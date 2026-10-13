@@ -19,6 +19,26 @@ const A = {
 };
 
 const VARIANTEN = {
+  flach: {
+    key: "flach",
+    name: "EG Gastro, 8 Wohnungen in 2 Obergeschossen, Flachdach",
+    bgf: 1020, // 3 Geschosse x 340 m²
+    gastroM2: 290,
+    bueroM2: 0,
+    gastroAusbau: 310000,
+    mieteOhnePacht: 8 * 950, // 8 Wohnungen à 950 € Kaltmiete = 7.600 €
+    pacht: 290 * 12, // 3.480 €
+  },
+  dach950: {
+    key: "dach950",
+    name: "EG Gastro, 8 Wohnungen in OG und Dach, 960 m² BGF",
+    bgf: 960,
+    gastroM2: 290,
+    bueroM2: 0,
+    gastroAusbau: 310000,
+    mieteOhnePacht: 8 * 950,
+    pacht: 290 * 12,
+  },
   gross: {
     key: "gross",
     name: "große Gastro im ganzen EG",
@@ -51,7 +71,7 @@ const VARIANTEN = {
 function finanz(v, foerderung, zins, opts = {}) {
   const f = foerderung;
   const land = (opts.grundstueck ?? A.grundstueck) * (1 - f);
-  const bauKosten = A.bgf * A.bauKostenM2;
+  const bauKosten = (v.bgf ?? A.bgf) * A.bauKostenM2;
   const bau = bauKosten * (1 + A.bnk);
   const gastro = (opts.gastroAusbau ?? v.gastroAusbau) * (1 - f);
   const build = bau * (1 - f) + gastro;
