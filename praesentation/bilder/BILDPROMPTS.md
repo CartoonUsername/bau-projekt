@@ -72,4 +72,6 @@ town and the church tower, golden hour. Flat roof, no pitched roof, no text.
 ## Hinweise
 - Die Zahlen stehen als Faktoren im Prompt, KI-Bilder sind keine Planung: Sie halten Maße nur ungefähr ein.
 - Wenn die Form abweicht: Skizze `skizze_aussen_ecke.png` als erstes Bild setzen und "keep exactly the massing of image 1" ergänzen.
-- Fertige Bilder bitte in `praesentation/bilder/` speichern, dann baue ich sie in die Präsentation ein.
+- **Dateinamen für den Einbau** (in `praesentation/bilder/` speichern, dann `build_deck_sechs.js` neu laufen lassen, die Folie "Visualisierungen" und das Titelbild entstehen automatisch):
+  - `ki_aussen_1.jpg` (Prompt 1, wird auch Titelbild), `ki_aussen_2.jpg` (Prompt 2)
+  - `ki_innen_1.jpg` (Prompt 3), `ki_innen_2.jpg` (Prompt 4)

@@ -1,6 +1,7 @@
 // Deck: Neue Mitte Werlte, Baufeld 3. 6 Wohnungen, EG komplett große Gastro, 960 m² BGF, Flachdach mit Staffelgeschoss
 // Aufruf: NODE_PATH=<node_modules> APPLY_THEME=<pfad>/apply_theme.js node build_deck_sechs.js
 const path = require("path");
+const fs = require("fs");
 const pptxgen = require("pptxgenjs");
 const { applyTheme } = require(process.env.APPLY_THEME || "./apply_theme.js");
 const { A, VARIANTEN, finanz, cashflow, umsatzBreakEven } = require("./model");
@@ -9,6 +10,10 @@ const IMG = process.env.BILDER || path.join(__dirname, "bilder");
 const OUT = process.env.OUT || __dirname;
 const v = VARIANTEN.sechs;
 const UM = v.umsatz; // Basis-Umsatz 50.000 €
+// KI-Bilder (optional): werden automatisch eingebaut, wenn die Dateien in bilder/ liegen
+const KI = ["ki_aussen_1.jpg", "ki_aussen_2.jpg", "ki_innen_1.jpg", "ki_innen_2.jpg"].map((n) => path.join(IMG, n)).filter((f) => fs.existsSync(f));
+const KI_AUSSEN = path.join(IMG, "ki_aussen_1.jpg");
+const hasKI = (n) => fs.existsSync(path.join(IMG, n));
 
 const THEME = {
   name: "Neue Mitte Werlte",
@@ -85,7 +90,7 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
 // ===== 1 Titel =====
 {
   const s = pres.addSlide({ masterName: "TITEL" });
-  s.addImage({ path: path.join(IMG, "aussen.jpg"), x: 6.9, y: 0, w: 6.43, h: H, sizing: { type: "cover", w: 6.43, h: H }, altText: "Referenzstudie Außenansicht, modernes Haus mit Klinker und Glas-Erdgeschoss" });
+  s.addImage({ path: hasKI("ki_aussen_1.jpg") ? KI_AUSSEN : path.join(IMG, "aussen.jpg"), x: 6.9, y: 0, w: 6.43, h: H, sizing: { type: "cover", w: 6.43, h: H }, altText: "Außenansicht, modernes Haus mit Klinker und Glas-Erdgeschoss" });
   text(s, "NEUE MITTE WERLTE", { x: MX, y: 1.3, w: 6, h: 0.4, fontSize: 16, bold: true, color: C.accent3, charSpacing: 4 });
   text(s, "Baufeld 3: Große Gastro und 6 Wohnungen", { x: MX, y: 1.85, w: 6, h: 2.2, fontSize: 40, bold: true, fontFace: "Cambria", color: C.background1 });
   text(s, "Baukonzept und Wirtschaftlichkeit", { x: MX, y: 4.3, w: 6, h: 0.6, fontSize: 18, color: C.background1 });
@@ -266,6 +271,22 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
     text(s, p[0], { x: 9.1, y: 4.35 + i * 0.75, w: 3.63, h: 0.35, fontSize: 18, bold: true, fontFace: "Cambria", color: C.accent2 });
     text(s, p[1], { x: 9.1, y: 4.72 + i * 0.75, w: 3.63, h: 0.35, fontSize: 13 });
   });
+}
+
+// ===== 8b Visualisierungen (nur wenn KI-Bilder vorliegen) =====
+if (KI.length) {
+  const s = content("Visualisierungen", "Für die Stadt", "KI-Visualisierungen auf Basis der Skizzen, keine Planung.");
+  const n = KI.length;
+  const cols = n >= 3 ? 2 : n;
+  const rowsN = Math.ceil(n / cols);
+  const gw = (W - 2 * MX - (cols - 1) * 0.3) / cols;
+  const gh = Math.min(gw * 0.62, (H - 2.3 - (rowsN - 1) * 0.3) / rowsN);
+  KI.forEach((f, i) => {
+    const x = MX + (i % cols) * (gw + 0.3);
+    const y = 1.45 + Math.floor(i / cols) * (gh + 0.3);
+    s.addImage({ path: f, x, y, w: gw, h: gh, sizing: { type: "cover", w: gw, h: gh }, altText: "Visualisierung " + (i + 1) });
+  });
+  text(s, "KI-generierte Visualisierungen zur Orientierung, Maße und Details folgen mit dem Architekten.", { x: MX, y: H - 0.95, w: W - 2 * MX, h: 0.4, fontSize: 12, color: C.accent4 });
 }
 
 // ===== 9 Stellplätze =====
