@@ -19,6 +19,19 @@ const A = {
 };
 
 const VARIANTEN = {
+  sechs: {
+    key: "sechs",
+    name: "6 Wohnungen, große Gastro im EG",
+    bgf: 960, // EG 340 + 1. OG 340 + Staffelgeschoss 280
+    gastroM2: 290,
+    bueroM2: 0,
+    wohnungen: 6,
+    wohnflaeche: 445, // 1. OG 3 x 85 m² + Staffel 3 x 63 m²
+    gastroAusbau: 310000,
+    mieteOhnePacht: 6 * 950, // 5.700 € Kaltmiete
+    pacht: 290 * 12, // 3.480 €
+    umsatz: 50000,
+  },
   flach: {
     key: "flach",
     name: "EG Gastro, 8 Wohnungen in 2 Obergeschossen, Flachdach",
@@ -71,7 +84,7 @@ const VARIANTEN = {
 function finanz(v, foerderung, zins, opts = {}) {
   const f = foerderung;
   const land = (opts.grundstueck ?? A.grundstueck) * (1 - f);
-  const bauKosten = (v.bgf ?? A.bgf) * A.bauKostenM2;
+  const bauKosten = (v.bgf ?? A.bgf) * (opts.bauKostenM2 ?? A.bauKostenM2);
   const bau = bauKosten * (1 + A.bnk);
   const gastro = (opts.gastroAusbau ?? v.gastroAusbau) * (1 - f);
   const build = bau * (1 - f) + gastro;
@@ -92,7 +105,8 @@ function finanz(v, foerderung, zins, opts = {}) {
   let D = bal;
   for (let m = 0; m < A.aufschubMonate; m++) D += (D * zins) / 12;
   const aufschubZinsen = D - kreditNachBau;
-  const rate = (D * (zins + A.tilgung)) / 12;
+  const til = opts.tilgung ?? A.tilgung;
+  const rate = (D * (zins + til)) / 12;
   return {
     gesamt,
     land,
@@ -104,22 +118,22 @@ function finanz(v, foerderung, zins, opts = {}) {
     kredit: D,
     rate,
     zinsAnteil: (D * zins) / 12,
-    tilgAnteil: (D * A.tilgung) / 12,
+    tilgAnteil: (D * til) / 12,
   };
 }
 
-function cashflow(v, fin, umsatz = A.umsatz) {
-  const miete = v.mieteOhnePacht + v.pacht;
+function cashflow(v, fin, umsatz = v.umsatz ?? A.umsatz, opts = {}) {
+  const miete = v.mieteOhnePacht * (opts.mieteFaktor ?? 1) + v.pacht;
   const gastroNachPacht = umsatz * A.gastroMargeVorPacht - v.pacht;
   const ruecklagen = miete * A.ruecklagen;
-  const cf = miete - ruecklagen - fin.rate + gastroNachPacht - A.lohn;
+  const cf = miete - ruecklagen - fin.rate + gastroNachPacht - (opts.lohn ?? A.lohn);
   return { miete, gastroNachPacht, ruecklagen, cf, hausErgebnis: miete - ruecklagen - fin.rate };
 }
 
 // Umsatz, bei dem der Cashflow nach Lohn genau 0 ist
-function umsatzBreakEven(v, fin) {
+function umsatzBreakEven(v, fin, lohn = A.lohn) {
   const miete = v.mieteOhnePacht + v.pacht;
-  const need = A.lohn + fin.rate + miete * A.ruecklagen - miete + v.pacht;
+  const need = lohn + fin.rate + miete * A.ruecklagen - miete + v.pacht;
   return need / A.gastroMargeVorPacht;
 }
 
