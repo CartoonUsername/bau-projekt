@@ -19,6 +19,15 @@ const A = {
 };
 
 const VARIANTEN = {
+  gross: {
+    key: "gross",
+    name: "große Gastro im ganzen EG",
+    gastroM2: 290,
+    bueroM2: 0,
+    gastroAusbau: 310000, // normal 257.250 € bei 190 m² + 100 m² Gastraum + modernere Bar
+    mieteOhnePacht: 260 * 11 + 190 * 12, // 4 WE im 1. OG (260 m²) + 4 WE im DG (190 m²) = 5.140 €
+    pacht: 290 * 12, // 3.480 €
+  },
   mit: {
     key: "mit",
     name: "mit Büro",
