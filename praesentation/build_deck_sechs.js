@@ -12,7 +12,7 @@ const OUT = process.env.OUT || __dirname;
 const v = VARIANTEN.sechs;
 const UM = v.umsatz; // Basis-Umsatz 50.000 €
 // KI-Bilder (optional): werden automatisch eingebaut, wenn die Dateien in bilder/ liegen
-const KI = ["ki_aussen_1.jpg", "ki_aussen_2.jpg", "ki_innen_1.jpg", "ki_innen_2.jpg"].map((n) => path.join(IMG, n)).filter((f) => fs.existsSync(f));
+const KI = ["ki_aussen_1.jpg", "ki_aussen_2.jpg", "ki_terrasse.jpg", "ki_innen_1.jpg", "ki_innen_2.jpg"].map((n) => path.join(IMG, n)).filter((f) => fs.existsSync(f));
 const KI_AUSSEN = path.join(IMG, "ki_aussen_1.jpg");
 
 // Bild verzerrungsfrei zuschneiden (Mitte), liefert Pfad zum passenden Ausschnitt
@@ -305,7 +305,7 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
 if (KI.length) {
   const s = content("Visualisierungen", "Für die Stadt", "KI-Visualisierungen auf Basis der Skizzen, keine Planung.");
   const n = KI.length;
-  const cols = n >= 3 ? 2 : n;
+  const cols = n >= 5 ? 3 : n >= 3 ? 2 : n;
   const rowsN = Math.ceil(n / cols);
   const gw = (W - 2 * MX - (cols - 1) * 0.3) / cols;
   const gh = Math.min(gw * 0.62, (H - 2.65 - (rowsN - 1) * 0.3) / rowsN);
