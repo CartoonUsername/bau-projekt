@@ -1,4 +1,4 @@
-"""Excel-Rechenmodell Baufeld 3 (6 Wohnungen, große Gastro im EG, 960 m² BGF).
+"""Excel-Rechenmodell Baufeld 3 (6 Wohnungen, große Gastro im EG, 930 m² BGF).
 Annahmen, Kosten, Kredit (Bauzeit + Aufschub), Cashflow rechnen mit Formeln;
 Szenarien sind Werte aus model.js (Stand Oktober 2026)."""
 import json
@@ -58,7 +58,7 @@ rows = [
     (5, "Preis je m² (€)", 230, EUR, ""),
     (6, "Grunderwerbsteuer", 0.05, PCT, "Steuer beim Grundstückskauf"),
     (7, "Notar und Grundbuch", 0.02, PCT, "Annahme"),
-    (8, "Bruttogrundfläche BGF (m²)", 960, "#,##0", "EG 340 + 1. OG 340 + Staffelgeschoss 280"),
+    (8, "Bruttogrundfläche BGF (m²)", 930, "#,##0", "EG 340 + 1. OG 340 + Staffelgeschoss 250 (Holzbau)"),
     (9, "Baukosten je m² BGF (€)", 2700, EUR, "Annahme, mit Architekt prüfen"),
     (10, "Baunebenkosten", 0.15, PCT, "Architekt, Statik, Gebühren"),
     (11, "Gastro-Ausbau (€)", 310000, EUR, "Küche, Bar, Möbel, Technik, Planung, Puffer"),
@@ -81,6 +81,12 @@ rows = [
     (30, "Gastro-Umsatz pro Monat (€)", 50000, EUR, "netto"),
     (31, "Gastro-Marge vor Pacht", 0.305, PCT, "Branchen-Richtwert"),
     (32, "Dein Lohn pro Monat (€)", 6000, EUR, ""),
+    (34, "Holzbau und Terrasse", None, None, None),
+    (35, "Staffelgeschoss in Holzbau (m² BGF)", 250, "#,##0", "Zimmerei, Terrasse rundum"),
+    (36, "Holzbau günstiger als Massivbau (€ je m²)", 400, EUR, "Annahme, Angebot der Zimmerei nötig"),
+    (37, "Dachterrasse rundum (m²)", 90, "#,##0", "zählt nicht zur BGF"),
+    (38, "Terrasse Preis (€ je m²)", 450, EUR, "Abdichtung, Holzrost, Geländer, Annahme"),
+    (39, "Preisnachlass Bauunternehmer/Zimmerei (%)", 0, PCT, "Bekanntenpreis, noch offen (z. B. 5 % oder 10 %)"),
 ]
 for r, label, val, fmt, hint in rows:
     if val is None:
@@ -104,7 +110,7 @@ krows = [
     (5, "Grunderwerbsteuer", "=B4*Annahmen!B6", ""),
     (6, "Notar und Grundbuch", "=B4*Annahmen!B7", ""),
     (7, "Grundstück gesamt", "=SUM(B4:B6)", ""),
-    (8, "Bau", "=Annahmen!B8*Annahmen!B9", "BGF × Baukosten je m²"),
+    (8, "Bau", "=(Annahmen!B8*Annahmen!B9-Annahmen!B35*Annahmen!B36+Annahmen!B37*Annahmen!B38)*(1-Annahmen!B39)", "BGF × Baukosten, minus Holz-Abschlag, plus Terrasse, minus Nachlass"),
     (9, "Baunebenkosten", "=B8*Annahmen!B10", ""),
     (10, "Bau gesamt", "=B8+B9", ""),
     (11, "Gastro-Ausbau", "=Annahmen!B11", ""),
@@ -236,7 +242,7 @@ ref = szen["referenz"]
 v = szen["variante4"]
 data = [
     ("Wohnungen", 6, 9, "0"),
-    ("BGF (m²)", 960, 1300, "#,##0"),
+    ("BGF (m²)", 930, 1270, "#,##0"),
     ("Gesamtkosten", ref["gesamt"], v["gesamt"], EUR),
     ("Rate (Plan)", ref["rate"], v["rate"], EUR),
     ("Ergebnis pro Monat ohne Förderung", ref["cf"], v["cf0"], EURS),
@@ -261,7 +267,7 @@ lines = [
     "Miete 950 € je Wohnung liegt über den Portalwerten für Neubau in Werlte (ca. 10,70–11,02 €/m²).",
     "Förderung ist als Zuschuss in Prozent der Gesamtkosten angesetzt, Höhe und Zweck sind offen.",
     "Gastro-Marge (30,5 % vor Pacht) und Kostenstruktur sind Branchen-Richtwerte, nicht aus Werlte.",
-    "Staffelgeschoss (ca. 280 m²) und Gesamthöhe ca. 9,90 m müssen mit der Stadt abgestimmt werden.",
+    "Staffelgeschoss (ca. 250 m², Holzbau, Terrasse rundum) und Gesamthöhe ca. 9,90 m müssen mit der Stadt abgestimmt werden.",
     "Zinsbindung 10 Jahre, der Folgezins ist offen.",
 ]
 for i, t in enumerate(lines):

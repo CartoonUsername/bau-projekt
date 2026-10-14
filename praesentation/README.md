@@ -1,6 +1,6 @@
 # Neue Mitte Werlte, Baufeld 3: Konzept mit 3 Ebenen
 
-Große Gastro mit Bar im ganzen Erdgeschoss, darüber 6 Wohnungen (1. OG und Staffelgeschoss), 960 m² BGF, Flachdach.
+Große Gastro mit Bar im ganzen Erdgeschoss, darüber 6 Wohnungen (1. OG und Staffelgeschoss in Holzbau mit Terrasse rundum), 930 m² BGF, Flachdach.
 
 | Datei | Inhalt |
 |---|---|

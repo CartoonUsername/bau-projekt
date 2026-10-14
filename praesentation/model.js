@@ -6,6 +6,9 @@ const A = {
   bgf: 960,
   bauKostenM2: 2700,
   bnk: 0.15,
+  holzAbschlag: 400, // €/m² günstiger als Massivbau beim Staffelgeschoss in Holzbau (Annahme, Angebot der Zimmerei nötig)
+  terrassePreis: 450, // €/m² Dachterrasse (Abdichtung, Holzrost, Geländer, Annahme)
+  bauRabatt: 0, // Preisnachlass durch Bauunternehmer/Zimmerei aus dem Bekanntenkreis (Annahme 0 %)
   bauMonate: 15,
   bereitstellung: 0.03, // p. a., ab Monat 7 auf noch nicht abgerufenen Betrag
   aufschubMonate: 12, // Rate ausgesetzt, Zinsen werden aufgeschlagen
@@ -22,11 +25,13 @@ const VARIANTEN = {
   sechs: {
     key: "sechs",
     name: "6 Wohnungen, große Gastro im EG",
-    bgf: 960, // EG 340 + 1. OG 340 + Staffelgeschoss 280
+    bgf: 930, // EG 340 + 1. OG 340 + Staffelgeschoss 250 (Holzbau, mit umlaufender Terrasse)
     gastroM2: 290,
     bueroM2: 0,
     wohnungen: 6,
-    wohnflaeche: 445, // 1. OG 3 x 85 m² + Staffel 3 x 63 m²
+    holzM2: 250, // Staffelgeschoss in Holzbau (Zimmerei)
+    terrasseM2: 90, // umlaufende Dachterrasse auf dem 1. OG, zählt nicht zur BGF
+    wohnflaeche: 423, // 1. OG 3 x 85 m² + Staffel 3 x 56 m²
     gastroAusbau: 310000,
     mieteOhnePacht: 6 * 950, // 5.700 € Kaltmiete
     pacht: 290 * 12, // 3.480 €
@@ -81,10 +86,18 @@ const VARIANTEN = {
   },
 };
 
+// Reine Baukosten (ohne Baunebenkosten): Massivbau, Holz-Abschlag, Terrasse, Rabatt
+function bauRoh(v, opts = {}) {
+  const massiv = (v.bgf ?? A.bgf) * (opts.bauKostenM2 ?? A.bauKostenM2);
+  const holz = (v.holzM2 ?? 0) * (opts.holzAbschlag ?? A.holzAbschlag);
+  const terr = (v.terrasseM2 ?? 0) * A.terrassePreis;
+  return (massiv - holz + terr) * (1 - (opts.bauRabatt ?? A.bauRabatt));
+}
+
 function finanz(v, foerderung, zins, opts = {}) {
   const f = foerderung;
   const land = (opts.grundstueck ?? A.grundstueck) * (1 - f);
-  const bauKosten = (v.bgf ?? A.bgf) * (opts.bauKostenM2 ?? A.bauKostenM2);
+  const bauKosten = bauRoh(v, opts);
   const bau = bauKosten * (1 + A.bnk);
   const gastro = (opts.gastroAusbau ?? v.gastroAusbau) * (1 - f);
   const build = bau * (1 - f) + gastro;
@@ -137,7 +150,7 @@ function umsatzBreakEven(v, fin, lohn = A.lohn) {
   return need / A.gastroMargeVorPacht;
 }
 
-module.exports = { A, VARIANTEN, finanz, cashflow, umsatzBreakEven };
+module.exports = { bauRoh, A, VARIANTEN, finanz, cashflow, umsatzBreakEven };
 
 if (require.main === module) {
   for (const v of Object.values(VARIANTEN)) {

@@ -1,5 +1,5 @@
-// SVG-Skizzen Baufeld 3 (modern, Flachdach mit Staffelgeschoss, EG komplett Gastro, 6 Wohnungen, 960 m² BGF)
-// Maße: Baukörper 24 x 14,2 m, Hauptbaukörper bis 6,50 m, Staffelgeschoss (ca. 280 m²) bis ca. 9,60 m, Attika ca. 9,90 m
+// SVG-Skizzen Baufeld 3 (modern, Flachdach mit Staffelgeschoss, EG komplett Gastro, 6 Wohnungen, 930 m² BGF)
+// Maße: Baukörper 24 x 14,2 m, Hauptbaukörper bis 6,50 m, Staffelgeschoss (ca. 250 m², Holzbau) bis ca. 9,60 m, Attika ca. 9,90 m
 const fs = require("fs");
 const path = require("path");
 const OUT = process.env.OUT || __dirname;
@@ -8,8 +8,8 @@ const COL = {
   klinker: "#7C3A32",
   klinkerHell: "#8E453B",
   fuge: "#B9A895",
-  zink: "#3A4047",
-  zinkHell: "#4B535B",
+  zink: "#8A6A45",
+  zinkHell: "#9C7B53",
   glas: "#BCD3DE",
   stahl: "#1E2326",
   holz: "#B88652",
@@ -93,16 +93,15 @@ function ansichten() {
   o += R(-0.2, 6.5, 24.2, 6.8, COL.beton);
   o += R(3.6, 6.8, 24, 7.6, COL.glas, 'opacity="0.3" stroke="#1E2326" stroke-width="1.5"');
   for (let i = 0; i < 9; i++) o += `<ellipse cx="${X(4 + i * 2.1)}" cy="${Z(7.0)}" rx="${0.5 * s}" ry="${0.35 * s}" fill="${COL.pflanze}"/>`;
-  // Staffelgeschoss (x 0..21, zurückgesetzt, Zinkpaneele + Glas)
-  o += R(3.6, 6.8, 21, 9.6, COL.zink);
+  // Staffelgeschoss in Holzbau (x 1,3..22,7, rundum zurückgesetzt, Terrasse ringsum)
+  o += R(1.3, 6.8, 22.7, 9.6, COL.zink);
   for (let k = 0; k < 3; k++) {
-    const bx = 3.6 + k * 5.8;
-    o += R(bx + 0.4, 6.9, bx + 5.4, 9.5, COL.glas, `stroke="${COL.stahl}" stroke-width="3"`);
-    o += L(bx + 2.9, 6.9, bx + 2.9, 9.5, COL.stahl, 2.5);
-    o += L(bx + 0.4, 8.3, bx + 5.4, 8.3, COL.stahl, 1.5);
+    const bx = 4.9 + k * 5.93;
+    o += R(bx + 0.4, 6.9, bx + 5.5, 9.5, COL.glas, `stroke="${COL.stahl}" stroke-width="3"`);
+    o += L(bx + 2.95, 6.9, bx + 2.95, 9.5, COL.stahl, 2.5);
+    o += L(bx + 0.4, 8.3, bx + 5.5, 8.3, COL.stahl, 1.5);
   }
-  o += R(-0.5, 9.6, 21.7, 9.9, COL.beton); // Flachdach mit Überstand
-  o += R(0, 9.6, 3.6, 9.9, COL.beton);
+  o += R(0.8, 9.6, 23.2, 9.9, COL.beton); // Flachdach mit Überstand
   // Terrasse (Holzdeck) + Vordach-Stützen
   o += `<rect x="${X(3.6) - 15}" y="${gy - 0.4 * s}" width="${20.4 * s + 30}" height="${0.4 * s}" fill="${COL.holz}"/>`;
   for (let i = 0; i < 6; i++) {
@@ -118,7 +117,7 @@ function ansichten() {
   o += `<line x1="${X(0)}" y1="${gy + 28}" x2="${X(24)}" y2="${gy + 28}" stroke="${COL.text}" stroke-width="1.5"/>` + T(X(11), gy + 22, "24,0 m", 15, 'font-weight="bold"');
   o += T(X(0), gy + 62, "Eingang", 16, 'font-weight="bold"');
   o += T(X(3.6), gy + 62, "EG: Gastro ca. 290 m² mit Bar und Terrasse", 16, 'font-weight="bold"');
-  o += T(X(16.4), gy + 62, "OG und Staffel: 6 Wohnungen", 16, 'font-weight="bold"');
+  o += T(X(16.4), gy + 62, "OG und Holz-Staffel mit Terrasse: 6 Wohnungen", 16, 'font-weight="bold"');
 
   // ---- Ost
   const ox2 = 1010;
@@ -135,11 +134,11 @@ function ansichten() {
   o += R2(-0.2, 6.5, 14.4, 6.8, COL.beton);
   o += R2(0, 6.8, 14.2, 7.6, COL.glas, 'opacity="0.3" stroke="#1E2326" stroke-width="1.5"');
   // Staffel zurückgesetzt (heller, entfernter)
-  o += R2(0.4, 6.8, 13.7, 9.6, COL.zinkHell);
-  for (let k = 0; k < 3; k++) o += R2(0.8 + k * 4.2, 6.9, 4.4 + k * 4.2, 9.5, COL.glas, `stroke="${COL.stahl}" stroke-width="3"`);
-  o += R2(0.2, 9.6, 13.9, 9.9, COL.beton);
+  o += R2(1.3, 6.8, 12.9, 9.6, COL.zinkHell);
+  for (let k = 0; k < 3; k++) o += R2(1.9 + k * 3.6, 6.9, 4.9 + k * 3.6, 9.5, COL.glas, `stroke="${COL.stahl}" stroke-width="3"`);
+  o += R2(0.8, 9.6, 13.4, 9.9, COL.beton);
   o += `<line x1="${X2(0)}" y1="${gy + 28}" x2="${X2(14.2)}" y2="${gy + 28}" stroke="${COL.text}" stroke-width="1.5"/>` + T(X2(5.4), gy + 22, "14,2 m", 15, 'font-weight="bold"');
-  o += T(40, 888, "Skizze, nicht maßstäblich genau. Staffelgeschoss mit ca. 280 m² und Gesamthöhe ca. 9,90 m (B-Plan: TH 6,50 m, H 12,00 m): Zulässigkeit mit der Stadt klären. Stand Oktober 2026.", 14);
+  o += T(40, 888, "Skizze, nicht maßstäblich genau. Staffelgeschoss in Holzbau mit ca. 250 m², Terrasse ca. 90 m² ringsum, und Gesamthöhe ca. 9,90 m (B-Plan: TH 6,50 m, H 12,00 m): Zulässigkeit mit der Stadt klären. Stand Oktober 2026.", 14);
   o += "</svg>";
   return o;
 }
@@ -162,7 +161,7 @@ function ecke() {
   let o = head(W, H, brick("bs", 30) + brick("bo", -30));
   o += `<rect width="${W}" height="${H}" fill="url(#sky)"/>`;
   o += T(40, 52, "Baufeld 3: Eckansicht modern (Skizze)", 28, 'font-weight="bold"');
-  o += T(40, 80, "Flachdach mit Staffelgeschoss, Klinker, Balkone, EG komplett verglast mit Bar-Gastro und Terrasse", 16, `fill="${COL.grau}"`);
+  o += T(40, 80, "Flachdach, Staffelgeschoss in Holzbau mit Terrasse rundum, Klinker, Balkone, EG komplett verglast mit Bar-Gastro", 16, `fill="${COL.grau}"`);
   o += poly([P(-2, -2, 0), P(28, -2, 0), P(28, 20.5, 0), P(-2, 20.5, 0)], COL.pflaster);
   for (let i = 0; i < 5; i++) {
     const a = P(26.2, 0.5 + i * 2.7, 0);
@@ -208,8 +207,8 @@ function ecke() {
   }
   // Dachterrasse OG-Dach (Ost-Streifen x 21..24 und Süd-Streifen)
   const roofZ = 6.5;
-  o += poly([P(21, 0, roofZ), P(24, 0, roofZ), P(24, Y, roofZ), P(21, Y, roofZ)], "#B9B3A6");
-  o += poly([P(0, 13.3, roofZ), P(21, 13.3, roofZ), P(21, Y, roofZ), P(0, Y, roofZ)], "#B9B3A6");
+  o += poly([P(22.7, 0, roofZ), P(24, 0, roofZ), P(24, Y, roofZ), P(22.7, Y, roofZ)], "#B9B3A6");
+  o += poly([P(0, 12.9, roofZ), P(22.7, 12.9, roofZ), P(22.7, Y, roofZ), P(0, Y, roofZ)], "#B9B3A6");
   // Pflanzkästen
   for (let i = 0; i < 6; i++) {
     const g = P(21.8 + (i % 2) * 1.2, 1 + i * 2.2, roofZ + 0.3);
@@ -221,23 +220,21 @@ function ecke() {
   o += poly([P(0, Y, roofZ), P(24, Y, roofZ), P(24, Y, roofZ + 1.0), P(0, Y, roofZ + 1.0)], COL.glas, 'opacity="0.3" stroke="#1E2326" stroke-width="1.5"');
   o += rect(SA, -0.2, 6.5, 24.2, 6.8, COL.beton) + rect(SB, -0.2, 6.5, Y + 0.2, 6.8, COL.beton);
   // Treppenhausblock bis 9,9 (Süd, flach mit Fassade)
-  o += rect(SA, 0, 6.5, 3.6, 9.6, "url(#bs)");
-  o += rect(SA, 1.0, 7.2, 2.4, 9.0, COL.glas, `stroke="${COL.beton}" stroke-width="3"`);
   // Staffelgeschoss Süd (y=13.3) und Ost (x=21)
-  const SS = A(13.3);
-  const SO = B(21);
-  o += rect(SS, 3.6, 6.5, 21, 9.6, COL.zink);
+  const SS = A(12.9);
+  const SO = B(22.7);
+  o += rect(SS, 1.3, 6.5, 22.7, 9.6, COL.zink);
   for (let k = 0; k < 3; k++) {
-    const bx = 3.6 + k * 5.8;
-    o += rect(SS, bx + 0.4, 6.7, bx + 5.4, 9.5, COL.glas, `stroke="${COL.stahl}" stroke-width="2.5"`);
-    o += line(SS(bx + 2.9, 6.7), SS(bx + 2.9, 9.5), COL.stahl, 2);
+    const bx = 4.9 + k * 5.93;
+    o += rect(SS, bx + 0.4, 6.7, bx + 5.5, 9.5, COL.glas, `stroke="${COL.stahl}" stroke-width="2.5"`);
+    o += line(SS(bx + 2.95, 6.7), SS(bx + 2.95, 9.5), COL.stahl, 2);
   }
-  o += rect(SO, 0, 6.5, 13.3, 9.6, COL.zinkHell);
-  [[0.8, 4.2], [5.0, 8.4], [9.2, 12.6]].forEach(([a, b]) => (o += rect(SO, a, 6.7, b, 9.5, COL.glas, `stroke="${COL.stahl}" stroke-width="2.5"`)));
+  o += rect(SO, 1.3, 6.5, 12.9, 9.6, COL.zinkHell);
+  [[2.0, 5.0], [5.6, 8.6], [9.2, 12.2]].forEach(([a, b]) => (o += rect(SO, a, 6.7, b, 9.5, COL.glas, `stroke="${COL.stahl}" stroke-width="2.5"`)));
   // Flachdach-Platte Staffel (Oberseite + Kante)
-  o += poly([P(-0.5, -0.5, 9.9), P(21.5, -0.5, 9.9), P(21.5, 13.8, 9.9), P(-0.5, 13.8, 9.9)], "#B4BAC0");
-  o += poly([P(-0.5, 13.8, 9.6), P(21.5, 13.8, 9.6), P(21.5, 13.8, 9.9), P(-0.5, 13.8, 9.9)], COL.beton);
-  o += poly([P(21.5, -0.5, 9.6), P(21.5, 13.8, 9.6), P(21.5, 13.8, 9.9), P(21.5, -0.5, 9.9)], "#C4BFB5");
+  o += poly([P(0.8, 0.8, 9.9), P(23.2, 0.8, 9.9), P(23.2, 13.4, 9.9), P(0.8, 13.4, 9.9)], "#B4BAC0");
+  o += poly([P(0.8, 13.4, 9.6), P(23.2, 13.4, 9.6), P(23.2, 13.4, 9.9), P(0.8, 13.4, 9.9)], COL.beton);
+  o += poly([P(23.2, 0.8, 9.6), P(23.2, 13.4, 9.6), P(23.2, 13.4, 9.9), P(23.2, 0.8, 9.9)], "#C4BFB5");
   // Terrassenstützen und Vordach
   [3.6, 7.0, 10.4, 13.8, 17.2, 20.6, 24.6].forEach((u) => (o += line(P(u, 19, 0), P(u, 19, 3.5), COL.stahl, 4)));
   [19, 16.6, 14.2].forEach((y) => (o += line(P(24.6, y, 0), P(24.6, y, 3.5), COL.stahl, 4)));
@@ -251,7 +248,7 @@ function ecke() {
   o += tree(27.5, -0.5);
   // Legende
   const leg = [
-    ["Staffelgeschoss", "3 Wohnungen, Dachterrassen, Zink und Glas, Attika ca. 9,90 m"],
+    ["Staffelgeschoss", "3 Penthouses in Holzbau, Terrasse rundum, Attika ca. 9,90 m"],
     ["1. Obergeschoss", "3 Wohnungen mit Balkon, Klinker, bodentiefe Fenster"],
     ["Erdgeschoss", "Gastro ca. 290 m² mit Bar, vollverglast, Terrasse mit Vordach"],
     ["Eingang Wohnen", "Treppenhaus mit Aufzug am Westende, ruhig getrennt"],

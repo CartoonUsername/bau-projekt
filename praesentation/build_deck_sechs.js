@@ -1,10 +1,11 @@
-// Deck: Neue Mitte Werlte, Baufeld 3. 6 Wohnungen, EG komplett große Gastro, 960 m² BGF, Flachdach mit Staffelgeschoss
+// Deck: Neue Mitte Werlte, Baufeld 3. 6 Wohnungen, EG komplett große Gastro, 930 m² BGF, Flachdach mit Staffelgeschoss in Holzbau
 // Aufruf: NODE_PATH=<node_modules> APPLY_THEME=<pfad>/apply_theme.js node build_deck_sechs.js
 const path = require("path");
 const fs = require("fs");
 const pptxgen = require("pptxgenjs");
 const { applyTheme } = require(process.env.APPLY_THEME || "./apply_theme.js");
-const { A, VARIANTEN, finanz, cashflow, umsatzBreakEven } = require("./model");
+const { A, VARIANTEN, finanz, cashflow, umsatzBreakEven, bauRoh } = require("./model");
+const { execFileSync } = require("child_process");
 
 const IMG = process.env.BILDER || path.join(__dirname, "bilder");
 const OUT = process.env.OUT || __dirname;
@@ -13,6 +14,13 @@ const UM = v.umsatz; // Basis-Umsatz 50.000 €
 // KI-Bilder (optional): werden automatisch eingebaut, wenn die Dateien in bilder/ liegen
 const KI = ["ki_aussen_1.jpg", "ki_aussen_2.jpg", "ki_innen_1.jpg", "ki_innen_2.jpg"].map((n) => path.join(IMG, n)).filter((f) => fs.existsSync(f));
 const KI_AUSSEN = path.join(IMG, "ki_aussen_1.jpg");
+
+// Bild verzerrungsfrei zuschneiden (Mitte), liefert Pfad zum passenden Ausschnitt
+function fit(file, w, h) {
+  const out = path.join(require("os").tmpdir(), "crop_" + path.basename(file).replace(/\W/g, "_") + "_" + Math.round(w * 100) + "x" + Math.round(h * 100) + ".jpg");
+  execFileSync("python3", ["-c", "import sys\nfrom PIL import Image\nim=Image.open(sys.argv[1]).convert('RGB');W,H=im.size;r=float(sys.argv[3])/float(sys.argv[4])\nif W/H>r:\n    nw=int(H*r);x=(W-nw)//2;im=im.crop((x,0,x+nw,H))\nelse:\n    nh=int(W/r);y=(H-nh)//2;im=im.crop((0,y,W,y+nh))\nim.save(sys.argv[2],quality=92)", file, out, String(w), String(h)]);
+  return out;
+}
 const hasKI = (n) => fs.existsSync(path.join(IMG, n));
 
 const THEME = {
@@ -90,7 +98,7 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
 // ===== 1 Titel =====
 {
   const s = pres.addSlide({ masterName: "TITEL" });
-  s.addImage({ path: hasKI("ki_aussen_1.jpg") ? KI_AUSSEN : path.join(IMG, "aussen.jpg"), x: 6.9, y: 0, w: 6.43, h: H, sizing: { type: "cover", w: 6.43, h: H }, altText: "Außenansicht, modernes Haus mit Klinker und Glas-Erdgeschoss" });
+  s.addImage({ path: fit(hasKI("ki_aussen_1.jpg") ? KI_AUSSEN : path.join(IMG, "aussen.jpg"), 6.43, H), x: 6.9, y: 0, w: 6.43, h: H, altText: "Außenansicht, modernes Haus mit Klinker und Glas-Erdgeschoss" });
   text(s, "NEUE MITTE WERLTE", { x: MX, y: 1.3, w: 6, h: 0.4, fontSize: 16, bold: true, color: C.accent3, charSpacing: 4 });
   text(s, "Baufeld 3: Große Gastro und 6 Wohnungen", { x: MX, y: 1.85, w: 6, h: 2.2, fontSize: 40, bold: true, fontFace: "Cambria", color: C.background1 });
   text(s, "Baukonzept und Wirtschaftlichkeit", { x: MX, y: 4.3, w: 6, h: 0.6, fontSize: 18, color: C.background1 });
@@ -152,8 +160,29 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
   card(s, MX, 5.4, W - 2 * MX, 1.25, "Klärungsbedarf");
   text(s, [
     { text: "Schriftlich klären: ", options: { bold: true, color: C.accent1 } },
-    { text: "Zählt das Staffelgeschoss (ca. 280 m², das sind 82 % der Fläche darunter) als drittes Vollgeschoss? Ab etwa 2/3 der Fläche darunter wird es meist dazugezählt. Ist die Flachdach-Lösung zulässig?" },
+    { text: "Zählt das Staffelgeschoss (ca. 250 m² in Holzbau, das sind 74 % der Fläche darunter) als drittes Vollgeschoss? Ab etwa 2/3 der Fläche darunter wird es meist dazugezählt. Ist die Flachdach-Lösung zulässig?" },
   ], { x: MX + 0.25, y: 5.5, w: W - 2 * MX - 0.5, h: 1.05, fontSize: 15, valign: "middle" });
+}
+
+// ===== 4b Holzbau und Terrasse =====
+{
+  const s = content("Staffelgeschoss in Holzbau mit Terrasse rundum", "Für Bank und Stadt", "Preise sind Annahmen und müssen durch Angebote der Zimmerei und des Bauunternehmens bestätigt werden.");
+  const rows = [[hdr("Bauunternehmer-Preisnachlass auf den Bau"), hdr("Gesamtkosten", "right"), hdr("Rate (Plan)", "right"), hdr("Ergebnis/Monat", "right")]];
+  [0, 0.05, 0.1].forEach((r) => {
+    const fin = finanz(v, 0, A.zinsPlan, { bauRabatt: r });
+    rows.push([cell(r === 0 ? "keiner (Annahme in der Rechnung)" : `${Math.round(r * 100)} % (Bekanntenpreis, noch offen)`), R(eur(fin.gesamt)), R(eur(fin.rate)), cfCell(cashflow(v, fin).cf)]);
+  });
+  s.addTable(rows, { x: MX, y: 1.5, w: 7.6, colW: [3.1, 1.6, 1.3, 1.6], rowH: 0.55, border: tblBorder, objectName: "Tabelle Holzbau Rabatt" });
+  const ohne = finanz(Object.assign({}, v, { holzM2: 0, terrasseM2: 0 }), 0, A.zinsPlan);
+  text(s, `Ergebnis bei ${k(UM)} Gastro-Umsatz und 3,3 % Zins. Ohne Holzbau und Terrasse wäre der Bau ${eur(bauRoh(Object.assign({}, v, { holzM2: 0, terrasseM2: 0 })) - bauRoh(v))} teurer, die Kosten lägen bei ${eur(ohne.gesamt)}.`, { x: MX, y: 4.0, w: 7.6, h: 1.0, fontSize: 14, color: C.accent4 });
+  card(s, 8.6, 1.5, W - 8.6 - MX, 4.6, "Warum Holz oben");
+  text(s, [
+    { text: "Leichter und schneller: weniger Last auf dem Klinker-Geschoss, kürzere Bauzeit.", options: { bullet: true, breakLine: true } },
+    { text: "Zimmerei kennt das Haus von Anfang an und plant das Penthouse mit der Terrasse rundum.", options: { bullet: true, breakLine: true } },
+    { text: "Zwei Partner (Bauunternehmen unten, Zimmerei oben) können Preise und Termine gemeinsam angeben.", options: { bullet: true, breakLine: true } },
+    { text: "Brandschutz (Holzbau bis Gebäudeklasse 4, Aufzug und Treppenhaus massiv) und Schallschutz muss der Architekt nachweisen.", options: { bullet: true } },
+  ], { x: 8.85, y: 1.95, w: W - 8.85 - MX - 0.5, h: 4.0, fontSize: 14, paraSpaceAfter: 8 });
+  text(s, "Das Staffelgeschoss springt rundum um ca. 1,3 m zurück: Terrasse ca. 90 m² um die drei Penthouses, kein Teil der BGF.", { x: MX, y: 5.3, w: 7.6, h: 0.9, fontSize: 15, bold: true, color: C.accent2 });
 }
 
 // ===== 5 Schnitt =====
@@ -167,7 +196,7 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
   s.addShape(pres.ShapeType.rect, { x: x0 - 0.3, y: yBase, w: w + 0.6, h: 0.06, fill: { color: C.accent4 }, line: { color: C.accent4, width: 0 }, objectName: "Gelände" });
   s.addShape(pres.ShapeType.rect, { x: x0, y: z(3.5), w, h: 3.2 * sc, fill: { color: "F4D58F" }, line: { color: C.accent4, width: 1 }, objectName: "Schnitt EG" });
   s.addShape(pres.ShapeType.rect, { x: x0, y: z(6.5), w, h: 3.0 * sc, fill: { color: "9A4034" }, line: { color: C.accent4, width: 1 }, objectName: "Schnitt OG" });
-  s.addShape(pres.ShapeType.rect, { x: x0, y: z(9.6), w: 13.3 * sc, h: 3.1 * sc, fill: { color: "3A4047" }, line: { color: C.accent4, width: 1 }, objectName: "Schnitt Staffel" });
+  s.addShape(pres.ShapeType.rect, { x: x0, y: z(9.6), w: 13.3 * sc, h: 3.1 * sc, fill: { color: "7A5C3A" }, line: { color: C.accent4, width: 1 }, objectName: "Schnitt Staffel" });
   s.addShape(pres.ShapeType.rect, { x: x0 - 0.2, y: z(9.9), w: 13.3 * sc + 0.4, h: 0.3 * sc, fill: { color: "D6D1C8" }, line: { color: C.accent4, width: 1 }, objectName: "Schnitt Dach" });
   s.addShape(pres.ShapeType.rect, { x: x0 + 13.3 * sc, y: z(7.6), w: 0.9 * sc, h: 1.1 * sc, fill: { color: "CFE0E8" }, line: { color: C.accent4, width: 1 }, objectName: "Brüstung" });
   text(s, "EG Gastro mit Bar", { x: x0, y: z(3.5), w, h: 3.2 * sc, fontSize: 14, bold: true, align: "center", valign: "middle" });
@@ -185,11 +214,11 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
     [hdr("Ebene"), hdr("Nutzung"), hdr("BGF", "right")],
     [cell("EG"), cell("Gastro ca. 290 m² mit Bar, Treppenhaus, Aufzug, Technik"), R("340 m²")],
     [cell("1. OG"), cell("3 Wohnungen à ca. 85 m²"), R("340 m²")],
-    [cell("Staffel"), cell("3 Wohnungen à ca. 63 m², Dachterrassen"), R("280 m²")],
-    [cell("Summe", { bold: true }), cell("6 Wohnungen, ca. 445 m² Wohnfläche", { bold: true }), R("960 m²", { bold: true })],
+    [cell("Staffel"), cell("3 Wohnungen à ca. 56 m², Holzbau, Terrasse rundum"), R("250 m²")],
+    [cell("Summe", { bold: true }), cell("6 Wohnungen, ca. 423 m² Wohnfläche", { bold: true }), R("930 m²", { bold: true })],
   ];
   s.addTable(rows, { x: 7.7, y: 1.6, w: W - 7.7 - MX, colW: [0.9, 3.2, 0.93], rowH: 0.6, border: tblBorder, objectName: "Tabelle Flächen" });
-  text(s, "BGF = Bruttogrundfläche, alle Geschossflächen zusammen. Das Staffelgeschoss springt zur Südseite um ca. 0,9 m und zur Ostseite um ca. 3 m zurück.", { x: 7.7, y: 5.4, w: W - 7.7 - MX, h: 1.0, fontSize: 14, color: C.accent4 });
+  text(s, "BGF = Bruttogrundfläche, alle Geschossflächen zusammen. Das Staffelgeschoss in Holzbau springt rundum um ca. 1,3 m zurück, so entsteht eine Terrasse von ca. 90 m² um die Penthouses.", { x: 7.7, y: 5.4, w: W - 7.7 - MX, h: 1.0, fontSize: 14, color: C.accent4 });
 }
 
 // ===== 6 Grundrisse =====
@@ -222,14 +251,13 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
       ],
     },
     {
-      title: "Staffelgeschoss",
+      title: "Staffel (Holzbau)",
       rooms: [
-        [0, 0, 3.6, 13.3, "Treppe", "8A9199"],
-        [3.6, 0, 5.8, 13.3, "WE 4 · 63 m²", "3A4047"],
-        [9.4, 0, 5.8, 13.3, "WE 5 · 63 m²", "3A4047"],
-        [15.2, 0, 5.8, 13.3, "WE 6 · 63 m²", "3A4047"],
-        [21, 0, 3, 14.2, "", "C9C4B8"],
-        [0, 13.3, 21, 0.9, "", "C9C4B8"],
+        [0, 0, 24, 14.2, "", "C9C4B8"],
+        [1.3, 1.3, 3.6, 11.6, "Treppe", "8A9199"],
+        [4.9, 1.3, 5.93, 11.6, "WE 4 · 56 m²", "7A5C3A"],
+        [10.83, 1.3, 5.93, 11.6, "WE 5 · 56 m²", "7A5C3A"],
+        [16.77, 1.3, 5.93, 11.6, "WE 6 · 56 m²", "7A5C3A"],
       ],
     },
   ];
@@ -243,17 +271,17 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
     });
   });
   card(s, MX, 5.35, W - 2 * MX, 1.2, "Hinweis");
-  text(s, "Grundfläche 24 × 14,2 m = 340 m², das passt in das geschätzte Baufenster. Treppenhaus und Aufzug liegen am Westende und erschließen die Wohnungen getrennt von der Gastro. Die Staffel hat ca. 280 m² BGF, die beigen Flächen sind Dachterrassen.", { x: MX + 0.25, y: 5.45, w: W - 2 * MX - 0.5, h: 1.0, fontSize: 15, valign: "middle" });
+  text(s, "Grundfläche 24 × 14,2 m = 340 m², das passt in das geschätzte Baufenster. Treppenhaus und Aufzug liegen am Westende und erschließen die Wohnungen getrennt von der Gastro. Die Staffel in Holzbau hat ca. 250 m² BGF, die beige Fläche ist die Terrasse (ca. 90 m²) rundum um die Penthouses.", { x: MX + 0.25, y: 5.45, w: W - 2 * MX - 0.5, h: 1.0, fontSize: 15, valign: "middle" });
 }
 
 // ===== 7 Außen =====
 {
   const s = content("Modern, Klinker, Glas und Staffelgeschoss", "Für die Stadt", "Links Referenzstudie, rechts unsere Eckansicht als Skizze.");
-  s.addImage({ path: hasKI("ki_aussen_1.jpg") ? path.join(IMG, "ki_aussen_1.jpg") : path.join(IMG, "aussen.jpg"), x: MX, y: 1.4, w: 5.9, h: 3.29, sizing: { type: "cover", w: 5.9, h: 3.29 }, altText: "Visualisierung Außenansicht" });
+  s.addImage({ path: fit(hasKI("ki_aussen_1.jpg") ? path.join(IMG, "ki_aussen_1.jpg") : path.join(IMG, "aussen.jpg"), 5.9, 3.29), x: MX, y: 1.4, w: 5.9, h: 3.29, altText: "Visualisierung Außenansicht" });
   s.addImage({ path: path.join(IMG, "skizze_aussen_ecke.png"), x: 6.8, y: 1.4, w: 5.9, h: 3.69, sizing: { type: "contain", w: 5.9, h: 3.69 }, altText: "Eckansicht als Skizze: Flachdach mit Staffelgeschoss, Balkone, vollverglastes Erdgeschoss" });
   text(s, hasKI("ki_aussen_1.jpg") ? "KI-Visualisierung" : "Referenzstudie", { x: MX, y: 4.75, w: 5.9, h: 0.3, fontSize: 12, color: C.accent4 });
   text(s, "Unsere Skizze (Eckansicht)", { x: 6.8, y: 5.12, w: 5.9, h: 0.3, fontSize: 12, color: C.accent4 });
-  const pts = [["Klinker", "dunkel, Langformat, passend zum Umfeld"], ["Staffelgeschoss", "Zink und Glas, Dachterrassen"], ["Balkone", "bodentiefe Fenster mit Glasbrüstung"], ["Glas-EG", "Gastro mit Bar, Terrasse und Vordach"]];
+  const pts = [["Klinker", "dunkel, Langformat, passend zum Umfeld"], ["Staffelgeschoss", "Holzbau, Terrasse rundum"], ["Balkone", "bodentiefe Fenster mit Glasbrüstung"], ["Glas-EG", "Gastro mit Bar, Terrasse und Vordach"]];
   pts.forEach((p, i) => {
     const x = MX + i * 3.05;
     text(s, p[0], { x, y: 5.6, w: 2.9, h: 0.4, fontSize: 18, bold: true, fontFace: "Cambria", color: C.accent1 });
@@ -265,7 +293,7 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
 {
   const s = content("Große Gastro mit Bar, neu und modern", "Für die Stadt", "Konzeptskizze, Planung folgt mit dem Gastro-Fachplaner.");
   s.addImage({ path: path.join(IMG, "skizze_innen_konzept.png"), x: MX, y: 1.4, w: 8.2, h: 5.125, sizing: { type: "contain", w: 8.2, h: 5.125 }, altText: "Konzeptskizze: Grundriss der Gastro mit Bar, Wandansicht und Materialpalette" });
-  s.addImage({ path: hasKI("ki_innen_1.jpg") ? path.join(IMG, "ki_innen_1.jpg") : path.join(IMG, "innen.jpg"), x: 9.1, y: 1.4, w: 3.63, h: 2.43, sizing: { type: "cover", w: 3.63, h: 2.43 }, altText: "Visualisierung Innenraum" });
+  s.addImage({ path: fit(hasKI("ki_innen_1.jpg") ? path.join(IMG, "ki_innen_1.jpg") : path.join(IMG, "innen.jpg"), 3.63, 2.43), x: 9.1, y: 1.4, w: 3.63, h: 2.43, altText: "Visualisierung Innenraum" });
   text(s, hasKI("ki_innen_1.jpg") ? "KI-Visualisierung" : "Referenz für Stimmung", { x: 9.1, y: 3.88, w: 3.63, h: 0.3, fontSize: 12, color: C.accent4 });
   [["ca. 100 Plätze", "innen, plus ca. 32 auf der Terrasse"], ["Bar", "10 Barhocker, Lounge, beleuchtete Backbar"], ["Material", "Dunkelgrün, Terrazzo, Eiche, Messing, Stahl"]].forEach((p, i) => {
     text(s, p[0], { x: 9.1, y: 4.35 + i * 0.75, w: 3.63, h: 0.35, fontSize: 18, bold: true, fontFace: "Cambria", color: C.accent2 });
@@ -284,7 +312,7 @@ if (KI.length) {
   KI.forEach((f, i) => {
     const x = MX + (i % cols) * (gw + 0.3);
     const y = 1.45 + Math.floor(i / cols) * (gh + 0.3);
-    s.addImage({ path: f, x, y, w: gw, h: gh, sizing: { type: "cover", w: gw, h: gh }, altText: "Visualisierung " + (i + 1) });
+    s.addImage({ path: fit(f, gw, gh), x, y, w: gw, h: gh, altText: "Visualisierung " + (i + 1) });
   });
   text(s, "KI-generierte Visualisierungen zur Orientierung, Maße und Details folgen mit dem Architekten.", { x: MX, y: H - 0.95, w: W - 2 * MX, h: 0.4, fontSize: 12, color: C.accent4 });
 }
@@ -307,22 +335,24 @@ if (KI.length) {
 
 // ===== 10 Kosten =====
 {
-  const s = content("Gesamtkosten ohne Förderung", "Für die Bank", "Baukosten 2.700 €/m² BGF und 15 % Baunebenkosten sind Annahmen und müssen durch Architekt und Angebote bestätigt werden.");
+  const s = content("Gesamtkosten ohne Förderung", "Für die Bank", "Baukosten 2.700 €/m² (Holz-Staffel 400 € günstiger) und 15 % Baunebenkosten sind Annahmen und müssen durch Architekt und Angebote bestätigt werden.");
   const fin = f0.plan;
   const rows = [
     [hdr("Posten"), hdr("Rechnung"), hdr("Betrag", "right")],
     [cell("Grundstück inkl. Steuer, Notar"), cell("960 m² × 230 € + ca. 7 %"), R(eur(A.grundstueck))],
-    [cell("Bau"), cell("960 m² × 2.700 €"), R(eur(960 * 2700))],
-    [cell("Baunebenkosten (Architekt, Statik, Gebühren)"), cell("15 % vom Bau"), R(eur(960 * 2700 * 0.15))],
+    [cell("Bau, Massivbau"), cell("930 m² × 2.700 €"), R(eur(930 * 2700))],
+    [cell("Abschlag Holzbau (Staffelgeschoss)"), cell("250 m² × 400 € günstiger"), R("− " + eur(250 * A.holzAbschlag))],
+    [cell("Dachterrasse rundum"), cell("90 m² × 450 €"), R(eur(90 * A.terrassePreis))],
+    [cell("Baunebenkosten (Architekt, Statik, Gebühren)"), cell("15 % vom Bau"), R(eur(bauRoh(v) * 0.15))],
     [cell("Gastro-Ausbau (Küche, Bar, Möbel, Technik)"), cell("Posten im Anhang"), R(eur(v.gastroAusbau))],
     [cell("Gesamtkosten", { bold: true }), cell(""), R(eur(fin.gesamt), { bold: true })],
   ];
-  s.addTable(rows, { x: MX, y: 1.5, w: 7.6, colW: [3.5, 2.4, 1.7], rowH: 0.62, border: tblBorder, objectName: "Tabelle Kosten" });
-  s.addChart(pres.charts.DOUGHNUT, [{ name: "Kosten", labels: ["Grundstück", "Bau", "Baunebenkosten", "Gastro-Ausbau"], values: [A.grundstueck, 960 * 2700, 960 * 2700 * 0.15, v.gastroAusbau] }], {
+  s.addTable(rows, { x: MX, y: 1.5, w: 7.6, colW: [3.5, 2.4, 1.7], rowH: 0.5, border: tblBorder, objectName: "Tabelle Kosten" });
+  s.addChart(pres.charts.DOUGHNUT, [{ name: "Kosten", labels: ["Grundstück", "Bau", "Baunebenkosten", "Gastro-Ausbau"], values: [A.grundstueck, bauRoh(v), bauRoh(v) * 0.15, v.gastroAusbau] }], {
     x: 8.5, y: 1.4, w: 4.3, h: 4.4, holeSize: 55, chartColors: ["C49A45", "8C3B32", "5B6770", "2F4A3E"], showPercent: true, showValue: false, dataLabelColor: "FFFFFF", dataLabelFontSize: 12, dataLabelFontFace: "+mn-lt",
     showLegend: true, legendPos: "b", legendFontSize: 12, legendColor: "1F2421", legendFontFace: "+mn-lt", showTitle: false, objectName: "Diagramm Kosten",
   });
-  text(s, `Das sind ca. ${nf.format(Math.round(fin.gesamt / 960))} € pro m² BGF.`, { x: MX, y: 5.6, w: 7.6, h: 0.5, fontSize: 16, bold: true, color: C.accent2 });
+  text(s, `Das sind ca. ${nf.format(Math.round(fin.gesamt / 930))} € pro m² BGF.`, { x: MX, y: 5.8, w: 7.6, h: 0.5, fontSize: 16, bold: true, color: C.accent2 });
 }
 
 // ===== 11 Finanzierung =====
@@ -517,7 +547,7 @@ if (KI.length) {
   const s = content("Rechenannahmen und offene Punkte", "Anhang", "Alle Zahlen sind Planungsannahmen, keine Zusagen.");
   const left = [
     "Grundstück 960 m² × 230 € plus ca. 7 % (5 % Grunderwerbsteuer, ca. 2 % Notar)",
-    "Bau 960 m² BGF × 2.700 €, Baunebenkosten 15 %",
+    "Bau 930 m² BGF × 2.700 €, Staffel in Holzbau 400 €/m² günstiger, Terrasse 90 m² × 450 €, Baunebenkosten 15 %",
     "100 % Fremdfinanzierung, 1 % Tilgung, Aufschub 12 Monate",
     "Bauzeit 15 Monate, Bereitstellungszins 3 % p. a. ab Monat 7",
     "Zins Plan 3,3 % (Förderkredite, Annahme), Ausgang 4,0 %",
@@ -602,13 +632,13 @@ if (hasKI("ki_aussen_4etagen.jpg")) {
   const s = content("Variante: Mittelgeschoss doppelt, vier Ebenen", "Anhang", "Bildmontage aus der KI-Visualisierung: das mittlere Geschoss wurde verdoppelt. Höhe ca. 13 m, der B-Plan erlaubt 12 m.");
   s.addImage({ path: path.join(IMG, "ki_aussen_4etagen.jpg"), x: MX, y: 1.4, w: 7.0, h: 4.46, sizing: { type: "contain", w: 7.0, h: 4.46 }, altText: "Bildmontage: Gebäude mit doppeltem Mittelgeschoss, vier Ebenen" });
   text(s, "Bildmontage, keine neue Planung", { x: MX, y: 5.9, w: 7.0, h: 0.3, fontSize: 12, color: C.accent4 });
-  const v4 = Object.assign({}, v, { bgf: 1300, mieteOhnePacht: 9 * 950 });
+  const v4 = Object.assign({}, v, { bgf: 1270, mieteOhnePacht: 9 * 950 });
   const g0 = finanz(v4, 0, A.zinsPlan);
   const g15 = finanz(v4, 0.15, A.zinsPlan);
   const rows = [
     [hdr(""), hdr("3 Ebenen", "right"), hdr("4 Ebenen", "right")],
     [cell("Wohnungen"), R("6"), R("9")],
-    [cell("BGF"), R("960 m²"), R("1.300 m²")],
+    [cell("BGF"), R("930 m²"), R("1.270 m²")],
     [cell("Gesamtkosten"), R(eur(f0.plan.gesamt)), R(eur(g0.gesamt))],
     [cell("Rate (Plan)"), R(eur(f0.plan.rate)), R(eur(g0.rate))],
     [cell(`Ergebnis bei ${k(UM)} Umsatz`), cfCell(f0.cfPlan.cf), cfCell(cashflow(v4, g0).cf)],
@@ -616,7 +646,7 @@ if (hasKI("ki_aussen_4etagen.jpg")) {
     [cell("Break-even-Umsatz, 15 % Förderung"), R(eur(umsatzBreakEven(v, F[0.15].plan))), R(eur(umsatzBreakEven(v4, g15)))],
   ];
   s.addTable(rows, { x: 7.9, y: 1.5, w: W - 7.9 - MX, colW: [2.2, 1.3, 1.33], rowH: 0.5, border: tblBorder, objectName: "Tabelle Vergleich 3 und 4 Ebenen" });
-  text(s, "Das zweite Mittelgeschoss bringt 3 weitere Wohnungen zu 950 €, kostet aber ca. 1,06 Mio. € mehr. Die Höhe von ca. 13 m braucht eine Ausnahme von der Stadt (B-Plan: 12 m).", { x: 7.9, y: 6.0, w: W - 7.9 - MX, h: 1.0, fontSize: 13, color: C.accent4 });
+  text(s, `Das zweite Mittelgeschoss bringt 3 weitere Wohnungen zu 950 €, kostet aber ca. ${((g0.gesamt - f0.plan.gesamt) / 1e6).toFixed(2).replace(".", ",")} Mio. € mehr. Die Höhe von ca. 13 m braucht eine Ausnahme von der Stadt (B-Plan: 12 m).`, { x: 7.9, y: 6.0, w: W - 7.9 - MX, h: 1.0, fontSize: 13, color: C.accent4 });
 }
 
 (async () => {
