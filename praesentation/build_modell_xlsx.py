@@ -1,0 +1,272 @@
+"""Excel-Rechenmodell Baufeld 3 (6 Wohnungen, große Gastro im EG, 960 m² BGF).
+Annahmen, Kosten, Kredit (Bauzeit + Aufschub), Cashflow rechnen mit Formeln;
+Szenarien sind Werte aus model.js (Stand Oktober 2026)."""
+import json
+import sys
+from openpyxl import Workbook
+from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+from openpyxl.utils import get_column_letter
+
+szen = json.load(open(sys.argv[1]))
+out = sys.argv[2]
+
+GREEN = "2F4A3E"
+RED = "8C3B32"
+hdr_font = Font(name="Calibri", bold=True, color="FFFFFF", size=11)
+hdr_fill = PatternFill("solid", fgColor=GREEN)
+inp_font = Font(name="Calibri", color="0000FF", size=11)  # Eingaben blau
+bold = Font(name="Calibri", bold=True, size=11)
+base = Font(name="Calibri", size=11)
+note = Font(name="Calibri", italic=True, size=10, color="5B6770")
+sec_fill = PatternFill("solid", fgColor="F1F0EE")
+EUR = '#,##0 "€";[Red]-#,##0 "€"'
+EURS = '+#,##0 "€";[Red]-#,##0 "€"'
+PCT = "0.0%"
+
+wb = Workbook()
+
+
+def title(ws, text, sub=None):
+    ws["A1"] = text
+    ws["A1"].font = Font(name="Cambria", bold=True, size=16, color=RED)
+    if sub:
+        ws["A2"] = sub
+        ws["A2"].font = note
+
+
+def header(ws, row, labels):
+    for i, t in enumerate(labels):
+        c = ws.cell(row=row, column=i + 1, value=t)
+        c.font = hdr_font
+        c.fill = hdr_fill
+        c.alignment = Alignment(horizontal="left" if i == 0 else "right")
+
+
+def section(ws, row, text, cols=3):
+    for i in range(cols):
+        ws.cell(row=row, column=i + 1).fill = sec_fill
+    ws.cell(row=row, column=1, value=text).font = bold
+
+
+# ---------------- Annahmen ----------------
+ws = wb.active
+ws.title = "Annahmen"
+title(ws, "Annahmen", "Blaue Zellen sind Eingaben. Alle anderen Blätter rechnen daraus.")
+rows = [
+    (3, "Grundstück und Bau", None, None, None),
+    (4, "Grundstück (m²)", 960, "#,##0", "Baufeld 3, ca. 960 m²"),
+    (5, "Preis je m² (€)", 230, EUR, ""),
+    (6, "Grunderwerbsteuer", 0.05, PCT, "Steuer beim Grundstückskauf"),
+    (7, "Notar und Grundbuch", 0.02, PCT, "Annahme"),
+    (8, "Bruttogrundfläche BGF (m²)", 960, "#,##0", "EG 340 + 1. OG 340 + Staffelgeschoss 280"),
+    (9, "Baukosten je m² BGF (€)", 2700, EUR, "Annahme, mit Architekt prüfen"),
+    (10, "Baunebenkosten", 0.15, PCT, "Architekt, Statik, Gebühren"),
+    (11, "Gastro-Ausbau (€)", 310000, EUR, "Küche, Bar, Möbel, Technik, Planung, Puffer"),
+    (12, "Förderung (Zuschuss in % der Kosten)", 0, PCT, "Annahme, mit der Stadt klären (0 bis 25 %)"),
+    (14, "Finanzierung", None, None, None),
+    (15, "Zins Plan", 0.033, PCT, "Mischzins aus Förderkrediten (Annahme)"),
+    (16, "Zins Ausgang", 0.04, PCT, "10 Jahre fest, Stand 17.09.2026"),
+    (17, "Zins für diese Rechnung", "=B15", PCT, "Auf =B16 stellen für den Ausgangszins"),
+    (18, "Tilgung", 0.01, PCT, "Rückzahlung der Schuld, 0 % = nur Zinsen"),
+    (19, "Bauzeit (Monate)", 15, "0", "Plan im Blatt Kredit ist auf 15 Monate ausgelegt"),
+    (20, "Bereitstellungszins p. a.", 0.03, PCT, "Gebühr auf zugesagtes, noch nicht abgerufenes Geld"),
+    (21, "Bereitstellungszins ab Monat", 7, "0", ""),
+    (22, "Raten-Aufschub (Monate)", 12, "0", "Plan im Blatt Kredit ist auf 12 Monate ausgelegt"),
+    (24, "Einnahmen und Gastro", None, None, None),
+    (25, "Anzahl Wohnungen", 6, "0", "3 im 1. OG, 3 im Staffelgeschoss"),
+    (26, "Kaltmiete je Wohnung (€)", 950, EUR, "Annahme des Bauherrn, Markt ca. 11 €/m²"),
+    (27, "Gastrofläche (m²)", 290, "#,##0", ""),
+    (28, "Pacht je m² (€)", 12, EUR, "Gastro zahlt an das Haus"),
+    (29, "Rücklagen", 0.10, PCT, "Reparaturen, Leerstand, in % von Miete und Pacht"),
+    (30, "Gastro-Umsatz pro Monat (€)", 50000, EUR, "netto"),
+    (31, "Gastro-Marge vor Pacht", 0.305, PCT, "Branchen-Richtwert"),
+    (32, "Dein Lohn pro Monat (€)", 6000, EUR, ""),
+]
+for r, label, val, fmt, hint in rows:
+    if val is None:
+        section(ws, r, label)
+        continue
+    ws.cell(row=r, column=1, value=label).font = base
+    c = ws.cell(row=r, column=2, value=val)
+    c.number_format = fmt
+    c.font = inp_font if not (isinstance(val, str) and val.startswith("=")) else base
+    ws.cell(row=r, column=3, value=hint).font = note
+ws.column_dimensions["A"].width = 38
+ws.column_dimensions["B"].width = 16
+ws.column_dimensions["C"].width = 58
+
+# ---------------- Kosten ----------------
+k = wb.create_sheet("Kosten")
+title(k, "Kosten bis zum fertigen Haus")
+header(k, 3, ["Posten", "Betrag", "Rechnung"])
+krows = [
+    (4, "Grundstück", "=Annahmen!B4*Annahmen!B5", "m² × Preis"),
+    (5, "Grunderwerbsteuer", "=B4*Annahmen!B6", ""),
+    (6, "Notar und Grundbuch", "=B4*Annahmen!B7", ""),
+    (7, "Grundstück gesamt", "=SUM(B4:B6)", ""),
+    (8, "Bau", "=Annahmen!B8*Annahmen!B9", "BGF × Baukosten je m²"),
+    (9, "Baunebenkosten", "=B8*Annahmen!B10", ""),
+    (10, "Bau gesamt", "=B8+B9", ""),
+    (11, "Gastro-Ausbau", "=Annahmen!B11", ""),
+    (12, "Gesamtkosten", "=B7+B10+B11", ""),
+    (13, "Förderung (Zuschuss)", "=-B12*Annahmen!B12", ""),
+    (14, "Kosten nach Förderung", "=B12+B13", ""),
+    (15, "Kosten je m² BGF", "=B14/Annahmen!B8", ""),
+    (17, "Grundstück nach Förderung (für den Kredit)", "=B7*(1-Annahmen!B12)", ""),
+    (18, "Bau und Gastro nach Förderung (für den Kredit)", "=(B10+B11)*(1-Annahmen!B12)", ""),
+]
+for r, label, f, h in krows:
+    k.cell(row=r, column=1, value=label).font = bold if label in ("Gesamtkosten", "Kosten nach Förderung") else base
+    c = k.cell(row=r, column=2, value=f)
+    c.number_format = EUR
+    c.font = bold if label in ("Gesamtkosten", "Kosten nach Förderung") else base
+    k.cell(row=r, column=3, value=h).font = note
+k.column_dimensions["A"].width = 46
+k.column_dimensions["B"].width = 18
+k.column_dimensions["C"].width = 30
+
+# ---------------- Kredit ----------------
+c_ = wb.create_sheet("Kredit")
+title(c_, "Kredit: Bauzeit, Aufschub und Rate", "Zinsen und Bereitstellungszinsen werden dem Kredit zugeschlagen (kein Eigenkapital).")
+header(c_, 4, ["Monat", "Auszahlung", "Zinsen", "Bereitstellung", "Noch nicht abgerufen", "Kredit am Monatsende"])
+c_["A5"] = 0
+c_["B5"] = "=Kosten!B17"
+c_["C5"] = 0
+c_["D5"] = 0
+c_["E5"] = "=Kosten!B18"
+c_["F5"] = "=B5"
+for m in range(1, 16):
+    r = 5 + m
+    c_.cell(row=r, column=1, value=m)
+    c_.cell(row=r, column=2, value="=Kosten!$B$18/Annahmen!$B$19")
+    c_.cell(row=r, column=3, value=f"=F{r-1}*Annahmen!$B$17/12")
+    c_.cell(row=r, column=4, value=f"=IF(A{r}>=Annahmen!$B$21,E{r}*Annahmen!$B$20/12,0)")
+    c_.cell(row=r, column=5, value="=Kosten!B18" if m == 1 else f"=E{r-1}-B{r-1}")
+    c_.cell(row=r, column=6, value=f"=F{r-1}+C{r}+D{r}+B{r}")
+c_["A22"] = "Raten-Aufschub: nur Zinsen laufen auf"
+c_["A22"].font = bold
+header(c_, 23, ["Monat", "", "Zinsen", "", "", "Kredit am Monatsende"])
+for m in range(1, 13):
+    r = 23 + m
+    c_.cell(row=r, column=1, value=m)
+    c_.cell(row=r, column=3, value=f"=F{r-1 if m > 1 else 20}*Annahmen!$B$17/12")
+    c_.cell(row=r, column=6, value=f"=F{r-1 if m > 1 else 20}+C{r}")
+# Ergebnisse
+c_["H4"] = "Ergebnis"
+c_["H4"].font = bold
+res = [
+    (5, "Zinsen in der Bauzeit", "=SUM(C6:C20)"),
+    (6, "Bereitstellungszinsen", "=SUM(D6:D20)"),
+    (7, "Zinsen im Aufschub-Jahr", "=SUM(C24:C35)"),
+    (8, "Kredit bei Start der Rate", "=F35"),
+    (9, "Rate pro Monat", "=F35*(Annahmen!B17+Annahmen!B18)/12"),
+    (10, "   davon Zinsen", "=F35*Annahmen!B17/12"),
+    (11, "   davon Tilgung", "=F35*Annahmen!B18/12"),
+]
+for r, label, f in res:
+    c_.cell(row=r, column=8, value=label).font = bold if r in (8, 9) else base
+    cell = c_.cell(row=r, column=9, value=f)
+    cell.number_format = EUR
+    cell.font = bold if r in (8, 9) else base
+for r in range(5, 36):
+    for col in (2, 3, 4, 5, 6):
+        c_.cell(row=r, column=col).number_format = EUR
+c_.column_dimensions["A"].width = 10
+for col in "BCDEF":
+    c_.column_dimensions[col].width = 20
+c_.column_dimensions["G"].width = 4
+c_.column_dimensions["H"].width = 30
+c_.column_dimensions["I"].width = 18
+
+# ---------------- Cashflow ----------------
+cf = wb.create_sheet("Cashflow")
+title(cf, "Was pro Monat übrig bleibt", "Mit den Annahmen aus dem Blatt Annahmen (Zins, Förderung, Umsatz).")
+header(cf, 4, ["Posten", "pro Monat"])
+cfrows = [
+    (5, "Wohnungen (Kaltmiete)", "=Annahmen!B25*Annahmen!B26"),
+    (6, "Gastro-Pacht", "=Annahmen!B27*Annahmen!B28"),
+    (7, "Miete und Pacht gesamt", "=B5+B6"),
+    (8, "Gastro-Gewinn nach Pacht", "=Annahmen!B30*Annahmen!B31-B6"),
+    (9, "Rate (Zinsen und Tilgung)", "=-Kredit!I9"),
+    (10, "Dein Lohn", "=-Annahmen!B32"),
+    (11, "Rücklagen", "=-B7*Annahmen!B29"),
+    (12, "Ergebnis pro Monat", "=B5+B6+B8+B9+B10+B11"),
+    (13, "Ergebnis pro Jahr", "=B12*12"),
+    (15, "Break-even Gastro-Umsatz (Ergebnis nach Lohn = 0)", "=(Annahmen!B32+Kredit!I9+B7*Annahmen!B29-B7+B6)/Annahmen!B31"),
+]
+for r, label, f in cfrows:
+    cf.cell(row=r, column=1, value=label).font = bold if r in (12, 15) else base
+    c = cf.cell(row=r, column=2, value=f)
+    c.number_format = EURS if r in (12, 13) else EUR
+    c.font = bold if r in (12, 15) else base
+cf["A17"] = "Die Tilgung in der Rate ist Vermögensaufbau (die Schuld sinkt), kein Verlust."
+cf["A17"].font = note
+cf.column_dimensions["A"].width = 52
+cf.column_dimensions["B"].width = 18
+
+# ---------------- Szenarien (Werte) ----------------
+s = wb.create_sheet("Szenarien")
+title(s, "Szenarien (Werte aus dem Rechenmodell, Stand Oktober 2026)", "Gastro-Umsatz 50.000 €, Mieten 6 × 950 €. Ändern sich die Annahmen, bitte neu erzeugen.")
+header(s, 4, ["Förderung", "Gesamtkosten", "Rate Plan 3,3 %", "Ergebnis Plan", "Rate Ausgang 4,0 %", "Ergebnis Ausgang", "Break-even Umsatz Plan", "Break-even Umsatz Ausgang"])
+for i, d in enumerate(szen["foerderung"]):
+    r = 5 + i
+    vals = [d["f"], d["gesamt"], d["ratePlan"], d["cfPlan"], d["rateAus"], d["cfAus"], d["bePlan"], d["beAus"]]
+    fmts = [PCT, EUR, EUR, EURS, EUR, EURS, EUR, EUR]
+    for j, (v, fm) in enumerate(zip(vals, fmts)):
+        c = s.cell(row=r, column=j + 1, value=round(v, 2) if j else v)
+        c.number_format = fm
+s["A12"] = "Ergebnis pro Monat nach Lohn, Plan 3,3 %, je Gastro-Umsatz"
+s["A12"].font = bold
+header(s, 13, ["Förderung", "40.000 €", "45.000 €", "50.000 €", "55.000 €", "60.000 €"])
+for i, d in enumerate(szen["umsatz"]):
+    r = 14 + i
+    c = s.cell(row=r, column=1, value=d["f"])
+    c.number_format = PCT
+    for j, v in enumerate(d["werte"]):
+        cc = s.cell(row=r, column=2 + j, value=round(v, 2))
+        cc.number_format = EURS
+for col in "ABCDEFGH":
+    s.column_dimensions[col].width = 22
+
+# ---------------- Variante 4 Ebenen ----------------
+v4 = wb.create_sheet("Variante 4 Ebenen")
+title(v4, "Variante: Mittelgeschoss doppelt (4 Ebenen)", "Nur als Gedankenspiel: Höhe ca. 13 m, der B-Plan erlaubt 12 m.")
+header(v4, 4, ["", "3 Ebenen", "4 Ebenen"])
+ref = szen["referenz"]
+v = szen["variante4"]
+data = [
+    ("Wohnungen", 6, 9, "0"),
+    ("BGF (m²)", 960, 1300, "#,##0"),
+    ("Gesamtkosten", ref["gesamt"], v["gesamt"], EUR),
+    ("Rate (Plan)", ref["rate"], v["rate"], EUR),
+    ("Ergebnis pro Monat ohne Förderung", ref["cf"], v["cf0"], EURS),
+    ("Ergebnis pro Monat mit 15 % Förderung", szen["foerderung"][3]["cfPlan"], v["cf15"], EURS),
+]
+for i, (a, b, c, fm) in enumerate(data):
+    r = 5 + i
+    v4.cell(row=r, column=1, value=a)
+    for j, x in enumerate((b, c)):
+        cc = v4.cell(row=r, column=2 + j, value=round(x, 2))
+        cc.number_format = fm
+v4.column_dimensions["A"].width = 44
+v4.column_dimensions["B"].width = 18
+v4.column_dimensions["C"].width = 18
+
+# ---------------- Hinweise ----------------
+h = wb.create_sheet("Hinweise")
+title(h, "Hinweise und offene Punkte")
+lines = [
+    "Alle Zahlen sind Planungsannahmen, keine Zusagen von Bank oder Stadt.",
+    "Nicht enthalten: Hausverwaltung, Versicherung, Grundsteuer (ca. 300–500 € im Monat).",
+    "Miete 950 € je Wohnung liegt über den Portalwerten für Neubau in Werlte (ca. 10,70–11,02 €/m²).",
+    "Förderung ist als Zuschuss in Prozent der Gesamtkosten angesetzt, Höhe und Zweck sind offen.",
+    "Gastro-Marge (30,5 % vor Pacht) und Kostenstruktur sind Branchen-Richtwerte, nicht aus Werlte.",
+    "Staffelgeschoss (ca. 280 m²) und Gesamthöhe ca. 9,90 m müssen mit der Stadt abgestimmt werden.",
+    "Zinsbindung 10 Jahre, der Folgezins ist offen.",
+]
+for i, t in enumerate(lines):
+    h.cell(row=3 + i, column=1, value="• " + t).font = base
+h.column_dimensions["A"].width = 110
+
+wb.save(out)
+print("gespeichert", out)
