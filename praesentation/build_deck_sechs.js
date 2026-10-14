@@ -249,9 +249,9 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
 // ===== 7 Außen =====
 {
   const s = content("Modern, Klinker, Glas und Staffelgeschoss", "Für die Stadt", "Links Referenzstudie, rechts unsere Eckansicht als Skizze.");
-  s.addImage({ path: path.join(IMG, "aussen.jpg"), x: MX, y: 1.4, w: 5.9, h: 3.29, sizing: { type: "cover", w: 5.9, h: 3.29 }, altText: "Referenzstudie Außenansicht" });
+  s.addImage({ path: hasKI("ki_aussen_1.jpg") ? path.join(IMG, "ki_aussen_1.jpg") : path.join(IMG, "aussen.jpg"), x: MX, y: 1.4, w: 5.9, h: 3.29, sizing: { type: "cover", w: 5.9, h: 3.29 }, altText: "Visualisierung Außenansicht" });
   s.addImage({ path: path.join(IMG, "skizze_aussen_ecke.png"), x: 6.8, y: 1.4, w: 5.9, h: 3.69, sizing: { type: "contain", w: 5.9, h: 3.69 }, altText: "Eckansicht als Skizze: Flachdach mit Staffelgeschoss, Balkone, vollverglastes Erdgeschoss" });
-  text(s, "Referenzstudie", { x: MX, y: 4.75, w: 5.9, h: 0.3, fontSize: 12, color: C.accent4 });
+  text(s, hasKI("ki_aussen_1.jpg") ? "KI-Visualisierung" : "Referenzstudie", { x: MX, y: 4.75, w: 5.9, h: 0.3, fontSize: 12, color: C.accent4 });
   text(s, "Unsere Skizze (Eckansicht)", { x: 6.8, y: 5.12, w: 5.9, h: 0.3, fontSize: 12, color: C.accent4 });
   const pts = [["Klinker", "dunkel, Langformat, passend zum Umfeld"], ["Staffelgeschoss", "Zink und Glas, Dachterrassen"], ["Balkone", "bodentiefe Fenster mit Glasbrüstung"], ["Glas-EG", "Gastro mit Bar, Terrasse und Vordach"]];
   pts.forEach((p, i) => {
@@ -265,8 +265,8 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
 {
   const s = content("Große Gastro mit Bar, neu und modern", "Für die Stadt", "Konzeptskizze, Planung folgt mit dem Gastro-Fachplaner.");
   s.addImage({ path: path.join(IMG, "skizze_innen_konzept.png"), x: MX, y: 1.4, w: 8.2, h: 5.125, sizing: { type: "contain", w: 8.2, h: 5.125 }, altText: "Konzeptskizze: Grundriss der Gastro mit Bar, Wandansicht und Materialpalette" });
-  s.addImage({ path: path.join(IMG, "innen.jpg"), x: 9.1, y: 1.4, w: 3.63, h: 2.43, sizing: { type: "cover", w: 3.63, h: 2.43 }, altText: "Referenz Innenraum" });
-  text(s, "Referenz für Stimmung", { x: 9.1, y: 3.88, w: 3.63, h: 0.3, fontSize: 12, color: C.accent4 });
+  s.addImage({ path: hasKI("ki_innen_1.jpg") ? path.join(IMG, "ki_innen_1.jpg") : path.join(IMG, "innen.jpg"), x: 9.1, y: 1.4, w: 3.63, h: 2.43, sizing: { type: "cover", w: 3.63, h: 2.43 }, altText: "Visualisierung Innenraum" });
+  text(s, hasKI("ki_innen_1.jpg") ? "KI-Visualisierung" : "Referenz für Stimmung", { x: 9.1, y: 3.88, w: 3.63, h: 0.3, fontSize: 12, color: C.accent4 });
   [["ca. 100 Plätze", "innen, plus ca. 32 auf der Terrasse"], ["Bar", "10 Barhocker, Lounge, beleuchtete Backbar"], ["Material", "Dunkelgrün, Terrazzo, Eiche, Messing, Stahl"]].forEach((p, i) => {
     text(s, p[0], { x: 9.1, y: 4.35 + i * 0.75, w: 3.63, h: 0.35, fontSize: 18, bold: true, fontFace: "Cambria", color: C.accent2 });
     text(s, p[1], { x: 9.1, y: 4.72 + i * 0.75, w: 3.63, h: 0.35, fontSize: 13 });
@@ -280,7 +280,7 @@ if (KI.length) {
   const cols = n >= 3 ? 2 : n;
   const rowsN = Math.ceil(n / cols);
   const gw = (W - 2 * MX - (cols - 1) * 0.3) / cols;
-  const gh = Math.min(gw * 0.62, (H - 2.3 - (rowsN - 1) * 0.3) / rowsN);
+  const gh = Math.min(gw * 0.62, (H - 2.65 - (rowsN - 1) * 0.3) / rowsN);
   KI.forEach((f, i) => {
     const x = MX + (i % cols) * (gw + 0.3);
     const y = 1.45 + Math.floor(i / cols) * (gh + 0.3);
