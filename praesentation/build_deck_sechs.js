@@ -289,6 +289,28 @@ if (KI.length) {
   text(s, "KI-generierte Visualisierungen zur Orientierung, Maße und Details folgen mit dem Architekten.", { x: MX, y: H - 0.95, w: W - 2 * MX, h: 0.4, fontSize: 12, color: C.accent4 });
 }
 
+// ===== 8c Variante mit zweitem Mittelgeschoss =====
+if (hasKI("ki_aussen_4etagen.jpg")) {
+  const s = content("Variante: Mittelgeschoss doppelt, vier Ebenen", "Für Stadt und Bank", "Bildmontage aus der KI-Visualisierung: das mittlere Geschoss wurde verdoppelt. Höhe ca. 13 m, der B-Plan erlaubt 12 m.");
+  s.addImage({ path: path.join(IMG, "ki_aussen_4etagen.jpg"), x: MX, y: 1.4, w: 7.0, h: 4.46, sizing: { type: "contain", w: 7.0, h: 4.46 }, altText: "Bildmontage: Gebäude mit doppeltem Mittelgeschoss, vier Ebenen" });
+  text(s, "Bildmontage, keine neue Planung", { x: MX, y: 5.9, w: 7.0, h: 0.3, fontSize: 12, color: C.accent4 });
+  const v4 = Object.assign({}, v, { bgf: 1300, mieteOhnePacht: 9 * 950 });
+  const g0 = finanz(v4, 0, A.zinsPlan);
+  const g15 = finanz(v4, 0.15, A.zinsPlan);
+  const rows = [
+    [hdr(""), hdr("3 Ebenen", "right"), hdr("4 Ebenen", "right")],
+    [cell("Wohnungen"), R("6"), R("9")],
+    [cell("BGF"), R("960 m²"), R("1.300 m²")],
+    [cell("Gesamtkosten"), R(eur(f0.plan.gesamt)), R(eur(g0.gesamt))],
+    [cell("Rate (Plan)"), R(eur(f0.plan.rate)), R(eur(g0.rate))],
+    [cell(`Ergebnis bei ${k(UM)} Umsatz`), cfCell(f0.cfPlan.cf), cfCell(cashflow(v4, g0).cf)],
+    [cell("… mit 15 % Förderung"), cfCell(F[0.15].cfPlan.cf), cfCell(cashflow(v4, g15).cf)],
+    [cell("Break-even-Umsatz, 15 % Förderung"), R(eur(umsatzBreakEven(v, F[0.15].plan))), R(eur(umsatzBreakEven(v4, g15)))],
+  ];
+  s.addTable(rows, { x: 7.9, y: 1.5, w: W - 7.9 - MX, colW: [2.2, 1.3, 1.33], rowH: 0.5, border: tblBorder, objectName: "Tabelle Vergleich 3 und 4 Ebenen" });
+  text(s, "Das zweite Mittelgeschoss bringt 3 weitere Wohnungen zu 950 €, kostet aber ca. 1,06 Mio. € mehr. Die Höhe von ca. 13 m braucht eine Ausnahme von der Stadt (B-Plan: 12 m).", { x: 7.9, y: 6.0, w: W - 7.9 - MX, h: 1.0, fontSize: 13, color: C.accent4 });
+}
+
 // ===== 9 Stellplätze =====
 {
   const s = content("Stellplätze sind der Knackpunkt", "Für die Stadt", "Bedarf nach groben Annahmen (1,5 pro Wohnung, 1 je 10 m² Gastraum bei ca. 200 m²). Die Stellplatzsatzung der Stadt gilt verbindlich.");
