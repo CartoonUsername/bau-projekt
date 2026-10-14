@@ -298,7 +298,7 @@ function innen() {
     seats++;
   }
   // Lounge
-  o += `<rect x="${gx + m(0.4)}" y="${oy + m(3.0)}" width="${m(2.0)}" height="${m(0.8)}" fill="#E7DCC8" stroke="${COL.stahl}" stroke-width="1.5"/>` + `<rect x="${gx + m(3.4)}" y="${oy + m(3.0)}" width="${m(2.0)}" height="${m(0.8)}" fill="#E7DCC8" stroke="${COL.stahl}" stroke-width="1.5"/>`;
+  o += `<rect x="${gx + m(0.4)}" y="${oy + m(3.0)}" width="${m(2.0)}" height="${m(0.8)}" fill="#A8723F" stroke="${COL.stahl}" stroke-width="1.5"/>` + `<rect x="${gx + m(3.4)}" y="${oy + m(3.0)}" width="${m(2.0)}" height="${m(0.8)}" fill="#A8723F" stroke="${COL.stahl}" stroke-width="1.5"/>`;
   o += `<rect x="${gx + m(2.7)}" y="${oy + m(3.6)}" width="${m(0.5)}" height="${m(0.5)}" fill="${COL.holz}"/>`;
   seats += 8;
   const t4 = (x, y) => {
@@ -333,7 +333,7 @@ function innen() {
   const wy = 150;
   const ww = 730;
   const wh = 440;
-  o += T(wx, wy - 14, "Wandansicht Bar (Stimmung, modern)", 20, 'font-weight="bold"');
+  o += T(wx, wy - 14, "Wandansicht Bar und Sitzecke (Stimmung nach Referenzbild)", 20, 'font-weight="bold"');
   o += `<rect x="${wx}" y="${wy}" width="${ww}" height="${wh}" fill="${COL.gruen}"/>`;
   o += `<rect x="${wx}" y="${wy}" width="${ww}" height="14" fill="#F5D590"/>`;
   // Backbar beleuchtet
@@ -343,9 +343,9 @@ function innen() {
     o += `<rect x="${wx + 40}" y="${wy + 60 + 95 * r + 88}" width="420" height="5" fill="${COL.gold}"/>`;
     for (let i = 0; i < 16; i++) o += `<rect x="${wx + 56 + i * 25}" y="${wy + 60 + 95 * r + 38}" width="11" height="50" rx="4" fill="${["#3C6E47", "#C49A45", "#222", "#7A3A2C"][i % 4]}"/>`;
   });
-  // Terrazzo-Bartheke
-  o += `<rect x="${wx + 20}" y="${wy + 290}" width="460" height="46" fill="#D8D2C6"/>`;
-  for (let i = 0; i < 60; i++) o += `<circle cx="${wx + 24 + ((i * 53) % 450)}" cy="${wy + 294 + ((i * 17) % 38)}" r="${1.5 + (i % 3)}" fill="${["#8E7C66", "#B9A58A", "#6E7C70"][i % 3]}" opacity="0.7"/>`;
+  // Bartheke aus Eiche mit dunkelgrüner Front
+  o += `<rect x="${wx + 20}" y="${wy + 290}" width="460" height="46" fill="#9A6B3F"/>`;
+  for (let i = 0; i < 0; i++) o += `<circle cx="${wx + 24 + ((i * 53) % 450)}" cy="${wy + 294 + ((i * 17) % 38)}" r="${1.5 + (i % 3)}" fill="${["#8E7C66", "#B9A58A", "#6E7C70"][i % 3]}" opacity="0.7"/>`;
   o += `<rect x="${wx + 20}" y="${wy + 336}" width="460" height="104" fill="#243A31"/>`;
   for (let i = 0; i < 12; i++) o += `<line x1="${wx + 20 + i * 38.4}" y1="${wy + 340}" x2="${wx + 20 + i * 38.4}" y2="${wy + 440}" stroke="#355247" stroke-width="3"/>`;
   [90, 210, 330, 440].forEach((x) => (o += `<circle cx="${wx + x}" cy="${wy + 270}" r="22" fill="#F1E8D8" stroke="#2B2B2B" stroke-width="3"/><rect x="${wx + x - 3}" y="${wy + 292}" width="6" height="${wh - 292}" fill="${COL.stahl}"/>`));
@@ -358,19 +358,22 @@ function innen() {
   for (let i = 1; i < 3; i++) o += `<line x1="${wx + 520 + (190 / 3) * i}" y1="${wy + 40}" x2="${wx + 520 + (190 / 3) * i}" y2="${wy + 340}" stroke="${COL.stahl}" stroke-width="4"/>`;
   for (let i = 1; i < 5; i++) o += `<line x1="${wx + 520}" y1="${wy + 40 + 60 * i}" x2="${wx + 710}" y2="${wy + 40 + 60 * i}" stroke="${COL.stahl}" stroke-width="4"/>`;
   // Bouclé-Lounge
-  o += `<rect x="${wx + 520}" y="${wy + 350}" width="190" height="70" rx="26" fill="#EDE5D6"/><rect x="${wx + 540}" y="${wy + 318}" width="150" height="46" rx="18" fill="#F4EEE2"/>`;
+  o += `<rect x="${wx + 520}" y="${wy + 350}" width="190" height="70" rx="26" fill="#A8723F"/><rect x="${wx + 540}" y="${wy + 318}" width="150" height="46" rx="18" fill="#B98350"/><rect x="${wx + 550}" y="${wy + 322}" width="34" height="34" rx="6" fill="#6E1F2E"/><rect x="${wx + 640}" y="${wy + 322}" width="34" height="34" rx="6" fill="#6E1F2E"/>`;
+  // Wandvertäfelung (Paneele), ovaler Spiegel, Pampas-Arrangement
+  for (let i = 0; i < 7; i++) o += `<rect x="${wx + 8 + i * 72}" y="${wy + 400}" width="62" height="34" fill="none" stroke="#4A6055" stroke-width="3"/>`;
+  o += `<ellipse cx="${wx + 500}" cy="${wy + 130}" rx="18" ry="44" fill="#CFD8D2" stroke="#1E2326" stroke-width="3" opacity="0.85"/>`;
   // Pflanze
   o += `<rect x="${wx + 492}" y="${wy + 360}" width="22" height="70" fill="#7A5A38"/><ellipse cx="${wx + 503}" cy="${wy + 345}" rx="30" ry="40" fill="${COL.pflanze}"/>`;
   // Materialpalette
   const py = 650;
   o += T(wx, py - 20, "Materialpalette 2026", 20, 'font-weight="bold"');
-  [["Dunkelgrün", COL.gruen, "Wände, Nischen"], ["Klinker dunkel", COL.klinker, "Fassade, Pfeiler"], ["Eiche warm", COL.holz, "Theke, Tische"], ["Terrazzo hell", "#D8D2C6", "Bartheke, Boden"], ["Bouclé creme", "#EDE5D6", "Sitzmöbel"], ["Messing", COL.gold, "Leuchten, Regale"], ["Stahl schwarz", COL.stahl, "Glaswand, Rahmen"]].forEach(([n, c, u], i) => {
+  [["Olivgrün dunkel", "#33443B", "Wände mit Vertäfelung"], ["Cognac Samt", "#A8723F", "Polsterbänke, Stühle"], ["Bordeaux", "#6E1F2E", "Kissen, Akzente"], ["Eiche warm", COL.holz, "Tische, Theke"], ["Klinker dunkel", COL.klinker, "Fassade, Pfeiler"], ["Glas gerippt", "#E9E2D2", "Tischlichter, Pendel"], ["Stahl schwarz", COL.stahl, "Glaswand, Rahmen"]].forEach(([n, c, u], i) => {
     const x = wx + (i % 4) * 185;
     const y = py + Math.floor(i / 4) * 130;
     o += `<rect x="${x}" y="${y}" width="165" height="70" rx="10" fill="${c}" stroke="#ccc"/>`;
     o += T(x, y + 92, n, 16, 'font-weight="bold"') + T(x, y + 112, u, 14, `fill="${COL.grau}"`);
   });
-  o += T(40, 968, "Konzeptskizze nach dem Referenzbild (Innenraum), neu und modern gedacht. Planung folgt mit dem Gastro-Fachplaner.", 14);
+  o += T(40, 968, "Konzeptskizze nach dem Referenzbild (Innenraum): dunkelgrüne Wände mit Vertäfelung, Cognac-Samtbänke, Bordeaux, Eiche, schwarze Stahl-Glas-Wand. Planung folgt mit dem Gastro-Fachplaner.", 14);
   o += "</svg>";
   return o;
 }

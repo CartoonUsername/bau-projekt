@@ -39,24 +39,27 @@ spaces, partly cloudy sky, soft natural light. Frontal elevation-like view, 35 m
 storey, no text.
 ```
 
-## 3. Innen, Bar und Restaurant (modern, 2026)
+## 3. Innen, Restaurant mit Bar (Stil wie Referenzbild innen.jpg)
 
 ```
-Photorealistic interior of a new modern restaurant and bar, evening mood, about 290 square metres, 100 seats.
-Long illuminated back bar with brass shelves and bottles, terrazzo bar counter with oak front and black stools,
-dark green walls, brass pendant lamps, cove lighting along the ceiling, cream bouclé lounge seating and cognac
-leather banquettes, solid oak tables with ribbed glass lanterns, black steel and glass partition with grid pattern,
-floor-to-ceiling windows to a town square at blue hour, lush green plants, guests softly blurred. Use image 1 as
-style reference. Wide-angle interior photography, warm and upscale, high detail, no text, no logos.
+Photorealistic interior of a new modern restaurant with a bar, evening mood, warm and cosy but contemporary (2026).
+Dark olive-green walls with elegant wainscot panelling, cognac-coloured channel-tufted velvet banquettes along the
+walls with burgundy velvet cushions, solid oak tables with black pedestal bases, velvet chairs in taupe, ribbed glass
+table lamps with candles, glass pendant lamps with brass caps, oval and arched mirrors, a large dried pampas grass
+wall arrangement, dark red accent lamp, a black steel-framed glass partition with grid pattern, indirect cove lighting
+along the ceiling, floor-to-ceiling windows to a town square with red brick paving at blue hour, a long oak bar with
+a dark green fluted front and a lit back bar in the background, guests softly blurred. Use image 1 as the exact style
+reference (colours, materials, mood). Wide-angle interior photography, high detail, no text, no logos.
 ```
 
-## 4. Innen, Theke
+## 4. Innen, Theke und Sitzecke (Stil wie Referenzbild)
 
 ```
-Photorealistic close-up of a terrazzo and oak bar counter with black bar stools in front of a lit back bar with
-brass shelves and bottles, dark green wall, three brass pendant lamps, arched mirror, warm candle light, restaurant
-guests blurred in the background, glass partition with black steel frame. Evening mood, shallow depth of field,
-high detail, no text, no logos.
+Photorealistic close-up of a bar counter in solid oak with a dark green fluted front and black bar stools, behind it
+dark olive-green panelled wall with an arched mirror, a small lit niche with a red back wall and bottles, glass
+pendant lamps, in front of it cognac velvet banquettes with burgundy cushions and oak tables with ribbed glass
+candle lamps, black steel-glass partition in the background, evening mood, shallow depth of field, use image 1 as
+the exact style reference, high detail, no text, no logos.
 ```
 
 ## 5. Dachterrasse im Staffelgeschoss (optional)
