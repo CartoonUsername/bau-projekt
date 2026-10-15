@@ -47,3 +47,35 @@ const dauermiete = () => {
 };
 
 module.exports = { AIRBNB, HOTEL, airbnb, hotel, dauermiete, gastroNetto };
+
+// Verkauf der Einheiten an Verwandte (je Einheit ein Kredit, kein Eigenkapital, Preis = Selbstkosten oder Zielpreis für plus €)
+const { teilung, LAYOUTS } = require("./model");
+function verkauf(konzept, ausl, plus = 250, zins = A.zinsPlan) {
+  const t = teilung(LAYOUTS.A, zins);
+  const k = t.k;
+  const preisFuer = (einnahme, til) => Math.max(0, ((einnahme - plus) * 12) / (k * (zins + til)));
+  const rate = (preis, til) => (preis * k * (zins + til)) / 12;
+  const einheiten = [];
+  if (konzept === "airbnb") {
+    const quote = Object.values(AIRBNB.kosten).reduce((a, b) => a + b, 0);
+    for (const ap of AIRBNB.apartments) {
+      const bau = (ap.m2 === 85 ? t.oG(85, 950) : t.st(56, 950)).kosten; // Selbstkosten ohne Möblierung
+      const kosten = ap.m2 === 85 ? t.oG(85, 950).kosten : t.st(56, 950).kosten;
+      const moebel = ap.m2 * AIRBNB.einrichtungM2;
+      const einnahme = (ap.preis * 365 * ausl * (1 - quote)) / 12;
+      einheiten.push({ name: `${ap.m2} m²`, n: ap.n, kosten: kosten + moebel, einnahme, rate: rate(kosten + moebel, A.tilgung), ergebnis: einnahme - rate(kosten + moebel, A.tilgung), preisPlus: preisFuer(einnahme, 0), bau });
+    }
+  } else {
+    const kostenOG = t.kostenOG, kostenST = t.kostenST;
+    const einricht = HOTEL.zimmer * HOTEL.einrichtungJeZimmer;
+    const proZimmer = (kostenOG + kostenST + einricht) / HOTEL.zimmer;
+    const einnahme = (HOTEL.preis * 365 * ausl * HOTEL.pachtQuote * (1 - A.ruecklagen)) / 12; // Pacht je Zimmer nach Rücklage
+    einheiten.push({ name: "Hotelzimmer", n: HOTEL.zimmer, kosten: proZimmer, einnahme, rate: rate(proZimmer, A.tilgung), ergebnis: einnahme - rate(proZimmer, A.tilgung), preisPlus: preisFuer(einnahme, 0) });
+  }
+  const luecke = einheiten.reduce((a, e) => a + e.n * Math.max(0, e.kosten - e.preisPlus), 0);
+  const gewinn = v.umsatz * A.gastroMargeVorPacht - A.lohn;
+  const rateEG = (t.gastro.kosten * k * (zins + A.tilgung)) / 12;
+  const zinsLuecke = (luecke * k * zins) / 12;
+  return { einheiten, luecke, rateEG, zinsLuecke, bessam: gewinn - rateEG - zinsLuecke, gewinn };
+}
+module.exports.verkauf = verkauf;

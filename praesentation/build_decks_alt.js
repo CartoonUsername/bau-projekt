@@ -5,7 +5,7 @@ const pptxgen = require("pptxgenjs");
 const { execFileSync } = require("child_process");
 const { applyTheme } = require(process.env.APPLY_THEME || "./apply_theme.js");
 const { A, VARIANTEN } = require("./model");
-const { AIRBNB, HOTEL, airbnb, hotel, dauermiete, gastroNetto } = require("./model_alt");
+const { AIRBNB, HOTEL, airbnb, hotel, dauermiete, gastroNetto, verkauf } = require("./model_alt");
 
 const IMG = process.env.BILDER || path.join(__dirname, "bilder");
 const OUT = process.env.OUT || __dirname;
@@ -141,6 +141,17 @@ async function deckAirbnb() {
     text(s, "Auch bei 40 % höheren Preisen bleibt das Ergebnis unter der Dauermiete. Der Vorteil von Airbnb liegt nur in Zeiten und Orten mit hoher Nachfrage, etwa Messen oder Monteure unter der Woche.", { x: MX, y: 4.9, w: 9.2, h: 1.0, fontSize: 13, color: C.accent4 });
   }
 
+  { const s = content("Verkauf an die Verwandten", "Ausarbeitung 1", "Jede Einheit mit eigenem Kredit ohne Eigenkapital. Käufer zahlen 3,3 % Zins; Preis für das Plus: nur Zinsen, ohne Tilgung. Selbstkosten enthalten Möblierung (600 €/m²).");
+    const r = verkauf("airbnb", 0.45), pl = 250;
+    const rows = [[hdr("Einheit"), hdr("Anzahl", "right"), hdr("Selbstkosten", "right"), hdr("Rate (1 % Tilgung)", "right"), hdr("Einnahme pro Monat", "right"), hdr("Ergebnis", "right"), hdr("Preis für +250 €", "right"), hdr("Differenz je Einheit", "right")]];
+    r.einheiten.forEach((e) => rows.push([cell(e.name), R(String(e.n)), R(eur(e.kosten)), R(eur(e.rate)), R(eur(e.einnahme)), cf(e.ergebnis), R(eur(e.preisPlus)), R(eur(Math.max(0, e.kosten - e.preisPlus)))]));
+    s.addTable(rows, { x: MX, y: 1.5, w: W - 2 * MX, colW: [1.7, 0.9, 1.6, 1.6, 1.7, 1.4, 1.6, 1.63], rowH: 0.6, border, objectName: "Tabelle Verkauf Verwandte" });
+    text(s, [
+      { text: `Bei Selbstkostenpreis ist jede Einheit im Minus. Für ein Plus von 250 € müsste der Preis so tief sinken, dass du insgesamt ${eur(r.luecke)} Differenz trägst.`, options: { breakLine: true } },
+      { text: `Dein Ergebnis dann: Gastro ${eur(r.gewinn)} minus Rate EG ${eur(r.rateEG)} minus Zinsen auf die Differenz ${eur(r.zinsLuecke)} = ${eurS(r.bessam)} pro Monat. Eine Bank finanziert eine so hohe Differenz kaum.`, options: {} },
+    ], { x: MX, y: 4.4, w: W - 2 * MX, h: 1.8, fontSize: 14, paraSpaceAfter: 8 });
+  }
+
   { const s = content("Recht und Risiken", "Ausarbeitung 1", "Bitte mit Bauamt und Brandschutz klären, die Hinweise sind keine Rechtsberatung.");
     const items = [
       ["Beherbergungsstätte", "Bei mehr als 12 Gästebetten gelten meist Sonderbau-Regeln (Brandschutz, Fluchtwege), hier ca. 18 Betten. Das betrifft auch das Holz-Staffelgeschoss."],
@@ -228,6 +239,17 @@ async function deckHotel() {
       [cell("Hotel, Eigenbetrieb (15 Zimmer)"), R(eur(h52.einrichtung)), R(eur(h52.fin.rate)), cf(h52.cf), cell("sehr hoch (Personal, 24 Stunden)")],
       [cell("Hotel, verpachtet"), R(eur(h52.einrichtung)), R(eur(h52p.fin.rate)), cf(h52p.cf), cell("gering, Betreiber nötig")]];
     s.addTable(rows, { x: MX, y: 1.5, w: W - 2 * MX, colW: [3.8, 1.9, 1.7, 2.0, 2.73], rowH: 0.65, border, objectName: "Tabelle Vergleich Konzepte" });
+  }
+
+  { const s = content("Verkauf an die Verwandten", "Ausarbeitung 2", "Jede Einheit mit eigenem Kredit ohne Eigenkapital. Käufer zahlen 3,3 % Zins; Preis für das Plus: nur Zinsen, ohne Tilgung. Hotelzimmer als Anlage: Betreiber zahlt 22 % vom Umsatz als Pacht, verteilt auf die Zimmer.");
+    const r = verkauf("hotel", 0.52), pl = 250;
+    const rows = [[hdr("Einheit"), hdr("Anzahl", "right"), hdr("Selbstkosten", "right"), hdr("Rate (1 % Tilgung)", "right"), hdr("Einnahme pro Monat", "right"), hdr("Ergebnis", "right"), hdr("Preis für +250 €", "right"), hdr("Differenz je Einheit", "right")]];
+    r.einheiten.forEach((e) => rows.push([cell(e.name), R(String(e.n)), R(eur(e.kosten)), R(eur(e.rate)), R(eur(e.einnahme)), cf(e.ergebnis), R(eur(e.preisPlus)), R(eur(Math.max(0, e.kosten - e.preisPlus)))]));
+    s.addTable(rows, { x: MX, y: 1.5, w: W - 2 * MX, colW: [1.7, 0.9, 1.6, 1.6, 1.7, 1.4, 1.6, 1.63], rowH: 0.6, border, objectName: "Tabelle Verkauf Verwandte" });
+    text(s, [
+      { text: `Bei Selbstkostenpreis ist jede Einheit im Minus. Für ein Plus von 250 € müsste der Preis so tief sinken, dass du insgesamt ${eur(r.luecke)} Differenz trägst.`, options: { breakLine: true } },
+      { text: `Dein Ergebnis dann: Gastro ${eur(r.gewinn)} minus Rate EG ${eur(r.rateEG)} minus Zinsen auf die Differenz ${eur(r.zinsLuecke)} = ${eurS(r.bessam)} pro Monat. Eine Bank finanziert eine so hohe Differenz kaum.`, options: {} },
+    ], { x: MX, y: 4.4, w: W - 2 * MX, h: 1.8, fontSize: 14, paraSpaceAfter: 8 });
   }
 
   { const s = content("Recht und Risiken", "Ausarbeitung 2", "Bitte mit Bauamt und Brandschutz klären, die Hinweise sind keine Rechtsberatung.");
