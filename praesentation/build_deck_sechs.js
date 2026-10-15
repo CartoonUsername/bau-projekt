@@ -116,7 +116,7 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
   stat(s, MX + (w + 0.2), 1.5, w, "6", "Wohnungen und eine Gastro von ca. 290 m² im ganzen EG", C.accent2);
   stat(s, MX + 2 * (w + 0.2), 1.5, w, eur(f0.plan.rate), "Rate pro Monat (3,3 %, ohne Förderung)");
   stat(s, MX + 3 * (w + 0.2), 1.5, w, eurS(f0.cfPlan.cf), `Ergebnis pro Monat bei ${k(UM)} Umsatz`, f0.cfPlan.cf >= 0 ? C.accent5 : C.accent6);
-  text(s, `Ergebnis pro Monat nach Lohn bei ${k(UM)} Gastro-Umsatz (Plan, 3,3 % Zins)`, { x: MX, y: 3.4, w: 10, h: 0.35, fontSize: 16, bold: true, color: C.accent2 });
+  text(s, `Ergebnis pro Monat (ohne Lohn des Bauherrn) bei ${k(UM)} Gastro-Umsatz (Plan, 3,3 % Zins)`, { x: MX, y: 3.4, w: 10, h: 0.35, fontSize: 16, bold: true, color: C.accent2 });
   s.addTable([[hdr("Förderung"), ...FOERDERUNG.map((f) => hdr(pct(f), "right"))], [cell("Ergebnis"), ...FOERDERUNG.map((f) => cfCell(F[f].cfPlan.cf))]], {
     x: MX, y: 3.85, w: W - 2 * MX, colW: [2.2, ...FOERDERUNG.map(() => (W - 2 * MX - 2.2) / FOERDERUNG.length)], rowH: 0.5, border: tblBorder, objectName: "Tabelle Förderung",
   });
@@ -395,16 +395,16 @@ if (KI.length) {
     [cell(`Gastro-Pacht: ${v.gastroM2} m² × 12 €`), R(eurS(v.pacht))],
     [cell("Gastro-Gewinn nach Pacht"), R(eurS(c.gastroNachPacht))],
     [cell("Rate (Zinsen und Tilgung)"), R(eurS(-f0.plan.rate))],
-    [cell("Dein Lohn"), R(eurS(-A.lohn))],
+    [cell("Dein Lohn (wird vorerst nicht gerechnet)"), R(eurS(-A.lohn))],
     [cell("Rücklagen (10 % der Miete und Pacht)"), R(eurS(-c.ruecklagen))],
     [cell("Ergebnis pro Monat", { bold: true }), cfCell(c.cf)],
   ];
   s.addTable(rows, { x: MX, y: 1.5, w: 7.2, colW: [5.3, 1.9], rowH: 0.5, border: tblBorder, objectName: "Tabelle Cashflow" });
-  s.addChart(pres.charts.BAR, [{ name: "Euro pro Monat", labels: ["Miete", "Gastro", "Rate", "Lohn"], values: [c.miete, c.gastroNachPacht, -f0.plan.rate, -(A.lohn + c.ruecklagen)].map(Math.round) }], {
+  s.addChart(pres.charts.BAR, [{ name: "Euro pro Monat", labels: ["Miete", "Gastro", "Rate", "Rücklagen"], values: [c.miete, c.gastroNachPacht, -f0.plan.rate, -(A.lohn + c.ruecklagen)].map(Math.round) }], {
     x: 8.1, y: 1.4, w: 4.7, h: 4.3, barDir: "col", chartColors: ["2E7D5B", "2E7D5B", "B3261E", "B3261E"], varyColors: true, showValue: true, dataLabelFormatCode: "#,##0", dataLabelFontSize: 12, dataLabelColor: "1F2421", dataLabelFontFace: "+mn-lt",
     catAxisLabelColor: "1F2421", catAxisLabelFontSize: 12, catAxisLabelFontFace: "+mn-lt", catAxisLabelPos: "low", catAxisLabelRotate: 0, valAxisHidden: true, valGridLine: { style: "none" }, catGridLine: { style: "none" }, showLegend: false, showTitle: false, objectName: "Diagramm Cashflow",
   });
-  text(s, "Lohn im Diagramm inkl. Rücklagen. Die ca. 3.100 € Tilgung in der Rate sind Vermögensaufbau (Schuld sinkt), kein Verlust.", { x: MX, y: 6.0, w: 11.5, h: 0.4, fontSize: 14, color: C.accent4 });
+  text(s, "Ohne Lohn des Bauherrn. Die ca. 3.100 € Tilgung in der Rate sind Vermögensaufbau (Schuld sinkt), kein Verlust.", { x: MX, y: 6.0, w: 11.5, h: 0.4, fontSize: 14, color: C.accent4 });
 }
 
 // ===== 13 Szenarien Förderung x Zins =====
@@ -421,18 +421,18 @@ if (KI.length) {
     x: MX, y: 4.75, w: 7.5, h: 2.15, chartColors: ["2F4A3E", "8C3B32"], lineSize: 3, lineDataSymbolSize: 7, catAxisLabelColor: "1F2421", catAxisLabelFontSize: 11, catAxisLabelFontFace: "+mn-lt", valAxisLabelColor: "1F2421", valAxisLabelFontSize: 11, valAxisLabelFontFace: "+mn-lt", valAxisLabelFormatCode: "#,##0",
     valGridLine: { color: "D9D9D9", size: 0.5 }, catGridLine: { style: "none" }, showLegend: true, legendPos: "r", legendFontSize: 11, legendColor: "1F2421", legendFontFace: "+mn-lt", showTitle: false, catAxisLabelPos: "low", objectName: "Diagramm Förderung",
   });
-  text(s, `Pro 5 Prozentpunkte Förderung steigt das Ergebnis um ca. ${nf.format(Math.round(F[0.05].cfPlan.cf - F[0].cfPlan.cf))} € im Monat. Gastro-Umsatz ${k(UM)}, nach Lohn und Rücklagen.`, { x: 8.4, y: 5.0, w: W - 8.4 - MX, h: 1.8, fontSize: 14 });
+  text(s, `Pro 5 Prozentpunkte Förderung steigt das Ergebnis um ca. ${nf.format(Math.round(F[0.05].cfPlan.cf - F[0].cfPlan.cf))} € im Monat. Gastro-Umsatz ${k(UM)}, nach Rücklagen, ohne Lohn.`, { x: 8.4, y: 5.0, w: W - 8.4 - MX, h: 1.8, fontSize: 14 });
 }
 
 // ===== 14 Szenarien Umsatz =====
 {
-  const s = content("Wie viel Umsatz braucht die Gastro?", "Für die Bank", "Gastro-Marge vor Pacht 30,5 % vom Umsatz (Branchen-Richtwert, nicht aus Werlte). Break-even = Ergebnis nach Lohn genau null.");
+  const s = content("Wie viel Umsatz braucht die Gastro?", "Für die Bank", "Gastro-Marge vor Pacht 30,5 % vom Umsatz (Branchen-Richtwert, nicht aus Werlte). Break-even = Ergebnis (ohne Lohn des Bauherrn) genau null.");
   const ums = [40000, 45000, 50000, 55000, 60000];
   const fs = [0, 0.1, 0.15, 0.2];
   const rows = [[hdr("Ergebnis pro Monat (Plan 3,3 %)"), ...ums.map((u) => hdr(k(u), "right"))]];
   fs.forEach((f) => rows.push([cell(`Förderung ${pct(f)}`, { bold: true }), ...ums.map((u) => cfCell(cashflow(v, F[f].plan, u).cf))]));
   s.addTable(rows, { x: MX, y: 1.5, w: W - 2 * MX, colW: [3.6, ...ums.map(() => (W - 2 * MX - 3.6) / ums.length)], rowH: 0.55, border: tblBorder, objectName: "Tabelle Umsatz" });
-  text(s, "Break-even-Umsatz (Ergebnis nach Lohn = 0)", { x: MX, y: 4.5, w: 8, h: 0.4, fontSize: 18, bold: true, color: C.accent2 });
+  text(s, "Break-even-Umsatz (Ergebnis = 0, ohne Lohn)", { x: MX, y: 4.5, w: 8, h: 0.4, fontSize: 18, bold: true, color: C.accent2 });
   const be = [[hdr("Förderung"), ...fs.map((f) => hdr(pct(f), "right"))],
     [cell("Plan, 3,3 %"), ...fs.map((f) => R(eur(umsatzBreakEven(v, F[f].plan))))],
     [cell("Ausgang, 4,0 %"), ...fs.map((f) => R(eur(umsatzBreakEven(v, F[f].ausgang))))]];
@@ -449,9 +449,8 @@ if (KI.length) {
     ["+ Gastro-Ausbau nur 100.000 € statt 150.000 €", { ausbau: 100000 }],
     ["+ Gastro-Umsatz 45.000 €", { u: 45000 }],
     ["+ Tilgung 0 % (nur Zinsen) in den ersten Jahren", { til: 0 }],
-    ["+ Lohn 4.000 € statt 6.000 €", { lohn: 4000 }],
   ];
-  let st = { f: 0, bau: A.bauKostenM2, ausbau: v.gastroAusbau, u: 40000, til: A.tilgung, lohn: A.lohn };
+  let st = { f: 0, bau: A.bauKostenM2, ausbau: v.gastroAusbau, u: 40000, til: A.tilgung };
   const rows = [[hdr("Schritt"), hdr("Plan (3,3 %)", "right"), hdr("Ausgang (4,0 %)", "right")]];
   const vals = [];
   steps.forEach(([n, d]) => {
@@ -459,7 +458,7 @@ if (KI.length) {
     const row = [n];
     [A.zinsPlan, A.zinsAusgang].forEach((z) => {
       const fin = finanz(v, st.f, z, { bauKostenM2: st.bau, gastroAusbau: st.ausbau, tilgung: st.til });
-      row.push(cashflow(v, fin, st.u, { lohn: st.lohn }).cf);
+      row.push(cashflow(v, fin, st.u).cf);
     });
     vals.push(row);
     rows.push([cell(n), cfCell(row[1]), cfCell(row[2])]);
@@ -468,10 +467,10 @@ if (KI.length) {
   card(s, 9.4, 1.4, W - 9.4 - MX, 4.7, "Fazit Pfad");
   text(s, [
     { text: "Mindestpaket", options: { bold: true, color: C.accent1, breakLine: true } },
-    { text: "Schon die Ausgangslage mit 2.200 €/m² und 150.000 € Ausbau liegt im Plan nahe an Plus, Förderung und günstige Preise geben Luft.", options: { breakLine: true } },
+    { text: "Ohne Lohn des Bauherrn liegt schon die Ausgangslage mit 40.000 € Umsatz im Plus, Förderung und günstige Preise geben zusätzlichen Puffer.", options: { breakLine: true } },
     { text: " ", options: { breakLine: true } },
     { text: "Nur Konto, kein Gewinn", options: { bold: true, color: C.accent1, breakLine: true } },
-    { text: "Tilgung 0 % und weniger Lohn verbessern das Konto, nicht das Haus.", options: {} },
+    { text: "Tilgung 0 % verbessert das Konto, nicht das Haus.", options: {} },
   ], { x: 9.65, y: 1.6, w: W - 9.4 - MX - 0.5, h: 4.4, fontSize: 14 });
   text(s, "Verwaltung, Versicherung, Grundsteuer (ca. 300–500 € im Monat) sind noch nicht enthalten.", { x: MX, y: 5.8, w: 8.4, h: 0.5, fontSize: 13, color: C.accent4 });
 }
@@ -494,7 +493,7 @@ if (KI.length) {
   ];
   s.addTable(rows, { x: MX, y: 1.4, w: W - 2 * MX, colW: [4.4, 2.6, 2.6, 2.53], rowH: 0.44, border: tblBorder, objectName: "Tabelle Verkauf je Partei" });
   text(s, [
-    { text: `Die Rechnung für den Gastro-Teil gilt bei ${k(UM)} Umsatz und 6.000 € Lohn, Break-even ab ${k(Math.round(g.beUmsatz / 1000) * 1000)}. Die Wohnungen tragen sich bei 11,18 €/m² Miete erst ab einem Preis von ca. ${eur(Math.round(t.preisFuerPlusM2 / 10) * 10)} je m².`, options: { breakLine: true } },
+    { text: `Die Rechnung für den Gastro-Teil gilt bei ${k(UM)} Umsatz ohne Lohn des Bauherrn, Break-even ab ${k(Math.round(g.beUmsatz / 1000) * 1000)}. Die Wohnungen tragen sich bei 11,18 €/m² Miete erst ab einem Preis von ca. ${eur(Math.round(t.preisFuerPlusM2 / 10) * 10)} je m².`, options: { breakLine: true } },
     { text: `Die Staffel-Wohnung (56 m²) kostet bei 950 € Miete 17 €/m², bei Marktmiete (11,18 €/m²) wären es ${eur(56 * 11.18)} und das Ergebnis ${eurS(t.st(56).ergebnis)}.`, options: {} },
   ], { x: MX, y: 5.65, w: W - 2 * MX, h: 1.1, fontSize: 12.5, color: C.accent4, paraSpaceAfter: 4 });
 }
@@ -542,7 +541,7 @@ if (KI.length) {
   const s = content("Risiken und was wir dagegen tun", "Für die Bank", "Die Miete von 950 € je Wohnung ist eine Annahme des Bauherrn, Marktdaten für Werlte liegen darunter.");
   const items = [
     ["Miete", "950 € je Wohnung (ca. 12–15 €/m²) liegt über den Portalwerten für Neubau in Werlte (ca. 11 €/m²). Gegenmaßnahme: Vergleichsangebote, Vorvermietung."],
-    ["Gastro-Umsatz", `Die Gastro braucht ab ca. ${k(Math.round(umsatzBreakEven(v, f0.plan) / 1000) * 1000)} Umsatz, bei 4 % Zins ca. ${k(Math.round(umsatzBreakEven(v, f0.ausgang) / 1000) * 1000)}. Gegenmaßnahme: Konzept, Pacht-Staffel, Lohn variabel.`],
+    ["Gastro-Umsatz", `Die Gastro braucht ab ca. ${k(Math.round(umsatzBreakEven(v, f0.plan) / 1000) * 1000)} Umsatz, bei 4 % Zins ca. ${k(Math.round(umsatzBreakEven(v, f0.ausgang) / 1000) * 1000)}. Gegenmaßnahme: Konzept, Pacht-Staffel, Lohn des Bauherrn bewusst ausgeklammert.`],
     ["Zins", "Nach 10 Jahren Zinsbindung ist der Folgezins offen. Gegenmaßnahme: Förderkredite, Forward-Darlehen, Tilgungsaussetzung."],
     ["Genehmigung", "Staffelgeschoss und Flachdach müssen von der Stadt bestätigt werden. Gegenmaßnahme: Vorabstimmung, Plan B mit Satteldach."],
   ];
@@ -618,7 +617,7 @@ if (KI.length) {
   const right = [
     `Gastro-Umsatz ${k(UM)} netto, Marge vor Pacht 30,5 %`,
     "6 Wohnungen zu je 950 € Kaltmiete, Gastro-Pacht 12 €/m²",
-    "Lohn Bessam 6.000 €, Rücklagen 10 % der Miete und Pacht",
+    "Lohn des Bauherrn wird vorerst nicht gerechnet, Rücklagen 10 % der Miete und Pacht",
     "Förderung als Zuschuss in % der Gesamtkosten (Annahme)",
     "Nicht enthalten: Hausverwaltung, Versicherung, Grundsteuer (ca. 300–500 €/Monat)",
     "Offen: Baufenster, Staffelgeschoss, Höhen, Stellplatzsatzung, Zins nach 10 Jahren",

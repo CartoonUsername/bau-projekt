@@ -80,7 +80,7 @@ rows = [
     (29, "Rücklagen", 0.10, PCT, "Reparaturen, Leerstand, in % von Miete und Pacht"),
     (30, "Gastro-Umsatz pro Monat (€)", 50000, EUR, "netto"),
     (31, "Gastro-Marge vor Pacht", 0.305, PCT, "Branchen-Richtwert"),
-    (32, "Dein Lohn pro Monat (€)", 6000, EUR, ""),
+    (32, "Dein Lohn pro Monat (€)", 0, EUR, "wird vorerst nicht gerechnet"),
     (34, "Holzbau und Terrasse", None, None, None),
     (35, "Staffelgeschoss in Holzbau (m² BGF)", 250, "#,##0", "Zimmerei, Terrasse rundum"),
     (36, "Holzbau günstiger als Massivbau (€ je m²)", 400, EUR, "Annahme, Angebot der Zimmerei nötig"),
@@ -198,7 +198,7 @@ cfrows = [
     (11, "Rücklagen", "=-B7*Annahmen!B29"),
     (12, "Ergebnis pro Monat", "=B5+B6+B8+B9+B10+B11"),
     (13, "Ergebnis pro Jahr", "=B12*12"),
-    (15, "Break-even Gastro-Umsatz (Ergebnis nach Lohn = 0)", "=(Annahmen!B32+Kredit!I9+B7*Annahmen!B29-B7+B6)/Annahmen!B31"),
+    (15, "Break-even Gastro-Umsatz (Ergebnis = 0, abzüglich Lohn aus Annahmen)", "=(Annahmen!B32+Kredit!I9+B7*Annahmen!B29-B7+B6)/Annahmen!B31"),
 ]
 for r, label, f in cfrows:
     cf.cell(row=r, column=1, value=label).font = bold if r in (12, 15) else base
@@ -221,7 +221,7 @@ for i, d in enumerate(szen["foerderung"]):
     for j, (v, fm) in enumerate(zip(vals, fmts)):
         c = s.cell(row=r, column=j + 1, value=round(v, 2) if j else v)
         c.number_format = fm
-s["A12"] = "Ergebnis pro Monat nach Lohn, Plan 3,3 %, je Gastro-Umsatz"
+s["A12"] = "Ergebnis pro Monat (ohne Lohn des Bauherrn), Plan 3,3 %, je Gastro-Umsatz"
 s["A12"].font = bold
 header(s, 13, ["Förderung", "40.000 €", "45.000 €", "50.000 €", "55.000 €", "60.000 €"])
 for i, d in enumerate(szen["umsatz"]):
@@ -240,7 +240,7 @@ title(vk, "Verkauf an die Familie: Rechnung je Partei", "Jede Partei mit eigenem
 header(vk, 4, ["", "A: 1. OG 85 m²", "A: Staffel 56 m²", "A: Gastro (Du)", "B: 1. OG 85 m²", "B: Staffel 56 m²", "B: Gastro + Büro (Du)", "C: Regelgeschoss 85 m²", "C: Staffel 56 m²", "C: Gastro + Büro (Du)"])
 VA, VB, VC = szen["verkauf"]["A"], szen["verkauf"]["B"], szen["verkauf"]["C"]
 cols = [(VA["og85"], 2), (VA["st56"], 3), (VA["gastro"], 4), (VB["og85"], 5), (VB["st56"], 6), (VB["gastro"], 7), (VC["og85"], 8), (VC["st56"], 9), (VC["gastro"], 10)]
-labels = ["Preis (Selbstkosten)", "Rate pro Monat", "Einnahme nach Rücklagen / Gastro-Gewinn nach Lohn (+ Büro)", "Ergebnis pro Monat", "Preis für Ergebnis 0 €", "Lücke zum Selbstkostenpreis"]
+labels = ["Preis (Selbstkosten)", "Rate pro Monat", "Einnahme nach Rücklagen / Gastro-Gewinn (+ Büro)", "Ergebnis pro Monat", "Preis für Ergebnis 0 €", "Lücke zum Selbstkostenpreis"]
 for i, lab in enumerate(labels):
     vk.cell(row=5 + i, column=1, value=lab).font = base
 for d, c in cols:

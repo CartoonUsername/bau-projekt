@@ -15,7 +15,7 @@ const A = {
   tilgung: 0.01,
   zinsPlan: 0.033,
   zinsAusgang: 0.04,
-  lohn: 6000,
+  lohn: 0, // Lohn des Bauherrn wird vorerst nicht gerechnet (separates Thema)
   ruecklagen: 0.1, // Anteil an Miete + Pacht
   gastroMargeVorPacht: 0.305, // Anteil vom Umsatz (12.200 € bei 40.000 €)
   umsatz: 40000,
@@ -173,7 +173,7 @@ function cashflow(v, fin, umsatz = v.umsatz ?? A.umsatz, opts = {}) {
   return { miete, gastroNachPacht, ruecklagen, cf, hausErgebnis: miete - ruecklagen - fin.rate };
 }
 
-// Umsatz, bei dem der Cashflow nach Lohn genau 0 ist
+// Umsatz, bei dem der Cashflow (ohne Lohn des Bauherrn) genau 0 ist
 function umsatzBreakEven(v, fin, lohn = A.lohn) {
   const miete = v.mieteOhnePacht + v.pacht;
   const need = lohn + fin.rate + miete * A.ruecklagen - miete + v.pacht;
