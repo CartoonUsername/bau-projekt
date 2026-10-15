@@ -85,13 +85,13 @@ function ansichten() {
     o += R(bx + 0.5, 3.9, bx + 3.2, 6.3, COL.glas, `stroke="${COL.stahl}" stroke-width="3"`);
     o += L(bx + 1.85, 3.9, bx + 1.85, 6.3, COL.stahl, 2.5);
     o += R(bx + 4.4, 3.9, bx + 6.2, 6.3, COL.glas, `stroke="${COL.stahl}" stroke-width="3"`);
-    // Balkon (Platte + Glasbrüstung)
+    // Balkon (Platte + Milchglas-Brüstung)
     o += R(bx + 0.3, 3.62, bx + 3.4, 3.8, COL.beton);
-    o += R(bx + 0.3, 3.8, bx + 3.4, 4.8, COL.glas, 'opacity="0.35" stroke="#1E2326" stroke-width="2"');
+    o += R(bx + 0.3, 3.8, bx + 3.4, 4.8, "#E6EAEC", 'opacity="0.92" stroke="#1E2326" stroke-width="2"');
   }
-  // Attika/Dachrand Hauptbaukörper mit Glasgeländer und Pflanzen
+  // Attika/Dachrand Hauptbaukörper mit Milchglas-Geländer und Pflanzen
   o += R(-0.2, 6.5, 24.2, 6.8, COL.beton);
-  o += R(3.6, 6.8, 24, 7.6, COL.glas, 'opacity="0.3" stroke="#1E2326" stroke-width="1.5"');
+  o += R(3.6, 6.8, 24, 7.6, "#E6EAEC", 'opacity="0.92" stroke="#1E2326" stroke-width="1.5"');
   for (let i = 0; i < 9; i++) o += `<ellipse cx="${X(4 + i * 2.1)}" cy="${Z(7.0)}" rx="${0.5 * s}" ry="${0.35 * s}" fill="${COL.pflanze}"/>`;
   // Staffelgeschoss in Holzbau (x 1,3..22,7, rundum zurückgesetzt, Terrasse ringsum)
   o += R(1.3, 6.8, 22.7, 9.6, COL.zink);
@@ -132,7 +132,7 @@ function ansichten() {
   [[1.0, 4.4], [9.8, 13.2]].forEach(([a, b]) => (o += R2(a, 3.9, b, 6.3, COL.glas, `stroke="${COL.stahl}" stroke-width="3"`)));
   o += R2(5.4, 3.9, 8.6, 6.3, COL.glas, `stroke="${COL.stahl}" stroke-width="3"`);
   o += R2(-0.2, 6.5, 14.4, 6.8, COL.beton);
-  o += R2(0, 6.8, 14.2, 7.6, COL.glas, 'opacity="0.3" stroke="#1E2326" stroke-width="1.5"');
+  o += R2(0, 6.8, 14.2, 7.6, "#E6EAEC", 'opacity="0.92" stroke="#1E2326" stroke-width="1.5"');
   // Staffel zurückgesetzt (heller, entfernter)
   o += R2(1.3, 6.8, 12.9, 9.6, COL.zinkHell);
   for (let k = 0; k < 3; k++) o += R2(1.9 + k * 3.6, 6.9, 4.9 + k * 3.6, 9.5, COL.glas, `stroke="${COL.stahl}" stroke-width="3"`);
@@ -199,11 +199,11 @@ function ecke() {
   // OG Ost
   [[1.0, 4.4], [9.8, 13.2]].forEach(([a, b]) => (o += rect(SB, a, 3.9, b, 6.3, COL.glas, `stroke="${COL.stahl}" stroke-width="2.5"`)));
   o += rect(SB, 5.4, 3.9, 8.6, 6.3, COL.glas, `stroke="${COL.stahl}" stroke-width="2.5"`);
-  // Balkone Süd (Platten und Glasbrüstung)
+  // Balkone Süd (Platten und Milchglas-Brüstung)
   for (let k = 0; k < 3; k++) {
     const bx = 3.6 + k * 6.8 + 0.3;
     o += poly([P(bx, Y, 3.62), P(bx + 3.1, Y, 3.62), P(bx + 3.1, Y + 1.5, 3.62), P(bx, Y + 1.5, 3.62)], COL.beton);
-    o += poly([P(bx, Y + 1.5, 3.62), P(bx + 3.1, Y + 1.5, 3.62), P(bx + 3.1, Y + 1.5, 4.7), P(bx, Y + 1.5, 4.7)], COL.glas, 'opacity="0.4" stroke="#1E2326" stroke-width="2"');
+    o += poly([P(bx, Y + 1.5, 3.62), P(bx + 3.1, Y + 1.5, 3.62), P(bx + 3.1, Y + 1.5, 4.7), P(bx, Y + 1.5, 4.7)], "#E6EAEC", 'opacity="0.92" stroke="#1E2326" stroke-width="2"');
   }
   // Dachterrasse OG-Dach (Ost-Streifen x 21..24 und Süd-Streifen)
   const roofZ = 6.5;
@@ -214,10 +214,10 @@ function ecke() {
     const g = P(21.8 + (i % 2) * 1.2, 1 + i * 2.2, roofZ + 0.3);
     o += `<ellipse cx="${g[0]}" cy="${g[1]}" rx="14" ry="9" fill="${COL.pflanze}"/>`;
   }
-  // Attika und Glasgeländer
+  // Attika und Milchglas-Geländer
   o += poly([P(21, 0, roofZ), P(24, 0, roofZ + 1.0), P(24, Y, roofZ + 1.0), P(24, Y, roofZ)], "#FFF", 'opacity="0"');
-  o += poly([P(24, 0, roofZ), P(24, Y, roofZ), P(24, Y, roofZ + 1.0), P(24, 0, roofZ + 1.0)], COL.glas, 'opacity="0.3" stroke="#1E2326" stroke-width="1.5"');
-  o += poly([P(0, Y, roofZ), P(24, Y, roofZ), P(24, Y, roofZ + 1.0), P(0, Y, roofZ + 1.0)], COL.glas, 'opacity="0.3" stroke="#1E2326" stroke-width="1.5"');
+  o += poly([P(24, 0, roofZ), P(24, Y, roofZ), P(24, Y, roofZ + 1.0), P(24, 0, roofZ + 1.0)], "#E6EAEC", 'opacity="0.92" stroke="#1E2326" stroke-width="1.5"');
+  o += poly([P(0, Y, roofZ), P(24, Y, roofZ), P(24, Y, roofZ + 1.0), P(0, Y, roofZ + 1.0)], "#E6EAEC", 'opacity="0.92" stroke="#1E2326" stroke-width="1.5"');
   o += rect(SA, -0.2, 6.5, 24.2, 6.8, COL.beton) + rect(SB, -0.2, 6.5, Y + 0.2, 6.8, COL.beton);
   // Treppenhausblock bis 9,9 (Süd, flach mit Fassade)
   // Staffelgeschoss Süd (y=13.3) und Ost (x=21)

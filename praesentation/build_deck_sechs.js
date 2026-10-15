@@ -278,12 +278,12 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
 
 // ===== 7 Außen =====
 {
-  const s = content("Modern, Klinker, Glas und Staffelgeschoss", "Für die Stadt", "Links Referenzstudie, rechts unsere Eckansicht als Skizze.");
+  const s = content("Modern, Klinker, Milchglas und Staffelgeschoss", "Für die Stadt", "Links Referenzstudie, rechts unsere Eckansicht als Skizze.");
   s.addImage({ path: fit(hasKI("ki_aussen_1.jpg") ? path.join(IMG, "ki_aussen_1.jpg") : path.join(IMG, "aussen.jpg"), 5.9, 3.29), x: MX, y: 1.4, w: 5.9, h: 3.29, altText: "Visualisierung Außenansicht" });
   s.addImage({ path: path.join(IMG, "skizze_aussen_ecke.png"), x: 6.8, y: 1.4, w: 5.9, h: 3.69, sizing: { type: "contain", w: 5.9, h: 3.69 }, altText: "Eckansicht als Skizze: Flachdach mit Staffelgeschoss, Balkone, vollverglastes Erdgeschoss" });
   text(s, hasKI("ki_aussen_1.jpg") ? "KI-Visualisierung" : "Referenzstudie", { x: MX, y: 4.75, w: 5.9, h: 0.3, fontSize: 12, color: C.accent4 });
   text(s, "Unsere Skizze (Eckansicht)", { x: 6.8, y: 5.12, w: 5.9, h: 0.3, fontSize: 12, color: C.accent4 });
-  const pts = [["Klinker", "dunkel, Langformat, passend zum Umfeld"], ["Staffelgeschoss", "Holzbau, Terrasse rundum"], ["Balkone", "bodentiefe Fenster mit Glasbrüstung"], ["Glas-EG", "Gastro mit Bar, Terrasse und Vordach"]];
+  const pts = [["Klinker", "dunkel, Langformat, passend zum Umfeld"], ["Staffelgeschoss", "Holzbau, Terrasse rundum"], ["Balkone", "bodentiefe Fenster, Milchglas-Brüstungen"], ["Glas-EG", "Gastro mit Bar, Terrasse und Vordach"]];
   pts.forEach((p, i) => {
     const x = MX + i * 3.05;
     text(s, p[0], { x, y: 5.6, w: 2.9, h: 0.4, fontSize: 16, bold: false, fontFace: "Georgia", color: C.accent1 });
@@ -316,7 +316,7 @@ if (KI.length) {
     const y = 1.45 + Math.floor(i / cols) * (gh + 0.3);
     s.addImage({ path: fit(f, gw, gh), x, y, w: gw, h: gh, altText: "Visualisierung " + (i + 1) });
   });
-  text(s, "KI-generierte Visualisierungen zur Orientierung (Theke farblich nachbearbeitet), Maße und Details folgen mit dem Architekten.", { x: MX, y: H - 0.95, w: W - 2 * MX, h: 0.4, fontSize: 12, color: C.accent4 });
+  text(s, "KI-generierte Visualisierungen zur Orientierung (Theke und Glasbrüstungen nachbearbeitet), Maße und Details folgen mit dem Architekten.", { x: MX, y: H - 0.95, w: W - 2 * MX, h: 0.4, fontSize: 12, color: C.accent4 });
 }
 
 // ===== 9 Stellplätze =====
