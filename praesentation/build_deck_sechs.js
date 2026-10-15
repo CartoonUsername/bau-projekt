@@ -4,7 +4,7 @@ const path = require("path");
 const fs = require("fs");
 const pptxgen = require("pptxgenjs");
 const { applyTheme } = require(process.env.APPLY_THEME || "./apply_theme.js");
-const { A, VARIANTEN, finanz, cashflow, umsatzBreakEven, bauRoh, teilung, LAYOUTS } = require("./model");
+const { A, VARIANTEN, finanz, cashflow, umsatzBreakEven, bauRoh, teilung, zielplus, LAYOUTS } = require("./model");
 const { execFileSync } = require("child_process");
 
 const IMG = process.env.BILDER || path.join(__dirname, "bilder");
@@ -534,6 +534,28 @@ if (KI.length) {
     { text: "Ohne Tilgung sinkt die Schuld nicht, der Kredit muss später abgelöst oder verlängert werden.", options: {} },
   ], { x: 9.75, y: 1.6, w: W - 9.5 - MX - 0.5, h: 4.5, fontSize: 12.5 });
   text(s, `Zum Vergleich: Wenn du die Lücke der drei OG-Wohnungen (${eur(3 * -t0.oG(85, 950).ergebnis)} im Monat) selbst trägst, bleiben dir ${eur(t0.gastro.ergebnis + 3 * t0.oG(85, 950).ergebnis)} aus der Gastro.`, { x: MX, y: 5.7, w: 8.6, h: 0.7, fontSize: 12.5, color: C.accent4 });
+}
+
+// ===== 15d Ziel: 250 € Plus je Wohnung =====
+{
+  const s = content("Ziel: 250 € Plus für jede Wohnung", "Für die Verwandten und die Bank", "Variante A, jede Wohnung mit eigenem Kredit ohne Eigenkapital und ohne Tilgung, 950 € Miete, 3,3 % Zins. Du trägst die Differenz zu deinen Selbstkosten.");
+  const r = zielplus(LAYOUTS.A, 250, A.zinsPlan), r4 = zielplus(LAYOUTS.A, 250, A.zinsAusgang);
+  const tb = teilung(LAYOUTS.B), tc = teilung(LAYOUTS.C);
+  const rows = [
+    [hdr(""), hdr("1. OG, 85 m² (3×)", "right"), hdr("Staffel, 56 m² (3×)", "right"), hdr("Du", "right")],
+    [cell("Deine Selbstkosten je Einheit"), R(eur(r.og.kosten)), R(eur(r.st.kosten)), R(eur(r.t.kostenEG))],
+    [cell("Verkaufspreis an die Verwandten", { bold: true }), R(eur(r.og.preis), { bold: true }), R(eur(r.st.preis), { bold: true }), R("")],
+    [cell("Preis je m² Wohnfläche"), R(eur(r.og.preisM2)), R(eur(r.st.preisM2)), R("")],
+    [cell("Nachlass, den du trägst"), R(eur(r.og.nachlass)), R(eur(r.st.nachlass)), R("gesamt " + eur(r.luecke))],
+    [cell("Einnahme pro Monat (Miete nach 10 % Rücklagen / Gastro-Gewinn)"), R(eur(r.og.miete * 0.9)), R(eur(r.st.miete * 0.9)), R(eur(UM * A.gastroMargeVorPacht - A.lohn))],
+    [cell("Rate pro Monat (Zinsen)"), R(eur(-r.og.rate)), R(eur(-r.st.rate)), R(eur(-r.rateEG - r.zinsLuecke))],
+    [cell("Ergebnis pro Monat", { bold: true }), cfCell(r.og.ergebnis), cfCell(r.st.ergebnis), cfCell(r.bessam)],
+  ];
+  s.addTable(rows, { x: MX, y: 1.4, w: W - 2 * MX, colW: [5.1, 2.4, 2.4, 2.23], rowH: 0.5, border: tblBorder, objectName: "Tabelle Ziel 250 Euro Plus" });
+  text(s, [
+    { text: `Dein Anteil: Rate für das Gastro-EG ${eur(r.rateEG)} (1 % Tilgung) plus Zinsen für die Differenz ${eur(r.zinsLuecke)}. Der Preis von ca. 207.000 € liegt nahe an dem, was Neubauwohnungen dieser Größe in Werlte kosten.`, options: { breakLine: true } },
+    { text: `Bei 4,0 % Zins sinkt der Preis für 250 € Plus auf ca. ${eur(r4.og.preis)} (${eur(r4.og.preisM2)} je m²), dein Ergebnis auf ${eurS(r4.bessam)}. Bei Variante B / C beträgt der Nachlass je 85-m²-Wohnung im OG ca. ${eur(tb.oG(85, 950).kosten - r.og.preis)} / ${eur(tc.oG(85, 950).kosten - r.og.preis)}.`, options: {} },
+  ], { x: MX, y: 5.6, w: W - 2 * MX, h: 1.2, fontSize: 12.5, color: C.accent4, paraSpaceAfter: 5 });
 }
 
 // ===== 16 Risiken =====

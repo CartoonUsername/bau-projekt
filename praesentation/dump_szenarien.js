@@ -1,5 +1,5 @@
 // Gibt die Szenario-Tabellen des Rechenmodells als JSON aus (für den Excel-Export)
-const { A, VARIANTEN, finanz, cashflow, umsatzBreakEven, teilung, LAYOUTS } = require("./model");
+const { A, VARIANTEN, finanz, cashflow, umsatzBreakEven, teilung, zielplus, LAYOUTS } = require("./model");
 const v = VARIANTEN.sechs;
 const F = [0, 0.05, 0.1, 0.15, 0.2, 0.25];
 const out = { foerderung: [], umsatz: [], variante4: null };
@@ -26,4 +26,9 @@ for (const key of ["A", "B", "C"]) {
   out.verkauf[key] = { og85: pick(t.oG(85, 950)), st56: pick(t.st(56, 950)), st56Markt: pick(t.st(56)), gastro: t.gastro, ogM2: t.ogM2, stM2: t.stM2, preisFuerPlusM2: t.preisFuerPlusM2 };
 }
 out.varianteB = { A: { gesamt: fa.gesamt, rate: fa.rate, cf: cashflow(v, fa).cf, be: umsatzBreakEven(v, fa) }, B: { gesamt: fb.gesamt, rate: fb.rate, cf: cashflow(vb, fb).cf, be: umsatzBreakEven(vb, fb) }, C: { gesamt: fc.gesamt, rate: fc.rate, cf: cashflow(vc, fc).cf, be: umsatzBreakEven(vc, fc) } };
+out.ziel = {};
+for (const [key, z] of [["plan", A.zinsPlan], ["ausgang", A.zinsAusgang]]) {
+  const r = zielplus(LAYOUTS.A, 250, z);
+  out.ziel[key] = { og: r.og, st: r.st, luecke: r.luecke, zinsLuecke: r.zinsLuecke, rateEG: r.rateEG, bessam: r.bessam };
+}
 console.log(JSON.stringify(out));

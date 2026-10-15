@@ -219,7 +219,26 @@ function teilung(L, zins = A.zinsPlan, opts = {}) {
   };
 }
 
-module.exports = { teilung, LAYOUTS, MIETE_M2, bauRoh, A, VARIANTEN, finanz, cashflow, umsatzBreakEven };
+// Zielplus: Verkaufspreis je Einheit so, dass der Käufer ohne Eigenkapital und ohne Tilgung genau 'plus' € im Monat übrig behält
+function zielplus(L, plus = 250, zins = A.zinsPlan, opts = {}) {
+  const t = teilung(L, zins, opts);
+  const til = opts.tilgungKaeufer ?? 0;
+  const rate = (kosten) => (kosten * t.k * (zins + til)) / 12;
+  const preisFuer = (miete) => Math.round(((miete * (1 - A.ruecklagen) - plus) * 12) / (t.k * (zins + til)));
+  const einheit = (e, miete) => {
+    const preis = Math.min(e.kosten, preisFuer(miete));
+    return { m2: e.m2, kosten: e.kosten, preis, nachlass: e.kosten - preis, preisM2: preis / e.m2, rate: rate(preis), miete, ergebnis: miete * (1 - A.ruecklagen) - rate(preis) };
+  };
+  const og = einheit(t.oG(85, 950), 950), st = einheit(t.st(56, 950), 950);
+  const luecke = 3 * og.nachlass + 3 * st.nachlass; // nur Layout A: 3 + 3 Einheiten
+  const tilEG = opts.tilgungBessam ?? A.tilgung;
+  const rateEG = (t.gastro.kosten * t.k * (zins + tilEG)) / 12;
+  const zinsLuecke = (luecke * t.k * zins) / 12;
+  const gewinn = VARIANTEN.sechs.umsatz * A.gastroMargeVorPacht - (opts.lohn ?? A.lohn);
+  return { t, og, st, luecke, zinsLuecke, rateEG, bessam: gewinn - rateEG - zinsLuecke, bessamOhneLuecke: gewinn - rateEG };
+}
+
+module.exports = { zielplus, teilung, LAYOUTS, MIETE_M2, bauRoh, A, VARIANTEN, finanz, cashflow, umsatzBreakEven };
 
 if (require.main === module) {
   for (const v of Object.values(VARIANTEN)) {

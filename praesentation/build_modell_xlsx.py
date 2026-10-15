@@ -266,6 +266,23 @@ for i, (lab, ka) in enumerate([("Gesamtkosten", "gesamt"), ("Rate pro Monat", "r
         cc.number_format = EURS if ka == "cf" else EUR
 vk.cell(row=20, column=1, value="B: EG 540 m² (Gastro 290 + Büro 150), 1. OG 540 m², Staffel 420 m² mit 120 m² Terrasse. C: zusätzlich 2. OG 540 m², Höhe ca. 13 m. Nur mit Ausnahme der Stadt (Baufenster, II Vollgeschosse, 12 m).").font = note
 
+# Ziel: 250 € Plus je Wohnung
+zr = szen["ziel"]
+vk.cell(row=22, column=1, value="Ziel: 250 € Plus je Wohnung (Käufer ohne Eigenkapital, ohne Tilgung, Variante A)").font = bold
+header(vk, 23, ["", "1. OG 85 m²", "Staffel 56 m²", "Du", "Zins 4,0 %: 1. OG", "Zins 4,0 %: Staffel", "Zins 4,0 %: Du"])
+zl = ["Selbstkosten", "Verkaufspreis", "Nachlass (von dir getragen)", "Rate pro Monat", "Ergebnis pro Monat"]
+for i, lab in enumerate(zl):
+    vk.cell(row=24 + i, column=1, value=lab).font = base
+for off, key in ((0, "plan"), (3, "ausgang")):
+    d = zr[key]
+    for j, e in enumerate((d["og"], d["st"])):
+        for i, x in enumerate((e["kosten"], e["preis"], e["nachlass"], e["rate"], e["ergebnis"])):
+            c_ = vk.cell(row=24 + i, column=2 + j if off == 0 else 5 + j, value=round(x, 2))
+            c_.number_format = EURS if i == 4 else EUR
+    cc_ = vk.cell(row=26, column=4 if off == 0 else 7, value=round(d["luecke"], 2)); cc_.number_format = EUR
+    cc_ = vk.cell(row=27, column=4 if off == 0 else 7, value=round(d["rateEG"] + d["zinsLuecke"], 2)); cc_.number_format = EUR
+    cc_ = vk.cell(row=28, column=4 if off == 0 else 7, value=round(d["bessam"], 2)); cc_.number_format = EURS
+
 # ---------------- Variante 4 Ebenen ----------------
 v4 = wb.create_sheet("Variante 4 Ebenen")
 title(v4, "Variante: Mittelgeschoss doppelt (4 Ebenen)", "Nur als Gedankenspiel: Höhe ca. 13 m, der B-Plan erlaubt 12 m.")
