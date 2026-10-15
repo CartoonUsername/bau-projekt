@@ -499,6 +499,44 @@ if (KI.length) {
   ], { x: MX, y: 5.65, w: W - 2 * MX, h: 1.1, fontSize: 12.5, color: C.accent4, paraSpaceAfter: 4 });
 }
 
+// ===== 15c So rentiert es sich für jede Partei =====
+{
+  const s = content("So rentiert es sich für jede Partei", "Für die Verwandten und die Bank", "Variante A, 6 Wohnungen, jede mit eigenem Kredit ohne Eigenkapital, Miete 950 €, 50.000 € Gastro-Umsatz. Förderung, Preise und tilgungsfreie Jahre sind Ziele, keine Zusagen.");
+  const t0 = teilung(LAYOUTS.A, A.zinsPlan);
+  const calc = (o) => {
+    const z = o.zins ?? A.zinsPlan, c = o.c ?? A.bauKostenM2, f = o.f ?? 0, til = o.til ?? A.tilgung;
+    const t = teilung(LAYOUTS.A, z, { bauKostenM2: c });
+    const rate = (kosten) => (kosten * (1 - f) * t.k * (z + til)) / 12;
+    const og = 950 * (1 - A.ruecklagen) - rate(t.oG(85, 950).kosten);
+    const st = 950 * (1 - A.ruecklagen) - rate(t.st(56, 950).kosten);
+    const g = UM * A.gastroMargeVorPacht - A.lohn - rate(t.gastro.kosten);
+    return [og, st, g];
+  };
+  const sc = [
+    ["Selbstkostenpreis, 1 % Tilgung (heute)", {}],
+    ["+ 15 % Förderung", { f: 0.15 }],
+    ["+ Tilgung 0 % (nur Zinsen) in den ersten Jahren", { f: 0.15, til: 0 }],
+    ["+ Baukosten 2.000 €/m² statt 2.200 €", { f: 0.15, til: 0, c: 2000 }],
+    ["Dasselbe bei 4,0 % Zins", { f: 0.15, til: 0, c: 2000, zins: A.zinsAusgang }],
+    ["Alternative: ohne Förderung, Tilgung 0 %, Baukosten 2.000 €/m²", { til: 0, c: 2000 }],
+  ];
+  const rows = [[hdr("Schritt"), hdr("1. OG, 85 m²", "right"), hdr("Staffel, 56 m²", "right"), hdr("Du: Gastro", "right")]];
+  sc.forEach(([n, o]) => {
+    const r = calc(o);
+    rows.push([cell(n), cfCell(r[0]), cfCell(r[1]), cfCell(r[2])]);
+  });
+  s.addTable(rows, { x: MX, y: 1.4, w: 8.6, colW: [4.3, 1.4, 1.5, 1.4], rowH: 0.52, border: tblBorder, objectName: "Tabelle Rentiert für alle" });
+  card(s, 9.5, 1.4, W - 9.5 - MX, 4.9, "Was das bedeutet");
+  text(s, [
+    { text: "Plus für alle", options: { bold: true, color: C.accent1, breakLine: true } },
+    { text: "Förderung 15 % und tilgungsfreie Jahre reichen bei 3,3 % Zins für ein Plus bei jeder Partei. Bei 4,0 % Zins fehlt dem OG trotz 2.000 €/m² noch ein kleines Stück, dann braucht es mehr Förderung oder noch günstigere Preise.", options: { breakLine: true } },
+    { text: " ", options: { breakLine: true } },
+    { text: "Zu beachten", options: { bold: true, color: C.accent1, breakLine: true } },
+    { text: "Ohne Tilgung sinkt die Schuld nicht, der Kredit muss später abgelöst oder verlängert werden.", options: {} },
+  ], { x: 9.75, y: 1.6, w: W - 9.5 - MX - 0.5, h: 4.5, fontSize: 12.5 });
+  text(s, `Zum Vergleich: Wenn du die Lücke der drei OG-Wohnungen (${eur(3 * -t0.oG(85, 950).ergebnis)} im Monat) selbst trägst, bleiben dir ${eur(t0.gastro.ergebnis + 3 * t0.oG(85, 950).ergebnis)} aus der Gastro.`, { x: MX, y: 5.7, w: 8.6, h: 0.7, fontSize: 12.5, color: C.accent4 });
+}
+
 // ===== 16 Risiken =====
 {
   const s = content("Risiken und was wir dagegen tun", "Für die Bank", "Die Miete von 950 € je Wohnung ist eine Annahme des Bauherrn, Marktdaten für Werlte liegen darunter.");
