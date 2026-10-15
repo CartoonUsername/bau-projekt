@@ -32,7 +32,7 @@ Wide angle, eye level, from the south-east corner. Architectural photography, hi
 ## 2. Außen, Tag, Straßenansicht
 
 ```
-Photorealistic daytime street view of a modern three-level mixed-use building with a set-back top floor, dark clinker
+Photorealistic daytime street view of a modern three-level mixed-use building with a set-back top floor of timber construction clad in warm larch wood with a continuous wraparound roof terrace, dark clinker
 brick facade, large black-framed windows, balconies with frosted (milk) glass railings, fully glazed restaurant ground floor with
 a wooden terrace and café tables, flat roof, town hall square in Werlte (Emsland) with red paving, trees and parking
 spaces, partly cloudy sky, soft natural light. Frontal elevation-like view, 35 mm lens. No pitched roof, no extra
@@ -48,14 +48,14 @@ walls with burgundy velvet cushions, solid oak tables with black pedestal bases,
 table lamps with candles, glass pendant lamps with brass caps, oval and arched mirrors, a large dried pampas grass
 wall arrangement, dark red accent lamp, a black steel-framed glass partition with grid pattern, indirect cove lighting
 along the ceiling, floor-to-ceiling windows to a town square with red brick paving at blue hour, a long oak bar with
-a dark green fluted front and a lit back bar in the background, guests softly blurred. Use image 1 as the exact style
+an anthracite (charcoal) fluted front and a lit back bar in the background, guests softly blurred. Use image 1 as the exact style
 reference (colours, materials, mood). Wide-angle interior photography, high detail, no text, no logos.
 ```
 
 ## 4. Innen, Theke und Sitzecke (Stil wie Referenzbild)
 
 ```
-Photorealistic close-up of a bar counter in solid oak with a dark green fluted front and black bar stools, behind it
+Photorealistic close-up of a bar counter in solid oak with an anthracite (charcoal) fluted front and black bar stools, behind it
 dark olive-green panelled wall with an arched mirror, a small lit niche with a red back wall and bottles, glass
 pendant lamps, in front of it cognac velvet banquettes with burgundy cushions and oak tables with ribbed glass
 candle lamps, black steel-glass partition in the background, evening mood, shallow depth of field, use image 1 as
