@@ -295,7 +295,7 @@ h = wb.create_sheet("Hinweise")
 title(h, "Hinweise und offene Punkte")
 lines = [
     "Alle Zahlen sind Planungsannahmen, keine Zusagen von Bank oder Stadt.",
-    "Nicht enthalten: Hausverwaltung, Versicherung, Grundsteuer (ca. 300–500 € im Monat).",
+    "Nebenkosten (Grundsteuer, Gebäudeversicherung, Betriebskosten) werden auf die Mieter umgelegt. Hausverwaltung und Instandhaltung sind nicht umlagefähig und stecken in der Rücklage von 10 %.",
     "Miete 950 € je Wohnung liegt über den Portalwerten für Neubau in Werlte (ca. 10,70–11,02 €/m²).",
     "Förderung ist als Zuschuss in Prozent der Gesamtkosten angesetzt, Höhe und Zweck sind offen.",
     "Gastro-Marge (30,5 % vor Pacht) und Kostenstruktur sind Branchen-Richtwerte, nicht aus Werlte.",

@@ -472,7 +472,7 @@ if (KI.length) {
     { text: "Nur Konto, kein Gewinn", options: { bold: true, color: C.accent1, breakLine: true } },
     { text: "Tilgung 0 % verbessert das Konto, nicht das Haus.", options: {} },
   ], { x: 9.65, y: 1.6, w: W - 9.4 - MX - 0.5, h: 4.4, fontSize: 14 });
-  text(s, "Verwaltung, Versicherung, Grundsteuer (ca. 300–500 € im Monat) sind noch nicht enthalten.", { x: MX, y: 5.8, w: 8.4, h: 0.5, fontSize: 13, color: C.accent4 });
+  text(s, "Grundsteuer, Gebäudeversicherung und Betriebskosten legt ihr über die Nebenkosten auf die Mieter um. Hausverwaltung und Instandhaltung (nicht umlagefähig) deckt die Rücklage von 10 %.", { x: MX, y: 5.8, w: 8.4, h: 0.5, fontSize: 13, color: C.accent4 });
 }
 
 // ===== 15b Verkauf an die Familie =====
@@ -619,7 +619,7 @@ if (KI.length) {
     "6 Wohnungen zu je 950 € Kaltmiete, Gastro-Pacht 12 €/m²",
     "Lohn des Bauherrn wird vorerst nicht gerechnet, Rücklagen 10 % der Miete und Pacht",
     "Förderung als Zuschuss in % der Gesamtkosten (Annahme)",
-    "Nicht enthalten: Hausverwaltung, Versicherung, Grundsteuer (ca. 300–500 €/Monat)",
+    "Nebenkosten (Grundsteuer, Versicherung, Betriebskosten) werden auf die Mieter umgelegt, die Hausverwaltung deckt die Rücklage",
     "Offen: Baufenster, Staffelgeschoss, Höhen, Stellplatzsatzung, Zins nach 10 Jahren",
   ];
   const cw = (W - 2 * MX - 0.5) / 2;
