@@ -562,20 +562,23 @@ if (KI.length) {
 {
   const s = content("Die Differenz so klein wie möglich", "Für die Verwandten und die Bank", "Variante A, Käufer ohne Eigenkapital und ohne Tilgung, 950 € Miete. Förderung senkt deine Selbstkosten, die Staffel-Wohnungen gehen zum Selbstkostenpreis.");
   const sc = [
-    ["250 € Plus, ohne Förderung, 2.200 €/m²", 250, {}, A.zinsPlan],
+    ["250 € Plus, 0 % Förderung, 2.200 €/m²", 250, {}, A.zinsPlan],
+    ["250 € Plus, 0 % Förderung, 2.000 €/m²", 250, { bauKostenM2: 2000 }, A.zinsPlan],
     ["250 € Plus, 15 % Förderung, 2.200 €/m²", 250, { foerderung: 0.15 }, A.zinsPlan],
     ["250 € Plus, 15 % Förderung, 2.000 €/m²", 250, { foerderung: 0.15, bauKostenM2: 2000 }, A.zinsPlan],
     ["250 € Plus, 20 % Förderung, 2.000 €/m²", 250, { foerderung: 0.2, bauKostenM2: 2000 }, A.zinsPlan],
     ["wie vorher, aber 4,0 % Zins (15 % Förderung, 2.000 €/m²)", 250, { foerderung: 0.15, bauKostenM2: 2000 }, A.zinsAusgang],
-    ["Keine Differenz: 15 % Förderung, 2.000 €/m², Plus so hoch wie möglich", 100, { foerderung: 0.15, bauKostenM2: 2000 }, A.zinsPlan],
+    ["Keine Differenz: 0 % Förderung, 2.200 €/m²", -9999, {}, A.zinsPlan],
+    ["Keine Differenz: 0 % Förderung, 2.000 €/m²", -9999, { bauKostenM2: 2000 }, A.zinsPlan],
+    ["Keine Differenz: 15 % Förderung, 2.000 €/m²", -9999, { foerderung: 0.15, bauKostenM2: 2000 }, A.zinsPlan],
   ];
   const rows = [[hdr("Szenario"), hdr("Preis 1. OG", "right"), hdr("Differenz je OG", "right"), hdr("Differenz gesamt", "right"), hdr("Plus je OG / Staffel", "right"), hdr("Du pro Monat", "right")]];
   sc.forEach(([n, plus, o, z]) => {
     const r = zielplus(LAYOUTS.A, plus, z, o);
     rows.push([cell(n), R(eur(r.og.preis)), R(eur(r.og.nachlass)), R(eur(r.luecke)), R(`${eurS(r.og.ergebnis)} / ${eurS(r.st.ergebnis)}`), cfCell(r.bessam)]);
   });
-  s.addTable(rows, { x: MX, y: 1.4, w: W - 2 * MX, colW: [4.4, 1.5, 1.6, 1.6, 2.0, 1.43], rowH: 0.55, border: tblBorder, objectName: "Tabelle Differenz klein" });
-  text(s, "Die Differenz belastet dich vor allem als Summe, die du vorfinanzierst. Dein Ergebnis pro Monat ändert sich kaum, weil du darauf nur Zinsen zahlst.", { x: MX, y: 5.85, w: W - 2 * MX, h: 0.7, fontSize: 12.5, color: C.accent4 });
+  s.addTable(rows, { x: MX, y: 1.4, w: W - 2 * MX, colW: [4.4, 1.5, 1.6, 1.6, 2.0, 1.43], rowH: 0.45, border: tblBorder, objectName: "Tabelle Differenz klein" });
+  text(s, "Die Differenz belastet dich vor allem als Summe, die du vorfinanzierst. Dein Ergebnis pro Monat ändert sich kaum, weil du darauf nur Zinsen zahlst.", { x: MX, y: 6.0, w: W - 2 * MX, h: 0.6, fontSize: 12.5, color: C.accent4 });
 }
 
 // ===== 16 Risiken =====
