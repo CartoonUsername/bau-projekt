@@ -283,6 +283,18 @@ for off, key in ((0, "plan"), (3, "ausgang")):
     cc_ = vk.cell(row=27, column=4 if off == 0 else 7, value=round(d["rateEG"] + d["zinsLuecke"], 2)); cc_.number_format = EUR
     cc_ = vk.cell(row=28, column=4 if off == 0 else 7, value=round(d["bessam"], 2)); cc_.number_format = EURS
 
+# Verkaufsplan
+vk.cell(row=31, column=1, value="Verkaufsplan (Vorschlag): Preis = Selbstkosten, tilgungsfrei, 3,3 % Zins, Notar 2 %, Grunderwerbsteuer 5 % (Vater frei)").font = bold
+header(vk, 32, ["Partei", "Wohnung", "Preis 15 % Förd., 2.000 €/m²", "Notar, Steuer", "Kredit", "Rate", "Ergebnis pro Monat", "Ergebnis ohne Förderung, 2.200 €/m²"])
+for i, (r, r0) in enumerate(zip(szen["verkaufsplan"], szen["verkaufsplan0"])):
+    row = 33 + i
+    vk.cell(row=row, column=1, value=r["name"]).font = base
+    vk.cell(row=row, column=2, value="1. OG, 85 m²" if r["typ"] == "OG" else "Staffel, 56 m²").font = base
+    for col, key in ((3, "preis"), (4, "nk"), (5, "kredit"), (6, "rate")):
+        c_ = vk.cell(row=row, column=col, value=round(r[key], 2)); c_.number_format = EUR
+    c_ = vk.cell(row=row, column=7, value=round(r["ergebnis"], 2)); c_.number_format = EURS
+    c_ = vk.cell(row=row, column=8, value=round(r0["ergebnis"], 2)); c_.number_format = EURS
+
 # ---------------- Variante 4 Ebenen ----------------
 v4 = wb.create_sheet("Variante 4 Ebenen")
 title(v4, "Variante: Mittelgeschoss doppelt (4 Ebenen)", "Nur als Gedankenspiel: Höhe ca. 13 m, der B-Plan erlaubt 12 m.")

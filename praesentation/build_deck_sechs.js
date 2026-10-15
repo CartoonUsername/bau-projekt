@@ -4,7 +4,7 @@ const path = require("path");
 const fs = require("fs");
 const pptxgen = require("pptxgenjs");
 const { applyTheme } = require(process.env.APPLY_THEME || "./apply_theme.js");
-const { A, VARIANTEN, finanz, cashflow, umsatzBreakEven, bauRoh, teilung, zielplus, LAYOUTS } = require("./model");
+const { A, VARIANTEN, finanz, cashflow, umsatzBreakEven, bauRoh, teilung, zielplus, verkaufsplan, LAYOUTS } = require("./model");
 const { execFileSync } = require("child_process");
 
 const IMG = process.env.BILDER || path.join(__dirname, "bilder");
@@ -579,6 +579,42 @@ if (KI.length) {
   });
   s.addTable(rows, { x: MX, y: 1.4, w: W - 2 * MX, colW: [4.4, 1.5, 1.6, 1.6, 2.0, 1.43], rowH: 0.45, border: tblBorder, objectName: "Tabelle Differenz klein" });
   text(s, "Die Differenz belastet dich vor allem als Summe, die du vorfinanzierst. Dein Ergebnis pro Monat ändert sich kaum, weil du darauf nur Zinsen zahlst.", { x: MX, y: 6.0, w: W - 2 * MX, h: 0.6, fontSize: 12.5, color: C.accent4 });
+}
+
+// ===== 15f Verkaufsplan =====
+{
+  const s = content("Verkaufsplan: wer bekommt welche Wohnung", "Für die Verwandten und die Bank", "Vorschlag, 6 Wohnungen als Dauermiete. Preis = Selbstkosten nach 15 % Förderung bei 2.000 €/m², tilgungsfreie Jahre, 3,3 % Zins, 950 € Miete, 10 % Rücklagen. Käufer zahlen Notar (2 %) und Grunderwerbsteuer (5 %, Vater frei).");
+  const vp = verkaufsplan({ foerderung: 0.15, bauKostenM2: 2000, tilgung: 0 });
+  const rows = [[hdr("Partei"), hdr("Wohnung"), hdr("Preis", "right"), hdr("Notar, Steuer", "right"), hdr("Kredit", "right"), hdr("Rate", "right"), hdr("Miete nach Rücklage", "right"), hdr("Ergebnis pro Monat", "right")]];
+  vp.rows.forEach((r) => rows.push([cell(r.name), cell(r.typ === "OG" ? "1. OG, 85 m²" : "Staffel, 56 m²"), R(eur(r.preis)), R(eur(r.nk)), R(eur(r.kredit)), R(eur(r.rate)), R(eur(r.einnahme)), cfCell(r.ergebnis)]));
+  const g = vp.gastro;
+  s.addTable(rows, { x: MX, y: 1.4, w: W - 2 * MX, colW: [2.3, 1.9, 1.35, 1.3, 1.35, 1.1, 1.55, 1.38], rowH: 0.5, border: tblBorder, objectName: "Tabelle Verkaufsplan" });
+  const vp0 = verkaufsplan({ foerderung: 0, bauKostenM2: 2200, tilgung: 0 }), vp1 = verkaufsplan({ foerderung: 0.15, bauKostenM2: 2000, tilgung: 0.01 });
+  const rng = (v) => `${eurS(Math.min(...v.rows.map((r) => r.ergebnis)))} bis ${eurS(Math.max(...v.rows.map((r) => r.ergebnis)))}`;
+  text(s, [
+    { text: `Ohne Förderung bei 2.200 €/m² (tilgungsfrei) liegt das Ergebnis je Partei bei ${rng(vp0)}, mit 1 % Tilgung statt tilgungsfrei (Förderung 15 %, 2.000 €/m²) bei ${rng(vp1)}.`, options: { breakLine: true } },
+    { text: `Die Staffel-Wohnungen für die Onkel bringen am meisten, weil sie billig sind. Grunderwerbsteuer und Notar (bis ca. ${eur(Math.max(...vp.rows.map((r) => r.nk)))}) belasten Bruder und Onkel, Dein Vater ist befreit (bitte prüfen).`, options: {} },
+  ], { x: MX, y: 5.45, w: W - 2 * MX, h: 1.3, fontSize: 12.5, color: C.accent4, paraSpaceAfter: 5 });
+}
+
+// ===== 15g Verkaufsplan: Ablauf =====
+{
+  const s = content("Verkaufsplan: Ablauf und offene Punkte", "Für die Verwandten und die Bank", "Reihenfolge ist ein Vorschlag, Notar, Bank und Bauamt bestimmen die Details. Keine Rechtsberatung.");
+  const steps = [
+    ["1", "Förderung und Preise klären", "Stadt: Städtebauförderung und Grundstückspreis. Bauunternehmen und Zimmerei: Festpreis je m²."],
+    ["2", "Bauvoranfrage / Bauantrag", "Staffelgeschoss, Flachdach, Höhe und Stellplätze schriftlich bestätigen lassen."],
+    ["3", "Teilungserklärung", "Aufteilung in Wohnungseigentum (6 Wohnungen und Gastro-EG), Hausverwaltung bestimmen."],
+    ["4", "Finanzierung je Käufer", "Bankzusage für jeden Käufer, ohne Eigenkapital und nach den neuen Käufen der letzten zwei Jahre schwer."],
+    ["5", "Notarverträge", "Verkauf vor dem Bau gilt als Bauträgergeschäft, Erlaubnis nach § 34c GewO und Sicherheiten klären."],
+    ["6", "Bau und Übergabe", "Bauzeit ca. 15 Monate, danach Abnahme und Übergabe, Vermietung der Wohnungen."],
+  ];
+  steps.forEach((st, i) => {
+    const y = 1.45 + i * 0.85;
+    s.addShape(pres.ShapeType.ellipse, { x: MX, y, w: 0.5, h: 0.5, fill: { color: C.accent2 }, line: { color: C.accent2, width: 0 }, objectName: "Schritt " + st[0] });
+    text(s, st[0], { x: MX, y, w: 0.5, h: 0.5, fontSize: 14, bold: true, color: C.background1, align: "center", valign: "middle" });
+    text(s, st[1], { x: MX + 0.75, y: y - 0.02, w: 3.6, h: 0.55, fontSize: 14, bold: true, color: C.accent1, valign: "middle" });
+    text(s, st[2], { x: MX + 4.5, y: y - 0.02, w: W - 2 * MX - 4.5, h: 0.6, fontSize: 12.5, valign: "middle" });
+  });
 }
 
 // ===== 16 Risiken =====

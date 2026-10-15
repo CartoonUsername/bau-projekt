@@ -240,7 +240,31 @@ function zielplus(L, plus = 250, zins = A.zinsPlan, opts = {}) {
   return { t, og, st, luecke, zinsLuecke, rateEG, bessam: gewinn - rateEG - zinsLuecke, bessamOhneLuecke: gewinn - rateEG };
 }
 
-module.exports = { zielplus, teilung, LAYOUTS, MIETE_M2, bauRoh, A, VARIANTEN, finanz, cashflow, umsatzBreakEven };
+// Verkaufsplan: Zuordnung der Wohnungen an Käufer, Preis = Selbstkosten nach Förderung, Käufer tragen Notar (2 %) und Grunderwerbsteuer (5 %, Verwandte in gerader Linie frei)
+const KAEUFER = [
+  { name: "Vater", typ: "OG", grest: 0 },
+  { name: "Bruder", typ: "OG", grest: 0.05 },
+  { name: "Du (eigene Wohnung)", typ: "OG", grest: 0, eigen: true },
+  { name: "Onkel 1", typ: "ST", grest: 0.05 },
+  { name: "Onkel 2", typ: "ST", grest: 0.05 },
+  { name: "Onkel 3", typ: "ST", grest: 0.05 },
+];
+function verkaufsplan(opts = {}) {
+  const f = opts.foerderung ?? 0, c = opts.bauKostenM2 ?? A.bauKostenM2, til = opts.tilgung ?? 0, zins = opts.zins ?? A.zinsPlan;
+  const t = teilung(LAYOUTS.A, zins, { bauKostenM2: c });
+  const rows = KAEUFER.map((b) => {
+    const e = b.typ === "OG" ? t.oG(85, 950) : t.st(56, 950);
+    const preis = e.kosten * (1 - f);
+    const nk = b.eigen ? 0 : preis * (0.02 + b.grest);
+    const kredit = (preis + nk) * t.k;
+    const rate = (kredit * (zins + til)) / 12;
+    const einnahme = e.miete * (1 - A.ruecklagen);
+    return { ...b, m2: e.m2, preis, nk, kredit, rate, einnahme, ergebnis: einnahme - rate };
+  });
+  return { rows, k: t.k, gastro: t.gastro };
+}
+
+module.exports = { verkaufsplan, KAEUFER, zielplus, teilung, LAYOUTS, MIETE_M2, bauRoh, A, VARIANTEN, finanz, cashflow, umsatzBreakEven };
 
 if (require.main === module) {
   for (const v of Object.values(VARIANTEN)) {

@@ -1,5 +1,5 @@
 // Gibt die Szenario-Tabellen des Rechenmodells als JSON aus (für den Excel-Export)
-const { A, VARIANTEN, finanz, cashflow, umsatzBreakEven, teilung, zielplus, LAYOUTS } = require("./model");
+const { A, VARIANTEN, finanz, cashflow, umsatzBreakEven, teilung, zielplus, verkaufsplan, LAYOUTS } = require("./model");
 const v = VARIANTEN.sechs;
 const F = [0, 0.05, 0.1, 0.15, 0.2, 0.25];
 const out = { foerderung: [], umsatz: [], variante4: null };
@@ -31,4 +31,6 @@ for (const [key, z] of [["plan", A.zinsPlan], ["ausgang", A.zinsAusgang]]) {
   const r = zielplus(LAYOUTS.A, 250, z);
   out.ziel[key] = { og: r.og, st: r.st, luecke: r.luecke, zinsLuecke: r.zinsLuecke, rateEG: r.rateEG, bessam: r.bessam };
 }
+out.verkaufsplan = verkaufsplan({ foerderung: 0.15, bauKostenM2: 2000, tilgung: 0 }).rows;
+out.verkaufsplan0 = verkaufsplan({ foerderung: 0, bauKostenM2: 2200, tilgung: 0 }).rows;
 console.log(JSON.stringify(out));
