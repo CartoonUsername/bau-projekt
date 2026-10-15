@@ -18,3 +18,8 @@ Alle Zahlen sind Planungsannahmen: Baukosten 2.700 €/m², Förderung als Zusch
 - Grundlage jetzt: Baukosten 2.200 €/m² BGF (Annahme des Bauherrn), Gastro-Ausbau 150.000 €, Staffelgeschoss in Holzbau mit Terrasse rundum, 930 m² BGF.
 - Folie "Verkauf an die Familie": Rechnung je Partei mit eigenem Kredit ohne Eigenkapital (auch Blatt "Verkauf je Partei" in der Excel-Datei).
 - Folie "Variante B" im Anhang: 540 m² Grundfläche, 1.500 m² BGF (nur mit Ausnahme der Stadt).
+
+## Alternativen (separate Ausarbeitungen)
+- `Neue-Mitte-Werlte_Baufeld3_Airbnb-Apartments.pptx`: 6 Apartments (Kurzzeitvermietung) statt Dauermiete, Gastro im EG.
+- `Neue-Mitte-Werlte_Baufeld3_Hotel-und-Gastro.pptx`: Hotel mit 15 Zimmern über der Gastro.
+- Rechnung in `model_alt.js`, Folien in `build_decks_alt.js`. Preise, Auslastung und Kostenquoten sind Annahmen, belastbare Werte für Werlte fehlen.
