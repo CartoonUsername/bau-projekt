@@ -651,36 +651,36 @@ if (KI.length) {
   text(s, "Quellen: mietpreise.info/mietspiegel/werlte, miete-aktuell.de, immobilienscout24.de (Kreis Emsland), Abruf Oktober 2026", { x: MX, y: 5.4, w: W - 2 * MX, h: 0.6, fontSize: 12, color: C.accent4 });
 }
 
-// ===== Variante B: 540 m² Grundfläche =====
+// ===== Varianten B und C: 540 m² Grundfläche =====
 {
-  const s = content("Variante B: 540 m² Grundfläche", "Anhang", "Nur mit Ausnahme der Stadt: Baufenster ca. 400–460 m² geschätzt, im Plan stehen zwei Vollgeschosse, GRZ 0,6 erlaubt max. 576 m².");
-  const vb = VARIANTEN.b;
-  const fa = finanz(v, 0, A.zinsPlan), fb = finanz(vb, 0, A.zinsPlan);
-  const ca = cashflow(v, fa), cb = cashflow(vb, fb);
-  const ta = teilung(LAYOUTS.A), tb = teilung(LAYOUTS.B);
+  const s = content("Varianten B und C: 540 m² Grundfläche", "Anhang", "Nur mit Ausnahme der Stadt: Baufenster ca. 400–460 m² geschätzt, im Plan stehen zwei Vollgeschosse und 12 m Höhe, GRZ 0,6 erlaubt max. 576 m².");
+  const vb = VARIANTEN.b, vc = VARIANTEN.c;
+  const fa = finanz(v, 0, A.zinsPlan), fb = finanz(vb, 0, A.zinsPlan), fc = finanz(vc, 0, A.zinsPlan);
+  const ca = cashflow(v, fa), cb = cashflow(vb, fb), cc = cashflow(vc, fc);
+  const ta = teilung(LAYOUTS.A), tb = teilung(LAYOUTS.B), tc = teilung(LAYOUTS.C);
   const rows = [
-    [hdr(""), hdr("A: 340 m² (jetzt)", "right"), hdr("B: 540 m²", "right")],
-    [cell("Bruttofläche"), R("930 m²"), R("1.500 m²")],
-    [cell("Wohnfläche"), R("ca. 423 m²"), R("ca. 738 m²")],
-    [cell("Wohnungen"), R("6"), R("ca. 8 bis 9")],
-    [cell("Gastro / Büro"), R("290 m² / –"), R("290 m² / 150 m²")],
-    [cell("Gesamtkosten"), R(eur(fa.gesamt)), R(eur(fb.gesamt))],
-    [cell("Rate pro Monat (ein Kredit)"), R(eur(fa.rate)), R(eur(fb.rate))],
-    [cell(`Ergebnis bei ${k(UM)} Umsatz`), cfCell(ca.cf), cfCell(cb.cf)],
-    [cell("Break-even-Umsatz Gastro"), R(eur(umsatzBreakEven(v, fa))), R(eur(umsatzBreakEven(vb, fb)))],
-    [cell("Kosten je m² Wohnfläche, OG / Staffel"), R(`${eur(ta.ogM2)} / ${eur(ta.stM2)}`), R(`${eur(tb.ogM2)} / ${eur(tb.stM2)}`)],
-    [cell("85-m²-Wohnung im OG: Ergebnis (eigener Kredit)"), cfCell(ta.oG(85).ergebnis), cfCell(tb.oG(85).ergebnis)],
-    [cell("Preis-Lücke je 85-m²-Wohnung im OG"), R(eur(ta.oG(85).luecke)), R(eur(tb.oG(85).luecke))],
+    [hdr(""), hdr("A: 340 m², 2+Staffel", "right"), hdr("B: 540 m², 2+Staffel", "right"), hdr("C: 540 m², 3+Holz-Penthouse", "right")],
+    [cell("Bruttofläche"), R("930 m²"), R("1.500 m²"), R("2.040 m²")],
+    [cell("Wohnfläche / Wohnungen"), R("423 m² / 6"), R("738 m² / ca. 8–9"), R("1.153 m² / ca. 13")],
+    [cell("Gastro / Büro im EG"), R("290 m² / –"), R("290 m² / 150 m²"), R("290 m² / 150 m²")],
+    [cell("Gesamtkosten"), R(eur(fa.gesamt)), R(eur(fb.gesamt)), R(eur(fc.gesamt))],
+    [cell("Rate pro Monat (ein Kredit)"), R(eur(fa.rate)), R(eur(fb.rate)), R(eur(fc.rate))],
+    [cell(`Ergebnis bei ${k(UM)} Umsatz`), cfCell(ca.cf), cfCell(cb.cf), cfCell(cc.cf)],
+    [cell("Break-even-Umsatz Gastro"), R(eur(umsatzBreakEven(v, fa))), R(eur(umsatzBreakEven(vb, fb))), R(eur(umsatzBreakEven(vc, fc)))],
+    [cell("Ergebnis bei 4,0 % Zins"), cfCell(cashflow(v, finanz(v, 0, A.zinsAusgang)).cf), cfCell(cashflow(vb, finanz(vb, 0, A.zinsAusgang)).cf), cfCell(cashflow(vc, finanz(vc, 0, A.zinsAusgang)).cf)],
+    [cell("Kosten je m² Wohnfläche, Regelgeschoss / Staffel"), R(`${eur(ta.ogM2)} / ${eur(ta.stM2)}`), R(`${eur(tb.ogM2)} / ${eur(tb.stM2)}`), R(`${eur(tc.ogM2)} / ${eur(tc.stM2)}`)],
+    [cell("85-m²-Wohnung im Regelgeschoss: Ergebnis (eigener Kredit)"), cfCell(ta.oG(85, 950).ergebnis), cfCell(tb.oG(85, 950).ergebnis), cfCell(tc.oG(85, 950).ergebnis)],
+    [cell("Preis-Lücke je 85-m²-Wohnung im Regelgeschoss"), R(eur(ta.oG(85, 950).luecke)), R(eur(tb.oG(85, 950).luecke)), R(eur(tc.oG(85, 950).luecke))],
   ];
-  s.addTable(rows, { x: MX, y: 1.4, w: 8.4, colW: [4.2, 2.1, 2.1], rowH: 0.42, border: tblBorder, objectName: "Tabelle Variante B" });
-  card(s, 9.4, 1.4, W - 9.4 - MX, 4.9, "Hinweis B");
+  s.addTable(rows, { x: MX, y: 1.4, w: 9.0, colW: [3.9, 1.7, 1.7, 1.7], rowH: 0.42, border: tblBorder, objectName: "Tabelle Varianten B und C" });
+  card(s, 10.2, 1.4, W - 10.2 - MX, 5.0, "Hinweis B und C");
   text(s, [
-    { text: "Annahmen B", options: { bold: true, color: C.accent1, breakLine: true } },
-    { text: "EG 540 m² (Gastro 290 m², Büro 150 m²), 1. OG 540 m², Staffel 420 m² in Holzbau mit 120 m² Terrasse. Büro 10 €/m², Wohnen 11,18 €/m².", options: { breakLine: true } },
+    { text: "Annahmen", options: { bold: true, color: C.accent1, breakLine: true } },
+    { text: "EG 540 m² (Gastro 290 m², Büro 150 m²), Regelgeschosse je 540 m², Staffel 420 m² in Holzbau mit 120 m² Terrasse. Büro 10 €/m², Wohnen 11,18 €/m².", options: { breakLine: true } },
     { text: " ", options: { breakLine: true } },
     { text: "Zu klären", options: { bold: true, color: C.accent1, breakLine: true } },
-    { text: "Baufenster, zwei Vollgeschosse, Höhe 12 m und deutlich mehr Stellplätze.", options: {} },
-  ], { x: 9.65, y: 1.6, w: W - 9.4 - MX - 0.5, h: 4.5, fontSize: 13 });
+    { text: "Baufenster, zwei Vollgeschosse, bei C drei Vollgeschosse und ca. 13 m Höhe statt 12 m, deutlich mehr Stellplätze.", options: {} },
+  ], { x: 10.4, y: 1.6, w: W - 10.2 - MX - 0.4, h: 4.6, fontSize: 12 });
 }
 
 // ===== 8c Variante mit zweitem Mittelgeschoss =====

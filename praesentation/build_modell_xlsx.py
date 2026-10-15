@@ -237,9 +237,9 @@ for col in "ABCDEFGH":
 # ---------------- Verkauf je Partei ----------------
 vk = wb.create_sheet("Verkauf je Partei")
 title(vk, "Verkauf an die Familie: Rechnung je Partei", "Jede Partei mit eigenem Kredit ohne Eigenkapital. Preis = Selbstkosten, 3,3 % Zins, 1 % Tilgung, 10 % Rücklagen. Feste Werte aus model.js.")
-header(vk, 4, ["", "A: 1. OG 85 m²", "A: Staffel 56 m²", "A: Gastro (Du)", "B: 1. OG 85 m²", "B: Staffel 56 m²", "B: Gastro + Büro (Du)"])
-VA, VB = szen["verkauf"]["A"], szen["verkauf"]["B"]
-cols = [(VA["og85"], 2), (VA["st56"], 3), (VA["gastro"], 4), (VB["og85"], 5), (VB["st56"], 6), (VB["gastro"], 7)]
+header(vk, 4, ["", "A: 1. OG 85 m²", "A: Staffel 56 m²", "A: Gastro (Du)", "B: 1. OG 85 m²", "B: Staffel 56 m²", "B: Gastro + Büro (Du)", "C: Regelgeschoss 85 m²", "C: Staffel 56 m²", "C: Gastro + Büro (Du)"])
+VA, VB, VC = szen["verkauf"]["A"], szen["verkauf"]["B"], szen["verkauf"]["C"]
+cols = [(VA["og85"], 2), (VA["st56"], 3), (VA["gastro"], 4), (VB["og85"], 5), (VB["st56"], 6), (VB["gastro"], 7), (VC["og85"], 8), (VC["st56"], 9), (VC["gastro"], 10)]
 labels = ["Preis (Selbstkosten)", "Rate pro Monat", "Einnahme nach Rücklagen / Gastro-Gewinn nach Lohn (+ Büro)", "Ergebnis pro Monat", "Preis für Ergebnis 0 €", "Lücke zum Selbstkostenpreis"]
 for i, lab in enumerate(labels):
     vk.cell(row=5 + i, column=1, value=lab).font = base
@@ -254,17 +254,17 @@ for d, c in cols:
         cc = vk.cell(row=5 + i, column=c, value=round(x, 2))
         cc.number_format = EURS if i == 3 else EUR
 vk.column_dimensions["A"].width = 52
-for col in "BCDEFG":
+for col in "BCDEFGHIJ":
     vk.column_dimensions[col].width = 20
 vb_ = szen["varianteB"]
 vk.cell(row=13, column=1, value="Haus als Ganzes mit einem Kredit").font = bold
-header(vk, 14, ["", "A: 340 m²", "B: 540 m²"])
+header(vk, 14, ["", "A: 340 m²", "B: 540 m²", "C: 540 m², 3 Vollgeschosse + Holz-Penthouse"])
 for i, (lab, ka) in enumerate([("Gesamtkosten", "gesamt"), ("Rate pro Monat", "rate"), ("Ergebnis pro Monat bei 50.000 € Umsatz", "cf"), ("Break-even Gastro-Umsatz", "be")]):
     vk.cell(row=15 + i, column=1, value=lab).font = base
-    for j, key in enumerate(["A", "B"]):
+    for j, key in enumerate(["A", "B", "C"]):
         cc = vk.cell(row=15 + i, column=2 + j, value=round(vb_[key][ka], 2))
         cc.number_format = EURS if ka == "cf" else EUR
-vk.cell(row=20, column=1, value="B: EG 540 m² (Gastro 290 + Büro 150), 1. OG 540 m², Staffel 420 m² mit 120 m² Terrasse. Nur mit Ausnahme der Stadt (Baufenster, II Vollgeschosse).").font = note
+vk.cell(row=20, column=1, value="B: EG 540 m² (Gastro 290 + Büro 150), 1. OG 540 m², Staffel 420 m² mit 120 m² Terrasse. C: zusätzlich 2. OG 540 m², Höhe ca. 13 m. Nur mit Ausnahme der Stadt (Baufenster, II Vollgeschosse, 12 m).").font = note
 
 # ---------------- Variante 4 Ebenen ----------------
 v4 = wb.create_sheet("Variante 4 Ebenen")

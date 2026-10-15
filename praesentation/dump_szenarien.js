@@ -17,12 +17,13 @@ out.variante4 = { gesamt: g0.gesamt, rate: g0.rate, cf0: cashflow(v4, g0).cf, cf
 const ref = finanz(v, 0, A.zinsPlan);
 out.referenz = { gesamt: ref.gesamt, kredit: ref.kredit, rate: ref.rate, cf: cashflow(v, ref).cf, zinsenBau: ref.zinsenBau, bereit: ref.bereit, aufschub: ref.aufschubZinsen };
 const vb = VARIANTEN.b;
-const fa = finanz(v, 0, A.zinsPlan), fb = finanz(vb, 0, A.zinsPlan);
+const vc = VARIANTEN.c;
+const fa = finanz(v, 0, A.zinsPlan), fb = finanz(vb, 0, A.zinsPlan), fc = finanz(vc, 0, A.zinsPlan);
 const pick = (e) => ({ m2: e.m2, kosten: e.kosten, kostenM2: e.kostenM2, rate: e.rate, miete: e.miete, ergebnis: e.ergebnis, preisFuerPlus: e.preisFuerPlus, luecke: e.luecke, ergebnisF15: e.ergebnisF15 });
 out.verkauf = {};
-for (const key of ["A", "B"]) {
+for (const key of ["A", "B", "C"]) {
   const t = teilung(LAYOUTS[key]);
   out.verkauf[key] = { og85: pick(t.oG(85, 950)), st56: pick(t.st(56, 950)), st56Markt: pick(t.st(56)), gastro: t.gastro, ogM2: t.ogM2, stM2: t.stM2, preisFuerPlusM2: t.preisFuerPlusM2 };
 }
-out.varianteB = { A: { gesamt: fa.gesamt, rate: fa.rate, cf: cashflow(v, fa).cf, be: umsatzBreakEven(v, fa) }, B: { gesamt: fb.gesamt, rate: fb.rate, cf: cashflow(vb, fb).cf, be: umsatzBreakEven(vb, fb) } };
+out.varianteB = { A: { gesamt: fa.gesamt, rate: fa.rate, cf: cashflow(v, fa).cf, be: umsatzBreakEven(v, fa) }, B: { gesamt: fb.gesamt, rate: fb.rate, cf: cashflow(vb, fb).cf, be: umsatzBreakEven(vb, fb) }, C: { gesamt: fc.gesamt, rate: fc.rate, cf: cashflow(vc, fc).cf, be: umsatzBreakEven(vc, fc) } };
 console.log(JSON.stringify(out));

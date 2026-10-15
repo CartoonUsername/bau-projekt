@@ -52,6 +52,21 @@ const VARIANTEN = {
     pacht: 290 * 12,
     umsatz: 50000,
   },
+  c: {
+    key: "c",
+    name: "Variante C: 540 m² Grundfläche, 3 Vollgeschosse plus Holz-Penthouse",
+    bgf: 2040, // EG 540 + 1. OG 540 + 2. OG 540 + Staffel 420 (Holzbau, Terrasse rundum)
+    holzM2: 420,
+    terrasseM2: 120,
+    gastroM2: 290,
+    bueroM2: 150,
+    wohnungen: 13,
+    wohnflaeche: 1153, // 1. OG 415 + 2. OG 415 + Staffel 323
+    gastroAusbau: 150000,
+    mieteOhnePacht: 1153 * (950 / 85) + 150 * 10,
+    pacht: 290 * 12,
+    umsatz: 50000,
+  },
   flach: {
     key: "flach",
     name: "EG Gastro, 8 Wohnungen in 2 Obergeschossen, Flachdach",
@@ -170,15 +185,17 @@ const MIETE_M2 = 950 / 85; // 11,18 €/m² (Annahme des Bauherrn)
 const LAYOUTS = {
   A: { EG: 340, OG: 340, ST: 250, terrasse: 90, wfOG: 255, wfST: 168, buero: 0 },
   B: { EG: 540, OG: 540, ST: 420, terrasse: 120, wfOG: 415, wfST: 323, buero: 150 },
+  C: { EG: 540, OG: 540, OG2: 540, ST: 420, terrasse: 120, wfOG: 415, wfOG2: 415, wfST: 323, buero: 150 },
 };
 function teilung(L, zins = A.zinsPlan, opts = {}) {
   const c = opts.bauKostenM2 ?? A.bauKostenM2;
   const aus = opts.gastroAusbau ?? VARIANTEN.sechs.gastroAusbau;
   const f0 = finanz(VARIANTEN.sechs, 0, zins);
   const k = f0.kredit / f0.gesamt; // Zinsen in Bauzeit und Aufschub auf den Kaufpreis
-  const B = L.EG + L.OG + L.ST;
+  const N = L.OG + (L.OG2 || 0), wfN = L.wfOG + (L.wfOG2 || 0);
+  const B = L.EG + N + L.ST;
   const land = (x) => (A.grundstueck * x) / B;
-  const kostenOG = land(L.OG) + L.OG * c * (1 + A.bnk);
+  const kostenOG = land(N) + N * c * (1 + A.bnk);
   const kostenST = land(L.ST) + (L.ST * (c - A.holzAbschlag) + L.terrasse * A.terrassePreis) * (1 + A.bnk);
   const kostenEG = land(L.EG) + L.EG * c * (1 + A.bnk) + aus;
   const rate = (kosten, eigenkapital = 0, f = 0, til = A.tilgung) => ((kosten * (1 - f) - eigenkapital) * k * (zins + til)) / 12;
@@ -194,8 +211,8 @@ function teilung(L, zins = A.zinsPlan, opts = {}) {
   const bueroMiete = L.buero * 10 * (1 - A.ruecklagen);
   return {
     L, k, kostenOG, kostenST, kostenEG, BGF: B,
-    ogM2: kostenOG / L.wfOG, stM2: kostenST / L.wfST,
-    oG: (m2, miete) => einheit(m2, kostenOG / L.wfOG, miete ?? m2 * MIETE_M2),
+    ogM2: kostenOG / wfN, stM2: kostenST / L.wfST,
+    oG: (m2, miete) => einheit(m2, kostenOG / wfN, miete ?? m2 * MIETE_M2),
     st: (m2, miete) => einheit(m2, kostenST / L.wfST, miete ?? m2 * MIETE_M2),
     gastro: { kosten: kostenEG, kredit: kostenEG * k, rate: g, gewinn: gastroGewinn, buero: bueroMiete, ergebnis: gastroGewinn + bueroMiete - g, beUmsatz: ((opts.lohn ?? A.lohn) + g - bueroMiete) / A.gastroMargeVorPacht },
     preisFuerPlusM2: (MIETE_M2 * (1 - A.ruecklagen) * 12) / (k * (zins + A.tilgung)),
