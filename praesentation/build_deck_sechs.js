@@ -25,8 +25,8 @@ const hasKI = (n) => fs.existsSync(path.join(IMG, n));
 
 const THEME = {
   name: "Neue Mitte Werlte",
-  headFontFace: "Cambria",
-  bodyFontFace: "Calibri",
+  headFontFace: "Century Gothic",
+  bodyFontFace: "Arial",
   colors: {
     dk1: "1F2421", lt1: "FFFFFF", dk2: "2F4A3E", lt2: "F1F0EE",
     accent1: "8C3B32", accent2: "2F4A3E", accent3: "C49A45", accent4: "5B6770", accent5: "2E7D5B", accent6: "B3261E",
@@ -57,7 +57,8 @@ pres.defineSlideMaster({
   title: "INHALT",
   background: { color: "FFFFFF" },
   objects: [
-    { placeholder: { options: { name: "title", type: "title", x: MX, y: 0.35, w: W - 2 * MX, h: 0.9, fontFace: "Cambria", fontSize: 32, bold: true, color: C.accent1, valign: "middle", align: "left", margin: 0 }, text: "" } },
+    { rect: { x: MX, y: 1.2, w: 0.9, h: 0.045, fill: { color: C.accent3 }, line: { color: C.accent3, width: 0 } } },
+    { placeholder: { options: { name: "title", type: "title", x: MX, y: 0.35, w: W - 2 * MX, h: 0.9, fontFace: "Century Gothic", fontSize: 27, bold: false, color: C.accent1, valign: "middle", align: "left", margin: 0 }, text: "" } },
   ],
   slideNumber: { x: W - 1.1, y: H - 0.45, w: 0.6, h: 0.3, fontSize: 10, color: C.accent4, align: "right" },
 });
@@ -70,18 +71,19 @@ function content(title, tag, notes) {
   return s;
 }
 function text(s, t, o) {
-  s.addText(t, Object.assign({ fontFace: "Calibri", fontSize: 14, color: C.text1, margin: 0, isTextBox: true, valign: "top" }, o));
+  if (o && o.fontSize && o.fontFace !== "Century Gothic") o = Object.assign({}, o, { fontSize: Math.round(o.fontSize * 1.0 * 2) / 2 });
+  s.addText(t, Object.assign({ fontFace: "Arial", fontSize: 13, color: C.text1, margin: 0, isTextBox: true, valign: "top" }, o));
 }
 function card(s, x, y, w, h, name) {
   s.addShape(pres.ShapeType.roundRect, { x, y, w, h, fill: { color: C.background2 }, line: { color: C.background2, width: 0 }, rectRadius: 0.08, objectName: name || "Karte" });
 }
 function stat(s, x, y, w, big, label, color) {
   card(s, x, y, w, 1.55, "Kennzahl " + label);
-  text(s, big, { x: x + 0.2, y: y + 0.15, w: w - 0.4, h: 0.75, fontSize: 32, bold: true, fontFace: "Cambria", color: color || C.accent1, valign: "middle" });
+  text(s, big, { x: x + 0.2, y: y + 0.15, w: w - 0.4, h: 0.75, fontSize: 27, bold: false, fontFace: "Century Gothic", color: color || C.accent1, valign: "middle" });
   text(s, label, { x: x + 0.2, y: y + 0.95, w: w - 0.4, h: 0.5, fontSize: 14, color: C.accent4 });
 }
-const hdr = (t, align) => ({ text: t, options: { bold: true, color: C.background1, fill: { color: C.accent2 }, align: align || "left", fontSize: 13 } });
-const cell = (t, o) => ({ text: t, options: Object.assign({ fontSize: 13 }, o) });
+const hdr = (t, align) => ({ text: t, options: { bold: true, color: C.background1, fill: { color: C.accent2 }, align: align || "left", fontSize: 12.5, fontFace: "Arial" } });
+const cell = (t, o) => ({ text: t, options: Object.assign({ fontSize: 12.5, fontFace: "Arial" }, o) });
 const cfCell = (n, o) => cell(eurS(n), Object.assign({ align: "right", bold: true, color: n >= 0 ? C.accent5 : C.accent6, fill: { color: n >= 0 ? "E3F1EA" : "F8E4E2" } }, o));
 const R = (t, o) => cell(t, Object.assign({ align: "right" }, o));
 const tblBorder = { type: "solid", color: "FFFFFF", pt: 1 };
@@ -100,7 +102,7 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
   const s = pres.addSlide({ masterName: "TITEL" });
   s.addImage({ path: fit(hasKI("ki_aussen_1.jpg") ? KI_AUSSEN : path.join(IMG, "aussen.jpg"), 6.43, H), x: 6.9, y: 0, w: 6.43, h: H, altText: "Außenansicht, modernes Haus mit Klinker und Glas-Erdgeschoss" });
   text(s, "NEUE MITTE WERLTE", { x: MX, y: 1.3, w: 6, h: 0.4, fontSize: 16, bold: true, color: C.accent3, charSpacing: 4 });
-  text(s, "Baufeld 3: Große Gastro und 6 Wohnungen", { x: MX, y: 1.85, w: 6, h: 2.2, fontSize: 40, bold: true, fontFace: "Cambria", color: C.background1 });
+  text(s, "Baufeld 3: Große Gastro und 6 Wohnungen", { x: MX, y: 1.85, w: 6, h: 2.2, fontSize: 34, bold: false, fontFace: "Century Gothic", color: C.background1 });
   text(s, "Baukonzept und Wirtschaftlichkeit", { x: MX, y: 4.3, w: 6, h: 0.6, fontSize: 18, color: C.background1 });
   text(s, "Bessam Hasso, Werlte\nBebauungsplan Nr. 123, 1. Änderung (Entwurf 25.08.2026)\nStand Oktober 2026", { x: MX, y: 5.5, w: 6, h: 1.1, fontSize: 14, color: "CFD8D3" });
   s.addNotes("Titelfolie. Das Bild ist eine Referenzstudie.");
@@ -129,7 +131,7 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
   const s = content("Ein Eckgrundstück an der neuen Mitte", "Für die Stadt", "Quelle: Konzeptheft Neue Mitte Werlte (Seiten 13, 16 und 24).");
   [["ca. 960 m²", "Baufeld 3, östlich des Rathauses, südlich der Planstraße"], ["Mischgebiet", "Gewerbe im EG erwünscht, Stellplätze auf dem Grundstück"], ["Baureife", "liegt vor, Baubeginn jederzeit möglich"]].forEach((it, i) => {
     card(s, MX, 1.5 + i * 1.4, 5.2, 1.2, "Fakt " + (i + 1));
-    text(s, it[0], { x: MX + 0.25, y: 1.6 + i * 1.4, w: 4.7, h: 0.5, fontSize: 24, bold: true, fontFace: "Cambria", color: C.accent1 });
+    text(s, it[0], { x: MX + 0.25, y: 1.6 + i * 1.4, w: 4.7, h: 0.5, fontSize: 20, bold: false, fontFace: "Century Gothic", color: C.accent1 });
     text(s, it[1], { x: MX + 0.25, y: 2.15 + i * 1.4, w: 4.7, h: 0.5, fontSize: 14 });
   });
   const tl = [["Nov 2026", "Stellplatz alte Grundschule"], ["ab März 2027", "Bau Planstraße (Erschließung)"], ["Mitte 2027", "Unser Baubeginn"], ["ab Juli 2027", "Kreisverkehr Loruper Straße"], ["Ende 2028", "Marktplatz, Rathaus fertig und unsere Eröffnung"]];
@@ -284,7 +286,7 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
   const pts = [["Klinker", "dunkel, Langformat, passend zum Umfeld"], ["Staffelgeschoss", "Holzbau, Terrasse rundum"], ["Balkone", "bodentiefe Fenster mit Glasbrüstung"], ["Glas-EG", "Gastro mit Bar, Terrasse und Vordach"]];
   pts.forEach((p, i) => {
     const x = MX + i * 3.05;
-    text(s, p[0], { x, y: 5.6, w: 2.9, h: 0.4, fontSize: 18, bold: true, fontFace: "Cambria", color: C.accent1 });
+    text(s, p[0], { x, y: 5.6, w: 2.9, h: 0.4, fontSize: 15, bold: false, fontFace: "Century Gothic", color: C.accent1 });
     text(s, p[1], { x, y: 6.0, w: 2.9, h: 0.6, fontSize: 14 });
   });
 }
@@ -295,8 +297,8 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
   s.addImage({ path: path.join(IMG, "skizze_innen_konzept.png"), x: MX, y: 1.4, w: 8.2, h: 5.125, sizing: { type: "contain", w: 8.2, h: 5.125 }, altText: "Konzeptskizze: Grundriss der Gastro mit Bar, Wandansicht und Materialpalette" });
   s.addImage({ path: fit(hasKI("ki_innen_1.jpg") ? path.join(IMG, "ki_innen_1.jpg") : path.join(IMG, "innen.jpg"), 3.63, 2.43), x: 9.1, y: 1.4, w: 3.63, h: 2.43, altText: "Visualisierung Innenraum" });
   text(s, hasKI("ki_innen_1.jpg") ? "KI-Visualisierung" : "Referenz für Stimmung", { x: 9.1, y: 3.88, w: 3.63, h: 0.3, fontSize: 12, color: C.accent4 });
-  [["ca. 100 Plätze", "innen, plus ca. 32 auf der Terrasse"], ["Bar", "10 Barhocker, Polsterbänke, beleuchtete Backbar"], ["Material", "Olivgrün, Cognac-Samt, Bordeaux, Eiche, schwarzer Stahl"]].forEach((p, i) => {
-    text(s, p[0], { x: 9.1, y: 4.35 + i * 0.75, w: 3.63, h: 0.35, fontSize: 18, bold: true, fontFace: "Cambria", color: C.accent2 });
+  [["ca. 100 Plätze", "innen, plus ca. 32 auf der Terrasse"], ["Bar", "10 Barhocker, Polsterbänke, Backbar"], ["Material", "Olivgrün, Cognac-Samt, Bordeaux, Eiche, schwarzer Stahl"]].forEach((p, i) => {
+    text(s, p[0], { x: 9.1, y: 4.3 + i * 0.85, w: 3.63, h: 0.35, fontSize: 15, bold: false, fontFace: "Century Gothic", color: C.accent2 });
     text(s, p[1], { x: 9.1, y: 4.72 + i * 0.75, w: 3.63, h: 0.35, fontSize: 13 });
   });
 }
@@ -324,7 +326,7 @@ if (KI.length) {
     x: MX, y: 1.5, w: 5.8, h: 4.6, barDir: "col", chartColors: ["8C3B32", "2F4A3E"], varyColors: true, showValue: true, dataLabelPosition: "outEnd", dataLabelColor: "1F2421", dataLabelFontSize: 16, dataLabelFontFace: "+mn-lt",
     catAxisLabelColor: "1F2421", catAxisLabelFontSize: 14, catAxisLabelFontFace: "+mn-lt", valAxisHidden: true, valGridLine: { style: "none" }, catGridLine: { style: "none" }, showLegend: false, showTitle: false, valAxisMaxVal: 36, valAxisMinVal: 0, objectName: "Diagramm Stellplätze",
   });
-  text(s, "Vorschlag für die Stadt", { x: 7.0, y: 1.5, w: 5.7, h: 0.4, fontSize: 20, bold: true, fontFace: "Cambria", color: C.accent1 });
+  text(s, "Vorschlag für die Stadt", { x: 7.0, y: 1.5, w: 5.7, h: 0.4, fontSize: 17, bold: false, fontFace: "Century Gothic", color: C.accent1 });
   text(s, [
     { text: "Bedarf ca. 29 Stellplätze, auf dem Grundstück passen ca. 10–13.", options: { bullet: true, breakLine: true } },
     { text: "Restplätze auf der öffentlichen Parkfläche nebenan (im Plan eingezeichnet) per Vereinbarung nutzen, besonders am Abend.", options: { bullet: true, breakLine: true } },
@@ -488,7 +490,7 @@ if (KI.length) {
     const x = MX + (i % 2) * (cw + 0.4);
     const y = 1.5 + Math.floor(i / 2) * 2.55;
     card(s, x, y, cw, 2.3, "Risiko " + (i + 1));
-    text(s, it[0], { x: x + 0.25, y: y + 0.15, w: cw - 0.5, h: 0.45, fontSize: 20, bold: true, fontFace: "Cambria", color: C.accent1 });
+    text(s, it[0], { x: x + 0.25, y: y + 0.15, w: cw - 0.5, h: 0.45, fontSize: 17, bold: false, fontFace: "Century Gothic", color: C.accent1 });
     text(s, it[1], { x: x + 0.25, y: y + 0.7, w: cw - 0.5, h: 1.5, fontSize: 14 });
   });
 }
@@ -512,7 +514,7 @@ if (KI.length) {
     const x = MX + (i % 2) * (cw + 0.4);
     const y = 1.5 + Math.floor(i / 2) * 1.65;
     card(s, x, y, cw, 1.45, "Forderung " + (i + 1));
-    text(s, it[0], { x: x + 0.25, y: y + 0.15, w: cw - 0.5, h: 0.45, fontSize: 20, bold: true, fontFace: "Cambria", color: C.accent1 });
+    text(s, it[0], { x: x + 0.25, y: y + 0.15, w: cw - 0.5, h: 0.45, fontSize: 17, bold: false, fontFace: "Century Gothic", color: C.accent1 });
     text(s, it[1], { x: x + 0.25, y: y + 0.65, w: cw - 0.5, h: 0.7, fontSize: 14 });
   });
 }
@@ -540,7 +542,7 @@ if (KI.length) {
 // ===== Anhang =====
 {
   const s = pres.addSlide({ masterName: "TITEL" });
-  text(s, "Anhang", { x: MX, y: 2.8, w: 10, h: 1.2, fontSize: 44, bold: true, fontFace: "Cambria", color: C.background1 });
+  text(s, "Anhang", { x: MX, y: 2.8, w: 10, h: 1.2, fontSize: 37, bold: false, fontFace: "Century Gothic", color: C.background1 });
   text(s, "Annahmen, Gastro-Kosten, Gastro-Ausbau, Mietdaten, Variante mit vier Ebenen", { x: MX, y: 4.1, w: 10, h: 0.6, fontSize: 18, color: "CFD8D3" });
 }
 {
