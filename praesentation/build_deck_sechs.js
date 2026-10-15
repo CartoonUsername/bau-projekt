@@ -543,8 +543,8 @@ if (KI.length) {
   const tb = teilung(LAYOUTS.B), tc = teilung(LAYOUTS.C);
   const rows = [
     [hdr(""), hdr("1. OG, 85 m² (3×)", "right"), hdr("Staffel, 56 m² (3×)", "right"), hdr("Du", "right")],
-    [cell("Deine Selbstkosten je Einheit"), R(eur(r.og.kosten)), R(eur(r.st.kosten)), R(eur(r.t.kostenEG))],
     [cell("Verkaufspreis an die Verwandten", { bold: true }), R(eur(r.og.preis), { bold: true }), R(eur(r.st.preis), { bold: true }), R("")],
+    [cell("Deine Selbstkosten je Einheit"), R(eur(r.og.kosten)), R(eur(r.st.kosten)), R(eur(r.t.kostenEG))],
     [cell("Preis je m² Wohnfläche"), R(eur(r.og.preisM2)), R(eur(r.st.preisM2)), R("")],
     [cell("Nachlass, den du trägst"), R(eur(r.og.nachlass)), R(eur(r.st.nachlass)), R("gesamt " + eur(r.luecke))],
     [cell("Einnahme pro Monat (Miete nach 10 % Rücklagen / Gastro-Gewinn)"), R(eur(r.og.miete * 0.9)), R(eur(r.st.miete * 0.9)), R(eur(UM * A.gastroMargeVorPacht - A.lohn))],
