@@ -59,9 +59,9 @@ rows = [
     (6, "Grunderwerbsteuer", 0.05, PCT, "Steuer beim Grundstückskauf"),
     (7, "Notar und Grundbuch", 0.02, PCT, "Annahme"),
     (8, "Bruttogrundfläche BGF (m²)", 930, "#,##0", "EG 340 + 1. OG 340 + Staffelgeschoss 250 (Holzbau)"),
-    (9, "Baukosten je m² BGF (€)", 2700, EUR, "Annahme, mit Architekt prüfen"),
+    (9, "Baukosten je m² BGF (€)", 2200, EUR, "Annahme des Bauherrn (Bekanntenpreis), Angebot nötig"),
     (10, "Baunebenkosten", 0.15, PCT, "Architekt, Statik, Gebühren"),
-    (11, "Gastro-Ausbau (€)", 310000, EUR, "Küche, Bar, Möbel, Technik, Planung, Puffer"),
+    (11, "Gastro-Ausbau (€)", 150000, EUR, "Annahme des Bauherrn, einfacher Ausbau (erste Schätzung 310.000 €)"),
     (12, "Förderung (Zuschuss in % der Kosten)", 0, PCT, "Annahme, mit der Stadt klären (0 bis 25 %)"),
     (14, "Finanzierung", None, None, None),
     (15, "Zins Plan", 0.033, PCT, "Mischzins aus Förderkrediten (Annahme)"),
@@ -233,6 +233,38 @@ for i, d in enumerate(szen["umsatz"]):
         cc.number_format = EURS
 for col in "ABCDEFGH":
     s.column_dimensions[col].width = 22
+
+# ---------------- Verkauf je Partei ----------------
+vk = wb.create_sheet("Verkauf je Partei")
+title(vk, "Verkauf an die Familie: Rechnung je Partei", "Jede Partei mit eigenem Kredit ohne Eigenkapital. Preis = Selbstkosten, 3,3 % Zins, 1 % Tilgung, 10 % Rücklagen. Feste Werte aus model.js.")
+header(vk, 4, ["", "A: 1. OG 85 m²", "A: Staffel 56 m²", "A: Gastro (Du)", "B: 1. OG 85 m²", "B: Staffel 56 m²", "B: Gastro + Büro (Du)"])
+VA, VB = szen["verkauf"]["A"], szen["verkauf"]["B"]
+cols = [(VA["og85"], 2), (VA["st56"], 3), (VA["gastro"], 4), (VB["og85"], 5), (VB["st56"], 6), (VB["gastro"], 7)]
+labels = ["Preis (Selbstkosten)", "Rate pro Monat", "Einnahme nach Rücklagen / Gastro-Gewinn nach Lohn (+ Büro)", "Ergebnis pro Monat", "Preis für Ergebnis 0 €", "Lücke zum Selbstkostenpreis"]
+for i, lab in enumerate(labels):
+    vk.cell(row=5 + i, column=1, value=lab).font = base
+for d, c in cols:
+    if "kosten" in d and "m2" in d:
+        vals = [d["kosten"], d["rate"], d["miete"] * 0.9, d["ergebnis"], d["preisFuerPlus"], d["luecke"]]
+    else:
+        vals = [d["kosten"], d["rate"], d["gewinn"] + d["buero"], d["ergebnis"], None, None]
+    for i, x in enumerate(vals):
+        if x is None:
+            continue
+        cc = vk.cell(row=5 + i, column=c, value=round(x, 2))
+        cc.number_format = EURS if i == 3 else EUR
+vk.column_dimensions["A"].width = 52
+for col in "BCDEFG":
+    vk.column_dimensions[col].width = 20
+vb_ = szen["varianteB"]
+vk.cell(row=13, column=1, value="Haus als Ganzes mit einem Kredit").font = bold
+header(vk, 14, ["", "A: 340 m²", "B: 540 m²"])
+for i, (lab, ka) in enumerate([("Gesamtkosten", "gesamt"), ("Rate pro Monat", "rate"), ("Ergebnis pro Monat bei 50.000 € Umsatz", "cf"), ("Break-even Gastro-Umsatz", "be")]):
+    vk.cell(row=15 + i, column=1, value=lab).font = base
+    for j, key in enumerate(["A", "B"]):
+        cc = vk.cell(row=15 + i, column=2 + j, value=round(vb_[key][ka], 2))
+        cc.number_format = EURS if ka == "cf" else EUR
+vk.cell(row=20, column=1, value="B: EG 540 m² (Gastro 290 + Büro 150), 1. OG 540 m², Staffel 420 m² mit 120 m² Terrasse. Nur mit Ausnahme der Stadt (Baufenster, II Vollgeschosse).").font = note
 
 # ---------------- Variante 4 Ebenen ----------------
 v4 = wb.create_sheet("Variante 4 Ebenen")

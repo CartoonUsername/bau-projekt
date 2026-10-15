@@ -13,3 +13,8 @@ Große Gastro mit Bar im ganzen Erdgeschoss, darüber 6 Wohnungen (1. OG und Sta
 | `build_modell_xlsx.py`, `dump_szenarien.js` | erzeugen die Excel-Datei |
 
 Alle Zahlen sind Planungsannahmen: Baukosten 2.700 €/m², Förderung als Zuschuss, Miete 950 € je Wohnung, Gastro-Marge nach Branchen-Richtwerten.
+
+## Stand Oktober 2026: Baukosten und Verkauf an die Familie
+- Grundlage jetzt: Baukosten 2.200 €/m² BGF (Annahme des Bauherrn), Gastro-Ausbau 150.000 €, Staffelgeschoss in Holzbau mit Terrasse rundum, 930 m² BGF.
+- Folie "Verkauf an die Familie": Rechnung je Partei mit eigenem Kredit ohne Eigenkapital (auch Blatt "Verkauf je Partei" in der Excel-Datei).
+- Folie "Variante B" im Anhang: 540 m² Grundfläche, 1.500 m² BGF (nur mit Ausnahme der Stadt).

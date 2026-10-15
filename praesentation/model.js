@@ -4,7 +4,7 @@
 const A = {
   grundstueck: 236256, // 960 m² x 230 € + 5 % GrESt + ca. 2 % Notar/Grundbuch
   bgf: 960,
-  bauKostenM2: 2700,
+  bauKostenM2: 2200, // Annahme des Bauherrn (Bekanntenpreis), durch Angebot zu belegen
   bnk: 0.15,
   holzAbschlag: 400, // €/m² günstiger als Massivbau beim Staffelgeschoss in Holzbau (Annahme, Angebot der Zimmerei nötig)
   terrassePreis: 450, // €/m² Dachterrasse (Abdichtung, Holzrost, Geländer, Annahme)
@@ -32,9 +32,24 @@ const VARIANTEN = {
     holzM2: 250, // Staffelgeschoss in Holzbau (Zimmerei)
     terrasseM2: 90, // umlaufende Dachterrasse auf dem 1. OG, zählt nicht zur BGF
     wohnflaeche: 423, // 1. OG 3 x 85 m² + Staffel 3 x 56 m²
-    gastroAusbau: 310000,
+    gastroAusbau: 150000, // Annahme des Bauherrn, einfacher Ausbau
     mieteOhnePacht: 6 * 950, // 5.700 € Kaltmiete
     pacht: 290 * 12, // 3.480 €
+    umsatz: 50000,
+  },
+  b: {
+    key: "b",
+    name: "Variante B: 540 m² Grundfläche, Gastro + Büro im EG, OG, Staffel",
+    bgf: 1500, // EG 540 + 1. OG 540 + Staffel 420 (Holzbau, Terrasse rundum)
+    holzM2: 420,
+    terrasseM2: 120,
+    gastroM2: 290,
+    bueroM2: 150,
+    wohnungen: 8,
+    wohnflaeche: 738, // 1. OG ca. 415 m² + Staffel ca. 323 m²
+    gastroAusbau: 150000,
+    mieteOhnePacht: 738 * (950 / 85) + 150 * 10, // Wohnen 11,18 €/m² + Büro 10 €/m²
+    pacht: 290 * 12,
     umsatz: 50000,
   },
   flach: {
@@ -150,7 +165,44 @@ function umsatzBreakEven(v, fin, lohn = A.lohn) {
   return need / A.gastroMargeVorPacht;
 }
 
-module.exports = { bauRoh, A, VARIANTEN, finanz, cashflow, umsatzBreakEven };
+// Verkauf der Einheiten an Einzelne: jede Einheit mit eigenem Kredit, Preis = Selbstkosten
+const MIETE_M2 = 950 / 85; // 11,18 €/m² (Annahme des Bauherrn)
+const LAYOUTS = {
+  A: { EG: 340, OG: 340, ST: 250, terrasse: 90, wfOG: 255, wfST: 168, buero: 0 },
+  B: { EG: 540, OG: 540, ST: 420, terrasse: 120, wfOG: 415, wfST: 323, buero: 150 },
+};
+function teilung(L, zins = A.zinsPlan, opts = {}) {
+  const c = opts.bauKostenM2 ?? A.bauKostenM2;
+  const aus = opts.gastroAusbau ?? VARIANTEN.sechs.gastroAusbau;
+  const f0 = finanz(VARIANTEN.sechs, 0, zins);
+  const k = f0.kredit / f0.gesamt; // Zinsen in Bauzeit und Aufschub auf den Kaufpreis
+  const B = L.EG + L.OG + L.ST;
+  const land = (x) => (A.grundstueck * x) / B;
+  const kostenOG = land(L.OG) + L.OG * c * (1 + A.bnk);
+  const kostenST = land(L.ST) + (L.ST * (c - A.holzAbschlag) + L.terrasse * A.terrassePreis) * (1 + A.bnk);
+  const kostenEG = land(L.EG) + L.EG * c * (1 + A.bnk) + aus;
+  const rate = (kosten, eigenkapital = 0, f = 0, til = A.tilgung) => ((kosten * (1 - f) - eigenkapital) * k * (zins + til)) / 12;
+  const einheit = (m2, kostenM2, miete) => {
+    const kosten = m2 * kostenM2;
+    const r = rate(kosten);
+    const ergebnis = miete * (1 - A.ruecklagen) - r;
+    const maxKredit = (miete * (1 - A.ruecklagen) * 12) / (k * (zins + A.tilgung));
+    return { m2, kosten, kostenM2, kredit: kosten * k, preisFuerPlus: maxKredit / k, luecke: Math.max(0, kosten - maxKredit / k), rate: r, miete, ergebnis, ekFuerPlus: Math.max(0, kosten - maxKredit), ekProzent: Math.max(0, 1 - maxKredit / kosten), ergebnisF15: miete * (1 - A.ruecklagen) - rate(kosten, 0, 0.15) };
+  };
+  const g = rate(kostenEG);
+  const gastroGewinn = VARIANTEN.sechs.umsatz * A.gastroMargeVorPacht - (opts.lohn ?? A.lohn);
+  const bueroMiete = L.buero * 10 * (1 - A.ruecklagen);
+  return {
+    L, k, kostenOG, kostenST, kostenEG, BGF: B,
+    ogM2: kostenOG / L.wfOG, stM2: kostenST / L.wfST,
+    oG: (m2, miete) => einheit(m2, kostenOG / L.wfOG, miete ?? m2 * MIETE_M2),
+    st: (m2, miete) => einheit(m2, kostenST / L.wfST, miete ?? m2 * MIETE_M2),
+    gastro: { kosten: kostenEG, kredit: kostenEG * k, rate: g, gewinn: gastroGewinn, buero: bueroMiete, ergebnis: gastroGewinn + bueroMiete - g, beUmsatz: ((opts.lohn ?? A.lohn) + g - bueroMiete) / A.gastroMargeVorPacht },
+    preisFuerPlusM2: (MIETE_M2 * (1 - A.ruecklagen) * 12) / (k * (zins + A.tilgung)),
+  };
+}
+
+module.exports = { teilung, LAYOUTS, MIETE_M2, bauRoh, A, VARIANTEN, finanz, cashflow, umsatzBreakEven };
 
 if (require.main === module) {
   for (const v of Object.values(VARIANTEN)) {

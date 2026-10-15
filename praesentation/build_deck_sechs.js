@@ -4,7 +4,7 @@ const path = require("path");
 const fs = require("fs");
 const pptxgen = require("pptxgenjs");
 const { applyTheme } = require(process.env.APPLY_THEME || "./apply_theme.js");
-const { A, VARIANTEN, finanz, cashflow, umsatzBreakEven, bauRoh } = require("./model");
+const { A, VARIANTEN, finanz, cashflow, umsatzBreakEven, bauRoh, teilung, LAYOUTS } = require("./model");
 const { execFileSync } = require("child_process");
 
 const IMG = process.env.BILDER || path.join(__dirname, "bilder");
@@ -121,7 +121,7 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
     x: MX, y: 3.85, w: W - 2 * MX, colW: [2.2, ...FOERDERUNG.map(() => (W - 2 * MX - 2.2) / FOERDERUNG.length)], rowH: 0.5, border: tblBorder, objectName: "Tabelle Förderung",
   });
   text(s, [
-    { text: firstPos === 0 ? "Schon ohne Förderung im Plus, aber knapp. " : `Mit ${pct(firstPos)} Förderung läuft das Haus erstmals im Plus. `, options: { bold: true } },
+    { text: firstPos === 0 ? "Schon ohne Förderung im Plus. " : `Mit ${pct(firstPos)} Förderung läuft das Haus erstmals im Plus. `, options: { bold: true } },
     { text: `Break-even-Umsatz ohne Förderung ca. ${k(Math.round(umsatzBreakEven(v, f0.plan) / 100) * 100)} im Monat. Dazu kommt eine Anlaufphase von 12 Monaten ohne Rate (Aufschub).` },
   ], { x: MX, y: 5.0, w: W - 2 * MX, h: 1.2, fontSize: 16 });
 }
@@ -337,16 +337,16 @@ if (KI.length) {
 
 // ===== 10 Kosten =====
 {
-  const s = content("Gesamtkosten ohne Förderung", "Für die Bank", "Baukosten 2.700 €/m² (Holz-Staffel 400 € günstiger) und 15 % Baunebenkosten sind Annahmen und müssen durch Architekt und Angebote bestätigt werden.");
+  const s = content("Gesamtkosten ohne Förderung", "Für die Bank", "Baukosten 2.200 €/m² (Holz-Staffel 400 € günstiger) und 15 % Baunebenkosten sind Annahmen des Bauherrn und müssen durch Angebote von Bauunternehmen und Zimmerei bestätigt werden.");
   const fin = f0.plan;
   const rows = [
     [hdr("Posten"), hdr("Rechnung"), hdr("Betrag", "right")],
     [cell("Grundstück inkl. Steuer, Notar"), cell("960 m² × 230 € + ca. 7 %"), R(eur(A.grundstueck))],
-    [cell("Bau, Massivbau"), cell("930 m² × 2.700 €"), R(eur(930 * 2700))],
+    [cell("Bau, Massivbau"), cell("930 m² × 2.200 €"), R(eur(930 * A.bauKostenM2))],
     [cell("Abschlag Holzbau (Staffelgeschoss)"), cell("250 m² × 400 € günstiger"), R("− " + eur(250 * A.holzAbschlag))],
     [cell("Dachterrasse rundum"), cell("90 m² × 450 €"), R(eur(90 * A.terrassePreis))],
     [cell("Baunebenkosten (Architekt, Statik, Gebühren)"), cell("15 % vom Bau"), R(eur(bauRoh(v) * 0.15))],
-    [cell("Gastro-Ausbau (Küche, Bar, Möbel, Technik)"), cell("Posten im Anhang"), R(eur(v.gastroAusbau))],
+    [cell("Gastro-Ausbau (Küche, Bar, Möbel, Technik)"), cell("Annahme, Posten im Anhang"), R(eur(v.gastroAusbau))],
     [cell("Gesamtkosten", { bold: true }), cell(""), R(eur(fin.gesamt), { bold: true })],
   ];
   s.addTable(rows, { x: MX, y: 1.5, w: 7.6, colW: [3.5, 2.4, 1.7], rowH: 0.5, border: tblBorder, objectName: "Tabelle Kosten" });
@@ -445,13 +445,13 @@ if (KI.length) {
   const steps = [
     ["Ausgangslage (40.000 € Umsatz, keine Förderung)", {}],
     ["+ 15 % Förderung", { f: 0.15 }],
-    ["+ Baukosten 2.500 €/m² statt 2.700 €", { bau: 2500 }],
-    ["+ Gastro-Ausbau sparsam (245.000 €)", { ausbau: 245000 }],
+    ["+ Baukosten 2.000 €/m² statt 2.200 € (Bekanntenpreis)", { bau: 2000 }],
+    ["+ Gastro-Ausbau nur 100.000 € statt 150.000 €", { ausbau: 100000 }],
     ["+ Gastro-Umsatz 45.000 €", { u: 45000 }],
     ["+ Tilgung 0 % (nur Zinsen) in den ersten Jahren", { til: 0 }],
     ["+ Lohn 4.000 € statt 6.000 €", { lohn: 4000 }],
   ];
-  let st = { f: 0, bau: 2700, ausbau: v.gastroAusbau, u: 40000, til: A.tilgung, lohn: A.lohn };
+  let st = { f: 0, bau: A.bauKostenM2, ausbau: v.gastroAusbau, u: 40000, til: A.tilgung, lohn: A.lohn };
   const rows = [[hdr("Schritt"), hdr("Plan (3,3 %)", "right"), hdr("Ausgang (4,0 %)", "right")]];
   const vals = [];
   steps.forEach(([n, d]) => {
@@ -468,12 +468,35 @@ if (KI.length) {
   card(s, 9.4, 1.4, W - 9.4 - MX, 4.7, "Fazit Pfad");
   text(s, [
     { text: "Mindestpaket", options: { bold: true, color: C.accent1, breakLine: true } },
-    { text: "Förderung, günstigere Baukosten und ein sparsamer Ausbau reichen im Plan für Plus.", options: { breakLine: true } },
+    { text: "Schon die Ausgangslage mit 2.200 €/m² und 150.000 € Ausbau liegt im Plan nahe an Plus, Förderung und günstige Preise geben Luft.", options: { breakLine: true } },
     { text: " ", options: { breakLine: true } },
     { text: "Nur Konto, kein Gewinn", options: { bold: true, color: C.accent1, breakLine: true } },
     { text: "Tilgung 0 % und weniger Lohn verbessern das Konto, nicht das Haus.", options: {} },
   ], { x: 9.65, y: 1.6, w: W - 9.4 - MX - 0.5, h: 4.4, fontSize: 14 });
   text(s, "Verwaltung, Versicherung, Grundsteuer (ca. 300–500 € im Monat) sind noch nicht enthalten.", { x: MX, y: 5.8, w: 8.4, h: 0.5, fontSize: 13, color: C.accent4 });
+}
+
+// ===== 15b Verkauf an die Familie =====
+{
+  const s = content("Verkauf an die Familie: Rechnung je Partei", "Für die Verwandten und die Bank", "Jede Partei bekommt einen eigenen Kredit ohne Eigenkapital. Preis = Selbstkosten, 3,3 % Zins, 1 % Tilgung, Miete 950 €, 10 % Rücklagen.");
+  const t = teilung(LAYOUTS.A);
+  const o = t.oG(85, 950), st = t.st(56, 950), g = t.gastro;
+  const rows = [
+    [hdr(""), hdr("1. OG, 85 m² (3×)", "right"), hdr("Staffel, 56 m² (3×)", "right"), hdr("Du: Gastro im EG", "right")],
+    [cell("Preis (Selbstkosten)"), R(eur(o.kosten)), R(eur(st.kosten)), R(eur(g.kosten))],
+    [cell("Preis je m² Wohnfläche"), R(eur(o.kostenM2)), R(eur(st.kostenM2)), R("")],
+    [cell("Rate pro Monat (3,3 % + 1 % Tilgung)"), R(eur(o.rate)), R(eur(st.rate)), R(eur(g.rate))],
+    [cell("Einnahme pro Monat (nach 10 % Rücklagen)"), R(eur(o.miete * 0.9)), R(eur(st.miete * 0.9)), R(eur(g.gewinn))],
+    [cell("Ergebnis pro Monat", { bold: true }), cfCell(o.ergebnis), cfCell(st.ergebnis), cfCell(g.ergebnis)],
+    [cell("Preis, bei dem das Ergebnis 0 € ist"), R(eur(o.preisFuerPlus)), R(eur(st.preisFuerPlus)), R("")],
+    [cell("Lücke zum Selbstkostenpreis (ohne Eigenkapital)"), R(eur(o.luecke)), R(eur(st.luecke)), R("")],
+    [cell("Ergebnis mit 15 % Förderung"), cfCell(o.ergebnisF15), cfCell(st.ergebnisF15), R("")],
+  ];
+  s.addTable(rows, { x: MX, y: 1.4, w: W - 2 * MX, colW: [4.4, 2.6, 2.6, 2.53], rowH: 0.44, border: tblBorder, objectName: "Tabelle Verkauf je Partei" });
+  text(s, [
+    { text: `Die Rechnung für den Gastro-Teil gilt bei ${k(UM)} Umsatz und 6.000 € Lohn, Break-even ab ${k(Math.round(g.beUmsatz / 1000) * 1000)}. Die Wohnungen tragen sich bei 11,18 €/m² Miete erst ab einem Preis von ca. ${eur(Math.round(t.preisFuerPlusM2 / 10) * 10)} je m².`, options: { breakLine: true } },
+    { text: `Die Staffel-Wohnung (56 m²) kostet bei 950 € Miete 17 €/m², bei Marktmiete (11,18 €/m²) wären es ${eur(56 * 11.18)} und das Ergebnis ${eurS(t.st(56).ergebnis)}.`, options: {} },
+  ], { x: MX, y: 5.65, w: W - 2 * MX, h: 1.1, fontSize: 12.5, color: C.accent4, paraSpaceAfter: 4 });
 }
 
 // ===== 16 Risiken =====
@@ -543,13 +566,13 @@ if (KI.length) {
 {
   const s = pres.addSlide({ masterName: "TITEL" });
   text(s, "Anhang", { x: MX, y: 2.8, w: 10, h: 1.2, fontSize: 41, bold: false, fontFace: "Georgia", color: C.background1 });
-  text(s, "Annahmen, Gastro-Kosten, Gastro-Ausbau, Mietdaten, Variante mit vier Ebenen", { x: MX, y: 4.1, w: 10, h: 0.6, fontSize: 18, color: "CFD8D3" });
+  text(s, "Annahmen, Gastro-Kosten, Gastro-Ausbau, Mietdaten, Variante B, Variante mit vier Ebenen", { x: MX, y: 4.1, w: 10, h: 0.6, fontSize: 18, color: "CFD8D3" });
 }
 {
   const s = content("Rechenannahmen und offene Punkte", "Anhang", "Alle Zahlen sind Planungsannahmen, keine Zusagen.");
   const left = [
     "Grundstück 960 m² × 230 € plus ca. 7 % (5 % Grunderwerbsteuer, ca. 2 % Notar)",
-    "Bau 930 m² BGF × 2.700 €, Staffel in Holzbau 400 €/m² günstiger, Terrasse 90 m² × 450 €, Baunebenkosten 15 %",
+    "Bau 930 m² BGF × 2.200 €, Staffel in Holzbau 400 €/m² günstiger, Terrasse 90 m² × 450 €, Baunebenkosten 15 %",
     "100 % Fremdfinanzierung, 1 % Tilgung, Aufschub 12 Monate",
     "Bauzeit 15 Monate, Bereitstellungszins 3 % p. a. ab Monat 7",
     "Zins Plan 3,3 % (Förderkredite, Annahme), Ausgang 4,0 %",
@@ -587,28 +610,27 @@ if (KI.length) {
   s.addTable(rows, { x: MX, y: 1.4, w: W - 2 * MX, colW: [7.0, 2.5, 2.63], rowH: 0.405, border: tblBorder, objectName: "Tabelle Gastro-Kosten" });
 }
 {
-  const s = content("Gastro-Ausbau nach Posten", "Anhang", "Preise sind eigene Schätzungen, ein Gastro-Fachplaner und Angebote von Küchen- und Lüftungsbauern müssen sie bestätigen.");
+  const s = content("Gastro-Ausbau nach Posten", "Anhang", "Zielbudget des Bauherrn für einen einfachen Ausbau, Angebote von Küchen- und Lüftungsbauern müssen es bestätigen.");
   const items = [
-    ["Küche (Herd, Kühlräume, Edelstahl, Spülküche)", 55000],
-    ["Lüftung und Abluft", 35000],
-    ["Theke und Bar (Zapfanlage, Kühlung, Backbar)", 38000],
-    ["Möbel (ca. 100 Plätze, Lounge)", 42000],
-    ["Beleuchtung und Deko", 20000],
-    ["Wand, Boden, Decke, Akustik", 32000],
-    ["Gäste-WC Ausstattung", 12000],
-    ["Kasse, Technik, Musik, WLAN", 9000],
-    ["Terrasse (Holzdeck, Möbel, Heizstrahler)", 22000],
-    ["Planung und Genehmigung", 9000],
-    ["Geschirr, Gläser, Besteck, Textilien", 14000],
-    ["Eröffnung, Marketing, Warenerstbestückung", 7000],
+    ["Küche (Herd, Kühlräume, Edelstahl, Spülküche)", 30000],
+    ["Lüftung und Abluft", 18000],
+    ["Theke und Bar (Zapfanlage, Kühlung, Backbar)", 20000],
+    ["Möbel (ca. 100 Plätze, Lounge)", 28000],
+    ["Beleuchtung und Deko", 8000],
+    ["Wand, Boden, Decke, Akustik", 15000],
+    ["Gäste-WC Ausstattung", 5000],
+    ["Kasse, Technik, Musik, WLAN", 5000],
+    ["Terrasse (Holzdeck, Möbel, Heizstrahler)", 6000],
+    ["Planung und Genehmigung", 5000],
+    ["Eröffnung, Marketing, Warenerstbestückung", 3000],
   ];
   const sumN = items.reduce((a, r) => a + r[1], 0);
   const rows = [[hdr("Posten"), hdr("Betrag", "right")], ...items.map((r) => [cell(r[0]), R(eur(r[1]))]),
     [cell("Puffer 5 %"), R(eur(sumN * 0.05))],
-    [cell("Summe (im Modell: 310.000 €)", { bold: true }), R(eur(sumN * 1.05), { bold: true })]];
+    [cell("Summe (im Modell: 150.000 €)", { bold: true }), R(eur(sumN * 1.05), { bold: true })]];
   s.addTable(rows, { x: MX, y: 1.35, w: 8.0, colW: [6.0, 2.0], rowH: 0.34, border: tblBorder, objectName: "Tabelle Gastro-Ausbau" });
   card(s, 9.0, 1.35, W - 9.0 - MX, 3.2, "Hinweis Ausbau");
-  text(s, "Baunebenkosten von 15 % fallen auf Möbel und Geräte nicht an, die Planung steckt als eigener Posten drin. Ein sparsamer Ausbau (ca. 245.000 €) steht auf der Pfad-Folie.", { x: 9.25, y: 1.55, w: W - 9.0 - MX - 0.5, h: 2.8, fontSize: 14 });
+  text(s, "Baunebenkosten von 15 % fallen auf Möbel und Geräte nicht an, die Planung steckt als eigener Posten drin. Eine erste Schätzung für einen aufwendigeren Ausbau lag bei ca. 310.000 €, der Unterschied liegt vor allem bei Küche, Möbeln und Theke.", { x: 9.25, y: 1.55, w: W - 9.0 - MX - 0.5, h: 2.8, fontSize: 14 });
 }
 {
   const s = content("Mietdaten für Werlte", "Anhang", "Es gibt keinen amtlichen Mietspiegel für Werlte, die Portale arbeiten mit kleinen Stichproben.");
@@ -627,6 +649,38 @@ if (KI.length) {
     { text: "6 Wohnungen zu 950 € Kaltmiete (Bauherr, zentrale Lage), das sind bei ca. 75 m² etwa 12,70 €/m². Gastro-Pacht 12 €/m² ohne Marktdaten." },
   ], { x: 9.85, y: 1.7, w: W - 9.6 - MX - 0.5, h: 3.2, fontSize: 14 });
   text(s, "Quellen: mietpreise.info/mietspiegel/werlte, miete-aktuell.de, immobilienscout24.de (Kreis Emsland), Abruf Oktober 2026", { x: MX, y: 5.4, w: W - 2 * MX, h: 0.6, fontSize: 12, color: C.accent4 });
+}
+
+// ===== Variante B: 540 m² Grundfläche =====
+{
+  const s = content("Variante B: 540 m² Grundfläche", "Anhang", "Nur mit Ausnahme der Stadt: Baufenster ca. 400–460 m² geschätzt, im Plan stehen zwei Vollgeschosse, GRZ 0,6 erlaubt max. 576 m².");
+  const vb = VARIANTEN.b;
+  const fa = finanz(v, 0, A.zinsPlan), fb = finanz(vb, 0, A.zinsPlan);
+  const ca = cashflow(v, fa), cb = cashflow(vb, fb);
+  const ta = teilung(LAYOUTS.A), tb = teilung(LAYOUTS.B);
+  const rows = [
+    [hdr(""), hdr("A: 340 m² (jetzt)", "right"), hdr("B: 540 m²", "right")],
+    [cell("Bruttofläche"), R("930 m²"), R("1.500 m²")],
+    [cell("Wohnfläche"), R("ca. 423 m²"), R("ca. 738 m²")],
+    [cell("Wohnungen"), R("6"), R("ca. 8 bis 9")],
+    [cell("Gastro / Büro"), R("290 m² / –"), R("290 m² / 150 m²")],
+    [cell("Gesamtkosten"), R(eur(fa.gesamt)), R(eur(fb.gesamt))],
+    [cell("Rate pro Monat (ein Kredit)"), R(eur(fa.rate)), R(eur(fb.rate))],
+    [cell(`Ergebnis bei ${k(UM)} Umsatz`), cfCell(ca.cf), cfCell(cb.cf)],
+    [cell("Break-even-Umsatz Gastro"), R(eur(umsatzBreakEven(v, fa))), R(eur(umsatzBreakEven(vb, fb)))],
+    [cell("Kosten je m² Wohnfläche, OG / Staffel"), R(`${eur(ta.ogM2)} / ${eur(ta.stM2)}`), R(`${eur(tb.ogM2)} / ${eur(tb.stM2)}`)],
+    [cell("85-m²-Wohnung im OG: Ergebnis (eigener Kredit)"), cfCell(ta.oG(85).ergebnis), cfCell(tb.oG(85).ergebnis)],
+    [cell("Preis-Lücke je 85-m²-Wohnung im OG"), R(eur(ta.oG(85).luecke)), R(eur(tb.oG(85).luecke))],
+  ];
+  s.addTable(rows, { x: MX, y: 1.4, w: 8.4, colW: [4.2, 2.1, 2.1], rowH: 0.42, border: tblBorder, objectName: "Tabelle Variante B" });
+  card(s, 9.4, 1.4, W - 9.4 - MX, 4.9, "Hinweis B");
+  text(s, [
+    { text: "Annahmen B", options: { bold: true, color: C.accent1, breakLine: true } },
+    { text: "EG 540 m² (Gastro 290 m², Büro 150 m²), 1. OG 540 m², Staffel 420 m² in Holzbau mit 120 m² Terrasse. Büro 10 €/m², Wohnen 11,18 €/m².", options: { breakLine: true } },
+    { text: " ", options: { breakLine: true } },
+    { text: "Zu klären", options: { bold: true, color: C.accent1, breakLine: true } },
+    { text: "Baufenster, zwei Vollgeschosse, Höhe 12 m und deutlich mehr Stellplätze.", options: {} },
+  ], { x: 9.65, y: 1.6, w: W - 9.4 - MX - 0.5, h: 4.5, fontSize: 13 });
 }
 
 // ===== 8c Variante mit zweitem Mittelgeschoss =====
