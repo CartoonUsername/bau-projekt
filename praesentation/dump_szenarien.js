@@ -31,6 +31,8 @@ for (const [key, z] of [["plan", A.zinsPlan], ["ausgang", A.zinsAusgang]]) {
   const r = zielplus(LAYOUTS.A, 250, z);
   out.ziel[key] = { og: r.og, st: r.st, luecke: r.luecke, zinsLuecke: r.zinsLuecke, rateEG: r.rateEG, bessam: r.bessam };
 }
-out.verkaufsplan = verkaufsplan({ foerderung: 0.15, bauKostenM2: 2000, tilgung: 0 }).rows;
+const vpz = verkaufsplan({ foerderung: 0, bauKostenM2: 2200, tilgung: 0, zielPlus: 100 });
+out.verkaufsplan = vpz.rows;
+out.verkaufsplanSumme = { luecke: vpz.luecke, zinsLuecke: vpz.zinsLuecke, rateEG: vpz.rateEG, gewinn: vpz.gewinn, bessam: vpz.bessam };
 out.verkaufsplan0 = verkaufsplan({ foerderung: 0, bauKostenM2: 2200, tilgung: 0 }).rows;
 console.log(JSON.stringify(out));

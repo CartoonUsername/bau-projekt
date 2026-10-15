@@ -254,14 +254,25 @@ function verkaufsplan(opts = {}) {
   const t = teilung(LAYOUTS.A, zins, { bauKostenM2: c });
   const rows = KAEUFER.map((b) => {
     const e = b.typ === "OG" ? t.oG(85, 950) : t.st(56, 950);
-    const preis = e.kosten * (1 - f);
+    const kosten = e.kosten * (1 - f);
+    const einnahme0 = e.miete * (1 - A.ruecklagen);
+    let preis = kosten;
+    if (opts.zielPlus != null && !b.eigen) {
+      const maxKredit = ((einnahme0 - opts.zielPlus) * 12) / (t.k * (zins + til) / 1);
+      preis = Math.min(kosten, maxKredit / (1 + 0.02 + b.grest) / 1);
+    }
     const nk = b.eigen ? 0 : preis * (0.02 + b.grest);
     const kredit = (preis + nk) * t.k;
     const rate = (kredit * (zins + til)) / 12;
     const einnahme = e.miete * (1 - A.ruecklagen);
-    return { ...b, m2: e.m2, preis, nk, kredit, rate, einnahme, ergebnis: einnahme - rate };
+    return { ...b, m2: e.m2, kosten, preis, nachlass: kosten - preis, nk, kredit, rate, einnahme, ergebnis: einnahme - rate };
   });
-  return { rows, k: t.k, gastro: t.gastro };
+  const luecke = rows.reduce((a2, r) => a2 + r.nachlass, 0);
+  const zinsLuecke = (luecke * t.k * zins) / 12;
+  const rateEG = (t.gastro.kosten * (1 - f) * t.k * (zins + A.tilgung)) / 12;
+  const gewinn = VARIANTEN.sechs.umsatz * A.gastroMargeVorPacht - A.lohn;
+  const eigen = rows.find((r) => r.eigen);
+  return { rows, k: t.k, gastro: t.gastro, luecke, zinsLuecke, rateEG, gewinn, bessam: gewinn - rateEG - zinsLuecke + (eigen ? eigen.ergebnis : 0), eigen };
 }
 
 module.exports = { verkaufsplan, KAEUFER, zielplus, teilung, LAYOUTS, MIETE_M2, bauRoh, A, VARIANTEN, finanz, cashflow, umsatzBreakEven };

@@ -284,16 +284,23 @@ for off, key in ((0, "plan"), (3, "ausgang")):
     cc_ = vk.cell(row=28, column=4 if off == 0 else 7, value=round(d["bessam"], 2)); cc_.number_format = EURS
 
 # Verkaufsplan
-vk.cell(row=31, column=1, value="Verkaufsplan (Vorschlag): Preis = Selbstkosten, tilgungsfrei, 3,3 % Zins, Notar 2 %, Grunderwerbsteuer 5 % (Vater frei)").font = bold
-header(vk, 32, ["Partei", "Wohnung", "Preis 15 % Förd., 2.000 €/m²", "Notar, Steuer", "Kredit", "Rate", "Ergebnis pro Monat", "Ergebnis ohne Förderung, 2.200 €/m²"])
+vk.cell(row=31, column=1, value="Verkaufsplan (Vorschlag), ohne Förderung, 2.200 €/m², tilgungsfrei, 3,3 % Zins, Notar 2 %, Grunderwerbsteuer 5 % (Vater frei)").font = bold
+header(vk, 32, ["Partei", "Wohnung", "Verkaufspreis", "Selbstkosten", "Differenz (von dir getragen)", "Notar, Steuer", "Rate (nur Zinsen)", "Ergebnis pro Monat", "Ergebnis zum Selbstkostenpreis"])
 for i, (r, r0) in enumerate(zip(szen["verkaufsplan"], szen["verkaufsplan0"])):
     row = 33 + i
     vk.cell(row=row, column=1, value=r["name"]).font = base
     vk.cell(row=row, column=2, value="1. OG, 85 m²" if r["typ"] == "OG" else "Staffel, 56 m²").font = base
-    for col, key in ((3, "preis"), (4, "nk"), (5, "kredit"), (6, "rate")):
+    for col, key in ((3, "preis"), (4, "kosten"), (5, "nachlass"), (6, "nk"), (7, "rate")):
         c_ = vk.cell(row=row, column=col, value=round(r[key], 2)); c_.number_format = EUR
-    c_ = vk.cell(row=row, column=7, value=round(r["ergebnis"], 2)); c_.number_format = EURS
-    c_ = vk.cell(row=row, column=8, value=round(r0["ergebnis"], 2)); c_.number_format = EURS
+    c_ = vk.cell(row=row, column=8, value=round(r["ergebnis"], 2)); c_.number_format = EURS
+    c_ = vk.cell(row=row, column=9, value=round(r0["ergebnis"], 2)); c_.number_format = EURS
+sm = szen["verkaufsplanSumme"]
+vk.cell(row=40, column=1, value="Differenz gesamt (von dir getragen)").font = base
+c_ = vk.cell(row=40, column=3, value=round(sm["luecke"], 2)); c_.number_format = EUR
+vk.cell(row=41, column=1, value="Zinsen auf die Differenz pro Monat").font = base
+c_ = vk.cell(row=41, column=3, value=round(sm["zinsLuecke"], 2)); c_.number_format = EUR
+vk.cell(row=42, column=1, value="Dein Ergebnis pro Monat (Gastro − Rate EG − Zinsen Differenz + eigene Wohnung)").font = bold
+c_ = vk.cell(row=42, column=3, value=round(sm["bessam"], 2)); c_.number_format = EURS
 
 # ---------------- Variante 4 Ebenen ----------------
 v4 = wb.create_sheet("Variante 4 Ebenen")

@@ -103,7 +103,7 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
   s.addImage({ path: fit(hasKI("ki_aussen_1.jpg") ? KI_AUSSEN : path.join(IMG, "aussen.jpg"), 6.43, H), x: 6.9, y: 0, w: 6.43, h: H, altText: "Außenansicht, modernes Haus mit Klinker und Glas-Erdgeschoss" });
   text(s, "NEUE MITTE WERLTE", { x: MX, y: 1.3, w: 6, h: 0.4, fontSize: 16, bold: true, color: C.accent3, charSpacing: 4 });
   text(s, "Baufeld 3: Große Gastro und 6 Wohnungen", { x: MX, y: 1.85, w: 6, h: 2.2, fontSize: 37, bold: false, fontFace: "Georgia", color: C.background1 });
-  text(s, "Baukonzept und Wirtschaftlichkeit", { x: MX, y: 4.3, w: 6, h: 0.6, fontSize: 18, color: C.background1 });
+  text(s, "Baukonzept und Wirtschaftlichkeit (Variante A, ohne Förderung)", { x: MX, y: 4.3, w: 6, h: 0.6, fontSize: 18, color: C.background1 });
   text(s, "Bessam Hasso, Werlte\nBebauungsplan Nr. 123, 1. Änderung (Entwurf 25.08.2026)\nStand Oktober 2026", { x: MX, y: 5.5, w: 6, h: 1.1, fontSize: 14, color: "CFD8D3" });
   s.addNotes("Titelfolie. Das Bild ist eine Referenzstudie.");
 }
@@ -316,7 +316,7 @@ if (KI.length) {
     const y = 1.45 + Math.floor(i / cols) * (gh + 0.3);
     s.addImage({ path: fit(f, gw, gh), x, y, w: gw, h: gh, altText: "Visualisierung " + (i + 1) });
   });
-  text(s, "KI-generierte Visualisierungen zur Orientierung, Maße und Details folgen mit dem Architekten.", { x: MX, y: H - 0.95, w: W - 2 * MX, h: 0.4, fontSize: 12, color: C.accent4 });
+  text(s, "KI-generierte Visualisierungen zur Orientierung (Theke farblich nachbearbeitet), Maße und Details folgen mit dem Architekten.", { x: MX, y: H - 0.95, w: W - 2 * MX, h: 0.4, fontSize: 12, color: C.accent4 });
 }
 
 // ===== 9 Stellplätze =====
@@ -498,44 +498,6 @@ if (KI.length) {
   ], { x: MX, y: 5.65, w: W - 2 * MX, h: 1.1, fontSize: 12.5, color: C.accent4, paraSpaceAfter: 4 });
 }
 
-// ===== 15c So rentiert es sich für jede Partei =====
-{
-  const s = content("So rentiert es sich für jede Partei", "Für die Verwandten und die Bank", "Variante A, 6 Wohnungen, jede mit eigenem Kredit ohne Eigenkapital, Miete 950 €, 50.000 € Gastro-Umsatz. Förderung, Preise und tilgungsfreie Jahre sind Ziele, keine Zusagen.");
-  const t0 = teilung(LAYOUTS.A, A.zinsPlan);
-  const calc = (o) => {
-    const z = o.zins ?? A.zinsPlan, c = o.c ?? A.bauKostenM2, f = o.f ?? 0, til = o.til ?? A.tilgung;
-    const t = teilung(LAYOUTS.A, z, { bauKostenM2: c });
-    const rate = (kosten) => (kosten * (1 - f) * t.k * (z + til)) / 12;
-    const og = 950 * (1 - A.ruecklagen) - rate(t.oG(85, 950).kosten);
-    const st = 950 * (1 - A.ruecklagen) - rate(t.st(56, 950).kosten);
-    const g = UM * A.gastroMargeVorPacht - A.lohn - rate(t.gastro.kosten);
-    return [og, st, g];
-  };
-  const sc = [
-    ["Selbstkostenpreis, 1 % Tilgung (heute)", {}],
-    ["+ 15 % Förderung", { f: 0.15 }],
-    ["+ Tilgung 0 % (nur Zinsen) in den ersten Jahren", { f: 0.15, til: 0 }],
-    ["+ Baukosten 2.000 €/m² statt 2.200 €", { f: 0.15, til: 0, c: 2000 }],
-    ["Dasselbe bei 4,0 % Zins", { f: 0.15, til: 0, c: 2000, zins: A.zinsAusgang }],
-    ["Alternative: ohne Förderung, Tilgung 0 %, Baukosten 2.000 €/m²", { til: 0, c: 2000 }],
-  ];
-  const rows = [[hdr("Schritt"), hdr("1. OG, 85 m²", "right"), hdr("Staffel, 56 m²", "right"), hdr("Du: Gastro", "right")]];
-  sc.forEach(([n, o]) => {
-    const r = calc(o);
-    rows.push([cell(n), cfCell(r[0]), cfCell(r[1]), cfCell(r[2])]);
-  });
-  s.addTable(rows, { x: MX, y: 1.4, w: 8.6, colW: [4.3, 1.4, 1.5, 1.4], rowH: 0.52, border: tblBorder, objectName: "Tabelle Rentiert für alle" });
-  card(s, 9.5, 1.4, W - 9.5 - MX, 4.9, "Was das bedeutet");
-  text(s, [
-    { text: "Plus für alle", options: { bold: true, color: C.accent1, breakLine: true } },
-    { text: "Förderung 15 % und tilgungsfreie Jahre reichen bei 3,3 % Zins für ein Plus bei jeder Partei. Bei 4,0 % Zins fehlt dem OG trotz 2.000 €/m² noch ein kleines Stück, dann braucht es mehr Förderung oder noch günstigere Preise.", options: { breakLine: true } },
-    { text: " ", options: { breakLine: true } },
-    { text: "Zu beachten", options: { bold: true, color: C.accent1, breakLine: true } },
-    { text: "Ohne Tilgung sinkt die Schuld nicht, der Kredit muss später abgelöst oder verlängert werden.", options: {} },
-  ], { x: 9.75, y: 1.6, w: W - 9.5 - MX - 0.5, h: 4.5, fontSize: 12.5 });
-  text(s, `Zum Vergleich: Wenn du die Lücke der drei OG-Wohnungen (${eur(3 * -t0.oG(85, 950).ergebnis)} im Monat) selbst trägst, bleiben dir ${eur(t0.gastro.ergebnis + 3 * t0.oG(85, 950).ergebnis)} aus der Gastro.`, { x: MX, y: 5.7, w: 8.6, h: 0.7, fontSize: 12.5, color: C.accent4 });
-}
-
 // ===== 15d Ziel: 250 € Plus je Wohnung =====
 {
   const s = content("Ziel: 250 € Plus für jede Wohnung", "Für die Verwandten und die Bank", "Variante A, jede Wohnung mit eigenem Kredit ohne Eigenkapital und ohne Tilgung, 950 € Miete, 3,3 % Zins. Du trägst die Differenz zu deinen Selbstkosten.");
@@ -558,43 +520,17 @@ if (KI.length) {
   ], { x: MX, y: 5.6, w: W - 2 * MX, h: 1.2, fontSize: 12.5, color: C.accent4, paraSpaceAfter: 5 });
 }
 
-// ===== 15e Differenz so klein wie möglich =====
-{
-  const s = content("Die Differenz so klein wie möglich", "Für die Verwandten und die Bank", "Variante A, Käufer ohne Eigenkapital und ohne Tilgung, 950 € Miete. Förderung senkt deine Selbstkosten, die Staffel-Wohnungen gehen zum Selbstkostenpreis.");
-  const sc = [
-    ["250 € Plus, 0 % Förderung, 2.200 €/m²", 250, {}, A.zinsPlan],
-    ["250 € Plus, 0 % Förderung, 2.000 €/m²", 250, { bauKostenM2: 2000 }, A.zinsPlan],
-    ["250 € Plus, 15 % Förderung, 2.200 €/m²", 250, { foerderung: 0.15 }, A.zinsPlan],
-    ["250 € Plus, 15 % Förderung, 2.000 €/m²", 250, { foerderung: 0.15, bauKostenM2: 2000 }, A.zinsPlan],
-    ["250 € Plus, 20 % Förderung, 2.000 €/m²", 250, { foerderung: 0.2, bauKostenM2: 2000 }, A.zinsPlan],
-    ["wie vorher, aber 4,0 % Zins (15 % Förderung, 2.000 €/m²)", 250, { foerderung: 0.15, bauKostenM2: 2000 }, A.zinsAusgang],
-    ["Keine Differenz: 0 % Förderung, 2.200 €/m²", -9999, {}, A.zinsPlan],
-    ["Keine Differenz: 0 % Förderung, 2.000 €/m²", -9999, { bauKostenM2: 2000 }, A.zinsPlan],
-    ["Keine Differenz: 15 % Förderung, 2.000 €/m²", -9999, { foerderung: 0.15, bauKostenM2: 2000 }, A.zinsPlan],
-  ];
-  const rows = [[hdr("Szenario"), hdr("Preis 1. OG", "right"), hdr("Differenz je OG", "right"), hdr("Differenz gesamt", "right"), hdr("Plus je OG / Staffel", "right"), hdr("Du pro Monat", "right")]];
-  sc.forEach(([n, plus, o, z]) => {
-    const r = zielplus(LAYOUTS.A, plus, z, o);
-    rows.push([cell(n), R(eur(r.og.preis)), R(eur(r.og.nachlass)), R(eur(r.luecke)), R(`${eurS(r.og.ergebnis)} / ${eurS(r.st.ergebnis)}`), cfCell(r.bessam)]);
-  });
-  s.addTable(rows, { x: MX, y: 1.4, w: W - 2 * MX, colW: [4.4, 1.5, 1.6, 1.6, 2.0, 1.43], rowH: 0.45, border: tblBorder, objectName: "Tabelle Differenz klein" });
-  text(s, "Die Differenz belastet dich vor allem als Summe, die du vorfinanzierst. Dein Ergebnis pro Monat ändert sich kaum, weil du darauf nur Zinsen zahlst.", { x: MX, y: 6.0, w: W - 2 * MX, h: 0.6, fontSize: 12.5, color: C.accent4 });
-}
-
 // ===== 15f Verkaufsplan =====
 {
-  const s = content("Verkaufsplan: wer bekommt welche Wohnung", "Für die Verwandten und die Bank", "Vorschlag, 6 Wohnungen als Dauermiete. Preis = Selbstkosten nach 15 % Förderung bei 2.000 €/m², tilgungsfreie Jahre, 3,3 % Zins, 950 € Miete, 10 % Rücklagen. Käufer zahlen Notar (2 %) und Grunderwerbsteuer (5 %, Vater frei).");
-  const vp = verkaufsplan({ foerderung: 0.15, bauKostenM2: 2000, tilgung: 0 });
-  const rows = [[hdr("Partei"), hdr("Wohnung"), hdr("Preis", "right"), hdr("Notar, Steuer", "right"), hdr("Kredit", "right"), hdr("Rate", "right"), hdr("Miete nach Rücklage", "right"), hdr("Ergebnis pro Monat", "right")]];
-  vp.rows.forEach((r) => rows.push([cell(r.name), cell(r.typ === "OG" ? "1. OG, 85 m²" : "Staffel, 56 m²"), R(eur(r.preis)), R(eur(r.nk)), R(eur(r.kredit)), R(eur(r.rate)), R(eur(r.einnahme)), cfCell(r.ergebnis)]));
-  const g = vp.gastro;
-  s.addTable(rows, { x: MX, y: 1.4, w: W - 2 * MX, colW: [2.3, 1.9, 1.35, 1.3, 1.35, 1.1, 1.55, 1.38], rowH: 0.5, border: tblBorder, objectName: "Tabelle Verkaufsplan" });
-  const vp0 = verkaufsplan({ foerderung: 0, bauKostenM2: 2200, tilgung: 0 }), vp1 = verkaufsplan({ foerderung: 0.15, bauKostenM2: 2000, tilgung: 0.01 });
-  const rng = (v) => `${eurS(Math.min(...v.rows.map((r) => r.ergebnis)))} bis ${eurS(Math.max(...v.rows.map((r) => r.ergebnis)))}`;
+  const s = content("Verkaufsplan: wer bekommt welche Wohnung", "Für die Verwandten und die Bank", "Variante A ohne Förderung, 2.200 €/m², Dauermiete 950 €, 3,3 % Zins, tilgungsfreie Jahre, 10 % Rücklagen. Käufer zahlen Notar (2 %) und Grunderwerbsteuer (5 %, Vater frei, bitte prüfen).");
+  const vp = verkaufsplan({ foerderung: 0, bauKostenM2: 2200, tilgung: 0, zielPlus: 100 });
+  const rows = [[hdr("Partei"), hdr("Wohnung"), hdr("Verkaufspreis", "right"), hdr("Selbstkosten", "right"), hdr("Differenz (du)", "right"), hdr("Notar, Steuer", "right"), hdr("Rate (Zinsen)", "right"), hdr("Ergebnis pro Monat", "right")]];
+  vp.rows.forEach((r) => rows.push([cell(r.name), cell(r.typ === "OG" ? "1. OG, 85 m²" : "Staffel, 56 m²"), R(eur(r.preis)), R(eur(r.kosten)), R(r.nachlass > 0 ? eur(r.nachlass) : "–"), R(eur(r.nk)), R(eur(r.rate)), cfCell(r.ergebnis)]));
+  s.addTable(rows, { x: MX, y: 1.4, w: W - 2 * MX, colW: [2.2, 1.7, 1.45, 1.4, 1.35, 1.3, 1.3, 1.43], rowH: 0.5, border: tblBorder, objectName: "Tabelle Verkaufsplan" });
   text(s, [
-    { text: `Ohne Förderung bei 2.200 €/m² (tilgungsfrei) liegt das Ergebnis je Partei bei ${rng(vp0)}, mit 1 % Tilgung statt tilgungsfrei (Förderung 15 %, 2.000 €/m²) bei ${rng(vp1)}.`, options: { breakLine: true } },
-    { text: `Die Staffel-Wohnungen für die Onkel bringen am meisten, weil sie billig sind. Grunderwerbsteuer und Notar (bis ca. ${eur(Math.max(...vp.rows.map((r) => r.nk)))}) belasten Bruder und Onkel, Dein Vater ist befreit (bitte prüfen).`, options: {} },
-  ], { x: MX, y: 5.45, w: W - 2 * MX, h: 1.3, fontSize: 12.5, color: C.accent4, paraSpaceAfter: 5 });
+    { text: `Staffel-Wohnungen gehen zum Selbstkostenpreis, die OG-Wohnungen von Vater und Bruder werden so gesenkt, dass sie mindestens +100 € im Monat haben. Die Differenz von ${eur(vp.luecke)} trägst du, die Zinsen darauf kosten ${eur(vp.zinsLuecke)} im Monat.`, options: { breakLine: true } },
+    { text: `Dein Ergebnis: Gastro ${eur(vp.gewinn)} minus Rate für das EG ${eur(vp.rateEG)} minus Zinsen auf die Differenz ${eur(vp.zinsLuecke)} plus deine eigene Wohnung ${eurS(vp.eigen.ergebnis)} = ${eurS(vp.bessam)} pro Monat (ohne Lohn).`, options: {} },
+  ], { x: MX, y: 5.2, w: W - 2 * MX, h: 1.5, fontSize: 12.5, color: C.accent4, paraSpaceAfter: 5 });
 }
 
 // ===== 15g Verkaufsplan: Ablauf =====
@@ -684,7 +620,7 @@ if (KI.length) {
 {
   const s = pres.addSlide({ masterName: "TITEL" });
   text(s, "Anhang", { x: MX, y: 2.8, w: 10, h: 1.2, fontSize: 41, bold: false, fontFace: "Georgia", color: C.background1 });
-  text(s, "Annahmen, Gastro-Kosten, Gastro-Ausbau, Mietdaten, Variante B, Variante mit vier Ebenen", { x: MX, y: 4.1, w: 10, h: 0.6, fontSize: 18, color: "CFD8D3" });
+  text(s, "Annahmen, Gastro-Kosten, Gastro-Ausbau, Mietdaten, Vergleich mit Variante B und C", { x: MX, y: 4.1, w: 10, h: 0.6, fontSize: 18, color: "CFD8D3" });
 }
 {
   const s = content("Rechenannahmen und offene Punkte", "Anhang", "Alle Zahlen sind Planungsannahmen, keine Zusagen.");
@@ -771,7 +707,7 @@ if (KI.length) {
 
 // ===== Varianten B und C: 540 m² Grundfläche =====
 {
-  const s = content("Varianten B und C: 540 m² Grundfläche", "Anhang", "Nur mit Ausnahme der Stadt: Baufenster ca. 400–460 m² geschätzt, im Plan stehen zwei Vollgeschosse und 12 m Höhe, GRZ 0,6 erlaubt max. 576 m².");
+  const s = content("Vergleich: Variante A, B und C", "Anhang", "Nur mit Ausnahme der Stadt: Baufenster ca. 400–460 m² geschätzt, im Plan stehen zwei Vollgeschosse und 12 m Höhe, GRZ 0,6 erlaubt max. 576 m².");
   const vb = VARIANTEN.b, vc = VARIANTEN.c;
   const fa = finanz(v, 0, A.zinsPlan), fb = finanz(vb, 0, A.zinsPlan), fc = finanz(vc, 0, A.zinsPlan);
   const ca = cashflow(v, fa), cb = cashflow(vb, fb), cc = cashflow(vc, fc);
@@ -799,28 +735,6 @@ if (KI.length) {
     { text: "Zu klären", options: { bold: true, color: C.accent1, breakLine: true } },
     { text: "Baufenster, zwei Vollgeschosse, bei C drei Vollgeschosse und ca. 13 m Höhe statt 12 m, deutlich mehr Stellplätze.", options: {} },
   ], { x: 10.4, y: 1.6, w: W - 10.2 - MX - 0.4, h: 4.6, fontSize: 12 });
-}
-
-// ===== 8c Variante mit zweitem Mittelgeschoss =====
-if (hasKI("ki_aussen_4etagen.jpg")) {
-  const s = content("Variante: Mittelgeschoss doppelt, vier Ebenen", "Anhang", "Bildmontage aus der KI-Visualisierung: das mittlere Geschoss wurde verdoppelt. Höhe ca. 13 m, der B-Plan erlaubt 12 m.");
-  s.addImage({ path: path.join(IMG, "ki_aussen_4etagen.jpg"), x: MX, y: 1.4, w: 7.0, h: 4.46, sizing: { type: "contain", w: 7.0, h: 4.46 }, altText: "Bildmontage: Gebäude mit doppeltem Mittelgeschoss, vier Ebenen" });
-  text(s, "Bildmontage, keine neue Planung", { x: MX, y: 5.9, w: 7.0, h: 0.3, fontSize: 12, color: C.accent4 });
-  const v4 = Object.assign({}, v, { bgf: 1270, mieteOhnePacht: 9 * 950 });
-  const g0 = finanz(v4, 0, A.zinsPlan);
-  const g15 = finanz(v4, 0.15, A.zinsPlan);
-  const rows = [
-    [hdr(""), hdr("3 Ebenen", "right"), hdr("4 Ebenen", "right")],
-    [cell("Wohnungen"), R("6"), R("9")],
-    [cell("BGF"), R("930 m²"), R("1.270 m²")],
-    [cell("Gesamtkosten"), R(eur(f0.plan.gesamt)), R(eur(g0.gesamt))],
-    [cell("Rate (Plan)"), R(eur(f0.plan.rate)), R(eur(g0.rate))],
-    [cell(`Ergebnis bei ${k(UM)} Umsatz`), cfCell(f0.cfPlan.cf), cfCell(cashflow(v4, g0).cf)],
-    [cell("… mit 15 % Förderung"), cfCell(F[0.15].cfPlan.cf), cfCell(cashflow(v4, g15).cf)],
-    [cell("Break-even-Umsatz, 15 % Förderung"), R(eur(umsatzBreakEven(v, F[0.15].plan))), R(eur(umsatzBreakEven(v4, g15)))],
-  ];
-  s.addTable(rows, { x: 7.9, y: 1.5, w: W - 7.9 - MX, colW: [2.2, 1.3, 1.33], rowH: 0.5, border: tblBorder, objectName: "Tabelle Vergleich 3 und 4 Ebenen" });
-  text(s, `Das zweite Mittelgeschoss bringt 3 weitere Wohnungen zu 950 €, kostet aber ca. ${((g0.gesamt - f0.plan.gesamt) / 1e6).toFixed(2).replace(".", ",")} Mio. € mehr. Die Höhe von ca. 13 m braucht eine Ausnahme von der Stadt (B-Plan: 12 m).`, { x: 7.9, y: 6.0, w: W - 7.9 - MX, h: 1.0, fontSize: 13, color: C.accent4 });
 }
 
 (async () => {
