@@ -221,7 +221,9 @@ function teilung(L, zins = A.zinsPlan, opts = {}) {
 
 // Zielplus: Verkaufspreis je Einheit so, dass der Käufer ohne Eigenkapital und ohne Tilgung genau 'plus' € im Monat übrig behält
 function zielplus(L, plus = 250, zins = A.zinsPlan, opts = {}) {
-  const t = teilung(L, zins, opts);
+  const t0 = teilung(L, zins, opts);
+  const fF = opts.foerderung ?? 0; // Förderung senkt deine Selbstkosten (nicht den Käuferpreis)
+  const t = Object.assign({}, t0, { oG: (m2, miete) => ({ ...t0.oG(m2, miete), kosten: t0.oG(m2, miete).kosten * (1 - fF) }), st: (m2, miete) => ({ ...t0.st(m2, miete), kosten: t0.st(m2, miete).kosten * (1 - fF) }), gastro: { ...t0.gastro, kosten: t0.gastro.kosten * (1 - fF) } });
   const til = opts.tilgungKaeufer ?? 0;
   const rate = (kosten) => (kosten * t.k * (zins + til)) / 12;
   const preisFuer = (miete) => Math.round(((miete * (1 - A.ruecklagen) - plus) * 12) / (t.k * (zins + til)));
