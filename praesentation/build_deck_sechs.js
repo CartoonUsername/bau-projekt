@@ -12,7 +12,7 @@ const OUT = process.env.OUT || __dirname;
 const v = VARIANTEN.sechs;
 const UM = v.umsatz; // Basis-Umsatz 50.000 €
 // KI-Bilder (optional): werden automatisch eingebaut, wenn die Dateien in bilder/ liegen
-const KI = ["ki_aussen_1.jpg", "ki_aussen_abend.jpg", "ki_aussen_2.jpg", "ki_terrasse.jpg", "ki_innen_1.jpg", "ki_innen_2.jpg"].map((n) => path.join(IMG, n)).filter((f) => fs.existsSync(f));
+const KI = ["ki_aussen_1.jpg", "ki_aussen_2.jpg", "ki_terrasse.jpg", "ki_innen_1.jpg", "ki_innen_2.jpg"].map((n) => path.join(IMG, n)).filter((f) => fs.existsSync(f));
 const KI_AUSSEN = path.join(IMG, "ki_aussen_1.jpg");
 
 // Bild verzerrungsfrei zuschneiden (Mitte), liefert Pfad zum passenden Ausschnitt
