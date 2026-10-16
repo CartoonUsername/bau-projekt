@@ -25,13 +25,13 @@ const VARIANTEN = {
   sechs: {
     key: "sechs",
     name: "6 Wohnungen, große Gastro im EG",
-    bgf: 930, // EG 340 + 1. OG 340 + Staffelgeschoss 250 (Holzbau, mit umlaufender Terrasse)
+    bgf: 960, // EG 340 + 1. OG 340 + Staffelgeschoss 280 (Holzbau, schmale Terrasse rundum)
     gastroM2: 290,
     bueroM2: 0,
     wohnungen: 6,
-    holzM2: 250, // Staffelgeschoss in Holzbau (Zimmerei)
-    terrasseM2: 90, // umlaufende Dachterrasse auf dem 1. OG, zählt nicht zur BGF
-    wohnflaeche: 423, // 1. OG 3 x 85 m² + Staffel 3 x 56 m²
+    holzM2: 280, // Staffelgeschoss in Holzbau (Zimmerei)
+    terrasseM2: 58, // schmale umlaufende Dachterrasse (ca. 0,8 m) auf dem 1. OG, zählt nicht zur BGF
+    wohnflaeche: 444, // 1. OG 3 x 85 m² + Staffel 3 x 63 m²
     gastroAusbau: 150000, // Annahme des Bauherrn, einfacher Ausbau
     mieteOhnePacht: 6 * 950, // 5.700 € Kaltmiete
     pacht: 290 * 12, // 3.480 €
@@ -40,30 +40,30 @@ const VARIANTEN = {
   b: {
     key: "b",
     name: "Variante B: 540 m² Grundfläche, Gastro + Büro im EG, OG, Staffel",
-    bgf: 1500, // EG 540 + 1. OG 540 + Staffel 420 (Holzbau, Terrasse rundum)
-    holzM2: 420,
-    terrasseM2: 120,
+    bgf: 1540, // EG 540 + 1. OG 540 + Staffel 460 (Holzbau, schmale Terrasse rundum)
+    holzM2: 460,
+    terrasseM2: 80,
     gastroM2: 290,
     bueroM2: 150,
     wohnungen: 8,
-    wohnflaeche: 738, // 1. OG ca. 415 m² + Staffel ca. 323 m²
+    wohnflaeche: 725, // 1. OG ca. 415 m² + Staffel ca. 310 m²
     gastroAusbau: 150000,
-    mieteOhnePacht: 738 * (950 / 85) + 150 * 10, // Wohnen 11,18 €/m² + Büro 10 €/m²
+    mieteOhnePacht: 725 * (950 / 85) + 150 * 10, // Wohnen 11,18 €/m² + Büro 10 €/m²
     pacht: 290 * 12,
     umsatz: 50000,
   },
   c: {
     key: "c",
     name: "Variante C: 540 m² Grundfläche, 3 Vollgeschosse plus Holz-Penthouse",
-    bgf: 2040, // EG 540 + 1. OG 540 + 2. OG 540 + Staffel 420 (Holzbau, Terrasse rundum)
-    holzM2: 420,
-    terrasseM2: 120,
+    bgf: 2080, // EG 540 + 1. OG 540 + 2. OG 540 + Staffel 460 (Holzbau, schmale Terrasse rundum)
+    holzM2: 460,
+    terrasseM2: 80,
     gastroM2: 290,
     bueroM2: 150,
     wohnungen: 13,
-    wohnflaeche: 1153, // 1. OG 415 + 2. OG 415 + Staffel 323
+    wohnflaeche: 1140, // 1. OG 415 + 2. OG 415 + Staffel 310
     gastroAusbau: 150000,
-    mieteOhnePacht: 1153 * (950 / 85) + 150 * 10,
+    mieteOhnePacht: 1140 * (950 / 85) + 150 * 10,
     pacht: 290 * 12,
     umsatz: 50000,
   },
@@ -183,9 +183,9 @@ function umsatzBreakEven(v, fin, lohn = A.lohn) {
 // Verkauf der Einheiten an Einzelne: jede Einheit mit eigenem Kredit, Preis = Selbstkosten
 const MIETE_M2 = 950 / 85; // 11,18 €/m² (Annahme des Bauherrn)
 const LAYOUTS = {
-  A: { EG: 340, OG: 340, ST: 250, terrasse: 90, wfOG: 255, wfST: 168, buero: 0 },
-  B: { EG: 540, OG: 540, ST: 420, terrasse: 120, wfOG: 415, wfST: 323, buero: 150 },
-  C: { EG: 540, OG: 540, OG2: 540, ST: 420, terrasse: 120, wfOG: 415, wfOG2: 415, wfST: 323, buero: 150 },
+  A: { EG: 340, OG: 340, ST: 280, terrasse: 58, wfOG: 255, wfST: 189, buero: 0 },
+  B: { EG: 540, OG: 540, ST: 460, terrasse: 80, wfOG: 415, wfST: 310, buero: 150 },
+  C: { EG: 540, OG: 540, OG2: 540, ST: 460, terrasse: 80, wfOG: 415, wfOG2: 415, wfST: 310, buero: 150 },
 };
 function teilung(L, zins = A.zinsPlan, opts = {}) {
   const c = opts.bauKostenM2 ?? A.bauKostenM2;
@@ -231,7 +231,7 @@ function zielplus(L, plus = 250, zins = A.zinsPlan, opts = {}) {
     const preis = Math.min(e.kosten, preisFuer(miete));
     return { m2: e.m2, kosten: e.kosten, preis, nachlass: e.kosten - preis, preisM2: preis / e.m2, rate: rate(preis), miete, ergebnis: miete * (1 - A.ruecklagen) - rate(preis) };
   };
-  const og = einheit(t.oG(85, 950), 950), st = einheit(t.st(56, 950), 950);
+  const og = einheit(t.oG(85, 950), 950), st = einheit(t.st(63, 950), 950);
   const luecke = 3 * og.nachlass + 3 * st.nachlass; // nur Layout A: 3 + 3 Einheiten
   const tilEG = opts.tilgungBessam ?? A.tilgung;
   const rateEG = (t.gastro.kosten * t.k * (zins + tilEG)) / 12;
@@ -253,7 +253,7 @@ function verkaufsplan(opts = {}) {
   const f = opts.foerderung ?? 0, c = opts.bauKostenM2 ?? A.bauKostenM2, til = opts.tilgung ?? 0, zins = opts.zins ?? A.zinsPlan;
   const t = teilung(LAYOUTS.A, zins, { bauKostenM2: c });
   const rows = KAEUFER.map((b) => {
-    const e = b.typ === "OG" ? t.oG(85, 950) : t.st(56, 950);
+    const e = b.typ === "OG" ? t.oG(85, 950) : t.st(63, 950);
     const kosten = e.kosten * (1 - f);
     const einnahme0 = e.miete * (1 - A.ruecklagen);
     let preis = kosten;

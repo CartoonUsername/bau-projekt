@@ -1,4 +1,4 @@
-// Deck: Neue Mitte Werlte, Baufeld 3. 6 Wohnungen, EG komplett große Gastro, 930 m² BGF, Flachdach mit Staffelgeschoss in Holzbau
+// Deck: Neue Mitte Werlte, Baufeld 3. 6 Wohnungen, EG komplett große Gastro, 960 m² BGF, Flachdach mit Staffelgeschoss in Holzbau
 // Aufruf: NODE_PATH=<node_modules> APPLY_THEME=<pfad>/apply_theme.js node build_deck_sechs.js
 const path = require("path");
 const fs = require("fs");
@@ -162,7 +162,7 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
   card(s, MX, 5.4, W - 2 * MX, 1.25, "Klärungsbedarf");
   text(s, [
     { text: "Schriftlich klären: ", options: { bold: true, color: C.accent1 } },
-    { text: "Zählt das Staffelgeschoss (ca. 250 m² in Holzbau, das sind 74 % der Fläche darunter) als drittes Vollgeschoss? Ab etwa 2/3 der Fläche darunter wird es meist dazugezählt. Ist die Flachdach-Lösung zulässig?" },
+    { text: "Zählt das Staffelgeschoss (ca. 280 m² in Holzbau, das sind 82 % der Fläche darunter) als drittes Vollgeschoss? Ab etwa 2/3 der Fläche darunter wird es meist dazugezählt. Ist die Flachdach-Lösung zulässig?" },
   ], { x: MX + 0.25, y: 5.5, w: W - 2 * MX - 0.5, h: 1.05, fontSize: 15, valign: "middle" });
 }
 
@@ -184,7 +184,7 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
     { text: "Zwei Partner (Bauunternehmen unten, Zimmerei oben) können Preise und Termine gemeinsam angeben.", options: { bullet: true, breakLine: true } },
     { text: "Brandschutz (Holzbau bis Gebäudeklasse 4, Aufzug und Treppenhaus massiv) und Schallschutz muss der Architekt nachweisen.", options: { bullet: true } },
   ], { x: 8.85, y: 1.95, w: W - 8.85 - MX - 0.5, h: 4.0, fontSize: 14, paraSpaceAfter: 8 });
-  text(s, "Das Staffelgeschoss springt rundum um ca. 1,3 m zurück: Terrasse ca. 90 m² um die drei Penthouses, kein Teil der BGF.", { x: MX, y: 5.3, w: 7.6, h: 0.9, fontSize: 15, bold: true, color: C.accent2 });
+  text(s, "Das Staffelgeschoss springt nur rundum ca. 0,8 m zurück: schmale Terrasse ca. 58 m² um die drei Penthouses, kein Teil der BGF.", { x: MX, y: 5.3, w: 7.6, h: 0.9, fontSize: 15, bold: true, color: C.accent2 });
 }
 
 // ===== 5 Schnitt =====
@@ -216,11 +216,11 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
     [hdr("Ebene"), hdr("Nutzung"), hdr("BGF", "right")],
     [cell("EG"), cell("Gastro ca. 290 m² mit Bar, Treppenhaus, Aufzug, Technik"), R("340 m²")],
     [cell("1. OG"), cell("3 Wohnungen à ca. 85 m²"), R("340 m²")],
-    [cell("Staffel"), cell("3 Wohnungen à ca. 56 m², Holzbau, Terrasse rundum"), R("250 m²")],
-    [cell("Summe", { bold: true }), cell("6 Wohnungen, ca. 423 m² Wohnfläche", { bold: true }), R("930 m²", { bold: true })],
+    [cell("Staffel"), cell("3 Wohnungen à ca. 63 m², Holzbau, schmale Terrasse rundum"), R("280 m²")],
+    [cell("Summe", { bold: true }), cell("6 Wohnungen, ca. 444 m² Wohnfläche", { bold: true }), R("960 m²", { bold: true })],
   ];
   s.addTable(rows, { x: 7.7, y: 1.6, w: W - 7.7 - MX, colW: [0.9, 3.2, 0.93], rowH: 0.6, border: tblBorder, objectName: "Tabelle Flächen" });
-  text(s, "BGF = Bruttogrundfläche, alle Geschossflächen zusammen. Das Staffelgeschoss in Holzbau springt rundum um ca. 1,3 m zurück, so entsteht eine Terrasse von ca. 90 m² um die Penthouses.", { x: 7.7, y: 5.4, w: W - 7.7 - MX, h: 1.0, fontSize: 14, color: C.accent4 });
+  text(s, "BGF = Bruttogrundfläche, alle Geschossflächen zusammen. Das Staffelgeschoss in Holzbau springt rundum nur ca. 0,8 m zurück, so entsteht eine schmale Terrasse von ca. 58 m² um die Penthouses.", { x: 7.7, y: 5.4, w: W - 7.7 - MX, h: 1.0, fontSize: 14, color: C.accent4 });
 }
 
 // ===== 6 Grundrisse =====
@@ -256,10 +256,10 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
       title: "Staffel (Holzbau)",
       rooms: [
         [0, 0, 24, 14.2, "", "C9C4B8"],
-        [1.3, 1.3, 3.6, 11.6, "Treppe", "8A9199"],
-        [4.9, 1.3, 5.93, 11.6, "WE 4 · 56 m²", "7A5C3A"],
-        [10.83, 1.3, 5.93, 11.6, "WE 5 · 56 m²", "7A5C3A"],
-        [16.77, 1.3, 5.93, 11.6, "WE 6 · 56 m²", "7A5C3A"],
+        [0.8, 0.8, 3.6, 12.6, "Treppe", "8A9199"],
+        [4.4, 0.8, 6.27, 12.6, "WE 4 · 63 m²", "7A5C3A"],
+        [10.67, 0.8, 6.27, 12.6, "WE 5 · 63 m²", "7A5C3A"],
+        [16.94, 0.8, 6.27, 12.6, "WE 6 · 63 m²", "7A5C3A"],
       ],
     },
   ];
@@ -273,7 +273,7 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
     });
   });
   card(s, MX, 5.35, W - 2 * MX, 1.2, "Hinweis");
-  text(s, "Grundfläche 24 × 14,2 m = 340 m², das passt in das geschätzte Baufenster. Treppenhaus und Aufzug liegen am Westende und erschließen die Wohnungen getrennt von der Gastro. Die Staffel in Holzbau hat ca. 250 m² BGF, die beige Fläche ist die Terrasse (ca. 90 m²) rundum um die Penthouses.", { x: MX + 0.25, y: 5.45, w: W - 2 * MX - 0.5, h: 1.0, fontSize: 15, valign: "middle" });
+  text(s, "Grundfläche 24 × 14,2 m = 340 m², das passt in das geschätzte Baufenster. Treppenhaus und Aufzug liegen am Westende und erschließen die Wohnungen getrennt von der Gastro. Die Staffel in Holzbau hat ca. 280 m² BGF, die beige Fläche ist die schmale Terrasse (ca. 58 m²) rundum um die Penthouses.", { x: MX + 0.25, y: 5.45, w: W - 2 * MX - 0.5, h: 1.0, fontSize: 15, valign: "middle" });
 }
 
 // ===== 7 Außen =====
@@ -342,9 +342,9 @@ if (KI.length) {
   const rows = [
     [hdr("Posten"), hdr("Rechnung"), hdr("Betrag", "right")],
     [cell("Grundstück inkl. Steuer, Notar"), cell("960 m² × 230 € + ca. 7 %"), R(eur(A.grundstueck))],
-    [cell("Bau, Massivbau"), cell("930 m² × 2.200 €"), R(eur(930 * A.bauKostenM2))],
-    [cell("Abschlag Holzbau (Staffelgeschoss)"), cell("250 m² × 400 € günstiger"), R("− " + eur(250 * A.holzAbschlag))],
-    [cell("Dachterrasse rundum"), cell("90 m² × 450 €"), R(eur(90 * A.terrassePreis))],
+    [cell("Bau, Massivbau"), cell("960 m² × 2.200 €"), R(eur(960 * A.bauKostenM2))],
+    [cell("Abschlag Holzbau (Staffelgeschoss)"), cell("280 m² × 400 € günstiger"), R("− " + eur(280 * A.holzAbschlag))],
+    [cell("Dachterrasse rundum (schmal)"), cell("58 m² × 450 €"), R(eur(58 * A.terrassePreis))],
     [cell("Baunebenkosten (Architekt, Statik, Gebühren)"), cell("15 % vom Bau"), R(eur(bauRoh(v) * 0.15))],
     [cell("Gastro-Ausbau (Küche, Bar, Möbel, Technik)"), cell("Annahme, Posten im Anhang"), R(eur(v.gastroAusbau))],
     [cell("Gesamtkosten", { bold: true }), cell(""), R(eur(fin.gesamt), { bold: true })],
@@ -354,7 +354,7 @@ if (KI.length) {
     x: 8.5, y: 1.4, w: 4.3, h: 4.4, holeSize: 55, chartColors: ["C49A45", "8C3B32", "5B6770", "2F4A3E"], showPercent: true, showValue: false, dataLabelColor: "FFFFFF", dataLabelFontSize: 12, dataLabelFontFace: "+mn-lt",
     showLegend: true, legendPos: "b", legendFontSize: 12, legendColor: "1F2421", legendFontFace: "+mn-lt", showTitle: false, objectName: "Diagramm Kosten",
   });
-  text(s, `Das sind ca. ${nf.format(Math.round(fin.gesamt / 930))} € pro m² BGF.`, { x: MX, y: 5.8, w: 7.6, h: 0.5, fontSize: 16, bold: true, color: C.accent2 });
+  text(s, `Das sind ca. ${nf.format(Math.round(fin.gesamt / 960))} € pro m² BGF.`, { x: MX, y: 5.8, w: 7.6, h: 0.5, fontSize: 16, bold: true, color: C.accent2 });
 }
 
 // ===== 11 Finanzierung =====
@@ -479,9 +479,9 @@ if (KI.length) {
 {
   const s = content("Verkauf an die Familie: Rechnung je Partei", "Für die Verwandten und die Bank", "Jede Partei bekommt einen eigenen Kredit ohne Eigenkapital. Preis = Selbstkosten, 3,3 % Zins, 1 % Tilgung, Miete 950 €, 10 % Rücklagen.");
   const t = teilung(LAYOUTS.A);
-  const o = t.oG(85, 950), st = t.st(56, 950), g = t.gastro;
+  const o = t.oG(85, 950), st = t.st(63, 950), g = t.gastro;
   const rows = [
-    [hdr(""), hdr("1. OG, 85 m² (3×)", "right"), hdr("Staffel, 56 m² (3×)", "right"), hdr("Du: Gastro im EG", "right")],
+    [hdr(""), hdr("1. OG, 85 m² (3×)", "right"), hdr("Staffel, 63 m² (3×)", "right"), hdr("Du: Gastro im EG", "right")],
     [cell("Preis (Selbstkosten)"), R(eur(o.kosten)), R(eur(st.kosten)), R(eur(g.kosten))],
     [cell("Preis je m² Wohnfläche"), R(eur(o.kostenM2)), R(eur(st.kostenM2)), R("")],
     [cell("Rate pro Monat (3,3 % + 1 % Tilgung)"), R(eur(o.rate)), R(eur(st.rate)), R(eur(g.rate))],
@@ -494,7 +494,7 @@ if (KI.length) {
   s.addTable(rows, { x: MX, y: 1.4, w: W - 2 * MX, colW: [4.4, 2.6, 2.6, 2.53], rowH: 0.44, border: tblBorder, objectName: "Tabelle Verkauf je Partei" });
   text(s, [
     { text: `Die Rechnung für den Gastro-Teil gilt bei ${k(UM)} Umsatz ohne Lohn des Bauherrn, Break-even ab ${k(Math.round(g.beUmsatz / 1000) * 1000)}. Die Wohnungen tragen sich bei 11,18 €/m² Miete erst ab einem Preis von ca. ${eur(Math.round(t.preisFuerPlusM2 / 10) * 10)} je m².`, options: { breakLine: true } },
-    { text: `Die Staffel-Wohnung (56 m²) kostet bei 950 € Miete 17 €/m², bei Marktmiete (11,18 €/m²) wären es ${eur(56 * 11.18)} und das Ergebnis ${eurS(t.st(56).ergebnis)}.`, options: {} },
+    { text: `Die Staffel-Wohnung (63 m²) kostet bei 950 € Miete 15 €/m², bei Marktmiete (11,18 €/m²) wären es ${eur(63 * 11.18)} und das Ergebnis ${eurS(t.st(56).ergebnis)}.`, options: {} },
   ], { x: MX, y: 5.65, w: W - 2 * MX, h: 1.1, fontSize: 12.5, color: C.accent4, paraSpaceAfter: 4 });
 }
 
@@ -504,7 +504,7 @@ if (KI.length) {
   const r = zielplus(LAYOUTS.A, 250, A.zinsPlan), r4 = zielplus(LAYOUTS.A, 250, A.zinsAusgang);
   const tb = teilung(LAYOUTS.B), tc = teilung(LAYOUTS.C);
   const rows = [
-    [hdr(""), hdr("1. OG, 85 m² (3×)", "right"), hdr("Staffel, 56 m² (3×)", "right"), hdr("Du", "right")],
+    [hdr(""), hdr("1. OG, 85 m² (3×)", "right"), hdr("Staffel, 63 m² (3×)", "right"), hdr("Du", "right")],
     [cell("Verkaufspreis an die Verwandten", { bold: true }), R(eur(r.og.preis), { bold: true }), R(eur(r.st.preis), { bold: true }), R("")],
     [cell("Deine Selbstkosten je Einheit"), R(eur(r.og.kosten)), R(eur(r.st.kosten)), R(eur(r.t.kostenEG))],
     [cell("Preis je m² Wohnfläche"), R(eur(r.og.preisM2)), R(eur(r.st.preisM2)), R("")],
@@ -525,7 +525,7 @@ if (KI.length) {
   const s = content("Verkaufsplan: wer bekommt welche Wohnung", "Für die Verwandten und die Bank", "Variante A ohne Förderung, 2.200 €/m², Dauermiete 950 €, 3,3 % Zins, tilgungsfreie Jahre, 10 % Rücklagen. Käufer zahlen Notar (2 %) und Grunderwerbsteuer (5 %, Vater frei, bitte prüfen).");
   const vp = verkaufsplan({ foerderung: 0, bauKostenM2: 2200, tilgung: 0, zielPlus: 100 });
   const rows = [[hdr("Partei"), hdr("Wohnung"), hdr("Verkaufspreis", "right"), hdr("Selbstkosten", "right"), hdr("Differenz (du)", "right"), hdr("Notar, Steuer", "right"), hdr("Rate (Zinsen)", "right"), hdr("Ergebnis pro Monat", "right")]];
-  vp.rows.forEach((r) => rows.push([cell(r.name), cell(r.typ === "OG" ? "1. OG, 85 m²" : "Staffel, 56 m²"), R(eur(r.preis)), R(eur(r.kosten)), R(r.nachlass > 0 ? eur(r.nachlass) : "–"), R(eur(r.nk)), R(eur(r.rate)), cfCell(r.ergebnis)]));
+  vp.rows.forEach((r) => rows.push([cell(r.name), cell(r.typ === "OG" ? "1. OG, 85 m²" : "Staffel, 63 m²"), R(eur(r.preis)), R(eur(r.kosten)), R(r.nachlass > 0 ? eur(r.nachlass) : "–"), R(eur(r.nk)), R(eur(r.rate)), cfCell(r.ergebnis)]));
   s.addTable(rows, { x: MX, y: 1.4, w: W - 2 * MX, colW: [2.2, 1.7, 1.45, 1.4, 1.35, 1.3, 1.3, 1.43], rowH: 0.5, border: tblBorder, objectName: "Tabelle Verkaufsplan" });
   text(s, [
     { text: `Staffel-Wohnungen gehen zum Selbstkostenpreis, die OG-Wohnungen von Vater und Bruder werden so gesenkt, dass sie mindestens +100 € im Monat haben. Die Differenz von ${eur(vp.luecke)} trägst du, die Zinsen darauf kosten ${eur(vp.zinsLuecke)} im Monat.`, options: { breakLine: true } },
@@ -626,7 +626,7 @@ if (KI.length) {
   const s = content("Rechenannahmen und offene Punkte", "Anhang", "Alle Zahlen sind Planungsannahmen, keine Zusagen.");
   const left = [
     "Grundstück 960 m² × 230 € plus ca. 7 % (5 % Grunderwerbsteuer, ca. 2 % Notar)",
-    "Bau 930 m² BGF × 2.200 €, Staffel in Holzbau 400 €/m² günstiger, Terrasse 90 m² × 450 €, Baunebenkosten 15 %",
+    "Bau 960 m² BGF × 2.200 €, Staffel in Holzbau 400 €/m² günstiger, Terrasse 58 m² × 450 €, Baunebenkosten 15 %",
     "100 % Fremdfinanzierung, 1 % Tilgung, Aufschub 12 Monate",
     "Bauzeit 15 Monate, Bereitstellungszins 3 % p. a. ab Monat 7",
     "Zins Plan 3,3 % (Förderkredite, Annahme), Ausgang 4,0 %",
@@ -714,8 +714,8 @@ if (KI.length) {
   const ta = teilung(LAYOUTS.A), tb = teilung(LAYOUTS.B), tc = teilung(LAYOUTS.C);
   const rows = [
     [hdr(""), hdr("A: 340 m², 2+Staffel", "right"), hdr("B: 540 m², 2+Staffel", "right"), hdr("C: 540 m², 3+Holz-Penthouse", "right")],
-    [cell("Bruttofläche"), R("930 m²"), R("1.500 m²"), R("2.040 m²")],
-    [cell("Wohnfläche / Wohnungen"), R("423 m² / 6"), R("738 m² / ca. 8–9"), R("1.153 m² / ca. 13")],
+    [cell("Bruttofläche"), R("960 m²"), R("1.540 m²"), R("2.080 m²")],
+    [cell("Wohnfläche / Wohnungen"), R("444 m² / 6"), R("725 m² / ca. 8–9"), R("1.140 m² / ca. 13")],
     [cell("Gastro / Büro im EG"), R("290 m² / –"), R("290 m² / 150 m²"), R("290 m² / 150 m²")],
     [cell("Gesamtkosten"), R(eur(fa.gesamt)), R(eur(fb.gesamt)), R(eur(fc.gesamt))],
     [cell("Rate pro Monat (ein Kredit)"), R(eur(fa.rate)), R(eur(fb.rate)), R(eur(fc.rate))],
@@ -730,7 +730,7 @@ if (KI.length) {
   card(s, 10.2, 1.4, W - 10.2 - MX, 5.0, "Hinweis B und C");
   text(s, [
     { text: "Annahmen", options: { bold: true, color: C.accent1, breakLine: true } },
-    { text: "EG 540 m² (Gastro 290 m², Büro 150 m²), Regelgeschosse je 540 m², Staffel 420 m² in Holzbau mit 120 m² Terrasse. Büro 10 €/m², Wohnen 11,18 €/m².", options: { breakLine: true } },
+    { text: "EG 540 m² (Gastro 290 m², Büro 150 m²), Regelgeschosse je 540 m², Staffel 460 m² in Holzbau mit 80 m² schmaler Terrasse. Büro 10 €/m², Wohnen 11,18 €/m².", options: { breakLine: true } },
     { text: " ", options: { breakLine: true } },
     { text: "Zu klären", options: { bold: true, color: C.accent1, breakLine: true } },
     { text: "Baufenster, zwei Vollgeschosse, bei C drei Vollgeschosse und ca. 13 m Höhe statt 12 m, deutlich mehr Stellplätze.", options: {} },

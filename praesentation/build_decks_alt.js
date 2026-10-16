@@ -81,9 +81,9 @@ async function deckAirbnb() {
   const a45 = airbnb(0.45);
   t.title("", "Baufeld 3: Große Gastro und 6 Apartments", "Kurzzeitvermietung (Airbnb) statt Dauermiete");
 
-  { const s = content("Das Konzept auf einen Blick", "Ausarbeitung 1", "Variante A: 930 m² BGF, EG Gastro 290 m², darüber 6 möblierte Apartments, Staffel in Holzbau.");
+  { const s = content("Das Konzept auf einen Blick", "Ausarbeitung 1", "Variante A: 960 m² BGF, EG Gastro 290 m², darüber 6 möblierte Apartments, Staffel in Holzbau.");
     const w = (W - 2 * MX - 3 * 0.25) / 4;
-    stat(s, MX, 1.5, w, "6", "Apartments: 3 × 85 m² (4 Gäste), 3 × 56 m² (2 Gäste)");
+    stat(s, MX, 1.5, w, "6", "Apartments: 3 × 85 m² (4 Gäste), 3 × 63 m² (2 Gäste)");
     stat(s, MX + (w + 0.25), 1.5, w, eur(a45.einrichtung), "Möblierung und Ausstattung, mit im Kredit");
     stat(s, MX + 2 * (w + 0.25), 1.5, w, eurS(a45.cf), `Ergebnis Haus pro Monat bei ${pct(0.45)} Auslastung`, a45.cf >= 0 ? C.accent5 : C.accent6);
     stat(s, MX + 3 * (w + 0.25), 1.5, w, eurS(dm.cf), "zum Vergleich: Dauermiete (950 € je Wohnung)", C.accent4);
@@ -99,7 +99,7 @@ async function deckAirbnb() {
       [cell("Saisonspanne laut Portalen"), cell("ca. 119 bis 205 € pro Nacht"), cell("widersprüchlich, nicht belegt")],
       [cell("Auslastung Emsland (Papenburg, Lingen)"), cell("ca. 37 % (2016/2017)"), cell("fast 10 Jahre alt")],
       [cell("Angebot in Werlte"), cell("über 60 Unterkünfte auf Portalen"), cell("Konkurrenz vorhanden")],
-      [cell("Unsere Annahme", { bold: true }), cell(`${eur(100)} (85 m²), ${eur(85)} (56 m²), ${pct(0.45)}`, { bold: true }), cell("vorsichtig, mit Daten prüfen", { bold: true })]];
+      [cell("Unsere Annahme", { bold: true }), cell(`${eur(100)} (85 m²), ${eur(85)} (63 m²), ${pct(0.45)}`, { bold: true }), cell("vorsichtig, mit Daten prüfen", { bold: true })]];
     s.addTable(rows, { x: MX, y: 1.5, w: W - 2 * MX, colW: [4.6, 4.0, 3.53], rowH: 0.55, border, objectName: "Tabelle Markt Airbnb" });
     text(s, "Belastbare Zahlen liefern das Landesamt für Statistik Niedersachsen (Beherbergungsstatistik), Emsland Touristik und Datenanbieter für Kurzzeitvermietung (z. B. AirDNA). Das sollten wir vor einer Entscheidung abfragen.", { x: MX, y: 5.2, w: W - 2 * MX, h: 1.0, fontSize: 13, color: C.accent4 });
   }
@@ -135,7 +135,7 @@ async function deckAirbnb() {
   }
 
   { const s = content("Ergebnis je Preis pro Nacht", "Ausarbeitung 1", `Bei ${pct(0.45)} Auslastung. Faktor auf unsere Annahme von 100 € und 85 € pro Nacht.`);
-    const rows = [[hdr("Preis"), hdr("85 m², 4 Gäste", "right"), hdr("56 m², 2 Gäste", "right"), hdr("Ergebnis Haus", "right"), hdr("gegenüber Dauermiete", "right")]];
+    const rows = [[hdr("Preis"), hdr("85 m², 4 Gäste", "right"), hdr("63 m², 2 Gäste", "right"), hdr("Ergebnis Haus", "right"), hdr("gegenüber Dauermiete", "right")]];
     [0.8, 1.0, 1.2, 1.4].forEach((f) => { const r = airbnb(0.45, { preisFaktor: f }); rows.push([cell(f === 1 ? "Annahme" : `${f > 1 ? "+" : "−"}${Math.round(Math.abs(f - 1) * 100)} %`), R(eur(100 * f)), R(eur(85 * f)), cf(r.cf), R(eurS(r.cf - dm.cf))]); });
     s.addTable(rows, { x: MX, y: 1.5, w: 9.2, colW: [1.8, 1.8, 1.8, 1.9, 1.9], rowH: 0.55, border, objectName: "Tabelle Preis Airbnb" });
     text(s, "Auch bei 40 % höheren Preisen bleibt das Ergebnis unter der Dauermiete. Der Vorteil von Airbnb liegt nur in Zeiten und Orten mit hoher Nachfrage, etwa Messen oder Monteure unter der Woche.", { x: MX, y: 4.9, w: 9.2, h: 1.0, fontSize: 13, color: C.accent4 });
@@ -183,7 +183,7 @@ async function deckHotel() {
   const h52 = hotel(0.52), h52p = hotel(0.52, { verpachtet: true });
   t.title("", "Baufeld 3: Hotel mit großer Gastro", "15 Zimmer über der Gastro im Erdgeschoss");
 
-  { const s = content("Das Konzept auf einen Blick", "Ausarbeitung 2", "Variante A: 930 m² BGF, EG Gastro 290 m² mit Frühstück, 1. OG und Staffel (Holzbau) als Hotel mit 15 Zimmern.");
+  { const s = content("Das Konzept auf einen Blick", "Ausarbeitung 2", "Variante A: 960 m² BGF, EG Gastro 290 m² mit Frühstück, 1. OG und Staffel (Holzbau) als Hotel mit 15 Zimmern.");
     const w = (W - 2 * MX - 3 * 0.25) / 4;
     stat(s, MX, 1.5, w, "15", "Zimmer: ca. 9 im 1. OG, ca. 6 in der Staffel mit Terrasse");
     stat(s, MX + (w + 0.25), 1.5, w, eur(h52.einrichtung), "Zimmerausstattung (18.000 € je Zimmer), mit im Kredit");

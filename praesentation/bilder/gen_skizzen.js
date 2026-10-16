@@ -1,5 +1,5 @@
 // SVG-Skizzen Baufeld 3 (modern, Flachdach mit Staffelgeschoss, EG komplett Gastro, 6 Wohnungen, 930 m² BGF)
-// Maße: Baukörper 24 x 14,2 m, Hauptbaukörper bis 6,50 m, Staffelgeschoss (ca. 250 m², Holzbau) bis ca. 9,60 m, Attika ca. 9,90 m
+// Maße: Baukörper 24 x 14,2 m, Hauptbaukörper bis 6,50 m, Staffelgeschoss (ca. 280 m², Holzbau) bis ca. 9,60 m, Attika ca. 9,90 m
 const fs = require("fs");
 const path = require("path");
 const OUT = process.env.OUT || __dirname;
@@ -94,9 +94,9 @@ function ansichten() {
   o += R(3.6, 6.8, 24, 7.6, "#E6EAEC", 'opacity="0.92" stroke="#1E2326" stroke-width="1.5"');
   for (let i = 0; i < 9; i++) o += `<ellipse cx="${X(4 + i * 2.1)}" cy="${Z(7.0)}" rx="${0.5 * s}" ry="${0.35 * s}" fill="${COL.pflanze}"/>`;
   // Staffelgeschoss in Holzbau (x 1,3..22,7, rundum zurückgesetzt, Terrasse ringsum)
-  o += R(1.3, 6.8, 22.7, 9.6, COL.zink);
+  o += R(0.8, 6.8, 23.2, 9.6, COL.zink);
   for (let k = 0; k < 3; k++) {
-    const bx = 4.9 + k * 5.93;
+    const bx = 4.4 + k * 6.27;
     o += R(bx + 0.4, 6.9, bx + 5.5, 9.5, COL.glas, `stroke="${COL.stahl}" stroke-width="3"`);
     o += L(bx + 2.95, 6.9, bx + 2.95, 9.5, COL.stahl, 2.5);
     o += L(bx + 0.4, 8.3, bx + 5.5, 8.3, COL.stahl, 1.5);
@@ -134,11 +134,11 @@ function ansichten() {
   o += R2(-0.2, 6.5, 14.4, 6.8, COL.beton);
   o += R2(0, 6.8, 14.2, 7.6, "#E6EAEC", 'opacity="0.92" stroke="#1E2326" stroke-width="1.5"');
   // Staffel zurückgesetzt (heller, entfernter)
-  o += R2(1.3, 6.8, 12.9, 9.6, COL.zinkHell);
+  o += R2(0.8, 6.8, 13.4, 9.6, COL.zinkHell);
   for (let k = 0; k < 3; k++) o += R2(1.9 + k * 3.6, 6.9, 4.9 + k * 3.6, 9.5, COL.glas, `stroke="${COL.stahl}" stroke-width="3"`);
   o += R2(0.8, 9.6, 13.4, 9.9, COL.beton);
   o += `<line x1="${X2(0)}" y1="${gy + 28}" x2="${X2(14.2)}" y2="${gy + 28}" stroke="${COL.text}" stroke-width="1.5"/>` + T(X2(5.4), gy + 22, "14,2 m", 15, 'font-weight="bold"');
-  o += T(40, 888, "Skizze, nicht maßstäblich genau. Staffelgeschoss in Holzbau mit ca. 250 m², Terrasse ca. 90 m² ringsum, und Gesamthöhe ca. 9,90 m (B-Plan: TH 6,50 m, H 12,00 m): Zulässigkeit mit der Stadt klären. Stand Oktober 2026.", 14);
+  o += T(40, 888, "Skizze, nicht maßstäblich genau. Staffelgeschoss in Holzbau mit ca. 280 m², Terrasse ca. 58 m² ringsum, und Gesamthöhe ca. 9,90 m (B-Plan: TH 6,50 m, H 12,00 m): Zulässigkeit mit der Stadt klären. Stand Oktober 2026.", 14);
   o += "</svg>";
   return o;
 }
@@ -207,8 +207,8 @@ function ecke() {
   }
   // Dachterrasse OG-Dach (Ost-Streifen x 21..24 und Süd-Streifen)
   const roofZ = 6.5;
-  o += poly([P(22.7, 0, roofZ), P(24, 0, roofZ), P(24, Y, roofZ), P(22.7, Y, roofZ)], "#B9B3A6");
-  o += poly([P(0, 12.9, roofZ), P(22.7, 12.9, roofZ), P(22.7, Y, roofZ), P(0, Y, roofZ)], "#B9B3A6");
+  o += poly([P(23.2, 0, roofZ), P(24, 0, roofZ), P(24, Y, roofZ), P(23.2, Y, roofZ)], "#B9B3A6");
+  o += poly([P(0, 13.4, roofZ), P(23.2, 13.4, roofZ), P(23.2, Y, roofZ), P(0, Y, roofZ)], "#B9B3A6");
   // Pflanzkästen
   for (let i = 0; i < 6; i++) {
     const g = P(21.8 + (i % 2) * 1.2, 1 + i * 2.2, roofZ + 0.3);
@@ -221,15 +221,15 @@ function ecke() {
   o += rect(SA, -0.2, 6.5, 24.2, 6.8, COL.beton) + rect(SB, -0.2, 6.5, Y + 0.2, 6.8, COL.beton);
   // Treppenhausblock bis 9,9 (Süd, flach mit Fassade)
   // Staffelgeschoss Süd (y=13.3) und Ost (x=21)
-  const SS = A(12.9);
-  const SO = B(22.7);
-  o += rect(SS, 1.3, 6.5, 22.7, 9.6, COL.zink);
+  const SS = A(13.4);
+  const SO = B(23.2);
+  o += rect(SS, 0.8, 6.5, 23.2, 9.6, COL.zink);
   for (let k = 0; k < 3; k++) {
-    const bx = 4.9 + k * 5.93;
+    const bx = 4.4 + k * 6.27;
     o += rect(SS, bx + 0.4, 6.7, bx + 5.5, 9.5, COL.glas, `stroke="${COL.stahl}" stroke-width="2.5"`);
     o += line(SS(bx + 2.95, 6.7), SS(bx + 2.95, 9.5), COL.stahl, 2);
   }
-  o += rect(SO, 1.3, 6.5, 12.9, 9.6, COL.zinkHell);
+  o += rect(SO, 0.8, 6.5, 13.4, 9.6, COL.zinkHell);
   [[2.0, 5.0], [5.6, 8.6], [9.2, 12.2]].forEach(([a, b]) => (o += rect(SO, a, 6.7, b, 9.5, COL.glas, `stroke="${COL.stahl}" stroke-width="2.5"`)));
   // Flachdach-Platte Staffel (Oberseite + Kante)
   o += poly([P(0.8, 0.8, 9.9), P(23.2, 0.8, 9.9), P(23.2, 13.4, 9.9), P(0.8, 13.4, 9.9)], "#B4BAC0");

@@ -1,11 +1,11 @@
-// Alternativen zu Dauermietwohnungen: Airbnb/Apartments und Hotel (je mit Gastro im EG), Variante A (930 m² BGF)
+// Alternativen zu Dauermietwohnungen: Airbnb/Apartments und Hotel (je mit Gastro im EG), Variante A (960 m² BGF)
 const { A, VARIANTEN, finanz, cashflow } = require("./model");
 const v = VARIANTEN.sechs;
 const gastroNetto = v.umsatz * A.gastroMargeVorPacht - v.pacht * A.ruecklagen; // Gastro-Gewinn, Rücklage auf die Pacht wie im Hausmodell
 
 // Airbnb / Apartments
 const AIRBNB = {
-  apartments: [{ n: 3, m2: 85, gaeste: 4, preis: 100 }, { n: 3, m2: 56, gaeste: 2, preis: 85 }],
+  apartments: [{ n: 3, m2: 85, gaeste: 4, preis: 100 }, { n: 3, m2: 63, gaeste: 2, preis: 85 }],
   einrichtungM2: 600, // € je m² möbliert (Möbel, Küche, Wäsche, Technik), Annahme
   kosten: { plattform: 0.15, reinigung: 0.2, nebenkosten: 0.08, material: 0.02, versicherungSoftware: 0.03, ruecklage: 0.08 }, // in % vom Umsatz, Annahmen
 };
@@ -59,8 +59,8 @@ function verkauf(konzept, ausl, plus = 250, zins = A.zinsPlan) {
   if (konzept === "airbnb") {
     const quote = Object.values(AIRBNB.kosten).reduce((a, b) => a + b, 0);
     for (const ap of AIRBNB.apartments) {
-      const bau = (ap.m2 === 85 ? t.oG(85, 950) : t.st(56, 950)).kosten; // Selbstkosten ohne Möblierung
-      const kosten = ap.m2 === 85 ? t.oG(85, 950).kosten : t.st(56, 950).kosten;
+      const bau = (ap.m2 === 85 ? t.oG(85, 950) : t.st(63, 950)).kosten; // Selbstkosten ohne Möblierung
+      const kosten = ap.m2 === 85 ? t.oG(85, 950).kosten : t.st(63, 950).kosten;
       const moebel = ap.m2 * AIRBNB.einrichtungM2;
       const einnahme = (ap.preis * 365 * ausl * (1 - quote)) / 12;
       einheiten.push({ name: `${ap.m2} m²`, n: ap.n, kosten: kosten + moebel, einnahme, rate: rate(kosten + moebel, A.tilgung), ergebnis: einnahme - rate(kosten + moebel, A.tilgung), preisPlus: preisFuer(einnahme, 0), bau });

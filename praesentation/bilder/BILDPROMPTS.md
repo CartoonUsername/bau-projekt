@@ -9,9 +9,9 @@ Die Prompts sind deshalb zum Einfügen in Higgsfield (Nano Banana Pro) gedacht.
 - Hinweis im Prompt: "Use image 1 for style, use the sketch for the exact massing and proportions"
 
 **Feste Faktoren (in jedem Prompt enthalten):**
-Gebäude ca. 24 × 14,2 m (Staffel ca. 21,4 × 11,6 m, rundum 1,3 m zurück), EG komplett große Gastro mit Bar und vollverglaster Fassade, darüber 1. OG mit drei Wohnungen
+Gebäude ca. 24 × 14,2 m (Staffel ca. 22,4 × 12,6 m, rundum nur 0,8 m zurück, also fast so groß wie das Geschoss darunter), EG komplett große Gastro mit Bar und vollverglaster Fassade, darüber 1. OG mit drei Wohnungen
 und ein zurückgesetztes Staffelgeschoss mit drei Wohnungen (insgesamt 6), Flachdach, Hauptbaukörper 6,50 m, Gesamthöhe ca. 9,90 m,
-dunkles Langformat-Klinker, schwarze Stahlrahmen, Milchglas-Brüstungen (satiniertes Glas), Holzbau-Staffelgeschoss mit Lärchenfassade und Terrasse rundum, Holzterrasse mit Vordach,
+dunkles Langformat-Klinker, schwarze Stahlrahmen, Milchglas-Brüstungen (satiniertes Glas), großes Holzbau-Staffelgeschoss mit Lärchenfassade und nur schmalem Terrassenumlauf (ca. 0,8 m), Holzterrasse mit Vordach,
 Stellplätze und rotes Pflaster rechts, norddeutsche Kleinstadt (Werlte, Emsland), Stil 2026, kein Landhaus, keine Satteldach.
 
 ---
@@ -23,7 +23,7 @@ Photorealistic architectural visualization of a new contemporary mixed-use corne
 town centre (Werlte, Emsland), 2026. Three levels: a fully glazed ground floor with black slim steel frames (large
 restaurant and bar, warm interior light, wooden terrace with outdoor tables under a flat steel canopy), one upper
 floor in dark long-format red-brown clinker brick with floor-to-ceiling windows, concrete bands and projecting
-balconies with frosted (milk) glass balustrades, and a set-back top floor of timber construction clad in warm larch wood and glass, set back evenly on all four sides with a continuous wraparound roof terrace with frosted (milk) glass balustrade and planters.
+balconies with frosted (milk) glass balustrades, and a large top floor of timber construction clad in warm larch wood and glass, set back only 0.8 m on all four sides so it covers about 82% of the floor below, with just a very narrow walkway (0.8 m) around it behind a frosted (milk) glass balustrade, no furniture, no large terrace.
 Flat roof with a slim concrete fascia, total height about 10 metres, no pitched roof, not a farmhouse style.
 Red brick paving, young street trees, public car parking on the right. Blue hour, soft clouds, glowing windows.
 Wide angle, eye level, from the south-east corner. Architectural photography, high detail, no text.
@@ -32,7 +32,7 @@ Wide angle, eye level, from the south-east corner. Architectural photography, hi
 ## 2. Außen, Tag, Straßenansicht
 
 ```
-Photorealistic daytime street view of a modern three-level mixed-use building with a set-back top floor of timber construction clad in warm larch wood with a continuous wraparound roof terrace, dark clinker
+Photorealistic daytime street view of a modern three-level mixed-use building with a large top floor of timber construction clad in warm larch wood, set back only 0.8 m with a narrow walkway and no garden furniture, dark clinker
 brick facade, large black-framed windows, balconies with frosted (milk) glass railings, fully glazed restaurant ground floor with
 a wooden terrace and café tables, flat roof, town hall square in Werlte (Emsland) with red paving, trees and parking
 spaces, partly cloudy sky, soft natural light. Frontal elevation-like view, 35 mm lens. No pitched roof, no extra
@@ -62,12 +62,13 @@ candle lamps, black steel-glass partition in the background, evening mood, shall
 the exact style reference, high detail, no text, no logos.
 ```
 
-## 5. Dachterrasse im Staffelgeschoss (optional)
+## 5. Schmaler Terrassenumlauf am Holzgeschoss (optional)
 
 ```
-Photorealistic view of a roof terrace of a set-back top-floor apartment, floor-to-ceiling glazing with black frames,
-warm larch timber cladding, wooden decking, frosted (milk) glass balustrade, planters, view over the red-brown roofs of a small north-German
-town and the church tower, golden hour. Flat roof, no pitched roof, no text.
+Photorealistic close view of the narrow 0.8 m walkway around a large timber top-floor apartment: floor-to-ceiling
+glazing with black frames, warm larch timber cladding, simple wooden decking, frosted (milk) glass balustrade, at most
+one small planter and no furniture, no loungers, no wellness look, view over the red-brown roofs of a small
+north-German town, soft daylight. Flat roof, no pitched roof, no text.
 ```
 
 ---

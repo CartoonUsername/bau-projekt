@@ -1,4 +1,4 @@
-"""Excel-Rechenmodell Baufeld 3 (6 Wohnungen, große Gastro im EG, 930 m² BGF).
+"""Excel-Rechenmodell Baufeld 3 (6 Wohnungen, große Gastro im EG, 960 m² BGF).
 Annahmen, Kosten, Kredit (Bauzeit + Aufschub), Cashflow rechnen mit Formeln;
 Szenarien sind Werte aus model.js (Stand Oktober 2026)."""
 import json
@@ -58,7 +58,7 @@ rows = [
     (5, "Preis je m² (€)", 230, EUR, ""),
     (6, "Grunderwerbsteuer", 0.05, PCT, "Steuer beim Grundstückskauf"),
     (7, "Notar und Grundbuch", 0.02, PCT, "Annahme"),
-    (8, "Bruttogrundfläche BGF (m²)", 930, "#,##0", "EG 340 + 1. OG 340 + Staffelgeschoss 250 (Holzbau)"),
+    (8, "Bruttogrundfläche BGF (m²)", 960, "#,##0", "EG 340 + 1. OG 340 + Staffelgeschoss 280 (Holzbau)"),
     (9, "Baukosten je m² BGF (€)", 2200, EUR, "Annahme des Bauherrn (Bekanntenpreis), Angebot nötig"),
     (10, "Baunebenkosten", 0.15, PCT, "Architekt, Statik, Gebühren"),
     (11, "Gastro-Ausbau (€)", 150000, EUR, "Annahme des Bauherrn, einfacher Ausbau (erste Schätzung 310.000 €)"),
@@ -82,9 +82,9 @@ rows = [
     (31, "Gastro-Marge vor Pacht", 0.305, PCT, "Branchen-Richtwert"),
     (32, "Dein Lohn pro Monat (€)", 0, EUR, "wird vorerst nicht gerechnet"),
     (34, "Holzbau und Terrasse", None, None, None),
-    (35, "Staffelgeschoss in Holzbau (m² BGF)", 250, "#,##0", "Zimmerei, Terrasse rundum"),
+    (35, "Staffelgeschoss in Holzbau (m² BGF)", 280, "#,##0", "Zimmerei, Terrasse rundum"),
     (36, "Holzbau günstiger als Massivbau (€ je m²)", 400, EUR, "Annahme, Angebot der Zimmerei nötig"),
-    (37, "Dachterrasse rundum (m²)", 90, "#,##0", "zählt nicht zur BGF"),
+    (37, "Dachterrasse rundum (m²)", 58, "#,##0", "zählt nicht zur BGF"),
     (38, "Terrasse Preis (€ je m²)", 450, EUR, "Abdichtung, Holzrost, Geländer, Annahme"),
     (39, "Preisnachlass Bauunternehmer/Zimmerei (%)", 0, PCT, "Bekanntenpreis, noch offen (z. B. 5 % oder 10 %)"),
 ]
@@ -237,7 +237,7 @@ for col in "ABCDEFGH":
 # ---------------- Verkauf je Partei ----------------
 vk = wb.create_sheet("Verkauf je Partei")
 title(vk, "Verkauf an die Familie: Rechnung je Partei", "Jede Partei mit eigenem Kredit ohne Eigenkapital. Preis = Selbstkosten, 3,3 % Zins, 1 % Tilgung, 10 % Rücklagen. Feste Werte aus model.js.")
-header(vk, 4, ["", "A: 1. OG 85 m²", "A: Staffel 56 m²", "A: Gastro (Du)", "B: 1. OG 85 m²", "B: Staffel 56 m²", "B: Gastro + Büro (Du)", "C: Regelgeschoss 85 m²", "C: Staffel 56 m²", "C: Gastro + Büro (Du)"])
+header(vk, 4, ["", "A: 1. OG 85 m²", "A: Staffel 63 m²", "A: Gastro (Du)", "B: 1. OG 85 m²", "B: Staffel 63 m²", "B: Gastro + Büro (Du)", "C: Regelgeschoss 85 m²", "C: Staffel 63 m²", "C: Gastro + Büro (Du)"])
 VA, VB, VC = szen["verkauf"]["A"], szen["verkauf"]["B"], szen["verkauf"]["C"]
 cols = [(VA["og85"], 2), (VA["st56"], 3), (VA["gastro"], 4), (VB["og85"], 5), (VB["st56"], 6), (VB["gastro"], 7), (VC["og85"], 8), (VC["st56"], 9), (VC["gastro"], 10)]
 labels = ["Preis (Selbstkosten)", "Rate pro Monat", "Einnahme nach Rücklagen / Gastro-Gewinn (+ Büro)", "Ergebnis pro Monat", "Preis für Ergebnis 0 €", "Lücke zum Selbstkostenpreis"]
@@ -269,7 +269,7 @@ vk.cell(row=20, column=1, value="B: EG 540 m² (Gastro 290 + Büro 150), 1. OG 5
 # Ziel: 250 € Plus je Wohnung
 zr = szen["ziel"]
 vk.cell(row=22, column=1, value="Ziel: 250 € Plus je Wohnung (Käufer ohne Eigenkapital, ohne Tilgung, Variante A)").font = bold
-header(vk, 23, ["", "1. OG 85 m²", "Staffel 56 m²", "Du", "Zins 4,0 %: 1. OG", "Zins 4,0 %: Staffel", "Zins 4,0 %: Du"])
+header(vk, 23, ["", "1. OG 85 m²", "Staffel 63 m²", "Du", "Zins 4,0 %: 1. OG", "Zins 4,0 %: Staffel", "Zins 4,0 %: Du"])
 zl = ["Verkaufspreis", "Selbstkosten", "Nachlass (von dir getragen)", "Rate pro Monat", "Ergebnis pro Monat"]
 for i, lab in enumerate(zl):
     vk.cell(row=24 + i, column=1, value=lab).font = base
@@ -289,7 +289,7 @@ header(vk, 32, ["Partei", "Wohnung", "Verkaufspreis", "Selbstkosten", "Differenz
 for i, (r, r0) in enumerate(zip(szen["verkaufsplan"], szen["verkaufsplan0"])):
     row = 33 + i
     vk.cell(row=row, column=1, value=r["name"]).font = base
-    vk.cell(row=row, column=2, value="1. OG, 85 m²" if r["typ"] == "OG" else "Staffel, 56 m²").font = base
+    vk.cell(row=row, column=2, value="1. OG, 85 m²" if r["typ"] == "OG" else "Staffel, 63 m²").font = base
     for col, key in ((3, "preis"), (4, "kosten"), (5, "nachlass"), (6, "nk"), (7, "rate")):
         c_ = vk.cell(row=row, column=col, value=round(r[key], 2)); c_.number_format = EUR
     c_ = vk.cell(row=row, column=8, value=round(r["ergebnis"], 2)); c_.number_format = EURS
@@ -310,7 +310,7 @@ ref = szen["referenz"]
 v = szen["variante4"]
 data = [
     ("Wohnungen", 6, 9, "0"),
-    ("BGF (m²)", 930, 1270, "#,##0"),
+    ("BGF (m²)", 960, 1300, "#,##0"),
     ("Gesamtkosten", ref["gesamt"], v["gesamt"], EUR),
     ("Rate (Plan)", ref["rate"], v["rate"], EUR),
     ("Ergebnis pro Monat ohne Förderung", ref["cf"], v["cf0"], EURS),
@@ -335,7 +335,7 @@ lines = [
     "Miete 950 € je Wohnung liegt über den Portalwerten für Neubau in Werlte (ca. 10,70–11,02 €/m²).",
     "Förderung ist als Zuschuss in Prozent der Gesamtkosten angesetzt, Höhe und Zweck sind offen.",
     "Gastro-Marge (30,5 % vor Pacht) und Kostenstruktur sind Branchen-Richtwerte, nicht aus Werlte.",
-    "Staffelgeschoss (ca. 250 m², Holzbau, Terrasse rundum) und Gesamthöhe ca. 9,90 m müssen mit der Stadt abgestimmt werden.",
+    "Staffelgeschoss (ca. 280 m², Holzbau, schmale Terrasse rundum) und Gesamthöhe ca. 9,90 m müssen mit der Stadt abgestimmt werden.",
     "Zinsbindung 10 Jahre, der Folgezins ist offen.",
 ]
 for i, t in enumerate(lines):
