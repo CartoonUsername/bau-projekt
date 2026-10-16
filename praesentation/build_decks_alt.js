@@ -72,7 +72,7 @@ function makeDeck(title, fileName) {
 }
 
 const dm = dauermiete();
-const base = VARIANTEN.sechs;
+const base = VARIANTEN.a;
 
 // ===================== Ausarbeitung 1: Airbnb / Apartments =====================
 async function deckAirbnb() {

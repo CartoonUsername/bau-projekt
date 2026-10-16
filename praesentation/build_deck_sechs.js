@@ -1,4 +1,4 @@
-// Deck: Neue Mitte Werlte, Baufeld 3. 6 Wohnungen, EG komplett große Gastro, 960 m² BGF, Flachdach mit Staffelgeschoss in Holzbau
+// Deck: Neue Mitte Werlte, Baufeld 3. 8 Wohnungen, Gastro und Büro im EG, 540 m² Grundfläche, 1.540 m² BGF, Flachdach mit Staffelgeschoss in Holzbau
 // Aufruf: NODE_PATH=<node_modules> APPLY_THEME=<pfad>/apply_theme.js node build_deck_sechs.js
 const path = require("path");
 const fs = require("fs");
@@ -12,7 +12,7 @@ const OUT = process.env.OUT || __dirname;
 const v = VARIANTEN.sechs;
 const UM = v.umsatz; // Basis-Umsatz 50.000 €
 // KI-Bilder (optional): werden automatisch eingebaut, wenn die Dateien in bilder/ liegen
-const KI = ["ki_aussen_1.jpg", "ki_aussen_2.jpg", "ki_terrasse.jpg", "ki_innen_1.jpg", "ki_innen_2.jpg"].map((n) => path.join(IMG, n)).filter((f) => fs.existsSync(f));
+const KI = ["ki_aussen_1.jpg", "ki_aussen_abend.jpg", "ki_aussen_2.jpg", "ki_terrasse.jpg", "ki_innen_1.jpg", "ki_innen_2.jpg"].map((n) => path.join(IMG, n)).filter((f) => fs.existsSync(f));
 const KI_AUSSEN = path.join(IMG, "ki_aussen_1.jpg");
 
 // Bild verzerrungsfrei zuschneiden (Mitte), liefert Pfad zum passenden Ausschnitt
@@ -44,7 +44,7 @@ const k = (n) => `${nf.format(n)} €`;
 
 const pres = new pptxgen();
 pres.layout = "LAYOUT_WIDE"; // 13.33 x 7.5
-pres.title = "Neue Mitte Werlte – Baufeld 3: Gastro und 6 Wohnungen";
+pres.title = "Neue Mitte Werlte – Baufeld 3: Gastro, Büro und 8 Wohnungen";
 pres.author = "Bessam Hasso";
 pres.theme = { headFontFace: THEME.headFontFace, bodyFontFace: THEME.bodyFontFace };
 const C = pres.SchemeColor;
@@ -102,8 +102,8 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
   const s = pres.addSlide({ masterName: "TITEL" });
   s.addImage({ path: fit(hasKI("ki_aussen_1.jpg") ? KI_AUSSEN : path.join(IMG, "aussen.jpg"), 6.43, H), x: 6.9, y: 0, w: 6.43, h: H, altText: "Außenansicht, modernes Haus mit Klinker und Glas-Erdgeschoss" });
   text(s, "NEUE MITTE WERLTE", { x: MX, y: 1.3, w: 6, h: 0.4, fontSize: 16, bold: true, color: C.accent3, charSpacing: 4 });
-  text(s, "Baufeld 3: Große Gastro und 6 Wohnungen", { x: MX, y: 1.85, w: 6, h: 2.2, fontSize: 37, bold: false, fontFace: "Georgia", color: C.background1 });
-  text(s, "Baukonzept und Wirtschaftlichkeit (Variante A, ohne Förderung)", { x: MX, y: 4.3, w: 6, h: 0.6, fontSize: 18, color: C.background1 });
+  text(s, "Baufeld 3: Große Gastro, Büro und 8 Wohnungen", { x: MX, y: 1.85, w: 6, h: 2.2, fontSize: 37, bold: false, fontFace: "Georgia", color: C.background1 });
+  text(s, "Baukonzept und Wirtschaftlichkeit (Variante B, 540 m² Grundfläche, ohne Förderung)", { x: MX, y: 4.3, w: 6, h: 0.6, fontSize: 18, color: C.background1 });
   text(s, "Bessam Hasso, Werlte\nBebauungsplan Nr. 123, 1. Änderung (Entwurf 25.08.2026)\nStand Oktober 2026", { x: MX, y: 5.5, w: 6, h: 1.1, fontSize: 14, color: "CFD8D3" });
   s.addNotes("Titelfolie. Das Bild ist eine Referenzstudie.");
 }
@@ -113,7 +113,7 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
   const s = content("Das Vorhaben auf einen Blick", "Für Stadt und Bank", "Kernaussage: Das Haus trägt sich mit Förderung und einer gut laufenden Gastro.");
   const w = (W - 2 * MX - 0.6) / 4;
   stat(s, MX, 1.5, w, mio(f0.plan.gesamt), "Gesamtkosten (ohne Bauzeitzinsen)");
-  stat(s, MX + (w + 0.2), 1.5, w, "6", "Wohnungen und eine Gastro von ca. 290 m² im ganzen EG", C.accent2);
+  stat(s, MX + (w + 0.2), 1.5, w, "8", "Wohnungen, dazu Gastro (ca. 290 m²) und Büro (ca. 150 m²) im EG", C.accent2);
   stat(s, MX + 2 * (w + 0.2), 1.5, w, eur(f0.plan.rate), "Rate pro Monat (3,3 %, ohne Förderung)");
   stat(s, MX + 3 * (w + 0.2), 1.5, w, eurS(f0.cfPlan.cf), `Ergebnis pro Monat bei ${k(UM)} Umsatz`, f0.cfPlan.cf >= 0 ? C.accent5 : C.accent6);
   text(s, `Ergebnis pro Monat (ohne Lohn des Bauherrn) bei ${k(UM)} Gastro-Umsatz (Plan, 3,3 % Zins)`, { x: MX, y: 3.4, w: 10, h: 0.35, fontSize: 16, bold: true, color: C.accent2 });
@@ -151,18 +151,18 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
   const s = content("Was der Bebauungsplan vorgibt", "Für die Stadt", "Festsetzungen aus Bebauungsplan Nr. 123 (Entwurf). Zulässigkeit von Staffelgeschoss und Flachdach muss die Stadt schriftlich bestätigen.");
   const rows = [
     [hdr("Festsetzung"), hdr("Wert im B-Plan"), hdr("Unser Entwurf")],
-    [cell("Grundflächenzahl (GRZ)"), cell("0,6 → max. 576 m²"), cell("340 m² Grundfläche (35 %)")],
+    [cell("Grundflächenzahl (GRZ)"), cell("0,6 → max. 576 m²"), cell("540 m² Grundfläche (56 %)")],
     [cell("Vollgeschosse"), cell("zwei (II im Kreis)"), cell("EG und 1. OG, dazu Staffelgeschoss")],
     [cell("Traufhöhe / Höhe"), cell("6,50 m / 12,00 m"), cell("Hauptbaukörper 6,50 m, gesamt ca. 9,90 m")],
     [cell("Dachform"), cell("laut Konzeptheft Mischgebiet, Details im Plan"), cell("Flachdach mit zurückgesetztem Staffelgeschoss")],
-    [cell("Baufenster (geschätzt)"), cell("ca. 27 × 15–17 m = 400–460 m²"), cell("ca. 24 × 14,2 m")],
-    [cell("Stellplätze"), cell("auf dem Grundstück, ausreichende Anzahl"), cell("ca. 10–13, Rest siehe Stellplatzfolie")],
+    [cell("Baufenster (geschätzt)"), cell("im Plan geschätzt ca. 400–460 m², Stadt klären"), cell("ca. 30 × 18 m = 540 m²")],
+    [cell("Stellplätze"), cell("auf dem Grundstück, ausreichende Anzahl"), cell("ca. 8–10, Rest siehe Stellplatzfolie")],
   ];
   s.addTable(rows, { x: MX, y: 1.5, w: W - 2 * MX, colW: [3.2, 4.4, 4.53], rowH: 0.52, border: tblBorder, objectName: "Tabelle B-Plan" });
   card(s, MX, 5.4, W - 2 * MX, 1.25, "Klärungsbedarf");
   text(s, [
     { text: "Schriftlich klären: ", options: { bold: true, color: C.accent1 } },
-    { text: "Zählt das Staffelgeschoss (ca. 280 m² in Holzbau, das sind 82 % der Fläche darunter) als drittes Vollgeschoss? Ab etwa 2/3 der Fläche darunter wird es meist dazugezählt. Ist die Flachdach-Lösung zulässig?" },
+    { text: "Sind 540 m² Grundfläche zulässig (im Plan ist das Baufenster nach meiner Schätzung kleiner)? Zählt das Staffelgeschoss (ca. 460 m² in Holzbau, 85 % der Fläche darunter) als drittes Vollgeschoss? Ist die Flachdach-Lösung zulässig?" },
   ], { x: MX + 0.25, y: 5.5, w: W - 2 * MX - 0.5, h: 1.05, fontSize: 15, valign: "middle" });
 }
 
@@ -184,26 +184,26 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
     { text: "Zwei Partner (Bauunternehmen unten, Zimmerei oben) können Preise und Termine gemeinsam angeben.", options: { bullet: true, breakLine: true } },
     { text: "Brandschutz (Holzbau bis Gebäudeklasse 4, Aufzug und Treppenhaus massiv) und Schallschutz muss der Architekt nachweisen.", options: { bullet: true } },
   ], { x: 8.85, y: 1.95, w: W - 8.85 - MX - 0.5, h: 4.0, fontSize: 14, paraSpaceAfter: 8 });
-  text(s, "Das Staffelgeschoss springt nur rundum ca. 0,8 m zurück: schmale Terrasse ca. 58 m² um die drei Penthouses, kein Teil der BGF.", { x: MX, y: 5.3, w: 7.6, h: 0.9, fontSize: 15, bold: true, color: C.accent2 });
+  text(s, "Das Staffelgeschoss springt nur rundum ca. 0,8 m zurück: schmale Terrasse ca. 72 m² um die drei Penthouses, kein Teil der BGF.", { x: MX, y: 5.3, w: 7.6, h: 0.9, fontSize: 15, bold: true, color: C.accent2 });
 }
 
 // ===== 5 Schnitt =====
 {
   const s = content("Zwei Geschosse plus Staffelgeschoss", "Für Stadt und Bank", "Schnitt schematisch. Hauptbaukörper bis 6,50 m, Staffelgeschoss bis ca. 9,60 m, Attika ca. 9,90 m.");
-  const sc = 0.34; // Zoll je m
-  const x0 = 2.0;
+  const sc = 0.3; // Zoll je m
+  const x0 = 1.7;
   const yBase = 6.4;
   const z = (m) => yBase - m * sc;
-  const w = 14.2 * sc;
+  const w = 18 * sc, ws = 16.4 * sc;
   s.addShape(pres.ShapeType.rect, { x: x0 - 0.3, y: yBase, w: w + 0.6, h: 0.06, fill: { color: C.accent4 }, line: { color: C.accent4, width: 0 }, objectName: "Gelände" });
   s.addShape(pres.ShapeType.rect, { x: x0, y: z(3.5), w, h: 3.2 * sc, fill: { color: "F4D58F" }, line: { color: C.accent4, width: 1 }, objectName: "Schnitt EG" });
   s.addShape(pres.ShapeType.rect, { x: x0, y: z(6.5), w, h: 3.0 * sc, fill: { color: "9A4034" }, line: { color: C.accent4, width: 1 }, objectName: "Schnitt OG" });
-  s.addShape(pres.ShapeType.rect, { x: x0, y: z(9.6), w: 13.3 * sc, h: 3.1 * sc, fill: { color: "7A5C3A" }, line: { color: C.accent4, width: 1 }, objectName: "Schnitt Staffel" });
-  s.addShape(pres.ShapeType.rect, { x: x0 - 0.2, y: z(9.9), w: 13.3 * sc + 0.4, h: 0.3 * sc, fill: { color: "D6D1C8" }, line: { color: C.accent4, width: 1 }, objectName: "Schnitt Dach" });
-  s.addShape(pres.ShapeType.rect, { x: x0 + 13.3 * sc, y: z(7.6), w: 0.9 * sc, h: 1.1 * sc, fill: { color: "CFE0E8" }, line: { color: C.accent4, width: 1 }, objectName: "Brüstung" });
-  text(s, "EG Gastro mit Bar", { x: x0, y: z(3.5), w, h: 3.2 * sc, fontSize: 14, bold: true, align: "center", valign: "middle" });
-  text(s, "1. OG · 3 Wohnungen", { x: x0, y: z(6.5), w, h: 3.0 * sc, fontSize: 14, bold: true, align: "center", valign: "middle", color: C.background1 });
-  text(s, "Staffelgeschoss · 3 Wohnungen", { x: x0, y: z(9.6), w: 13.3 * sc, h: 3.1 * sc, fontSize: 14, bold: true, align: "center", valign: "middle", color: C.background1 });
+  s.addShape(pres.ShapeType.rect, { x: x0, y: z(9.6), w: ws, h: 3.1 * sc, fill: { color: "7A5C3A" }, line: { color: C.accent4, width: 1 }, objectName: "Schnitt Staffel" });
+  s.addShape(pres.ShapeType.rect, { x: x0 - 0.2, y: z(9.9), w: ws + 0.4, h: 0.3 * sc, fill: { color: "D6D1C8" }, line: { color: C.accent4, width: 1 }, objectName: "Schnitt Dach" });
+  s.addShape(pres.ShapeType.rect, { x: x0 + ws, y: z(7.6), w: 0.9 * sc, h: 1.1 * sc, fill: { color: "CFE0E8" }, line: { color: C.accent4, width: 1 }, objectName: "Brüstung" });
+  text(s, "EG Gastro, Büro", { x: x0, y: z(3.5), w, h: 3.2 * sc, fontSize: 14, bold: true, align: "center", valign: "middle" });
+  text(s, "1. OG · 5 Wohnungen", { x: x0, y: z(6.5), w, h: 3.0 * sc, fontSize: 14, bold: true, align: "center", valign: "middle", color: C.background1 });
+  text(s, "Staffelgeschoss · 3 Wohnungen", { x: x0, y: z(9.6), w: ws, h: 3.1 * sc, fontSize: 14, bold: true, align: "center", valign: "middle", color: C.background1 });
   const mark = (zz, label) => {
     s.addShape(pres.ShapeType.line, { x: x0 - 0.5, y: z(zz), w: w + 0.8, h: 0, line: { color: C.accent1, width: 1, dashType: "dash" }, objectName: "Marke " + label });
     text(s, label, { x: MX, y: z(zz) - 0.2, w: 1.1, h: 0.4, fontSize: 12, bold: true, color: C.accent1, align: "right", valign: "middle" });
@@ -214,52 +214,49 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
   text(s, "Nord", { x: x0, y: yBase + 0.1, w: 0.6, h: 0.3, fontSize: 12, color: C.accent4 });
   const rows = [
     [hdr("Ebene"), hdr("Nutzung"), hdr("BGF", "right")],
-    [cell("EG"), cell("Gastro ca. 290 m² mit Bar, Treppenhaus, Aufzug, Technik"), R("340 m²")],
-    [cell("1. OG"), cell("3 Wohnungen à ca. 85 m²"), R("340 m²")],
-    [cell("Staffel"), cell("3 Wohnungen à ca. 63 m², Holzbau, schmale Terrasse rundum"), R("280 m²")],
-    [cell("Summe", { bold: true }), cell("6 Wohnungen, ca. 444 m² Wohnfläche", { bold: true }), R("960 m²", { bold: true })],
+    [cell("EG"), cell("Gastro ca. 290 m² mit Bar, Büro ca. 150 m², Treppenhaus, Aufzug, Technik"), R("540 m²")],
+    [cell("1. OG"), cell("5 Wohnungen à ca. 83 m²"), R("540 m²")],
+    [cell("Staffel"), cell("3 Penthouses à ca. 103 m², Holzbau, schmale Terrasse rundum"), R("460 m²")],
+    [cell("Summe", { bold: true }), cell("8 Wohnungen, ca. 725 m² Wohnfläche", { bold: true }), R("1.540 m²", { bold: true })],
   ];
   s.addTable(rows, { x: 7.7, y: 1.6, w: W - 7.7 - MX, colW: [0.9, 3.2, 0.93], rowH: 0.6, border: tblBorder, objectName: "Tabelle Flächen" });
-  text(s, "BGF = Bruttogrundfläche, alle Geschossflächen zusammen. Das Staffelgeschoss in Holzbau springt rundum nur ca. 0,8 m zurück, so entsteht eine schmale Terrasse von ca. 58 m² um die Penthouses.", { x: 7.7, y: 5.4, w: W - 7.7 - MX, h: 1.0, fontSize: 14, color: C.accent4 });
+  text(s, "BGF = Bruttogrundfläche, alle Geschossflächen zusammen. Das Staffelgeschoss in Holzbau springt rundum nur ca. 0,8 m zurück, so entsteht eine schmale Terrasse von ca. 72 m² um die Penthouses.", { x: 7.7, y: 5.4, w: W - 7.7 - MX, h: 1.0, fontSize: 14, color: C.accent4 });
 }
 
 // ===== 6 Grundrisse =====
 {
   const s = content("Skizzen der Geschosse", "Für die Stadt", "Schematische Skizzen, nicht maßstäblich genau. Aufteilung wird mit dem Architekten verfeinert.");
-  const sc = 0.165;
-  const pw = 24 * sc;
-  const ph = 14.2 * sc;
+  const sc = 0.132;
+  const pw = 30 * sc;
+  const ph = 18 * sc;
   const gap = (W - 2 * MX - 3 * pw) / 2;
   const y0 = 2.3;
   const plans = [
     {
       title: "Erdgeschoss",
       rooms: [
-        [0, 0, 3.6, 14.2, "Treppe, Aufzug", "8A9199"],
-        [3.6, 0, 20.4, 14.2, "", "F2D48C"],
-        [4.0, 0.4, 4.2, 1.8, "Bar", "B88652"],
-        [12.4, 0, 8, 4.2, "Küche", "7E8A94"],
-        [8.4, 0, 4, 4.2, "WC", "A6ADB4"],
-        [6, 6.5, 14, 4.5, "Gastraum, ca. 100 Plätze", "E7BE63"],
+        [0, 0, 4, 18, "Treppe, Aufzug", "8A9199"],
+        [4, 0, 8.3, 18, "Büro\nca. 150 m²", "5B7D8C"],
+        [12.3, 0, 17.7, 18, "", "F2D48C"],
+        [12.8, 0.4, 4.2, 1.8, "Bar", "B88652"],
+        [21.8, 0, 8.2, 4.2, "Küche", "7E8A94"],
+        [17.6, 0, 4.2, 4.2, "WC", "A6ADB4"],
+        [15, 7.5, 14, 6.5, "Gastraum, ca. 100 Plätze", "E7BE63"],
       ],
     },
     {
       title: "1. Obergeschoss",
       rooms: [
-        [0, 0, 3.6, 14.2, "Treppe, Aufzug", "8A9199"],
-        [3.6, 0, 6.8, 14.2, "WE 1 · 85 m²", "9A4034"],
-        [10.4, 0, 6.8, 14.2, "WE 2 · 85 m²", "9A4034"],
-        [17.2, 0, 6.8, 14.2, "WE 3 · 85 m²", "9A4034"],
+        [0, 0, 4, 18, "Treppe, Aufzug", "8A9199"],
+        ...[0, 1, 2, 3, 4].map((n) => [4 + n * 5.2, 0, 5.2, 18, `WE ${n + 1}\n83 m²`, "9A4034"]),
       ],
     },
     {
       title: "Staffel (Holzbau)",
       rooms: [
-        [0, 0, 24, 14.2, "", "C9C4B8"],
-        [0.8, 0.8, 3.6, 12.6, "Treppe", "8A9199"],
-        [4.4, 0.8, 6.27, 12.6, "WE 4 · 63 m²", "7A5C3A"],
-        [10.67, 0.8, 6.27, 12.6, "WE 5 · 63 m²", "7A5C3A"],
-        [16.94, 0.8, 6.27, 12.6, "WE 6 · 63 m²", "7A5C3A"],
+        [0, 0, 30, 18, "", "C9C4B8"],
+        [0.8, 0.8, 3.4, 16.4, "Treppe", "8A9199"],
+        ...[0, 1, 2].map((n) => [4.2 + n * 8.33, 0.8, 8.33, 16.4, `WE ${n + 6}\n103 m²`, "7A5C3A"]),
       ],
     },
   ];
@@ -273,7 +270,7 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
     });
   });
   card(s, MX, 5.35, W - 2 * MX, 1.2, "Hinweis");
-  text(s, "Grundfläche 24 × 14,2 m = 340 m², das passt in das geschätzte Baufenster. Treppenhaus und Aufzug liegen am Westende und erschließen die Wohnungen getrennt von der Gastro. Die Staffel in Holzbau hat ca. 280 m² BGF, die beige Fläche ist die schmale Terrasse (ca. 58 m²) rundum um die Penthouses.", { x: MX + 0.25, y: 5.45, w: W - 2 * MX - 0.5, h: 1.0, fontSize: 15, valign: "middle" });
+  text(s, "Grundfläche ca. 30 × 18 m = 540 m² (GRZ 0,6 erlaubt max. 576 m²). Treppenhaus und Aufzug liegen am Westende und erschließen die Wohnungen getrennt von Gastro und Büro. Die Staffel in Holzbau hat ca. 460 m² BGF, die beige Fläche ist die schmale Terrasse (ca. 72 m²) rundum um die Penthouses.", { x: MX + 0.25, y: 5.45, w: W - 2 * MX - 0.5, h: 1.0, fontSize: 15, valign: "middle" });
 }
 
 // ===== 7 Außen =====
@@ -321,14 +318,14 @@ if (KI.length) {
 
 // ===== 9 Stellplätze =====
 {
-  const s = content("Stellplätze sind der Knackpunkt", "Für die Stadt", "Bedarf nach groben Annahmen (1,5 pro Wohnung, 1 je 10 m² Gastraum bei ca. 200 m²). Die Stellplatzsatzung der Stadt gilt verbindlich.");
-  s.addChart(pres.charts.BAR, [{ name: "Stellplätze", labels: ["Bedarf (Annahme)", "Platz auf dem Grundstück"], values: [29, 12] }], {
+  const s = content("Stellplätze sind der Knackpunkt", "Für die Stadt", "Bedarf nach groben Annahmen (1,5 pro Wohnung, 1 je 10 m² Gastraum bei ca. 200 m², 1 je 30 m² Büro). Die Stellplatzsatzung der Stadt gilt verbindlich.");
+  s.addChart(pres.charts.BAR, [{ name: "Stellplätze", labels: ["Bedarf (Annahme)", "Platz auf dem Grundstück"], values: [37, 8] }], {
     x: MX, y: 1.5, w: 5.8, h: 4.6, barDir: "col", chartColors: ["8C3B32", "2F4A3E"], varyColors: true, showValue: true, dataLabelPosition: "outEnd", dataLabelColor: "1F2421", dataLabelFontSize: 16, dataLabelFontFace: "+mn-lt",
     catAxisLabelColor: "1F2421", catAxisLabelFontSize: 14, catAxisLabelFontFace: "+mn-lt", valAxisHidden: true, valGridLine: { style: "none" }, catGridLine: { style: "none" }, showLegend: false, showTitle: false, valAxisMaxVal: 36, valAxisMinVal: 0, objectName: "Diagramm Stellplätze",
   });
   text(s, "Vorschlag für die Stadt", { x: 7.0, y: 1.5, w: 5.7, h: 0.4, fontSize: 19, bold: false, fontFace: "Georgia", color: C.accent1 });
   text(s, [
-    { text: "Bedarf ca. 29 Stellplätze, auf dem Grundstück passen ca. 10–13.", options: { bullet: true, breakLine: true } },
+    { text: "Bedarf ca. 37 Stellplätze, auf dem Grundstück passen bei 540 m² Gebäude nur ca. 8–10.", options: { bullet: true, breakLine: true } },
     { text: "Restplätze auf der öffentlichen Parkfläche nebenan (im Plan eingezeichnet) per Vereinbarung nutzen, besonders am Abend.", options: { bullet: true, breakLine: true } },
     { text: "Alternativ Ablöse statt Bau, die Höhe muss die Stadt nennen.", options: { bullet: true, breakLine: true } },
     { text: "Klären, ob der 10 m breite Grünstreifen teils befestigt werden darf.", options: { bullet: true } },
@@ -342,9 +339,9 @@ if (KI.length) {
   const rows = [
     [hdr("Posten"), hdr("Rechnung"), hdr("Betrag", "right")],
     [cell("Grundstück inkl. Steuer, Notar"), cell("960 m² × 230 € + ca. 7 %"), R(eur(A.grundstueck))],
-    [cell("Bau, Massivbau"), cell("960 m² × 2.200 €"), R(eur(960 * A.bauKostenM2))],
-    [cell("Abschlag Holzbau (Staffelgeschoss)"), cell("280 m² × 400 € günstiger"), R("− " + eur(280 * A.holzAbschlag))],
-    [cell("Dachterrasse rundum (schmal)"), cell("58 m² × 450 €"), R(eur(58 * A.terrassePreis))],
+    [cell("Bau, Massivbau"), cell(`${nf.format(v.bgf)} m² × 2.200 €`), R(eur(v.bgf * A.bauKostenM2))],
+    [cell("Abschlag Holzbau (Staffelgeschoss)"), cell(`${v.holzM2} m² × 400 € günstiger`), R("− " + eur(v.holzM2 * A.holzAbschlag))],
+    [cell("Dachterrasse rundum (schmal)"), cell(`${v.terrasseM2} m² × 450 €`), R(eur(v.terrasseM2 * A.terrassePreis))],
     [cell("Baunebenkosten (Architekt, Statik, Gebühren)"), cell("15 % vom Bau"), R(eur(bauRoh(v) * 0.15))],
     [cell("Gastro-Ausbau (Küche, Bar, Möbel, Technik)"), cell("Annahme, Posten im Anhang"), R(eur(v.gastroAusbau))],
     [cell("Gesamtkosten", { bold: true }), cell(""), R(eur(fin.gesamt), { bold: true })],
@@ -354,7 +351,7 @@ if (KI.length) {
     x: 8.5, y: 1.4, w: 4.3, h: 4.4, holeSize: 55, chartColors: ["C49A45", "8C3B32", "5B6770", "2F4A3E"], showPercent: true, showValue: false, dataLabelColor: "FFFFFF", dataLabelFontSize: 12, dataLabelFontFace: "+mn-lt",
     showLegend: true, legendPos: "b", legendFontSize: 12, legendColor: "1F2421", legendFontFace: "+mn-lt", showTitle: false, objectName: "Diagramm Kosten",
   });
-  text(s, `Das sind ca. ${nf.format(Math.round(fin.gesamt / 960))} € pro m² BGF.`, { x: MX, y: 5.8, w: 7.6, h: 0.5, fontSize: 16, bold: true, color: C.accent2 });
+  text(s, `Das sind ca. ${nf.format(Math.round(fin.gesamt / v.bgf))} € pro m² BGF.`, { x: MX, y: 5.8, w: 7.6, h: 0.5, fontSize: 16, bold: true, color: C.accent2 });
 }
 
 // ===== 11 Finanzierung =====
@@ -387,11 +384,11 @@ if (KI.length) {
 
 // ===== 12 Cashflow =====
 {
-  const s = content("Was pro Monat übrig bleibt", "Für die Bank", "Mieten: 6 Wohnungen zu je 950 € Kaltmiete (Annahme des Bauherrn). Gastro-Marge nach Branchen-Richtwerten.");
+  const s = content("Was pro Monat übrig bleibt", "Für die Bank", "Mieten: Wohnungen 11,18 €/m² (950 € für 85 m², Annahme des Bauherrn), Büro 10 €/m². Gastro-Marge nach Branchen-Richtwerten.");
   const c = f0.cfPlan;
   const rows = [
     [hdr(`Pro Monat, Plan, ohne Förderung, ${k(UM)} Umsatz`), hdr("Betrag", "right")],
-    [cell("6 Wohnungen: je 950 € Kaltmiete"), R(eurS(v.mieteOhnePacht))],
+    [cell("8 Wohnungen (725 m² × 11,18 €) und Büro (150 m² × 10 €)"), R(eurS(v.mieteOhnePacht))],
     [cell(`Gastro-Pacht: ${v.gastroM2} m² × 12 €`), R(eurS(v.pacht))],
     [cell("Gastro-Gewinn nach Pacht"), R(eurS(c.gastroNachPacht))],
     [cell("Rate (Zinsen und Tilgung)"), R(eurS(-f0.plan.rate))],
@@ -404,7 +401,7 @@ if (KI.length) {
     x: 8.1, y: 1.4, w: 4.7, h: 4.3, barDir: "col", chartColors: ["2E7D5B", "2E7D5B", "B3261E", "B3261E"], varyColors: true, showValue: true, dataLabelFormatCode: "#,##0", dataLabelFontSize: 12, dataLabelColor: "1F2421", dataLabelFontFace: "+mn-lt",
     catAxisLabelColor: "1F2421", catAxisLabelFontSize: 12, catAxisLabelFontFace: "+mn-lt", catAxisLabelPos: "low", catAxisLabelRotate: 0, valAxisHidden: true, valGridLine: { style: "none" }, catGridLine: { style: "none" }, showLegend: false, showTitle: false, objectName: "Diagramm Cashflow",
   });
-  text(s, "Ohne Lohn des Bauherrn. Die ca. 3.100 € Tilgung in der Rate sind Vermögensaufbau (Schuld sinkt), kein Verlust.", { x: MX, y: 6.0, w: 11.5, h: 0.4, fontSize: 14, color: C.accent4 });
+  text(s, `Ohne Lohn des Bauherrn. Die ca. ${nf.format(Math.round(f0.plan.tilgAnteil / 100) * 100)} € Tilgung in der Rate sind Vermögensaufbau (Schuld sinkt), kein Verlust.`, { x: MX, y: 6.0, w: 11.5, h: 0.4, fontSize: 14, color: C.accent4 });
 }
 
 // ===== 13 Szenarien Förderung x Zins =====
@@ -477,11 +474,12 @@ if (KI.length) {
 
 // ===== 15b Verkauf an die Familie =====
 {
-  const s = content("Verkauf an die Familie: Rechnung je Partei", "Für die Verwandten und die Bank", "Jede Partei bekommt einen eigenen Kredit ohne Eigenkapital. Preis = Selbstkosten, 3,3 % Zins, 1 % Tilgung, Miete 950 €, 10 % Rücklagen.");
-  const t = teilung(LAYOUTS.A);
-  const o = t.oG(85, 950), st = t.st(63, 950), g = t.gastro;
+  const s = content("Verkauf an die Familie: Rechnung je Partei", "Für die Verwandten und die Bank", "Jede Partei bekommt einen eigenen Kredit ohne Eigenkapital. Preis = Selbstkosten, 3,3 % Zins, 1 % Tilgung, Miete 11,18 €/m², 10 % Rücklagen.");
+  const L = LAYOUTS.B, mOG = L.wfOG / L.nOG, mST = L.wfST / L.nST;
+  const t = teilung(L);
+  const o = t.oG(mOG), st = t.st(mST), g = t.gastro;
   const rows = [
-    [hdr(""), hdr("1. OG, 85 m² (3×)", "right"), hdr("Staffel, 63 m² (3×)", "right"), hdr("Du: Gastro im EG", "right")],
+    [hdr(""), hdr(`1. OG, ${Math.round(mOG)} m² (${L.nOG}×)`, "right"), hdr(`Staffel, ${Math.round(mST)} m² (${L.nST}×)`, "right"), hdr("Du: Gastro und Büro im EG", "right")],
     [cell("Preis (Selbstkosten)"), R(eur(o.kosten)), R(eur(st.kosten)), R(eur(g.kosten))],
     [cell("Preis je m² Wohnfläche"), R(eur(o.kostenM2)), R(eur(st.kostenM2)), R("")],
     [cell("Rate pro Monat (3,3 % + 1 % Tilgung)"), R(eur(o.rate)), R(eur(st.rate)), R(eur(g.rate))],
@@ -493,18 +491,18 @@ if (KI.length) {
   ];
   s.addTable(rows, { x: MX, y: 1.4, w: W - 2 * MX, colW: [4.4, 2.6, 2.6, 2.53], rowH: 0.44, border: tblBorder, objectName: "Tabelle Verkauf je Partei" });
   text(s, [
-    { text: `Die Rechnung für den Gastro-Teil gilt bei ${k(UM)} Umsatz ohne Lohn des Bauherrn, Break-even ab ${k(Math.round(g.beUmsatz / 1000) * 1000)}. Die Wohnungen tragen sich bei 11,18 €/m² Miete erst ab einem Preis von ca. ${eur(Math.round(t.preisFuerPlusM2 / 10) * 10)} je m².`, options: { breakLine: true } },
-    { text: `Die Staffel-Wohnung (63 m²) kostet bei 950 € Miete 15 €/m², bei Marktmiete (11,18 €/m²) wären es ${eur(63 * 11.18)} und das Ergebnis ${eurS(t.st(56).ergebnis)}.`, options: {} },
+    { text: `Die Rechnung für den Gastro-Teil gilt bei ${k(UM)} Umsatz ohne Lohn des Bauherrn, Break-even ab ${k(Math.round(g.beUmsatz / 1000) * 1000)}. Die Wohnungen tragen sich bei 11,18 €/m² Miete (Büro 10 €/m²) erst ab einem Preis von ca. ${eur(Math.round(t.preisFuerPlusM2 / 10) * 10)} je m².`, options: { breakLine: true } },
+    { text: `Ein Penthouse (${Math.round(mST)} m²) bringt bei 11,18 €/m² ${eur(st.miete)} Miete, eine OG-Wohnung (${Math.round(mOG)} m²) ${eur(o.miete)}.`, options: {} },
   ], { x: MX, y: 5.65, w: W - 2 * MX, h: 1.1, fontSize: 12.5, color: C.accent4, paraSpaceAfter: 4 });
 }
 
 // ===== 15d Ziel: 250 € Plus je Wohnung =====
 {
-  const s = content("Ziel: 250 € Plus für jede Wohnung", "Für die Verwandten und die Bank", "Variante A, jede Wohnung mit eigenem Kredit ohne Eigenkapital und ohne Tilgung, 950 € Miete, 3,3 % Zins. Du trägst die Differenz zu deinen Selbstkosten.");
-  const r = zielplus(LAYOUTS.A, 250, A.zinsPlan), r4 = zielplus(LAYOUTS.A, 250, A.zinsAusgang);
-  const tb = teilung(LAYOUTS.B), tc = teilung(LAYOUTS.C);
+  const s = content("Ziel: 250 € Plus für jede Wohnung", "Für die Verwandten und die Bank", "Variante B, jede Wohnung mit eigenem Kredit ohne Eigenkapital und ohne Tilgung, Miete 11,18 €/m², 3,3 % Zins. Du trägst die Differenz zu deinen Selbstkosten.");
+  const LB = LAYOUTS.B, mOG = LB.wfOG / LB.nOG, mST = LB.wfST / LB.nST;
+  const r = zielplus(LB, 250, A.zinsPlan), r4 = zielplus(LB, 250, A.zinsAusgang);
   const rows = [
-    [hdr(""), hdr("1. OG, 85 m² (3×)", "right"), hdr("Staffel, 63 m² (3×)", "right"), hdr("Du", "right")],
+    [hdr(""), hdr(`1. OG, ${Math.round(mOG)} m² (${LB.nOG}×)`, "right"), hdr(`Staffel, ${Math.round(mST)} m² (${LB.nST}×)`, "right"), hdr("Du", "right")],
     [cell("Verkaufspreis an die Verwandten", { bold: true }), R(eur(r.og.preis), { bold: true }), R(eur(r.st.preis), { bold: true }), R("")],
     [cell("Deine Selbstkosten je Einheit"), R(eur(r.og.kosten)), R(eur(r.st.kosten)), R(eur(r.t.kostenEG))],
     [cell("Preis je m² Wohnfläche"), R(eur(r.og.preisM2)), R(eur(r.st.preisM2)), R("")],
@@ -515,22 +513,22 @@ if (KI.length) {
   ];
   s.addTable(rows, { x: MX, y: 1.4, w: W - 2 * MX, colW: [5.1, 2.4, 2.4, 2.23], rowH: 0.5, border: tblBorder, objectName: "Tabelle Ziel 250 Euro Plus" });
   text(s, [
-    { text: `Dein Anteil: Rate für das Gastro-EG ${eur(r.rateEG)} (1 % Tilgung) plus Zinsen für die Differenz ${eur(r.zinsLuecke)}. Der Preis von ca. 207.000 € liegt nahe an dem, was Neubauwohnungen dieser Größe in Werlte kosten.`, options: { breakLine: true } },
-    { text: `Bei 4,0 % Zins sinkt der Preis für 250 € Plus auf ca. ${eur(r4.og.preis)} (${eur(r4.og.preisM2)} je m²), dein Ergebnis auf ${eurS(r4.bessam)}. Bei Variante B / C beträgt der Nachlass je 85-m²-Wohnung im OG ca. ${eur(tb.oG(85, 950).kosten - r.og.preis)} / ${eur(tc.oG(85, 950).kosten - r.og.preis)}.`, options: {} },
+    { text: `Dein Anteil: Rate für das Gastro-EG ${eur(r.rateEG)} (1 % Tilgung) plus Zinsen für die Differenz ${eur(r.zinsLuecke)}. Der Verkaufspreis liegt bei ca. ${eur(r.og.preisM2)} je m² (OG) und ${eur(r.st.preisM2)} je m² (Staffel).`, options: { breakLine: true } },
+    { text: `Bei 4,0 % Zins sinkt der Preis für 250 € Plus auf ca. ${eur(r4.og.preis)} (${eur(r4.og.preisM2)} je m²), dein Ergebnis auf ${eurS(r4.bessam)}.`, options: {} },
   ], { x: MX, y: 5.6, w: W - 2 * MX, h: 1.2, fontSize: 12.5, color: C.accent4, paraSpaceAfter: 5 });
 }
 
 // ===== 15f Verkaufsplan =====
 {
-  const s = content("Verkaufsplan: wer bekommt welche Wohnung", "Für die Verwandten und die Bank", "Variante A ohne Förderung, 2.200 €/m², Dauermiete 950 €, 3,3 % Zins, tilgungsfreie Jahre, 10 % Rücklagen. Käufer zahlen Notar (2 %) und Grunderwerbsteuer (5 %, Vater frei, bitte prüfen).");
+  const s = content("Verkaufsplan: wer bekommt welche Wohnung", "Für die Verwandten und die Bank", "Variante B ohne Förderung, 2.200 €/m², Dauermiete 11,18 €/m², 3,3 % Zins, tilgungsfreie Jahre, 10 % Rücklagen. Käufer zahlen Notar (2 %) und Grunderwerbsteuer (5 %, Vater frei, bitte prüfen).");
   const vp = verkaufsplan({ foerderung: 0, bauKostenM2: 2200, tilgung: 0, zielPlus: 100 });
   const rows = [[hdr("Partei"), hdr("Wohnung"), hdr("Verkaufspreis", "right"), hdr("Selbstkosten", "right"), hdr("Differenz (du)", "right"), hdr("Notar, Steuer", "right"), hdr("Rate (Zinsen)", "right"), hdr("Ergebnis pro Monat", "right")]];
-  vp.rows.forEach((r) => rows.push([cell(r.name), cell(r.typ === "OG" ? "1. OG, 85 m²" : "Staffel, 63 m²"), R(eur(r.preis)), R(eur(r.kosten)), R(r.nachlass > 0 ? eur(r.nachlass) : "–"), R(eur(r.nk)), R(eur(r.rate)), cfCell(r.ergebnis)]));
-  s.addTable(rows, { x: MX, y: 1.4, w: W - 2 * MX, colW: [2.2, 1.7, 1.45, 1.4, 1.35, 1.3, 1.3, 1.43], rowH: 0.5, border: tblBorder, objectName: "Tabelle Verkaufsplan" });
+  vp.rows.forEach((r) => rows.push([cell(r.name), cell(r.typ === "OG" ? `1. OG, ${Math.round(r.m2)} m²` : `Staffel, ${Math.round(r.m2)} m²`), R(eur(r.preis)), R(eur(r.kosten)), R(r.nachlass > 0 ? eur(r.nachlass) : "–"), R(eur(r.nk)), R(eur(r.rate)), cfCell(r.ergebnis)]));
+  s.addTable(rows, { x: MX, y: 1.4, w: W - 2 * MX, colW: [2.6, 1.6, 1.4, 1.35, 1.3, 1.25, 1.25, 1.38], rowH: 0.4, border: tblBorder, objectName: "Tabelle Verkaufsplan" });
   text(s, [
-    { text: `Staffel-Wohnungen gehen zum Selbstkostenpreis, die OG-Wohnungen von Vater und Bruder werden so gesenkt, dass sie mindestens +100 € im Monat haben. Die Differenz von ${eur(vp.luecke)} trägst du, die Zinsen darauf kosten ${eur(vp.zinsLuecke)} im Monat.`, options: { breakLine: true } },
-    { text: `Dein Ergebnis: Gastro ${eur(vp.gewinn)} minus Rate für das EG ${eur(vp.rateEG)} minus Zinsen auf die Differenz ${eur(vp.zinsLuecke)} plus deine eigene Wohnung ${eurS(vp.eigen.ergebnis)} = ${eurS(vp.bessam)} pro Monat (ohne Lohn).`, options: {} },
-  ], { x: MX, y: 5.2, w: W - 2 * MX, h: 1.5, fontSize: 12.5, color: C.accent4, paraSpaceAfter: 5 });
+    { text: `Du behältst drei OG-Wohnungen (eine zum Wohnen, zwei vermietet, ohne Notar und Steuer). Die Wohnungen von Vater, Bruder und den drei Onkeln werden so gesenkt, dass jede mindestens +100 € im Monat hat. Die Differenz von ${eur(vp.luecke)} trägst du, die Zinsen darauf kosten ${eur(vp.zinsLuecke)} im Monat.`, options: { breakLine: true } },
+    { text: `Dein Ergebnis: Gastro ${eur(vp.gewinn)} minus Rate für das EG ${eur(vp.rateEG)} minus Zinsen auf die Differenz ${eur(vp.zinsLuecke)} plus deine drei eigenen Wohnungen ${eurS(vp.rows.filter((r) => r.eigen).reduce((a2, r) => a2 + r.ergebnis, 0))} = ${eurS(vp.bessam)} pro Monat (ohne Lohn).`, options: {} },
+  ], { x: MX, y: 5.15, w: W - 2 * MX, h: 1.6, fontSize: 12.5, color: C.accent4, paraSpaceAfter: 5 });
 }
 
 // ===== 15g Verkaufsplan: Ablauf =====
@@ -539,7 +537,7 @@ if (KI.length) {
   const steps = [
     ["1", "Förderung und Preise klären", "Stadt: Städtebauförderung und Grundstückspreis. Bauunternehmen und Zimmerei: Festpreis je m²."],
     ["2", "Bauvoranfrage / Bauantrag", "Staffelgeschoss, Flachdach, Höhe und Stellplätze schriftlich bestätigen lassen."],
-    ["3", "Teilungserklärung", "Aufteilung in Wohnungseigentum (6 Wohnungen und Gastro-EG), Hausverwaltung bestimmen."],
+    ["3", "Teilungserklärung", "Aufteilung in Wohnungseigentum (8 Wohnungen, Büro und Gastro im EG), Hausverwaltung bestimmen."],
     ["4", "Finanzierung je Käufer", "Bankzusage für jeden Käufer, ohne Eigenkapital und nach den neuen Käufen der letzten zwei Jahre schwer."],
     ["5", "Notarverträge", "Verkauf vor dem Bau gilt als Bauträgergeschäft, Erlaubnis nach § 34c GewO und Sicherheiten klären."],
     ["6", "Bau und Übergabe", "Bauzeit ca. 15 Monate, danach Abnahme und Übergabe, Vermietung der Wohnungen."],
@@ -555,12 +553,12 @@ if (KI.length) {
 
 // ===== 16 Risiken =====
 {
-  const s = content("Risiken und was wir dagegen tun", "Für die Bank", "Die Miete von 950 € je Wohnung ist eine Annahme des Bauherrn, Marktdaten für Werlte liegen darunter.");
+  const s = content("Risiken und was wir dagegen tun", "Für die Bank", "Die Miete von 11,18 €/m² ist eine Annahme des Bauherrn, Marktdaten für Werlte liegen darunter.");
   const items = [
-    ["Miete", "950 € je Wohnung (ca. 12–15 €/m²) liegt über den Portalwerten für Neubau in Werlte (ca. 11 €/m²). Gegenmaßnahme: Vergleichsangebote, Vorvermietung."],
+    ["Miete", "11,18 €/m² liegt am oberen Rand der Portalwerte für Neubau in Werlte (ca. 10,7–11,0 €/m²), der Altbestand liegt bei 8–10 €/m². Gegenmaßnahme: Vergleichsangebote, Vorvermietung."],
     ["Gastro-Umsatz", `Die Gastro braucht ab ca. ${k(Math.round(umsatzBreakEven(v, f0.plan) / 1000) * 1000)} Umsatz, bei 4 % Zins ca. ${k(Math.round(umsatzBreakEven(v, f0.ausgang) / 1000) * 1000)}. Gegenmaßnahme: Konzept, Pacht-Staffel, Lohn des Bauherrn bewusst ausgeklammert.`],
     ["Zins", "Nach 10 Jahren Zinsbindung ist der Folgezins offen. Gegenmaßnahme: Förderkredite, Forward-Darlehen, Tilgungsaussetzung."],
-    ["Genehmigung", "Staffelgeschoss und Flachdach müssen von der Stadt bestätigt werden. Gegenmaßnahme: Vorabstimmung, Plan B mit Satteldach."],
+    ["Genehmigung", "540 m² Grundfläche, Staffelgeschoss und Flachdach müssen von der Stadt bestätigt werden. Gegenmaßnahme: Vorabstimmung, Plan B mit Variante A (340 m²) oder Satteldach."],
   ];
   const cw = (W - 2 * MX - 0.4) / 2;
   items.forEach((it, i) => {
@@ -583,7 +581,7 @@ if (KI.length) {
     ["Grundstückspreis", `30 € weniger pro m² bringen ca. ${eurS(effLand)} im Monat`],
     ["Pacht oder Mietzuschuss", "1.000 € Zuschuss im Monat sind 1.000 € mehr im Monat"],
     ["Stellplätze", "Mitnutzung der öffentlichen Parkfläche oder faire Ablöse"],
-    ["Genehmigung", "Staffelgeschoss, Flachdach und Höhe schriftlich bestätigen"],
+    ["Genehmigung", "540 m² Grundfläche, Staffelgeschoss, Flachdach und Höhe schriftlich bestätigen"],
     ["Zinsvorteil", `0,5 % weniger Zins bringen ca. ${eurS(effZins)} im Monat`],
   ];
   const cw = (W - 2 * MX - 0.4) / 2;
@@ -620,20 +618,20 @@ if (KI.length) {
 {
   const s = pres.addSlide({ masterName: "TITEL" });
   text(s, "Anhang", { x: MX, y: 2.8, w: 10, h: 1.2, fontSize: 41, bold: false, fontFace: "Georgia", color: C.background1 });
-  text(s, "Annahmen, Gastro-Kosten, Gastro-Ausbau, Mietdaten, Vergleich mit Variante B und C", { x: MX, y: 4.1, w: 10, h: 0.6, fontSize: 18, color: "CFD8D3" });
+  text(s, "Annahmen, Gastro-Kosten, Gastro-Ausbau, Mietdaten, Vergleich mit Variante A und C", { x: MX, y: 4.1, w: 10, h: 0.6, fontSize: 18, color: "CFD8D3" });
 }
 {
   const s = content("Rechenannahmen und offene Punkte", "Anhang", "Alle Zahlen sind Planungsannahmen, keine Zusagen.");
   const left = [
     "Grundstück 960 m² × 230 € plus ca. 7 % (5 % Grunderwerbsteuer, ca. 2 % Notar)",
-    "Bau 960 m² BGF × 2.200 €, Staffel in Holzbau 400 €/m² günstiger, Terrasse 58 m² × 450 €, Baunebenkosten 15 %",
+    "Bau 1.540 m² BGF × 2.200 €, Staffel (460 m²) in Holzbau 400 €/m² günstiger, Terrasse 72 m² × 450 €, Baunebenkosten 15 %",
     "100 % Fremdfinanzierung, 1 % Tilgung, Aufschub 12 Monate",
     "Bauzeit 15 Monate, Bereitstellungszins 3 % p. a. ab Monat 7",
     "Zins Plan 3,3 % (Förderkredite, Annahme), Ausgang 4,0 %",
   ];
   const right = [
     `Gastro-Umsatz ${k(UM)} netto, Marge vor Pacht 30,5 %`,
-    "6 Wohnungen zu je 950 € Kaltmiete, Gastro-Pacht 12 €/m²",
+    "8 Wohnungen (725 m²) zu 11,18 €/m² Kaltmiete, Büro 150 m² zu 10 €/m², Gastro-Pacht 12 €/m²",
     "Lohn des Bauherrn wird vorerst nicht gerechnet, Rücklagen 10 % der Miete und Pacht",
     "Förderung als Zuschuss in % der Gesamtkosten (Annahme)",
     "Nebenkosten (Grundsteuer, Versicherung, Betriebskosten) werden auf die Mieter umgelegt, die Hausverwaltung deckt die Rücklage",
@@ -700,37 +698,37 @@ if (KI.length) {
   card(s, 9.6, 1.5, W - 9.6 - MX, 3.6, "Annahme Miete");
   text(s, [
     { text: "Im Modell", options: { bold: true, color: C.accent1, breakLine: true } },
-    { text: "6 Wohnungen zu 950 € Kaltmiete (Bauherr, zentrale Lage), das sind bei ca. 75 m² etwa 12,70 €/m². Gastro-Pacht 12 €/m² ohne Marktdaten." },
+    { text: "Wohnungen 11,18 €/m² Kaltmiete (950 € für 85 m², Bauherr, zentrale Lage), Büro 10 €/m². Gastro-Pacht 12 €/m² ohne Marktdaten." },
   ], { x: 9.85, y: 1.7, w: W - 9.6 - MX - 0.5, h: 3.2, fontSize: 14 });
   text(s, "Quellen: mietpreise.info/mietspiegel/werlte, miete-aktuell.de, immobilienscout24.de (Kreis Emsland), Abruf Oktober 2026", { x: MX, y: 5.4, w: W - 2 * MX, h: 0.6, fontSize: 12, color: C.accent4 });
 }
 
 // ===== Varianten B und C: 540 m² Grundfläche =====
 {
-  const s = content("Vergleich: Variante A, B und C", "Anhang", "Nur mit Ausnahme der Stadt: Baufenster ca. 400–460 m² geschätzt, im Plan stehen zwei Vollgeschosse und 12 m Höhe, GRZ 0,6 erlaubt max. 576 m².");
-  const vb = VARIANTEN.b, vc = VARIANTEN.c;
-  const fa = finanz(v, 0, A.zinsPlan), fb = finanz(vb, 0, A.zinsPlan), fc = finanz(vc, 0, A.zinsPlan);
-  const ca = cashflow(v, fa), cb = cashflow(vb, fb), cc = cashflow(vc, fc);
+  const s = content("Vergleich: Variante A, B und C", "Anhang", "B ist die Hauptvariante. Baufenster im Plan ca. 400–460 m² geschätzt, im Plan stehen zwei Vollgeschosse und 12 m Höhe, GRZ 0,6 erlaubt max. 576 m².");
+  const va = VARIANTEN.a, vb = v, vc = VARIANTEN.c;
+  const fa = finanz(va, 0, A.zinsPlan), fb = finanz(vb, 0, A.zinsPlan), fc = finanz(vc, 0, A.zinsPlan);
+  const ca = cashflow(va, fa), cb = cashflow(vb, fb), cc = cashflow(vc, fc);
   const ta = teilung(LAYOUTS.A), tb = teilung(LAYOUTS.B), tc = teilung(LAYOUTS.C);
   const rows = [
-    [hdr(""), hdr("A: 340 m², 2+Staffel", "right"), hdr("B: 540 m², 2+Staffel", "right"), hdr("C: 540 m², 3+Holz-Penthouse", "right")],
+    [hdr(""), hdr("A: 340 m², 2+Staffel", "right"), hdr("B (Haupt): 540 m², 2+Staffel", "right"), hdr("C: 540 m², 3+Holz-Penthouse", "right")],
     [cell("Bruttofläche"), R("960 m²"), R("1.540 m²"), R("2.080 m²")],
-    [cell("Wohnfläche / Wohnungen"), R("444 m² / 6"), R("725 m² / ca. 8–9"), R("1.140 m² / ca. 13")],
+    [cell("Wohnfläche / Wohnungen"), R("444 m² / 6"), R("725 m² / 8"), R("1.140 m² / ca. 13")],
     [cell("Gastro / Büro im EG"), R("290 m² / –"), R("290 m² / 150 m²"), R("290 m² / 150 m²")],
     [cell("Gesamtkosten"), R(eur(fa.gesamt)), R(eur(fb.gesamt)), R(eur(fc.gesamt))],
     [cell("Rate pro Monat (ein Kredit)"), R(eur(fa.rate)), R(eur(fb.rate)), R(eur(fc.rate))],
     [cell(`Ergebnis bei ${k(UM)} Umsatz`), cfCell(ca.cf), cfCell(cb.cf), cfCell(cc.cf)],
-    [cell("Break-even-Umsatz Gastro"), R(eur(umsatzBreakEven(v, fa))), R(eur(umsatzBreakEven(vb, fb))), R(eur(umsatzBreakEven(vc, fc)))],
-    [cell("Ergebnis bei 4,0 % Zins"), cfCell(cashflow(v, finanz(v, 0, A.zinsAusgang)).cf), cfCell(cashflow(vb, finanz(vb, 0, A.zinsAusgang)).cf), cfCell(cashflow(vc, finanz(vc, 0, A.zinsAusgang)).cf)],
+    [cell("Break-even-Umsatz Gastro"), R(eur(umsatzBreakEven(va, fa))), R(eur(umsatzBreakEven(vb, fb))), R(eur(umsatzBreakEven(vc, fc)))],
+    [cell("Ergebnis bei 4,0 % Zins"), cfCell(cashflow(va, finanz(va, 0, A.zinsAusgang)).cf), cfCell(cashflow(vb, finanz(vb, 0, A.zinsAusgang)).cf), cfCell(cashflow(vc, finanz(vc, 0, A.zinsAusgang)).cf)],
     [cell("Kosten je m² Wohnfläche, Regelgeschoss / Staffel"), R(`${eur(ta.ogM2)} / ${eur(ta.stM2)}`), R(`${eur(tb.ogM2)} / ${eur(tb.stM2)}`), R(`${eur(tc.ogM2)} / ${eur(tc.stM2)}`)],
     [cell("85-m²-Wohnung im Regelgeschoss: Ergebnis (eigener Kredit)"), cfCell(ta.oG(85, 950).ergebnis), cfCell(tb.oG(85, 950).ergebnis), cfCell(tc.oG(85, 950).ergebnis)],
     [cell("Preis-Lücke je 85-m²-Wohnung im Regelgeschoss"), R(eur(ta.oG(85, 950).luecke)), R(eur(tb.oG(85, 950).luecke)), R(eur(tc.oG(85, 950).luecke))],
   ];
   s.addTable(rows, { x: MX, y: 1.4, w: 9.0, colW: [3.9, 1.7, 1.7, 1.7], rowH: 0.42, border: tblBorder, objectName: "Tabelle Varianten B und C" });
-  card(s, 10.2, 1.4, W - 10.2 - MX, 5.0, "Hinweis B und C");
+  card(s, 10.2, 1.4, W - 10.2 - MX, 5.0, "Hinweis A, B und C");
   text(s, [
     { text: "Annahmen", options: { bold: true, color: C.accent1, breakLine: true } },
-    { text: "EG 540 m² (Gastro 290 m², Büro 150 m²), Regelgeschosse je 540 m², Staffel 460 m² in Holzbau mit 80 m² schmaler Terrasse. Büro 10 €/m², Wohnen 11,18 €/m².", options: { breakLine: true } },
+    { text: "EG 540 m² (Gastro 290 m², Büro 150 m²), Regelgeschosse je 540 m², Staffel 460 m² in Holzbau mit 72 m² schmaler Terrasse. Büro 10 €/m², Wohnen 11,18 €/m².", options: { breakLine: true } },
     { text: " ", options: { breakLine: true } },
     { text: "Zu klären", options: { bold: true, color: C.accent1, breakLine: true } },
     { text: "Baufenster, zwei Vollgeschosse, bei C drei Vollgeschosse und ca. 13 m Höhe statt 12 m, deutlich mehr Stellplätze.", options: {} },
@@ -738,7 +736,7 @@ if (KI.length) {
 }
 
 (async () => {
-  const file = path.join(OUT, "Neue-Mitte-Werlte_Baufeld3_6-Wohnungen_Gastro-EG.pptx");
+  const file = path.join(OUT, "Neue-Mitte-Werlte_Baufeld3_8-Wohnungen_Gastro-Buero-EG.pptx");
   await pres.writeFile({ fileName: file });
   await applyTheme(file, THEME);
   console.log("geschrieben", file);

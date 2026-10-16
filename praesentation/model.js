@@ -24,7 +24,22 @@ const A = {
 const VARIANTEN = {
   sechs: {
     key: "sechs",
-    name: "6 Wohnungen, große Gastro im EG",
+    name: "8 Wohnungen, Gastro und Büro im EG, 540 m² Grundfläche",
+    bgf: 1540, // EG 540 + 1. OG 540 + Staffelgeschoss 460 (Holzbau, schmale Terrasse rundum)
+    gastroM2: 290,
+    bueroM2: 150,
+    wohnungen: 8,
+    holzM2: 460, // Staffelgeschoss in Holzbau (Zimmerei), nur 0,8 m zurückgesetzt
+    terrasseM2: 72, // schmale umlaufende Dachterrasse (ca. 0,8 m) auf dem 1. OG, zählt nicht zur BGF
+    wohnflaeche: 725, // 1. OG 5 x 83 m² + Staffel 3 x 103 m²
+    gastroAusbau: 150000, // Annahme des Bauherrn, einfacher Ausbau
+    mieteOhnePacht: 725 * (950 / 85) + 150 * 10, // Wohnen 11,18 €/m² + Büro 10 €/m²
+    pacht: 290 * 12, // 3.480 €
+    umsatz: 50000,
+  },
+  a: {
+    key: "a",
+    name: "Variante A: 340 m² Grundfläche, 6 Wohnungen, große Gastro im EG",
     bgf: 960, // EG 340 + 1. OG 340 + Staffelgeschoss 280 (Holzbau, schmale Terrasse rundum)
     gastroM2: 290,
     bueroM2: 0,
@@ -42,7 +57,7 @@ const VARIANTEN = {
     name: "Variante B: 540 m² Grundfläche, Gastro + Büro im EG, OG, Staffel",
     bgf: 1540, // EG 540 + 1. OG 540 + Staffel 460 (Holzbau, schmale Terrasse rundum)
     holzM2: 460,
-    terrasseM2: 80,
+    terrasseM2: 72,
     gastroM2: 290,
     bueroM2: 150,
     wohnungen: 8,
@@ -57,7 +72,7 @@ const VARIANTEN = {
     name: "Variante C: 540 m² Grundfläche, 3 Vollgeschosse plus Holz-Penthouse",
     bgf: 2080, // EG 540 + 1. OG 540 + 2. OG 540 + Staffel 460 (Holzbau, schmale Terrasse rundum)
     holzM2: 460,
-    terrasseM2: 80,
+    terrasseM2: 72,
     gastroM2: 290,
     bueroM2: 150,
     wohnungen: 13,
@@ -183,9 +198,9 @@ function umsatzBreakEven(v, fin, lohn = A.lohn) {
 // Verkauf der Einheiten an Einzelne: jede Einheit mit eigenem Kredit, Preis = Selbstkosten
 const MIETE_M2 = 950 / 85; // 11,18 €/m² (Annahme des Bauherrn)
 const LAYOUTS = {
-  A: { EG: 340, OG: 340, ST: 280, terrasse: 58, wfOG: 255, wfST: 189, buero: 0 },
-  B: { EG: 540, OG: 540, ST: 460, terrasse: 80, wfOG: 415, wfST: 310, buero: 150 },
-  C: { EG: 540, OG: 540, OG2: 540, ST: 460, terrasse: 80, wfOG: 415, wfOG2: 415, wfST: 310, buero: 150 },
+  A: { EG: 340, OG: 340, ST: 280, terrasse: 58, wfOG: 255, wfST: 189, buero: 0, nOG: 3, nST: 3 },
+  B: { EG: 540, OG: 540, ST: 460, terrasse: 72, wfOG: 415, wfST: 310, buero: 150, nOG: 5, nST: 3 },
+  C: { EG: 540, OG: 540, OG2: 540, ST: 460, terrasse: 72, wfOG: 415, wfOG2: 415, wfST: 310, buero: 150, nOG: 10, nST: 3 },
 };
 function teilung(L, zins = A.zinsPlan, opts = {}) {
   const c = opts.bauKostenM2 ?? A.bauKostenM2;
@@ -231,8 +246,9 @@ function zielplus(L, plus = 250, zins = A.zinsPlan, opts = {}) {
     const preis = Math.min(e.kosten, preisFuer(miete));
     return { m2: e.m2, kosten: e.kosten, preis, nachlass: e.kosten - preis, preisM2: preis / e.m2, rate: rate(preis), miete, ergebnis: miete * (1 - A.ruecklagen) - rate(preis) };
   };
-  const og = einheit(t.oG(85, 950), 950), st = einheit(t.st(63, 950), 950);
-  const luecke = 3 * og.nachlass + 3 * st.nachlass; // nur Layout A: 3 + 3 Einheiten
+  const mOG = L.wfOG / L.nOG, mST = L.wfST / L.nST;
+  const og = einheit(t.oG(mOG, mOG * MIETE_M2), mOG * MIETE_M2), st = einheit(t.st(mST, mST * MIETE_M2), mST * MIETE_M2);
+  const luecke = L.nOG * og.nachlass + L.nST * st.nachlass;
   const tilEG = opts.tilgungBessam ?? A.tilgung;
   const rateEG = (t.gastro.kosten * t.k * (zins + tilEG)) / 12;
   const zinsLuecke = (luecke * t.k * zins) / 12;
@@ -244,16 +260,19 @@ function zielplus(L, plus = 250, zins = A.zinsPlan, opts = {}) {
 const KAEUFER = [
   { name: "Vater", typ: "OG", grest: 0 },
   { name: "Bruder", typ: "OG", grest: 0.05 },
-  { name: "Du (eigene Wohnung)", typ: "OG", grest: 0, eigen: true },
+  { name: "Du (Wohnung 1, eigene)", typ: "OG", grest: 0, eigen: true },
+  { name: "Du (Wohnung 2, vermietet)", typ: "OG", grest: 0, eigen: true },
+  { name: "Du (Wohnung 3, vermietet)", typ: "OG", grest: 0, eigen: true },
   { name: "Onkel 1", typ: "ST", grest: 0.05 },
   { name: "Onkel 2", typ: "ST", grest: 0.05 },
   { name: "Onkel 3", typ: "ST", grest: 0.05 },
 ];
 function verkaufsplan(opts = {}) {
   const f = opts.foerderung ?? 0, c = opts.bauKostenM2 ?? A.bauKostenM2, til = opts.tilgung ?? 0, zins = opts.zins ?? A.zinsPlan;
-  const t = teilung(LAYOUTS.A, zins, { bauKostenM2: c });
+  const L = LAYOUTS.B, mOG = L.wfOG / L.nOG, mST = L.wfST / L.nST;
+  const t = teilung(L, zins, { bauKostenM2: c });
   const rows = KAEUFER.map((b) => {
-    const e = b.typ === "OG" ? t.oG(85, 950) : t.st(63, 950);
+    const e = b.typ === "OG" ? t.oG(mOG) : t.st(mST);
     const kosten = e.kosten * (1 - f);
     const einnahme0 = e.miete * (1 - A.ruecklagen);
     let preis = kosten;
@@ -272,7 +291,7 @@ function verkaufsplan(opts = {}) {
   const rateEG = (t.gastro.kosten * (1 - f) * t.k * (zins + A.tilgung)) / 12;
   const gewinn = VARIANTEN.sechs.umsatz * A.gastroMargeVorPacht - A.lohn;
   const eigen = rows.find((r) => r.eigen);
-  return { rows, k: t.k, gastro: t.gastro, luecke, zinsLuecke, rateEG, gewinn, bessam: gewinn - rateEG - zinsLuecke + (eigen ? eigen.ergebnis : 0), eigen };
+  return { rows, k: t.k, gastro: t.gastro, luecke, zinsLuecke, rateEG, gewinn, bessam: gewinn - rateEG - zinsLuecke + rows.filter((r) => r.eigen).reduce((a2, r) => a2 + r.ergebnis, 0), eigen };
 }
 
 module.exports = { verkaufsplan, KAEUFER, zielplus, teilung, LAYOUTS, MIETE_M2, bauRoh, A, VARIANTEN, finanz, cashflow, umsatzBreakEven };

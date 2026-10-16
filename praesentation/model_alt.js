@@ -1,6 +1,6 @@
 // Alternativen zu Dauermietwohnungen: Airbnb/Apartments und Hotel (je mit Gastro im EG), Variante A (960 m² BGF)
 const { A, VARIANTEN, finanz, cashflow } = require("./model");
-const v = VARIANTEN.sechs;
+const v = VARIANTEN.a;
 const gastroNetto = v.umsatz * A.gastroMargeVorPacht - v.pacht * A.ruecklagen; // Gastro-Gewinn, Rücklage auf die Pacht wie im Hausmodell
 
 // Airbnb / Apartments
