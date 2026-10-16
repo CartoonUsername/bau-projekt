@@ -1,4 +1,4 @@
-"""Excel-Rechenmodell Baufeld 3 (Variante B: 8 Wohnungen, Gastro und Büro im EG, 540 m² Grundfläche, 1.540 m² BGF).
+"""Excel-Rechenmodell Baufeld 3 (Variante B: 8 Wohnungen, große Gastro im ganzen EG, 540 m² Grundfläche, 1.540 m² BGF).
 Annahmen, Kosten, Kredit (Bauzeit + Aufschub), Cashflow rechnen mit Formeln;
 Szenarien sind Werte aus model.js (Stand Oktober 2026)."""
 import json
@@ -75,7 +75,7 @@ rows = [
     (24, "Einnahmen und Gastro", None, None, None),
     (25, "Wohnfläche (m²)", 725, "#,##0", "8 Wohnungen: 5 × 83 m² im 1. OG, 3 × 103 m² im Staffelgeschoss"),
     (26, "Kaltmiete je m² Wohnfläche (€)", "=950/85", "0.00", "950 € für 85 m² (Annahme des Bauherrn), Markt ca. 11 €/m²"),
-    (27, "Gastrofläche (m²)", 290, "#,##0", ""),
+    (27, "Gastrofläche (m²)", 460, "#,##0", ""),
     (28, "Pacht je m² (€)", 12, EUR, "Gastro zahlt an das Haus"),
     (29, "Rücklagen", 0.10, PCT, "Reparaturen, Leerstand, in % von Miete und Pacht"),
     (30, "Gastro-Umsatz pro Monat (€)", 50000, EUR, "netto"),
@@ -88,7 +88,7 @@ rows = [
     (38, "Terrasse Preis (€ je m²)", 450, EUR, "Abdichtung, Holzrost, Geländer, Annahme"),
     (39, "Preisnachlass Bauunternehmer/Zimmerei (%)", 0, PCT, "Bekanntenpreis, noch offen (z. B. 5 % oder 10 %)"),
     (41, "Büro im EG", None, None, None),
-    (42, "Büro-Fläche (m²)", 150, "#,##0", "vermietet"),
+    (42, "Büro-Fläche (m²)", 0, "#,##0", "in Variante B kein Büro, Gastro nutzt das ganze EG"),
     (43, "Büro-Miete je m² (€)", 10, EUR, "Annahme"),
 ]
 for r, label, val, fmt, hint in rows:
@@ -240,7 +240,7 @@ for col in "ABCDEFGH":
 # ---------------- Verkauf je Partei ----------------
 vk = wb.create_sheet("Verkauf je Partei")
 title(vk, "Verkauf an die Familie: Rechnung je Partei", "Jede Partei mit eigenem Kredit ohne Eigenkapital. Preis = Selbstkosten, 3,3 % Zins, 1 % Tilgung, 10 % Rücklagen. Feste Werte aus model.js.")
-header(vk, 4, ["", "A: 1. OG 85 m²", "A: Staffel 63 m²", "A: Gastro (Du)", "B: 1. OG 83 m²", "B: Staffel 103 m²", "B: Gastro + Büro (Du)", "C: Regelgeschoss 83 m²", "C: Staffel 103 m²", "C: Gastro + Büro (Du)"])
+header(vk, 4, ["", "A: 1. OG 85 m²", "A: Staffel 63 m²", "A: Gastro (Du)", "B: 1. OG 83 m²", "B: Staffel 103 m²", "B: Gastro (Du)", "C: Regelgeschoss 83 m²", "C: Staffel 103 m²", "C: Gastro + Büro (Du)"])
 VA, VB, VC = szen["verkauf"]["A"], szen["verkauf"]["B"], szen["verkauf"]["C"]
 cols = [(VA["og85"], 2), (VA["st56"], 3), (VA["gastro"], 4), (VB["og85"], 5), (VB["st56"], 6), (VB["gastro"], 7), (VC["og85"], 8), (VC["st56"], 9), (VC["gastro"], 10)]
 labels = ["Preis (Selbstkosten)", "Rate pro Monat", "Einnahme nach Rücklagen / Gastro-Gewinn (+ Büro)", "Ergebnis pro Monat", "Preis für Ergebnis 0 €", "Lücke zum Selbstkostenpreis"]
@@ -267,7 +267,7 @@ for i, (lab, ka) in enumerate([("Gesamtkosten", "gesamt"), ("Rate pro Monat", "r
     for j, key in enumerate(["A", "B", "C"]):
         cc = vk.cell(row=15 + i, column=2 + j, value=round(vb_[key][ka], 2))
         cc.number_format = EURS if ka == "cf" else EUR
-vk.cell(row=20, column=1, value="B (Hauptvariante): EG 540 m² (Gastro 290 + Büro 150), 1. OG 540 m², Staffel 460 m² mit 72 m² Terrasse. C: zusätzlich 2. OG 540 m², Höhe ca. 13 m. Nur mit Ausnahme der Stadt (Baufenster, II Vollgeschosse, 12 m).").font = note
+vk.cell(row=20, column=1, value="B (Hauptvariante): EG 540 m² (Gastro 460), 1. OG 540 m², Staffel 460 m² mit 72 m² Terrasse. C: zusätzlich 2. OG 540 m², Höhe ca. 13 m. Nur mit Ausnahme der Stadt (Baufenster, II Vollgeschosse, 12 m).").font = note
 
 # Ziel: 250 € Plus je Wohnung
 zr = szen["ziel"]

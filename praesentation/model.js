@@ -24,17 +24,17 @@ const A = {
 const VARIANTEN = {
   sechs: {
     key: "sechs",
-    name: "8 Wohnungen, Gastro und Büro im EG, 540 m² Grundfläche",
+    name: "8 Wohnungen, große Gastro im ganzen EG, 540 m² Grundfläche",
     bgf: 1540, // EG 540 + 1. OG 540 + Staffelgeschoss 460 (Holzbau, schmale Terrasse rundum)
-    gastroM2: 290,
-    bueroM2: 150,
+    gastroM2: 460, // EG 540 m² abzüglich Treppenhaus, Aufzug und Wohn-Eingang (ca. 80 m²)
+    bueroM2: 0,
     wohnungen: 8,
     holzM2: 460, // Staffelgeschoss in Holzbau (Zimmerei), nur 0,8 m zurückgesetzt
     terrasseM2: 72, // schmale umlaufende Dachterrasse (ca. 0,8 m) auf dem 1. OG, zählt nicht zur BGF
     wohnflaeche: 725, // 1. OG 5 x 83 m² + Staffel 3 x 103 m²
     gastroAusbau: 150000, // Annahme des Bauherrn, einfacher Ausbau
-    mieteOhnePacht: 725 * (950 / 85) + 150 * 10, // Wohnen 11,18 €/m² + Büro 10 €/m²
-    pacht: 290 * 12, // 3.480 €
+    mieteOhnePacht: 725 * (950 / 85), // Wohnen 11,18 €/m²
+    pacht: 460 * 12, // 5.520 €
     umsatz: 50000,
   },
   a: {
@@ -58,13 +58,13 @@ const VARIANTEN = {
     bgf: 1540, // EG 540 + 1. OG 540 + Staffel 460 (Holzbau, schmale Terrasse rundum)
     holzM2: 460,
     terrasseM2: 72,
-    gastroM2: 290,
-    bueroM2: 150,
+    gastroM2: 460,
+    bueroM2: 0,
     wohnungen: 8,
     wohnflaeche: 725, // 1. OG ca. 415 m² + Staffel ca. 310 m²
     gastroAusbau: 150000,
-    mieteOhnePacht: 725 * (950 / 85) + 150 * 10, // Wohnen 11,18 €/m² + Büro 10 €/m²
-    pacht: 290 * 12,
+    mieteOhnePacht: 725 * (950 / 85) , // Wohnen 11,18 €/m² + Büro 10 €/m²
+    pacht: 460 * 12,
     umsatz: 50000,
   },
   c: {
@@ -73,13 +73,13 @@ const VARIANTEN = {
     bgf: 2080, // EG 540 + 1. OG 540 + 2. OG 540 + Staffel 460 (Holzbau, schmale Terrasse rundum)
     holzM2: 460,
     terrasseM2: 72,
-    gastroM2: 290,
-    bueroM2: 150,
+    gastroM2: 460,
+    bueroM2: 0,
     wohnungen: 13,
     wohnflaeche: 1140, // 1. OG 415 + 2. OG 415 + Staffel 310
     gastroAusbau: 150000,
-    mieteOhnePacht: 1140 * (950 / 85) + 150 * 10,
-    pacht: 290 * 12,
+    mieteOhnePacht: 1140 * (950 / 85) ,
+    pacht: 460 * 12,
     umsatz: 50000,
   },
   flach: {
@@ -199,8 +199,8 @@ function umsatzBreakEven(v, fin, lohn = A.lohn) {
 const MIETE_M2 = 950 / 85; // 11,18 €/m² (Annahme des Bauherrn)
 const LAYOUTS = {
   A: { EG: 340, OG: 340, ST: 280, terrasse: 58, wfOG: 255, wfST: 189, buero: 0, nOG: 3, nST: 3 },
-  B: { EG: 540, OG: 540, ST: 460, terrasse: 72, wfOG: 415, wfST: 310, buero: 150, nOG: 5, nST: 3 },
-  C: { EG: 540, OG: 540, OG2: 540, ST: 460, terrasse: 72, wfOG: 415, wfOG2: 415, wfST: 310, buero: 150, nOG: 10, nST: 3 },
+  B: { EG: 540, OG: 540, ST: 460, terrasse: 72, wfOG: 415, wfST: 310, buero: 0, nOG: 5, nST: 3 },
+  C: { EG: 540, OG: 540, OG2: 540, ST: 460, terrasse: 72, wfOG: 415, wfOG2: 415, wfST: 310, buero: 0, nOG: 10, nST: 3 },
 };
 function teilung(L, zins = A.zinsPlan, opts = {}) {
   const c = opts.bauKostenM2 ?? A.bauKostenM2;

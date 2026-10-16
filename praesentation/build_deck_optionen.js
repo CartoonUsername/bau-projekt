@@ -83,7 +83,7 @@ async function deck() {
   const TAG = "Optionen";
 
   // ---- 2 Überblick
-  { const s = content("Die drei Optionen auf einen Blick", "Für Stadt und Bank", "Variante B: 540 m² Grundfläche, 1.540 m² BGF. Gastro (290 m²) und Büro (150 m²) im EG sind in allen Optionen gleich. 3,3 % Zins, 1 % Tilgung, ohne Förderung, ohne Lohn des Bauherrn.");
+  { const s = content("Die drei Optionen auf einen Blick", "Für Stadt und Bank", "Variante B: 540 m² Grundfläche, 1.540 m² BGF. Die Gastro (460 m²) im ganzen EG ist in allen Optionen gleich. 3,3 % Zins, 1 % Tilgung, ohne Förderung, ohne Lohn des Bauherrn.");
     const rows = [[hdr("Option"), hdr("Einheiten"), hdr("Zusatzkosten", "right"), hdr("Rate pro Monat", "right"), hdr("Ergebnis Haus pro Monat", "right"), hdr("Aufwand")],
       [cell("1. Dauermiete", { bold: true }), cell("8 Wohnungen"), R("–"), R(eur(dm.fin.rate)), cf(dm.cf), cell("gering")],
       [cell("2. Airbnb-Apartments", { bold: true }), cell("8 Apartments (45 % Auslastung)"), R(eur(a45.einrichtung)), R(eur(a45.fin.rate)), cf(a45.cf), cell("hoch")],
@@ -97,10 +97,10 @@ async function deck() {
   }
 
   // ---- 3 Option 1 Dauermiete
-  { const s = content("Option 1: Dauermiete (Basis)", "Für Stadt und Bank", "Ausführliche Rechnung steht in der Hauptpräsentation (8 Wohnungen und Büro, Gastro im EG).");
+  { const s = content("Option 1: Dauermiete (Basis)", "Für Stadt und Bank", "Ausführliche Rechnung steht in der Hauptpräsentation (8 Wohnungen, Gastro im EG).");
     const w = (W - 2 * MX - 3 * 0.25) / 4;
     stat(s, MX, 1.5, w, "8", `Wohnungen: 5 × ${Math.round(mOG)} m² (1. OG), 3 × ${Math.round(mST)} m² (Penthouse)`);
-    stat(s, MX + (w + 0.25), 1.5, w, eur(base.mieteOhnePacht), "Kaltmiete pro Monat (11,18 €/m², Büro 10 €/m²)", C.accent2);
+    stat(s, MX + (w + 0.25), 1.5, w, eur(base.mieteOhnePacht), "Kaltmiete pro Monat (11,18 €/m²)", C.accent2);
     stat(s, MX + 2 * (w + 0.25), 1.5, w, eur(dm.fin.rate), "Rate pro Monat bei einem Kredit", C.accent4);
     stat(s, MX + 3 * (w + 0.25), 1.5, w, eurS(dm.cf), "Ergebnis Haus pro Monat", dm.cf >= 0 ? C.accent5 : C.accent6);
     text(s, [
@@ -174,7 +174,7 @@ async function deck() {
     ], { x: 8.85, y: 1.7, w: W - 8.6 - MX - 0.5, h: 4.2, fontSize: 13 });
   }
 
-  { const s = content("Option 3: Hotel, Ergebnis", "Für Bank", `Ergebnis des ganzen Hauses pro Monat: Gastro und Büro plus Hotel minus Rate (${eur(h52.fin.rate)}). Gleichauf mit der Dauermiete ab ca. ${pct(gleichHotel)} Auslastung (Eigenbetrieb).`);
+  { const s = content("Option 3: Hotel, Ergebnis", "Für Bank", `Ergebnis des ganzen Hauses pro Monat: Gastro plus Hotel minus Rate (${eur(h52.fin.rate)}). Gleichauf mit der Dauermiete ab ca. ${pct(gleichHotel)} Auslastung (Eigenbetrieb).`);
     const rows = [[hdr("Auslastung"), hdr("Umsatz Hotel", "right"), hdr("Hotel nach Kosten", "right"), hdr("Haus: Eigenbetrieb", "right"), hdr("Pacht (22 %)", "right"), hdr("Haus: verpachtet", "right")]];
     [0.4, 0.5, 0.6, 0.7].forEach((x) => { const r = hotel(x), p = hotel(x, { verpachtet: true }); rows.push([cell(pct(x)), R(eur(r.umsatzMonat)), R(eur(r.gopMonat)), cf(r.cf), R(eur(r.pachtMonat)), cf(p.cf)]); });
     rows.push([cell("Dauermiete (Vergleich)", { bold: true }), R(""), R(eur(dm.nettoMiete)), cf(dm.cf), R(""), R("")]);
@@ -201,7 +201,7 @@ async function deck() {
   { const s = content("Recht und Risiken je Option", "Für Stadt und Bank", "Bitte mit Bauamt und Brandschutz klären, die Hinweise sind keine Rechtsberatung.");
     const items = [
       ["Sonderbau Beherbergung", `Bei mehr als 12 Gästebetten gelten meist Sonderbau-Regeln (Brandschutz, Fluchtwege). Airbnb (ca. ${AIRBNB.apartments.reduce((a, x) => a + x.n * x.gaeste, 0)} Betten) und Hotel (${HOTEL.zimmer} Zimmer) betrifft das auch für das Holz-Staffelgeschoss, Dauermiete nicht.`],
-      ["Nutzung im B-Plan", "Im Mischgebiet sind Wohnen, Beherbergung und Büro meist zulässig, die Stadt muss es für Baufeld 3 und die 540 m² Grundfläche bestätigen."],
+      ["Nutzung im B-Plan", "Im Mischgebiet sind Wohnen, Beherbergung und Gastro meist zulässig, die Stadt muss es für Baufeld 3 und die 540 m² Grundfläche bestätigen."],
       ["Stellplätze", "Hotelgäste und Gastro brauchen deutlich mehr Plätze als Wohnungen (ca. 0,5 bis 1 je Zimmer). Auf dem Grundstück passen nur ca. 8–10."],
       ["Betrieb und Markt", "Airbnb und Hotel sind ein zweiter Betrieb mit Personal oder Aufwand. Für Werlte fehlen belastbare Zahlen zu Preis und Auslastung."],
     ];
