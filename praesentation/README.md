@@ -28,3 +28,6 @@ Alle Zahlen sind Planungsannahmen: Baukosten 2.700 €/m², Förderung als Zusch
 - Basis: 340 m² Grundfläche, EG Gastro, 6 Dauermietwohnungen, 2.200 €/m², Gastro-Ausbau 150.000 €, ohne Förderung, ohne Lohn des Bauherrn.
 - Verkaufsplan an Verwandte (Folie 20) und im Excel-Blatt "Verkauf je Partei": Staffel zum Selbstkostenpreis, OG-Wohnungen von Vater und Bruder mit Nachlass, Käufer tilgungsfrei.
 - Bilder: `bilder/ki_*.jpg` (Theke `ki_innen_2.jpg` farblich nachbearbeitet, Original in `bilder/alt/`).
+
+- Bilder (16.10.): alle fünf KI-Bilder (`bilder/ki_*.jpg`) mit Higgsfield neu erzeugt (Milchglas-Brüstungen, Holz-Penthouse, anthrazitfarbene Theke); die retuschierten Vorversionen liegen in `bilder/alt/retusche/`.
+- `package.json` in `praesentation/` setzt CommonJS, weil das Hauptverzeichnis ein TypeScript-Modulprojekt (Higgsfield-SDK) ist.

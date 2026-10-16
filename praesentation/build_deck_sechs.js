@@ -316,7 +316,7 @@ if (KI.length) {
     const y = 1.45 + Math.floor(i / cols) * (gh + 0.3);
     s.addImage({ path: fit(f, gw, gh), x, y, w: gw, h: gh, altText: "Visualisierung " + (i + 1) });
   });
-  text(s, "KI-generierte Visualisierungen zur Orientierung (Theke und Glasbrüstungen nachbearbeitet), Maße und Details folgen mit dem Architekten.", { x: MX, y: H - 0.95, w: W - 2 * MX, h: 0.4, fontSize: 12, color: C.accent4 });
+  text(s, "KI-generierte Visualisierungen zur Orientierung (neu erzeugt, mit Milchglas-Brüstungen), Maße und Details folgen mit dem Architekten.", { x: MX, y: H - 0.95, w: W - 2 * MX, h: 0.4, fontSize: 12, color: C.accent4 });
 }
 
 // ===== 9 Stellplätze =====
