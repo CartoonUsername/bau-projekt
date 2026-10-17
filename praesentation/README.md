@@ -22,7 +22,7 @@ Alle Zahlen sind Planungsannahmen: Baukosten 2.700 €/m², Förderung als Zusch
 ## Alternativen (separate Ausarbeitungen)
 - `Neue-Mitte-Werlte_Baufeld3_Airbnb-Apartments.pptx`: 6 Apartments (Kurzzeitvermietung) statt Dauermiete, Gastro im EG.
 - `Neue-Mitte-Werlte_Baufeld3_Hotel-und-Gastro.pptx`: Hotel mit 15 Zimmern über der Gastro.
-- Rechnung in `model_alt.js`, Gastro-Konzept in `build_deck_gastro.js`, Folien in `build_deck_optionen.js` (eine Präsentation für Dauermiete, Airbnb und Hotel auf Basis Variante B). Preise, Auslastung und Kostenquoten sind Annahmen, belastbare Werte für Werlte fehlen.
+- Rechnung in `model_alt.js`, KfW in `build_deck_kfw.js`, Gastro-Konzept in `build_deck_gastro.js`, Folien in `build_deck_optionen.js` (eine Präsentation für Dauermiete, Airbnb und Hotel auf Basis Variante B). Preise, Auslastung und Kostenquoten sind Annahmen, belastbare Werte für Werlte fehlen.
 
 ## Finale Präsentation (Variante A, ohne Förderung)
 - Basis: 340 m² Grundfläche, EG Gastro, 6 Dauermietwohnungen, 2.200 €/m², Gastro-Ausbau 150.000 €, ohne Förderung, ohne Lohn des Bauherrn.

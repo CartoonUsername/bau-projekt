@@ -294,7 +294,28 @@ function verkaufsplan(opts = {}) {
   return { rows, k: t.k, gastro: t.gastro, luecke, zinsLuecke, rateEG, gewinn, bessam: gewinn - rateEG - zinsLuecke + rows.filter((r) => r.eigen).reduce((a2, r) => a2 + r.ergebnis, 0), eigen };
 }
 
-module.exports = { verkaufsplan, KAEUFER, zielplus, teilung, LAYOUTS, MIETE_M2, bauRoh, A, VARIANTEN, finanz, cashflow, umsatzBreakEven };
+
+// KfW "Klimafreundlicher Neubau": zinsverbilligter Kredit (kein Zuschuss). Wohnteil Programm 298 (je Wohneinheit), Gastro Programm 299 (je m² Nettogrundfläche).
+// Beträge und Zinsen sind Stand der Ratgeber im Oktober 2026 und müssen bei der Hausbank/KfW bestätigt werden (Quellen widersprechen sich).
+const KFW = {
+  jeWE: { ohneQNG: 100000, mitQNG: 150000 },
+  jeM2NGF: { ohneQNG: 1500, mitQNG: 2000 },
+  ngfAnteil: 0.85, // Nettogrundfläche der Gastro als Anteil der Fläche (Annahme)
+  mehrkostenPct: 0.03, // Mehrkosten Effizienzhaus 40 und QNG-Nachweis in % der Baukosten (Annahme)
+};
+function kfw(v, { zKfW, qng, mehrPct = KFW.mehrkostenPct, zMarkt = A.zinsAusgang }) {
+  const L = LAYOUTS.B;
+  const nWE = L.nOG + L.nST;
+  const rahmen = nWE * (qng ? KFW.jeWE.mitQNG : KFW.jeWE.ohneQNG) + v.gastroM2 * KFW.ngfAnteil * (qng ? KFW.jeM2NGF.mitQNG : KFW.jeM2NGF.ohneQNG);
+  const opts = { bauKostenM2: A.bauKostenM2 * (1 + mehrPct) };
+  const f0 = finanz(v, 0, zMarkt, opts);
+  const anteil = Math.min(1, rahmen / f0.gesamt);
+  const zMix = anteil * zKfW + (1 - anteil) * zMarkt;
+  const fin = finanz(v, 0, zMix, opts);
+  return { rahmen, anteil, zMix, fin, cf: cashflow(v, fin).cf, mehrkosten: f0.gesamt - finanz(v, 0, zMarkt).gesamt };
+}
+
+module.exports = { kfw, KFW, verkaufsplan, KAEUFER, zielplus, teilung, LAYOUTS, MIETE_M2, bauRoh, A, VARIANTEN, finanz, cashflow, umsatzBreakEven };
 
 if (require.main === module) {
   for (const v of Object.values(VARIANTEN)) {

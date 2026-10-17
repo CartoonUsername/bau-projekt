@@ -4,7 +4,7 @@ const path = require("path");
 const fs = require("fs");
 const pptxgen = require("pptxgenjs");
 const { applyTheme } = require(process.env.APPLY_THEME || "./apply_theme.js");
-const { A, VARIANTEN, finanz, cashflow, umsatzBreakEven, bauRoh, teilung, zielplus, verkaufsplan, LAYOUTS } = require("./model");
+const { A, VARIANTEN, finanz, cashflow, umsatzBreakEven, bauRoh, teilung, zielplus, verkaufsplan, LAYOUTS, kfw } = require("./model");
 const { execFileSync } = require("child_process");
 
 const IMG = process.env.BILDER || path.join(__dirname, "bilder");
@@ -419,6 +419,24 @@ if (KI.length) {
     valGridLine: { color: "D9D9D9", size: 0.5 }, catGridLine: { style: "none" }, showLegend: true, legendPos: "r", legendFontSize: 11, legendColor: "1F2421", legendFontFace: "+mn-lt", showTitle: false, catAxisLabelPos: "low", objectName: "Diagramm Förderung",
   });
   text(s, `Pro 5 Prozentpunkte Förderung steigt das Ergebnis um ca. ${nf.format(Math.round(F[0.05].cfPlan.cf - F[0].cfPlan.cf))} € im Monat. Gastro-Umsatz ${k(UM)}, nach Rücklagen, ohne Lohn.`, { x: 8.4, y: 5.0, w: W - 8.4 - MX, h: 1.8, fontSize: 14 });
+}
+
+// ===== 13b KfW =====
+{
+  const s = content("KfW: günstiger Kredit für einen Teil der Finanzierung", "Für Stadt und Bank", "KfW Klimafreundlicher Neubau (298 Wohnen, 299 Gastro): kein Zuschuss, sondern niedriger Zins. Konditionen laut Ratgebern Oktober 2026, bei Hausbank und KfW bestätigen. Details im KfW-Deck.");
+  const base = finanz(v, 0, A.zinsAusgang), cb = cashflow(v, base).cf;
+  const k0 = kfw(v, { zKfW: 0.02, qng: false }), k1 = kfw(v, { zKfW: 0.02, qng: true });
+  const rows = [
+    [hdr("Szenario (Rest zu 4,0 %)"), hdr("KfW-Rahmen", "right"), hdr("Mischzins", "right"), hdr("Rate / Monat", "right"), hdr("Ergebnis / Monat", "right"), hdr("gg. ohne KfW", "right")],
+    [cell("Ohne KfW", { bold: true }), R("–"), R("4,00 %"), R(eur(base.rate)), cfCell(cb), R("")],
+    [cell("KfW ohne QNG, 2 % Zins"), R(eur(Math.round(k0.rahmen / 1000) * 1000)), R(`${(k0.zMix * 100).toFixed(2).replace(".", ",")} %`), R(eur(k0.fin.rate)), cfCell(k0.cf), R(eurS(k0.cf - cb))],
+    [cell("KfW mit QNG, 2 % Zins"), R(eur(Math.round(k1.rahmen / 1000) * 1000)), R(`${(k1.zMix * 100).toFixed(2).replace(".", ",")} %`), R(eur(k1.fin.rate)), cfCell(k1.cf), R(eurS(k1.cf - cb))],
+  ];
+  s.addTable(rows, { x: MX, y: 1.5, w: W - 2 * MX, colW: [3.8, 1.8, 1.6, 1.7, 1.8, 1.43], rowH: 0.55, border: tblBorder, objectName: "Tabelle KfW" });
+  text(s, [
+    { text: "Voraussetzung: ", options: { bold: true, color: C.accent1 } },
+    { text: `Effizienzhaus 40, QNG-Zertifikat für den vollen Rahmen, Heizung ohne Gas und Öl, Antrag über die Hausbank vor Baubeginn. Mehrkosten angenommen ca. ${eur(k1.mehrkosten)}. Der Mischzins von ca. 3,1 % mit QNG passt zur Annahme von 3,3 % in dieser Präsentation.` },
+  ], { x: MX, y: 4.1, w: W - 2 * MX, h: 1.4, fontSize: 14 });
 }
 
 // ===== 14 Szenarien Umsatz =====
