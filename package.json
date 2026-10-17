@@ -1,0 +1,17 @@
+{
+  "name": "bau-projekt",
+  "private": true,
+  "type": "module",
+  "description": "Neue Mitte Werlte, Baufeld 3: Praesentation, Rechenmodell und Higgsfield-API-Beispiel",
+  "scripts": {
+    "video": "node --env-file=.env.local index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@higgsfield/client": "^0.2.6"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "typescript": "^7.0.2"
+  }
+}
