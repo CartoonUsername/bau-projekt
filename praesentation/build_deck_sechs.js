@@ -7,6 +7,7 @@ const { applyTheme } = require(process.env.APPLY_THEME || "./apply_theme.js");
 const { A, VARIANTEN, finanz, cashflow, umsatzBreakEven, bauRoh, teilung, zielplus, verkaufsplan, LAYOUTS, kfw } = require("./model");
 const { execFileSync } = require("child_process");
 
+const B = JSON.parse(fs.readFileSync(path.join(__dirname, "bank_values.json"), "utf8"));
 const IMG = process.env.BILDER || path.join(__dirname, "bilder");
 const OUT = process.env.OUT || __dirname;
 const v = VARIANTEN.sechs;
@@ -39,6 +40,8 @@ const nf = new Intl.NumberFormat("de-DE", { maximumFractionDigits: 0 });
 const eur = (n) => `${n < 0 ? "−" : ""}${nf.format(Math.abs(Math.round(n)))} €`;
 const eurS = (n) => `${n > 0 ? "+" : n < 0 ? "−" : ""}${nf.format(Math.abs(Math.round(n)))} €`;
 const pct = (f) => `${Math.round(f * 100)} %`;
+const eur2 = (n) => `${new Intl.NumberFormat("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n)} €`;
+const pct2 = (n) => `${(n * 100).toFixed(2).replace(".", ",")} %`;
 const mio = (n) => `${(n / 1e6).toFixed(2).replace(".", ",")} Mio. €`;
 const k = (n) => `${nf.format(n)} €`;
 
@@ -103,27 +106,27 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
   s.addImage({ path: fit(hasKI("ki_aussen_1.jpg") ? KI_AUSSEN : path.join(IMG, "aussen.jpg"), 6.43, H), x: 6.9, y: 0, w: 6.43, h: H, altText: "Außenansicht, modernes Haus mit Klinker und Glas-Erdgeschoss" });
   text(s, "NEUE MITTE WERLTE", { x: MX, y: 1.3, w: 6, h: 0.4, fontSize: 16, bold: true, color: C.accent3, charSpacing: 4 });
   text(s, "Baufeld 3: Große Gastro und 8 Wohnungen", { x: MX, y: 1.85, w: 6, h: 2.2, fontSize: 37, bold: false, fontFace: "Georgia", color: C.background1 });
-  text(s, "Baukonzept und Wirtschaftlichkeit (Variante B, 540 m² Grundfläche, ohne Förderung)", { x: MX, y: 4.3, w: 6, h: 0.6, fontSize: 18, color: C.background1 });
+  text(s, "Businessplan für die Bank: Konzept, Finanzierung mit KfW-Krediten, Ertragswert und Abzahlungsplan", { x: MX, y: 4.3, w: 6, h: 0.9, fontSize: 17, color: C.background1 });
   text(s, "Bessam Hasso, Werlte\nBebauungsplan Nr. 123, 1. Änderung (Entwurf 25.08.2026)\nStand Oktober 2026", { x: MX, y: 5.5, w: 6, h: 1.1, fontSize: 14, color: "CFD8D3" });
   s.addNotes("Titelfolie. Das Bild ist eine Referenzstudie.");
 }
 
 // ===== 2 Überblick =====
 {
-  const s = content("Das Vorhaben auf einen Blick", "Für Stadt und Bank", "Kernaussage: Das Haus trägt sich mit Förderung und einer gut laufenden Gastro.");
+  const s = content("Das Vorhaben auf einen Blick", "Für Stadt und Bank", "Alle Zahlen stammen aus dem Rechenmodell Bankunterlagen_Baufeld3.xlsx und sind Planungsannahmen.");
   const w = (W - 2 * MX - 0.6) / 4;
-  stat(s, MX, 1.5, w, mio(f0.plan.gesamt), "Gesamtkosten (ohne Bauzeitzinsen)");
-  stat(s, MX + (w + 0.2), 1.5, w, "8", "Wohnungen, dazu eine Gastro von ca. 460 m² im ganzen EG", C.accent2);
-  stat(s, MX + 2 * (w + 0.2), 1.5, w, eur(f0.plan.rate), "Rate pro Monat (3,3 %, ohne Förderung)");
-  stat(s, MX + 3 * (w + 0.2), 1.5, w, eurS(f0.cfPlan.cf), `Ergebnis pro Monat bei ${k(UM)} Umsatz`, f0.cfPlan.cf >= 0 ? C.accent5 : C.accent6);
-  text(s, `Ergebnis pro Monat (ohne Lohn des Bauherrn) bei ${k(UM)} Gastro-Umsatz (Plan, 3,3 % Zins)`, { x: MX, y: 3.4, w: 10, h: 0.35, fontSize: 16, bold: true, color: C.accent2 });
-  s.addTable([[hdr("Förderung"), ...FOERDERUNG.map((f) => hdr(pct(f), "right"))], [cell("Ergebnis"), ...FOERDERUNG.map((f) => cfCell(F[f].cfPlan.cf))]], {
-    x: MX, y: 3.85, w: W - 2 * MX, colW: [2.2, ...FOERDERUNG.map(() => (W - 2 * MX - 2.2) / FOERDERUNG.length)], rowH: 0.5, border: tblBorder, objectName: "Tabelle Förderung",
-  });
-  text(s, [
-    { text: firstPos === 0 ? "Schon ohne Förderung im Plus. " : `Mit ${pct(firstPos)} Förderung läuft das Haus erstmals im Plus. `, options: { bold: true } },
-    { text: `Break-even-Umsatz ohne Förderung ca. ${k(Math.round(umsatzBreakEven(v, f0.plan) / 100) * 100)} im Monat. Dazu kommt eine Anlaufphase von 12 Monaten ohne Rate (Aufschub).` },
-  ], { x: MX, y: 5.0, w: W - 2 * MX, h: 1.2, fontSize: 16 });
+  stat(s, MX, 1.5, w, mio(B.k_gesamt), "Gesamtkosten inkl. Finanzierung in Bau- und Anlaufzeit");
+  stat(s, MX + (w + 0.2), 1.5, w, pct(B.kredit_kfw_anteil), "des Darlehens über KfW 297, 298, 299 (" + mio(B.kredit_297 + B.kredit_298 + B.kredit_299) + ")", C.accent2);
+  stat(s, MX + 2 * (w + 0.2), 1.5, w, eur(B.rate_monat), "Kapitaldienst pro Monat (Mischzins " + (B.mischzins * 100).toFixed(2).replace(".", ",") + " %, 1 % Tilgung)", C.accent4);
+  stat(s, MX + 3 * (w + 0.2), 1.5, w, eurS(B.c_ergebnis), "Ergebnis pro Monat nach Kapitaldienst, ohne Lohn", B.c_ergebnis >= 0 ? C.accent5 : C.accent6);
+  const rows = [[hdr("Projekt"), hdr("Wert")],
+    [cell("Grundstück / Grundfläche / BGF"), cell("960 m² / 540 m² / 1.540 m² (EG, 1. OG, Staffel)")],
+    [cell("Nutzung"), cell("Gastro im ganzen EG (ca. 460 m²), 8 Wohnungen (725 m²) auf 1. OG und Staffelgeschoss in Holzbau")],
+    [cell("Finanzierung"), cell("100 % Fremdkapital, kein Eigenkapital, KfW 297/298/299 plus Hausbank")],
+    [cell("Kapitaldienstdeckung (DSCR)"), cell(B.dscr.toFixed(2).replace(".", ",") + " gesamt, " + B.dscr_immo.toFixed(2).replace(".", ",") + " nur Immobilie (Miete und Pacht)")],
+    [cell("Ertragswert / Beleihungsauslauf"), cell(mio(B.ertragswert) + " / " + pct(B.auslauf) + " (Darlehen zu Beleihungswert)")]];
+  s.addTable(rows, { x: MX, y: 3.45, w: W - 2 * MX, colW: [3.6, 8.53], rowH: 0.42, border: tblBorder, objectName: "Tabelle Eckdaten" });
+  text(s, "Der Ertrag trägt die Raten nur zusammen mit dem Gastro-Gewinn. Die Bank wird wegen des Ertragswerts zusätzliche Sicherheiten oder Eigenkapital verlangen, siehe Folie Ertragswert.", { x: MX, y: 6.0, w: W - 2 * MX, h: 0.6, fontSize: 14, bold: true, color: C.accent2 });
 }
 
 // ===== 3 Standort =====
@@ -168,23 +171,18 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
 
 // ===== 4b Holzbau und Terrasse =====
 {
-  const s = content("Staffelgeschoss in Holzbau mit Terrasse rundum", "Für Bank und Stadt", "Preise sind Annahmen und müssen durch Angebote der Zimmerei und des Bauunternehmens bestätigt werden.");
-  const rows = [[hdr("Bauunternehmer-Preisnachlass auf den Bau"), hdr("Gesamtkosten", "right"), hdr("Rate (Plan)", "right"), hdr("Ergebnis/Monat", "right")]];
-  [0, 0.05, 0.1].forEach((r) => {
-    const fin = finanz(v, 0, A.zinsPlan, { bauRabatt: r });
-    rows.push([cell(r === 0 ? "keiner (Annahme in der Rechnung)" : `${Math.round(r * 100)} % (Bekanntenpreis, noch offen)`), R(eur(fin.gesamt)), R(eur(fin.rate)), cfCell(cashflow(v, fin).cf)]);
-  });
-  s.addTable(rows, { x: MX, y: 1.5, w: 7.6, colW: [3.1, 1.6, 1.3, 1.6], rowH: 0.55, border: tblBorder, objectName: "Tabelle Holzbau Rabatt" });
-  const ohne = finanz(Object.assign({}, v, { holzM2: 0, terrasseM2: 0 }), 0, A.zinsPlan);
-  text(s, `Ergebnis bei ${k(UM)} Gastro-Umsatz und 3,3 % Zins. Ohne Holzbau und Terrasse wäre der Bau ${eur(bauRoh(Object.assign({}, v, { holzM2: 0, terrasseM2: 0 })) - bauRoh(v))} teurer, die Kosten lägen bei ${eur(ohne.gesamt)}.`, { x: MX, y: 4.0, w: 7.6, h: 1.0, fontSize: 14, color: C.accent4 });
-  card(s, 8.6, 1.5, W - 8.6 - MX, 4.6, "Warum Holz oben");
+  const s = content("Staffelgeschoss in Holzbau", "Für Bank und Stadt", "Preise sind Annahmen und müssen durch Angebote der Zimmerei und des Bauunternehmens bestätigt werden.");
+  const w = (W - 2 * MX - 0.6) / 3;
+  stat(s, MX, 1.5, w, "460 m²", "Staffelgeschoss in Holzbau, nur 0,8 m rundum zurückgesetzt", C.accent2);
+  stat(s, MX + (w + 0.3), 1.5, w, eur(-B.k_holz), "Ersparnis gegenüber Massivbau (400 € je m², Annahme)", C.accent5);
+  stat(s, MX + 2 * (w + 0.3), 1.5, w, "72 m²", "schmale Dachterrasse rundum (ca. 0,8 m), nicht Teil der BGF", C.accent4);
+  card(s, MX, 3.4, W - 2 * MX, 2.9, "Warum Holz oben");
   text(s, [
     { text: "Leichter und schneller: weniger Last auf dem Klinker-Geschoss, kürzere Bauzeit.", options: { bullet: true, breakLine: true } },
-    { text: "Zimmerei kennt das Haus von Anfang an und plant das Penthouse mit der Terrasse rundum.", options: { bullet: true, breakLine: true } },
-    { text: "Zwei Partner (Bauunternehmen unten, Zimmerei oben) können Preise und Termine gemeinsam angeben.", options: { bullet: true, breakLine: true } },
+    { text: "Zwei Partner aus dem Bekanntenkreis (Bauunternehmen unten, Zimmerei oben) können Preise und Termine gemeinsam angeben.", options: { bullet: true, breakLine: true } },
+    { text: "Holzbau hilft beim QNG-Nachweis und beim Effizienzhaus-40-Standard (KfW-Voraussetzung).", options: { bullet: true, breakLine: true } },
     { text: "Brandschutz (Holzbau bis Gebäudeklasse 4, Aufzug und Treppenhaus massiv) und Schallschutz muss der Architekt nachweisen.", options: { bullet: true } },
-  ], { x: 8.85, y: 1.95, w: W - 8.85 - MX - 0.5, h: 4.0, fontSize: 14, paraSpaceAfter: 8 });
-  text(s, "Das Staffelgeschoss springt nur rundum ca. 0,8 m zurück: schmale Terrasse ca. 72 m² um die drei Penthouses, kein Teil der BGF.", { x: MX, y: 5.3, w: 7.6, h: 0.9, fontSize: 15, bold: true, color: C.accent2 });
+  ], { x: MX + 0.3, y: 3.6, w: W - 2 * MX - 0.6, h: 2.6, fontSize: 15, paraSpaceAfter: 8 });
 }
 
 // ===== 5 Schnitt =====
@@ -332,251 +330,217 @@ if (KI.length) {
   ], { x: 7.0, y: 2.05, w: 5.7, h: 3.8, fontSize: 16, paraSpaceAfter: 10 });
 }
 
-// ===== 10 Kosten =====
+// ===== 11b Flächen und Mieten =====
 {
-  const s = content("Gesamtkosten ohne Förderung", "Für die Bank", "Baukosten 2.200 €/m² (Holz-Staffel 400 € günstiger) und 15 % Baunebenkosten sind Annahmen des Bauherrn und müssen durch Angebote von Bauunternehmen und Zimmerei bestätigt werden.");
-  const fin = f0.plan;
-  const rows = [
-    [hdr("Posten"), hdr("Rechnung"), hdr("Betrag", "right")],
-    [cell("Grundstück inkl. Steuer, Notar"), cell("960 m² × 230 € + ca. 7 %"), R(eur(A.grundstueck))],
-    [cell("Bau, Massivbau"), cell(`${nf.format(v.bgf)} m² × 2.200 €`), R(eur(v.bgf * A.bauKostenM2))],
-    [cell("Abschlag Holzbau (Staffelgeschoss)"), cell(`${v.holzM2} m² × 400 € günstiger`), R("− " + eur(v.holzM2 * A.holzAbschlag))],
-    [cell("Dachterrasse rundum (schmal)"), cell(`${v.terrasseM2} m² × 450 €`), R(eur(v.terrasseM2 * A.terrassePreis))],
-    [cell("Baunebenkosten (Architekt, Statik, Gebühren)"), cell("15 % vom Bau"), R(eur(bauRoh(v) * 0.15))],
-    [cell("Gastro-Ausbau (Küche, Bar, Möbel, Technik)"), cell("Annahme, Posten im Anhang"), R(eur(v.gastroAusbau))],
-    [cell("Gesamtkosten", { bold: true }), cell(""), R(eur(fin.gesamt), { bold: true })],
-  ];
-  s.addTable(rows, { x: MX, y: 1.5, w: 7.6, colW: [3.5, 2.4, 1.7], rowH: 0.5, border: tblBorder, objectName: "Tabelle Kosten" });
-  s.addChart(pres.charts.DOUGHNUT, [{ name: "Kosten", labels: ["Grundstück", "Bau", "Baunebenkosten", "Gastro-Ausbau"], values: [A.grundstueck, bauRoh(v), bauRoh(v) * 0.15, v.gastroAusbau] }], {
-    x: 8.5, y: 1.4, w: 4.3, h: 4.4, holeSize: 55, chartColors: ["C49A45", "8C3B32", "5B6770", "2F4A3E"], showPercent: true, showValue: false, dataLabelColor: "FFFFFF", dataLabelFontSize: 12, dataLabelFontFace: "+mn-lt",
-    showLegend: true, legendPos: "b", legendFontSize: 12, legendColor: "1F2421", legendFontFace: "+mn-lt", showTitle: false, objectName: "Diagramm Kosten",
-  });
-  text(s, `Das sind ca. ${nf.format(Math.round(fin.gesamt / v.bgf))} € pro m² BGF.`, { x: MX, y: 5.8, w: 7.6, h: 0.5, fontSize: 16, bold: true, color: C.accent2 });
+  const s = content("Flächen und Mieten: 8 Wohnungen und die Gastro", "Für die Bank", "Miete 11,18 €/m² (950 € für 85 m², Annahme des Bauherrn). Portale nennen für Neubau in Werlte ca. 10,7–11,0 €/m². Nebenkosten werden umgelegt.");
+  const rows = [[hdr("Einheit"), hdr("Geschoss"), hdr("Fläche", "right"), hdr("Miete je m²", "right"), hdr("Kaltmiete / Monat", "right"), hdr("Kaltmiete / Jahr", "right")]];
+  B.einheiten.forEach((e) => rows.push([cell(e.nr), cell(e.geschoss), R(e.m2.toFixed(1).replace(".", ",") + " m²"), R(eur2(e.miete_m2)), R(eur(e.miete)), R(eur(e.jahr))]));
+  rows.push([cell("Summe Wohnen", { bold: true }), cell(""), R("725,0 m²", { bold: true }), R(""), R(eur(B.miete_voll_monat), { bold: true }), R(eur(B.miete_voll_monat * 12), { bold: true })]);
+  rows.push([cell("Gastro (Pacht 12 €/m²)", { bold: true }), cell("EG"), R("460,0 m²", { bold: true }), R(eur2(12)), R(eur(B.pacht_monat), { bold: true }), R(eur(B.pacht_monat * 12), { bold: true })]);
+  rows.push([cell("Rohertrag gesamt", { bold: true }), cell(""), cell(""), cell(""), R(eur(B.miete_voll_monat + B.pacht_monat), { bold: true }), R(eur(B.rohertrag), { bold: true })]);
+  s.addTable(rows, { x: MX, y: 1.45, w: W - 2 * MX, colW: [3.3, 1.5, 1.6, 1.8, 2.0, 1.93], rowH: 0.38, border: tblBorder, objectName: "Tabelle Mieten" });
 }
 
-// ===== 11 Finanzierung =====
+// ===== 11c KfW-Programme =====
 {
-  const s = content("Finanzierung zu 100 % ohne Eigenkapital", "Für die Bank", "Zinsen in der Bauzeit und im Aufschub werden dem Kredit zugeschlagen. Der Aufschub von 12 Monaten muss mit der Bank verhandelt werden.");
-  const p = f0.plan;
-  const au = f0.ausgang;
-  const rows = [
-    [hdr(""), hdr("Plan (3,3 %)", "right"), hdr("Ausgang (4,0 %)", "right")],
-    [cell("Gesamtkosten"), R(eur(p.gesamt)), R(eur(au.gesamt))],
-    [cell("Zinsen in der Bauzeit (15 Monate)"), R(eur(p.zinsenBau)), R(eur(au.zinsenBau))],
-    [cell("Bereitstellungszinsen (3 % p. a. ab Monat 7)"), R(eur(p.bereit)), R(eur(au.bereit))],
-    [cell("Zinsen im Aufschub-Jahr (keine Rate)"), R(eur(p.aufschubZinsen)), R(eur(au.aufschubZinsen))],
-    [cell("Kredit bei Start der Rate", { bold: true }), R(eur(p.kredit), { bold: true }), R(eur(au.kredit), { bold: true })],
-    [cell("Rate pro Monat (1 % Tilgung)", { bold: true }), R(eur(p.rate), { bold: true }), R(eur(au.rate), { bold: true })],
-    [cell("   davon Zinsen"), R(eur(p.zinsAnteil)), R(eur(au.zinsAnteil))],
-    [cell("   davon Tilgung (Rückzahlung der Schuld)"), R(eur(p.tilgAnteil)), R(eur(au.tilgAnteil))],
-  ];
-  s.addTable(rows, { x: MX, y: 1.5, w: 8.3, colW: [4.5, 1.9, 1.9], rowH: 0.5, border: tblBorder, objectName: "Tabelle Finanzierung" });
-  card(s, 9.3, 1.5, W - 9.3 - MX, 4.5, "Hinweise");
+  const s = content("KfW-Kredite 297, 298 und 299", "Für Bank und Stadt", "KfW zahlt im Neubau keinen Zuschuss, sondern verbilligt den Zins. Beträge und Zinsen laut Ratgebern Oktober 2026, bei Hausbank und KfW bestätigen. Antrag über die Hausbank vor Baubeginn.");
+  const rows = [[hdr("Programm"), hdr("Wofür"), hdr("Rahmen (mit QNG)"), hdr("Im Projekt", "right"), hdr("Zins (Annahme)", "right")],
+    [cell("KfW 297 Klimafreundlicher Neubau", { bold: true }), cell("selbst genutzte Wohnungen"), cell("bis 150.000 € je Wohnung"), R(eur(B.kredit_297)), R("2,50 %")],
+    [cell("KfW 298 Klimafreundlicher Neubau", { bold: true }), cell("vermietete Wohnungen"), cell("bis 150.000 € je Wohnung"), R(eur(B.kredit_298)), R("2,50 %")],
+    [cell("KfW 299 Klimafreundlicher Neubau", { bold: true }), cell("Gastro (Nichtwohngebäude)"), cell("bis 2.000 € je m² Nettogrundfläche"), R(eur(B.kredit_299)), R("3,00 %")],
+    [cell("Hausbank (Rest)", { bold: true }), cell("Restfinanzierung inkl. Bauzeitzinsen"), cell("–"), R(eur(B.kredit_bank)), R("4,00 %")]];
+  s.addTable(rows, { x: MX, y: 1.45, w: W - 2 * MX, colW: [3.3, 2.8, 2.9, 1.7, 1.43], rowH: 0.5, border: tblBorder, objectName: "Tabelle KfW" });
+  card(s, MX, 4.15, W - 2 * MX, 2.3, "Voraussetzungen");
   text(s, [
-    { text: "Annahmen", options: { bold: true, color: C.accent1, breakLine: true } },
-    { text: "Baubeginn Mitte 2027, 15 Monate Bauzeit, gleichmäßiger Abruf.", options: { breakLine: true } },
+    { text: "Voraussetzungen: ", options: { bold: true, color: C.accent1 } },
+    { text: "Effizienzhaus 40 (Gastro: Effizienzgebäude 40), QNG-Zertifikat für den vollen Rahmen, Heizung ohne Öl, Gas und Biomasse (z. B. Wärmepumpe), Energieeffizienz-Experte, Antrag vor Baubeginn über die Hausbank.", options: { breakLine: true } },
+    { text: "Gemischte Nutzung: ", options: { bold: true, color: C.accent1 } },
+    { text: `Wohnteil (297/298) und Gastro (299) werden getrennt gefördert. Kreditrahmen insgesamt ${eur(B.kfw_rahmen)}, das sind ${pct(B.kredit_kfw_anteil)} des Darlehens. Die KfW-Zinsen schwanken in den Quellen zwischen 0,6 % und 3,05 %. Mehrkosten für den Standard angenommen mit 3 % (${eur(B.k_eh40)}).`, options: {} },
+  ], { x: MX + 0.3, y: 4.3, w: W - 2 * MX - 0.6, h: 2.1, fontSize: 13.5, paraSpaceAfter: 6 });
+}
+
+// ===== 11d Kosten =====
+{
+  const s = content("Gesamtkosten", "Für die Bank", "Baukosten 2.200 €/m² (Holz-Staffel 400 € günstiger) und 15 % Baunebenkosten sind Annahmen des Bauherrn und müssen durch Angebote von Bauunternehmen und Zimmerei bestätigt werden.");
+  const rows = [[hdr("Posten"), hdr("Rechnung"), hdr("Betrag", "right"), hdr("Anteil", "right")],
+    [cell("Grundstück inkl. Steuer und Notar"), cell("960 m² × 230 € + ca. 7 %"), R(eur(B.k_land_ges)), R(pct(B.k_land_ges / B.k_gesamt))],
+    [cell("Bau, Massivbau"), cell("1.540 m² × 2.200 €"), R(eur(B.k_bau_massiv)), R(pct(B.k_bau_massiv / B.k_gesamt))],
+    [cell("Abschlag Holzbau (Staffelgeschoss)"), cell("460 m² × 400 € günstiger"), R(eur(B.k_holz)), R(pct(B.k_holz / B.k_gesamt))],
+    [cell("Dachterrasse rundum (schmal)"), cell("72 m² × 450 €"), R(eur(B.k_terrasse)), R(pct(B.k_terrasse / B.k_gesamt))],
+    [cell("Baunebenkosten (Architekt, Statik, Gebühren)"), cell("15 % vom Bau"), R(eur(B.k_bnk)), R(pct(B.k_bnk / B.k_gesamt))],
+    [cell("Mehrkosten Effizienzhaus 40 und QNG"), cell("3 % auf Bau inkl. Nebenkosten"), R(eur(B.k_eh40)), R(pct(B.k_eh40 / B.k_gesamt))],
+    [cell("Gastro-Ausbau (Küche, Bar, Möbel, Technik)"), cell("Annahme Bauherr"), R(eur(B.k_ausbau)), R(pct(B.k_ausbau / B.k_gesamt))],
+    [cell("Finanzierungskosten (Bauzeit, Bereitstellung, Anlaufzeit)"), cell("27 Monate"), R(eur(B.k_fin)), R(pct(B.k_fin / B.k_gesamt))],
+    [cell("Gesamtkosten", { bold: true }), cell(""), R(eur(B.k_gesamt), { bold: true }), R("100 %", { bold: true })]];
+  s.addTable(rows, { x: MX, y: 1.5, w: 8.1, colW: [3.7, 2.2, 1.35, 0.85], rowH: 0.46, border: tblBorder, objectName: "Tabelle Kosten" });
+  s.addChart(pres.charts.DOUGHNUT, [{ name: "Kosten", labels: ["Grundstück", "Bau", "Baunebenkosten und Standard", "Gastro-Ausbau", "Finanzierung"], values: [B.k_land_ges, B.k_bau, B.k_bnk + B.k_eh40, B.k_ausbau, B.k_fin] }], {
+    x: 8.9, y: 1.4, w: 4.0, h: 4.4, holeSize: 55, chartColors: ["C49A45", "8C3B32", "5B6770", "2F4A3E", "A8B0B6"], showPercent: true, showValue: false, dataLabelColor: "FFFFFF", dataLabelFontSize: 12, dataLabelFontFace: "+mn-lt",
+    showLegend: true, legendPos: "b", legendFontSize: 11, legendColor: "1F2421", legendFontFace: "+mn-lt", showTitle: false, objectName: "Diagramm Kosten",
+  });
+  text(s, `Das sind ca. ${nf.format(Math.round(B.kosten_m2_bgf))} € pro m² BGF.`, { x: MX, y: 6.3, w: 8, h: 0.4, fontSize: 15, bold: true, color: C.accent2 });
+}
+
+// ===== 11e Finanzierungsplan =====
+{
+  const s = content("Finanzierungsplan", "Für die Bank", "Kein Eigenkapital. Die Hausbank finanziert den Rest und die Zinsen der Bau- und Anlaufzeit. Tilgungsfreie Anlaufzeit 12 Monate ist mit der Bank zu verhandeln.");
+  const rows = [[hdr("Mittelherkunft"), hdr("Betrag", "right"), hdr("Anteil", "right"), hdr("Zins", "right")]];
+  B.fin_tab.forEach((r) => rows.push([cell(r[0].replace(" Klimafreundlicher Neubau", "").replace(" (Restfinanzierung inkl. Zinsen der Bauzeit)", "")), R(r[1] ? eur(r[1]) : "–"), R(r[2] ? pct(r[2]) : "–"), R(r[3] ? (r[3] * 100).toFixed(2).replace(".", ",") + " %" : "")]));
+  s.addTable(rows, { x: MX, y: 1.5, w: 7.6, colW: [4.0, 1.5, 1.0, 1.1], rowH: 0.5, border: tblBorder, objectName: "Tabelle Herkunft" });
+  card(s, 8.5, 1.5, W - 8.5 - MX, 4.2, "Finanzierungskosten");
+  text(s, [
+    { text: "Mischzins", options: { bold: true, color: C.accent1, breakLine: true } },
+    { text: (B.mischzins * 100).toFixed(2).replace(".", ",") + " % über alle Darlehen.", options: { breakLine: true } },
     { text: " ", options: { breakLine: true } },
-    { text: "Plan: 3,3 % Mischzins aus Förderkrediten (Annahme).", options: { breakLine: true } },
+    { text: "Bau- und Anlaufzeit", options: { bold: true, color: C.accent1, breakLine: true } },
+    { text: `15 Monate Bau und 12 Monate Anlaufzeit kosten ${eur(B.k_fin)} an Zinsen und Bereitstellungsgebühr, finanziert von der Hausbank.`, options: { breakLine: true } },
     { text: " ", options: { breakLine: true } },
-    { text: "Ausgang: 4,0 % bei 10 Jahren Zinsbindung (Stand 17.09.2026).", options: {} },
-  ], { x: 9.55, y: 1.7, w: W - 9.3 - MX - 0.5, h: 4.0, fontSize: 14 });
+    { text: "Danach", options: { bold: true, color: C.accent1, breakLine: true } },
+    { text: `Rate ${eur(B.rate_monat)} pro Monat (Zins plus 1 % Anfangstilgung).`, options: {} },
+  ], { x: 8.75, y: 1.7, w: W - 8.5 - MX - 0.5, h: 3.9, fontSize: 13 });
+  text(s, `Die Kosten von ${eur(B.k_gesamt)} sind komplett durch Fremdkapital gedeckt.`, { x: MX, y: 5.0, w: 7.6, h: 0.6, fontSize: 14, bold: true, color: C.accent2 });
+}
+
+// ===== 11f Zinsen und Rate =====
+{
+  const s = content("Zinsberechnung und Rate je Darlehen", "Für die Bank", "Annuität: Rate = Darlehen × (Zins + 1 % Tilgung) / 12. Zinsbindung 10 Jahre, danach gleicher Zins angenommen. Die Rate gilt nach der tilgungsfreien Anlaufzeit.");
+  const rows = [[hdr("Darlehen"), hdr("Betrag bei Rate-Start", "right"), hdr("Zins", "right"), hdr("Tilgung", "right"), hdr("Rate / Monat", "right"), hdr("Rate / Jahr", "right")],
+    [cell("KfW Wohnen (297 und 298)"), R(eur(B.kredit_297 + B.kredit_298)), R("2,50 %"), R("1,00 %"), R(eur(B.rate_w)), R(eur(B.rate_w * 12))],
+    [cell("KfW Gastro (299)"), R(eur(B.kredit_299)), R("3,00 %"), R("1,00 %"), R(eur(B.rate_g)), R(eur(B.rate_g * 12))],
+    [cell("Hausbank"), R(eur(B.kredit_bank)), R("4,00 %"), R("1,00 %"), R(eur(B.rate_b)), R(eur(B.rate_b * 12))],
+    [cell("Summe", { bold: true }), R(eur(B.kredit), { bold: true }), R((B.mischzins * 100).toFixed(2).replace(".", ",") + " %", { bold: true }), R(""), R(eur(B.rate_monat), { bold: true }), R(eur(B.rate_jahr1), { bold: true })]];
+  s.addTable(rows, { x: MX, y: 1.5, w: W - 2 * MX, colW: [3.5, 2.2, 1.2, 1.2, 2.0, 2.03], rowH: 0.55, border: tblBorder, objectName: "Tabelle Zinsen" });
+  text(s, [
+    { text: `Im ersten Jahr nach der Anlaufzeit zahlst du ${eur(B.zins_jahr1)} Zinsen und ${eur(B.tilg_jahr1)} Tilgung.`, options: { breakLine: true } },
+    { text: "Zinsänderung nach 10 Jahren: +1 Prozentpunkt auf die Restschuld kostet ca. " + eur(B.rest_10 * 0.01 / 12) + " pro Monat mehr.", options: {} },
+  ], { x: MX, y: 4.7, w: W - 2 * MX, h: 1.3, fontSize: 14, paraSpaceAfter: 8 });
+}
+
+// ===== 11g Abzahlungsplan =====
+{
+  const s = content("Abzahlungsplan", "Für die Bank", "Monatlicher Plan über 35 Jahre im Excel-Blatt Tilgungsplan. Hier nach Jahren, Anfangstilgung 1 %, gleicher Zins nach der Zinsbindung angenommen.");
+  s.addChart(pres.charts.LINE, [{ name: "Restschuld", labels: B.tilgung.map((t) => String(t.jahr)), values: B.tilgung.map((t) => Math.round(t.rest)) }], {
+    x: MX, y: 1.4, w: 6.8, h: 4.8, chartColors: ["8C3B32"], lineSize: 3, lineDataSymbolSize: 4, catAxisLabelColor: "1F2421", catAxisLabelFontSize: 11, catAxisLabelFontFace: "+mn-lt", valAxisLabelColor: "1F2421", valAxisLabelFontSize: 11, valAxisLabelFontFace: "+mn-lt", valAxisLabelFormatCode: "#,##0",
+    valGridLine: { color: "D9D9D9", size: 0.5 }, catGridLine: { style: "none" }, showLegend: false, showTitle: true, title: "Restschuld in € nach Jahren", titleFontSize: 13, titleColor: "1F2421", titleFontFace: "+mn-lt", objectName: "Diagramm Restschuld",
+  });
+  const rows = [[hdr("Jahr"), hdr("Zinsen", "right"), hdr("Tilgung", "right"), hdr("Restschuld", "right")]];
+  [1, 2, 3, 5, 10, 15, 20, 25, 30, 35].forEach((y) => { const t = B.tilgung[y - 1]; rows.push([cell(String(y) + (y === 10 ? " (Ende Zinsbindung)" : "")), R(eur(t.zins)), R(eur(t.tilg)), R(eur(t.rest))]); });
+  s.addTable(rows, { x: 7.6, y: 1.4, w: W - 7.6 - MX, colW: [1.7, 1.1, 1.1, 1.23], rowH: 0.4, border: tblBorder, objectName: "Tabelle Abzahlungsplan" });
+  text(s, `Nach 10 Jahren Zinsbindung beträgt die Restschuld ${eur(B.rest_10)}. Die Anschlussfinanzierung muss eingeplant werden.`, { x: MX, y: 6.25, w: W - 2 * MX, h: 0.5, fontSize: 13.5, bold: true, color: C.accent2 });
 }
 
 // ===== 12 Cashflow =====
 {
-  const s = content("Was pro Monat übrig bleibt", "Für die Bank", "Mieten: Wohnungen 11,18 €/m² (950 € für 85 m², Annahme des Bauherrn). Gastro-Marge nach Branchen-Richtwerten.");
-  const c = f0.cfPlan;
-  const rows = [
-    [hdr(`Pro Monat, Plan, ohne Förderung, ${k(UM)} Umsatz`), hdr("Betrag", "right")],
-    [cell("8 Wohnungen (725 m² × 11,18 €)"), R(eurS(v.mieteOhnePacht))],
-    [cell(`Gastro-Pacht: ${v.gastroM2} m² × 12 €`), R(eurS(v.pacht))],
-    [cell("Gastro-Gewinn nach Pacht"), R(eurS(c.gastroNachPacht))],
-    [cell("Rate (Zinsen und Tilgung)"), R(eurS(-f0.plan.rate))],
-    [cell("Dein Lohn (wird vorerst nicht gerechnet)"), R(eurS(-A.lohn))],
-    [cell("Rücklagen (10 % der Miete und Pacht)"), R(eurS(-c.ruecklagen))],
-    [cell("Ergebnis pro Monat", { bold: true }), cfCell(c.cf)],
-  ];
-  s.addTable(rows, { x: MX, y: 1.5, w: 7.2, colW: [5.3, 1.9], rowH: 0.5, border: tblBorder, objectName: "Tabelle Cashflow" });
-  s.addChart(pres.charts.BAR, [{ name: "Euro pro Monat", labels: ["Miete", "Gastro", "Rate", "Rücklagen"], values: [c.miete, c.gastroNachPacht, -f0.plan.rate, -(A.lohn + c.ruecklagen)].map(Math.round) }], {
-    x: 8.1, y: 1.4, w: 4.7, h: 4.3, barDir: "col", chartColors: ["2E7D5B", "2E7D5B", "B3261E", "B3261E"], varyColors: true, showValue: true, dataLabelFormatCode: "#,##0", dataLabelFontSize: 12, dataLabelColor: "1F2421", dataLabelFontFace: "+mn-lt",
-    catAxisLabelColor: "1F2421", catAxisLabelFontSize: 12, catAxisLabelFontFace: "+mn-lt", catAxisLabelPos: "low", catAxisLabelRotate: 0, valAxisHidden: true, valGridLine: { style: "none" }, catGridLine: { style: "none" }, showLegend: false, showTitle: false, objectName: "Diagramm Cashflow",
-  });
-  text(s, `Ohne Lohn des Bauherrn. Die ca. ${nf.format(Math.round(f0.plan.tilgAnteil / 100) * 100)} € Tilgung in der Rate sind Vermögensaufbau (Schuld sinkt), kein Verlust.`, { x: MX, y: 6.0, w: 11.5, h: 0.4, fontSize: 14, color: C.accent4 });
-}
-
-// ===== 13 Szenarien Förderung x Zins =====
-{
-  const s = content("Förderung entscheidet über das Ergebnis", "Für Stadt und Bank", `Gastro-Umsatz ${k(UM)}. Förderung als Zuschuss in Prozent der Kosten, der den Kredit von Anfang an verkleinert (Annahme).`);
-  const head = [hdr("Förderung"), hdr("Gesamtkosten", "right"), hdr("Rate (3,3 %)", "right"), hdr("Ergebnis (3,3 %)", "right"), hdr("Rate (4,0 %)", "right"), hdr("Ergebnis (4,0 %)", "right")];
-  const rows = [head];
-  FOERDERUNG.forEach((f) => rows.push([cell(pct(f), { bold: true }), R(eur(F[f].plan.gesamt)), R(eur(F[f].plan.rate)), cfCell(F[f].cfPlan.cf), R(eur(F[f].ausgang.rate)), cfCell(F[f].cfAusgang.cf)]));
-  s.addTable(rows, { x: MX, y: 1.45, w: W - 2 * MX, colW: [1.5, 2.3, 2.1, 2.3, 2.1, 1.83], rowH: 0.44, border: tblBorder, objectName: "Tabelle Szenarien" });
-  s.addChart(pres.charts.LINE, [
-    { name: "Plan (3,3 %)", labels: FOERDERUNG.map(pct), values: FOERDERUNG.map((f) => Math.round(F[f].cfPlan.cf)) },
-    { name: "Ausgang (4,0 %)", labels: FOERDERUNG.map(pct), values: FOERDERUNG.map((f) => Math.round(F[f].cfAusgang.cf)) },
-  ], {
-    x: MX, y: 4.75, w: 7.5, h: 2.15, chartColors: ["2F4A3E", "8C3B32"], lineSize: 3, lineDataSymbolSize: 7, catAxisLabelColor: "1F2421", catAxisLabelFontSize: 11, catAxisLabelFontFace: "+mn-lt", valAxisLabelColor: "1F2421", valAxisLabelFontSize: 11, valAxisLabelFontFace: "+mn-lt", valAxisLabelFormatCode: "#,##0",
-    valGridLine: { color: "D9D9D9", size: 0.5 }, catGridLine: { style: "none" }, showLegend: true, legendPos: "r", legendFontSize: 11, legendColor: "1F2421", legendFontFace: "+mn-lt", showTitle: false, catAxisLabelPos: "low", objectName: "Diagramm Förderung",
-  });
-  text(s, `Pro 5 Prozentpunkte Förderung steigt das Ergebnis um ca. ${nf.format(Math.round(F[0.05].cfPlan.cf - F[0].cfPlan.cf))} € im Monat. Gastro-Umsatz ${k(UM)}, nach Rücklagen, ohne Lohn.`, { x: 8.4, y: 5.0, w: W - 8.4 - MX, h: 1.8, fontSize: 14 });
-}
-
-// ===== 13b KfW =====
-{
-  const s = content("KfW: günstiger Kredit für einen Teil der Finanzierung", "Für Stadt und Bank", "KfW Klimafreundlicher Neubau (298 Wohnen, 299 Gastro): kein Zuschuss, sondern niedriger Zins. Konditionen laut Ratgebern Oktober 2026, bei Hausbank und KfW bestätigen. Details im KfW-Deck.");
-  const base = finanz(v, 0, A.zinsAusgang), cb = cashflow(v, base).cf;
-  const k0 = kfw(v, { zKfW: 0.02, qng: false }), k1 = kfw(v, { zKfW: 0.02, qng: true });
-  const rows = [
-    [hdr("Szenario (Rest zu 4,0 %)"), hdr("KfW-Rahmen", "right"), hdr("Mischzins", "right"), hdr("Rate / Monat", "right"), hdr("Ergebnis / Monat", "right"), hdr("gg. ohne KfW", "right")],
-    [cell("Ohne KfW", { bold: true }), R("–"), R("4,00 %"), R(eur(base.rate)), cfCell(cb), R("")],
-    [cell("KfW ohne QNG, 2 % Zins"), R(eur(Math.round(k0.rahmen / 1000) * 1000)), R(`${(k0.zMix * 100).toFixed(2).replace(".", ",")} %`), R(eur(k0.fin.rate)), cfCell(k0.cf), R(eurS(k0.cf - cb))],
-    [cell("KfW mit QNG, 2 % Zins"), R(eur(Math.round(k1.rahmen / 1000) * 1000)), R(`${(k1.zMix * 100).toFixed(2).replace(".", ",")} %`), R(eur(k1.fin.rate)), cfCell(k1.cf), R(eurS(k1.cf - cb))],
-  ];
-  s.addTable(rows, { x: MX, y: 1.5, w: W - 2 * MX, colW: [3.8, 1.8, 1.6, 1.7, 1.8, 1.43], rowH: 0.55, border: tblBorder, objectName: "Tabelle KfW" });
+  const s = content("Ertrag und Kapitaldienst pro Monat", "Für die Bank", "Gastro-Betrieb bei 50.000 € Umsatz und 30,5 % Marge vor Pacht, ohne Lohn des Bauherrn. Rücklagen 10 % von Miete und Pacht.");
+  const rows = [[hdr("Position", "left"), hdr("pro Monat", "right"), hdr("pro Jahr", "right")],
+    [cell("Kaltmiete Wohnen (8 Wohnungen)"), R(eurS(B.c_miete)), R(eurS(B.c_miete * 12))],
+    [cell("Pacht Gastro (460 m² × 12 €)"), R(eurS(B.c_pacht)), R(eurS(B.c_pacht * 12))],
+    [cell("Rücklagen (10 %)"), R(eurS(B.c_rueck)), R(eurS(B.c_rueck * 12))],
+    [cell("Nettoertrag Immobilie", { bold: true }), R(eurS(B.c_netto_immo), { bold: true }), R(eurS(B.c_netto_immo * 12), { bold: true })],
+    [cell("Betriebsergebnis Gastro nach Pacht"), R(eurS(B.c_gastro)), R(eurS(B.c_gastro * 12))],
+    [cell("Nettoertrag vor Kapitaldienst", { bold: true }), R(eurS(B.c_netto), { bold: true }), R(eurS(B.c_netto * 12), { bold: true })],
+    [cell("Kapitaldienst (Zinsen und Tilgung)"), R(eurS(B.c_kd)), R(eurS(B.c_kd * 12))],
+    [cell("Ergebnis nach Kapitaldienst", { bold: true }), cfCell(B.c_ergebnis), cfCell(B.c_ergebnis * 12)]];
+  s.addTable(rows, { x: MX, y: 1.5, w: 7.6, colW: [4.2, 1.7, 1.7], rowH: 0.5, border: tblBorder, objectName: "Tabelle Cashflow" });
+  card(s, 8.6, 1.5, W - 8.6 - MX, 4.5, "Kennzahlen");
   text(s, [
-    { text: "Voraussetzung: ", options: { bold: true, color: C.accent1 } },
-    { text: `Effizienzhaus 40, QNG-Zertifikat für den vollen Rahmen, Heizung ohne Gas und Öl, Antrag über die Hausbank vor Baubeginn. Mehrkosten angenommen ca. ${eur(k1.mehrkosten)}. Der Mischzins von ca. 3,1 % mit QNG passt zur Annahme von 3,3 % in dieser Präsentation.` },
-  ], { x: MX, y: 4.1, w: W - 2 * MX, h: 1.4, fontSize: 14 });
-}
-
-// ===== 14 Szenarien Umsatz =====
-{
-  const s = content("Wie viel Umsatz braucht die Gastro?", "Für die Bank", "Gastro-Marge vor Pacht 30,5 % vom Umsatz (Branchen-Richtwert, nicht aus Werlte). Break-even = Ergebnis (ohne Lohn des Bauherrn) genau null.");
-  const ums = [40000, 45000, 50000, 55000, 60000];
-  const fs = [0, 0.1, 0.15, 0.2];
-  const rows = [[hdr("Ergebnis pro Monat (Plan 3,3 %)"), ...ums.map((u) => hdr(k(u), "right"))]];
-  fs.forEach((f) => rows.push([cell(`Förderung ${pct(f)}`, { bold: true }), ...ums.map((u) => cfCell(cashflow(v, F[f].plan, u).cf))]));
-  s.addTable(rows, { x: MX, y: 1.5, w: W - 2 * MX, colW: [3.6, ...ums.map(() => (W - 2 * MX - 3.6) / ums.length)], rowH: 0.55, border: tblBorder, objectName: "Tabelle Umsatz" });
-  text(s, "Break-even-Umsatz (Ergebnis = 0, ohne Lohn)", { x: MX, y: 4.5, w: 8, h: 0.4, fontSize: 18, bold: true, color: C.accent2 });
-  const be = [[hdr("Förderung"), ...fs.map((f) => hdr(pct(f), "right"))],
-    [cell("Plan, 3,3 %"), ...fs.map((f) => R(eur(umsatzBreakEven(v, F[f].plan))))],
-    [cell("Ausgang, 4,0 %"), ...fs.map((f) => R(eur(umsatzBreakEven(v, F[f].ausgang))))]];
-  s.addTable(be, { x: MX, y: 5.0, w: W - 2 * MX, colW: [3.6, ...fs.map(() => (W - 2 * MX - 3.6) / fs.length)], rowH: 0.5, border: tblBorder, objectName: "Tabelle Break-even" });
-}
-
-// ===== 15 Pfad zu Plus =====
-{
-  const s = content("Der Weg zu Plus: Hebel nacheinander", "Für Stadt und Bank", "Startpunkt ist die vorsichtige Annahme von 40.000 € Umsatz ohne Förderung. Die Hebel sind Ziele für die Verhandlung, keine Zusagen.");
-  const steps = [
-    ["Ausgangslage (40.000 € Umsatz, keine Förderung)", {}],
-    ["+ 15 % Förderung", { f: 0.15 }],
-    ["+ Baukosten 2.000 €/m² statt 2.200 € (Bekanntenpreis)", { bau: 2000 }],
-    ["+ Gastro-Ausbau nur 100.000 € statt 150.000 €", { ausbau: 100000 }],
-    ["+ Gastro-Umsatz 45.000 €", { u: 45000 }],
-    ["+ Tilgung 0 % (nur Zinsen) in den ersten Jahren", { til: 0 }],
-  ];
-  let st = { f: 0, bau: A.bauKostenM2, ausbau: v.gastroAusbau, u: 40000, til: A.tilgung };
-  const rows = [[hdr("Schritt"), hdr("Plan (3,3 %)", "right"), hdr("Ausgang (4,0 %)", "right")]];
-  const vals = [];
-  steps.forEach(([n, d]) => {
-    st = Object.assign({}, st, d);
-    const row = [n];
-    [A.zinsPlan, A.zinsAusgang].forEach((z) => {
-      const fin = finanz(v, st.f, z, { bauKostenM2: st.bau, gastroAusbau: st.ausbau, tilgung: st.til });
-      row.push(cashflow(v, fin, st.u).cf);
-    });
-    vals.push(row);
-    rows.push([cell(n), cfCell(row[1]), cfCell(row[2])]);
-  });
-  s.addTable(rows, { x: MX, y: 1.4, w: 8.4, colW: [5.2, 1.6, 1.6], rowH: 0.52, border: tblBorder, objectName: "Tabelle Pfad" });
-  card(s, 9.4, 1.4, W - 9.4 - MX, 4.7, "Fazit Pfad");
-  text(s, [
-    { text: "Mindestpaket", options: { bold: true, color: C.accent1, breakLine: true } },
-    { text: "Ohne Lohn des Bauherrn liegt schon die Ausgangslage mit 40.000 € Umsatz im Plus, Förderung und günstige Preise geben zusätzlichen Puffer.", options: { breakLine: true } },
+    { text: "Kapitaldienstdeckung (DSCR)", options: { bold: true, color: C.accent1, breakLine: true } },
+    { text: `Gesamt ${B.dscr.toFixed(2).replace(".", ",")}, nur Immobilie ${B.dscr_immo.toFixed(2).replace(".", ",")}. Banken verlangen meist mindestens 1,2.`, options: { breakLine: true } },
     { text: " ", options: { breakLine: true } },
-    { text: "Nur Konto, kein Gewinn", options: { bold: true, color: C.accent1, breakLine: true } },
-    { text: "Tilgung 0 % verbessert das Konto, nicht das Haus.", options: {} },
-  ], { x: 9.65, y: 1.6, w: W - 9.4 - MX - 0.5, h: 4.4, fontSize: 14 });
-  text(s, "Grundsteuer, Gebäudeversicherung und Betriebskosten legt ihr über die Nebenkosten auf die Mieter um. Hausverwaltung und Instandhaltung (nicht umlagefähig) deckt die Rücklage von 10 %.", { x: MX, y: 5.8, w: 8.4, h: 0.5, fontSize: 13, color: C.accent4 });
+    { text: "Zinsdeckung", options: { bold: true, color: C.accent1, breakLine: true } },
+    { text: B.zinsdeckung.toFixed(2).replace(".", ",") + ".", options: { breakLine: true } },
+    { text: " ", options: { breakLine: true } },
+    { text: "Anfangsrendite", options: { bold: true, color: C.accent1, breakLine: true } },
+    { text: pct2(B.anfangsrendite) + " auf die Gesamtkosten (Nettoertrag Immobilie).", options: {} },
+  ], { x: 8.85, y: 1.7, w: W - 8.6 - MX - 0.5, h: 4.2, fontSize: 13 });
+  text(s, "Ohne den Gastro-Gewinn deckt die Immobilie allein die Raten nicht. Der Pachtvertrag mit einem tragfähigen Betreiber ist für die Bank entscheidend.", { x: MX, y: 6.15, w: W - 2 * MX, h: 0.5, fontSize: 13.5, bold: true, color: C.accent2 });
 }
 
-// ===== 15b Verkauf an die Familie =====
+// ===== 14 Gastro Umsatz =====
 {
-  const s = content("Verkauf an die Familie: Rechnung je Partei", "Für die Verwandten und die Bank", "Jede Partei bekommt einen eigenen Kredit ohne Eigenkapital. Preis = Selbstkosten, 3,3 % Zins, 1 % Tilgung, Miete 11,18 €/m², 10 % Rücklagen.");
-  const L = LAYOUTS.B, mOG = L.wfOG / L.nOG, mST = L.wfST / L.nST;
-  const t = teilung(L);
-  const o = t.oG(mOG), st = t.st(mST), g = t.gastro;
-  const rows = [
-    [hdr(""), hdr(`1. OG, ${Math.round(mOG)} m² (${L.nOG}×)`, "right"), hdr(`Staffel, ${Math.round(mST)} m² (${L.nST}×)`, "right"), hdr("Du: Gastro im EG", "right")],
-    [cell("Preis (Selbstkosten)"), R(eur(o.kosten)), R(eur(st.kosten)), R(eur(g.kosten))],
-    [cell("Preis je m² Wohnfläche"), R(eur(o.kostenM2)), R(eur(st.kostenM2)), R("")],
-    [cell("Rate pro Monat (3,3 % + 1 % Tilgung)"), R(eur(o.rate)), R(eur(st.rate)), R(eur(g.rate))],
-    [cell("Einnahme pro Monat (nach 10 % Rücklagen)"), R(eur(o.miete * 0.9)), R(eur(st.miete * 0.9)), R(eur(g.gewinn))],
-    [cell("Ergebnis pro Monat", { bold: true }), cfCell(o.ergebnis), cfCell(st.ergebnis), cfCell(g.ergebnis)],
-    [cell("Preis, bei dem das Ergebnis 0 € ist"), R(eur(o.preisFuerPlus)), R(eur(st.preisFuerPlus)), R("")],
-    [cell("Lücke zum Selbstkostenpreis (ohne Eigenkapital)"), R(eur(o.luecke)), R(eur(st.luecke)), R("")],
-    [cell("Ergebnis mit 15 % Förderung"), cfCell(o.ergebnisF15), cfCell(st.ergebnisF15), R("")],
-  ];
-  s.addTable(rows, { x: MX, y: 1.4, w: W - 2 * MX, colW: [4.4, 2.6, 2.6, 2.53], rowH: 0.44, border: tblBorder, objectName: "Tabelle Verkauf je Partei" });
+  const s = content("Wie viel Umsatz braucht die Gastro?", "Für die Bank", "Gastro-Marge vor Pacht 30,5 % vom Umsatz (Branchen-Richtwert, nicht aus Werlte). Bei sehr niedrigem Umsatz drücken Fixkosten stärker, die Rechnung ist dort zu günstig.");
+  const rows = [[hdr("Umsatz pro Monat"), hdr("Gewinn vor Pacht", "right"), hdr("Gewinn nach Pacht", "right")]];
+  B.gastro_umsatz.forEach((r) => rows.push([cell(eur(r[0]), { bold: r[0] === 50000 }), R(eur(r[1])), cfCell(r[2])]));
+  s.addTable(rows, { x: MX, y: 1.5, w: 7.6, colW: [2.8, 2.4, 2.4], rowH: 0.55, border: tblBorder, objectName: "Tabelle Gastro Umsatz" });
+  card(s, 8.6, 1.5, W - 8.6 - MX, 3.6, "Break-even");
   text(s, [
-    { text: `Die Rechnung für den Gastro-Teil gilt bei ${k(UM)} Umsatz ohne Lohn des Bauherrn, Break-even ab ${k(Math.round(g.beUmsatz / 1000) * 1000)}. Die Wohnungen tragen sich bei 11,18 €/m² Miete erst ab einem Preis von ca. ${eur(Math.round(t.preisFuerPlusM2 / 10) * 10)} je m².`, options: { breakLine: true } },
-    { text: `Ein Penthouse (${Math.round(mST)} m²) bringt bei 11,18 €/m² ${eur(st.miete)} Miete, eine OG-Wohnung (${Math.round(mOG)} m²) ${eur(o.miete)}.`, options: {} },
-  ], { x: MX, y: 5.65, w: W - 2 * MX, h: 1.1, fontSize: 12.5, color: C.accent4, paraSpaceAfter: 4 });
+    { text: "Betrieb allein", options: { bold: true, color: C.accent1, breakLine: true } },
+    { text: `Ab ca. ${eur(Math.round(B.g_breakeven / 100) * 100)} Umsatz deckt der Betrieb seine Pacht.`, options: { breakLine: true } },
+    { text: " ", options: { breakLine: true } },
+    { text: "Haus insgesamt", options: { bold: true, color: C.accent1, breakLine: true } },
+    { text: `Ab ca. ${eur(Math.round(B.breakeven_haus / 100) * 100)} Umsatz sind alle Raten bezahlt.`, options: {} },
+  ], { x: 8.85, y: 1.7, w: W - 8.6 - MX - 0.5, h: 3.3, fontSize: 13.5 });
+  text(s, "Der Umsatz von 50.000 € ist für 460 m² und ca. 150 Plätze eine vorsichtige Annahme.", { x: MX, y: 5.4, w: 7.6, h: 0.5, fontSize: 13.5, color: C.accent4 });
 }
 
-// ===== 15d Ziel: 250 € Plus je Wohnung =====
+// ===== 14b Ertragswert =====
 {
-  const s = content("Ziel: 250 € Plus für jede Wohnung", "Für die Verwandten und die Bank", "Variante B, jede Wohnung mit eigenem Kredit ohne Eigenkapital und ohne Tilgung, Miete 11,18 €/m², 3,3 % Zins. Du trägst die Differenz zu deinen Selbstkosten.");
-  const LB = LAYOUTS.B, mOG = LB.wfOG / LB.nOG, mST = LB.wfST / LB.nST;
-  const r = zielplus(LB, 250, A.zinsPlan), r4 = zielplus(LB, 250, A.zinsAusgang);
-  const rows = [
-    [hdr(""), hdr(`1. OG, ${Math.round(mOG)} m² (${LB.nOG}×)`, "right"), hdr(`Staffel, ${Math.round(mST)} m² (${LB.nST}×)`, "right"), hdr("Du", "right")],
-    [cell("Verkaufspreis an die Verwandten", { bold: true }), R(eur(r.og.preis), { bold: true }), R(eur(r.st.preis), { bold: true }), R("")],
-    [cell("Deine Selbstkosten je Einheit"), R(eur(r.og.kosten)), R(eur(r.st.kosten)), R(eur(r.t.kostenEG))],
-    [cell("Preis je m² Wohnfläche"), R(eur(r.og.preisM2)), R(eur(r.st.preisM2)), R("")],
-    [cell("Nachlass, den du trägst"), R(eur(r.og.nachlass)), R(eur(r.st.nachlass)), R("gesamt " + eur(r.luecke))],
-    [cell("Einnahme pro Monat (Miete nach 10 % Rücklagen / Gastro-Gewinn)"), R(eur(r.og.miete * 0.9)), R(eur(r.st.miete * 0.9)), R(eur(UM * A.gastroMargeVorPacht - A.lohn))],
-    [cell("Rate pro Monat (Zinsen)"), R(eur(-r.og.rate)), R(eur(-r.st.rate)), R(eur(-r.rateEG - r.zinsLuecke))],
-    [cell("Ergebnis pro Monat", { bold: true }), cfCell(r.og.ergebnis), cfCell(r.st.ergebnis), cfCell(r.bessam)],
-  ];
-  s.addTable(rows, { x: MX, y: 1.4, w: W - 2 * MX, colW: [5.1, 2.4, 2.4, 2.23], rowH: 0.5, border: tblBorder, objectName: "Tabelle Ziel 250 Euro Plus" });
+  const s = content("Ertragswert und Beleihung", "Für die Bank", "Vereinfachtes Ertragswertverfahren nach ImmoWertV: Liegenschaftszins 4,5 %, Restnutzungsdauer 80 Jahre. Der verbindliche Beleihungswert kommt vom Gutachter der Bank.");
+  const rows = [[hdr("Ertragswert"), hdr("Betrag", "right")],
+    [cell("Rohertrag pro Jahr (Mieten und Pacht)"), R(eur(B.rohertrag))],
+    [cell("Bewirtschaftungskosten"), R(eur(B.bewirt))],
+    [cell("Reinertrag", { bold: true }), R(eur(B.reinertrag), { bold: true })],
+    [cell("Bodenwert (960 m² × 230 €)"), R(eur(B.bodenwert))],
+    [cell("Gebäudeertragswert (Vervielfältiger " + B.vervielf.toFixed(1).replace(".", ",") + ")"), R(eur(B.ertragswert_geb))],
+    [cell("Ertragswert", { bold: true }), R(eur(B.ertragswert), { bold: true })]];
+  s.addTable(rows, { x: MX, y: 1.5, w: 6.2, colW: [4.4, 1.8], rowH: 0.5, border: tblBorder, objectName: "Tabelle Ertragswert" });
+  const rows2 = [[hdr("Beleihung"), hdr("Betrag", "right")],
+    [cell("Sachwert (Boden + Herstellungskosten)"), R(eur(B.sachwert))],
+    [cell("Beleihungswert (niedrigerer Wert, −10 %)"), R(eur(B.beleihungswert))],
+    [cell("Gesamtkosten und Darlehen"), R(eur(B.kredit))],
+    [cell("Beleihungsauslauf", { bold: true }), cfCell(0, { text: pct(B.auslauf), fill: { color: "F8E4E2" }, color: C.accent6 })],
+    [cell("Ertragswert minus Gesamtkosten"), R(eurS(B.wertluecke))],
+    [cell("Betrag über 80 % Auslauf"), R(eur(B.eigenkapital_80))]];
+  rows2[4][1] = R(pct(B.auslauf), { bold: true, color: C.accent6, fill: { color: "F8E4E2" } });
+  s.addTable(rows2, { x: 7.0, y: 1.5, w: W - 7.0 - MX, colW: [3.9, 1.83], rowH: 0.5, border: tblBorder, objectName: "Tabelle Beleihung" });
   text(s, [
-    { text: `Dein Anteil: Rate für das Gastro-EG ${eur(r.rateEG)} (1 % Tilgung) plus Zinsen für die Differenz ${eur(r.zinsLuecke)}. Der Verkaufspreis liegt bei ca. ${eur(r.og.preisM2)} je m² (OG) und ${eur(r.st.preisM2)} je m² (Staffel).`, options: { breakLine: true } },
-    { text: `Bei 4,0 % Zins sinkt der Preis für 250 € Plus auf ca. ${eur(r4.og.preis)} (${eur(r4.og.preisM2)} je m²), dein Ergebnis auf ${eurS(r4.bessam)}.`, options: {} },
-  ], { x: MX, y: 5.6, w: W - 2 * MX, h: 1.2, fontSize: 12.5, color: C.accent4, paraSpaceAfter: 5 });
+    { text: "Einordnung: ", options: { bold: true, color: C.accent1 } },
+    { text: `Die Mieten und die Pacht tragen einen Wert von ${mio(B.ertragswert)}, die Kosten liegen bei ${mio(B.k_gesamt)}. Eine Bank beleiht üblicherweise nur bis ca. 80 % des Beleihungswerts. Für die Finanzierung braucht es deshalb zusätzliche Sicherheiten (Grundschulden auf weitere Immobilien, Bürgschaft) oder Eigenkapital in Höhe von ca. ${mio(B.eigenkapital_80)}.`, options: {} },
+  ], { x: MX, y: 5.2, w: W - 2 * MX, h: 1.5, fontSize: 13.5 });
 }
 
-// ===== 15f Verkaufsplan =====
+// ===== 14c Prognose und Belastungstest =====
 {
-  const s = content("Verkaufsplan: wer bekommt welche Wohnung", "Für die Verwandten und die Bank", "Variante B ohne Förderung, 2.200 €/m², Dauermiete 11,18 €/m², 3,3 % Zins, tilgungsfreie Jahre, 10 % Rücklagen. Käufer zahlen Notar (2 %) und Grunderwerbsteuer (5 %, Vater frei, bitte prüfen).");
-  const vp = verkaufsplan({ foerderung: 0, bauKostenM2: 2200, tilgung: 0, zielPlus: 100 });
-  const rows = [[hdr("Partei"), hdr("Wohnung"), hdr("Verkaufspreis", "right"), hdr("Selbstkosten", "right"), hdr("Differenz (du)", "right"), hdr("Notar, Steuer", "right"), hdr("Rate (Zinsen)", "right"), hdr("Ergebnis pro Monat", "right")]];
-  vp.rows.forEach((r) => rows.push([cell(r.name), cell(r.typ === "OG" ? `1. OG, ${Math.round(r.m2)} m²` : `Staffel, ${Math.round(r.m2)} m²`), R(eur(r.preis)), R(eur(r.kosten)), R(r.nachlass > 0 ? eur(r.nachlass) : "–"), R(eur(r.nk)), R(eur(r.rate)), cfCell(r.ergebnis)]));
-  s.addTable(rows, { x: MX, y: 1.4, w: W - 2 * MX, colW: [2.6, 1.6, 1.4, 1.35, 1.3, 1.25, 1.25, 1.38], rowH: 0.4, border: tblBorder, objectName: "Tabelle Verkaufsplan" });
+  const s = content("Prognose und Belastungstest", "Für die Bank", "Prognose: Miete, Pacht und Umsatz +1,5 % pro Jahr, Kapitaldienst konstant. Belastungstest vereinfacht, Hausbank rechnet mit eigenen Annahmen.");
+  const P = B.prognose;
+  const yrs = [1, 3, 5, 7, 10];
+  const rows = [[hdr("Jahr"), ...yrs.map((y) => hdr(String(y), "right"))],
+    [cell("Nettoertrag vor Kapitaldienst"), ...yrs.map((y) => R(eur(P["Nettoertrag vor Kapitaldienst"][y - 1])))],
+    [cell("Kapitaldienst"), ...yrs.map((y) => R(eur(P["Kapitaldienst"][y - 1])))],
+    [cell("Ergebnis nach Kapitaldienst", { bold: true }), ...yrs.map((y) => cfCell(P["Ergebnis nach Kapitaldienst"][y - 1] / 12, { text: eurS(P["Ergebnis nach Kapitaldienst"][y - 1]) }))],
+    [cell("DSCR"), ...yrs.map((y) => R(P["Kapitaldienstdeckung (DSCR)"][y - 1].toFixed(2).replace(".", ",")))],
+    [cell("Restschuld Jahresende"), ...yrs.map((y) => R(eur(P["Restschuld Jahresende"][y - 1])))]];
+  s.addTable(rows, { x: MX, y: 1.45, w: W - 2 * MX, colW: [3.7, 1.69, 1.69, 1.69, 1.69, 1.67], rowH: 0.42, border: tblBorder, objectName: "Tabelle Prognose" });
+  const rows2 = [[hdr("Belastungstest (pro Monat)"), hdr("Ergebnis", "right"), hdr("DSCR", "right"), hdr("zum Plan", "right")]];
+  B.sens.forEach((r, i) => rows2.push([cell(r[0], { bold: i === 0 }), cfCell(r[1]), R(r[2].toFixed(2).replace(".", ",")), R(i === 0 ? "" : eurS(r[3]))]));
+  s.addTable(rows2, { x: MX, y: 4.2, w: W - 2 * MX, colW: [6.6, 1.9, 1.5, 2.13], rowH: 0.3, fontSize: 11, border: tblBorder, objectName: "Tabelle Belastungstest" });
+}
+
+// ===== 14d Airbnb =====
+{
+  const s = content("Prüfung: zwei Wohnungen als Airbnb", "Für die Bank", "Annahmen: Auslastung 50 % (Emsland laut Quelle ca. 37 %), Möblierung 600 €/m² im Kredit, Kostenquote 56 % vom Umsatz, Mindest-Mehrertrag 300 € pro Monat für den Mehraufwand.");
+  const T = B.airbnb_tab;
+  const row = (i, f) => T[i];
+  const rows = [[hdr("Zwei Apartments à ..."), hdr("45 m²", "right"), hdr("60 m²", "right"), hdr("83 m²", "right")],
+    [cell("Preis pro Nacht"), ...[1, 2, 3].map((c) => R(eur(T[2][c])))],
+    [cell("Netto Airbnb je Apartment und Monat"), ...[1, 2, 3].map((c) => R(eur(T[4][c])))],
+    [cell("Netto langfristige Miete je Apartment und Monat"), ...[1, 2, 3].map((c) => R(eur(T[5][c])))],
+    [cell("Möblierung (im Kredit)"), ...[1, 2, 3].map((c) => R(eur(T[6][c])))],
+    [cell("Mehrertrag für 2 Apartments pro Monat", { bold: true }), ...[1, 2, 3].map((c) => cfCell(T[9][c], { text: eurS(T[9][c]) }))]];
+  s.addTable(rows, { x: MX, y: 1.5, w: W - 2 * MX, colW: [5.6, 2.2, 2.2, 2.13], rowH: 0.5, border: tblBorder, objectName: "Tabelle Airbnb" });
+  card(s, MX, 4.7, W - 2 * MX, 1.7, "Ergebnis");
   text(s, [
-    { text: `Du behältst drei OG-Wohnungen (eine zum Wohnen, zwei vermietet, ohne Notar und Steuer). Die Wohnungen von Vater, Bruder und den drei Onkeln werden so gesenkt, dass jede mindestens +100 € im Monat hat. Die Differenz von ${eur(vp.luecke)} trägst du, die Zinsen darauf kosten ${eur(vp.zinsLuecke)} im Monat.`, options: { breakLine: true } },
-    { text: `Dein Ergebnis: Gastro ${eur(vp.gewinn)} minus Rate für das EG ${eur(vp.rateEG)} minus Zinsen auf die Differenz ${eur(vp.zinsLuecke)} plus deine drei eigenen Wohnungen ${eurS(vp.rows.filter((r) => r.eigen).reduce((a2, r) => a2 + r.ergebnis, 0))} = ${eurS(vp.bessam)} pro Monat (ohne Lohn).`, options: {} },
-  ], { x: MX, y: 5.15, w: W - 2 * MX, h: 1.6, fontSize: 12.5, color: C.accent4, paraSpaceAfter: 5 });
-}
-
-// ===== 15g Verkaufsplan: Ablauf =====
-{
-  const s = content("Verkaufsplan: Ablauf und offene Punkte", "Für die Verwandten und die Bank", "Reihenfolge ist ein Vorschlag, Notar, Bank und Bauamt bestimmen die Details. Keine Rechtsberatung.");
-  const steps = [
-    ["1", "Förderung und Preise klären", "Stadt: Städtebauförderung und Grundstückspreis. Bauunternehmen und Zimmerei: Festpreis je m²."],
-    ["2", "Bauvoranfrage / Bauantrag", "Staffelgeschoss, Flachdach, Höhe und Stellplätze schriftlich bestätigen lassen."],
-    ["3", "Teilungserklärung", "Aufteilung in Wohnungseigentum (8 Wohnungen und Gastro im EG), Hausverwaltung bestimmen."],
-    ["4", "Finanzierung je Käufer", "Bankzusage für jeden Käufer, ohne Eigenkapital und nach den neuen Käufen der letzten zwei Jahre schwer."],
-    ["5", "Notarverträge", "Verkauf vor dem Bau gilt als Bauträgergeschäft, Erlaubnis nach § 34c GewO und Sicherheiten klären."],
-    ["6", "Bau und Übergabe", "Bauzeit ca. 15 Monate, danach Abnahme und Übergabe, Vermietung der Wohnungen."],
-  ];
-  steps.forEach((st, i) => {
-    const y = 1.45 + i * 0.85;
-    s.addShape(pres.ShapeType.ellipse, { x: MX, y, w: 0.5, h: 0.5, fill: { color: C.accent2 }, line: { color: C.accent2, width: 0 }, objectName: "Schritt " + st[0] });
-    text(s, st[0], { x: MX, y, w: 0.5, h: 0.5, fontSize: 14, bold: true, color: C.background1, align: "center", valign: "middle" });
-    text(s, st[1], { x: MX + 0.75, y: y - 0.02, w: 3.6, h: 0.55, fontSize: 14, bold: true, color: C.accent1, valign: "middle" });
-    text(s, st[2], { x: MX + 4.5, y: y - 0.02, w: W - 2 * MX - 4.5, h: 0.6, fontSize: 12.5, valign: "middle" });
-  });
+    { text: "Ergebnis: ", options: { bold: true, color: C.accent1 } },
+    { text: "Kurzzeitvermietung lohnt sich nicht. Auch kleine Apartments bringen nach Möblierung, Kapitaldienst und Kosten weniger als langfristige Mieter. Dazu kommen Aufwand, Reinigung und bei mehr als 12 Betten Sonderbau-Brandschutz. Deshalb bleiben alle 8 Wohnungen langfristig vermietet." }], { x: MX + 0.3, y: 4.85, w: W - 2 * MX - 0.6, h: 1.4, fontSize: 14, valign: "middle" });
 }
 
 // ===== 16 Risiken =====
 {
   const s = content("Risiken und was wir dagegen tun", "Für die Bank", "Die Miete von 11,18 €/m² ist eine Annahme des Bauherrn, Marktdaten für Werlte liegen darunter.");
   const items = [
-    ["Miete", "11,18 €/m² liegt am oberen Rand der Portalwerte für Neubau in Werlte (ca. 10,7–11,0 €/m²), der Altbestand liegt bei 8–10 €/m². Gegenmaßnahme: Vergleichsangebote, Vorvermietung."],
-    ["Gastro-Umsatz", `Die Gastro braucht ab ca. ${k(Math.round(umsatzBreakEven(v, f0.plan) / 1000) * 1000)} Umsatz, bei 4 % Zins ca. ${k(Math.round(umsatzBreakEven(v, f0.ausgang) / 1000) * 1000)}. Gegenmaßnahme: Konzept, Pacht-Staffel, Lohn des Bauherrn bewusst ausgeklammert.`],
-    ["Zins", "Nach 10 Jahren Zinsbindung ist der Folgezins offen. Gegenmaßnahme: Förderkredite, Forward-Darlehen, Tilgungsaussetzung."],
-    ["Genehmigung", "540 m² Grundfläche, Staffelgeschoss und Flachdach müssen von der Stadt bestätigt werden. Gegenmaßnahme: Vorabstimmung, Plan B mit Variante A (340 m²) oder Satteldach."],
+    ["Sicherheiten und Beleihung", `Beleihungsauslauf ${pct(B.auslauf)} bei 100 % Fremdfinanzierung. Gegenmaßnahme: Grundschulden auf weitere Immobilien, Bürgschaft oder Eigenkapital, Pachtvertrag mit Bonitätsnachweis.`],
+    ["Gastro-Umsatz", `Haus insgesamt ab ca. ${eur(Math.round(B.breakeven_haus / 1000) * 1000)} Umsatz im Plus, bei Ausfall der Gastro fehlen ca. ${eur(-B.sens[6][3])} pro Monat. Gegenmaßnahme: Konzept, erfahrener Betreiber, Pachtstaffel.`],
+    ["Zins", "KfW-Zinsen und Rahmen sind Stand Okt. 2026 unsicher, nach 10 Jahren ist der Folgezins offen. Gegenmaßnahme: Zusage vor Baubeginn, Forward-Darlehen, Tilgungsaussetzung."],
+    ["Genehmigung und Standard", "540 m² Grundfläche, Staffelgeschoss und Flachdach müssen bestätigt werden, KfW verlangt Effizienzhaus 40 mit QNG. Gegenmaßnahme: Vorabstimmung, Energieeffizienz-Experte früh einbinden."],
   ];
   const cw = (W - 2 * MX - 0.4) / 2;
   items.forEach((it, i) => {
@@ -588,26 +552,23 @@ if (KI.length) {
   });
 }
 
-// ===== 17 Forderungen an die Stadt =====
+// ===== 17 Was ich brauche =====
 {
-  const s = content("Was ich von der Stadt brauche", "Für die Stadt", "Wirkungen gerechnet mit dem Modell (Plan 3,3 %, ohne Förderung als Basis).");
-  const eff10 = F[0.1].cfPlan.cf - F[0].cfPlan.cf;
-  const effLand = f0.plan.rate - finanz(v, 0, A.zinsPlan, { grundstueck: A.grundstueck - 960 * 30 * 1.07 }).rate;
-  const effZins = f0.plan.rate - finanz(v, 0, A.zinsPlan - 0.005).rate;
+  const s = content("Was ich von Stadt und Bank brauche", "Für Stadt und Bank", "");
   const items = [
-    ["Städtebauförderung", `10 % Förderung bringen ca. ${eurS(eff10)} im Monat`],
-    ["Grundstückspreis", `30 € weniger pro m² bringen ca. ${eurS(effLand)} im Monat`],
-    ["Pacht oder Mietzuschuss", "1.000 € Zuschuss im Monat sind 1.000 € mehr im Monat"],
-    ["Stellplätze", "Mitnutzung der öffentlichen Parkfläche oder faire Ablöse"],
-    ["Genehmigung", "540 m² Grundfläche, Staffelgeschoss, Flachdach und Höhe schriftlich bestätigen"],
-    ["Zinsvorteil", `0,5 % weniger Zins bringen ca. ${eurS(effZins)} im Monat`],
+    ["Von der Stadt: Genehmigung", "540 m² Grundfläche, Staffelgeschoss, Flachdach und Höhe schriftlich bestätigen"],
+    ["Von der Stadt: Stellplätze", "Mitnutzung der öffentlichen Parkfläche oder faire Ablöse"],
+    ["Von der Stadt: Grundstück", "Kaufpreis 230 €/m² mit Baureife, Reservierung bis zur Finanzierungszusage"],
+    ["Von der Bank: Darlehen", `Finanzierung von ${mio(B.kredit)} mit KfW 297/298/299 und tilgungsfreier Anlaufzeit von 12 Monaten`],
+    ["Von der Bank: Sicherheiten", "Gespräch über zusätzliche Grundschulden oder Bürgschaft wegen des Beleihungsauslaufs"],
+    ["Von der Bank: KfW-Antrag", "Antrag für 297/298 und 299 vor Baubeginn über die Hausbank"],
   ];
   const cw = (W - 2 * MX - 0.4) / 2;
   items.forEach((it, i) => {
     const x = MX + (i % 2) * (cw + 0.4);
     const y = 1.5 + Math.floor(i / 2) * 1.65;
-    card(s, x, y, cw, 1.45, "Forderung " + (i + 1));
-    text(s, it[0], { x: x + 0.25, y: y + 0.15, w: cw - 0.5, h: 0.45, fontSize: 19, bold: false, fontFace: "Georgia", color: C.accent1 });
+    card(s, x, y, cw, 1.45, "Bedarf " + (i + 1));
+    text(s, it[0], { x: x + 0.25, y: y + 0.15, w: cw - 0.5, h: 0.45, fontSize: 18, bold: false, fontFace: "Georgia", color: C.accent1 });
     text(s, it[1], { x: x + 0.25, y: y + 0.65, w: cw - 0.5, h: 0.7, fontSize: 14 });
   });
 }
@@ -618,8 +579,8 @@ if (KI.length) {
   const steps = [
     ["Okt 2026", "Gespräch mit der Stadt: Preis, Förderung, Stellplätze"],
     ["Nov 2026", "Architekt, Baufenster, Höhen und Geschosse schriftlich klären"],
-    ["Dez 2026", "Bank: Finanzierung, Aufschub, Förderkredite anfragen"],
-    ["Q1 2027", "Städtebaulicher Vertrag, Bauantrag"],
+    ["Dez 2026", "Hausbank: Finanzierung, Anlaufzeit, KfW 297/298/299 und Sicherheiten klären"],
+    ["Q1 2027", "Städtebaulicher Vertrag, Bauantrag, KfW-Antrag vor Baubeginn"],
     ["Mitte 2027", "Baubeginn, 15 Monate Bauzeit"],
     ["Ende 2028", "Eröffnung zusammen mit der neuen Mitte"],
   ];
@@ -636,24 +597,24 @@ if (KI.length) {
 {
   const s = pres.addSlide({ masterName: "TITEL" });
   text(s, "Anhang", { x: MX, y: 2.8, w: 10, h: 1.2, fontSize: 41, bold: false, fontFace: "Georgia", color: C.background1 });
-  text(s, "Annahmen, Gastro-Kosten, Gastro-Ausbau, Mietdaten, Vergleich mit Variante A und C", { x: MX, y: 4.1, w: 10, h: 0.6, fontSize: 18, color: "CFD8D3" });
+  text(s, "Annahmen, Gastro-Kosten, Gastro-Ausbau, Mietdaten", { x: MX, y: 4.1, w: 10, h: 0.6, fontSize: 18, color: "CFD8D3" });
 }
 {
   const s = content("Rechenannahmen und offene Punkte", "Anhang", "Alle Zahlen sind Planungsannahmen, keine Zusagen.");
   const left = [
     "Grundstück 960 m² × 230 € plus ca. 7 % (5 % Grunderwerbsteuer, ca. 2 % Notar)",
     "Bau 1.540 m² BGF × 2.200 €, Staffel (460 m²) in Holzbau 400 €/m² günstiger, Terrasse 72 m² × 450 €, Baunebenkosten 15 %",
-    "100 % Fremdfinanzierung, 1 % Tilgung, Aufschub 12 Monate",
+    "100 % Fremdfinanzierung, 1 % Anfangstilgung, tilgungsfreie Anlaufzeit 12 Monate",
     "Bauzeit 15 Monate, Bereitstellungszins 3 % p. a. ab Monat 7",
-    "Zins Plan 3,3 % (Förderkredite, Annahme), Ausgang 4,0 %",
+    "Zins KfW 297/298 2,5 %, KfW 299 3,0 %, Hausbank 4,0 % (Annahmen)",
   ];
   const right = [
     `Gastro-Umsatz ${k(UM)} netto, Marge vor Pacht 30,5 %`,
     "8 Wohnungen (725 m²) zu 11,18 €/m² Kaltmiete, Gastro-Pacht 12 €/m² auf 460 m²",
     "Lohn des Bauherrn wird vorerst nicht gerechnet, Rücklagen 10 % der Miete und Pacht",
-    "Förderung als Zuschuss in % der Gesamtkosten (Annahme)",
+    "KfW-Kredite statt Zuschuss, Antrag vor Baubeginn; Mehrkosten Effizienzhaus 40 und QNG 3 %",
     "Nebenkosten (Grundsteuer, Versicherung, Betriebskosten) werden auf die Mieter umgelegt, die Hausverwaltung deckt die Rücklage",
-    "Offen: Baufenster, Staffelgeschoss, Höhen, Stellplatzsatzung, Zins nach 10 Jahren",
+    "Offen: Baufenster, Staffelgeschoss, Höhen, Stellplatzsatzung, Zins nach 10 Jahren, Sicherheiten",
   ];
   const cw = (W - 2 * MX - 0.5) / 2;
   [left, right].forEach((arr, kk) => text(s, arr.map((t, i) => ({ text: t, options: { bullet: true, breakLine: i < arr.length - 1 } })), { x: MX + kk * (cw + 0.5), y: 1.5, w: cw, h: 4.8, fontSize: 15, paraSpaceAfter: 12 }));
@@ -719,38 +680,6 @@ if (KI.length) {
     { text: "Wohnungen 11,18 €/m² Kaltmiete (950 € für 85 m², Bauherr, zentrale Lage). Gastro-Pacht 12 €/m² ohne Marktdaten." },
   ], { x: 9.85, y: 1.7, w: W - 9.6 - MX - 0.5, h: 3.2, fontSize: 14 });
   text(s, "Quellen: mietpreise.info/mietspiegel/werlte, miete-aktuell.de, immobilienscout24.de (Kreis Emsland), Abruf Oktober 2026", { x: MX, y: 5.4, w: W - 2 * MX, h: 0.6, fontSize: 12, color: C.accent4 });
-}
-
-// ===== Varianten B und C: 540 m² Grundfläche =====
-{
-  const s = content("Vergleich: Variante A, B und C", "Anhang", "B ist die Hauptvariante. Baufenster im Plan ca. 400–460 m² geschätzt, im Plan stehen zwei Vollgeschosse und 12 m Höhe, GRZ 0,6 erlaubt max. 576 m².");
-  const va = VARIANTEN.a, vb = v, vc = VARIANTEN.c;
-  const fa = finanz(va, 0, A.zinsPlan), fb = finanz(vb, 0, A.zinsPlan), fc = finanz(vc, 0, A.zinsPlan);
-  const ca = cashflow(va, fa), cb = cashflow(vb, fb), cc = cashflow(vc, fc);
-  const ta = teilung(LAYOUTS.A), tb = teilung(LAYOUTS.B), tc = teilung(LAYOUTS.C);
-  const rows = [
-    [hdr(""), hdr("A: 340 m², 2+Staffel", "right"), hdr("B (Haupt): 540 m², 2+Staffel", "right"), hdr("C: 540 m², 3+Holz-Penthouse", "right")],
-    [cell("Bruttofläche"), R("960 m²"), R("1.540 m²"), R("2.080 m²")],
-    [cell("Wohnfläche / Wohnungen"), R("444 m² / 6"), R("725 m² / 8"), R("1.140 m² / ca. 13")],
-    [cell("Gastro im EG"), R("290 m² (+ Büro 150 m²)"), R("460 m²"), R("460 m²")],
-    [cell("Gesamtkosten"), R(eur(fa.gesamt)), R(eur(fb.gesamt)), R(eur(fc.gesamt))],
-    [cell("Rate pro Monat (ein Kredit)"), R(eur(fa.rate)), R(eur(fb.rate)), R(eur(fc.rate))],
-    [cell(`Ergebnis bei ${k(UM)} Umsatz`), cfCell(ca.cf), cfCell(cb.cf), cfCell(cc.cf)],
-    [cell("Break-even-Umsatz Gastro"), R(eur(umsatzBreakEven(va, fa))), R(eur(umsatzBreakEven(vb, fb))), R(eur(umsatzBreakEven(vc, fc)))],
-    [cell("Ergebnis bei 4,0 % Zins"), cfCell(cashflow(va, finanz(va, 0, A.zinsAusgang)).cf), cfCell(cashflow(vb, finanz(vb, 0, A.zinsAusgang)).cf), cfCell(cashflow(vc, finanz(vc, 0, A.zinsAusgang)).cf)],
-    [cell("Kosten je m² Wohnfläche, Regelgeschoss / Staffel"), R(`${eur(ta.ogM2)} / ${eur(ta.stM2)}`), R(`${eur(tb.ogM2)} / ${eur(tb.stM2)}`), R(`${eur(tc.ogM2)} / ${eur(tc.stM2)}`)],
-    [cell("85-m²-Wohnung im Regelgeschoss: Ergebnis (eigener Kredit)"), cfCell(ta.oG(85, 950).ergebnis), cfCell(tb.oG(85, 950).ergebnis), cfCell(tc.oG(85, 950).ergebnis)],
-    [cell("Preis-Lücke je 85-m²-Wohnung im Regelgeschoss"), R(eur(ta.oG(85, 950).luecke)), R(eur(tb.oG(85, 950).luecke)), R(eur(tc.oG(85, 950).luecke))],
-  ];
-  s.addTable(rows, { x: MX, y: 1.4, w: 9.0, colW: [3.9, 1.7, 1.7, 1.7], rowH: 0.42, border: tblBorder, objectName: "Tabelle Varianten B und C" });
-  card(s, 10.2, 1.4, W - 10.2 - MX, 5.0, "Hinweis A, B und C");
-  text(s, [
-    { text: "Annahmen", options: { bold: true, color: C.accent1, breakLine: true } },
-    { text: "EG 540 m² (Gastro 460 m²), Regelgeschosse je 540 m², Staffel 460 m² in Holzbau mit 72 m² schmaler Terrasse. Wohnen 11,18 €/m². Variante A hat Gastro 290 m² und Büro 150 m² im EG.", options: { breakLine: true } },
-    { text: " ", options: { breakLine: true } },
-    { text: "Zu klären", options: { bold: true, color: C.accent1, breakLine: true } },
-    { text: "Baufenster, zwei Vollgeschosse, bei C drei Vollgeschosse und ca. 13 m Höhe statt 12 m, deutlich mehr Stellplätze.", options: {} },
-  ], { x: 10.4, y: 1.6, w: W - 10.2 - MX - 0.4, h: 4.6, fontSize: 12 });
 }
 
 (async () => {

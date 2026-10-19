@@ -257,11 +257,11 @@ async function deck() {
     const rows = [[hdr("Umsatz pro Monat"), hdr("Gewinn vor Pacht", "right"), hdr("Pacht ans Haus", "right"), hdr("Gewinn nach Pacht", "right")]];
     [30000, 40000, 50000, 60000, 70000].forEach((u) => { const g = u * 0.305; rows.push([cell(eur(u), { bold: u === UM }), R(eur(g)), R(eur(-v.pacht)), cf(g - v.pacht)]); });
     s.addTable(rows, { x: MX, y: 1.5, w: 8.4, colW: [2.4, 2.0, 2.0, 2.0], rowH: 0.55, border, objectName: "Tabelle Gastro Gewinn" });
-    const f0 = finanz(v, 0, A.zinsPlan), c0 = cashflow(v, f0);
+    const BV = JSON.parse(require("fs").readFileSync(path.join(__dirname, "bank_values.json"), "utf8"));
     card(s, 9.4, 1.5, W - 9.4 - MX, 4.2, "Haus");
     text(s, [
       { text: "Für das ganze Haus", options: { bold: true, color: C.accent1, breakLine: true } },
-      { text: `Mit ${eur(UM)} Umsatz bleiben im ganzen Haus ${eurS(c0.cf)} pro Monat (3,3 % Zins, ohne Förderung, ohne Lohn). Die Gastro braucht für Break-even im Haus ca. ${eur(Math.round(umsatzBreakEven(v, f0) / 1000) * 1000)} Umsatz.`, options: {} },
+      { text: `Mit ${eur(UM)} Umsatz bleiben im ganzen Haus ${eurS(BV.c_ergebnis)} pro Monat nach Zinsen und Tilgung (KfW-Kredite und Hausbank, ohne Lohn). Die Gastro braucht für Break-even im Haus ca. ${eur(Math.round(BV.breakeven_haus / 100) * 100)} Umsatz.`, options: {} },
     ], { x: 9.65, y: 1.7, w: W - 9.4 - MX - 0.5, h: 3.9, fontSize: 13 });
     text(s, "Kosten im Detail (Wareneinsatz, Personal, Energie ...) stehen im Anhang der Hauptpräsentation.", { x: MX, y: 5.0, w: 8.4, h: 0.5, fontSize: 13, color: C.accent4 });
   }
