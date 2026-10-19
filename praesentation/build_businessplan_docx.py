@@ -280,7 +280,7 @@ for r_ in B["gastro_bedarf"]:
     rows.append([r_[0], f"{r_[1]} Plätze" if r_[1] > 1 else "–", fmt(r_[3]) + " m²"])
 rows.append(["Gastro gesamt (ca. 190 Plätze)", "", fmt(B["g_bedarf"]) + " m²"])
 table(rows, [9.0, 3.8, 3.8], right_cols=(1, 2), bold_rows=(8,), font=9)
-para(f"Der Gastro-Umsatz von 65.000 € im Monat entspricht ca. {fmt(B['g_umsatz_platz'])} € je Sitzplatz und Jahr. Zum Vergleich: Der Median in Österreich liegt für Betriebe mit weniger als 100 Plätzen bei ca. 12.000 € (Fitness-Check Gastronomie 2026). Die Annahme ist also sehr vorsichtig. Die Pacht von 10 €/m² entspricht {pct(B['g_pacht_quote'], 1)} vom Umsatz (üblich 6 bis 12 %).", after=4)
+para(f"Der Gastro-Umsatz von {eur(B['g_umsatz_monat'])} im Monat entspricht ca. {fmt(B['g_umsatz_platz'])} € je Sitzplatz und Jahr. Zum Vergleich: Der Median in Österreich liegt für Betriebe mit weniger als 100 Plätzen bei ca. 12.000 € (Fitness-Check Gastronomie 2026). Die Annahme liegt damit deutlich unter dem Branchen-Median. Die Pacht von 10 €/m² entspricht {pct(B['g_pacht_quote'], 1)} vom Umsatz (üblich 6 bis 12 %).", after=4)
 para("Ankermieter Büro", bold=True, color=GREEN, after=2)
 para("Im 1. Obergeschoss mit Aufzug und eigenem Eingang liegen zwei Büros für langfristige Ankermieter: ein größeres Büro (100 m², Versicherungsgesellschaft oder ähnlicher Mieter mit zentralem Büro) und ein kleineres Büro (65 m², kleiner Makler oder Dienstleister). Beide Mietverträge sollen 10 Jahre fest laufen, mit Indexmiete (Anpassung an die Inflation). Der Vermieter übernimmt einen Grundausbau (Böden, Decken, Elektro) von 150 €/m², der Mieter den Rest.")
 rows = [["Ankermieter", "Fläche", "Miete je m²", "Miete pro Monat", "Miete pro Jahr"]]
@@ -297,20 +297,26 @@ bullets([
 
 # ------------------------------------------------------------------ 4 Gastro
 H("Gastro-Konzept")
-para("Die Gastro nutzt das ganze Erdgeschoss (ca. 510 m²) als Bar-Restaurant für den ganzen Tag: Frühstück und Brunch am Wochenende, Mittagstisch für Beschäftigte aus Rathaus und Umgebung, Abendrestaurant mit regionaler, moderner Küche, Bar mit Theke und ein Séparée (abgetrennter Raum) mit 30 Plätzen für Feiern. Die Gestaltung folgt dem Referenzbild des Bauherrn: olivgrüne Vertäfelung, Cognac-Samtbanketten, Eiche, anthrazitfarbene Theke, Stahl-Glas-Trennwand und warmes Licht.")
+para("Die Gastro nutzt das ganze Erdgeschoss (ca. 510 m²) als Bar-Restaurant für den ganzen Tag mit dem Hauptfokus auf dem Abend. Morgens gibt es Frühstück (am Wochenende Brunch), mittags einen Mittagstisch für Beschäftigte aus Rathaus und Umgebung. Ab dem späten Nachmittag wird das Haus zum Abendrestaurant mit regionaler, moderner Küche, ab 21 Uhr zur Bar mit Cocktails, Wein, Bier und leiser Musik (Fr und Sa bis 01 Uhr). Dazu kommen Feiern, Live-Abende und Themenabende im Séparée (abgetrennter Raum mit 30 Plätzen). Die Gestaltung folgt dem Referenzbild des Bauherrn: olivgrüne Vertäfelung, Cognac-Samtbanketten, Eiche, anthrazitfarbene Theke, Stahl-Glas-Trennwand und warmes Licht.")
 table([
     ["Merkmal", "Annahme"],
     ["Plätze", "ca. 190 innen (160 Gastraum, 30 Séparée), ca. 60 auf der Terrasse, 12 Barhocker"],
     ["Öffnungszeiten", "Di–Fr 11:30–23 Uhr, Sa 10–01 Uhr, So 10–21 Uhr, Montag Ruhetag"],
-    ["Umsatz", "65.000 € pro Monat (netto), ca. 4.100 € je Sitzplatz und Jahr, vorsichtig"],
+    ["Umsatz", f"{eur(B['g_umsatz_monat'])} pro Monat (netto), davon {pct(B['g_abend_anteil'], 0)} am Abend, ca. {eur(round(B['g_umsatz_platz'], -2))} je Sitzplatz und Jahr"],
     ["Marge vor Pacht", "30,5 % (Branchen-Richtwert, nicht aus Werlte)"],
-    ["Pacht an das Haus", f"10 €/m², {eur(B['pacht_monat'])} pro Monat (ca. 8 % vom Umsatz)"],
+    ["Pacht an das Haus", f"10 €/m², {eur(B['pacht_monat'])} pro Monat (ca. " + pct(B['g_pacht_quote'], 1) + " vom Umsatz)"],
     ["Ausbau", "190.000 € (1.000 € je Platz nach dem Budget des Bauherrn, Angebote nötig), dazu Büro-Ausbau 150 €/m²"],
 ], [4.0, 12.6], font=9)
+para(f"Der Umsatz setzt sich aus Tagesteilen zusammen. Der Abend (Restaurant, Bar, Feiern) bringt {pct(B['g_abend_anteil'], 0)} des Umsatzes, Frühstück und Mittag füllen das Haus am Tag. Öffnungstage, Gäste und Bon sind Annahmen, es liegen keine Marktdaten für Werlte vor.", after=4)
+rows = [["Tagesteil", "Zeit", "Tage", "Gäste/Tag", "Ø Bon", "Umsatz/Monat", "Anteil"]]
+for nm, zt, tg, gs, bon, um, an in B["tagesteile"]:
+    rows.append([nm, zt, fmt(tg, 0), fmt(gs, 0), eur(bon), eur(um), pct(an, 0)])
+rows.append(["Summe", "", "", "", "", eur(B["g_umsatz_monat"]), "100 %"])
+table(rows, [4.6, 4.2, 1.2, 1.7, 1.4, 2.2, 1.3], right_cols=(2, 3, 4, 5, 6), bold_rows=(8,), font=8.5)
 rows = [["Umsatz pro Monat", "Gewinn vor Pacht", "Gewinn nach Pacht"]]
 for u, g, n in B["gastro_umsatz"]:
     rows.append([eur(u), eur(g), eurs(n)])
-table(rows, [5.0, 5.8, 5.8], right_cols=(1, 2), bold_rows=(3,), font=9)
+table(rows, [5.0, 5.8, 5.8], right_cols=(1, 2), bold_rows=(4,), font=9)
 para(f"Der Gastro-Betrieb deckt seine Pacht ab ca. {eur(round(B['g_breakeven'], -2))} Umsatz im Monat. Der Lohn des Bauherrn ist nicht gerechnet. Ausführliche Gestaltung, Grundriss, Speisekarte und Personalplan stehen im Gastro-Konzept.", after=4)
 
 # ------------------------------------------------------------------ 5 Kosten
@@ -371,7 +377,7 @@ table([
     ["Pacht Gastro (510 m² × 10 €)", eurs(B["c_pacht"]), eurs(B["c_pacht"] * 12)],
     ["Rücklagen (10 % von Miete, Büro und Pacht)", eurs(B["c_rueck"]), eurs(B["c_rueck"] * 12)],
     ["Nettoertrag Immobilie", eurs(B["c_netto_immo"]), eurs(B["c_netto_immo"] * 12)],
-    ["Betriebsergebnis Gastro nach Pacht (65.000 € Umsatz)", eurs(B["c_gastro"]), eurs(B["c_gastro"] * 12)],
+    [f"Betriebsergebnis Gastro nach Pacht ({eur(B['g_umsatz_monat'])} Umsatz)", eurs(B["c_gastro"]), eurs(B["c_gastro"] * 12)],
     ["Nettoertrag vor Kapitaldienst", eurs(B["c_netto"]), eurs(B["c_netto"] * 12)],
     ["Kapitaldienst (Zinsen und Tilgung)", eurs(B["c_kd"]), eurs(B["c_kd"] * 12)],
     ["Ergebnis nach Kapitaldienst", eurs(B["c_ergebnis"]), eurs(B["c_ergebnis"] * 12)],
@@ -425,7 +431,7 @@ rows = [["Belastungstest (pro Monat)", "Ergebnis", "DSCR", "zum Plan"]]
 for i, (lab, e, d, z) in enumerate(B["sens"]):
     rows.append([lab, eurs(e), fmt(d, 2), "" if i == 0 else eurs(z)])
 table(rows, [8.6, 2.8, 2.0, 3.2], right_cols=(1, 2, 3), bold_rows=(1,), font=9)
-para("Die Tests sind vereinfacht. Das Ergebnis reagiert am stärksten auf den Gastro-Umsatz und die Pacht. Bei einem Umsatz −40 % ist die Kapitaldienstdeckung knapp über 1,0, bei einem Ausfall der Gastro reicht der Ertrag nicht mehr für die Raten. Ein Auszug eines Ankermieters ist verkraftbar.", after=4)
+para("Die Tests sind vereinfacht. Das Ergebnis reagiert am stärksten auf den Gastro-Umsatz und die Pacht. Bei einem Umsatz −40 % liegt die Kapitaldienstdeckung noch über 1,4, bei einem Ausfall der Gastro reicht der Ertrag nicht mehr für die Raten. Ein Auszug eines Ankermieters ist verkraftbar.", after=4)
 
 # ------------------------------------------------------------------ 11 Airbnb
 H("Prüfung: ein 60-m²-Apartment als Airbnb")

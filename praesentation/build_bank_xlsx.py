@@ -150,7 +150,7 @@ ASSUME = [
     ("miete_m2", "Kaltmiete Wohnen (€/m² Wohnfläche)", "=950/85", EUR2, "Bauherr: 950 € für 85 m²; Portale Neubau Werlte ca. 10,7–11,0 €/m²"),
     ("pacht_m2", "Pacht Gastro (€/m²)", 10, EUR, "Annahme: ca. 8 % vom Umsatz (üblich 6–12 %), große Fläche günstiger je m²"),
     ("ruecklage", "Rücklagen (Anteil an Miete und Pacht)", 0.10, PCT, "Hausverwaltung, Instandhaltung, Leerstand; Nebenkosten werden umgelegt"),
-    ("umsatz", "Gastro-Umsatz pro Monat (€)", 65000, EUR, "netto; ca. 4.100 € je Sitzplatz und Jahr bei 190 Plätzen (Österreich Median ca. 12.000 €, vorsichtig)"),
+    ("umsatz", "Gastro-Umsatz pro Monat (€)", "='Gastro Tagesteile'!F14", EUR, "netto; Summe aus Frühstück, Mittag, Abend, Bar und Events (Blatt Gastro Tagesteile), Annahmen"),
     ("marge", "Gastro-Marge vor Pacht", 0.305, PCT, "Branchen-Richtwert"),
     ("lohn", "Lohn des Bauherrn pro Monat (€)", 0, EUR, "Bauherr: wird vorerst nicht gerechnet"),
     ("sec", "Finanzierung (100 % Fremdkapital, kein Eigenkapital)"),
@@ -254,7 +254,7 @@ put(sW, "A13", "Gastrofläche im Modell (Annahmen)"); put(sW, "D13", f"={A['gast
 put(sW, "A14", "Abweichung (Bedarf minus Modell)"); put(sW, "D14", "=D12-D13", EURS.replace(' "€"',''))
 put(sW, "A15", "Plätze innen gesamt"); put(sW, "D15", "=B5+B6", NUM)
 put(sW, "A16", "Bruttofläche je Platz (m²)"); put(sW, "D16", "=D13/D15", "0.00"); put(sW, "H16", "Richtwert Gesamtfläche 2,5–3 m² je Platz", font=note)
-put(sW, "A17", "Gastro-Umsatz je Platz und Jahr (€)"); put(sW, "D17", f"={A['umsatz']}*12/D15", EUR); put(sW, "H17", "vorsichtig, Österreich Median ca. 12.000 €", font=note)
+put(sW, "A17", "Gastro-Umsatz je Platz und Jahr (€)"); put(sW, "D17", f"={A['umsatz']}*12/D15", EUR); put(sW, "H17", "Österreich Median ca. 12.000 €", font=note)
 put(sW, "A18", "Pacht in % vom Gastro-Umsatz"); put(sW, "D18", f"='Flächen und Mieten'!F22/{A['umsatz']}", PCT); put(sW, "H18", "üblich 6–12 %", font=note)
 reg("g_plaetze", sW, "D15"); reg("g_bedarf", sW, "D12"); reg("g_umsatz_platz", sW, "D17"); reg("g_pacht_quote", sW, "D18"); reg("g_m2_platz", sW, "D16")
 header(sW, 21, ["Ankermieter Büro", "Fläche (m²)", "Miete €/m²", "Miete / Monat", "Miete / Jahr", "Laufzeit (Jahre)", "Miete über Laufzeit", "Anteil am Rohertrag"])
@@ -461,10 +461,38 @@ put(sG, "A20", "Break-even-Umsatz des Betriebs (Ergebnis nach Pacht = 0)"); put(
 put(sG, "D16", "Marge laut Annahmen muss mit 30,5 % übereinstimmen", font=note)
 reg("g_gewinn_vor_pacht", sG, "C16"); reg("g_ergebnis", sG, "C19"); reg("g_breakeven", sG, "C20")
 header(sG, 23, ["Umsatz pro Monat", "", "Gewinn vor Pacht", "Gewinn nach Pacht"])
-for i, u in enumerate([40000, 50000, 65000, 80000, 90000]):
+for i, u in enumerate([50000, 65000, 80000, f"={A['umsatz']}", 110000]):
     r = 24 + i
     put(sG, f"A{r}", u, EUR, inp); put(sG, f"C{r}", f"=A{r}*$B$16", EUR); put(sG, f"D{r}", f"=C{r}-'Flächen und Mieten'!$F$22-{A['lohn']}", EURS)
 put(sG, "A30", "Bei sehr niedrigem Umsatz drücken Fixkosten stärker: die Rechnung ist dort zu günstig.", font=note, border=False)
+
+# =====================================================================================
+# Gastro Tagesteile
+# =====================================================================================
+sTT = sheet("Gastro Tagesteile", "Gastro-Umsatz nach Tagesteilen: Frühstück, Mittag, Abend, Bar", "Hauptfokus Abend mit Restaurant und Bar. Öffnungstage, Gäste und Bon sind Annahmen (keine Marktdaten für Werlte), Ruhetag Montag.", [42, 24, 12, 12, 12, 16, 12])
+header(sTT, 4, ["Tagesteil", "Zeit", "Tage / Monat", "Gäste / Tag", "Ø Bon (€)", "Umsatz / Monat", "Anteil"])
+TT = [
+    ("Frühstück werktags", "Di–Fr 08:00–11:00", 17, 25, 11),
+    ("Brunch am Wochenende", "Sa, So 09:00–14:00", 9, 60, 14),
+    ("Mittagstisch", "Di–Fr 11:30–14:30", 17, 50, 14),
+    ("Abendessen Restaurant", "Di–So 17:30–22:00", 26, 55, 32),
+    ("Bar Di–Do", "ab 21:00", 13, 20, 18),
+    ("Bar Fr, Sa (bis 01:00)", "Cocktails, Wein, Bier, Musik", 9, 70, 22),
+    ("Feiern, Live-Abende, Séparée", "nach Absprache, 4 pro Monat", 4, 40, 45),
+]
+for i, (nm, zt, tg, gs, bon) in enumerate(TT):
+    r_ = 5 + i
+    put(sTT, f"A{r_}", nm); put(sTT, f"B{r_}", zt, font=note)
+    put(sTT, f"C{r_}", tg, "0", inp); put(sTT, f"D{r_}", gs, "0", inp); put(sTT, f"E{r_}", bon, EUR, inp)
+    put(sTT, f"F{r_}", f"=C{r_}*D{r_}*E{r_}", EUR); put(sTT, f"G{r_}", f"=F{r_}/$F$14", PCT)
+put(sTT, "A14", "Gastro-Umsatz pro Monat (netto)", font=bold); put(sTT, "F14", "=SUM(F5:F11)", EUR, bold, fill=key_fill); put(sTT, "G14", "=SUM(G5:G11)", PCT, bold)
+put(sTT, "A15", "davon Tag (Frühstück, Brunch, Mittag)"); put(sTT, "F15", "=SUM(F5:F7)", EUR); put(sTT, "G15", "=F15/F14", PCT)
+put(sTT, "A16", "davon Abend (Restaurant, Bar, Feiern)", font=bold); put(sTT, "F16", "=SUM(F8:F11)", EUR, bold); put(sTT, "G16", "=F16/F14", PCT, bold)
+put(sTT, "A17", "Gäste pro Monat"); put(sTT, "F17", "=SUMPRODUCT(C5:C11,D5:D11)", NUM)
+put(sTT, "A18", "Umsatz je Platz und Jahr (190 Plätze)"); put(sTT, "F18", f"=F14*12/({A['plaetze_gast']}+{A['plaetze_sep']})", EUR); put(sTT, "G18", "", font=note)
+put(sTT, "A19", "Auslastung der Plätze am Abend (Restaurantgäste je Tag / Plätze)"); put(sTT, "F19", f"=D8/({A['plaetze_gast']}+{A['plaetze_sep']})", PCT)
+put(sTT, "A21", "Einordnung: Der Abend (Restaurant, Bar, Feiern) trägt den größten Teil des Umsatzes, Frühstück und Mittagstisch füllen das Haus am Tag. Terrasse im Sommer, Catering und Weihnachtsfeiern sind nicht eingerechnet. Branchen-Median Österreich ca. 12.000 € je Platz und Jahr.", font=note, border=False)
+reg("g_umsatz_monat", sTT, "F14"); reg("g_abend_anteil", sTT, "G16"); reg("g_tag_anteil", sTT, "G15"); reg("g_gaeste_monat", sTT, "F17")
 
 # =====================================================================================
 # Ertrag und Cashflow
@@ -747,7 +775,7 @@ over = [
     ("Ertrag und Wert", None, None, None),
     ("Mieten Wohnen + Büro + Pacht pro Monat", "='Flächen und Mieten'!F26", EUR, "Rohertrag"),
     ("Nettoertrag Immobilie pro Monat (nach Rücklagen)", "='Ertrag und Cashflow'!B9", EUR, ""),
-    ("Betriebsergebnis Gastro nach Pacht pro Monat", "='Ertrag und Cashflow'!B10", EUR, "bei 65.000 € Umsatz, ohne Lohn des Bauherrn"),
+    ("Betriebsergebnis Gastro nach Pacht pro Monat", "='Ertrag und Cashflow'!B10", EUR, "bei dem Umsatz aus Blatt Gastro Tagesteile, ohne Lohn des Bauherrn"),
     ("Ergebnis pro Monat nach Kapitaldienst", "='Ertrag und Cashflow'!B13", EURS, ""),
     ("Kapitaldienstdeckung gesamt (DSCR)", "='Ertrag und Cashflow'!B15", X, "Bank verlangt meist mindestens 1,2"),
     ("Kapitaldienstdeckung nur Immobilie", "='Ertrag und Cashflow'!B16", X, "ohne Gastro-Gewinn"),
@@ -774,7 +802,7 @@ for lab, f_, fmt, nt in over:
     r += 1
 put(sO, f"A{r + 1}", "Alle Beträge sind Planungsannahmen. KfW-Zinsen und Rahmen sind Stand Ratgeber Oktober 2026 und müssen bei Hausbank und KfW bestätigt werden.", font=note, border=False)
 
-order = ["Übersicht", "Annahmen", "Flächen und Mieten", "Gewerbe und Anker", "Kosten und Finanzierung", "Bauphase", "Tilgung Jahre", "Tilgungsplan", "Ertrag und Cashflow", "Gastro Betrieb", "Ertragswert", "Prognose", "Sensitivität", "Airbnb Prüfung", "Bankunterlagen"]
+order = ["Übersicht", "Annahmen", "Flächen und Mieten", "Gewerbe und Anker", "Kosten und Finanzierung", "Bauphase", "Tilgung Jahre", "Tilgungsplan", "Ertrag und Cashflow", "Gastro Betrieb", "Gastro Tagesteile", "Ertragswert", "Prognose", "Sensitivität", "Airbnb Prüfung", "Bankunterlagen"]
 wb._sheets = [wb[n] for n in order]
 for ws in wb.worksheets:
     ws.sheet_properties.tabColor = GREEN if ws.title in ("Übersicht", "Annahmen") else GOLD

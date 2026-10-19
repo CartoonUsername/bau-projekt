@@ -72,19 +72,14 @@ function makeDeck(title, fileName) {
 }
 
 const v = VARIANTEN.sechs;
-const UM = v.umsatz;
+const BV = JSON.parse(require("fs").readFileSync(path.join(__dirname, "bank_values.json"), "utf8"));
+const UM = BV.g_umsatz_monat;
 const img = (n) => path.join(IMG, n);
 
-// Umsatzaufbau (Plausibilitätsrechnung, Annahmen): Öffnungstage pro Monat, Gäste pro Tag, Ø Bon
-const SEG = [
-  ["Mittagstisch (Di–Fr)", 17.3, 50, 14],
-  ["Frühstück und Brunch (Sa, So)", 8.7, 60, 13],
-  ["Abendessen (Di–So)", 26, 48, 29],
-  ["Bar am Abend (Fr, Sa)", 8.7, 45, 15],
-  ["Feiern im Séparée (3 pro Monat)", 3, 30, 45],
-];
-const segSumme = SEG.reduce((a, s) => a + s[1] * s[2] * s[3], 0);
-const gaesteMonat = SEG.reduce((a, s) => a + s[1] * s[2], 0);
+// Umsatzaufbau nach Tagesteilen aus der Excel (Blatt Gastro Tagesteile): Name, Zeit, Tage/Monat, Gäste/Tag, Ø Bon, Umsatz, Anteil
+const SEG = BV.tagesteile.map((t) => [t[0] + " (" + t[1] + ")", t[2], t[3], t[4]]);
+const segSumme = BV.tagesteile.reduce((a, t) => a + t[5], 0);
+const gaesteMonat = BV.tagesteile.reduce((a, t) => a + t[2] * t[3], 0);
 
 async function deck() {
   const t = makeDeck("Neue Mitte Werlte – Baufeld 3: Gastro, Gestaltung und Konzept", "Neue-Mitte-Werlte_Baufeld3_Gastro-Konzept.pptx");
@@ -103,9 +98,9 @@ async function deck() {
   // ---- 2 Idee
   { const s = content("Die Idee: ein Ort für den ganzen Tag", "Für Stadt und Bank", "Alle Zahlen zu Plätzen, Preisen und Gästen sind Planungsannahmen, noch kein Betreiberkonzept.");
     const cols = [
-      ["Tagsüber", "Frühstück, Mittagstisch und Kaffee am Marktplatz. Regional, frisch, schnell für Beschäftigte aus Rathaus und Umgebung."],
-      ["Abends", "Restaurant mit moderner, regionaler Küche. Gemütlich, mit Banketten, Kerzenlicht und offener Bar."],
-      ["Bar und Feiern", "Cocktails, Wein und Bier an der Theke. Séparée mit 30 Plätzen für Geburtstage, Firmen- und Vereinsfeiern."],
+      ["Morgens und mittags", "Frühstück, Brunch am Wochenende und Mittagstisch am Marktplatz. Regional, frisch, schnell für Beschäftigte aus Rathaus und Umgebung."],
+      ["Abends (Hauptfokus)", "Moderne, regionale Küche in warmer, dunkler Atmosphäre mit Cognac-Banketten und Kerzenlicht. Der Abend bringt ca. " + Math.round(BV.g_abend_anteil * 100) + " % vom Umsatz."],
+      ["Bar und Feiern", "Ab 21 Uhr Cocktails, Wein und Bier an der Theke, Fr und Sa bis 01 Uhr. Live-Abende, Séparée mit 30 Plätzen für Feiern."],
     ];
     const cw = (W - 2 * MX - 0.6) / 3;
     cols.forEach((c, i) => { const x = MX + i * (cw + 0.3); card(s, x, 1.5, cw, 2.3, c[0]); text(s, c[0], { x: x + 0.25, y: 1.65, w: cw - 0.5, h: 0.45, fontSize: 20, fontFace: "Georgia", color: C.accent1 }); text(s, c[1], { x: x + 0.25, y: 2.25, w: cw - 0.5, h: 1.5, fontSize: 14 }); });
@@ -129,14 +124,14 @@ async function deck() {
   }
 
   // ---- 4 Tagesablauf und Öffnungszeiten
-  { const s = content("Ein Tag in der Gastro", "Für Stadt und Bank", "Vorschlag für Öffnungszeiten, Ruhetag Montag. Küche warm bis ca. 21:30 Uhr.");
+  { const s = content("Ein Tag in der Gastro", "Für Stadt und Bank", "Vorschlag für Öffnungszeiten, Ruhetag Montag. Hauptfokus ist der Abend. Küche warm bis ca. 21:30 Uhr.");
     const rows = [[hdr("Zeit"), hdr("Angebot"), hdr("Stimmung")],
-      [cell("10:00–14:00 (Sa, So)"), cell("Frühstück und Brunch, Kaffee"), cell("hell, entspannt, Familien")],
+      [cell("08:00–11:00 (Di–Fr), 09:00–14:00 (Sa, So)"), cell("Frühstück, am Wochenende Brunch, Kaffee"), cell("hell, entspannt, Familien")],
       [cell("11:30–14:30 (Di–Fr)"), cell("Mittagstisch, Tagesgericht, Suppe"), cell("schnell, Tische für zwei und vier")],
-      [cell("14:30–17:00"), cell("Kaffee, Kuchen, Eis, kleine Karte"), cell("ruhig, Terrasse im Sommer")],
-      [cell("17:00–22:00"), cell("Abendessen, Wein, Bier"), cell("Kerzenlicht, Banketten, Bar")],
-      [cell("ab 21:00 (Fr, Sa bis 01:00)"), cell("Bar, Cocktails, Musik leise"), cell("Theke, Lounge")]];
-    s.addTable(rows, { x: MX, y: 1.5, w: 7.0, colW: [2.2, 2.6, 2.2], rowH: 0.62, border, objectName: "Tabelle Tagesablauf" });
+      [cell("14:30–17:30"), cell("Kaffee, Kuchen, kleine Karte"), cell("ruhig, Terrasse im Sommer")],
+      [cell("17:30–22:00 (Di–So)"), cell("Abendessen, Wein, Bier"), cell("Kerzenlicht, Banketten, Hauptgeschäft")],
+      [cell("ab 21:00 (Fr, Sa bis 01:00)"), cell("Bar, Cocktails, Live-Abende, leise Musik"), cell("Theke, Lounge, Séparée")]];
+    s.addTable(rows, { x: MX, y: 1.5, w: 7.0, colW: [2.4, 2.5, 2.1], rowH: 0.62, border, objectName: "Tabelle Tagesablauf" });
     s.addImage({ path: fit(img("ki_gastro_fruehstueck.jpg"), 4.9, 3.3), x: W - MX - 4.9, y: 1.5, w: 4.9, h: 3.3, altText: "Frühstück am Fenster" });
     text(s, "Frühstück und Brunch am Morgen", { x: W - MX - 4.9, y: 4.85, w: 4.9, h: 0.3, fontSize: 12, color: C.accent4 });
   }
@@ -151,7 +146,29 @@ async function deck() {
     ];
     const cw = (W - 2 * MX - 0.9) / 4;
     cols.forEach((c, i) => { const x = MX + i * (cw + 0.3); card(s, x, 1.5, cw, 4.0, c[0]); text(s, c[0], { x: x + 0.2, y: 1.62, w: cw - 0.4, h: 0.5, fontSize: 17, fontFace: "Georgia", color: C.accent1 }); text(s, c[1].map((t2, j) => ({ text: t2, options: { bullet: true, breakLine: j < c[1].length - 1 } })), { x: x + 0.2, y: 2.2, w: cw - 0.4, h: 3.2, fontSize: 13, paraSpaceAfter: 6 }); });
-    text(s, "Durchschnittlicher Bon (Annahme): Mittag 14 €, Brunch 13 €, Abend 29 € mit Getränk.", { x: MX, y: 5.8, w: W - 2 * MX, h: 0.4, fontSize: 14, color: C.accent2, bold: true });
+    text(s, "Durchschnittlicher Bon (Annahme): Frühstück 11 €, Brunch 14 €, Mittag 14 €, Abendessen 32 €, Bar 18–22 €, Feiern 45 €.", { x: MX, y: 5.8, w: W - 2 * MX, h: 0.4, fontSize: 14, color: C.accent2, bold: true });
+  }
+
+  // ---- 5b Abend und Bar
+  { const s = content("Hauptfokus Abend: Restaurant und Bar", "Für Stadt und Bank", "Konzeptideen und Zahlen sind Annahmen, keine Betreiberplanung. Der Abend bringt den größten Teil des Umsatzes.");
+    const ab = BV.tagesteile.slice(3);
+    const abSum = ab.reduce((a, t) => a + t[5], 0);
+    s.addImage({ path: fit(img("ki_gastro_bar.jpg"), 4.6, 3.0), x: MX, y: 1.5, w: 4.6, h: 3.0, altText: "Bar am Abend mit beleuchteter Backbar" });
+    text(s, [
+      { text: "Restaurant (17:30–22:00)", options: { bold: true, color: C.accent1, breakLine: true } },
+      { text: "Kurze, moderne Karte mit regionalen Zutaten, Steaks und Burger, Wein-Empfehlung zum Essen", options: { bullet: true, breakLine: true } },
+      { text: "Reservierung für Gruppen, Tische für zwei bis acht", options: { bullet: true, breakLine: true } },
+      { text: "Bar (ab 21:00, Fr und Sa bis 01:00)", options: { bold: true, color: C.accent1, breakLine: true } },
+      { text: "Signature-Cocktails, regionale Weine, Craft-Bier vom Fass, alkoholfreie Drinks", options: { bullet: true, breakLine: true } },
+      { text: "After-Work am Donnerstag, Live-Musik oder DJ am Freitag", options: { bullet: true, breakLine: true } },
+      { text: "Feiern und Events", options: { bold: true, color: C.accent1, breakLine: true } },
+      { text: "Séparée, Themenabende, Firmen- und Vereinsfeiern, Weihnachtsfeiern", options: { bullet: true } },
+    ], { x: 5.5, y: 1.5, w: W - 5.5 - MX, h: 3.4, fontSize: 13, paraSpaceAfter: 3 });
+    const rows = [[hdr("Abend-Bereich"), hdr("Tage", "right"), hdr("Gäste/Tag", "right"), hdr("Ø Bon", "right"), hdr("Umsatz/Monat", "right")]];
+    ab.forEach((t) => rows.push([cell(t[0]), R(String(t[2])), R(String(t[3])), R(eur(t[4])), R(eur(t[5]))]));
+    rows.push([cell("Summe Abend", { bold: true }), R(""), R(""), R(""), R(eur(abSum), { bold: true })]);
+    s.addTable(rows, { x: MX, y: 4.65, w: 8.2, colW: [3.8, 0.9, 1.1, 1.0, 1.4], rowH: 0.27, fontSize: 11, border, objectName: "Tabelle Abend" });
+    text(s, `${Math.round(BV.g_abend_anteil * 100)} % vom Gastro-Umsatz`, { x: 9.0, y: 5.1, w: W - 9.0 - MX, h: 0.8, fontSize: 24, fontFace: "Georgia", color: C.accent2, valign: "middle" });
   }
 
   // ---- 6 Grundriss
@@ -220,18 +237,18 @@ async function deck() {
   }
 
   // ---- 10 Umsatzaufbau
-  { const s = content("Wie 65.000 € Umsatz im Monat zusammenkommen", "Für Bank", "Plausibilitätsrechnung mit Annahmen für Gäste und Bon. Die Gastro hat ca. 190 Plätze (ca. 4.100 € Umsatz je Sitzplatz und Jahr), die Annahme ist vorsichtig.");
+  { const s = content(`Wie ${eur(UM)} Umsatz im Monat zusammenkommen`, "Für Bank", `Plausibilitätsrechnung mit Annahmen für Gäste und Bon. Ca. ${eur(Math.round(BV.g_umsatz_platz / 100) * 100)} Umsatz je Sitzplatz und Jahr bei 190 Plätzen, Branchen-Median Österreich ca. 12.000 €.`);
     const rows = [[hdr("Bereich"), hdr("Tage / Monat", "right"), hdr("Gäste pro Tag", "right"), hdr("Ø Bon", "right"), hdr("Umsatz / Monat", "right")]];
     SEG.forEach((g) => rows.push([cell(g[0]), R(String(g[1]).replace(".", ",")), R(String(g[2])), R(eur(g[3])), R(eur(g[1] * g[2] * g[3]))]));
     rows.push([cell("Summe", { bold: true }), R(""), R(""), R(""), R(eur(segSumme), { bold: true })]);
-    s.addTable(rows, { x: MX, y: 1.5, w: 8.2, colW: [3.4, 1.2, 1.2, 1.0, 1.4], rowH: 0.52, border, objectName: "Tabelle Umsatzaufbau" });
+    s.addTable(rows, { x: MX, y: 1.5, w: 8.2, colW: [4.0, 0.9, 1.0, 0.9, 1.4], rowH: 0.5, border, objectName: "Tabelle Umsatzaufbau" });
     card(s, 9.2, 1.5, W - 9.2 - MX, 4.5, "Einordnung");
     text(s, [
       { text: "Was das bedeutet", options: { bold: true, color: C.accent1, breakLine: true } },
-      { text: `Ca. ${nf.format(Math.round(gaesteMonat))} Gäste im Monat, im Schnitt ca. ${Math.round(gaesteMonat / 26)} pro Öffnungstag bei 190 Plätzen.`, options: { breakLine: true } },
+      { text: `Ca. ${nf.format(Math.round(gaesteMonat))} Gäste im Monat, im Schnitt ca. ${Math.round(gaesteMonat / 26)} pro Öffnungstag bei 190 Plätzen. Der Abend (Restaurant, Bar, Feiern) bringt ${Math.round(BV.g_abend_anteil * 100)} % vom Umsatz.`, options: { breakLine: true } },
       { text: " ", options: { breakLine: true } },
       { text: "Nicht eingerechnet", options: { bold: true, color: C.accent1, breakLine: true } },
-      { text: "Terrasse im Sommer, Catering, Weihnachtsfeiern und ein Mittagstisch an Samstagen. Das ist Spielraum nach oben.", options: {} },
+      { text: "Terrasse im Sommer, Catering und Weihnachtsfeiern. Das ist Spielraum nach oben.", options: {} },
     ], { x: 9.45, y: 1.7, w: W - 9.2 - MX - 0.5, h: 4.2, fontSize: 13 });
   }
 
@@ -244,7 +261,7 @@ async function deck() {
     card(s, 8.6, 1.5, W - 8.6 - MX, 4.6, "Betrieb");
     text(s, [
       { text: "Betreiber", options: { bold: true, color: C.accent1, breakLine: true } },
-      { text: "Du führst die Gastro selbst oder verpachtest sie. Bei Verpachtung zahlt der Betreiber ca. 10 €/m² Pacht, das sind bei 510 m² ca. 5.100 € im Monat (ca. 8 % vom Umsatz).", options: { breakLine: true } },
+      { text: "Du führst die Gastro selbst oder verpachtest sie. Bei Verpachtung zahlt der Betreiber ca. 10 €/m² Pacht, das sind bei 510 m² ca. 5.100 € im Monat (ca. " + Math.round(BV.g_pacht_quote * 1000) / 10 + " % vom Umsatz).", options: { breakLine: true } },
       { text: " ", options: { breakLine: true } },
       { text: "Start", options: { bold: true, color: C.accent1, breakLine: true } },
       { text: "Küchenchef früh einstellen, 4 bis 6 Wochen vor Eröffnung Probebetrieb.", options: {} },
@@ -254,7 +271,7 @@ async function deck() {
   // ---- 12 Wirtschaftlichkeit
   { const s = content("Wirtschaftlichkeit der Gastro", "Für Bank", "Marge vor Pacht 30,5 % vom Umsatz (Branchen-Richtwert, nicht aus Werlte). Bei sehr niedrigem Umsatz drücken die Fixkosten stärker, die Rechnung ist dort zu günstig.");
     const rows = [[hdr("Umsatz pro Monat"), hdr("Gewinn vor Pacht", "right"), hdr("Pacht ans Haus", "right"), hdr("Gewinn nach Pacht", "right")]];
-    [40000, 50000, 65000, 80000, 90000].forEach((u) => { const g = u * 0.305; rows.push([cell(eur(u), { bold: u === UM }), R(eur(g)), R(eur(-v.pacht)), cf(g - v.pacht)]); });
+    [50000, 65000, 80000, UM, 110000].forEach((u) => { const g = u * 0.305; rows.push([cell(eur(u), { bold: u === UM }), R(eur(g)), R(eur(-v.pacht)), cf(g - v.pacht)]); });
     s.addTable(rows, { x: MX, y: 1.5, w: 8.4, colW: [2.4, 2.0, 2.0, 2.0], rowH: 0.55, border, objectName: "Tabelle Gastro Gewinn" });
     const BV = JSON.parse(require("fs").readFileSync(path.join(__dirname, "bank_values.json"), "utf8"));
     card(s, 9.4, 1.5, W - 9.4 - MX, 4.2, "Haus");

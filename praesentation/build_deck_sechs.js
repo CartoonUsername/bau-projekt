@@ -11,7 +11,7 @@ const B = JSON.parse(fs.readFileSync(path.join(__dirname, "bank_values.json"), "
 const IMG = process.env.BILDER || path.join(__dirname, "bilder");
 const OUT = process.env.OUT || __dirname;
 const v = VARIANTEN.sechs;
-const UM = v.umsatz; // Basis-Umsatz 65.000 €
+const UM = B.g_umsatz_monat; // Basis-Umsatz aus Excel (Blatt Gastro Tagesteile)
 // KI-Bilder (optional): werden automatisch eingebaut, wenn die Dateien in bilder/ liegen
 const KI = ["ki_aussen_1.jpg", "ki_aussen_2.jpg", "ki_terrasse.jpg", "ki_gastro_raum.jpg", "ki_gastro_bar.jpg"].map((n) => path.join(IMG, n)).filter((f) => fs.existsSync(f));
 const KI_AUSSEN = path.join(IMG, "ki_aussen_1.jpg");
@@ -455,7 +455,7 @@ if (KI.length) {
 
 // ===== 12 Cashflow =====
 {
-  const s = content("Ertrag und Kapitaldienst pro Monat", "Für die Bank", "Gastro-Betrieb bei 65.000 € Umsatz und 30,5 % Marge vor Pacht, ohne Lohn des Bauherrn. Rücklagen 10 % von Miete und Pacht.");
+  const s = content("Ertrag und Kapitaldienst pro Monat", "Für die Bank", `Gastro-Betrieb bei ${eur(UM)} Umsatz und 30,5 % Marge vor Pacht, ohne Lohn des Bauherrn. Rücklagen 10 % von Miete und Pacht.`);
   const rows = [[hdr("Position", "left"), hdr("pro Monat", "right"), hdr("pro Jahr", "right")],
     [cell("Kaltmiete Wohnen (8 Wohnungen)"), R(eurS(B.c_miete)), R(eurS(B.c_miete * 12))],
     [cell("Büromieten (2 Ankermieter, 10 Jahre fest)"), R(eurS(B.c_buero)), R(eurS(B.c_buero * 12))],
@@ -481,11 +481,28 @@ if (KI.length) {
   text(s, "Ohne den Gastro-Gewinn deckt die Immobilie allein die Raten nicht. Der Pachtvertrag mit einem tragfähigen Betreiber ist für die Bank entscheidend.", { x: MX, y: 6.3, w: W - 2 * MX, h: 0.5, fontSize: 13.5, bold: true, color: C.accent2 });
 }
 
+// ===== 14a Gastro Tagesteile =====
+{
+  const s = content("Gastro-Umsatz: Hauptfokus Abend", "Für die Bank", "Frühstück und Mittag am Tag, Restaurant und Bar am Abend. Öffnungstage, Gäste und Bon sind Annahmen ohne Marktdaten für Werlte, Ruhetag Montag.");
+  const rows = [[hdr("Tagesteil"), hdr("Tage", "right"), hdr("Gäste/Tag", "right"), hdr("Ø Bon", "right"), hdr("Umsatz/Monat", "right"), hdr("Anteil", "right")]];
+  B.tagesteile.forEach((r) => rows.push([cell(r[0] + " (" + r[1] + ")"), R(String(r[2])), R(String(r[3])), R(eur(r[4])), R(eur(r[5])), R(pct(r[6]))]));
+  rows.push([cell("Gastro-Umsatz pro Monat", { bold: true }), R(""), R(""), R(""), R(eur(B.g_umsatz_monat), { bold: true }), R("100 %", { bold: true })]);
+  s.addTable(rows, { x: MX, y: 1.5, w: 8.6, colW: [3.9, 0.7, 1.0, 0.8, 1.2, 1.0], rowH: 0.46, border: tblBorder, fontSize: 11, objectName: "Tabelle Tagesteile" });
+  card(s, 9.5, 1.5, W - 9.5 - MX, 4.7, "Einordnung");
+  text(s, [
+    { text: "Abend im Fokus", options: { bold: true, color: C.accent1, breakLine: true } },
+    { text: `${pct(B.g_abend_anteil)} des Umsatzes entstehen am Abend (Restaurant, Bar, Feiern), ${pct(B.g_tag_anteil)} am Tag.`, options: { breakLine: true } },
+    { text: " ", options: { breakLine: true } },
+    { text: "Plausibel?", options: { bold: true, color: C.accent1, breakLine: true } },
+    { text: `ca. ${eur(Math.round(B.g_umsatz_platz / 100) * 100)} je Platz und Jahr, Branchen-Median Österreich ca. 12.000 €. Das Haus trägt sich ab ${eur(Math.round(B.breakeven_haus / 100) * 100)} Umsatz.`, options: {} },
+  ], { x: 9.7, y: 1.7, w: W - 9.5 - MX - 0.4, h: 4.4, fontSize: 12.5 });
+}
+
 // ===== 14 Gastro Umsatz =====
 {
   const s = content("Wie viel Umsatz braucht die Gastro?", "Für die Bank", "Gastro-Marge vor Pacht 30,5 % vom Umsatz (Branchen-Richtwert, nicht aus Werlte). Bei sehr niedrigem Umsatz drücken Fixkosten stärker, die Rechnung ist dort zu günstig.");
   const rows = [[hdr("Umsatz pro Monat"), hdr("Gewinn vor Pacht", "right"), hdr("Gewinn nach Pacht", "right")]];
-  B.gastro_umsatz.forEach((r) => rows.push([cell(eur(r[0]), { bold: r[0] === 65000 }), R(eur(r[1])), cfCell(r[2])]));
+  B.gastro_umsatz.forEach((r) => rows.push([cell(eur(r[0]), { bold: Math.abs(r[0] - UM) < 1 }), R(eur(r[1])), cfCell(r[2])]));
   s.addTable(rows, { x: MX, y: 1.5, w: 7.6, colW: [2.8, 2.4, 2.4], rowH: 0.55, border: tblBorder, objectName: "Tabelle Gastro Umsatz" });
   card(s, 8.6, 1.5, W - 8.6 - MX, 3.6, "Break-even");
   text(s, [
@@ -495,7 +512,7 @@ if (KI.length) {
     { text: "Haus insgesamt", options: { bold: true, color: C.accent1, breakLine: true } },
     { text: `Ab ca. ${eur(Math.round(B.breakeven_haus / 100) * 100)} Umsatz sind alle Raten bezahlt.`, options: {} },
   ], { x: 8.85, y: 1.7, w: W - 8.6 - MX - 0.5, h: 3.3, fontSize: 13.5 });
-  text(s, "Der Umsatz von 65.000 € entspricht nur ca. 4.100 € je Sitzplatz und Jahr (190 Plätze), das ist für 510 m² vorsichtig.", { x: MX, y: 5.4, w: 7.6, h: 0.5, fontSize: 13.5, color: C.accent4 });
+  text(s, `Der Umsatz von ${eur(UM)} entspricht ca. ${eur(Math.round(B.g_umsatz_platz / 100) * 100)} je Sitzplatz und Jahr (190 Plätze), der Branchen-Median in Österreich liegt bei ca. 12.000 €.`, { x: MX, y: 5.4, w: 7.6, h: 0.5, fontSize: 13.5, color: C.accent4 });
 }
 
 // ===== 14b Ertragswert =====
