@@ -1,4 +1,4 @@
-// SVG-Skizzen Baufeld 3 (modern, Flachdach mit Staffelgeschoss, EG Gastro, 8 Wohnungen, 1.650 m² BGF)
+// SVG-Skizzen Baufeld 3 (modern, Flachdach mit Staffelgeschoss, EG Gastro, 6 Wohnungen, 1.650 m² BGF)
 // Maße: Baukörper 32 x 18 m, Hauptbaukörper bis 6,50 m, Staffelgeschoss (ca. 498 m², Holzbau) bis ca. 9,60 m, Attika ca. 9,90 m
 const fs = require("fs");
 const path = require("path");
@@ -48,7 +48,7 @@ const LEN = 32;
 // 1. OG: Treppe 0–4, Büro 1 (100 m²) 4–10,2, Büro 2 (65 m²) 10,2–14,3, Wohnungen 14,3–32 (3 × 5,9 m)
 const OGWIN = [[4.7, 6.9], [7.7, 9.9], [10.9, 13.6], [15.2, 19.2], [21.1, 25.1], [27.0, 31.0]];
 const OGBAL = [[14.9, 19.5], [20.8, 25.4], [26.7, 31.3]];
-const STB = [0, 1, 2, 3, 4];
+const STB = [0, 1, 2];
 const DEP = 18;
 const INS = 0.8;
 function ansichten() {
@@ -95,13 +95,13 @@ function ansichten() {
   });
   o += R(-0.2, 6.5, LEN + 0.2, 6.8, COL.beton);
   o += R(4, 6.8, LEN, 7.6, "#E6EAEC", 'opacity="0.92" stroke="#1E2326" stroke-width="1.5"');
-  // Staffelgeschoss in Holzbau (0,8 m zurückgesetzt), 5 Wohnungen
+  // Staffelgeschoss in Holzbau (0,8 m zurückgesetzt), 3 Wohnungen
   o += R(INS, 6.8, LEN - INS, 9.6, COL.zink);
   STB.forEach((k) => {
-    const bx = 4.2 + k * 5.4;
-    o += R(bx + 0.4, 6.9, bx + 5.0, 9.5, COL.glas, `stroke="${COL.stahl}" stroke-width="3"`);
-    o += L(bx + 2.7, 6.9, bx + 2.7, 9.5, COL.stahl, 2.5);
-    o += L(bx + 0.4, 8.3, bx + 5.0, 8.3, COL.stahl, 1.5);
+    const bx = 4.2 + k * 9.0;
+    o += R(bx + 0.4, 6.9, bx + 8.6, 9.5, COL.glas, `stroke="${COL.stahl}" stroke-width="3"`);
+    o += L(bx + 4.5, 6.9, bx + 4.5, 9.5, COL.stahl, 2.5);
+    o += L(bx + 0.4, 8.3, bx + 8.6, 8.3, COL.stahl, 1.5);
   });
   o += R(INS, 9.6, LEN - INS, 9.9, COL.beton);
   // Terrasse (Holzdeck) + Vordach vor der Gastro
@@ -118,7 +118,7 @@ function ansichten() {
   o += `<line x1="${X(0)}" y1="${gy + 28}" x2="${X(LEN)}" y2="${gy + 28}" stroke="${COL.text}" stroke-width="1.5"/>` + T(X(13), gy + 22, "32,0 m", 15, 'font-weight="bold"');
   o += T(X(0), gy + 62, "Eingang", 16, 'font-weight="bold"');
     o += T(X(4), gy + 62, "EG: große Gastro ca. 510 m² mit Bar und Terrasse", 16, 'font-weight="bold"');
-  o += T(X(0), gy + 86, "OG: 2 Büros und 3 Wohnungen, Staffel in Holzbau: 5 Wohnungen", 16, 'font-weight="bold"');
+  o += T(X(0), gy + 86, "OG: 2 Büros und 3 Wohnungen, Staffel in Holzbau: 3 Wohnungen", 16, 'font-weight="bold"');
 
   // ---- Ost
   const ox2 = 1050;
@@ -209,9 +209,9 @@ function ecke() {
   const SO = B(sx);
   o += rect(SS, INS, 6.5, sx, 9.6, COL.zink);
   STB.forEach((k) => {
-    const bx = 4.2 + k * 5.4;
-    o += rect(SS, bx + 0.4, 6.7, bx + 5.0, 9.5, COL.glas, `stroke="${COL.stahl}" stroke-width="2.5"`);
-    o += line(SS(bx + 2.7, 6.7), SS(bx + 2.7, 9.5), COL.stahl, 2);
+    const bx = 4.2 + k * 9.0;
+    o += rect(SS, bx + 0.4, 6.7, bx + 8.6, 9.5, COL.glas, `stroke="${COL.stahl}" stroke-width="2.5"`);
+    o += line(SS(bx + 4.5, 6.7), SS(bx + 4.5, 9.5), COL.stahl, 2);
   });
   o += rect(SO, INS, 6.5, sy, 9.6, COL.zinkHell);
   [[2.0, 5.8], [7.0, 10.8], [12.0, 15.8]].forEach(([a, b]) => (o += rect(SO, a, 6.7, b, 9.5, COL.glas, `stroke="${COL.stahl}" stroke-width="2.5"`)));
@@ -229,7 +229,7 @@ function ecke() {
   o += tree(-1.5, Y + 4.5);
   o += tree(X + 3.5, -0.5);
   const leg = [
-    ["Staffelgeschoss", "5 Wohnungen in Holzbau (498 m²), nur 0,8 m zurück, Attika ca. 9,90 m"],
+    ["Staffelgeschoss", "3 Wohnungen in Holzbau (498 m²), nur 0,8 m zurück, Attika ca. 9,90 m"],
     ["1. Obergeschoss", "2 Büros als Ankermieter (100 und 65 m²) und 3 Wohnungen mit Balkon"],
     ["Erdgeschoss", "Gastro ca. 510 m² mit Bar im ganzen EG, verglast, Terrasse mit Vordach"],
     ["Eingang Wohnen", "Treppenhaus mit Aufzug am Westende, ruhig getrennt"],

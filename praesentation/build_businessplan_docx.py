@@ -193,7 +193,7 @@ def H(text):
 
 # ------------------------------------------------------------------ Deckblatt
 para("NEUE MITTE WERLTE", bold=True, color=RGBColor(0xC4, 0x9A, 0x45), size=11, after=2)
-doc.add_paragraph("Businessplan: Große Gastro und 8 Wohnungen", style="Title")
+doc.add_paragraph("Businessplan: Große Gastro und 6 Wohnungen", style="Title")
 para("Baufeld 3, Neue Mitte Werlte", size=14, color=GREY, after=14)
 img = os.path.join(here, "bilder", "ki_aussen_1.jpg")
 if os.path.exists(img):
@@ -201,7 +201,7 @@ if os.path.exists(img):
     para("KI-Visualisierung zur Orientierung, keine Planung.", italic=True, color=GREY, size=8.5, after=14)
 table([
     ["Bauherr", "Bessam Hasso, Werlte"],
-    ["Vorhaben", "Neubau eines gemischt genutzten Gebäudes: große Gastro im Erdgeschoss, 2 Büro-Ankermieter und 3 Wohnungen im 1. Obergeschoss, 5 Wohnungen im Staffelgeschoss in Holzbau"],
+    ["Vorhaben", "Neubau eines gemischt genutzten Gebäudes: große Gastro im Erdgeschoss, 2 Büro-Ankermieter und 3 Wohnungen im 1. Obergeschoss, 3 Wohnungen im Staffelgeschoss in Holzbau"],
     ["Grundstück", "Baufeld 3, ca. 960 m², Bebauungsplan Nr. 123 „Ehemalige Grundschule“, 1. Änderung (Entwurf 25.08.2026)"],
     ["Finanzierungsbedarf", f"{eur(B['kredit'])} (100 % Fremdkapital), davon KfW-Kredite {eur(B['kredit_297'] + B['kredit_298'] + B['kredit_299'])}"],
     ["Stand", "Oktober 2026"],
@@ -211,7 +211,7 @@ doc.add_page_break()
 
 # ------------------------------------------------------------------ 1 Zusammenfassung
 H("Zusammenfassung")
-para(f"Auf dem Baufeld 3 der Neuen Mitte Werlte entsteht ein dreigeschossiges Gebäude (zwei Vollgeschosse plus Staffelgeschoss in Holzbau) mit 576 m² Grundfläche (32 × 18 m, das Maximum der Grundflächenzahl 0,6) und 1.650 m² Bruttogrundfläche (BGF, alle Geschossflächen zusammen). Im Erdgeschoss liegt eine große Gastro mit ca. 510 m² und ca. 190 Plätzen. Im 1. Obergeschoss mieten zwei Ankermieter Büros (100 m² Versicherungsgesellschaft o. ä., 65 m² Makler o. ä., 10 Jahre fest), dazu kommen 3 Wohnungen. Im Staffelgeschoss in Holzbau liegen 5 Wohnungen. Die 8 Wohnungen haben zusammen 655 m² Wohnfläche und werden langfristig vermietet.")
+para(f"Auf dem Baufeld 3 der Neuen Mitte Werlte entsteht ein dreigeschossiges Gebäude (zwei Vollgeschosse plus Staffelgeschoss in Holzbau) mit 576 m² Grundfläche (32 × 18 m, das Maximum der Grundflächenzahl 0,6) und 1.650 m² Bruttogrundfläche (BGF, alle Geschossflächen zusammen). Im Erdgeschoss liegt eine große Gastro mit ca. 510 m² und ca. 190 Plätzen. Im 1. Obergeschoss mieten zwei Ankermieter Büros (100 m² Versicherungsgesellschaft o. ä., 65 m² Makler o. ä., 10 Jahre fest), dazu kommen 3 Wohnungen. Im Staffelgeschoss in Holzbau liegen 3 Wohnungen. Die 6 Wohnungen haben zusammen 655 m² Wohnfläche und werden langfristig vermietet.")
 table([
     ["Kennzahl", "Wert"],
     ["Gesamtkosten inkl. Finanzierung in Bau- und Anlaufzeit", eur(B["k_gesamt"])],
@@ -232,7 +232,7 @@ bullets([
     ("Die Büro-Ankermieter sichern einen Teil. ", f"Die zwei Büros bringen {eur(B['b_miete_jahr'])} im Jahr über 10 Jahre fest und decken {pct(B['b_anteil_kd'], 0)} des Kapitaldienstes, zusammen mit den Wohnungen decken die langfristigen Mieten {pct(B['b_wohn_anteil_kd'], 0)}."),
     ("KfW senkt die Zinslast deutlich. ", f"Die drei KfW-Kreditprogramme decken {pct(B['kredit_kfw_anteil'], 0)} des Darlehens zu 2,5 bis 3,0 % ab, der Mischzins liegt bei {pct(B['mischzins'], 2)} statt 4,0 %."),
     ("Der Beleihungswert ist die Hürde. ", f"Der Ertragswert von {mio(B['ertragswert'])} liegt weit unter den Kosten von {mio(B['k_gesamt'])}. Die Bank wird zusätzliche Sicherheiten oder Eigenkapital in der Größenordnung von {mio(B['eigenkapital_80'])} verlangen."),
-    ("Airbnb lohnt sich nicht. ", "Zwei Wohnungen als Kurzzeitvermietung bringen weniger als langfristige Mieter, deshalb bleiben alle 8 Wohnungen langfristig vermietet."),
+    ("Airbnb lohnt sich nicht. ", "Zwei Wohnungen als Kurzzeitvermietung bringen weniger als langfristige Mieter, deshalb bleiben alle 6 Wohnungen langfristig vermietet."),
 ])
 
 # ------------------------------------------------------------------ 2 Vorhaben
@@ -251,13 +251,13 @@ para("Zeitplan der Stadt: Stellplatz alte Grundschule ab November 2026, Planstra
 
 # ------------------------------------------------------------------ 3 Baukonzept
 H("Baukonzept und Flächen")
-para("Das Gebäude hat eine Grundfläche von 32 × 18 m (576 m², das Maximum der Grundflächenzahl). Das Erdgeschoss ist vollverglast und gehört ganz der Gastro, Treppenhaus und Aufzug liegen am Westende und erschließen Büros und Wohnungen getrennt von der Gastro. Im 1. Obergeschoss liegen die zwei Büros und 3 Wohnungen, im Staffelgeschoss 5 Wohnungen. Das 1. Obergeschoss ist in rotbraunem Klinker mit Balkonen und Milchglas-Brüstungen ausgeführt, das Staffelgeschoss in Holzbau mit schmaler Dachterrasse (ca. 0,8 m, 77 m²) rundum. Holzbau spart ca. 184.000 € gegenüber Massivbau (Annahme, Angebot der Zimmerei nötig) und hilft beim Effizienzhaus-40-Standard.")
+para("Das Gebäude hat eine Grundfläche von 32 × 18 m (576 m², das Maximum der Grundflächenzahl). Das Erdgeschoss ist vollverglast und gehört ganz der Gastro, Treppenhaus und Aufzug liegen am Westende und erschließen Büros und Wohnungen getrennt von der Gastro. Im 1. Obergeschoss liegen die zwei Büros und 3 Wohnungen, im Staffelgeschoss 3 Wohnungen. Das 1. Obergeschoss ist in rotbraunem Klinker mit Balkonen und Milchglas-Brüstungen ausgeführt, das Staffelgeschoss in Holzbau mit schmaler Dachterrasse (ca. 0,8 m, 77 m²) rundum. Holzbau spart ca. 184.000 € gegenüber Massivbau (Annahme, Angebot der Zimmerei nötig) und hilft beim Effizienzhaus-40-Standard.")
 table([
     ["Geschoss", "BGF", "Nutzung", "Einheiten", "Fläche"],
     ["Erdgeschoss", "576 m²", "Gastro mit Bar, Séparée, Küche", "1", "ca. 510 m²"],
     ["1. Obergeschoss", "576 m²", "Büro 1, Büro 2, Wohnen", "2 + 3 × 107 m²", "165 m² Büro, 321 m² Wohnen"],
-    ["Staffelgeschoss (Holzbau)", "498 m²", "Wohnen", "5 × 67 m²", "334 m²"],
-    ["Summe", "1.650 m²", "", "8 Wohnungen, 2 Büros", "655 m² Wohnen, 165 m² Büro"],
+    ["Staffelgeschoss (Holzbau)", "498 m²", "Wohnen", "3 × 111 m²", "334 m²"],
+    ["Summe", "1.650 m²", "", "6 Wohnungen, 2 Büros", "655 m² Wohnen, 165 m² Büro"],
 ], [4.0, 2.2, 4.8, 2.6, 3.0], bold_rows=(4,), font=9)
 para("Mietaufstellung", bold=True, color=GREEN, after=2)
 rows = [["Einheit", "Geschoss", "Fläche", "Miete je m²", "Kaltmiete / Monat", "Kaltmiete / Jahr"]]
@@ -339,7 +339,7 @@ bullets([
     "Effizienzhaus 40 (Wohnen) bzw. Effizienzgebäude 40 (Gastro) und QNG-Zertifikat für den vollen Kreditrahmen. Mehrkosten angenommen mit 3 % der Baukosten.",
     "Heizung ohne Öl, Gas und Biomasse, zum Beispiel Wärmepumpe oder Fernwärme. Ein Energieeffizienz-Experte plant und bestätigt den Standard.",
     "Antrag über die Hausbank vor Baubeginn (Vorhabenbeginn). Es gibt keinen Rechtsanspruch, der Zins gilt am Tag der Zusage.",
-    "Wohnteil (297/298) und Gastro (299) werden bei gemischter Nutzung getrennt gefördert. Das Programm 297 gilt für selbst genutzte Wohnungen, 298 für vermietete, die Konditionen sind gleich. Im Rechenmodell sind alle 8 Wohnungen vermietet (298), eine Selbstnutzung lässt sich im Blatt Annahmen einstellen.",
+    "Wohnteil (297/298) und Gastro (299) werden bei gemischter Nutzung getrennt gefördert. Das Programm 297 gilt für selbst genutzte Wohnungen, 298 für vermietete, die Konditionen sind gleich. Im Rechenmodell sind alle 6 Wohnungen vermietet (298), eine Selbstnutzung lässt sich im Blatt Annahmen einstellen.",
     "Die KfW-Zinsen in den Quellen (Ratgeber, Oktober 2026) schwanken zwischen 0,6 % und 3,05 %. Angesetzt sind 2,5 % (Wohnen) und 3,0 % (Gastro). Die Hausbank und die KfW müssen die Konditionen bestätigen.",
 ])
 para("Bau- und Anlaufzeit", bold=True, color=GREEN, after=2)
@@ -366,7 +366,7 @@ para(f"Nach 10 Jahren beträgt die Restschuld {eur(B['rest_10'])}. Die Anschluss
 H("Ertrag und Kapitaldienst")
 table([
     ["Position", "pro Monat", "pro Jahr"],
-    ["Kaltmiete Wohnen (8 Wohnungen)", eurs(B["c_miete"]), eurs(B["c_miete"] * 12)],
+    ["Kaltmiete Wohnen (6 Wohnungen)", eurs(B["c_miete"]), eurs(B["c_miete"] * 12)],
     ["Büromieten (2 Ankermieter, 10 Jahre fest)", eurs(B["c_buero"]), eurs(B["c_buero"] * 12)],
     ["Pacht Gastro (510 m² × 10 €)", eurs(B["c_pacht"]), eurs(B["c_pacht"] * 12)],
     ["Rücklagen (10 % von Miete, Büro und Pacht)", eurs(B["c_rueck"]), eurs(B["c_rueck"] * 12)],
@@ -438,7 +438,7 @@ rows.append(["Netto langfristige Miete je Apartment und Monat"] + [eur(T[5][c]) 
 rows.append(["Möblierung (im Kredit)"] + [eur(T[6][c]) for c in (1, 2, 3)])
 rows.append(["Mehrertrag für 2 Apartments pro Monat"] + [eurs(T[9][c]) for c in (1, 2, 3)])
 table(rows, [7.6, 3.0, 3.0, 3.0], right_cols=(1, 2, 3), bold_rows=(5,), font=9)
-para("Ergebnis: Kurzzeitvermietung lohnt sich nicht. Auch kleine Apartments bringen nach Möblierung, Kapitaldienst und Kosten weniger als langfristige Mieter. Dazu kommen Aufwand für Gäste und Reinigung und bei mehr als 12 Betten Sonderbau-Brandschutz. Alle 8 Wohnungen bleiben deshalb langfristig vermietet.", bold=True, color=GREEN)
+para("Ergebnis: Kurzzeitvermietung lohnt sich nicht. Auch kleine Apartments bringen nach Möblierung, Kapitaldienst und Kosten weniger als langfristige Mieter. Dazu kommen Aufwand für Gäste und Reinigung und bei mehr als 12 Betten Sonderbau-Brandschutz. Alle 6 Wohnungen bleiben deshalb langfristig vermietet.", bold=True, color=GREEN)
 
 # ------------------------------------------------------------------ 12 Risiken
 H("Chancen und Risiken")
@@ -473,7 +473,7 @@ rows = [["Nr.", "Unterlage", "Status"]]
 for nr, name, inh, stt in B["unterlagen"]:
     rows.append([str(nr), name, stt])
 table(rows, [1.2, 12.4, 3.0], font=8.5)
-para("Weitere Anlagen: Präsentation (Neue-Mitte-Werlte_Baufeld3_8-Wohnungen_Grosse-Gastro-EG.pptx), Gastro-Konzept (Neue-Mitte-Werlte_Baufeld3_Gastro-Konzept.pptx).", italic=True, color=GREY, size=9)
+para("Weitere Anlagen: Präsentation (Neue-Mitte-Werlte_Baufeld3_6-Wohnungen_Grosse-Gastro-EG.pptx), Gastro-Konzept (Neue-Mitte-Werlte_Baufeld3_Gastro-Konzept.pptx).", italic=True, color=GREY, size=9)
 
 doc.save(OUT)
 print("gespeichert", OUT)
