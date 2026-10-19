@@ -113,7 +113,7 @@ ASSUME = [
     ("sec", "Bauwerk"),
     ("bgf_eg", "BGF Erdgeschoss (m²)", 576, NUM, "Grundfläche 32 × 18 m = GRZ-Maximum 0,6 × 960 m² = 576 m²"),
     ("bgf_og", "BGF 1. Obergeschoss (m²)", 576, NUM, "zweites Vollgeschoss: 2 Büros und 3 Wohnungen"),
-    ("bgf_st", "BGF Staffelgeschoss in Holzbau (m²)", 498, NUM, "0,8 m rundum zurückgesetzt: 30,4 × 16,4 m, 3 Wohnungen"),
+    ("bgf_st", "BGF Staffelgeschoss in Holzbau (m²)", 498, NUM, "0,8 m rundum zurückgesetzt: 30,4 × 16,4 m, 5 Wohnungen"),
     ("baukosten_m2", "Baukosten je m² BGF (€)", 2200, EUR, "Bauherr (Bekanntenpreis), durch Angebote zu belegen"),
     ("holz_abschlag", "Holzbau günstiger als Massivbau (€/m²)", 400, EUR, "Annahme, Angebot der Zimmerei nötig"),
     ("terrasse_m2", "Umlaufende Dachterrasse (m²)", 77, NUM, "schmal, ca. 0,8 m, zählt nicht zur BGF"),
@@ -125,9 +125,9 @@ ASSUME = [
     ("gastro_m2", "Gastrofläche im EG (m²)", 510, NUM, "EG abzüglich Treppenhaus, Aufzug, Eingänge (66 m²); Bedarf siehe Blatt Gewerbe und Anker"),
     ("ngf_anteil", "Nettogrundfläche Anteil der Gastrofläche", 0.85, PCT, "Annahme, für KfW 299"),
     ("wf_og", "Wohnfläche 1. OG (m²)", 321, NUM, "3 Wohnungen à ca. 107 m² (OG: 576 m² BGF minus Büros, Treppenhaus, Wände)"),
-    ("n_og", "Wohnungen im 1. OG", 3, NUM, "Bauherr: 6 Wohnungen insgesamt"),
-    ("wf_st", "Wohnfläche Staffelgeschoss (m²)", 334, NUM, "3 Wohnungen à ca. 111 m² (67 % der BGF)"),
-    ("n_st", "Wohnungen im Staffelgeschoss", 3, NUM, "Bauherr: 6 Wohnungen insgesamt"),
+    ("n_og", "Wohnungen im 1. OG", 3, NUM, "Bauherr: 8 Wohnungen insgesamt"),
+    ("wf_st", "Wohnfläche Staffelgeschoss (m²)", 334, NUM, "5 Wohnungen à ca. 67 m² (67 % der BGF)"),
+    ("n_st", "Wohnungen im Staffelgeschoss", 5, NUM, "Bauherr: 8 Wohnungen insgesamt"),
     ("eigen", "davon vom Bauherrn selbst genutzt (Anzahl)", 0, NUM, "0 = alle vermietet. Selbstnutzung: KfW 297 statt 298, Miete entfällt"),
     ("sec", "Ankermieter Büro (1. OG, mit Aufzug)"),
     ("b1_m2", "Büro 1, Versicherungsgesellschaft o. ä. (m²)", 100, NUM, "Bauherr: größeres Büro, langfristiger Ankermieter"),
@@ -203,7 +203,7 @@ put(sA, f"A{row + 1}", "Gelb hinterlegt: wichtigste Stellschrauben für die Bank
 # =====================================================================================
 # Flächen und Mieten
 # =====================================================================================
-sF = sheet("Flächen und Mieten", "Flächenprogramm und Mietaufstellung", "Grundfläche 32 × 18 m (GRZ-Maximum): Gastro im EG, 2 Ankermieter-Büros und 3 Wohnungen im 1. OG, 3 Wohnungen im Staffelgeschoss.", [46, 14, 14, 16, 16, 18, 18])
+sF = sheet("Flächen und Mieten", "Flächenprogramm und Mietaufstellung", "Grundfläche 32 × 18 m (GRZ-Maximum): Gastro im EG, 2 Ankermieter-Büros und 3 Wohnungen im 1. OG, 5 Wohnungen im Staffelgeschoss.", [46, 14, 14, 16, 16, 18, 18])
 header(sF, 4, ["Geschoss", "BGF (m²)", "Nutzung", "Einheiten", "Fläche (m²)", "", ""])
 put(sF, "A5", "Erdgeschoss"); put(sF, "B5", f"={A['bgf_eg']}", NUM, link); put(sF, "C5", "Gastro"); put(sF, "D5", 1, NUM); put(sF, "E5", f"={A['gastro_m2']}", NUM, link)
 put(sF, "A6", "1. Obergeschoss"); put(sF, "B6", f"={A['bgf_og']}", NUM, link); put(sF, "C6", "Büro + Wohnen"); put(sF, "D6", f"=2+{A['n_og']}", NUM); put(sF, "E6", f"={A['wf_og']}+{A['b1_m2']}+{A['b2_m2']}", NUM)
@@ -212,7 +212,7 @@ put(sF, "A8", "Summe", font=bold); put(sF, "B8", "=SUM(B5:B7)", NUM, bold); put(
 put(sF, "A9", "davon Wohneinheiten / Wohnfläche"); put(sF, "D9", f"={A['n_og']}+{A['n_st']}", NUM); put(sF, "E9", f"={A['wf_og']}+{A['wf_st']}", NUM)
 reg("bgf", sF, "B8"); reg("n_we", sF, "D9"); reg("wf", sF, "E9")
 header(sF, 11, ["Einheit", "Geschoss", "Fläche (m²)", "Nutzung", "Kaltmiete / m²", "Kaltmiete / Monat", "Kaltmiete / Jahr"])
-for i in range(6):
+for i in range(8):
     r = 12 + i
     og = i < 3
     put(sF, f"A{r}", f"WE {i + 1}")
@@ -690,7 +690,7 @@ docs = [
     ("KfW", "Bestätigung Energieeffizienz-Experte (Effizienzhaus 40)", "Antrag KfW 297/298 und 299 über die Hausbank vor Baubeginn.", "offen"),
     ("KfW", "QNG-Zertifizierung (Konzept und Zertifizierer)", "Für den vollen Kreditrahmen erforderlich.", "offen"),
     ("KfW", "Heizkonzept ohne Öl, Gas und Biomasse", "Wärmepumpe oder Fernwärme.", "offen"),
-    ("Einnahmen", "Mietaufstellung und Mietkalkulation", "6 Wohnungen und 2 Büros, Flächen, Miete je m².", "vorhanden"),
+    ("Einnahmen", "Mietaufstellung und Mietkalkulation", "8 Wohnungen und 2 Büros, Flächen, Miete je m².", "vorhanden"),
     ("Einnahmen", "Pachtvertrag Gastro (Entwurf)", "Laufzeit, Pacht 10 €/m², Staffel, Sicherheiten.", "offen"),
     ("Einnahmen", "Vorverträge Ankermieter Büro (2 Mieter)", "Versicherungsgesellschaft (100 m²) und Makler (65 m²), 10 Jahre fest, Indexmiete, Bonitätsauskunft.", "offen"),
     ("Einnahmen", "Vorvermietungsabsichten", "Interessenten für Wohnungen und Gastro.", "offen"),
@@ -718,7 +718,7 @@ sO.column_dimensions["B"].width = 20
 sO.column_dimensions["C"].width = 60
 sO["A1"] = "Neue Mitte Werlte, Baufeld 3: Bankunterlagen"
 sO["A1"].font = title_font
-sO["A2"] = "Große Gastro im EG (ca. 510 m²), 2 Büro-Ankermieter und 3 Wohnungen im 1. OG, 3 Wohnungen im Staffelgeschoss in Holzbau. Bauherr: Bessam Hasso. Stand Oktober 2026."
+sO["A2"] = "Große Gastro im EG (ca. 510 m²), 2 Büro-Ankermieter und 3 Wohnungen im 1. OG, 5 Wohnungen im Staffelgeschoss in Holzbau. Bauherr: Bessam Hasso. Stand Oktober 2026."
 sO["A2"].font = sub_font
 header(sO, 4, ["Kennzahl", "Wert", "Erläuterung"])
 over = [
@@ -728,7 +728,7 @@ over = [
     ("Bruttogrundfläche gesamt (m²)", "='Flächen und Mieten'!B8", NUM, "EG 576, 1. OG 576, Staffel 498"),
     ("Gastrofläche (m²)", f"={A['gastro_m2']}", NUM, "ca. 190 Plätze innen, ca. 60 Terrasse"),
     ("Büro-Ankermieter (m²)", "='Gewerbe und Anker'!B24", NUM, "100 m² Versicherung o. ä. und 65 m² Makler o. ä., 10 Jahre fest"),
-    ("Wohneinheiten", "='Flächen und Mieten'!D9", NUM, "3 im 1. OG (ca. 107 m²), 3 im Staffelgeschoss (ca. 111 m²)"),
+    ("Wohneinheiten", "='Flächen und Mieten'!D9", NUM, "3 im 1. OG (ca. 107 m²), 5 im Staffelgeschoss (ca. 67 m²)"),
     ("Wohnfläche gesamt (m²)", "='Flächen und Mieten'!E9", NUM, ""),
     ("Kosten und Finanzierung", None, None, None),
     ("Gesamtkosten", "='Kosten und Finanzierung'!B18", EUR, "inkl. Finanzierungskosten der Bau- und Anlaufzeit"),

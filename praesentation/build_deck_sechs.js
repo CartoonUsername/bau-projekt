@@ -1,4 +1,4 @@
-// Deck: Neue Mitte Werlte, Baufeld 3. 6 Wohnungen, große Gastro im ganzen EG, 576 m² Grundfläche, 1.650 m² BGF, 2 Büro-Ankermieter, Flachdach mit Staffelgeschoss in Holzbau
+// Deck: Neue Mitte Werlte, Baufeld 3. 8 Wohnungen, große Gastro im ganzen EG, 576 m² Grundfläche, 1.650 m² BGF, 2 Büro-Ankermieter, Flachdach mit Staffelgeschoss in Holzbau
 // Aufruf: NODE_PATH=<node_modules> APPLY_THEME=<pfad>/apply_theme.js node build_deck_sechs.js
 const path = require("path");
 const fs = require("fs");
@@ -48,7 +48,7 @@ const k = (n) => `${nf.format(n)} €`;
 
 const pres = new pptxgen();
 pres.layout = "LAYOUT_WIDE"; // 13.33 x 7.5
-pres.title = "Neue Mitte Werlte – Baufeld 3: Große Gastro und 6 Wohnungen";
+pres.title = "Neue Mitte Werlte – Baufeld 3: Große Gastro und 8 Wohnungen";
 pres.author = "Bessam Hasso";
 pres.theme = { headFontFace: THEME.headFontFace, bodyFontFace: THEME.bodyFontFace };
 const C = pres.SchemeColor;
@@ -106,7 +106,7 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
   const s = pres.addSlide({ masterName: "TITEL" });
   s.addImage({ path: fit(hasKI("ki_aussen_1.jpg") ? KI_AUSSEN : path.join(IMG, "aussen.jpg"), 6.43, H), x: 6.9, y: 0, w: 6.43, h: H, altText: "Außenansicht, modernes Haus mit Klinker und Glas-Erdgeschoss" });
   text(s, "NEUE MITTE WERLTE", { x: MX, y: 1.3, w: 6, h: 0.4, fontSize: 16, bold: true, color: C.accent3, charSpacing: 4 });
-  text(s, "Baufeld 3: Große Gastro und 6 Wohnungen", { x: MX, y: 1.85, w: 6, h: 2.2, fontSize: 37, bold: false, fontFace: "Georgia", color: C.background1 });
+  text(s, "Baufeld 3: Große Gastro und 8 Wohnungen", { x: MX, y: 1.85, w: 6, h: 2.2, fontSize: 37, bold: false, fontFace: "Georgia", color: C.background1 });
   text(s, "Businessplan für die Bank: Konzept, Finanzierung mit KfW-Krediten, Ertragswert und Abzahlungsplan", { x: MX, y: 4.3, w: 6, h: 0.9, fontSize: 17, color: C.background1 });
   text(s, "Bessam Hasso, Werlte\nBebauungsplan Nr. 123, 1. Änderung (Entwurf 25.08.2026)\nStand Oktober 2026", { x: MX, y: 5.5, w: 6, h: 1.1, fontSize: 14, color: "CFD8D3" });
   s.addNotes("Titelfolie. Das Bild ist eine Referenzstudie.");
@@ -122,7 +122,7 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
   stat(s, MX + 3 * (w + 0.2), 1.5, w, eurS(B.c_ergebnis), "Ergebnis pro Monat nach Kapitaldienst, ohne Lohn", B.c_ergebnis >= 0 ? C.accent5 : C.accent6);
   const rows = [[hdr("Projekt"), hdr("Wert")],
     [cell("Grundstück / Grundfläche / BGF"), cell("960 m² / 576 m² (32 × 18 m, GRZ-Maximum) / 1.650 m² (EG, 1. OG, Staffel)")],
-    [cell("Nutzung"), cell("Gastro im ganzen EG (ca. 510 m²), im 1. OG 2 Büro-Ankermieter (100 und 65 m²) und 3 Wohnungen, im Staffelgeschoss in Holzbau 3 Wohnungen")],
+    [cell("Nutzung"), cell("Gastro im ganzen EG (ca. 510 m²), im 1. OG 2 Büro-Ankermieter (100 und 65 m²) und 3 Wohnungen, im Staffelgeschoss in Holzbau 5 Wohnungen")],
     [cell("Finanzierung"), cell("100 % Fremdkapital, kein Eigenkapital, KfW 297/298/299 plus Hausbank")],
     [cell("Kapitaldienstdeckung (DSCR)"), cell(B.dscr.toFixed(2).replace(".", ",") + " gesamt, " + B.dscr_immo.toFixed(2).replace(".", ",") + " nur Immobilie (Miete und Pacht)")],
     [cell("Ertragswert / Beleihungsauslauf"), cell(mio(B.ertragswert) + " / " + pct(B.auslauf) + " (Darlehen zu Beleihungswert)")]];
@@ -202,7 +202,7 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
   s.addShape(pres.ShapeType.rect, { x: x0 + ws, y: z(7.6), w: 0.9 * sc, h: 1.1 * sc, fill: { color: "CFE0E8" }, line: { color: C.accent4, width: 1 }, objectName: "Brüstung" });
   text(s, "EG große Gastro mit Bar", { x: x0, y: z(3.5), w, h: 3.2 * sc, fontSize: 14, bold: true, align: "center", valign: "middle" });
   text(s, "1. OG · 2 Büros, 3 Wohnungen", { x: x0, y: z(6.5), w, h: 3.0 * sc, fontSize: 14, bold: true, align: "center", valign: "middle", color: C.background1 });
-  text(s, "Staffelgeschoss · 3 Wohnungen", { x: x0, y: z(9.6), w: ws, h: 3.1 * sc, fontSize: 14, bold: true, align: "center", valign: "middle", color: C.background1 });
+  text(s, "Staffelgeschoss · 5 Wohnungen", { x: x0, y: z(9.6), w: ws, h: 3.1 * sc, fontSize: 14, bold: true, align: "center", valign: "middle", color: C.background1 });
   const mark = (zz, label) => {
     s.addShape(pres.ShapeType.line, { x: x0 - 0.5, y: z(zz), w: w + 0.8, h: 0, line: { color: C.accent1, width: 1, dashType: "dash" }, objectName: "Marke " + label });
     text(s, label, { x: MX, y: z(zz) - 0.2, w: 1.1, h: 0.4, fontSize: 12, bold: true, color: C.accent1, align: "right", valign: "middle" });
@@ -215,8 +215,8 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
     [hdr("Ebene"), hdr("Nutzung"), hdr("BGF", "right")],
     [cell("EG"), cell("Gastro ca. 510 m² mit Bar, Séparée und Küche, dazu Treppenhaus, Aufzug, Eingänge"), R("576 m²")],
     [cell("1. OG"), cell("2 Büro-Ankermieter (100 und 65 m²), 3 Wohnungen à ca. 107 m²"), R("576 m²")],
-    [cell("Staffel"), cell("3 Wohnungen à ca. 111 m², Holzbau, schmale Terrasse rundum"), R("498 m²")],
-    [cell("Summe", { bold: true }), cell("6 Wohnungen (655 m²), 2 Büros (165 m²)", { bold: true }), R("1.650 m²", { bold: true })],
+    [cell("Staffel"), cell("5 Wohnungen à ca. 67 m², Holzbau, schmale Terrasse rundum"), R("498 m²")],
+    [cell("Summe", { bold: true }), cell("8 Wohnungen (655 m²), 2 Büros (165 m²)", { bold: true }), R("1.650 m²", { bold: true })],
   ];
   s.addTable(rows, { x: 7.7, y: 1.6, w: W - 7.7 - MX, colW: [0.9, 3.2, 0.93], rowH: 0.6, border: tblBorder, objectName: "Tabelle Flächen" });
   text(s, "BGF = Bruttogrundfläche, alle Geschossflächen zusammen. Das Staffelgeschoss in Holzbau springt rundum nur ca. 0,8 m zurück, so entsteht eine schmale Terrasse von ca. 77 m² um die Wohnungen.", { x: 7.7, y: 5.4, w: W - 7.7 - MX, h: 1.0, fontSize: 14, color: C.accent4 });
@@ -258,7 +258,7 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
       rooms: [
         [0, 0, 32, 18, "", "C9C4B8"],
         [0.8, 0.8, 3.4, 16.4, "Treppe", "8A9199"],
-        ...[0, 1, 2].map((n) => [4.2 + n * 9.0, 0.8, 9.0, 16.4, `WE ${n + 4}\n111 m²`, "7A5C3A"]),
+        ...[0, 1, 2, 3, 4].map((n) => [4.2 + n * 5.4, 0.8, 5.4, 16.4, `WE ${n + 4}\n67 m²`, "7A5C3A"]),
       ],
     },
   ];
@@ -272,7 +272,7 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
     });
   });
   card(s, MX, 5.35, W - 2 * MX, 1.2, "Hinweis");
-  text(s, "Grundfläche 32 × 18 m = 576 m² (GRZ-Maximum 0,6). Die Gastro nutzt das ganze EG (ca. 510 m²), Treppenhaus und Aufzug liegen am Westende und erschließen Büros und Wohnungen getrennt von der Gastro. Im 1. OG liegen die zwei Büro-Ankermieter und 3 Wohnungen, die Staffel in Holzbau hat ca. 498 m² BGF mit 3 Wohnungen, die beige Fläche ist die schmale Terrasse (ca. 77 m²).", { x: MX + 0.25, y: 5.45, w: W - 2 * MX - 0.5, h: 1.0, fontSize: 15, valign: "middle" });
+  text(s, "Grundfläche 32 × 18 m = 576 m² (GRZ-Maximum 0,6). Die Gastro nutzt das ganze EG (ca. 510 m²), Treppenhaus und Aufzug liegen am Westende und erschließen Büros und Wohnungen getrennt von der Gastro. Im 1. OG liegen die zwei Büro-Ankermieter und 3 Wohnungen, die Staffel in Holzbau hat ca. 498 m² BGF mit 5 Wohnungen, die beige Fläche ist die schmale Terrasse (ca. 77 m²).", { x: MX + 0.25, y: 5.45, w: W - 2 * MX - 0.5, h: 1.0, fontSize: 15, valign: "middle" });
 }
 
 // ===== 7 Außen =====
@@ -457,7 +457,7 @@ if (KI.length) {
 {
   const s = content("Ertrag und Kapitaldienst pro Monat", "Für die Bank", "Gastro-Betrieb bei 65.000 € Umsatz und 30,5 % Marge vor Pacht, ohne Lohn des Bauherrn. Rücklagen 10 % von Miete und Pacht.");
   const rows = [[hdr("Position", "left"), hdr("pro Monat", "right"), hdr("pro Jahr", "right")],
-    [cell("Kaltmiete Wohnen (6 Wohnungen)"), R(eurS(B.c_miete)), R(eurS(B.c_miete * 12))],
+    [cell("Kaltmiete Wohnen (8 Wohnungen)"), R(eurS(B.c_miete)), R(eurS(B.c_miete * 12))],
     [cell("Büromieten (2 Ankermieter, 10 Jahre fest)"), R(eurS(B.c_buero)), R(eurS(B.c_buero * 12))],
     [cell("Pacht Gastro (510 m² × 10 €)"), R(eurS(B.c_pacht)), R(eurS(B.c_pacht * 12))],
     [cell("Rücklagen (10 % von Miete, Büro, Pacht)"), R(eurS(B.c_rueck)), R(eurS(B.c_rueck * 12))],
@@ -557,7 +557,7 @@ if (KI.length) {
   card(s, MX, 4.7, W - 2 * MX, 1.7, "Ergebnis");
   text(s, [
     { text: "Ergebnis: ", options: { bold: true, color: C.accent1 } },
-    { text: "Kurzzeitvermietung lohnt sich nicht. Auch kleine Apartments bringen nach Möblierung, Kapitaldienst und Kosten weniger als langfristige Mieter. Dazu kommen Aufwand, Reinigung und bei mehr als 12 Betten Sonderbau-Brandschutz. Deshalb bleiben alle 6 Wohnungen langfristig vermietet." }], { x: MX + 0.3, y: 4.85, w: W - 2 * MX - 0.6, h: 1.4, fontSize: 14, valign: "middle" });
+    { text: "Kurzzeitvermietung lohnt sich nicht. Auch kleine Apartments bringen nach Möblierung, Kapitaldienst und Kosten weniger als langfristige Mieter. Dazu kommen Aufwand, Reinigung und bei mehr als 12 Betten Sonderbau-Brandschutz. Deshalb bleiben alle 8 Wohnungen langfristig vermietet." }], { x: MX + 0.3, y: 4.85, w: W - 2 * MX - 0.6, h: 1.4, fontSize: 14, valign: "middle" });
 }
 
 // ===== 16 Risiken =====
@@ -637,7 +637,7 @@ if (KI.length) {
   ];
   const right = [
     `Gastro-Umsatz ${k(UM)} netto, Marge vor Pacht 30,5 %`,
-    "6 Wohnungen (655 m²) zu 11,18 €/m² Kaltmiete, 2 Büros (165 m²) zu 9,50 und 10,00 €/m² (10 Jahre fest), Gastro-Pacht 10 €/m² auf 510 m²",
+    "8 Wohnungen (655 m²) zu 11,18 €/m² Kaltmiete, 2 Büros (165 m²) zu 9,50 und 10,00 €/m² (10 Jahre fest), Gastro-Pacht 10 €/m² auf 510 m²",
     "Lohn des Bauherrn wird vorerst nicht gerechnet, Rücklagen 10 % der Miete und Pacht",
     "KfW-Kredite statt Zuschuss, Antrag vor Baubeginn; Mehrkosten Effizienzhaus 40 und QNG 3 %",
     "Nebenkosten (Grundsteuer, Versicherung, Betriebskosten) werden auf die Mieter umgelegt, die Hausverwaltung deckt die Rücklage",
@@ -710,7 +710,7 @@ if (KI.length) {
 }
 
 (async () => {
-  const file = path.join(OUT, "Neue-Mitte-Werlte_Baufeld3_6-Wohnungen_Grosse-Gastro-EG.pptx");
+  const file = path.join(OUT, "Neue-Mitte-Werlte_Baufeld3_8-Wohnungen_Grosse-Gastro-EG.pptx");
   await pres.writeFile({ fileName: file });
   await applyTheme(file, THEME);
   console.log("geschrieben", file);
