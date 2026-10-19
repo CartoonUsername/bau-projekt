@@ -1,6 +1,6 @@
 # Neue Mitte Werlte, Baufeld 3: Businessplan für die Bank
 
-Große Gastro (ca. 460 m²) im ganzen Erdgeschoss, darüber 8 Wohnungen (1. OG und Staffelgeschoss in Holzbau), 540 m² Grundfläche, 1.540 m² BGF, 100 % Fremdfinanzierung mit KfW 297, 298, 299 und Hausbank.
+Große Gastro (510 m²) im ganzen Erdgeschoss, darüber im 1. OG zwei Ankermieter-Büros (100 m² und 65 m²) und 3 Wohnungen, im Staffelgeschoss 5 Wohnungen (8 Wohnungen, Holzbau), 576 m² Grundfläche (GRZ-Maximum), 1.650 m² BGF, 100 % Fremdfinanzierung mit KfW 297, 298, 299 und Hausbank (Gesamtkosten 4,85 Mio €, Mischzins 3,39 %, Rate 17.733 €/Monat).
 
 | Datei | Inhalt |
 |---|---|

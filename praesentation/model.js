@@ -26,16 +26,16 @@ const VARIANTEN = {
     key: "sechs",
     name: "8 Wohnungen, große Gastro im ganzen EG, 540 m² Grundfläche",
     bgf: 1540, // EG 540 + 1. OG 540 + Staffelgeschoss 460 (Holzbau, schmale Terrasse rundum)
-    gastroM2: 460, // EG 540 m² abzüglich Treppenhaus, Aufzug und Wohn-Eingang (ca. 80 m²)
+    gastroM2: 510, // EG 540 m² abzüglich Treppenhaus, Aufzug und Wohn-Eingang (ca. 80 m²)
     bueroM2: 0,
     wohnungen: 8,
     holzM2: 460, // Staffelgeschoss in Holzbau (Zimmerei), nur 0,8 m zurückgesetzt
     terrasseM2: 72, // schmale umlaufende Dachterrasse (ca. 0,8 m) auf dem 1. OG, zählt nicht zur BGF
     wohnflaeche: 725, // 1. OG 5 x 83 m² + Staffel 3 x 103 m²
-    gastroAusbau: 150000, // Annahme des Bauherrn, einfacher Ausbau
+    gastroAusbau: 190000, // Annahme des Bauherrn, einfacher Ausbau
     mieteOhnePacht: 725 * (950 / 85), // Wohnen 11,18 €/m²
-    pacht: 460 * 12, // 5.520 €
-    umsatz: 50000,
+    pacht: 510 * 10, // 5.100 €
+    umsatz: 65000,
   },
   a: {
     key: "a",
