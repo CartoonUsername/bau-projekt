@@ -94,14 +94,14 @@
  "dscr_y5": 1.63825518672138,
  "dscr_y10": 1.76722145526297,
  "ergebnis_y10": 163264.944567569,
- "airbnb_45": -59.6274509803923,
- "airbnb_60": -176.970588235294,
- "airbnb_83": -277.632352941177,
- "airbnb_fazit": "Kein Apartment erreicht den Mindest-Mehrertrag von 300 € pro Monat. Langfristige Vermietung ist besser, Airbnb bleibt aus dem Konzept.",
- "airbnb_netto_45": 535.333333333333,
- "langfrist_45": 452.647058823529,
- "airbnb_netto_83": 702.625,
- "langfrist_83": 673.941176470588,
+ "airbnb_45": -543.946411764706,
+ "airbnb_60": -317.500411764706,
+ "airbnb_83": -30.8294117647059,
+ "airbnb_fazit": "Kein Szenario erreicht den Mindest-Mehrertrag von 300 € pro Monat. Langfristige Vermietung ist besser, Airbnb bleibt aus dem Konzept.",
+ "airbnb_netto_45": 209.583,
+ "langfrist_45": 603.529411764706,
+ "airbnb_netto_83": 722.7,
+ "langfrist_83": 603.529411764706,
  "sens_zins": 6052.52203384148,
  "sens_miete": 8951.31936232801,
  "sens_umsatz20": 5645.17230350448,
@@ -1085,69 +1085,75 @@
  "airbnb_tab": [
   [
    "Wohnfläche je Apartment (m²)",
-   45,
-   55,
-   67
+   60,
+   60,
+   60
   ],
   [
-   "Gäste",
-   2,
-   3,
-   4
+   "Auslastung",
+   0.174,
+   0.362,
+   0.6
   ],
   [
    "Preis pro Nacht (€)",
-   80,
    90,
-   105
+   90,
+   90
   ],
   [
    "Umsatz pro Apartment und Monat",
-   1216.66666666667,
-   1368.75,
-   1596.875
+   476.325,
+   990.975,
+   1642.5
   ],
   [
    "Netto Airbnb pro Apartment und Monat",
-   535.333333333333,
-   602.25,
-   702.625
+   209.583,
+   436.029,
+   722.7
   ],
   [
    "Netto langfristige Miete pro Apartment und Monat",
-   452.647058823529,
-   553.235294117647,
-   673.941176470588
+   603.529411764706,
+   603.529411764706,
+   603.529411764706
   ],
   [
    "Möblierung (€)",
-   27000,
-   33000,
-   40200
+   36000,
+   36000,
+   36000
   ],
   [
    "Kapitaldienst der Möblierung pro Monat",
-   -112.5,
-   -137.5,
-   -167.5
+   -150,
+   -150,
+   -150
   ],
   [
    "Mehrertrag Airbnb je Apartment pro Monat",
-   -29.8137254901961,
-   -88.4852941176471,
-   -138.816176470588
+   -543.946411764706,
+   -317.500411764706,
+   -30.8294117647059
   ],
   [
-   "Mehrertrag für 2 Apartments pro Monat",
-   -59.6274509803923,
-   -176.970588235294,
-   -277.632352941177
+   "Mehrertrag für das Apartment pro Monat",
+   -543.946411764706,
+   -317.500411764706,
+   -30.8294117647059
   ],
   [
    "Ergebnis",
    "lohnt sich nicht",
    "lohnt sich nicht",
    "lohnt sich nicht"
+  ],
+  [
+   "Break-even Auslastung (Airbnb = langfristige Miete)",
+   0.625595194491246,
+   0.625595194491246,
+   0.625595194491246
   ]
  ],
  "bau": [

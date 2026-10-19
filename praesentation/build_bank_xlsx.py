@@ -601,18 +601,18 @@ put(sP, "A16", "Gastro-Gewinn vor Pacht mit der Umsatzsteigerung fortgeschrieben
 # =====================================================================================
 # Airbnb Prüfung
 # =====================================================================================
-sX = sheet("Airbnb Prüfung", "Prüfung: 2 Wohnungen als Airbnb-Apartments", "Lohnt sich Kurzzeitvermietung gegenüber langfristiger Vermietung? Zwei Apartments, Möblierung im Kredit (Hausbank-Zins + Tilgung).", [52, 16, 16, 16, 40])
+sX = sheet("Airbnb Prüfung", "Prüfung: 60-m²-Apartment als Airbnb in Werlte", "Lohnt sich Kurzzeitvermietung gegenüber langfristiger Vermietung? Ein Apartment mit 60 m², Marktdaten Werlte Stand Okt. 2026, Möblierung im Kredit (Hausbank-Zins + Tilgung).", [52, 16, 16, 16, 40])
 put(sX, "A3", "Eingaben", font=bold, border=False)
-inputs = [("Auslastung Airbnb", 0.50, PCT, "Annahme; Emsland laut Quelle ca. 37 % (2016/17)"), ("Möblierung je m² (€)", 600, EUR, "Möbel, Küche, Wäsche, Technik; Annahme"), ("Kostenquote vom Umsatz (Plattform, Reinigung, Nebenkosten, Material, Versicherung, Rücklage)", 0.56, PCT, "15 + 20 + 8 + 2 + 3 + 8 %"), ("Mindest-Mehrertrag je Monat für den Mehraufwand (€)", 300, EUR, "Annahme: Gäste, Schlüssel, Preise kosten Zeit")]
+inputs = [("Preis pro Nacht (€)", 90, EUR, "Marktschnitt Werlte ca. 87 € (ferienhausmiete.de), 89 % der Angebote unter 100 €; Neubau Zentrum 90 €"), ("Möblierung je m² (€)", 600, EUR, "Möbel, Küche, Wäsche, Technik; Annahme"), ("Kostenquote vom Umsatz (Plattform, Reinigung, Nebenkosten, Material, Versicherung, Rücklage)", 0.56, PCT, "15 + 20 + 8 + 2 + 3 + 8 %"), ("Mindest-Mehrertrag je Monat für den Mehraufwand (€)", 300, EUR, "Annahme: Gäste, Schlüssel, Preise kosten Zeit")]
 for i, (lab, v, fmt, nt) in enumerate(inputs):
     r = 4 + i
     put(sX, f"A{r}", lab); put(sX, f"B{r}", v, fmt, inp); put(sX, f"E{r}", nt, font=note)
-header(sX, 9, ["Apartmentgröße (2 Apartments)", "45 m²", "55 m²", "67 m²", "Hinweis"])
-sizes = [45, 55, 67]
-guests = [2, 3, 4]
-prices = [80, 90, 105]
+header(sX, 9, ["Apartment 60 m², Szenario", "Werlte amtlich", "Emsland-Schnitt", "Optimistisch", "Hinweis"])
+sizes = [60, 60, 60]
+guests = [0.174, 0.362, 0.60]
+prices = [90, 90, 90]
 put(sX, "A10", "Wohnfläche je Apartment (m²)")
-put(sX, "A11", "Gäste")
+put(sX, "A11", "Auslastung")
 put(sX, "A12", "Preis pro Nacht (€)")
 put(sX, "A13", "Umsatz pro Apartment und Monat")
 put(sX, "A14", "Netto Airbnb pro Apartment und Monat")
@@ -620,22 +620,28 @@ put(sX, "A15", "Netto langfristige Miete pro Apartment und Monat")
 put(sX, "A16", "Möblierung (€)")
 put(sX, "A17", "Kapitaldienst der Möblierung pro Monat")
 put(sX, "A18", "Mehrertrag Airbnb je Apartment pro Monat", font=bold)
-put(sX, "A19", "Mehrertrag für 2 Apartments pro Monat", font=bold)
+put(sX, "A19", "Mehrertrag für das Apartment pro Monat", font=bold)
 put(sX, "A20", "Ergebnis", font=bold)
 for j, col in enumerate("BCD"):
-    put(sX, f"{col}10", sizes[j], NUM, inp); put(sX, f"{col}11", guests[j], NUM, inp); put(sX, f"{col}12", prices[j], EUR, inp)
-    put(sX, f"{col}13", f"={col}12*365*$B$4/12", EUR)
+    put(sX, f"{col}10", sizes[j], NUM, inp); put(sX, f"{col}11", guests[j], PCT, inp); put(sX, f"{col}12", "=$B$4", EUR)
+    put(sX, f"{col}13", f"={col}12*365*{col}11/12", EUR)
     put(sX, f"{col}14", f"={col}13*(1-$B$6)", EUR)
     put(sX, f"{col}15", f"={col}10*{A['miete_m2']}*(1-{A['ruecklage']})", EUR)
     put(sX, f"{col}16", f"={col}10*$B$5", EUR)
     put(sX, f"{col}17", f"=-{col}16*({A['z_bank']}+{A['tilgung']})/12", EUR)
     put(sX, f"{col}18", f"={col}14-{col}15+{col}17", EURS, bold)
-    put(sX, f"{col}19", f"=2*{col}18", EURS, bold, fill=key_fill)
+    put(sX, f"{col}19", f"={col}18", EURS, bold, fill=key_fill)
     put(sX, f"{col}20", f'=IF({col}19>=$B$7,"lohnt sich","lohnt sich nicht")', None, bold)
-put(sX, "E12", "Annahme: kleinere Apartments erzielen mehr Umsatz je m²", font=note)
+put(sX, "E11", "17,4 % Werlte (LSN, Betriebe ab 10 Betten), 36,2 % Emsland, 60 % Annahme Monteure/Business", font=note)
+put(sX, "A21", "Break-even Auslastung (Airbnb = langfristige Miete)")
+for col in "BCD":
+    put(sX, f"{col}21", f"=({col}15-{col}17)/({col}12*365/12*(1-$B$6))", PCT)
 put(sX, "E15", "nach Rücklagen von 10 %, Miete aus 11,18 €/m²", font=note)
 put(sX, "A22", "Fazit", font=bold, border=False)
-put(sX, "A23", '=IF(MAX(B19:D19)>=B7,"Mindestens eine Größe erreicht den Mindest-Mehrertrag: Airbnb prüfen.","Kein Apartment erreicht den Mindest-Mehrertrag von "&TEXT(B7,"#,##0")&" € pro Monat. Langfristige Vermietung ist besser, Airbnb bleibt aus dem Konzept.")', None, bold, border=False)
+put(sX, "A23", '=IF(MAX(B19:D19)>=B7,"Mindestens ein Szenario erreicht den Mindest-Mehrertrag: Airbnb prüfen.","Kein Szenario erreicht den Mindest-Mehrertrag von "&TEXT(B7,"#,##0")&" € pro Monat. Langfristige Vermietung ist besser, Airbnb bleibt aus dem Konzept.")', None, bold, border=False)
+put(sX, "A26", "Marktanalyse Werlte (49757), Stand Q4 2026", font=bold, border=False)
+for i_, t_ in enumerate(["Auslastung Beherbergung Samtgemeinde Werlte 17,4 % bei 4 Betrieben, 2,7 Tage Aufenthalt, 29.141 Übernachtungen; Emsland gesamt 36,2 % (Emsland Tourismus, Quelle LSN, Betriebe ab 10 Betten).", "Angebotspreise Werlte im Schnitt ca. 87 € pro Nacht, 89 % der Ferienunterkünfte unter 100 €; Niedersachsen 2025 Rekord mit 46,9 Mio. Übernachtungen.", "Vergleich Kleinstadt Diepholz: Airbnb-Auslastung typisch 49 % (Drittanbieter-Schätzung), Spitzenobjekte bis 77 %.", "Langfristige Vermietung: Ø 8,79 €/m² Werlte (wohnungsboerse.net, Mai 2026), Annahme Neubau Zentrum 11,18 €/m².", "Keine AirDNA-Daten für Werlte verfügbar; Auslastung und Preise sind Näherungen aus Statistik und Portalen."]):
+    put(sX, f"A{27 + i_}", t_, font=note, border=False)
 put(sX, "A24", "Die Möblierung erhöht den Kredit, Kurzzeitvermietung braucht dazu Aufwand, Reinigung, Gästekommunikation und bei mehr als 12 Betten Sonderbau-Brandschutz.", font=note, border=False)
 reg("airbnb_45", sX, "B19"); reg("airbnb_60", sX, "C19"); reg("airbnb_83", sX, "D19"); reg("airbnb_fazit", sX, "A23")
 reg("airbnb_netto_45", sX, "B14"); reg("langfrist_45", sX, "B15"); reg("airbnb_netto_83", sX, "D14"); reg("langfrist_83", sX, "D15")
@@ -749,7 +755,7 @@ over = [
     ("Ertragswert", "='Ertragswert'!E19", EUR, "Ertragswertverfahren nach Nutzung"),
     ("Beleihungswert nach Abschlag", "='Ertragswert'!B26", EUR, ""),
     ("Beleihungsauslauf", "='Ertragswert'!B29", PCT, "Darlehen / Beleihungswert"),
-    ("Airbnb für 2 Apartments", "='Airbnb Prüfung'!A23", None, "Prüfung, siehe Blatt 'Airbnb Prüfung'"),
+    ("Airbnb für 1 Apartment (60 m²)", "='Airbnb Prüfung'!A23", None, "Prüfung, siehe Blatt 'Airbnb Prüfung'"),
 ]
 r = 5
 for lab, f_, fmt, nt in over:

@@ -232,7 +232,7 @@ bullets([
     ("Die Büro-Ankermieter sichern einen Teil. ", f"Die zwei Büros bringen {eur(B['b_miete_jahr'])} im Jahr über 10 Jahre fest und decken {pct(B['b_anteil_kd'], 0)} des Kapitaldienstes, zusammen mit den Wohnungen decken die langfristigen Mieten {pct(B['b_wohn_anteil_kd'], 0)}."),
     ("KfW senkt die Zinslast deutlich. ", f"Die drei KfW-Kreditprogramme decken {pct(B['kredit_kfw_anteil'], 0)} des Darlehens zu 2,5 bis 3,0 % ab, der Mischzins liegt bei {pct(B['mischzins'], 2)} statt 4,0 %."),
     ("Der Beleihungswert ist die Hürde. ", f"Der Ertragswert von {mio(B['ertragswert'])} liegt weit unter den Kosten von {mio(B['k_gesamt'])}. Die Bank wird zusätzliche Sicherheiten oder Eigenkapital in der Größenordnung von {mio(B['eigenkapital_80'])} verlangen."),
-    ("Airbnb lohnt sich nicht. ", "Zwei Wohnungen als Kurzzeitvermietung bringen weniger als langfristige Mieter, deshalb bleiben alle 8 Wohnungen langfristig vermietet."),
+    ("Airbnb lohnt sich nicht. ", "Ein 60-m²-Airbnb-Apartment bringt bei der Werlter Auslastung (17 %, Emsland 36 %) deutlich weniger als eine langfristige Miete, deshalb bleiben alle 8 Wohnungen langfristig vermietet."),
 ])
 
 # ------------------------------------------------------------------ 2 Vorhaben
@@ -428,17 +428,18 @@ table(rows, [8.6, 2.8, 2.0, 3.2], right_cols=(1, 2, 3), bold_rows=(1,), font=9)
 para("Die Tests sind vereinfacht. Das Ergebnis reagiert am stärksten auf den Gastro-Umsatz und die Pacht. Bei einem Umsatz −40 % ist die Kapitaldienstdeckung knapp über 1,0, bei einem Ausfall der Gastro reicht der Ertrag nicht mehr für die Raten. Ein Auszug eines Ankermieters ist verkraftbar.", after=4)
 
 # ------------------------------------------------------------------ 11 Airbnb
-H("Prüfung: zwei Wohnungen als Airbnb")
+H("Prüfung: ein 60-m²-Apartment als Airbnb")
 T = B["airbnb_tab"]
-para("Geprüft wurde, ob zwei Wohnungen als Airbnb-Apartments (Kurzzeitvermietung) mehr bringen als langfristige Vermietung. Angesetzt sind eine Auslastung von 50 % (laut Quelle liegt der Emsland-Durchschnitt bei ca. 37 %), Möblierung von 600 €/m² im Kredit, Kosten von 56 % des Umsatzes (Plattform, Reinigung, Nebenkosten, Rücklage) und ein Mindest-Mehrertrag von 300 € pro Monat für den Mehraufwand.")
-rows = [["Zwei Apartments à ...", "45 m²", "55 m²", "67 m²"]]
+para("Marktlage Werlte (49757), Stand Q4 2026: Die Beherbergungsbetriebe der Samtgemeinde Werlte (ab 10 Betten) hatten zuletzt eine Auslastung von 17,4 % bei 2,7 Tagen Aufenthalt, der Emsland-Schnitt liegt bei 36,2 % (Emsland Tourismus, Quelle Landesamt für Statistik). Ferienunterkünfte kosten in Werlte im Schnitt ca. 87 € pro Nacht, 89 % liegen unter 100 €. Belegungsdaten von Airbnb oder AirDNA für Werlte lagen nicht vor, deshalb sind die Szenarien Näherungen. Angesetzt sind 90 € pro Nacht, Möblierung von 600 €/m² (36.000 €) im Kredit, Kosten von 56 % des Umsatzes (Plattform, Reinigung, Nebenkosten, Rücklage) gegenüber einer langfristigen Miete von 11,18 €/m² abzüglich 10 % Rücklagen.")
+rows = [["Apartment 60 m²", "Werlte amtlich", "Emsland-Schnitt", "Optimistisch"]]
+rows.append(["Auslastung"] + [pct(T[1][c], 1) for c in (1, 2, 3)])
 rows.append(["Preis pro Nacht"] + [eur(T[2][c]) for c in (1, 2, 3)])
-rows.append(["Netto Airbnb je Apartment und Monat"] + [eur(T[4][c]) for c in (1, 2, 3)])
-rows.append(["Netto langfristige Miete je Apartment und Monat"] + [eur(T[5][c]) for c in (1, 2, 3)])
-rows.append(["Möblierung (im Kredit)"] + [eur(T[6][c]) for c in (1, 2, 3)])
-rows.append(["Mehrertrag für 2 Apartments pro Monat"] + [eurs(T[9][c]) for c in (1, 2, 3)])
-table(rows, [7.6, 3.0, 3.0, 3.0], right_cols=(1, 2, 3), bold_rows=(5,), font=9)
-para("Ergebnis: Kurzzeitvermietung lohnt sich nicht. Auch kleine Apartments bringen nach Möblierung, Kapitaldienst und Kosten weniger als langfristige Mieter. Dazu kommen Aufwand für Gäste und Reinigung und bei mehr als 12 Betten Sonderbau-Brandschutz. Alle 8 Wohnungen bleiben deshalb langfristig vermietet.", bold=True, color=GREEN)
+rows.append(["Netto Airbnb pro Monat"] + [eur(T[4][c]) for c in (1, 2, 3)])
+rows.append(["Netto langfristige Miete pro Monat"] + [eur(T[5][c]) for c in (1, 2, 3)])
+rows.append(["Kapitaldienst Möblierung pro Monat"] + [eurs(T[7][c]) for c in (1, 2, 3)])
+rows.append(["Mehrertrag gegenüber langfristiger Miete pro Monat"] + [eurs(T[8][c]) for c in (1, 2, 3)])
+table(rows, [7.6, 3.0, 3.0, 3.0], right_cols=(1, 2, 3), bold_rows=(6,), font=9)
+para(f"Ergebnis: Airbnb lohnt sich in Werlte nicht. Erst ab ca. {pct(T[11][1], 0)} Auslastung wäre es so gut wie die langfristige Miete, in Werlte liegt sie amtlich bei 17 %. Dazu kommen Aufwand für Gäste und Reinigung. Die Wohnung bleibt deshalb langfristig vermietet.", bold=True, color=GREEN)
 
 # ------------------------------------------------------------------ 12 Risiken
 H("Chancen und Risiken")

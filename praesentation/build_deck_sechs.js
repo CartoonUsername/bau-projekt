@@ -544,20 +544,20 @@ if (KI.length) {
 
 // ===== 14d Airbnb =====
 {
-  const s = content("Prüfung: zwei Wohnungen als Airbnb", "Für die Bank", "Annahmen: Auslastung 50 % (Emsland laut Quelle ca. 37 %), Möblierung 600 €/m² im Kredit, Kostenquote 56 % vom Umsatz, Mindest-Mehrertrag 300 € pro Monat für den Mehraufwand.");
+  const s = content("Prüfung: ein 60-m²-Apartment als Airbnb", "Für die Bank", "Marktdaten Werlte Q4 2026: Auslastung der Beherbergung 17,4 % (Emsland 36,2 %), Angebotspreis ca. 87 € pro Nacht, 89 % der Unterkünfte unter 100 €. Möblierung 600 €/m² im Kredit, Kostenquote 56 % vom Umsatz.");
   const T = B.airbnb_tab;
-  const row = (i, f) => T[i];
-  const rows = [[hdr("Zwei Apartments à ..."), hdr("45 m²", "right"), hdr("55 m²", "right"), hdr("67 m²", "right")],
+  const rows = [[hdr("Apartment 60 m²"), hdr("Werlte amtlich", "right"), hdr("Emsland-Schnitt", "right"), hdr("Optimistisch", "right")],
+    [cell("Auslastung"), ...[1, 2, 3].map((c) => R((T[1][c] * 100).toFixed(1).replace(".", ",") + " %"))],
     [cell("Preis pro Nacht"), ...[1, 2, 3].map((c) => R(eur(T[2][c])))],
-    [cell("Netto Airbnb je Apartment und Monat"), ...[1, 2, 3].map((c) => R(eur(T[4][c])))],
-    [cell("Netto langfristige Miete je Apartment und Monat"), ...[1, 2, 3].map((c) => R(eur(T[5][c])))],
-    [cell("Möblierung (im Kredit)"), ...[1, 2, 3].map((c) => R(eur(T[6][c])))],
-    [cell("Mehrertrag für 2 Apartments pro Monat", { bold: true }), ...[1, 2, 3].map((c) => cfCell(T[9][c], { text: eurS(T[9][c]) }))]];
-  s.addTable(rows, { x: MX, y: 1.5, w: W - 2 * MX, colW: [5.6, 2.2, 2.2, 2.13], rowH: 0.5, border: tblBorder, objectName: "Tabelle Airbnb" });
-  card(s, MX, 4.7, W - 2 * MX, 1.7, "Ergebnis");
+    [cell("Netto Airbnb pro Monat"), ...[1, 2, 3].map((c) => R(eur(T[4][c])))],
+    [cell("Netto langfristige Miete pro Monat (60 m² × 11,18 €)"), ...[1, 2, 3].map((c) => R(eur(T[5][c])))],
+    [cell("Möblierung 36.000 € (Kapitaldienst pro Monat)"), ...[1, 2, 3].map((c) => R(eur(T[7][c])))],
+    [cell("Mehrertrag gegenüber langfristiger Miete pro Monat", { bold: true }), ...[1, 2, 3].map((c) => cfCell(T[8][c], { text: eurS(T[8][c]) }))]];
+  s.addTable(rows, { x: MX, y: 1.5, w: W - 2 * MX, colW: [5.6, 2.2, 2.2, 2.13], rowH: 0.45, border: tblBorder, objectName: "Tabelle Airbnb" });
+  card(s, MX, 4.95, W - 2 * MX, 1.5, "Ergebnis");
   text(s, [
     { text: "Ergebnis: ", options: { bold: true, color: C.accent1 } },
-    { text: "Kurzzeitvermietung lohnt sich nicht. Auch kleine Apartments bringen nach Möblierung, Kapitaldienst und Kosten weniger als langfristige Mieter. Dazu kommen Aufwand, Reinigung und bei mehr als 12 Betten Sonderbau-Brandschutz. Deshalb bleiben alle 8 Wohnungen langfristig vermietet." }], { x: MX + 0.3, y: 4.85, w: W - 2 * MX - 0.6, h: 1.4, fontSize: 14, valign: "middle" });
+    { text: `Airbnb lohnt sich in Werlte nicht. Erst ab ca. ${pct(T[11][1], 0)} Auslastung wäre es so gut wie die langfristige Miete, in Werlte liegt sie amtlich bei 17 %. Die Wohnung bleibt langfristig vermietet.` }], { x: MX + 0.3, y: 5.05, w: W - 2 * MX - 0.6, h: 1.3, fontSize: 14, valign: "middle" });
 }
 
 // ===== 16 Risiken =====
