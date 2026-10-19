@@ -559,6 +559,28 @@ if (KI.length) {
   s.addTable(rows2, { x: MX, y: 3.85, w: W - 2 * MX, colW: [6.6, 1.9, 1.5, 2.13], rowH: 0.27, fontSize: 11, border: tblBorder, objectName: "Tabelle Belastungstest" });
 }
 
+// ===== 14c Gastro-Einfluss pro Kopf =====
+{
+  const s = content("Einfluss der Gastro auf das Ergebnis pro Person", "Für Gesellschafter und Bank", "Cash pro Person und Monat nach Zins und Tilgung, vor Steuern, bei gleichen Anteilen in einer GbR. Mieten, Büros und Pacht bleiben gleich, nur das Gastro-Betriebsergebnis ändert sich (Marge 30,5 %, ohne Lohn).");
+  const immo = B.c_netto_immo + B.c_kd; // Haus ohne Gastro-Gewinn, pro Monat
+  const gast = (u) => u * 0.305 - B.pacht_monat;
+  const sc = [
+    ["Gastro fällt ganz aus (ohne Pacht)", B.sens[8][1]],
+    ["Gastro-Umsatz 40.000 €", immo + gast(40000)],
+    ["Gastro-Umsatz 50.000 €", immo + gast(50000)],
+    ["Plan: " + eur(UM), immo + gast(UM)],
+    ["Gastro-Umsatz 80.000 €", immo + gast(80000)],
+    ["Gastro-Umsatz 95.000 €", immo + gast(95000)],
+  ];
+  const rows = [[hdr("Gastro-Szenario"), hdr("Haus gesamt", "right"), hdr("1 Person", "right"), hdr("2 Personen", "right"), hdr("4 Personen", "right"), hdr("8 Personen", "right")]];
+  sc.forEach((r, i) => rows.push([cell(r[0], { bold: i === 3 }), cfCell(r[1], { text: eurS(r[1]) }), ...[1, 2, 4, 8].map((k) => cfCell(r[1] / k, { text: eurS(r[1] / k) }))]));
+  s.addTable(rows, { x: MX, y: 1.6, w: W - 2 * MX, colW: [4.0, 1.7, 1.55, 1.7, 1.7, 1.48], rowH: 0.5, border: tblBorder, objectName: "Tabelle Gastro Einfluss" });
+  card(s, MX, 5.4, W - 2 * MX, 1.0, "Einordnung");
+  text(s, [
+    { text: "Aussage: ", options: { bold: true, color: C.accent1 } },
+    { text: `Ohne Gastro-Gewinn fehlen ${eur(-immo)} pro Monat, im Plan bleiben ${eur(immo + gast(UM))}. Die Gastro macht also den ganzen Unterschied, das Haus trägt sich erst ab ca. ${eur(Math.round(B.breakeven_haus / 100) * 100)} Gastro-Umsatz.` }], { x: MX + 0.3, y: 5.5, w: W - 2 * MX - 0.6, h: 0.8, fontSize: 13.5, valign: "middle" });
+}
+
 // ===== 14d Airbnb =====
 {
   const s = content("Prüfung: ein 60-m²-Apartment als Airbnb", "Für die Bank", "Marktdaten Werlte Q4 2026: Auslastung der Beherbergung 17,4 % (Emsland 36,2 %), Angebotspreis ca. 87 € pro Nacht, 89 % der Unterkünfte unter 100 €. Möblierung 600 €/m² im Kredit, Kostenquote 56 % vom Umsatz.");
