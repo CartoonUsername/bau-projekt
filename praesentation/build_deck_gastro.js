@@ -261,7 +261,7 @@ async function deck() {
     card(s, 8.6, 1.5, W - 8.6 - MX, 4.6, "Betrieb");
     text(s, [
       { text: "Betreiber", options: { bold: true, color: C.accent1, breakLine: true } },
-      { text: "Du führst die Gastro selbst oder verpachtest sie. Bei Verpachtung zahlt der Betreiber ca. 10 €/m² Pacht, das sind bei 510 m² ca. 5.100 € im Monat (ca. " + Math.round(BV.g_pacht_quote * 1000) / 10 + " % vom Umsatz).", options: { breakLine: true } },
+      { text: "Eine eigene Betreiberfirma des Bauherrn pachtet die Gastro von der Vermietungs-GbR. Die Pacht beträgt 10 % vom Umsatz, mindestens 10 €/m². Bei Plan-Umsatz sind das " + eur(BV.pacht_monat) + " im Monat (" + Math.round(BV.pacht_monat / 510 * 100) / 100 + " €/m²).", options: { breakLine: true } },
       { text: " ", options: { breakLine: true } },
       { text: "Start", options: { bold: true, color: C.accent1, breakLine: true } },
       { text: "Küchenchef früh einstellen, 4 bis 6 Wochen vor Eröffnung Probebetrieb.", options: {} },
@@ -269,15 +269,15 @@ async function deck() {
   }
 
   // ---- 12 Wirtschaftlichkeit
-  { const s = content("Wirtschaftlichkeit der Gastro", "Für Bank", "Marge vor Pacht 30,5 % vom Umsatz (Branchen-Richtwert, nicht aus Werlte). Bei sehr niedrigem Umsatz drücken die Fixkosten stärker, die Rechnung ist dort zu günstig.");
-    const rows = [[hdr("Umsatz pro Monat"), hdr("Gewinn vor Pacht", "right"), hdr("Pacht ans Haus", "right"), hdr("Gewinn nach Pacht", "right")]];
-    [50000, 65000, 80000, UM, 110000].forEach((u) => { const g = u * 0.305; rows.push([cell(eur(u), { bold: u === UM }), R(eur(g)), R(eur(-v.pacht)), cf(g - v.pacht)]); });
+  { const s = content("Wirtschaftlichkeit der Gastro", "Für Bank", "Betreiberfirma: Marge vor Pacht 30,5 % vom Umsatz (Branchen-Richtwert, nicht aus Werlte). Pacht = Maximum aus 10 €/m² und 10 % vom Umsatz. Bei sehr niedrigem Umsatz drücken die Fixkosten stärker.");
+    const rows = [[hdr("Umsatz pro Monat"), hdr("Gewinn vor Pacht", "right"), hdr("Pacht an die GbR", "right"), hdr("Gewinn nach Pacht", "right")]];
+    [50000, 65000, 80000, UM, 110000].forEach((u) => { const g = u * 0.305; const pk = Math.max(5100, u * 0.1); rows.push([cell(eur(u), { bold: Math.abs(u - UM) < 1 }), R(eur(g)), R(eur(-pk)), cf(g - pk)]); });
     s.addTable(rows, { x: MX, y: 1.5, w: 8.4, colW: [2.4, 2.0, 2.0, 2.0], rowH: 0.55, border, objectName: "Tabelle Gastro Gewinn" });
     const BV = JSON.parse(require("fs").readFileSync(path.join(__dirname, "bank_values.json"), "utf8"));
     card(s, 9.4, 1.5, W - 9.4 - MX, 4.2, "Haus");
     text(s, [
-      { text: "Für das ganze Haus", options: { bold: true, color: C.accent1, breakLine: true } },
-      { text: `Mit ${eur(UM)} Umsatz bleiben im ganzen Haus ${eurS(BV.c_ergebnis)} pro Monat nach Zinsen und Tilgung (KfW-Kredite und Hausbank, ohne Lohn). Die Gastro braucht für Break-even im Haus ca. ${eur(Math.round(BV.breakeven_haus / 100) * 100)} Umsatz.`, options: {} },
+      { text: "Betreiberfirma und GbR", options: { bold: true, color: C.accent1, breakLine: true } },
+      { text: `Mit ${eur(UM)} Umsatz verdient die Betreiberfirma ${eurS(BV.c_gastro)} pro Monat nach Pacht (ohne Lohn). Die Vermietungs-GbR bekommt ${eur(BV.pacht_monat)} Pacht und deckt damit ihre Raten ab ca. ${eur(Math.round(BV.breakeven_haus / 100) * 100)} Umsatz.`, options: {} },
     ], { x: 9.65, y: 1.7, w: W - 9.4 - MX - 0.5, h: 3.9, fontSize: 13 });
     text(s, "Kosten im Detail (Wareneinsatz, Personal, Energie ...) stehen im Anhang der Hauptpräsentation.", { x: MX, y: 5.0, w: 8.4, h: 0.5, fontSize: 13, color: C.accent4 });
   }

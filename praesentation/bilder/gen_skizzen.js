@@ -1,4 +1,4 @@
-// SVG-Skizzen Baufeld 3 (modern, Flachdach mit Staffelgeschoss, EG Gastro, 8 Wohnungen, 1.650 m² BGF)
+// SVG-Skizzen Baufeld 3 (modern, Flachdach mit Staffelgeschoss, EG Gastro, 12 Wohnungen, 1.650 m² BGF)
 // Maße: Baukörper 32 x 18 m, Hauptbaukörper bis 6,50 m, Staffelgeschoss (ca. 498 m², Holzbau) bis ca. 9,60 m, Attika ca. 9,90 m
 const fs = require("fs");
 const path = require("path");
@@ -43,12 +43,13 @@ const brick = (id, skew = 0) =>
 const T = (x, y, s, size = 16, opt = "") => `<text x="${x}" y="${y}" font-size="${size}" fill="${COL.text}" ${opt}>${s}</text>`;
 
 // ---------------------------------------------------------------- Ansichten
-// Baukörper 30 x 18 m (540 m²), EG Gastro (ganzes EG außer Treppenhaus), 1. OG 2 Büros + 3 Wohnungen, Staffel 30,4 x 16,4 m (498 m²)
+// Baukörper 30 x 18 m (540 m²), EG Gastro (ganzes EG außer Treppenhaus), 1. OG 2 Büros + 5 Wohnungen, Staffel 30,4 x 16,4 m (498 m²)
 const LEN = 32;
-// 1. OG: Treppe 0–4, Büro 1 (100 m²) 4–10,2, Büro 2 (65 m²) 10,2–14,3, Wohnungen 14,3–32 (3 × 5,9 m)
-const OGWIN = [[4.7, 6.9], [7.7, 9.9], [10.9, 13.6], [15.2, 19.2], [21.1, 25.1], [27.0, 31.0]];
-const OGBAL = [[14.9, 19.5], [20.8, 25.4], [26.7, 31.3]];
-const STB = [0, 1, 2, 3, 4];
+// 1. OG: Treppe 0–4, Büro 1 (100 m²) 4–10,2, Büro 2 (65 m²) 10,2–14,3, Wohnungen 14,3–32 (5 × 3,5 m)
+const OGWIN = [[4.7, 6.9], [7.7, 9.9], [10.9, 13.6], [15.0, 17.2], [18.5, 20.7], [22.0, 24.2], [25.6, 27.8], [29.1, 31.3]];
+const OGBAL = [[14.7, 17.4], [18.3, 21.0], [21.8, 24.5], [25.4, 28.1], [28.9, 31.6]];
+const STB = [0, 1, 2, 3, 4, 5, 6];
+const STP = 27 / 7; // Achsabstand der 7 Wohnungen im Staffelgeschoss
 const DEP = 18;
 const INS = 0.8;
 function ansichten() {
@@ -83,7 +84,7 @@ function ansichten() {
   o += R(6.5, 0.3, 8, 3.5, COL.stahl, 'opacity="0.18"'); // Gastro-Tür
   o += R(18, 0.3, 27, 1.1, COL.holz, 'opacity="0.8"'); // Bar
   o += R(-0.2, 3.5, LEN + 0.2, 3.8, COL.beton);
-  // OG: Büro 1, Büro 2 und 3 Wohnungen mit Balkon
+  // OG: Büro 1, Büro 2 und 5 Wohnungen mit Balkon
   o += R(4, 3.8, LEN, 6.5, "url(#b1)");
   OGWIN.forEach(([x0, x1], k) => {
     o += R(x0, 3.9, x1, 6.3, COL.glas, `stroke="${COL.stahl}" stroke-width="3"`);
@@ -95,13 +96,13 @@ function ansichten() {
   });
   o += R(-0.2, 6.5, LEN + 0.2, 6.8, COL.beton);
   o += R(4, 6.8, LEN, 7.6, "#E6EAEC", 'opacity="0.92" stroke="#1E2326" stroke-width="1.5"');
-  // Staffelgeschoss in Holzbau (0,8 m zurückgesetzt), 5 Wohnungen
+  // Staffelgeschoss in Holzbau (0,8 m zurückgesetzt), 7 Wohnungen
   o += R(INS, 6.8, LEN - INS, 9.6, COL.zink);
   STB.forEach((k) => {
-    const bx = 4.2 + k * 5.4;
-    o += R(bx + 0.4, 6.9, bx + 5.0, 9.5, COL.glas, `stroke="${COL.stahl}" stroke-width="3"`);
-    o += L(bx + 2.7, 6.9, bx + 2.7, 9.5, COL.stahl, 2.5);
-    o += L(bx + 0.4, 8.3, bx + 5.0, 8.3, COL.stahl, 1.5);
+    const bx = 4.2 + k * STP;
+    o += R(bx + 0.3, 6.9, bx + STP - 0.3, 9.5, COL.glas, `stroke="${COL.stahl}" stroke-width="3"`);
+    o += L(bx + STP / 2, 6.9, bx + STP / 2, 9.5, COL.stahl, 2.5);
+    o += L(bx + 0.3, 8.3, bx + STP - 0.3, 8.3, COL.stahl, 1.5);
   });
   o += R(INS, 9.6, LEN - INS, 9.9, COL.beton);
   // Terrasse (Holzdeck) + Vordach vor der Gastro
@@ -118,7 +119,7 @@ function ansichten() {
   o += `<line x1="${X(0)}" y1="${gy + 28}" x2="${X(LEN)}" y2="${gy + 28}" stroke="${COL.text}" stroke-width="1.5"/>` + T(X(13), gy + 22, "32,0 m", 15, 'font-weight="bold"');
   o += T(X(0), gy + 62, "Eingang", 16, 'font-weight="bold"');
     o += T(X(4), gy + 62, "EG: große Gastro ca. 510 m² mit Bar und Terrasse", 16, 'font-weight="bold"');
-  o += T(X(0), gy + 86, "OG: 2 Büros und 3 Wohnungen, Staffel in Holzbau: 5 Wohnungen", 16, 'font-weight="bold"');
+  o += T(X(0), gy + 86, "OG: 2 Büros und 5 Wohnungen, Staffel in Holzbau: 7 Wohnungen", 16, 'font-weight="bold"');
 
   // ---- Ost
   const ox2 = 1050;
@@ -185,13 +186,13 @@ function ecke() {
   o += rect(SB, 0, 0.3, Y, 3.5, "url(#glow)");
   for (let i = 0; i <= 9; i++) o += line(SB(i * 2, 0.3), SB(i * 2, 3.5), COL.stahl, 2.5);
   o += rect(SA, -0.2, 3.5, X + 0.2, 3.8, COL.beton) + rect(SB, -0.2, 3.5, Y + 0.2, 3.8, COL.beton);
-  // OG Süd: 2 Büros, 3 Wohnungen
+  // OG Süd: 2 Büros, 5 Wohnungen
   OGWIN.forEach(([x0, x1]) => {
     o += rect(SA, x0, 3.9, x1, 6.3, COL.glas, `stroke="${COL.stahl}" stroke-width="2.5"`);
     o += line(SA((x0 + x1) / 2, 3.9), SA((x0 + x1) / 2, 6.3), COL.stahl, 2);
   });
   [[1.2, 5.2], [7.0, 11.0], [12.8, 16.8]].forEach(([a, b]) => (o += rect(SB, a, 3.9, b, 6.3, COL.glas, `stroke="${COL.stahl}" stroke-width="2.5"`)));
-  // Balkone Süd (3 Wohnungen)
+  // Balkone Süd (5 Wohnungen)
   OGBAL.forEach(([x0, x1]) => {
     o += poly([P(x0, Y, 3.62), P(x1, Y, 3.62), P(x1, Y + 1.5, 3.62), P(x0, Y + 1.5, 3.62)], COL.beton);
     o += poly([P(x0, Y + 1.5, 3.62), P(x1, Y + 1.5, 3.62), P(x1, Y + 1.5, 4.7), P(x0, Y + 1.5, 4.7)], "#E6EAEC", 'opacity="0.92" stroke="#1E2326" stroke-width="2"');
@@ -209,9 +210,9 @@ function ecke() {
   const SO = B(sx);
   o += rect(SS, INS, 6.5, sx, 9.6, COL.zink);
   STB.forEach((k) => {
-    const bx = 4.2 + k * 5.4;
-    o += rect(SS, bx + 0.4, 6.7, bx + 5.0, 9.5, COL.glas, `stroke="${COL.stahl}" stroke-width="2.5"`);
-    o += line(SS(bx + 2.7, 6.7), SS(bx + 2.7, 9.5), COL.stahl, 2);
+    const bx = 4.2 + k * STP;
+    o += rect(SS, bx + 0.3, 6.7, bx + STP - 0.3, 9.5, COL.glas, `stroke="${COL.stahl}" stroke-width="2.5"`);
+    o += line(SS(bx + STP / 2, 6.7), SS(bx + STP / 2, 9.5), COL.stahl, 2);
   });
   o += rect(SO, INS, 6.5, sy, 9.6, COL.zinkHell);
   [[2.0, 5.8], [7.0, 10.8], [12.0, 15.8]].forEach(([a, b]) => (o += rect(SO, a, 6.7, b, 9.5, COL.glas, `stroke="${COL.stahl}" stroke-width="2.5"`)));
@@ -229,8 +230,8 @@ function ecke() {
   o += tree(-1.5, Y + 4.5);
   o += tree(X + 3.5, -0.5);
   const leg = [
-    ["Staffelgeschoss", "5 Wohnungen in Holzbau (498 m²), nur 0,8 m zurück, Attika ca. 9,90 m"],
-    ["1. Obergeschoss", "2 Büros als Ankermieter (100 und 65 m²) und 3 Wohnungen mit Balkon"],
+    ["Staffelgeschoss", "7 Wohnungen in Holzbau (498 m²), nur 0,8 m zurück, Attika ca. 9,90 m"],
+    ["1. Obergeschoss", "2 Büros als Ankermieter (100 und 65 m²) und 5 Wohnungen mit Balkon"],
     ["Erdgeschoss", "Gastro ca. 510 m² mit Bar im ganzen EG, verglast, Terrasse mit Vordach"],
     ["Eingang Wohnen", "Treppenhaus mit Aufzug am Westende, ruhig getrennt"],
     ["Stellplätze", "ca. 6–8 auf dem Grundstück, Rest über die Parkfläche"],

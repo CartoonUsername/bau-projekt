@@ -12,7 +12,7 @@ for k, ref in reg.items():
     out[k] = wb[sh][c].value
 # Tabellen
 ws = wb["Flächen und Mieten"]
-out["einheiten"] = [{"nr": ws[f"A{r}"].value, "geschoss": ws[f"B{r}"].value, "m2": ws[f"C{r}"].value, "nutzung": ws[f"D{r}"].value, "miete_m2": ws[f"E{r}"].value, "miete": ws[f"F{r}"].value, "jahr": ws[f"G{r}"].value} for r in range(12, 20)]
+out["einheiten"] = [{"nr": ws[f"A{r}"].value, "geschoss": ws[f"B{r}"].value, "m2": ws[f"C{r}"].value, "nutzung": ws[f"D{r}"].value, "miete_m2": ws[f"E{r}"].value, "miete": ws[f"F{r}"].value, "jahr": ws[f"G{r}"].value} for r in range(12, 14)]
 ws = wb["Tilgung Jahre"]
 out["tilgung"] = [{"jahr": ws[f"A{r}"].value, "zins": ws[f"B{r}"].value, "tilg": ws[f"C{r}"].value, "rate": ws[f"D{r}"].value, "rest": ws[f"E{r}"].value, "kfw": ws[f"F{r}"].value} for r in range(5, 40)]
 ws = wb["Prognose"]
@@ -33,6 +33,11 @@ out["gastro_tab"] = [[ws[f"A{r}"].value, ws[f"B{r}"].value, ws[f"C{r}"].value] f
 out["gastro_umsatz"] = [[ws[f"A{r}"].value, ws[f"C{r}"].value, ws[f"D{r}"].value] for r in range(24, 29)]
 ws = wb["Gastro Tagesteile"]
 out["tagesteile"] = [[ws[f"{c}{r}"].value for c in "ABCDEFG"] for r in range(5, 12)]
+ws = wb["Gesellschafter"]
+out["gs_items"] = [[ws[f"A{r}"].value, ws[f"B{r}"].value] for r in range(5, 15)]
+out["gs_kopf"] = [[ws[f"A{r}"].value] + [ws[f"{c}{r}"].value for c in "BCDE"] for r in range(18, 29)]
+import os
+out["szenarien"] = json.load(open("szenarien.json", encoding="utf-8")) if os.path.exists("szenarien.json") else []
 ws = wb["Airbnb Prüfung"]
 out["airbnb_tab"] = [[ws[f"A{r}"].value] + [ws[f"{c}{r}"].value for c in "BCD"] for r in range(10, 22)]
 ws = wb["Bauphase"]

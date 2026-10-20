@@ -1,4 +1,4 @@
-// Deck: Neue Mitte Werlte, Baufeld 3. 8 Wohnungen, große Gastro im ganzen EG, 576 m² Grundfläche, 1.650 m² BGF, 2 Büro-Ankermieter, Flachdach mit Staffelgeschoss in Holzbau
+// Deck: Neue Mitte Werlte, Baufeld 3. 12 Wohnungen, große Gastro im ganzen EG, 576 m² Grundfläche, 1.650 m² BGF, 2 Büro-Ankermieter, Flachdach mit Staffelgeschoss in Holzbau
 // Aufruf: NODE_PATH=<node_modules> APPLY_THEME=<pfad>/apply_theme.js node build_deck_sechs.js
 const path = require("path");
 const fs = require("fs");
@@ -48,7 +48,7 @@ const k = (n) => `${nf.format(n)} €`;
 
 const pres = new pptxgen();
 pres.layout = "LAYOUT_WIDE"; // 13.33 x 7.5
-pres.title = "Neue Mitte Werlte – Baufeld 3: Große Gastro und 8 Wohnungen";
+pres.title = "Neue Mitte Werlte – Baufeld 3: Restaurant, Bar und 12 Wohnungen";
 pres.author = "Bessam Hasso";
 pres.theme = { headFontFace: THEME.headFontFace, bodyFontFace: THEME.bodyFontFace };
 const C = pres.SchemeColor;
@@ -106,8 +106,8 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
   const s = pres.addSlide({ masterName: "TITEL" });
   s.addImage({ path: fit(hasKI("ki_aussen_1.jpg") ? KI_AUSSEN : path.join(IMG, "aussen.jpg"), 6.43, H), x: 6.9, y: 0, w: 6.43, h: H, altText: "Außenansicht, modernes Haus mit Klinker und Glas-Erdgeschoss" });
   text(s, "NEUE MITTE WERLTE", { x: MX, y: 1.3, w: 6, h: 0.4, fontSize: 16, bold: true, color: C.accent3, charSpacing: 4 });
-  text(s, "Baufeld 3: Große Gastro und 8 Wohnungen", { x: MX, y: 1.85, w: 6, h: 2.2, fontSize: 37, bold: false, fontFace: "Georgia", color: C.background1 });
-  text(s, "Businessplan für die Bank: Konzept, Finanzierung mit KfW-Krediten, Ertragswert und Abzahlungsplan", { x: MX, y: 4.3, w: 6, h: 0.9, fontSize: 17, color: C.background1 });
+  text(s, "Baufeld 3: Restaurant, Bar und 12 Wohnungen", { x: MX, y: 1.85, w: 6, h: 2.2, fontSize: 37, bold: false, fontFace: "Georgia", color: C.background1 });
+  text(s, "Businessplan für die Bank und die Gesellschafter: Vermietungs-GbR, Gastro getrennt, KfW-Förderung, Ertragswert, Abzahlungsplan", { x: MX, y: 4.3, w: 6, h: 0.9, fontSize: 17, color: C.background1 });
   text(s, "Bessam Hasso, Werlte\nBebauungsplan Nr. 123, 1. Änderung (Entwurf 25.08.2026)\nStand Oktober 2026", { x: MX, y: 5.5, w: 6, h: 1.1, fontSize: 14, color: "CFD8D3" });
   s.addNotes("Titelfolie. Das Bild ist eine Referenzstudie.");
 }
@@ -117,17 +117,18 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
   const s = content("Das Vorhaben auf einen Blick", "Für Stadt und Bank", "Alle Zahlen stammen aus dem Rechenmodell Bankunterlagen_Baufeld3.xlsx und sind Planungsannahmen.");
   const w = (W - 2 * MX - 0.6) / 4;
   stat(s, MX, 1.5, w, mio(B.k_gesamt), "Gesamtkosten inkl. Finanzierung in Bau- und Anlaufzeit");
-  stat(s, MX + (w + 0.2), 1.5, w, pct(B.kredit_kfw_anteil), "des Darlehens über KfW 297, 298, 299 (" + mio(B.kredit_297 + B.kredit_298 + B.kredit_299) + ")", C.accent2);
+  stat(s, MX + (w + 0.2), 1.5, w, mio(B.kredit_297 + B.kredit_298 + B.kredit_299), "KfW-Kredite 297, 298, 299 (" + pct(B.kredit_kfw_anteil) + " der Finanzierung)", C.accent2);
   stat(s, MX + 2 * (w + 0.2), 1.5, w, eur(B.rate_monat), "Kapitaldienst pro Monat (Mischzins " + (B.mischzins * 100).toFixed(2).replace(".", ",") + " %, 1 % Tilgung)", C.accent4);
-  stat(s, MX + 3 * (w + 0.2), 1.5, w, eurS(B.c_ergebnis), "Ergebnis pro Monat nach Kapitaldienst, ohne Lohn", B.c_ergebnis >= 0 ? C.accent5 : C.accent6);
+  stat(s, MX + 3 * (w + 0.2), 1.5, w, eurS(B.c_ergebnis), "Ergebnis der Vermietungs-GbR pro Monat nach Kapitaldienst", B.c_ergebnis >= 0 ? C.accent5 : C.accent6);
   const rows = [[hdr("Projekt"), hdr("Wert")],
     [cell("Grundstück / Grundfläche / BGF"), cell("960 m² / 576 m² (32 × 18 m, GRZ-Maximum) / 1.650 m² (EG, 1. OG, Staffel)")],
-    [cell("Nutzung"), cell("Gastro im ganzen EG (ca. 510 m²), im 1. OG 2 Büro-Ankermieter (100 und 65 m²) und 3 Wohnungen, im Staffelgeschoss in Holzbau 5 Wohnungen")],
-    [cell("Finanzierung"), cell("100 % Fremdkapital, kein Eigenkapital, KfW 297/298/299 plus Hausbank")],
-    [cell("Kapitaldienstdeckung (DSCR)"), cell(B.dscr.toFixed(2).replace(".", ",") + " gesamt, " + B.dscr_immo.toFixed(2).replace(".", ",") + " nur Immobilie (Miete und Pacht)")],
+    [cell("Nutzung"), cell("Restaurant und Bar im EG (ca. 510 m²), im 1. OG 2 Büro-Ankermieter (100 und 65 m²) und 5 Wohnungen, im Staffelgeschoss in Holzbau 7 Wohnungen")],
+    [cell("Struktur"), cell("Vermietungs-GbR mit den Gesellschaftern ist Eigentümerin, eine eigene Betreiberfirma führt die Gastro und zahlt 10 % vom Umsatz als Pacht (mindestens 10 €/m²)")],
+    [cell("Förderung"), cell("KfW 297/298/299 sparen " + eur(B.foerder_zins_jahr) + " Zinsen im Jahr gegenüber der Hausbank, steuerliche Abschreibungen als Option")],
+    [cell("Kapitaldienstdeckung (DSCR) der GbR"), cell(B.dscr.toFixed(2).replace(".", ",") + " ohne Eigenkapital, mit Gastro-Gewinn des Bauherrn " + B.dscr_gesamt.toFixed(2).replace(".", ","))],
     [cell("Ertragswert / Beleihungsauslauf"), cell(mio(B.ertragswert) + " / " + pct(B.auslauf) + " (Darlehen zu Beleihungswert)")]];
-  s.addTable(rows, { x: MX, y: 3.45, w: W - 2 * MX, colW: [3.6, 8.53], rowH: 0.42, border: tblBorder, objectName: "Tabelle Eckdaten" });
-  text(s, "Der Ertrag trägt die Raten nur zusammen mit dem Gastro-Gewinn. Die Bank wird wegen des Ertragswerts zusätzliche Sicherheiten oder Eigenkapital verlangen, siehe Folie Ertragswert.", { x: MX, y: 6.0, w: W - 2 * MX, h: 0.6, fontSize: 14, bold: true, color: C.accent2 });
+  s.addTable(rows, { x: MX, y: 3.3, w: W - 2 * MX, colW: [3.6, 8.53], rowH: 0.36, border: tblBorder, fontSize: 11.5, objectName: "Tabelle Eckdaten" });
+  text(s, "Ohne Eigenkapital deckt die GbR die Raten knapp nicht, mit Eigenkapital der Gesellschafter oder Sicherheiten wird das Vorhaben finanzierbar, siehe Folien Ergebnis pro Gesellschafter und Szenarien.", { x: MX, y: 6.5, w: W - 2 * MX, h: 0.6, fontSize: 13, bold: true, color: C.accent2 });
 }
 
 // ===== 3 Standort =====
@@ -201,8 +202,8 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
   s.addShape(pres.ShapeType.rect, { x: x0 - 0.2, y: z(9.9), w: ws + 0.4, h: 0.3 * sc, fill: { color: "D6D1C8" }, line: { color: C.accent4, width: 1 }, objectName: "Schnitt Dach" });
   s.addShape(pres.ShapeType.rect, { x: x0 + ws, y: z(7.6), w: 0.9 * sc, h: 1.1 * sc, fill: { color: "CFE0E8" }, line: { color: C.accent4, width: 1 }, objectName: "Brüstung" });
   text(s, "EG große Gastro mit Bar", { x: x0, y: z(3.5), w, h: 3.2 * sc, fontSize: 14, bold: true, align: "center", valign: "middle" });
-  text(s, "1. OG · 2 Büros, 3 Wohnungen", { x: x0, y: z(6.5), w, h: 3.0 * sc, fontSize: 14, bold: true, align: "center", valign: "middle", color: C.background1 });
-  text(s, "Staffelgeschoss · 5 Wohnungen", { x: x0, y: z(9.6), w: ws, h: 3.1 * sc, fontSize: 14, bold: true, align: "center", valign: "middle", color: C.background1 });
+  text(s, "1. OG · 2 Büros, 5 Wohnungen", { x: x0, y: z(6.5), w, h: 3.0 * sc, fontSize: 14, bold: true, align: "center", valign: "middle", color: C.background1 });
+  text(s, "Staffelgeschoss · 7 Wohnungen", { x: x0, y: z(9.6), w: ws, h: 3.1 * sc, fontSize: 14, bold: true, align: "center", valign: "middle", color: C.background1 });
   const mark = (zz, label) => {
     s.addShape(pres.ShapeType.line, { x: x0 - 0.5, y: z(zz), w: w + 0.8, h: 0, line: { color: C.accent1, width: 1, dashType: "dash" }, objectName: "Marke " + label });
     text(s, label, { x: MX, y: z(zz) - 0.2, w: 1.1, h: 0.4, fontSize: 12, bold: true, color: C.accent1, align: "right", valign: "middle" });
@@ -213,10 +214,10 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
   text(s, "Nord", { x: x0, y: yBase + 0.1, w: 0.6, h: 0.3, fontSize: 12, color: C.accent4 });
   const rows = [
     [hdr("Ebene"), hdr("Nutzung"), hdr("BGF", "right")],
-    [cell("EG"), cell("Gastro ca. 510 m² mit Bar, Séparée und Küche, dazu Treppenhaus, Aufzug, Eingänge"), R("576 m²")],
-    [cell("1. OG"), cell("2 Büro-Ankermieter (100 und 65 m²), 3 Wohnungen à ca. 107 m²"), R("576 m²")],
-    [cell("Staffel"), cell("5 Wohnungen à ca. 67 m², Holzbau, schmale Terrasse rundum"), R("498 m²")],
-    [cell("Summe", { bold: true }), cell("8 Wohnungen (655 m²), 2 Büros (165 m²)", { bold: true }), R("1.650 m²", { bold: true })],
+    [cell("EG"), cell("Restaurant und Bar ca. 510 m² mit Séparée und Küche, dazu Treppenhaus, Aufzug, Eingänge"), R("576 m²")],
+    [cell("1. OG"), cell("2 Büro-Ankermieter (100 und 65 m²), 5 Wohnungen à ca. 64 m²"), R("576 m²")],
+    [cell("Staffel"), cell("7 Wohnungen à ca. 48 m², Holzbau, schmale Terrasse rundum"), R("498 m²")],
+    [cell("Summe", { bold: true }), cell("12 Wohnungen (655 m²), 2 Büros (165 m²)", { bold: true }), R("1.650 m²", { bold: true })],
   ];
   s.addTable(rows, { x: 7.7, y: 1.6, w: W - 7.7 - MX, colW: [0.9, 3.2, 0.93], rowH: 0.6, border: tblBorder, objectName: "Tabelle Flächen" });
   text(s, "BGF = Bruttogrundfläche, alle Geschossflächen zusammen. Das Staffelgeschoss in Holzbau springt rundum nur ca. 0,8 m zurück, so entsteht eine schmale Terrasse von ca. 77 m² um die Wohnungen.", { x: 7.7, y: 5.4, w: W - 7.7 - MX, h: 1.0, fontSize: 14, color: C.accent4 });
@@ -250,7 +251,7 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
         [0, 0, 4, 18, "Treppe, Aufzug", "8A9199"],
         [4, 0, 6.2, 18, "Büro 1\n100 m²", "3F6275"],
         [10.2, 0, 4.1, 18, "Büro 2\n65 m²", "5B7D8C"],
-        ...[0, 1, 2].map((n) => [14.3 + n * 5.9, 0, 5.9, 18, `WE ${n + 1}\n107 m²`, "9A4034"]),
+        ...[0, 1, 2, 3, 4].map((n) => [14.3 + n * 3.54, 0, 3.54, 18, `WE ${n + 1}\n64 m²`, "9A4034"]),
       ],
     },
     {
@@ -258,7 +259,7 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
       rooms: [
         [0, 0, 32, 18, "", "C9C4B8"],
         [0.8, 0.8, 3.4, 16.4, "Treppe", "8A9199"],
-        ...[0, 1, 2, 3, 4].map((n) => [4.2 + n * 5.4, 0.8, 5.4, 16.4, `WE ${n + 4}\n67 m²`, "7A5C3A"]),
+        ...[0, 1, 2, 3, 4, 5, 6].map((n) => [4.2 + n * (27 / 7), 0.8, 27 / 7, 16.4, `WE ${n + 6}\n48 m²`, "7A5C3A"]),
       ],
     },
   ];
@@ -268,11 +269,11 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
     s.addShape(pres.ShapeType.rect, { x, y: y0 - 0.1, w: pw, h: ph + 0.2, fill: { color: "FFFFFF" }, line: { color: C.accent4, width: 1, dashType: "dash" }, objectName: "Baukörper " + p.title });
     p.rooms.forEach((r) => {
       s.addShape(pres.ShapeType.rect, { x: x + r[0] * sc, y: y0 + r[1] * sc, w: r[2] * sc, h: r[3] * sc, fill: { color: r[5] }, line: { color: "FFFFFF", width: 1.5 }, objectName: "Raum " + (r[4] || "Fläche") });
-      if (r[4]) text(s, r[4], { x: x + r[0] * sc, y: y0 + r[1] * sc, w: r[2] * sc, h: r[3] * sc, fontSize: 11, bold: true, color: r[5] === "F2D48C" || r[5] === "E7BE63" || r[5] === "C9C4B8" ? "1F2421" : "FFFFFF", align: "center", valign: "middle" });
+      if (r[4]) text(s, r[4], { x: x + r[0] * sc, y: y0 + r[1] * sc, w: r[2] * sc, h: r[3] * sc, fontSize: r[2] * sc < 0.6 ? 7 : 11, bold: true, color: r[5] === "F2D48C" || r[5] === "E7BE63" || r[5] === "C9C4B8" ? "1F2421" : "FFFFFF", align: "center", valign: "middle" });
     });
   });
   card(s, MX, 5.35, W - 2 * MX, 1.2, "Hinweis");
-  text(s, "Grundfläche 32 × 18 m = 576 m² (GRZ-Maximum 0,6). Die Gastro nutzt das ganze EG (ca. 510 m²), Treppenhaus und Aufzug liegen am Westende und erschließen Büros und Wohnungen getrennt von der Gastro. Im 1. OG liegen die zwei Büro-Ankermieter und 3 Wohnungen, die Staffel in Holzbau hat ca. 498 m² BGF mit 5 Wohnungen, die beige Fläche ist die schmale Terrasse (ca. 77 m²).", { x: MX + 0.25, y: 5.45, w: W - 2 * MX - 0.5, h: 1.0, fontSize: 15, valign: "middle" });
+  text(s, "Grundfläche 32 × 18 m = 576 m² (GRZ-Maximum 0,6). Die Gastro nutzt das ganze EG (ca. 510 m²), Treppenhaus und Aufzug liegen am Westende und erschließen Büros und Wohnungen getrennt von der Gastro. Im 1. OG liegen die zwei Büro-Ankermieter und 5 Wohnungen, die Staffel in Holzbau hat ca. 498 m² BGF mit 7 Wohnungen, die beige Fläche ist die schmale Terrasse (ca. 77 m²).", { x: MX + 0.25, y: 5.45, w: W - 2 * MX - 0.5, h: 1.0, fontSize: 15, valign: "middle" });
 }
 
 // ===== 7 Außen =====
@@ -336,10 +337,10 @@ if (KI.length) {
 // ===== 11b Flächen und Mieten =====
 {
   const s = content("Flächen und Mieten: Wohnungen, Büros und Gastro", "Für die Bank", "Miete 11,18 €/m² (950 € für 85 m², Annahme des Bauherrn). Portale nennen für Neubau in Werlte ca. 10,7–11,0 €/m². Nebenkosten werden umgelegt.");
-  const rows = [[hdr("Einheit"), hdr("Geschoss"), hdr("Fläche", "right"), hdr("Miete je m²", "right"), hdr("Kaltmiete / Monat", "right"), hdr("Kaltmiete / Jahr", "right")]];
-  B.einheiten.forEach((e) => rows.push([cell(e.nr), cell(e.geschoss), R(e.m2.toFixed(1).replace(".", ",") + " m²"), R(eur2(e.miete_m2)), R(eur(e.miete)), R(eur(e.jahr))]));
+  const rows = [[hdr("Wohnungen"), hdr("Geschoss"), hdr("Fläche", "right"), hdr("Miete je m²", "right"), hdr("Kaltmiete / Monat", "right"), hdr("Kaltmiete / Jahr", "right")]];
+  B.einheiten.forEach((e) => rows.push([cell(String(e.nr).replace(".", ",")), cell(e.geschoss), R(e.m2.toFixed(1).replace(".", ",") + " m²"), R(eur2(e.miete_m2)), R(eur(e.miete)), R(eur(e.jahr))]));
   rows.push([cell("Summe Wohnen", { bold: true }), cell(""), R(B.wf.toFixed(1).replace(".", ",") + " m²", { bold: true }), R(""), R(eur(B.miete_voll_monat), { bold: true }), R(eur(B.miete_voll_monat * 12), { bold: true })]);
-  rows.push([cell("Gastro (Pacht 10 €/m²)", { bold: true }), cell("EG"), R("510,0 m²", { bold: true }), R(eur2(10)), R(eur(B.pacht_monat), { bold: true }), R(eur(B.pacht_monat * 12), { bold: true })]);
+  rows.push([cell("Gastro (Pacht: 10 % vom Umsatz)", { bold: true }), cell("EG"), R("510,0 m²", { bold: true }), R(eur2(B.pacht_monat / 510)), R(eur(B.pacht_monat), { bold: true }), R(eur(B.pacht_monat * 12), { bold: true })]);
   B.anker.slice(0, 2).forEach((a) => rows.push([cell(a[0].split(":")[0] + " (Ankermieter)", { bold: true }), cell("1. OG"), R(fm1(a[1]) + " m²", { bold: true }), R(eur2(a[2])), R(eur(a[3]), { bold: true }), R(eur(a[4]), { bold: true })]));
   rows.push([cell("Rohertrag gesamt", { bold: true }), cell(""), cell(""), cell(""), R(eur(B.rohertrag_monat), { bold: true }), R(eur(B.rohertrag), { bold: true })]);
   s.addTable(rows, { x: MX, y: 1.45, w: W - 2 * MX, colW: [3.3, 1.5, 1.6, 1.8, 2.0, 1.93], rowH: 0.36, border: tblBorder, objectName: "Tabelle Mieten" });
@@ -394,7 +395,7 @@ if (KI.length) {
     [cell("Dachterrasse rundum (schmal)"), cell("77 m² × 450 €"), R(eur(B.k_terrasse)), R(pct(B.k_terrasse / B.k_gesamt))],
     [cell("Baunebenkosten (Architekt, Statik, Gebühren)"), cell("15 % vom Bau"), R(eur(B.k_bnk)), R(pct(B.k_bnk / B.k_gesamt))],
     [cell("Mehrkosten Effizienzhaus 40 und QNG"), cell("3 % auf Bau inkl. Nebenkosten"), R(eur(B.k_eh40)), R(pct(B.k_eh40 / B.k_gesamt))],
-    [cell("Ausbau Gastro (190 Plätze) und Büros"), cell("1.000 € je Platz, Büros 150 €/m²"), R(eur(B.k_ausbau)), R(pct(B.k_ausbau / B.k_gesamt))],
+    [cell("Ausbau Gastro, Büros und 4 zusätzliche Wohnungen"), cell("Gastro 190.000 €, Büros 150 €/m², je Wohnung über 8: 15.000 €"), R(eur(B.k_ausbau)), R(pct(B.k_ausbau / B.k_gesamt))],
     [cell("Finanzierungskosten (Bauzeit, Bereitstellung, Anlaufzeit)"), cell("27 Monate"), R(eur(B.k_fin)), R(pct(B.k_fin / B.k_gesamt))],
     [cell("Gesamtkosten", { bold: true }), cell(""), R(eur(B.k_gesamt), { bold: true }), R("100 %", { bold: true })]];
   s.addTable(rows, { x: MX, y: 1.5, w: 8.1, colW: [3.7, 2.2, 1.35, 0.85], rowH: 0.46, border: tblBorder, objectName: "Tabelle Kosten" });
@@ -407,7 +408,7 @@ if (KI.length) {
 
 // ===== 11e Finanzierungsplan =====
 {
-  const s = content("Finanzierungsplan", "Für die Bank", "Kein Eigenkapital. Die Hausbank finanziert den Rest und die Zinsen der Bau- und Anlaufzeit. Tilgungsfreie Anlaufzeit 12 Monate ist mit der Bank zu verhandeln.");
+  const s = content("Finanzierungsplan", "Für die Bank", "Basis ohne Eigenkapital. Die Hausbank finanziert den Rest und die Zinsen der Bau- und Anlaufzeit. Tilgungsfreie Anlaufzeit 12 Monate ist mit der Bank zu verhandeln.");
   const rows = [[hdr("Mittelherkunft"), hdr("Betrag", "right"), hdr("Anteil", "right"), hdr("Zins", "right")]];
   B.fin_tab.forEach((r) => rows.push([cell(r[0].replace(" Klimafreundlicher Neubau", "").replace(" (Restfinanzierung inkl. Zinsen der Bauzeit)", "")), R(r[1] ? eur(r[1]) : "–"), R(r[2] ? pct(r[2]) : "–"), R(r[3] ? (r[3] * 100).toFixed(2).replace(".", ",") + " %" : "")]));
   s.addTable(rows, { x: MX, y: 1.5, w: 7.6, colW: [4.0, 1.5, 1.0, 1.1], rowH: 0.5, border: tblBorder, objectName: "Tabelle Herkunft" });
@@ -453,24 +454,39 @@ if (KI.length) {
   text(s, `Nach 10 Jahren Zinsbindung beträgt die Restschuld ${eur(B.rest_10)}. Die Anschlussfinanzierung muss eingeplant werden.`, { x: MX, y: 6.25, w: W - 2 * MX, h: 0.5, fontSize: 13.5, bold: true, color: C.accent2 });
 }
 
+// ===== 11x Struktur =====
+{
+  const s = content("Struktur: Vermietungs-GbR und Betreiberfirma", "Für Bank und Gesellschafter", "Die Gastro wird getrennt geführt. Die GbR ist Eigentümerin und Vermieterin, die Betreiberfirma pachtet die Gastro. Rechtsform und Haftung mit Steuerberater und Anwalt klären.");
+  const bx = (x, y, w, h, title, lines, col) => {
+    s.addShape(pres.ShapeType.roundRect, { x, y, w, h, fill: { color: col }, line: { color: col, width: 0 }, rectRadius: 0.08, objectName: "Box " + title });
+    text(s, title, { x: x + 0.2, y: y + 0.15, w: w - 0.4, h: 0.5, fontSize: 18, bold: false, fontFace: "Georgia", color: "FFFFFF" });
+    text(s, lines.map((t, i) => ({ text: t, options: { bullet: true, breakLine: i < lines.length - 1 } })), { x: x + 0.2, y: y + 0.75, w: w - 0.4, h: h - 0.9, fontSize: 13, color: "FFFFFF", paraSpaceAfter: 4 });
+  };
+  bx(MX, 1.6, 5.6, 3.6, "Vermietungs-GbR (Gesellschafter)", ["Eigentümerin des Gebäudes, nimmt die Darlehen auf (KfW und Hausbank)", "Einnahmen: Mieten Wohnen (12 Wohnungen), Büros (2 Ankermieter), Pacht der Gastro", `Ergebnis nach Kapitaldienst: ${eurS(B.c_ergebnis)} pro Monat ohne Eigenkapital`, "Gesellschafter teilen Ergebnis, Steuer und Haftung"], C.accent2);
+  bx(W - MX - 5.6, 1.6, 5.6, 3.6, "Betreiberfirma Gastro (Bauherr)", ["Pachtet Restaurant und Bar (510 m²) von der GbR", `Pacht: 10 % vom Umsatz, mindestens 10 €/m², bei Plan ${eur(B.pacht_monat)} pro Monat`, `Betriebsergebnis nach Pacht: ${eurS(B.c_gastro)} pro Monat, ohne Lohn`, "Ergebnis gehört nicht der GbR"], C.accent1);
+  s.addShape(pres.ShapeType.line, { x: MX + 5.7, y: 3.4, w: W - 2 * MX - 11.4, h: 0, line: { color: C.accent3, width: 3, endArrowType: "triangle" }, objectName: "Pfeil Pacht" });
+  text(s, "Pacht", { x: MX + 5.7, y: 3.0, w: W - 2 * MX - 11.4, h: 0.35, fontSize: 13, bold: true, align: "center", color: C.accent3 });
+  text(s, "Für die Bank ist die Pacht der Gastro Teil des Ertrags der GbR. Die Kapitaldienstdeckung wird deshalb ohne den Gastro-Gewinn des Bauherrn gerechnet.", { x: MX, y: 5.55, w: W - 2 * MX, h: 0.8, fontSize: 14, bold: true, color: C.accent2 });
+}
+
 // ===== 12 Cashflow =====
 {
-  const s = content("Ertrag und Kapitaldienst pro Monat", "Für die Bank", `Gastro-Betrieb bei ${eur(UM)} Umsatz und 30,5 % Marge vor Pacht, ohne Lohn des Bauherrn. Rücklagen 10 % von Miete und Pacht.`);
+  const s = content("Ertrag und Kapitaldienst der GbR pro Monat", "Für die Bank", "Pacht = Maximum aus 10 €/m² und 10 % vom Umsatz (Plan: 95.635 € Umsatz). Rücklagen 10 % von Miete, Büro und Pacht. Das Gastro-Betriebsergebnis gehört der Betreiberfirma.");
   const rows = [[hdr("Position", "left"), hdr("pro Monat", "right"), hdr("pro Jahr", "right")],
-    [cell("Kaltmiete Wohnen (8 Wohnungen)"), R(eurS(B.c_miete)), R(eurS(B.c_miete * 12))],
+    [cell("Kaltmiete Wohnen (12 Wohnungen)"), R(eurS(B.c_miete)), R(eurS(B.c_miete * 12))],
     [cell("Büromieten (2 Ankermieter, 10 Jahre fest)"), R(eurS(B.c_buero)), R(eurS(B.c_buero * 12))],
-    [cell("Pacht Gastro (510 m² × 10 €)"), R(eurS(B.c_pacht)), R(eurS(B.c_pacht * 12))],
+    [cell("Pacht Gastro (10 % vom Umsatz)"), R(eurS(B.c_pacht)), R(eurS(B.c_pacht * 12))],
     [cell("Rücklagen (10 % von Miete, Büro, Pacht)"), R(eurS(B.c_rueck)), R(eurS(B.c_rueck * 12))],
     [cell("Nettoertrag Immobilie", { bold: true }), R(eurS(B.c_netto_immo), { bold: true }), R(eurS(B.c_netto_immo * 12), { bold: true })],
-    [cell("Betriebsergebnis Gastro nach Pacht"), R(eurS(B.c_gastro)), R(eurS(B.c_gastro * 12))],
-    [cell("Nettoertrag vor Kapitaldienst", { bold: true }), R(eurS(B.c_netto), { bold: true }), R(eurS(B.c_netto * 12), { bold: true })],
     [cell("Kapitaldienst (Zinsen und Tilgung)"), R(eurS(B.c_kd)), R(eurS(B.c_kd * 12))],
-    [cell("Ergebnis nach Kapitaldienst", { bold: true }), cfCell(B.c_ergebnis), cfCell(B.c_ergebnis * 12)]];
+    [cell("Ergebnis der GbR nach Kapitaldienst", { bold: true }), cfCell(B.c_ergebnis), cfCell(B.c_ergebnis * 12)],
+    [cell("Betriebsergebnis Gastro (Betreiberfirma)"), R(eurS(B.c_gastro)), R(eurS(B.c_gastro * 12))],
+    [cell("Gesamt Bauherr (zur Information)", { bold: true }), cfCell(B.c_gesamt), cfCell(B.c_gesamt * 12)]];
   s.addTable(rows, { x: MX, y: 1.45, w: 7.6, colW: [4.2, 1.7, 1.7], rowH: 0.43, border: tblBorder, objectName: "Tabelle Cashflow" });
   card(s, 8.6, 1.5, W - 8.6 - MX, 4.5, "Kennzahlen");
   text(s, [
     { text: "Kapitaldienstdeckung (DSCR)", options: { bold: true, color: C.accent1, breakLine: true } },
-    { text: `Gesamt ${B.dscr.toFixed(2).replace(".", ",")}, nur Immobilie ${B.dscr_immo.toFixed(2).replace(".", ",")}, nur Wohnen und Büro ${B.dscr_lang.toFixed(2).replace(".", ",")}. Banken verlangen meist mindestens 1,2.`, options: { breakLine: true } },
+    { text: `GbR ${B.dscr.toFixed(2).replace(".", ",")}, nur Wohnen und Büro ${B.dscr_lang.toFixed(2).replace(".", ",")}, mit Gastro-Gewinn des Bauherrn ${B.dscr_gesamt.toFixed(2).replace(".", ",")}. Banken verlangen meist mindestens 1,2.`, options: { breakLine: true } },
     { text: " ", options: { breakLine: true } },
     { text: "Zinsdeckung", options: { bold: true, color: C.accent1, breakLine: true } },
     { text: B.zinsdeckung.toFixed(2).replace(".", ",") + ".", options: { breakLine: true } },
@@ -478,7 +494,7 @@ if (KI.length) {
     { text: "Anfangsrendite", options: { bold: true, color: C.accent1, breakLine: true } },
     { text: pct2(B.anfangsrendite) + " auf die Gesamtkosten (Nettoertrag Immobilie).", options: {} },
   ], { x: 8.85, y: 1.7, w: W - 8.6 - MX - 0.5, h: 4.2, fontSize: 13 });
-  text(s, "Ohne den Gastro-Gewinn deckt die Immobilie allein die Raten nicht. Der Pachtvertrag mit einem tragfähigen Betreiber ist für die Bank entscheidend.", { x: MX, y: 6.3, w: W - 2 * MX, h: 0.5, fontSize: 13.5, bold: true, color: C.accent2 });
+  text(s, `Die GbR deckt die Raten ohne Eigenkapital zu ${pct(B.dscr)}. Ab ca. ${eur(Math.round(B.breakeven_haus / 100) * 100)} Gastro-Umsatz (Umsatzpacht) wäre sie bei 100 %.`, { x: MX, y: 6.3, w: W - 2 * MX, h: 0.5, fontSize: 13.5, bold: true, color: C.accent2 });
 }
 
 // ===== 14a Gastro Tagesteile =====
@@ -500,17 +516,17 @@ if (KI.length) {
 
 // ===== 14 Gastro Umsatz =====
 {
-  const s = content("Wie viel Umsatz braucht die Gastro?", "Für die Bank", "Gastro-Marge vor Pacht 30,5 % vom Umsatz (Branchen-Richtwert, nicht aus Werlte). Bei sehr niedrigem Umsatz drücken Fixkosten stärker, die Rechnung ist dort zu günstig.");
-  const rows = [[hdr("Umsatz pro Monat"), hdr("Gewinn vor Pacht", "right"), hdr("Gewinn nach Pacht", "right")]];
+  const s = content("Wie viel Umsatz braucht die Gastro?", "Für die Bank", "Betreiberfirma: Marge vor Pacht 30,5 % vom Umsatz (Branchen-Richtwert, nicht aus Werlte). Pacht = Maximum aus 10 €/m² und 10 % vom Umsatz. Bei sehr niedrigem Umsatz drücken Fixkosten stärker.");
+  const rows = [[hdr("Umsatz pro Monat"), hdr("Gewinn vor Pacht", "right"), hdr("Gewinn nach Pacht (Betreiber)", "right")]];
   B.gastro_umsatz.forEach((r) => rows.push([cell(eur(r[0]), { bold: Math.abs(r[0] - UM) < 1 }), R(eur(r[1])), cfCell(r[2])]));
   s.addTable(rows, { x: MX, y: 1.5, w: 7.6, colW: [2.8, 2.4, 2.4], rowH: 0.55, border: tblBorder, objectName: "Tabelle Gastro Umsatz" });
   card(s, 8.6, 1.5, W - 8.6 - MX, 3.6, "Break-even");
   text(s, [
     { text: "Betrieb allein", options: { bold: true, color: C.accent1, breakLine: true } },
-    { text: `Ab ca. ${eur(Math.round(B.g_breakeven / 100) * 100)} Umsatz deckt der Betrieb seine Pacht.`, options: { breakLine: true } },
+    { text: `Ab ca. ${eur(Math.round(B.g_breakeven / 100) * 100)} Umsatz deckt die Betreiberfirma die Mindestpacht.`, options: { breakLine: true } },
     { text: " ", options: { breakLine: true } },
-    { text: "Haus insgesamt", options: { bold: true, color: C.accent1, breakLine: true } },
-    { text: `Ab ca. ${eur(Math.round(B.breakeven_haus / 100) * 100)} Umsatz sind alle Raten bezahlt.`, options: {} },
+    { text: "Vermietungs-GbR", options: { bold: true, color: C.accent1, breakLine: true } },
+    { text: `Ab ca. ${eur(Math.round(B.breakeven_haus / 100) * 100)} Umsatz (Umsatzpacht) deckt die GbR alle Raten.`, options: {} },
   ], { x: 8.85, y: 1.7, w: W - 8.6 - MX - 0.5, h: 3.3, fontSize: 13.5 });
   text(s, `Der Umsatz von ${eur(UM)} entspricht ca. ${eur(Math.round(B.g_umsatz_platz / 100) * 100)} je Sitzplatz und Jahr (190 Plätze), der Branchen-Median in Österreich liegt bei ca. 12.000 €.`, { x: MX, y: 5.4, w: 7.6, h: 0.5, fontSize: 13.5, color: C.accent4 });
 }
@@ -544,14 +560,14 @@ if (KI.length) {
 
 // ===== 14c Prognose und Belastungstest =====
 {
-  const s = content("Prognose und Belastungstest", "Für die Bank", "Prognose: Miete, Pacht und Umsatz +1,5 % pro Jahr, Kapitaldienst konstant. Belastungstest vereinfacht, Hausbank rechnet mit eigenen Annahmen.");
+  const s = content("Prognose und Belastungstest", "Für die Bank", "Prognose: Miete, Pacht und Umsatz +1,5 % pro Jahr, Büros +2 %, Kapitaldienst konstant. Belastungstest vereinfacht, Hausbank rechnet mit eigenen Annahmen.");
   const P = B.prognose;
   const yrs = [1, 3, 5, 7, 10];
   const rows = [[hdr("Jahr"), ...yrs.map((y) => hdr(String(y), "right"))],
-    [cell("Nettoertrag vor Kapitaldienst"), ...yrs.map((y) => R(eur(P["Nettoertrag vor Kapitaldienst"][y - 1])))],
+    [cell("Nettoertrag Immobilie (GbR)"), ...yrs.map((y) => R(eur(P["Nettoertrag Immobilie (GbR)"][y - 1])))],
     [cell("Kapitaldienst"), ...yrs.map((y) => R(eur(P["Kapitaldienst"][y - 1])))],
-    [cell("Ergebnis nach Kapitaldienst", { bold: true }), ...yrs.map((y) => cfCell(P["Ergebnis nach Kapitaldienst"][y - 1] / 12, { text: eurS(P["Ergebnis nach Kapitaldienst"][y - 1]) }))],
-    [cell("DSCR"), ...yrs.map((y) => R(P["Kapitaldienstdeckung (DSCR)"][y - 1].toFixed(2).replace(".", ",")))],
+    [cell("Ergebnis der GbR nach Kapitaldienst", { bold: true }), ...yrs.map((y) => cfCell(P["Ergebnis der GbR nach Kapitaldienst"][y - 1] / 12, { text: eurS(P["Ergebnis der GbR nach Kapitaldienst"][y - 1]) }))],
+    [cell("DSCR"), ...yrs.map((y) => R(P["Kapitaldienstdeckung der GbR (DSCR)"][y - 1].toFixed(2).replace(".", ",")))],
     [cell("Restschuld Jahresende"), ...yrs.map((y) => R(eur(P["Restschuld Jahresende"][y - 1])))]];
   s.addTable(rows, { x: MX, y: 1.45, w: W - 2 * MX, colW: [3.7, 1.69, 1.69, 1.69, 1.69, 1.67], rowH: 0.37, border: tblBorder, objectName: "Tabelle Prognose" });
   const rows2 = [[hdr("Belastungstest (pro Monat)"), hdr("Ergebnis", "right"), hdr("DSCR", "right"), hdr("zum Plan", "right")]];
@@ -559,26 +575,48 @@ if (KI.length) {
   s.addTable(rows2, { x: MX, y: 3.85, w: W - 2 * MX, colW: [6.6, 1.9, 1.5, 2.13], rowH: 0.27, fontSize: 11, border: tblBorder, objectName: "Tabelle Belastungstest" });
 }
 
-// ===== 14c Gastro-Einfluss pro Kopf =====
+// ===== 14c Förderung =====
 {
-  const s = content("Einfluss der Gastro auf das Ergebnis pro Person", "Für Gesellschafter und Bank", "Cash pro Person und Monat nach Zins und Tilgung, vor Steuern, bei gleichen Anteilen in einer GbR. Mieten, Büros und Pacht bleiben gleich, nur das Gastro-Betriebsergebnis ändert sich (Marge 30,5 %, ohne Lohn).");
-  const immo = B.c_netto_immo + B.c_kd; // Haus ohne Gastro-Gewinn, pro Monat
-  const gast = (u) => u * 0.305 - B.pacht_monat;
-  const sc = [
-    ["Gastro fällt ganz aus (ohne Pacht)", B.sens[8][1]],
-    ["Gastro-Umsatz 40.000 €", immo + gast(40000)],
-    ["Gastro-Umsatz 50.000 €", immo + gast(50000)],
-    ["Plan: " + eur(UM), immo + gast(UM)],
-    ["Gastro-Umsatz 80.000 €", immo + gast(80000)],
-    ["Gastro-Umsatz 95.000 €", immo + gast(95000)],
-  ];
-  const rows = [[hdr("Gastro-Szenario"), hdr("Haus gesamt", "right"), hdr("1 Person", "right"), hdr("2 Personen", "right"), hdr("4 Personen", "right"), hdr("8 Personen", "right")]];
-  sc.forEach((r, i) => rows.push([cell(r[0], { bold: i === 3 }), cfCell(r[1], { text: eurS(r[1]) }), ...[1, 2, 4, 8].map((k) => cfCell(r[1] / k, { text: eurS(r[1] / k) }))]));
-  s.addTable(rows, { x: MX, y: 1.6, w: W - 2 * MX, colW: [4.0, 1.7, 1.55, 1.7, 1.7, 1.48], rowH: 0.5, border: tblBorder, objectName: "Tabelle Gastro Einfluss" });
-  card(s, MX, 5.4, W - 2 * MX, 1.0, "Einordnung");
-  text(s, [
-    { text: "Aussage: ", options: { bold: true, color: C.accent1 } },
-    { text: `Ohne Gastro-Gewinn fehlen ${eur(-immo)} pro Monat, im Plan bleiben ${eur(immo + gast(UM))}. Die Gastro macht also den ganzen Unterschied, das Haus trägt sich erst ab ca. ${eur(Math.round(B.breakeven_haus / 100) * 100)} Gastro-Umsatz.` }], { x: MX + 0.3, y: 5.5, w: W - 2 * MX - 0.6, h: 0.8, fontSize: 13.5, valign: "middle" });
+  const s = content("Förderungen: KfW-Kredite und steuerliche Abschreibung", "Für Bank und Gesellschafter", "KfW-Zinsen und Rahmen Stand Ratgeber Oktober 2026 (Annahme). Steuerliche Förderung und NBank-Programm sind nicht in der Basisrechnung, Fristen und Voraussetzungen prüfen Steuerberater und NBank.");
+  const rows = [[hdr("Förderung"), hdr("Inhalt"), hdr("Wirkung im Projekt", "right")],
+    [cell("KfW 298 (vermietete Wohnungen)", { bold: true }), cell("bis 150.000 € je Wohnung, Zins 2,5 % statt 4 %"), R(eur(B.kredit_298) + ", spart " + eur(B.kredit_298 * 0.015) + " im Jahr")],
+    [cell("KfW 299 (Gastro und Büros)", { bold: true }), cell("bis 2.000 € je m² Nettogrundfläche, Zins 3,0 %"), R(eur(B.kredit_299) + ", spart " + eur(B.kredit_299 * 0.01) + " im Jahr")],
+    [cell("Zinsvorteil KfW gesamt", { bold: true }), cell("gegenüber reiner Hausbank-Finanzierung zu 4,0 %"), R(eur(B.foerder_zins_jahr) + " pro Jahr", { bold: true })],
+    [cell("Degressive AfA (Option)", { bold: true }), cell("5 % vom Restwert im Wohnteil statt 3 % linear, § 7 Abs. 5a EStG"), R("Abschreibung " + eur(B.gs_afa_opt) + " statt " + eur(B.gs_afa))],
+    [cell("Sonder-AfA § 7b (Option)", { bold: true }), cell("zusätzlich 5 % in 4 Jahren, Baukostengrenze 5.200 €/m², 10 Jahre Vermietung"), R("im Wohnteil, in der Zahl oben enthalten")],
+    [cell("NBank Mietwohnraumförderung (Option)", { bold: true }), cell("zinsloses Darlehen, Zuschuss 2–3 € je m² und Monat, dafür Mietbindung und Mietobergrenze ca. 6,50–6,80 €/m²"), R("nicht gerechnet")]];
+  s.addTable(rows, { x: MX, y: 1.45, w: W - 2 * MX, colW: [3.4, 5.5, 3.23], rowH: 0.6, border: tblBorder, objectName: "Tabelle Förderungen" });
+  text(s, `Die KfW-Kredite stecken in der Basisrechnung: ${eur(B.kredit_297 + B.kredit_298 + B.kredit_299)} (${pct(B.kredit_kfw_anteil)} der Finanzierung) bringen den Mischzins auf ${(B.mischzins * 100).toFixed(2).replace(".", ",")} %. Die NBank-Förderung passt nur, wenn die Wohnungen mietgebunden vermietet werden, das senkt die Miete deutlich unter die angesetzten 11,18 €/m².`, { x: MX, y: 5.85, w: W - 2 * MX, h: 0.8, fontSize: 13.5, bold: true, color: C.accent2 });
+}
+
+// ===== 14c2 Ergebnis pro Gesellschafter =====
+{
+  const s = content("Ergebnis pro Gesellschafter der GbR", "Für Gesellschafter und Bank", "Gleiche Anteile, Basis ohne Eigenkapital. Steuerwirkung bei 35 % Grenzsteuersatz (Annahme), Verluste der GbR werden mit anderen Einkünften verrechnet (Gewinnerzielungsabsicht prüfen). Förderoption: degressive AfA und Sonder-AfA im Wohnteil.");
+  const G = B.gs_kopf; // [Label, 1, 2, 4, 8]
+  const rows = [[hdr("Pro Person"), hdr("1 Person", "right"), hdr("2 Personen", "right"), hdr("4 Personen", "right"), hdr("8 Personen", "right")]];
+  const add = (i, label, bold) => rows.push([cell(label, { bold }), ...[1, 2, 3, 4].map((c) => cfCell(G[i][c], { bold }))]);
+  add(2, "Cash pro Monat vor Steuern");
+  add(1, "Cash pro Jahr vor Steuern");
+  rows.push([cell("Steuerliches Ergebnis pro Jahr (Verlust negativ)"), ...[1, 2, 3, 4].map((c) => R(eurS(G[3][c])))]);
+  add(4, "Steuerwirkung pro Jahr");
+  add(6, "Cash pro Monat nach Steuer", true);
+  add(9, "Mit Förderoption: Cash pro Monat nach Steuer", true);
+  rows.push([cell("Tilgung pro Jahr (Vermögensaufbau)"), ...[1, 2, 3, 4].map((c) => R(eur(G[10][c])))]);
+  s.addTable(rows, { x: MX, y: 1.45, w: W - 2 * MX, colW: [4.53, 1.9, 1.9, 1.9, 1.9], rowH: 0.5, border: tblBorder, objectName: "Tabelle Gesellschafter" });
+  text(s, `Ohne Eigenkapital liegt der Cash knapp unter null, die Steuerwirkung des Verlusts (Zinsen und Abschreibung) macht das Ergebnis nach Steuer positiv. Die Tilgung von ${eur(G[10][1])} im Jahr baut zusätzlich Vermögen auf. Die GbR haftet persönlich und gesamtschuldnerisch.`, { x: MX, y: 5.5, w: W - 2 * MX, h: 0.9, fontSize: 13.5, bold: true, color: C.accent2 });
+}
+
+// ===== 14c3 Szenarien 12 gegen 8 Wohnungen =====
+{
+  const s = content("Szenarien: 12 gegen 8 Wohnungen", "Für Gesellschafter und Bank", "Restaurant und Bar, Gastro getrennt, Pacht 10 % vom Umsatz, KfW 297/298/299 berücksichtigt. Eigenkapital so bemessen, dass die GbR die Raten mit Faktor 1,2 deckt. Werte aus einem unabhängigen Nachbau des Modells, Basis stimmt auf den Cent mit Excel überein.");
+  const Z = B.szenarien; // 12 ohne, 8 ohne, 12 mit, 8 mit
+  const col = (z) => [eur(z.gesamt), eur(z.kfw), eur(z.bank), eur(z.ek), eur(z.rate), eurS(z.ergebnis_m), z.dscr.toFixed(2).replace(".", ","), eurS(z.kopf["8"].cash_steuer_m), eur(z.kopf["8"].ek), eurS(z.betreiber_m)];
+  const labels = ["Gesamtkosten", "KfW-Kredite", "Hausbank", "Eigenkapital", "Kapitaldienst pro Monat", "Ergebnis der GbR pro Monat", "Kapitaldienstdeckung", "Pro Person nach Steuer, 8 Pers. pro Monat", "Eigenkapital pro Person bei 8", "Betriebsergebnis Gastro (Betreiber)"];
+  const cols = Z.map(col);
+  const rows = [[hdr("Kennzahl"), hdr("12 WE ohne EK", "right"), hdr("8 WE ohne EK", "right"), hdr("12 WE mit EK", "right"), hdr("8 WE mit EK", "right")]];
+  labels.forEach((l, i) => rows.push([cell(l, { bold: i === 5 }), ...cols.map((c) => R(c[i], { bold: i === 5 }))]));
+  s.addTable(rows, { x: MX, y: 1.45, w: W - 2 * MX, colW: [4.13, 2.0, 2.0, 2.0, 2.0], rowH: 0.42, border: tblBorder, fontSize: 12, objectName: "Tabelle Szenarien" });
+  text(s, `Mit 12 Wohnungen brauchen die Gesellschafter ${eur(Z[2].ek)} Eigenkapital für Deckung 1,2, mit 8 Wohnungen ${eur(Z[3].ek)}. Der Grund ist der höhere KfW-Rahmen (150.000 € je Wohnung zu 2,5 %), er wiegt die Mehrkosten von 15.000 € je zusätzlicher Wohnung auf.`, { x: MX, y: 6.3, w: W - 2 * MX, h: 0.8, fontSize: 12.5, bold: true, color: C.accent2 });
 }
 
 // ===== 14d Airbnb =====
@@ -603,9 +641,9 @@ if (KI.length) {
 {
   const s = content("Risiken und was wir dagegen tun", "Für die Bank", "Die Miete von 11,18 €/m² ist eine Annahme des Bauherrn, Marktdaten für Werlte liegen darunter.");
   const items = [
-    ["Sicherheiten und Beleihung", `Beleihungsauslauf ${pct(B.auslauf)} bei 100 % Fremdfinanzierung. Gegenmaßnahme: Grundschulden auf weitere Immobilien, Bürgschaft oder Eigenkapital, Pachtvertrag mit Bonitätsnachweis.`],
-    ["Gastro-Umsatz", `Haus insgesamt ab ca. ${eur(Math.round(B.breakeven_haus / 1000) * 1000)} Umsatz im Plus, bei Ausfall der Gastro fehlen ca. ${eur(-B.sens[8][3])} pro Monat, bei Auszug des großen Büro-Ankermieters ca. ${eur(-B.sens[6][3])}. Gegenmaßnahme: Konzept, erfahrener Betreiber, Pachtstaffel, Mietverträge über 10 Jahre mit Bonitätsprüfung.`],
-    ["Zins", "KfW-Zinsen und Rahmen sind Stand Okt. 2026 unsicher, nach 10 Jahren ist der Folgezins offen. Gegenmaßnahme: Zusage vor Baubeginn, Forward-Darlehen, Tilgungsaussetzung."],
+    ["Sicherheiten und Beleihung", `Beleihungsauslauf ${pct(B.auslauf)} und Deckung ${B.dscr.toFixed(2).replace(".", ",")} bei 100 % Fremdfinanzierung. Gegenmaßnahme: Eigenkapital der Gesellschafter (siehe Szenarien), Grundschulden auf weitere Immobilien, Bürgschaft, Pachtvertrag mit Bonitätsnachweis.`],
+    ["Gastro-Umsatz und Pacht", `Die GbR deckt die Raten erst ab ca. ${eur(Math.round(B.breakeven_haus / 1000) * 1000)} Gastro-Umsatz (Umsatzpacht), bei Ausfall der Gastro fehlen ca. ${eur(-B.sens[8][3])} pro Monat zusätzlich, bei Auszug des großen Büro-Ankermieters ca. ${eur(-B.sens[6][3])}. Gegenmaßnahme: Mindestpacht, Bürgschaft des Betreibers, erfahrener Betreiber, Mietverträge über 10 Jahre.`],
+    ["Zins und Förderung", "KfW-Zinsen und Rahmen sind Stand Okt. 2026 unsicher, steuerliche Förderungen hängen an Fristen, nach 10 Jahren ist der Folgezins offen. Gegenmaßnahme: Zusage vor Baubeginn, Forward-Darlehen, Tilgungsaussetzung."],
     ["Genehmigung und Standard", "576 m² Grundfläche, Staffelgeschoss und Flachdach müssen bestätigt werden, KfW verlangt Effizienzhaus 40 mit QNG. Gegenmaßnahme: Vorabstimmung, Energieeffizienz-Experte früh einbinden."],
   ];
   const cw = (W - 2 * MX - 0.4) / 2;
@@ -625,7 +663,7 @@ if (KI.length) {
     ["Von der Stadt: Genehmigung", "576 m² Grundfläche, Staffelgeschoss, Flachdach und Höhe schriftlich bestätigen"],
     ["Von der Stadt: Stellplätze", "Mitnutzung der öffentlichen Parkfläche oder faire Ablöse"],
     ["Von der Stadt: Grundstück", "Kaufpreis 230 €/m² mit Baureife, Reservierung bis zur Finanzierungszusage"],
-    ["Von der Bank: Darlehen", `Finanzierung von ${mio(B.kredit)} mit KfW 297/298/299 und tilgungsfreier Anlaufzeit von 12 Monaten`],
+    ["Von der Bank: Darlehen", `Finanzierung von ${mio(B.kredit)} mit KfW 297/298/299, tilgungsfreier Anlaufzeit von 12 Monaten und Eigenkapital oder Sicherheiten der GbR`],
     ["Von der Bank: Sicherheiten", "Gespräch über zusätzliche Grundschulden oder Bürgschaft wegen des Beleihungsauslaufs"],
     ["Von der Bank: KfW-Antrag", "Antrag für 297/298 und 299 vor Baubeginn über die Hausbank"],
   ];
@@ -673,10 +711,11 @@ if (KI.length) {
     "100 % Fremdfinanzierung, 1 % Anfangstilgung, tilgungsfreie Anlaufzeit 12 Monate",
     "Bauzeit 15 Monate, Bereitstellungszins 3 % p. a. ab Monat 7",
     "Zins KfW 297/298 2,5 %, KfW 299 3,0 %, Hausbank 4,0 % (Annahmen)",
+    "Mehrkosten je Wohnung über 8: 15.000 €, Steuersatz der Gesellschafter 35 % (Annahme)",
   ];
   const right = [
     `Gastro-Umsatz ${k(UM)} netto, Marge vor Pacht 30,5 %`,
-    "8 Wohnungen (655 m²) zu 11,18 €/m² Kaltmiete, 2 Büros (165 m²) zu 9,50 und 10,00 €/m² (10 Jahre fest), Gastro-Pacht 10 €/m² auf 510 m²",
+    "12 Wohnungen (655 m²) zu 11,18 €/m² Kaltmiete, 2 Büros (165 m²) zu 9,50 und 10,00 €/m² (10 Jahre fest), Gastro-Pacht 10 % vom Umsatz, mindestens 10 €/m²",
     "Lohn des Bauherrn wird vorerst nicht gerechnet, Rücklagen 10 % der Miete und Pacht",
     "KfW-Kredite statt Zuschuss, Antrag vor Baubeginn; Mehrkosten Effizienzhaus 40 und QNG 3 %",
     "Nebenkosten (Grundsteuer, Versicherung, Betriebskosten) werden auf die Mieter umgelegt, die Hausverwaltung deckt die Rücklage",
@@ -691,7 +730,7 @@ if (KI.length) {
   const base = [
     ["Wareneinsatz (Einkauf Essen und Getränke)", "ca. 28 %", pctOf(0.28)],
     ["Personal (ohne Chef-Lohn)", "ca. 30 %", pctOf(0.3)],
-    [`Pacht ans Haus (${v.gastroM2} m² × 10 €)`, "", v.pacht],
+    ["Pacht an die GbR (10 % vom Umsatz)", "ca. 10 %", Math.round(B.pacht_monat)],
     ["Energie, Wasser, Müll", "ca. 3 %", pctOf(0.03)],
     ["Reinigung, Wäsche, Verbrauchsmaterial", "ca. 2 %", pctOf(0.02)],
     ["Werbung und Marketing", "ca. 1,5 %", pctOf(0.015)],
@@ -703,7 +742,7 @@ if (KI.length) {
   const sum = base.reduce((a, r) => a + r[2], 0);
   const rows = [[hdr("Posten"), hdr("Richtwert", "right"), hdr("Betrag", "right")], ...base.map((r) => [cell(r[0]), R(r[1]), R(eur(r[2]))]),
     [cell("Summe Kosten", { bold: true }), cell(""), R(eur(sum), { bold: true })],
-    [cell("Gewinn nach Pacht, vor Lohn", { bold: true }), cell(""), R(eur(UM - sum), { bold: true })]];
+    [cell("Gewinn nach Pacht, vor Lohn (Betreiberfirma)", { bold: true }), cell(""), R(eur(UM - sum), { bold: true })]];
   s.addTable(rows, { x: MX, y: 1.4, w: W - 2 * MX, colW: [7.0, 2.5, 2.63], rowH: 0.405, border: tblBorder, objectName: "Tabelle Gastro-Kosten" });
 }
 {
@@ -749,7 +788,7 @@ if (KI.length) {
 }
 
 (async () => {
-  const file = path.join(OUT, "Neue-Mitte-Werlte_Baufeld3_8-Wohnungen_Grosse-Gastro-EG.pptx");
+  const file = path.join(OUT, "Neue-Mitte-Werlte_Baufeld3_12-Wohnungen_Restaurant-Bar.pptx");
   await pres.writeFile({ fileName: file });
   await applyTheme(file, THEME);
   console.log("geschrieben", file);

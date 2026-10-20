@@ -1,12 +1,12 @@
 # Neue Mitte Werlte, Baufeld 3: Businessplan für die Bank
 
-Große Gastro (510 m²) im ganzen Erdgeschoss, darüber im 1. OG zwei Ankermieter-Büros (100 m² und 65 m²) und 3 Wohnungen, im Staffelgeschoss 5 Wohnungen (8 Wohnungen, Holzbau), 576 m² Grundfläche (GRZ-Maximum), 1.650 m² BGF, 100 % Fremdfinanzierung mit KfW 297, 298, 299 und Hausbank (Gesamtkosten 4,85 Mio €, Mischzins 3,39 %, Rate 17.733 €/Monat).
+Restaurant und Bar (510 m², eigene Betreiberfirma, Pacht 10 % vom Umsatz) im ganzen Erdgeschoss, darüber 2 Ankermieter-Büros und 12 Wohnungen (5 im 1. OG, 7 im Staffelgeschoss in Holzbau), 576 m² Grundfläche (GRZ-Maximum), 1.650 m² BGF. Eigentümerin ist eine Vermietungs-GbR, Finanzierung Basis 100 % Fremdkapital mit KfW 297, 298, 299 und Hausbank. Vergleich mit 8 Wohnungen und mit Eigenkapital im Excel-Blatt Szenarien (`build_szenarien.py`, `rechenkern.py` = unabhängiger Nachbau zur Gegenprüfung).
 
 | Datei | Inhalt |
 |---|---|
 | `Businessplan_Baufeld3_Neue-Mitte-Werlte.docx` (+ `.pdf`) | Businessplan für die Bank (Word, ca. 9 Seiten) |
 | `Bankunterlagen_Baufeld3.xlsx` | Rechenmodell mit Formeln: Annahmen, Flächen und Mieten, Kosten und Finanzierung, Bauphase, Abzahlungsplan (monatlich und jährlich), Ertrag und Cashflow, Gastro-Betrieb, Ertragswert, Prognose, Belastungstest, Airbnb-Prüfung, Checkliste Bankunterlagen |
-| `Neue-Mitte-Werlte_Baufeld3_8-Wohnungen_Grosse-Gastro-EG.pptx` (+ `.pdf`) | Präsentation für Bank und Stadt |
+| `Neue-Mitte-Werlte_Baufeld3_12-Wohnungen_Restaurant-Bar.pptx` (+ `.pdf`) | Präsentation für Bank und Stadt |
 | `Neue-Mitte-Werlte_Baufeld3_Gastro-Konzept.pptx` (+ `.pdf`) | Gastro: Gestaltung, Grundriss, Speisekarte, Umsatz, Personal |
 | `bilder/` | KI-Visualisierungen (`ki_*.jpg`), Skizzen, Referenzbilder, `BILDPROMPTS.md` |
 

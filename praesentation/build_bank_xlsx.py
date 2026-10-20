@@ -124,10 +124,11 @@ ASSUME = [
     ("sec", "Flächen und Nutzung"),
     ("gastro_m2", "Gastrofläche im EG (m²)", 510, NUM, "EG abzüglich Treppenhaus, Aufzug, Eingänge (66 m²); Bedarf siehe Blatt Gewerbe und Anker"),
     ("ngf_anteil", "Nettogrundfläche Anteil der Gastrofläche", 0.85, PCT, "Annahme, für KfW 299"),
-    ("wf_og", "Wohnfläche 1. OG (m²)", 321, NUM, "3 Wohnungen à ca. 107 m² (OG: 576 m² BGF minus Büros, Treppenhaus, Wände)"),
-    ("n_og", "Wohnungen im 1. OG", 3, NUM, "Bauherr: 8 Wohnungen insgesamt"),
-    ("wf_st", "Wohnfläche Staffelgeschoss (m²)", 334, NUM, "5 Wohnungen à ca. 67 m² (67 % der BGF)"),
-    ("n_st", "Wohnungen im Staffelgeschoss", 5, NUM, "Bauherr: 8 Wohnungen insgesamt"),
+    ("wf_og", "Wohnfläche 1. OG (m²)", 321, NUM, "5 Wohnungen à ca. 64 m² (OG: 576 m² BGF minus Büros, Treppenhaus, Wände)"),
+    ("n_og", "Wohnungen im 1. OG", 5, NUM, "Basis: 12 Wohnungen insgesamt (Vergleich mit 8 im Blatt Szenarien)"),
+    ("wf_st", "Wohnfläche Staffelgeschoss (m²)", 334, NUM, "7 Wohnungen à ca. 48 m² (67 % der BGF)"),
+    ("n_st", "Wohnungen im Staffelgeschoss", 7, NUM, "Basis: 12 Wohnungen insgesamt")
+    ,("we_mehr", "Mehrkosten je Wohneinheit über 8 hinaus (€)", 15000, EUR, "Annahme: zusätzliche Bäder, Küchen, Trennwände und Installationen bei kleineren Wohnungen"),
     ("eigen", "davon vom Bauherrn selbst genutzt (Anzahl)", 0, NUM, "0 = alle vermietet. Selbstnutzung: KfW 297 statt 298, Miete entfällt"),
     ("sec", "Ankermieter Büro (1. OG, mit Aufzug)"),
     ("b1_m2", "Büro 1, Versicherungsgesellschaft o. ä. (m²)", 100, NUM, "Bauherr: größeres Büro, langfristiger Ankermieter"),
@@ -148,12 +149,14 @@ ASSUME = [
     ("fl_eingang", "Eingang, Garderobe, Flure, Technik (m²)", 37, NUM, "Rest bis zur Gastrofläche"),
     ("sec", "Einnahmen und Gastro"),
     ("miete_m2", "Kaltmiete Wohnen (€/m² Wohnfläche)", "=950/85", EUR2, "Bauherr: 950 € für 85 m²; Portale Neubau Werlte ca. 10,7–11,0 €/m²"),
-    ("pacht_m2", "Pacht Gastro (€/m²)", 10, EUR, "Annahme: ca. 8 % vom Umsatz (üblich 6–12 %), große Fläche günstiger je m²"),
+    ("pacht_m2", "Mindestpacht Gastro (€/m²)", 10, EUR, "Annahme: Untergrenze, auch bei schwachem Umsatz")
+    ,("pacht_quote", "Umsatzpacht Gastro (Anteil vom Umsatz)", 0.10, PCT, "Annahme: obere Grenze des üblichen Bereichs 6–12 %. Pacht = Maximum aus Mindestpacht und Umsatzpacht"),
     ("ruecklage", "Rücklagen (Anteil an Miete und Pacht)", 0.10, PCT, "Hausverwaltung, Instandhaltung, Leerstand; Nebenkosten werden umgelegt"),
     ("umsatz", "Gastro-Umsatz pro Monat (€)", "='Gastro Tagesteile'!F14", EUR, "netto; Summe aus Frühstück, Mittag, Abend, Bar und Events (Blatt Gastro Tagesteile), Annahmen"),
     ("marge", "Gastro-Marge vor Pacht", 0.305, PCT, "Branchen-Richtwert"),
     ("lohn", "Lohn des Bauherrn pro Monat (€)", 0, EUR, "Bauherr: wird vorerst nicht gerechnet"),
-    ("sec", "Finanzierung (100 % Fremdkapital, kein Eigenkapital)"),
+    ("sec", "Finanzierung (Basis 100 % Fremdkapital, KfW 297/298/299 und Hausbank)"),
+    ("ek", "Eigenkapital der Gesellschafter (€)", 0, EUR, "Basis 0 (100 % Fremdfinanzierung). Ersetzt zuerst das Hausbank-Darlehen, höchstens bis zu dessen Höhe"),
     ("kfw_we", "KfW 297/298: Kreditrahmen je Wohneinheit (€)", 150000, EUR, "mit QNG-Zertifikat, ohne QNG 100.000 € (Stand Ratgeber Okt. 2026)"),
     ("kfw_m2", "KfW 299: Kreditrahmen je m² Nettogrundfläche (€)", 2000, EUR, "mit QNG-PLUS/PREMIUM, ohne QNG 1.500 € (Stand Ratgeber Okt. 2026)"),
     ("z_kfw_wohn", "Zins KfW 297 und 298 (effektiv, 10 Jahre fest)", 0.025, PCT2, "Annahme: Ratgeber nennen 0,6 % bis 3,05 %. Bei Hausbank/KfW bestätigen"),
@@ -182,6 +185,11 @@ ASSUME = [
     ("g_miete", "Mietsteigerung pro Jahr", 0.015, PCT, "Annahme"),
     ("g_umsatz", "Umsatzsteigerung Gastro pro Jahr", 0.015, PCT, "Annahme"),
     ("g_index", "Indexierung Büromieten pro Jahr", 0.02, PCT, "Annahme: Indexmiete, zieht Inflation nach"),
+    ("sec", "Steuer und Förderung (Gesellschafter der GbR)"),
+    ("steuersatz", "Persönlicher Grenzsteuersatz der Gesellschafter", 0.35, PCT, "Annahme, individuell verschieden"),
+    ("afa_lin", "Gebäudeabschreibung linear", 0.03, PCT, "§ 7 Abs. 4 EStG, Neubau"),
+    ("afa_deg", "Degressive AfA Wohnteil (steuerliche Förderung, zu prüfen)", 0.05, PCT, "§ 7 Abs. 5a EStG: 5 % vom Restwert. Frist und Voraussetzungen vom Steuerberater prüfen"),
+    ("afa_sonder", "Sonder-AfA Mietwohnungsneubau (steuerliche Förderung, zu prüfen)", 0.05, PCT, "§ 7b EStG: 4 Jahre, Baukostengrenze 5.200 €/m², 10 Jahre Vermietung. Frist prüfen"),
 ]
 put(sA, "A3", "Annahme", font=hdr_font, fill=hdr_fill)
 put(sA, "B3", "Wert", font=hdr_font, fill=hdr_fill)
@@ -203,7 +211,7 @@ put(sA, f"A{row + 1}", "Gelb hinterlegt: wichtigste Stellschrauben für die Bank
 # =====================================================================================
 # Flächen und Mieten
 # =====================================================================================
-sF = sheet("Flächen und Mieten", "Flächenprogramm und Mietaufstellung", "Grundfläche 32 × 18 m (GRZ-Maximum): Gastro im EG, 2 Ankermieter-Büros und 3 Wohnungen im 1. OG, 5 Wohnungen im Staffelgeschoss.", [46, 14, 14, 16, 16, 18, 18])
+sF = sheet("Flächen und Mieten", "Flächenprogramm und Mietaufstellung", "Grundfläche 32 × 18 m (GRZ-Maximum): Gastro im EG, 2 Ankermieter-Büros und 5 Wohnungen im 1. OG, 7 Wohnungen im Staffelgeschoss. Pacht = Maximum aus Mindestpacht und 10 % vom Umsatz.", [46, 14, 14, 16, 16, 18, 18])
 header(sF, 4, ["Geschoss", "BGF (m²)", "Nutzung", "Einheiten", "Fläche (m²)", "", ""])
 put(sF, "A5", "Erdgeschoss"); put(sF, "B5", f"={A['bgf_eg']}", NUM, link); put(sF, "C5", "Gastro"); put(sF, "D5", 1, NUM); put(sF, "E5", f"={A['gastro_m2']}", NUM, link)
 put(sF, "A6", "1. Obergeschoss"); put(sF, "B6", f"={A['bgf_og']}", NUM, link); put(sF, "C6", "Büro + Wohnen"); put(sF, "D6", f"=2+{A['n_og']}", NUM); put(sF, "E6", f"={A['wf_og']}+{A['b1_m2']}+{A['b2_m2']}", NUM)
@@ -211,20 +219,25 @@ put(sF, "A7", "Staffelgeschoss (Holzbau)"); put(sF, "B7", f"={A['bgf_st']}", NUM
 put(sF, "A8", "Summe", font=bold); put(sF, "B8", "=SUM(B5:B7)", NUM, bold); put(sF, "C8", ""); put(sF, "D8", "=D5+D6+D7", NUM, bold); put(sF, "E8", "=SUM(E5:E7)", NUM, bold)
 put(sF, "A9", "davon Wohneinheiten / Wohnfläche"); put(sF, "D9", f"={A['n_og']}+{A['n_st']}", NUM); put(sF, "E9", f"={A['wf_og']}+{A['wf_st']}", NUM)
 reg("bgf", sF, "B8"); reg("n_we", sF, "D9"); reg("wf", sF, "E9")
-header(sF, 11, ["Einheit", "Geschoss", "Fläche (m²)", "Nutzung", "Kaltmiete / m²", "Kaltmiete / Monat", "Kaltmiete / Jahr"])
-for i in range(8):
+header(sF, 11, ["Wohnungen", "Geschoss", "Fläche (m²)", "Nutzung", "Kaltmiete / m²", "Kaltmiete / Monat", "Kaltmiete / Jahr"])
+for i in range(2):
     r = 12 + i
-    og = i < 3
-    put(sF, f"A{r}", f"WE {i + 1}")
+    og = i == 0
+    if og:
+        put(sF, f"A{r}", f'="WE 1–"&{A["n_og"]}&" im 1. OG ("&{A["n_og"]}&" × "&TEXT({A["wf_og"]}/{A["n_og"]},"0.0")&" m²)"')
+    else:
+        put(sF, f"A{r}", f'="WE "&({A["n_og"]}+1)&"–"&({A["n_og"]}+{A["n_st"]})&" im Staffelgeschoss ("&{A["n_st"]}&" × "&TEXT({A["wf_st"]}/{A["n_st"]},"0.0")&" m²)"')
     put(sF, f"B{r}", "1. OG" if og else "Staffel")
-    put(sF, f"C{r}", f"={A['wf_og']}/{A['n_og']}" if og else f"={A['wf_st']}/{A['n_st']}", "0.0")
-    put(sF, f"D{r}", f'=IF({i + 1}>{A["n_og"]}+{A["n_st"]}-{A["eigen"]},"Eigennutzung","vermietet")')
+    put(sF, f"C{r}", f"={A['wf_og']}" if og else f"={A['wf_st']}", "0.0")
+    put(sF, f"D{r}", "vermietet")
     put(sF, f"E{r}", f"={A['miete_m2']}", EUR2, link)
     put(sF, f"F{r}", f"=C{r}*E{r}", EUR)
     put(sF, f"G{r}", f"=F{r}*12", EUR)
+for r in range(14, 20):
+    sF.row_dimensions[r].hidden = True
 put(sF, "A20", "Summe Wohnen (alle Wohnungen, marktüblich)", font=bold); put(sF, "C20", "=SUM(C12:C19)", "0.0", bold); put(sF, "F20", "=SUM(F12:F19)", EUR, bold); put(sF, "G20", "=SUM(G12:G19)", EUR, bold)
-put(sF, "A21", "davon vermietet (Einnahmen)", font=bold); put(sF, "F21", '=SUMIF(D12:D19,"vermietet",F12:F19)', EUR, bold); put(sF, "G21", "=F21*12", EUR, bold)
-put(sF, "A22", "Gastro-Pacht (Gastro zahlt an das Haus)", font=bold); put(sF, "C22", f"={A['gastro_m2']}", "0.0"); put(sF, "E22", f"={A['pacht_m2']}", EUR2, link); put(sF, "F22", "=C22*E22", EUR, bold); put(sF, "G22", "=F22*12", EUR, bold)
+put(sF, "A21", "davon vermietet (Einnahmen)", font=bold); put(sF, "F21", f"=F20*({A['n_og']}+{A['n_st']}-{A['eigen']})/({A['n_og']}+{A['n_st']})", EUR, bold); put(sF, "G21", "=F21*12", EUR, bold)
+put(sF, "A22", "Gastro-Pacht (Betreiberfirma zahlt an die GbR)", font=bold); put(sF, "C22", f"={A['gastro_m2']}", "0.0"); put(sF, "E22", "=F22/C22", EUR2); put(sF, "F22", f"=MAX(C22*{A['pacht_m2']},{A['umsatz']}*{A['pacht_quote']})", EUR, bold); put(sF, "G22", "=F22*12", EUR, bold)
 put(sF, "A23", "Büro 1 (Ankermieter, Versicherung o. ä.)", font=bold); put(sF, "B23", "1. OG"); put(sF, "C23", f"={A['b1_m2']}", "0.0"); put(sF, "D23", f'={A["b_laufzeit"]}&" Jahre fest"'); put(sF, "E23", f"={A['b1_miete']}", EUR2, link); put(sF, "F23", "=C23*E23", EUR, bold); put(sF, "G23", "=F23*12", EUR, bold)
 put(sF, "A24", "Büro 2 (Makler o. ä.)", font=bold); put(sF, "B24", "1. OG"); put(sF, "C24", f"={A['b2_m2']}", "0.0"); put(sF, "D24", f'={A["b_laufzeit"]}&" Jahre fest"'); put(sF, "E24", f"={A['b2_miete']}", EUR2, link); put(sF, "F24", "=C24*E24", EUR, bold); put(sF, "G24", "=F24*12", EUR, bold)
 put(sF, "A25", "Büromieten gesamt", font=bold); put(sF, "C25", "=C23+C24", "0.0", bold); put(sF, "F25", "=F23+F24", EUR, bold); put(sF, "G25", "=G23+G24", EUR, bold)
@@ -302,7 +315,7 @@ rows = [
     ("bau", "Bau gesamt", "=SUM(B9:B11)", ""),
     ("bnk", "Baunebenkosten", f"=B12*{A['bnk']}", "15 % vom Bau"),
     ("eh40", "Mehrkosten Effizienzhaus 40 und QNG-Nachweis", f"=(B12+B13)*{A['mehr_eh40']}", "3 % auf Bau inkl. Baunebenkosten"),
-    ("ausbau", "Ausbau Gastro (Küche, Bar, Möbel, Technik) und Büros (Vermieter-Ausbau)", f"={A['gastro_ausbau']}+({A['b1_m2']}+{A['b2_m2']})*{A['b_ausbau']}", "Gastro 1.000 € je Platz, Büros 150 €/m²"),
+    ("ausbau", "Ausbau Gastro, Büros (Vermieter-Ausbau) und Mehrkosten zusätzlicher Wohneinheiten", f"={A['gastro_ausbau']}+({A['b1_m2']}+{A['b2_m2']})*{A['b_ausbau']}+MAX(0,{A['n_og']}+{A['n_st']}-8)*{A['we_mehr']}", "Gastro 1.000 € je Platz, Büros 150 €/m², je Wohnung über 8: 15.000 €"),
     ("invest", "Investitionskosten ohne Finanzierung", "=B8+B12+B13+B14+B15", ""),
     ("fin", "Finanzierungskosten (Bauzeit, Bereitstellung, Anlaufzeit)", "=0", "aus Blatt Bauphase"),
     ("gesamt", "Gesamtkosten des Vorhabens", "=B16+B17", ""),
@@ -317,7 +330,7 @@ for i, (k, lab, fml, rc) in enumerate(rows):
     K[k] = f"B{r}"
     reg("k_" + k, sK, f"B{r}")
 put(sK, "A19", "Kosten je m² BGF", font=base); put(sK, "B19", f"=B18/'Flächen und Mieten'!B8", EUR); reg("kosten_m2_bgf", sK, "B19")
-put(sK, "A20", "Kosten je Wohneinheit (Gesamtkosten / 8, inkl. Gewerbe)", font=base); put(sK, "B20", "=B18/'Flächen und Mieten'!D9", EUR)
+put(sK, "A20", "Kosten je Wohneinheit (Gesamtkosten / Wohneinheiten, inkl. Gewerbe)", font=base); put(sK, "B20", "=B18/'Flächen und Mieten'!D9", EUR)
 
 header(sK, 23, ["Mittelherkunft (Finanzierung)", "Betrag bei Rate-Start", "Anteil", "Zins / Programm"])
 put(sK, "A24", "KfW 297 Klimafreundlicher Neubau (selbst genutzte Wohnungen)"); put(sK, "A25", "KfW 298 Klimafreundlicher Neubau (vermietete Wohnungen)"); put(sK, "A26", "KfW 299 Klimafreundlicher Neubau (Nichtwohngebäude: Gastro und Büros)"); put(sK, "A27", "Hausbank-Darlehen (Restfinanzierung inkl. Zinsen der Bauzeit)"); put(sK, "A28", "Eigenkapital"); put(sK, "A29", "Summe Finanzierung", font=bold)
@@ -325,12 +338,20 @@ put(sK, "B24", f"='Bauphase'!L33*{A['eigen']}/MAX(1,({A['n_og']}+{A['n_st']}))",
 put(sK, "B25", f"='Bauphase'!L33-B24", EUR)
 put(sK, "B26", "='Bauphase'!M33", EUR)
 put(sK, "B27", "='Bauphase'!N33", EUR)
-put(sK, "B28", 0, EUR, inp)
+put(sK, "B28", f"={A['ek']}", EUR, link)
 put(sK, "B29", "=SUM(B24:B28)", EUR, bold, fill=key_fill)
 for r in range(24, 30):
     put(sK, f"C{r}", f"=B{r}/$B$29", PCT)
 put(sK, "D24", f"={A['z_kfw_wohn']}", PCT2, link); put(sK, "D25", f"={A['z_kfw_wohn']}", PCT2, link); put(sK, "D26", f"={A['z_kfw_gewerbe']}", PCT2, link); put(sK, "D27", f"={A['z_bank']}", PCT2, link); put(sK, "D28", "")
 put(sK, "A30", "Anteil KfW-Kredite an der Finanzierung", font=bold); put(sK, "B30", "=(B24+B25+B26)/B29", PCT, bold)
+put(sK, "A40", "Förderwirkung (Jahr 1 nach der Anlaufzeit)", font=bold, border=False)
+put(sK, "A41", "KfW-Kredite insgesamt (297/298/299)"); put(sK, "B41", "=B24+B25+B26", EUR)
+put(sK, "A42", "Zinsvorteil KfW 297/298 gegenüber Hausbank"); put(sK, "B42", f"=(B24+B25)*({A['z_bank']}-{A['z_kfw_wohn']})", EUR)
+put(sK, "A43", "Zinsvorteil KfW 299 gegenüber Hausbank"); put(sK, "B43", f"=B26*({A['z_bank']}-{A['z_kfw_gewerbe']})", EUR)
+put(sK, "A44", "Zinsvorteil durch KfW pro Jahr", font=bold); put(sK, "B44", "=B42+B43", EUR, bold, fill=key_fill)
+put(sK, "A45", "Zinsvorteil durch KfW pro Monat"); put(sK, "B45", "=B44/12", EUR)
+put(sK, "A46", "Weitere Förderung, nicht im Basisrechnung: Steuerliche Abschreibungen (Blatt Gesellschafter) und NBank-Mietwohnraumförderung (zinsloses Darlehen, Zuschuss 2–3 €/m² Wohnfläche und Monat gegen Mietbindung, Mietobergrenze ca. 6,50–6,80 €/m²).", font=note, border=False)
+reg("foerder_kfw", sK, "B41"); reg("foerder_zins_jahr", sK, "B44"); reg("foerder_zins_monat", sK, "B45")
 put(sK, "A31", "Mischzins aller Darlehen", font=bold); put(sK, "B31", f"=(B24*{A['z_kfw_wohn']}+B25*{A['z_kfw_wohn']}+B26*{A['z_kfw_gewerbe']}+B27*{A['z_bank']})/B29", PCT2, bold)
 reg("kredit", sK, "B29"); reg("kredit_kfw_anteil", sK, "B30"); reg("mischzins", sK, "B31")
 reg("kredit_297", sK, "B24"); reg("kredit_298", sK, "B25"); reg("kredit_299", sK, "B26"); reg("kredit_bank", sK, "B27")
@@ -347,7 +368,7 @@ reg("kfw_rahmen", sK, "B36"); reg("kfw_rahmen_wohn", sK, "B34"); reg("kfw_rahmen
 sB = sheet("Bauphase", "Bauphase und Anlaufzeit: Abrufe, Zinsen, Kreditstand", "Monat 0 = Grundstück. Monate 1–15 Bau. Monate 16–27 tilgungsfreie Anlaufzeit. KfW-Darlehen werden anteilig zu den Ausgaben abgerufen, die Hausbank zahlt zusätzlich alle Zinsen.", [8, 14, 14, 14, 14, 14, 13, 13, 13, 13, 13, 15, 15, 15])
 put(sB, "A3", "Anteil KfW Wohnen an den Ausgaben", border=False); put(sB, "E3", f"=MIN(1,'Kosten und Finanzierung'!B34/'Kosten und Finanzierung'!B16)", PCT)
 put(sB, "F3", "Anteil KfW Gastro", border=False); put(sB, "I3", f"=MIN(1-E3,'Kosten und Finanzierung'!B35/'Kosten und Finanzierung'!B16)", PCT)
-put(sB, "J3", "Anteil Hausbank", border=False); put(sB, "L3", "=1-E3-I3", PCT)
+put(sB, "J3", "Anteil Hausbank", border=False); put(sB, "L3", "=MAX(0,1-E3-I3-'Kosten und Finanzierung'!B28/'Kosten und Finanzierung'!B16)", PCT)
 header(sB, 5, ["Monat", "Phase", "Ausgaben (Grundstück, Bau)", "Offene Bausumme", "Abruf KfW Wohnen", "Abruf KfW Gastro", "Zinsen KfW Wohnen", "Zinsen KfW Gastro", "Zinsen Hausbank", "Bereitstellungs-zins", "Abruf Hausbank", "Stand KfW Wohnen", "Stand KfW Gastro", "Stand Hausbank"])
 sB.row_dimensions[5].height = 42
 bau_sum = "('Kosten und Finanzierung'!B16-'Kosten und Finanzierung'!B8)"
@@ -380,7 +401,7 @@ for col in "CEFGHIJK":
 put(sB, "B34", "Summen", font=bold)
 put(sB, "B33", "Rate-Start", font=bold)
 put(sB, "A36", "Finanzierungskosten gesamt (Zinsen und Bereitstellung):", font=bold, border=False); put(sB, "G36", "=SUM(G34:J34)", EUR, bold)
-put(sB, "A37", "Kontrolle: Stand Rate-Start minus Ausgaben minus Finanzierungskosten (muss 0 sein)", border=False); put(sB, "G37", "=ROUND(L33+M33+N33-C34-G36,2)", EUR)
+put(sB, "A37", "Kontrolle: Stand Rate-Start minus Ausgaben minus Finanzierungskosten (muss 0 sein)", border=False); put(sB, "G37", "=ROUND(L33+M33+N33+'Kosten und Finanzierung'!B28-C34-G36,2)", EUR)
 # Zeile 33 enthält die Summen; die Finanzierungskosten stehen in den Spalten G–J
 sK["B17"].value = "='Bauphase'!G36"
 reg("fin_kosten", sB, "G36")
@@ -445,7 +466,7 @@ sJ.add_chart(ch, "I4")
 # =====================================================================================
 # Gastro Betrieb
 # =====================================================================================
-sG = sheet("Gastro Betrieb", "Gastro-Betrieb: Umsatz, Kosten, Ergebnis pro Monat", "Richtwerte aus der Branche, keine Werte aus Werlte. Lohn des Bauherrn ist nicht gerechnet.", [46, 14, 16, 40])
+sG = sheet("Gastro Betrieb", "Gastro-Betrieb: Umsatz, Kosten, Ergebnis pro Monat", "Betreiberfirma des Bauherrn (getrennt von der Vermietungs-GbR). Richtwerte aus der Branche, keine Werte aus Werlte. Lohn des Bauherrn ist nicht gerechnet.", [46, 14, 16, 40])
 header(sG, 4, ["Posten", "Anteil", "Betrag / Monat", "Hinweis"])
 put(sG, "A5", "Umsatz (netto)", font=bold); put(sG, "B5", ""); put(sG, "C5", f"={A['umsatz']}", EUR, link)
 costs = [("Wareneinsatz (Einkauf Essen und Getränke)", 0.28), ("Personal (ohne Lohn des Bauherrn)", 0.30), ("Energie, Wasser, Müll", 0.03), ("Reinigung, Wäsche, Verbrauchsmaterial", 0.02), ("Werbung und Marketing", 0.015), ("Reparaturen, Wartung, Kassensystem", 0.015), ("Sonstiges", 0.015), ("Versicherungen, GEMA, Gebühren", 0.01), ("Steuerberater, Buchhaltung", 0.01)]
@@ -454,16 +475,16 @@ for i, (lab, p) in enumerate(costs):
     put(sG, f"A{r}", lab); put(sG, f"B{r}", p, PCT, inp); put(sG, f"C{r}", f"=-$C$5*B{r}", EUR)
 put(sG, "A15", "Summe Betriebskosten ohne Pacht", font=bold); put(sG, "B15", "=SUM(B6:B14)", PCT, bold); put(sG, "C15", "=SUM(C6:C14)", EUR, bold)
 put(sG, "A16", "Gewinn vor Pacht", font=bold); put(sG, "B16", "=1-B15", PCT, bold); put(sG, "C16", "=C5+C15", EUR, bold)
-put(sG, "A17", "Pacht an das Haus"); put(sG, "C17", "=-'Flächen und Mieten'!F22", EUR)
+put(sG, "A17", "Pacht an die GbR (Maximum aus Mindestpacht und Umsatzpacht)"); put(sG, "C17", "=-'Flächen und Mieten'!F22", EUR)
 put(sG, "A18", "Lohn des Bauherrn"); put(sG, "C18", f"=-{A['lohn']}", EUR, link)
 put(sG, "A19", "Betriebsergebnis nach Pacht", font=bold); put(sG, "C19", "=C16+C17+C18", EUR, bold, fill=key_fill)
-put(sG, "A20", "Break-even-Umsatz des Betriebs (Ergebnis nach Pacht = 0)"); put(sG, "C20", f"=('Flächen und Mieten'!F22+{A['lohn']})/B16", EUR)
+put(sG, "A20", "Break-even-Umsatz des Betriebs (Ergebnis nach Pacht = 0)"); put(sG, "C20", f"=({A['gastro_m2']}*{A['pacht_m2']}+{A['lohn']})/B16", EUR)
 put(sG, "D16", "Marge laut Annahmen muss mit 30,5 % übereinstimmen", font=note)
 reg("g_gewinn_vor_pacht", sG, "C16"); reg("g_ergebnis", sG, "C19"); reg("g_breakeven", sG, "C20")
 header(sG, 23, ["Umsatz pro Monat", "", "Gewinn vor Pacht", "Gewinn nach Pacht"])
 for i, u in enumerate([50000, 65000, 80000, f"={A['umsatz']}", 110000]):
     r = 24 + i
-    put(sG, f"A{r}", u, EUR, inp); put(sG, f"C{r}", f"=A{r}*$B$16", EUR); put(sG, f"D{r}", f"=C{r}-'Flächen und Mieten'!$F$22-{A['lohn']}", EURS)
+    put(sG, f"A{r}", u, EUR, inp); put(sG, f"C{r}", f"=A{r}*$B$16", EUR); put(sG, f"D{r}", f"=C{r}-MAX({A['gastro_m2']}*{A['pacht_m2']},A{r}*{A['pacht_quote']})-{A['lohn']}", EURS)
 put(sG, "A30", "Bei sehr niedrigem Umsatz drücken Fixkosten stärker: die Rechnung ist dort zu günstig.", font=note, border=False)
 
 # =====================================================================================
@@ -497,35 +518,35 @@ reg("g_umsatz_monat", sTT, "F14"); reg("g_abend_anteil", sTT, "G16"); reg("g_tag
 # =====================================================================================
 # Ertrag und Cashflow
 # =====================================================================================
-sC = sheet("Ertrag und Cashflow", "Ertrag und Kapitaldienst (erstes Jahr nach der Anlaufzeit)", "Für die Bank: reicht der Ertrag für Zinsen und Tilgung? Kapitaldienstdeckung (DSCR) = Ertrag vor Kapitaldienst / Kapitaldienst.", [64, 18, 18, 46])
+sC = sheet("Ertrag und Cashflow", "Ertrag und Kapitaldienst der Vermietungs-GbR (erstes Jahr nach der Anlaufzeit)", "Die Gastro wird von einer eigenen Betreiberfirma geführt und zahlt Pacht an die GbR. Kapitaldienstdeckung (DSCR) = Ertrag der GbR / Kapitaldienst.", [64, 18, 18, 46])
 header(sC, 4, ["Position", "pro Monat", "pro Jahr", "Hinweis"])
 lines = [
     ("Kaltmiete Wohnen (vermietete Wohnungen)", "='Flächen und Mieten'!F21", ""),
     ("Büromieten (2 Ankermieter)", "='Flächen und Mieten'!F25", "10 Jahre fest, Indexmiete"),
-    ("Pacht Gastro", "='Flächen und Mieten'!F22", "Gastro zahlt an das Haus"),
+    ("Pacht Gastro", "='Flächen und Mieten'!F22", "Maximum aus Mindestpacht und 10 % vom Umsatz"),
     ("Rücklagen (Verwaltung, Instandhaltung, Leerstand)", f"=-{A['ruecklage']}*(B5+B6+B7)", "10 % von Miete, Büro und Pacht"),
-    ("Nettoertrag Immobilie", "=SUM(B5:B8)", ""),
-    ("Betriebsergebnis Gastro nach Pacht", "='Gastro Betrieb'!C19", "Betreiber = Bauherr, ohne Lohn"),
-    ("Nettoertrag vor Kapitaldienst", "=B9+B10", ""),
+    ("Nettoertrag Immobilie (Vermietungs-GbR)", "=SUM(B5:B8)", ""),
     ("Kapitaldienst (Zinsen und Tilgung aller Darlehen)", "=-'Tilgungsplan'!N3", ""),
-    ("Ergebnis pro Monat nach Kapitaldienst", "=B11+B12", "ohne Lohn des Bauherrn"),
+    ("Ergebnis der GbR pro Monat nach Kapitaldienst", "=B9+B10", "für die Gesellschafter, vor Steuern"),
+    ("Betriebsergebnis Gastro nach Pacht (Betreiberfirma)", "='Gastro Betrieb'!C19", "gehört der Betreiberfirma des Bauherrn, ohne Lohn"),
+    ("Gesamtergebnis Bauherr (GbR-Anteil und Betreiberfirma)", "=B11+B12", "nur zur Information"),
 ]
 for i, (lab, fml, h) in enumerate(lines):
     r = 5 + i
     b = i in (4, 6, 8)
-    sg = i in (3, 7, 8)
+    sg = i in (3, 5, 6, 7, 8)
     put(sC, f"A{r}", lab, font=bold if b else base)
-    put(sC, f"B{r}", fml, EURS if sg else EUR, bold if b else base, fill=key_fill if i == 8 else None)
+    put(sC, f"B{r}", fml, EURS if sg else EUR, bold if b else base, fill=key_fill if i == 6 else None)
     put(sC, f"C{r}", f"=B{r}*12", EURS if sg else EUR, bold if b else base)
     put(sC, f"D{r}", h, font=note)
-put(sC, "A15", "Kapitaldienstdeckung gesamt (DSCR)", font=bold); put(sC, "B15", "=B11/-B12", X, bold, fill=key_fill); put(sC, "D15", "Bank verlangt meist mindestens 1,2", font=note)
-put(sC, "A16", "Kapitaldienstdeckung nur Immobilie (Wohnen, Büro, Pacht)", font=bold); put(sC, "B16", "=B9/-B12", X, bold); put(sC, "D16", "ohne Gastro-Gewinn", font=note)
-put(sC, "A17", "Kapitaldienstdeckung nur langfristige Mieten (Wohnen, Büro)", font=bold); put(sC, "B17", f"=(B5+B6)*(1-{A['ruecklage']})/-B12", X, bold); put(sC, "D17", "ohne Pacht und Gastro: Ankermieter helfen hier", font=note)
-put(sC, "A18", "Zinsdeckung (Ertrag vor Kapitaldienst / Zinsen)"); put(sC, "B18", "=B11/('Tilgung Jahre'!B5/12)", X)
+put(sC, "A15", "Kapitaldienstdeckung der GbR (DSCR)", font=bold); put(sC, "B15", "=B9/-B10", X, bold, fill=key_fill); put(sC, "D15", "Bank verlangt meist mindestens 1,2", font=note)
+put(sC, "A16", "Kapitaldienstdeckung mit Gastro-Gewinn des Bauherrn (nur wenn er einsteht)", font=bold); put(sC, "B16", "=(B9+B12)/-B10", X, bold); put(sC, "D16", "z. B. über Bürgschaft oder Pachtgarantie", font=note)
+put(sC, "A17", "Kapitaldienstdeckung nur langfristige Mieten (Wohnen, Büro)", font=bold); put(sC, "B17", f"=(B5+B6)*(1-{A['ruecklage']})/-B10", X, bold); put(sC, "D17", "ohne Pacht: Ankermieter helfen hier", font=note)
+put(sC, "A18", "Zinsdeckung (Ertrag der GbR / Zinsen)"); put(sC, "B18", "=B9/('Tilgung Jahre'!B5/12)", X)
 put(sC, "A19", "Anfangsrendite auf Gesamtkosten (Nettoertrag Immobilie p. a.)"); put(sC, "B19", "=C9/'Kosten und Finanzierung'!B18", PCT2)
-put(sC, "A20", "Break-even Gastro-Umsatz (Haus insgesamt Ergebnis = 0)"); put(sC, "B20", f"=(-B9-B12+'Flächen und Mieten'!F22+{A['lohn']})/{A['marge']}", EUR); put(sC, "D20", "Umsatz, ab dem Zinsen und Tilgung aller Darlehen bezahlt sind", font=note)
+put(sC, "A20", "Gastro-Umsatz, ab dem die GbR den Kapitaldienst voll deckt (Umsatzpacht)"); put(sC, "B20", f"=MAX(0,(-B10/(1-{A['ruecklage']})-B5-B6)/{A['pacht_quote']})", EUR); put(sC, "D20", "darunter fehlt der GbR Geld", font=note)
 put(sC, "A21", "Anteil der Büro-Ankermieter am Rohertrag"); put(sC, "B21", "='Flächen und Mieten'!G25/'Flächen und Mieten'!G26", PCT)
-for k_, c_ in (("c_miete", "B5"), ("c_buero", "B6"), ("c_pacht", "B7"), ("c_rueck", "B8"), ("c_netto_immo", "B9"), ("c_gastro", "B10"), ("c_netto", "B11"), ("c_kd", "B12"), ("c_ergebnis", "B13"), ("dscr", "B15"), ("dscr_immo", "B16"), ("dscr_lang", "B17"), ("zinsdeckung", "B18"), ("anfangsrendite", "B19"), ("breakeven_haus", "B20"), ("anteil_buero", "B21")):
+for k_, c_ in (("c_miete", "B5"), ("c_buero", "B6"), ("c_pacht", "B7"), ("c_rueck", "B8"), ("c_netto_immo", "B9"), ("c_netto", "B9"), ("c_kd", "B10"), ("c_ergebnis", "B11"), ("c_gastro", "B12"), ("c_gesamt", "B13"), ("dscr", "B15"), ("dscr_immo", "B15"), ("dscr_gesamt", "B16"), ("dscr_lang", "B17"), ("zinsdeckung", "B18"), ("anfangsrendite", "B19"), ("breakeven_haus", "B20"), ("anteil_buero", "B21")):
     reg(k_, sC, c_)
 
 # =====================================================================================
@@ -607,24 +628,24 @@ header(sP, 4, ["Jahr"] + [str(y) for y in range(1, 11)])
 pl = [
     ("Kaltmiete Wohnen", lambda c, y: f"='Flächen und Mieten'!$G$21*(1+{A['g_miete']})^({y}-1)"),
     ("Büromieten (Indexmiete)", lambda c, y: f"='Flächen und Mieten'!$G$25*(1+{A['g_index']})^({y}-1)"),
-    ("Pacht Gastro", lambda c, y: f"='Flächen und Mieten'!$G$22*(1+{A['g_miete']})^({y}-1)"),
+    ("Pacht Gastro", lambda c, y: f"='Flächen und Mieten'!$G$22*(1+{A['g_umsatz']})^({y}-1)"),
     ("Rücklagen", lambda c, y: f"=-{A['ruecklage']}*({c}5+{c}6+{c}7)"),
-    ("Betriebsergebnis Gastro nach Pacht", lambda c, y: f"=('Gastro Betrieb'!$C$16*12*(1+{A['g_umsatz']})^({y}-1))-{c}7-{A['lohn']}*12"),
-    ("Nettoertrag vor Kapitaldienst", lambda c, y: f"=SUM({c}5:{c}9)"),
+    ("Nettoertrag Immobilie (GbR)", lambda c, y: f"=SUM({c}5:{c}8)"),
     ("Kapitaldienst", lambda c, y: f"=-'Tilgung Jahre'!D{4 + y}"),
-    ("Ergebnis nach Kapitaldienst", lambda c, y: f"={c}10+{c}11"),
-    ("Kapitaldienstdeckung (DSCR)", lambda c, y: f"={c}10/-{c}11"),
+    ("Ergebnis der GbR nach Kapitaldienst", lambda c, y: f"={c}9+{c}10"),
+    ("Kapitaldienstdeckung der GbR (DSCR)", lambda c, y: f"={c}9/-{c}10"),
     ("Restschuld Jahresende", lambda c, y: f"='Tilgung Jahre'!E{4 + y}"),
+    ("Betriebsergebnis Gastro nach Pacht (Betreiberfirma)", lambda c, y: f"=('Gastro Betrieb'!$C$16*12*(1+{A['g_umsatz']})^({y}-1))-{c}7-{A['lohn']}*12"),
 ]
 for i, (lab, f) in enumerate(pl):
     r = 5 + i
-    b = i in (5, 7, 8)
+    b = i in (4, 6, 7)
     put(sP, f"A{r}", lab, font=bold if b else base)
     for y in range(1, 11):
         col = get_column_letter(1 + y)
-        put(sP, f"{col}{r}", f(col, y), X if i == 8 else (EURS if i in (3, 6, 7) else EUR), bold if b else base)
-reg("dscr_y5", sP, "F13"); reg("dscr_y10", sP, "K13"); reg("ergebnis_y10", sP, "K12")
-put(sP, "A16", "Gastro-Gewinn vor Pacht mit der Umsatzsteigerung fortgeschrieben, Lohn des Bauherrn nicht gerechnet.", font=note, border=False)
+        put(sP, f"{col}{r}", f(col, y), X if i == 7 else (EURS if i in (3, 5, 6, 9) else EUR), bold if b else base)
+reg("dscr_y5", sP, "F12"); reg("dscr_y10", sP, "K12"); reg("ergebnis_y10", sP, "K11")
+put(sP, "A16", "Pacht wächst mit dem Umsatz (Umsatzpacht). Betriebsergebnis der Betreiberfirma mit der Umsatzsteigerung fortgeschrieben, Lohn des Bauherrn nicht gerechnet.", font=note, border=False)
 
 # =====================================================================================
 # Airbnb Prüfung
@@ -677,22 +698,24 @@ reg("airbnb_netto_45", sX, "B14"); reg("langfrist_45", sX, "B15"); reg("airbnb_n
 # =====================================================================================
 # Sensitivität
 # =====================================================================================
-sS = sheet("Sensitivität", "Belastungstest: Was passiert, wenn es schlechter läuft?", "Veränderung des Ergebnisses pro Monat und der Kapitaldienstdeckung gegenüber dem Plan.", [60, 18, 18, 20])
+sS = sheet("Sensitivität", "Belastungstest: Was passiert, wenn es schlechter läuft?", "Veränderung des GbR-Ergebnisses pro Monat und der Kapitaldienstdeckung gegenüber dem Plan.", [60, 18, 18, 20])
 header(sS, 4, ["Szenario", "Ergebnis / Monat", "DSCR", "Änderung zum Plan"])
 dbau = "0.1*'Kosten und Finanzierung'!B12*(1+" + A["bnk"] + ")*('Kosten und Finanzierung'!B31+" + A["tilgung"] + ")/12"
 dz = "'Tilgung Jahre'!E14*0.01/12"
 EC = "'Ertrag und Cashflow'!"
 KD = "'Tilgungsplan'!N3"
+def pk(f):
+    return f"(MAX({A['gastro_m2']}*{A['pacht_m2']},{A['umsatz']}*{1 - f}*{A['pacht_quote']})-'Flächen und Mieten'!F22)*(1-{A['ruecklage']})"
 sens = [
-    ("Plan", f"={EC}B13", f"={EC}B11/{KD}"),
-    ("Anschlusszins nach 10 Jahren +1 Prozentpunkt (auf Restschuld)", f"={EC}B13-{dz}", f"={EC}B11/({KD}+{dz})"),
-    ("Mieten Wohnen −10 %", f"={EC}B13-0.1*{EC}B5*(1-{A['ruecklage']})", f"=({EC}B11-0.1*{EC}B5*(1-{A['ruecklage']}))/{KD}"),
-    ("Gastro-Umsatz −20 %", f"={EC}B13-0.2*{A['umsatz']}*{A['marge']}", f"=({EC}B11-0.2*{A['umsatz']}*{A['marge']})/{KD}"),
-    ("Gastro-Umsatz −40 %", f"={EC}B13-0.4*{A['umsatz']}*{A['marge']}", f"=({EC}B11-0.4*{A['umsatz']}*{A['marge']})/{KD}"),
-    ("Baukosten +10 % (Kredit steigt entsprechend)", f"={EC}B13-{dbau}", f"={EC}B11/({KD}+{dbau})"),
-    ("Größerer Büro-Ankermieter zieht aus (Leerstand)", f"={EC}B13-'Flächen und Mieten'!F23*(1-{A['ruecklage']})", f"=({EC}B11-'Flächen und Mieten'!F23*(1-{A['ruecklage']}))/{KD}"),
-    ("Beide Büros leer", f"={EC}B13-{EC}B6*(1-{A['ruecklage']})", f"=({EC}B11-{EC}B6*(1-{A['ruecklage']}))/{KD}"),
-    ("Gastro fällt ganz aus (keine Pacht, kein Betriebsergebnis)", f"={EC}B9-{EC}B7*(1-{A['ruecklage']})+{EC}B12", f"=({EC}B9-{EC}B7*(1-{A['ruecklage']}))/{KD}"),
+    ("Plan", f"={EC}B11", f"={EC}B9/{KD}"),
+    ("Anschlusszins nach 10 Jahren +1 Prozentpunkt (auf Restschuld)", f"={EC}B11-{dz}", f"={EC}B9/({KD}+{dz})"),
+    ("Mieten Wohnen −10 %", f"={EC}B11-0.1*{EC}B5*(1-{A['ruecklage']})", f"=({EC}B9-0.1*{EC}B5*(1-{A['ruecklage']}))/{KD}"),
+    ("Gastro-Umsatz −20 % (Umsatzpacht sinkt)", f"={EC}B11+{pk(0.2)}", f"=({EC}B9+{pk(0.2)})/{KD}"),
+    ("Gastro-Umsatz −40 % (Umsatzpacht sinkt, Mindestpacht)", f"={EC}B11+{pk(0.4)}", f"=({EC}B9+{pk(0.4)})/{KD}"),
+    ("Baukosten +10 % (Kredit steigt entsprechend)", f"={EC}B11-{dbau}", f"={EC}B9/({KD}+{dbau})"),
+    ("Größerer Büro-Ankermieter zieht aus (Leerstand)", f"={EC}B11-'Flächen und Mieten'!F23*(1-{A['ruecklage']})", f"=({EC}B9-'Flächen und Mieten'!F23*(1-{A['ruecklage']}))/{KD}"),
+    ("Beide Büros leer", f"={EC}B11-{EC}B6*(1-{A['ruecklage']})", f"=({EC}B9-{EC}B6*(1-{A['ruecklage']}))/{KD}"),
+    ("Gastro fällt ganz aus (keine Pacht)", f"={EC}B11-{EC}B7*(1-{A['ruecklage']})", f"=({EC}B9-{EC}B7*(1-{A['ruecklage']}))/{KD}"),
 ]
 for i, (lab, e, d) in enumerate(sens):
     r = 5 + i
@@ -752,7 +775,7 @@ sO.column_dimensions["B"].width = 20
 sO.column_dimensions["C"].width = 60
 sO["A1"] = "Neue Mitte Werlte, Baufeld 3: Bankunterlagen"
 sO["A1"].font = title_font
-sO["A2"] = "Große Gastro im EG (ca. 510 m²), 2 Büro-Ankermieter und 3 Wohnungen im 1. OG, 5 Wohnungen im Staffelgeschoss in Holzbau. Bauherr: Bessam Hasso. Stand Oktober 2026."
+sO["A2"] = "Restaurant und Bar im EG (ca. 510 m², eigene Betreiberfirma), 2 Büro-Ankermieter und 5 Wohnungen im 1. OG, 7 Wohnungen im Staffelgeschoss in Holzbau, Eigentümer: Vermietungs-GbR. Bauherr: Bessam Hasso. Stand Oktober 2026."
 sO["A2"].font = sub_font
 header(sO, 4, ["Kennzahl", "Wert", "Erläuterung"])
 over = [
@@ -762,23 +785,24 @@ over = [
     ("Bruttogrundfläche gesamt (m²)", "='Flächen und Mieten'!B8", NUM, "EG 576, 1. OG 576, Staffel 498"),
     ("Gastrofläche (m²)", f"={A['gastro_m2']}", NUM, "ca. 190 Plätze innen, ca. 60 Terrasse"),
     ("Büro-Ankermieter (m²)", "='Gewerbe und Anker'!B24", NUM, "100 m² Versicherung o. ä. und 65 m² Makler o. ä., 10 Jahre fest"),
-    ("Wohneinheiten", "='Flächen und Mieten'!D9", NUM, "3 im 1. OG (ca. 107 m²), 5 im Staffelgeschoss (ca. 67 m²)"),
+    ("Wohneinheiten", "='Flächen und Mieten'!D9", NUM, "5 im 1. OG (ca. 64 m²), 7 im Staffelgeschoss (ca. 48 m²)"),
     ("Wohnfläche gesamt (m²)", "='Flächen und Mieten'!E9", NUM, ""),
     ("Kosten und Finanzierung", None, None, None),
     ("Gesamtkosten", "='Kosten und Finanzierung'!B18", EUR, "inkl. Finanzierungskosten der Bau- und Anlaufzeit"),
-    ("Darlehen gesamt (100 % Fremdkapital)", "='Kosten und Finanzierung'!B29", EUR, "kein Eigenkapital"),
+    ("Darlehen gesamt", "='Kosten und Finanzierung'!B29-'Kosten und Finanzierung'!B28", EUR, "Basis 100 % Fremdkapital, kein Eigenkapital"),
     ("davon KfW 297/298/299", "=SUM('Kosten und Finanzierung'!B24:B26)", EUR, "zinsverbilligt"),
     ("Anteil KfW", "='Kosten und Finanzierung'!B30", PCT, ""),
+    ("Zinsvorteil durch KfW pro Jahr", "='Kosten und Finanzierung'!B44", EUR, "gegenüber reiner Hausbank-Finanzierung zu 4,0 %"),
     ("Mischzins", "='Kosten und Finanzierung'!B31", PCT2, "KfW 2,5 % / 3,0 %, Hausbank 4,0 % (Annahmen)"),
     ("Kapitaldienst pro Monat (Anfangstilgung 1 %)", "='Tilgungsplan'!N3", EUR, "nach 12 Monaten tilgungsfreier Anlaufzeit"),
     ("Restschuld nach 10 Jahren Zinsbindung", "='Tilgung Jahre'!E14", EUR, ""),
     ("Ertrag und Wert", None, None, None),
     ("Mieten Wohnen + Büro + Pacht pro Monat", "='Flächen und Mieten'!F26", EUR, "Rohertrag"),
-    ("Nettoertrag Immobilie pro Monat (nach Rücklagen)", "='Ertrag und Cashflow'!B9", EUR, ""),
-    ("Betriebsergebnis Gastro nach Pacht pro Monat", "='Ertrag und Cashflow'!B10", EUR, "bei dem Umsatz aus Blatt Gastro Tagesteile, ohne Lohn des Bauherrn"),
-    ("Ergebnis pro Monat nach Kapitaldienst", "='Ertrag und Cashflow'!B13", EURS, ""),
-    ("Kapitaldienstdeckung gesamt (DSCR)", "='Ertrag und Cashflow'!B15", X, "Bank verlangt meist mindestens 1,2"),
-    ("Kapitaldienstdeckung nur Immobilie", "='Ertrag und Cashflow'!B16", X, "ohne Gastro-Gewinn"),
+    ("Nettoertrag Immobilie pro Monat (nach Rücklagen)", "='Ertrag und Cashflow'!B9", EUR, "Vermietungs-GbR"),
+    ("Ergebnis der GbR pro Monat nach Kapitaldienst", "='Ertrag und Cashflow'!B11", EURS, "für die Gesellschafter, vor Steuern"),
+    ("Betriebsergebnis Gastro nach Pacht pro Monat (Betreiberfirma)", "='Ertrag und Cashflow'!B12", EURS, "Umsatz aus Blatt Gastro Tagesteile, ohne Lohn des Bauherrn, nicht in der GbR"),
+    ("Kapitaldienstdeckung der GbR (DSCR)", "='Ertrag und Cashflow'!B15", X, "Bank verlangt meist mindestens 1,2"),
+    ("Kapitaldienstdeckung mit Gastro-Gewinn des Bauherrn", "='Ertrag und Cashflow'!B16", X, "nur bei Bürgschaft oder Pachtgarantie"),
     ("Kapitaldienstdeckung nur Wohnen und Büro", "='Ertrag und Cashflow'!B17", X, "langfristige Mieten ohne Gastro"),
     ("Ertragswert", "='Ertragswert'!E19", EUR, "Ertragswertverfahren nach Nutzung"),
     ("Beleihungswert nach Abschlag", "='Ertragswert'!B26", EUR, ""),
@@ -802,8 +826,91 @@ for lab, f_, fmt, nt in over:
     r += 1
 put(sO, f"A{r + 1}", "Alle Beträge sind Planungsannahmen. KfW-Zinsen und Rahmen sind Stand Ratgeber Oktober 2026 und müssen bei Hausbank und KfW bestätigt werden.", font=note, border=False)
 
-order = ["Übersicht", "Annahmen", "Flächen und Mieten", "Gewerbe und Anker", "Kosten und Finanzierung", "Bauphase", "Tilgung Jahre", "Tilgungsplan", "Ertrag und Cashflow", "Gastro Betrieb", "Gastro Tagesteile", "Ertragswert", "Prognose", "Sensitivität", "Airbnb Prüfung", "Bankunterlagen"]
-wb._sheets = [wb[n] for n in order]
+# =====================================================================================
+# Gesellschafter (Vermietungs-GbR, pro Kopf)
+# =====================================================================================
+sGS = sheet("Gesellschafter", "Vermietungs-GbR: Ergebnis pro Gesellschafter", "Gleiche Anteile. Die Gastro ist eine eigene Betreiberfirma und gehört nicht zur GbR. Steuerliche Werte vereinfacht, Steuerberater prüft.", [62, 18, 18, 18, 18])
+put(sGS, "A4", "Ergebnis der GbR im ersten Jahr nach der Anlaufzeit", font=bold, border=False)
+gs = [
+    ("Nettoertrag Immobilie pro Jahr", "='Ertrag und Cashflow'!C9", EUR),
+    ("Zinsen im 1. Jahr", "='Tilgung Jahre'!B5", EUR),
+    ("Tilgung im 1. Jahr (Vermögensaufbau)", "='Tilgung Jahre'!C5", EUR),
+    ("Cash nach Kapitaldienst pro Jahr", "='Ertrag und Cashflow'!C11", EURS),
+    ("Gebäudekosten als Abschreibungsbasis (ohne Grundstück und Finanzierungskosten)", "='Kosten und Finanzierung'!B18-'Kosten und Finanzierung'!B8-'Kosten und Finanzierung'!B17", EUR),
+    ("Abschreibung linear 3 %", f"=B9*{A['afa_lin']}", EUR),
+    ("Steuerliches Ergebnis (Verlust negativ)", "=B5-B6-B10", EURS),
+    ("Wohnanteil nach Fläche (Wohnen / Wohnen, Büro, Gastro)", f"='Flächen und Mieten'!E9/('Flächen und Mieten'!E9+{A['b1_m2']}+{A['b2_m2']}+{A['gastro_m2']})", PCT),
+    ("Abschreibung mit steuerlicher Förderung (Wohnteil: degressiv 5 % + Sonder-AfA 5 %, Rest linear)", f"=B9*(B12*({A['afa_deg']}+{A['afa_sonder']})+(1-B12)*{A['afa_lin']})", EUR),
+    ("Steuerliches Ergebnis mit Förderung (Verlust negativ)", "=B5-B6-B13", EURS),
+]
+for i, (lab, fml, fm) in enumerate(gs):
+    r_ = 5 + i
+    put(sGS, f"A{r_}", lab, font=bold if i in (3, 6, 9) else base)
+    put(sGS, f"B{r_}", fml, fm, bold if i in (3, 6, 9) else base)
+put(sGS, "C13", "Option: § 7 Abs. 5a und § 7b EStG, Fristen und Voraussetzungen prüfen", font=note, border=False)
+header(sGS, 17, ["Pro Gesellschafter bei gleichen Anteilen", "1 Person", "2 Personen", "4 Personen", "8 Personen"])
+pers = {"B": 1, "C": 2, "D": 4, "E": 8}
+rowsGS = [
+    ("Eigenkapital pro Person", lambda c, k: f"={A['ek']}/{k}", EUR),
+    ("Cash pro Person und Jahr (vor Steuern)", lambda c, k: f"=$B$8/{k}", EURS),
+    ("Cash pro Person und Monat (vor Steuern)", lambda c, k: f"={c}19/12", EURS),
+    ("Steuerliches Ergebnis pro Person und Jahr", lambda c, k: f"=$B$11/{k}", EURS),
+    ("Steuerwirkung pro Person (Erstattung bei Verlust, Zahlung bei Gewinn)", lambda c, k: f"=-{A['steuersatz']}*{c}21", EURS),
+    ("Cash nach Steuer pro Person und Jahr", lambda c, k: f"={c}19+{c}22", EURS),
+    ("Cash nach Steuer pro Person und Monat", lambda c, k: f"={c}23/12", EURS),
+    ("Mit steuerlicher Förderung: Steuerwirkung pro Person und Jahr", lambda c, k: f"=-{A['steuersatz']}*$B$14/{k}", EURS),
+    ("Mit steuerlicher Förderung: Cash nach Steuer pro Person und Jahr", lambda c, k: f"={c}19+{c}25", EURS),
+    ("Mit steuerlicher Förderung: Cash nach Steuer pro Person und Monat", lambda c, k: f"={c}26/12", EURS),
+    ("Tilgung pro Person und Jahr (Vermögensaufbau)", lambda c, k: f"=$B$7/{k}", EUR),
+]
+for i, (lab, fn, fm) in enumerate(rowsGS):
+    r_ = 18 + i
+    put(sGS, f"A{r_}", lab, font=bold if i in (5, 6) else base)
+    for c, k in pers.items():
+        put(sGS, f"{c}{r_}", fn(c, k), fm, bold if i in (5, 6) else base)
+put(sGS, "A30", "Betreiberfirma Gastro (Bauherr, nicht in der GbR)", font=bold, border=False)
+put(sGS, "A31", "Betriebsergebnis nach Pacht pro Monat"); put(sGS, "B31", "='Ertrag und Cashflow'!B12", EURS)
+put(sGS, "A32", "Betriebsergebnis nach Pacht pro Jahr"); put(sGS, "B32", "='Ertrag und Cashflow'!C12", EURS)
+put(sGS, "A34", "Hinweise: Verluste der GbR können mit anderen Einkünften verrechnet werden, das Finanzamt prüft dabei die Gewinnerzielungsabsicht (Totalüberschuss). Die GbR haftet persönlich und gesamtschuldnerisch. Der Steuersatz von 35 % ist eine Annahme. Die Förderoptionen (degressive Abschreibung, Sonder-AfA) und die NBank-Mietwohnraumförderung sind in der Basisrechnung nicht enthalten.", font=note, border=False)
+for k_, c_ in (("gs_cash_j", "B8"), ("gs_gewinn", "B11"), ("gs_gewinn_opt", "B14"), ("gs_afa", "B10"), ("gs_afa_opt", "B13"), ("gs_wohnanteil", "B12")):
+    reg(k_, sGS, c_)
+
+# =====================================================================================
+# Szenarien (feste Werte aus dem unabhängigen Rechenkern, build_szenarien.py)
+# =====================================================================================
+import os, json as _json
+if os.path.exists("szenarien.json"):
+    SZ = _json.load(open("szenarien.json", encoding="utf-8"))
+    sSZ = sheet("Szenarien", "Vergleich: 12 gegen 8 Wohnungen, ohne und mit Eigenkapital", "Feste Werte aus einem unabhängigen Nachbau des Modells (rechenkern.py), Restaurant und Bar, Gastro getrennt, KfW 297/298/299 berücksichtigt. Das Blatt Basis (12 Wohnungen) im Rest der Datei rechnet live.", [58, 18, 18, 18, 18])
+    header(sSZ, 4, ["Kennzahl"] + ["12 WE ohne EK", "8 WE ohne EK", "12 WE mit EK", "8 WE mit EK"])
+    def f_(k):
+        return [SZ[i][k] for i in range(4)]
+    items = [
+        ("Wohneinheiten", f_("we"), NUM), ("Eigenkapital (für Kapitaldienstdeckung 1,2 gerechnet)", f_("ek"), EUR),
+        ("Gesamtkosten inkl. Finanzierung", f_("gesamt"), EUR), ("KfW-Kredite 297/298/299", f_("kfw"), EUR), ("Hausbank-Darlehen", f_("bank"), EUR),
+        ("Mischzins", f_("mischzins"), PCT2), ("Zinsvorteil durch KfW pro Jahr (gegenüber Hausbank 4 %)", f_("zinsvorteil"), EUR),
+        ("Kapitaldienst pro Monat", f_("rate"), EUR), ("Pacht Gastro pro Monat", f_("pacht"), EUR), ("Nettoertrag Immobilie pro Monat", f_("netto_immo"), EUR),
+        ("Ergebnis der GbR pro Monat nach Kapitaldienst", f_("ergebnis_m"), EURS), ("Ergebnis der GbR pro Jahr", f_("ergebnis_j"), EURS),
+        ("Kapitaldienstdeckung der GbR (DSCR)", f_("dscr"), X), ("Betriebsergebnis Betreiberfirma pro Monat", f_("betreiber_m"), EURS),
+        ("Gesamtergebnis Bauherr pro Monat", f_("gesamt_bauherr_m"), EURS), ("Kosten / Ertrag der GbR vor Kapitaldienst (Vervielfältiger)", f_("vervielf"), "0.00"),
+        ("Kosten / Gesamtergebnis Bauherr pro Jahr", f_("faktor_bauherr"), "0.00"),
+        ("Steuerliches Ergebnis pro Jahr (Verlust negativ)", f_("gewinn"), EURS), ("Steuerliches Ergebnis mit steuerlicher Förderung", f_("gewinn_opt"), EURS),
+    ]
+    for k_, n_ in ((1, "1 Person"), (2, "2 Personen"), (4, "4 Personen"), (8, "8 Personen")):
+        items.append((f"Cash pro Person und Monat vor Steuern, {n_}", [SZ[i]["kopf"][str(k_)]["cash_m"] for i in range(4)], EURS))
+    for k_, n_ in ((1, "1 Person"), (2, "2 Personen"), (4, "4 Personen"), (8, "8 Personen")):
+        items.append((f"Cash pro Person und Monat nach Steuer, {n_}", [SZ[i]["kopf"][str(k_)]["cash_steuer_m"] for i in range(4)], EURS))
+    for k_, n_ in ((1, "1 Person"), (2, "2 Personen"), (4, "4 Personen"), (8, "8 Personen")):
+        items.append((f"Eigenkapital pro Person, {n_}", [SZ[i]["kopf"][str(k_)]["ek"] for i in range(4)], EUR))
+    for i, (lab, vals, fm) in enumerate(items):
+        r_ = 5 + i
+        put(sSZ, f"A{r_}", lab)
+        for j, v_ in enumerate(vals):
+            put(sSZ, f"{'BCDE'[j]}{r_}", v_, fm)
+    put(sSZ, f"A{6 + len(items)}", "Annahmen: Gastro-Umsatz 95.635 €/Monat (Restaurant und Bar), Pacht 10 % vom Umsatz (mindestens 10 €/m²), Mehrkosten 15.000 € je Wohnung über 8, Steuersatz 35 %. Steuerliche Förderung: degressive AfA und Sonder-AfA nur im Wohnteil.", font=note, border=False)
+
+order = ["Übersicht", "Annahmen", "Flächen und Mieten", "Gewerbe und Anker", "Kosten und Finanzierung", "Bauphase", "Tilgung Jahre", "Tilgungsplan", "Ertrag und Cashflow", "Gesellschafter", "Szenarien", "Gastro Betrieb", "Gastro Tagesteile", "Ertragswert", "Prognose", "Sensitivität", "Airbnb Prüfung", "Bankunterlagen"]
+wb._sheets = [wb[n] for n in order if n in wb.sheetnames]
 for ws in wb.worksheets:
     ws.sheet_properties.tabColor = GREEN if ws.title in ("Übersicht", "Annahmen") else GOLD
     ws.page_setup.orientation = "landscape"
