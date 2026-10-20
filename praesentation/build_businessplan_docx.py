@@ -254,7 +254,7 @@ H("Baukonzept und Flächen")
 para("Das Gebäude hat eine Grundfläche von 32 × 18 m (576 m², das Maximum der Grundflächenzahl). Das Erdgeschoss ist vollverglast und gehört ganz der Gastro, Treppenhaus und Aufzug liegen am Westende und erschließen Büros und Wohnungen getrennt von der Gastro. Im 1. Obergeschoss liegen die zwei Büros und 3 Wohnungen, im Staffelgeschoss 5 Wohnungen. Das 1. Obergeschoss ist in rotbraunem Klinker mit Balkonen und Milchglas-Brüstungen ausgeführt, das Staffelgeschoss in Holzbau mit schmaler Dachterrasse (ca. 0,8 m, 77 m²) rundum. Holzbau spart ca. 184.000 € gegenüber Massivbau (Annahme, Angebot der Zimmerei nötig) und hilft beim Effizienzhaus-40-Standard.")
 table([
     ["Geschoss", "BGF", "Nutzung", "Einheiten", "Fläche"],
-    ["Erdgeschoss", "576 m²", "Gastro mit Bar, Séparée, kleiner Küche", "1", "ca. 510 m²"],
+    ["Erdgeschoss", "576 m²", "Gastro mit Bar, Séparée, Küche", "1", "ca. 510 m²"],
     ["1. Obergeschoss", "576 m²", "Büro 1, Büro 2, Wohnen", "2 + 3 × 107 m²", "165 m² Büro, 321 m² Wohnen"],
     ["Staffelgeschoss (Holzbau)", "498 m²", "Wohnen", "5 × 67 m²", "334 m²"],
     ["Summe", "1.650 m²", "", "8 Wohnungen, 2 Büros", "655 m² Wohnen, 165 m² Büro"],
@@ -274,7 +274,7 @@ para("Die Miete von 11,18 €/m² (950 € für 85 m², Annahme des Bauherrn) li
 
 # ------------------------------------------------------------------ Gewerbe
 H("Gewerbeflächen: große Gastro und zwei Ankermieter")
-para("Die Grundfläche wurde auf das zulässige Maximum von 576 m² (GRZ 0,6 × 960 m²) vergrößert. Das Erdgeschoss gehört vollständig der Gastro, abzüglich Treppenhaus, Aufzug und Eingängen (66 m²) bleiben 510 m². Die Größe ist aus dem Platzbedarf abgeleitet: 160 Plätze im Gastraum und 30 im Séparée brauchen mit großer Bar, kleiner Küche, Lager, WC und Eingang genau diese Fläche. Das sind 2,7 m² je Platz (Richtwert 2,5 bis 3 m²).")
+para("Die Grundfläche wurde auf das zulässige Maximum von 576 m² (GRZ 0,6 × 960 m²) vergrößert. Das Erdgeschoss gehört vollständig der Gastro, abzüglich Treppenhaus, Aufzug und Eingängen (66 m²) bleiben 510 m². Die Größe ist aus dem Platzbedarf abgeleitet: 160 Plätze im Gastraum und 30 im Séparée brauchen mit Bar, Küche, Lager, WC und Eingang genau diese Fläche. Das sind 2,7 m² je Platz (Richtwert 2,5 bis 3 m²).")
 rows = [["Gastro-Flächenbedarf", "Menge", "Fläche"]]
 for r_ in B["gastro_bedarf"]:
     rows.append([r_[0], f"{r_[1]} Plätze" if r_[1] > 1 else "–", fmt(r_[3]) + " m²"])
@@ -297,7 +297,7 @@ bullets([
 
 # ------------------------------------------------------------------ 4 Gastro
 H("Gastro-Konzept")
-para("Die Gastro nutzt das ganze Erdgeschoss (ca. 510 m²) als Café und Bar für den ganzen Tag mit dem Hauptfokus auf dem Abend. Morgens gibt es Frühstück (am Wochenende Brunch), mittags Bowls, Salate und Suppe für Beschäftigte aus Rathaus und Umgebung, nachmittags Kaffee und Kuchen. Ab 17 Uhr wird das Haus zur Bar mit Cocktails, Wein, Bier und einer kleinen Snackkarte (Fr und Sa bis 01 Uhr), eine große Restaurantküche gibt es nicht. Dazu kommen Live-Musik, Feiern und Themenabende im Séparée (abgetrennter Raum mit 30 Plätzen). Die Gestaltung folgt dem Referenzbild des Bauherrn: olivgrüne Vertäfelung, Cognac-Samtbanketten, Eiche, anthrazitfarbene Theke, Stahl-Glas-Trennwand und warmes Licht.")
+para("Die Gastro nutzt das ganze Erdgeschoss (ca. 510 m²) als Bar-Restaurant für den ganzen Tag mit dem Hauptfokus auf dem Abend. Morgens gibt es Frühstück (am Wochenende Brunch), mittags einen Mittagstisch für Beschäftigte aus Rathaus und Umgebung. Ab dem späten Nachmittag wird das Haus zum Abendrestaurant mit regionaler, moderner Küche, ab 21 Uhr zur Bar mit Cocktails, Wein, Bier und leiser Musik (Fr und Sa bis 01 Uhr). Dazu kommen Feiern, Live-Abende und Themenabende im Séparée (abgetrennter Raum mit 30 Plätzen). Die Gestaltung folgt dem Referenzbild des Bauherrn: olivgrüne Vertäfelung, Cognac-Samtbanketten, Eiche, anthrazitfarbene Theke, Stahl-Glas-Trennwand und warmes Licht.")
 table([
     ["Merkmal", "Annahme"],
     ["Plätze", "ca. 190 innen (160 Gastraum, 30 Séparée), ca. 60 auf der Terrasse, 12 Barhocker"],
@@ -307,7 +307,7 @@ table([
     ["Pacht an das Haus", f"10 €/m², {eur(B['pacht_monat'])} pro Monat (ca. " + pct(B['g_pacht_quote'], 1) + " vom Umsatz)"],
     ["Ausbau", "190.000 € (1.000 € je Platz nach dem Budget des Bauherrn, Angebote nötig), dazu Büro-Ausbau 150 €/m²"],
 ], [4.0, 12.6], font=9)
-para(f"Der Umsatz setzt sich aus Tagesteilen zusammen. Der Abend (Bar mit Snacks, Events) bringt {pct(B['g_abend_anteil'], 0)} des Umsatzes, Frühstück, Bowls und Kaffee füllen das Haus am Tag. Öffnungstage, Gäste und Bon sind Annahmen, es liegen keine Marktdaten für Werlte vor.", after=4)
+para(f"Der Umsatz setzt sich aus Tagesteilen zusammen. Der Abend (Restaurant, Bar, Feiern) bringt {pct(B['g_abend_anteil'], 0)} des Umsatzes, Frühstück und Mittag füllen das Haus am Tag. Öffnungstage, Gäste und Bon sind Annahmen, es liegen keine Marktdaten für Werlte vor.", after=4)
 rows = [["Tagesteil", "Zeit", "Tage", "Gäste/Tag", "Ø Bon", "Umsatz/Monat", "Anteil"]]
 for nm, zt, tg, gs, bon, um, an in B["tagesteile"]:
     rows.append([nm, zt, fmt(tg, 0), fmt(gs, 0), eur(bon), eur(um), pct(an, 0)])
@@ -316,7 +316,7 @@ table(rows, [4.6, 4.2, 1.2, 1.7, 1.4, 2.2, 1.3], right_cols=(2, 3, 4, 5, 6), bol
 rows = [["Umsatz pro Monat", "Gewinn vor Pacht", "Gewinn nach Pacht"]]
 for u, g, n in B["gastro_umsatz"]:
     rows.append([eur(u), eur(g), eurs(n)])
-table(rows, [5.0, 5.8, 5.8], right_cols=(1, 2), bold_rows=(3,), font=9)
+table(rows, [5.0, 5.8, 5.8], right_cols=(1, 2), bold_rows=(4,), font=9)
 para(f"Der Gastro-Betrieb deckt seine Pacht ab ca. {eur(round(B['g_breakeven'], -2))} Umsatz im Monat. Der Lohn des Bauherrn ist nicht gerechnet. Ausführliche Gestaltung, Grundriss, Speisekarte und Personalplan stehen im Gastro-Konzept.", after=4)
 
 # ------------------------------------------------------------------ 5 Kosten
@@ -431,7 +431,7 @@ rows = [["Belastungstest (pro Monat)", "Ergebnis", "DSCR", "zum Plan"]]
 for i, (lab, e, d, z) in enumerate(B["sens"]):
     rows.append([lab, eurs(e), fmt(d, 2), "" if i == 0 else eurs(z)])
 table(rows, [8.6, 2.8, 2.0, 3.2], right_cols=(1, 2, 3), bold_rows=(1,), font=9)
-para("Die Tests sind vereinfacht. Das Ergebnis reagiert am stärksten auf den Gastro-Umsatz und die Pacht. Bei einem Umsatz −40 % liegt die Kapitaldienstdeckung knapp über 1,0, bei einem Ausfall der Gastro reicht der Ertrag nicht mehr für die Raten. Ein Auszug eines Ankermieters ist verkraftbar.", after=4)
+para("Die Tests sind vereinfacht. Das Ergebnis reagiert am stärksten auf den Gastro-Umsatz und die Pacht. Bei einem Umsatz −40 % liegt die Kapitaldienstdeckung noch über 1,4, bei einem Ausfall der Gastro reicht der Ertrag nicht mehr für die Raten. Ein Auszug eines Ankermieters ist verkraftbar.", after=4)
 
 # ------------------------------------------------------------------ 11 Airbnb
 H("Prüfung: ein 60-m²-Apartment als Airbnb")

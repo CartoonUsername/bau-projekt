@@ -213,7 +213,7 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
   text(s, "Nord", { x: x0, y: yBase + 0.1, w: 0.6, h: 0.3, fontSize: 12, color: C.accent4 });
   const rows = [
     [hdr("Ebene"), hdr("Nutzung"), hdr("BGF", "right")],
-    [cell("EG"), cell("Gastro ca. 510 m² mit großer Bar, Séparée und kleiner Küche, dazu Treppenhaus, Aufzug, Eingänge"), R("576 m²")],
+    [cell("EG"), cell("Gastro ca. 510 m² mit Bar, Séparée und Küche, dazu Treppenhaus, Aufzug, Eingänge"), R("576 m²")],
     [cell("1. OG"), cell("2 Büro-Ankermieter (100 und 65 m²), 3 Wohnungen à ca. 107 m²"), R("576 m²")],
     [cell("Staffel"), cell("5 Wohnungen à ca. 67 m², Holzbau, schmale Terrasse rundum"), R("498 m²")],
     [cell("Summe", { bold: true }), cell("8 Wohnungen (655 m²), 2 Büros (165 m²)", { bold: true }), R("1.650 m²", { bold: true })],
@@ -483,7 +483,7 @@ if (KI.length) {
 
 // ===== 14a Gastro Tagesteile =====
 {
-  const s = content("Gastro-Umsatz: Hauptfokus Abend", "Für die Bank", "Frühstück und Bowls am Tag, Bar mit Snacks am Abend. Öffnungstage, Gäste und Bon sind Annahmen ohne Marktdaten für Werlte, Ruhetag Montag.");
+  const s = content("Gastro-Umsatz: Hauptfokus Abend", "Für die Bank", "Frühstück und Mittag am Tag, Restaurant und Bar am Abend. Öffnungstage, Gäste und Bon sind Annahmen ohne Marktdaten für Werlte, Ruhetag Montag.");
   const rows = [[hdr("Tagesteil"), hdr("Tage", "right"), hdr("Gäste/Tag", "right"), hdr("Ø Bon", "right"), hdr("Umsatz/Monat", "right"), hdr("Anteil", "right")]];
   B.tagesteile.forEach((r) => rows.push([cell(r[0] + " (" + r[1] + ")"), R(String(r[2])), R(String(r[3])), R(eur(r[4])), R(eur(r[5])), R(pct(r[6]))]));
   rows.push([cell("Gastro-Umsatz pro Monat", { bold: true }), R(""), R(""), R(""), R(eur(B.g_umsatz_monat), { bold: true }), R("100 %", { bold: true })]);
@@ -491,7 +491,7 @@ if (KI.length) {
   card(s, 9.5, 1.5, W - 9.5 - MX, 4.7, "Einordnung");
   text(s, [
     { text: "Abend im Fokus", options: { bold: true, color: C.accent1, breakLine: true } },
-    { text: `${pct(B.g_abend_anteil)} des Umsatzes entstehen am Abend (Bar mit Snacks, Events), ${pct(B.g_tag_anteil)} am Tag.`, options: { breakLine: true } },
+    { text: `${pct(B.g_abend_anteil)} des Umsatzes entstehen am Abend (Restaurant, Bar, Feiern), ${pct(B.g_tag_anteil)} am Tag.`, options: { breakLine: true } },
     { text: " ", options: { breakLine: true } },
     { text: "Plausibel?", options: { bold: true, color: C.accent1, breakLine: true } },
     { text: `ca. ${eur(Math.round(B.g_umsatz_platz / 100) * 100)} je Platz und Jahr, Branchen-Median Österreich ca. 12.000 €. Das Haus trägt sich ab ${eur(Math.round(B.breakeven_haus / 100) * 100)} Umsatz.`, options: {} },
@@ -709,9 +709,9 @@ if (KI.length) {
 {
   const s = content("Gastro-Ausbau nach Posten", "Anhang", "Ausgehend vom Zielbudget des Bauherrn (150.000 € für 150 Plätze) hochgerechnet auf 190 Plätze: 1.000 € je Platz. Büros: Vermieter-Ausbau 150 €/m² zusätzlich. Angebote müssen es bestätigen.");
   const items = [
-    ["Küche (Bowl- und Snackküche, Kühlräume, Spülküche)", 28000],
+    ["Küche (Herd, Kühlräume, Edelstahl, Spülküche)", 38000],
     ["Lüftung und Abluft", 23000],
-    ["Theke und Bar (Zapfanlage, Kühlung, Backbar, große Theke)", 35000],
+    ["Theke und Bar (Zapfanlage, Kühlung, Backbar)", 25000],
     ["Möbel (ca. 190 Plätze, Lounge, Séparée)", 36000],
     ["Beleuchtung und Deko", 10000],
     ["Wand, Boden, Decke, Akustik", 19000],

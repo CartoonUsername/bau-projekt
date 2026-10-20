@@ -141,8 +141,8 @@ ASSUME = [
     ("plaetze_sep", "Plätze im Séparée", 30, NUM, "Planung"),
     ("m2_platz", "Fläche je Platz im Gastraum (m²)", 1.9, "0.0", "Richtwert Gastraum 1,6–2,2 m² je Platz"),
     ("m2_platz_sep", "Fläche je Platz im Séparée (m²)", 1.4, "0.0", "Richtwert Festtafel"),
-    ("fl_bar", "Bar- und Theken-Zone (m²)", 45, NUM, "große Theke, Backbar, Service, Stehtische (Bar im Fokus)"),
-    ("fl_kueche", "Küche mit Spülküche (m²)", 35, NUM, "kleine Bowl- und Snack-Küche, keine große Restaurantküche"),
+    ("fl_bar", "Bar- und Theken-Zone (m²)", 25, NUM, "Theke, Backbar, Service"),
+    ("fl_kueche", "Küche mit Spülküche (m²)", 55, NUM, "Richtwert ca. 25–30 % der Gastraumfläche"),
     ("fl_lager", "Lager, Kühlung, Anlieferung (m²)", 25, NUM, ""),
     ("fl_wc", "WC (Herren, Damen, barrierefrei) (m²)", 22, NUM, "ca. 1 WC je 25 Plätze"),
     ("fl_eingang", "Eingang, Garderobe, Flure, Technik (m²)", 37, NUM, "Rest bis zur Gastrofläche"),
@@ -241,7 +241,7 @@ need = [
     ("Gastraum inkl. Lounge", f"={A['plaetze_gast']}", f"={A['m2_platz']}", "=B5*C5", "Plätze × Richtwert"),
     ("Séparée (Feiern)", f"={A['plaetze_sep']}", f"={A['m2_platz_sep']}", "=B6*C6", "Festtafel"),
     ("Bar und Theken-Zone", 1, f"={A['fl_bar']}", "=B7*C7", ""),
-    ("Küche (Bowls, Snacks) mit Spülküche", 1, f"={A['fl_kueche']}", "=B8*C8", ""),
+    ("Küche mit Spülküche", 1, f"={A['fl_kueche']}", "=B8*C8", ""),
     ("Lager, Kühlung, Anlieferung", 1, f"={A['fl_lager']}", "=B9*C9", ""),
     ("WC (Herren, Damen, barrierefrei)", 1, f"={A['fl_wc']}", "=B10*C10", ""),
     ("Eingang, Garderobe, Flure, Technik", 1, f"={A['fl_eingang']}", "=B11*C11", ""),
@@ -461,7 +461,7 @@ put(sG, "A20", "Break-even-Umsatz des Betriebs (Ergebnis nach Pacht = 0)"); put(
 put(sG, "D16", "Marge laut Annahmen muss mit 30,5 % übereinstimmen", font=note)
 reg("g_gewinn_vor_pacht", sG, "C16"); reg("g_ergebnis", sG, "C19"); reg("g_breakeven", sG, "C20")
 header(sG, 23, ["Umsatz pro Monat", "", "Gewinn vor Pacht", "Gewinn nach Pacht"])
-for i, u in enumerate([40000, 50000, f"={A['umsatz']}", 80000, 95000]):
+for i, u in enumerate([50000, 65000, 80000, f"={A['umsatz']}", 110000]):
     r = 24 + i
     put(sG, f"A{r}", u, EUR, inp); put(sG, f"C{r}", f"=A{r}*$B$16", EUR); put(sG, f"D{r}", f"=C{r}-'Flächen und Mieten'!$F$22-{A['lohn']}", EURS)
 put(sG, "A30", "Bei sehr niedrigem Umsatz drücken Fixkosten stärker: die Rechnung ist dort zu günstig.", font=note, border=False)
@@ -469,16 +469,16 @@ put(sG, "A30", "Bei sehr niedrigem Umsatz drücken Fixkosten stärker: die Rechn
 # =====================================================================================
 # Gastro Tagesteile
 # =====================================================================================
-sTT = sheet("Gastro Tagesteile", "Gastro-Umsatz nach Tagesteilen: Frühstück, Mittag, Bar am Abend", "Tagsüber Frühstück und Bowls, abends Bar mit Snacks. Öffnungstage, Gäste und Bon sind Annahmen (keine Marktdaten für Werlte), Ruhetag Montag.", [42, 24, 12, 12, 12, 16, 12])
+sTT = sheet("Gastro Tagesteile", "Gastro-Umsatz nach Tagesteilen: Frühstück, Mittag, Abend, Bar", "Hauptfokus Abend mit Restaurant und Bar. Öffnungstage, Gäste und Bon sind Annahmen (keine Marktdaten für Werlte), Ruhetag Montag.", [42, 24, 12, 12, 12, 16, 12])
 header(sTT, 4, ["Tagesteil", "Zeit", "Tage / Monat", "Gäste / Tag", "Ø Bon (€)", "Umsatz / Monat", "Anteil"])
 TT = [
-    ("Frühstück werktags", "Di–Fr 08:00–11:00", 17, 30, 11),
+    ("Frühstück werktags", "Di–Fr 08:00–11:00", 17, 25, 11),
     ("Brunch am Wochenende", "Sa, So 09:00–14:00", 9, 60, 14),
-    ("Mittag: Bowls, Salate, Suppe", "Di–Fr 11:30–14:30", 17, 40, 13),
-    ("Nachmittag: Kaffee, Kuchen, Snacks", "Di–So 14:30–17:00", 26, 20, 7),
-    ("Bar mit Snacks Di–Do, So", "ab 17:00", 17, 35, 20),
-    ("Bar Fr, Sa (bis 01:00)", "Cocktails, Wein, Bier, Snacks", 9, 90, 26),
-    ("Events: Live-Musik, Feiern", "nach Absprache, 4 pro Monat", 4, 40, 40),
+    ("Mittagstisch", "Di–Fr 11:30–14:30", 17, 50, 14),
+    ("Abendessen Restaurant", "Di–So 17:30–22:00", 26, 55, 32),
+    ("Bar Di–Do", "ab 21:00", 13, 20, 18),
+    ("Bar Fr, Sa (bis 01:00)", "Cocktails, Wein, Bier, Musik", 9, 70, 22),
+    ("Feiern, Live-Abende, Séparée", "nach Absprache, 4 pro Monat", 4, 40, 45),
 ]
 for i, (nm, zt, tg, gs, bon) in enumerate(TT):
     r_ = 5 + i
@@ -486,12 +486,12 @@ for i, (nm, zt, tg, gs, bon) in enumerate(TT):
     put(sTT, f"C{r_}", tg, "0", inp); put(sTT, f"D{r_}", gs, "0", inp); put(sTT, f"E{r_}", bon, EUR, inp)
     put(sTT, f"F{r_}", f"=C{r_}*D{r_}*E{r_}", EUR); put(sTT, f"G{r_}", f"=F{r_}/$F$14", PCT)
 put(sTT, "A14", "Gastro-Umsatz pro Monat (netto)", font=bold); put(sTT, "F14", "=SUM(F5:F11)", EUR, bold, fill=key_fill); put(sTT, "G14", "=SUM(G5:G11)", PCT, bold)
-put(sTT, "A15", "davon Tag (Frühstück, Brunch, Mittag, Nachmittag)"); put(sTT, "F15", "=SUM(F5:F8)", EUR); put(sTT, "G15", "=F15/F14", PCT)
-put(sTT, "A16", "davon Abend (Bar mit Snacks, Events)", font=bold); put(sTT, "F16", "=SUM(F9:F11)", EUR, bold); put(sTT, "G16", "=F16/F14", PCT, bold)
+put(sTT, "A15", "davon Tag (Frühstück, Brunch, Mittag)"); put(sTT, "F15", "=SUM(F5:F7)", EUR); put(sTT, "G15", "=F15/F14", PCT)
+put(sTT, "A16", "davon Abend (Restaurant, Bar, Feiern)", font=bold); put(sTT, "F16", "=SUM(F8:F11)", EUR, bold); put(sTT, "G16", "=F16/F14", PCT, bold)
 put(sTT, "A17", "Gäste pro Monat"); put(sTT, "F17", "=SUMPRODUCT(C5:C11,D5:D11)", NUM)
 put(sTT, "A18", "Umsatz je Platz und Jahr (190 Plätze)"); put(sTT, "F18", f"=F14*12/({A['plaetze_gast']}+{A['plaetze_sep']})", EUR); put(sTT, "G18", "", font=note)
-put(sTT, "A19", "Auslastung der Plätze an der Bar Fr, Sa (Gäste je Abend / Plätze)"); put(sTT, "F19", f"=D10/({A['plaetze_gast']}+{A['plaetze_sep']})", PCT)
-put(sTT, "A21", "Einordnung: Die Bar mit Snacks am Abend trägt den größten Teil des Umsatzes, Frühstück und Bowls füllen das Haus am Tag. Terrasse im Sommer, Catering und Weihnachtsfeiern sind nicht eingerechnet. Branchen-Median Österreich ca. 12.000 € je Platz und Jahr.", font=note, border=False)
+put(sTT, "A19", "Auslastung der Plätze am Abend (Restaurantgäste je Tag / Plätze)"); put(sTT, "F19", f"=D8/({A['plaetze_gast']}+{A['plaetze_sep']})", PCT)
+put(sTT, "A21", "Einordnung: Der Abend (Restaurant, Bar, Feiern) trägt den größten Teil des Umsatzes, Frühstück und Mittagstisch füllen das Haus am Tag. Terrasse im Sommer, Catering und Weihnachtsfeiern sind nicht eingerechnet. Branchen-Median Österreich ca. 12.000 € je Platz und Jahr.", font=note, border=False)
 reg("g_umsatz_monat", sTT, "F14"); reg("g_abend_anteil", sTT, "G16"); reg("g_tag_anteil", sTT, "G15"); reg("g_gaeste_monat", sTT, "F17")
 
 # =====================================================================================
@@ -712,7 +712,7 @@ header(sU, 4, ["Nr.", "Unterlage", "Inhalt / Hinweis", "Status"])
 docs = [
     ("Projekt", "Businessplan (Word) und Präsentation", "Vorhaben, Konzept, Zahlen, Risiken. Liegt vor.", "vorhanden"),
     ("Projekt", "Rechenmodell mit Finanzierungs- und Tilgungsplan", "Diese Excel-Datei.", "vorhanden"),
-    ("Projekt", "Gastro-Konzept mit Gestaltung", "Konzept (Frühstück, Bowls, Bar mit Snacks), Grundriss, Karte, Umsatzaufbau.", "vorhanden"),
+    ("Projekt", "Gastro-Konzept mit Gestaltung", "Konzept, Grundriss, Speisekarte, Umsatzaufbau.", "vorhanden"),
     ("Projekt", "Lageplan, Flurkarte, Grundbuchauszug", "Baufeld 3, ca. 960 m². Grundbuchauszug nach Kaufvertrag.", "offen"),
     ("Projekt", "Bebauungsplan Nr. 123, 1. Änderung und Konzeptheft", "Festsetzungen, städtebaulicher Vertrag. Entwurf Stand 25.08.2026.", "teilweise"),
     ("Projekt", "Grundstückskaufvertrag oder Reservierung der Stadt", "Preis 230 €/m², Zuschnitt, Baureife.", "offen"),
