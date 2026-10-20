@@ -8,23 +8,23 @@ from docx.oxml import OxmlElement
 B = json.load(open("bank_values.json"))
 GREEN = RGBColor(0x2E, 0x4A, 0x3E); RED = RGBColor(0x8B, 0x3A, 0x2F); GREY = RGBColor(0x5A, 0x5F, 0x66)
 def n(x, d=0): return f"{x:,.{d}f}".replace(",", "X").replace(".", ",").replace("X", ".")
-def eur(x): return n(x) + " €"
+def eur(x): return ("−" if x < 0 else "") + n(abs(x)) + " €"
+def eurs(x): return ("+" if x > 0 else "−" if x < 0 else "") + n(abs(x)) + " €"
 
-kosten = B["k_gesamt"]; land = B["k_land_ges"]; fin = B["k_fin"]
+kosten = B["k_gesamt"]
+G = B["gs_kopf"]; Z = B["szenarien"]
 roh = B["rohertrag"]; rueck = -B["c_rueck"] * 12
-gastro = B["c_gastro"] * 12
-zins = B["zins_jahr1"]; tilg = B["tilg_jahr1"]; rate = B["rate_jahr1"]
-afa = 0.03 * (kosten - land - fin)
-vor_kd = roh - rueck + gastro
-cash = vor_kd - rate
-gewinn = vor_kd - zins - afa
-immo_cash = roh - rueck - rate
+netto = B["c_netto_immo"] * 12
+rate = -B["c_kd"] * 12
+cash = B["c_ergebnis"] * 12
+betreiber = B["c_gastro"] * 12
+zins = B["zins_jahr1"]; tilg = B["tilg_jahr1"]
 
 doc = Document()
 sec = doc.sections[0]; sec.page_width = Cm(21); sec.page_height = Cm(29.7)
 for a in ("left_margin", "right_margin"): setattr(sec, a, Cm(2))
-sec.top_margin = Cm(1.8); sec.bottom_margin = Cm(1.6)
-st = doc.styles["Normal"]; st.font.name = "Calibri"; st.font.size = Pt(10.5)
+sec.top_margin = Cm(1.4); sec.bottom_margin = Cm(1.2)
+st = doc.styles["Normal"]; st.font.name = "Calibri"; st.font.size = Pt(9.5)
 st.element.rPr.rFonts.set(qn("w:eastAsia"), "Calibri")
 
 def para(t, bold=False, size=None, color=None, after=4, italic=False, font=None):
@@ -54,40 +54,40 @@ def table(rows, widths, right=(), boldrows=()):
 
 para("NEUE MITTE WERLTE · BAUFELD 3", bold=True, size=9, color=RGBColor(0xB8, 0x8A, 0x2E), after=0)
 para("Kosten, Nutzen und Gewinn pro Kopf", size=22, color=GREEN, after=2, font="Georgia")
-para("Kurze Erklärung für die Gesellschafter einer GbR. Basis: Excel-Rechenmodell (8 Wohnungen, 2 Büros, Gastro 510 m²), Jahr 1 nach der Anlaufzeit. Alle Zahlen sind Planungsannahmen, Stand Oktober 2026.", italic=True, color=GREY, size=9.5, after=6)
+para("Kurze Erklärung für die Gesellschafter einer Vermietungs-GbR. Basis: Excel-Rechenmodell (12 Wohnungen, 2 Büros, Restaurant und Bar 510 m² als getrennte Betreiberfirma), Jahr 1 nach der Anlaufzeit, ohne Eigenkapital. Alle Zahlen sind Planungsannahmen, Stand Oktober 2026.", italic=True, color=GREY, size=9.5, after=6)
 
 head("1 Was kostet das Projekt?")
-para(f"Die Gesamtkosten liegen bei {eur(kosten)} (Grundstück {eur(land)}, Bau, Nebenkosten, Gastro- und Büro-Ausbau, Finanzierungskosten in der Bauzeit). Sie werden zu 100 % über KfW-Kredite und Hausbank finanziert, die Gesellschafter zahlen kein Eigenkapital ein. Die Rate für Zins und 1 % Tilgung beträgt {eur(rate / 12)} im Monat ({eur(rate)} im Jahr).")
+para(f"Die Gesamtkosten liegen bei {eur(kosten)} (Grundstück, Bau, Nebenkosten, Ausbau, Mehrkosten für 4 zusätzliche Wohnungen, Finanzierungskosten der Bauzeit). Finanziert wird mit KfW-Krediten ({eur(B['kredit_297'] + B['kredit_298'] + B['kredit_299'])}, {n(B['kredit_kfw_anteil'] * 100, 0)} %) und Hausbank, die Gesellschafter zahlen im Basisfall kein Eigenkapital. Die KfW-Förderung spart {eur(B['foerder_zins_jahr'])} Zinsen im Jahr gegenüber reiner Hausbank-Finanzierung. Zins und 1 % Tilgung betragen {eur(rate / 12)} im Monat ({eur(rate)} im Jahr).")
 
-head("2 Was kommt rein? (pro Jahr)")
+head("2 Was kommt rein? (Vermietungs-GbR, pro Jahr)")
 table([
     ["Position", "pro Jahr"],
-    ["Mieten Wohnen (8 Wohnungen, 655 m²) + Büros (2 Ankermieter) + Gastro-Pacht", eur(roh)],
+    ["Mieten Wohnen (12 Wohnungen, 655 m²) + Büros (2 Ankermieter) + Gastro-Pacht (10 % vom Umsatz)", eur(roh)],
     ["abzüglich Rücklagen (10 %: Verwaltung, Instandhaltung, Leerstand)", "−" + eur(rueck)],
-    ["Gastro-Betriebsergebnis nach Pacht (Umsatz 65.010 € im Monat, ohne Lohn)", eur(gastro)],
-    ["Ertrag vor Kapitaldienst", eur(vor_kd)],
+    ["Nettoertrag der GbR", eur(netto)],
     ["Zins und Tilgung an die Banken", "−" + eur(rate)],
-    ["Cash für die Gesellschafter", eur(cash)],
-], [13.2, 3.8], right=(1,), boldrows=(4, 6))
-para(f"Nutzen-Faktor: Der Ertrag vor Kapitaldienst entspricht {n(vor_kd / kosten * 100, 1)} % der Gesamtkosten (Anfangsrendite), die Kosten sind also das {n(kosten / vor_kd, 1)}-Fache des Jahresertrags. Nur aus Mieten und Pacht wären es {n((roh - rueck) / kosten * 100, 1)} %, das reicht nicht für die Raten.", after=4)
+    ["Cash der GbR für die Gesellschafter", eurs(cash)],
+], [13.2, 3.8], right=(1,), boldrows=(3, 5))
+para(f"Nutzen-Faktor: Der Nettoertrag entspricht {n(netto / kosten * 100, 1)} % der Gesamtkosten (Anfangsrendite), die Kosten sind das {n(kosten / netto, 1)}-Fache des Jahresertrags. Die Kapitaldienstdeckung der GbR beträgt {n(B['dscr'], 2)}, Banken verlangen meist 1,2. Das Gastro-Betriebsergebnis ({eur(betreiber)} im Jahr nach Pacht) gehört der Betreiberfirma des Bauherrn und ist nicht enthalten.", after=4)
 
 head("3 Was bekommt jeder? (gleiche Anteile)")
-rows = [["Personen", "Cash pro Person / Monat", "Cash pro Person / Jahr", "Gewinn zu versteuern / Jahr", "Nach Steuer / Monat", "Tilgung pro Person / Jahr"]]
-for k in (1, 2, 4, 8):
-    steuer = 0.35 * gewinn / k
-    rows.append([str(k), eur(cash / 12 / k), eur(cash / k), eur(gewinn / k), eur((cash / k - steuer) / 12), eur(tilg / k)])
-table(rows, [2.0, 3.2, 3.2, 3.2, 3.0, 2.4], right=(1, 2, 3, 4, 5))
-para(f"Steuerlich ist der Gewinn nur {eur(gewinn)} im Jahr: Zinsen ({eur(zins)}) und Gebäudeabschreibung 3 % ({eur(afa)}) mindern ihn, die Tilgung ({eur(tilg)}) nicht. Die Tilgung ist aber Vermögensaufbau, denn sie senkt die Schulden. Der Steuersatz von 35 % ist eine Annahme und hängt vom persönlichen Einkommen ab.", after=4)
+rows = [["Personen", "Cash pro Person / Monat", "Cash pro Person / Jahr", "Steuerlicher Verlust / Jahr", "Nach Steuer / Monat", "Mit Förder-option / Monat"]]
+for c, k in ((1, 1), (2, 2), (3, 4), (4, 8)):
+    rows.append([str(k), eurs(G[2][c]), eurs(G[1][c]), eurs(G[3][c]), eurs(G[6][c]), eurs(G[9][c])])
+table(rows, [1.8, 3.0, 3.0, 3.2, 3.0, 3.0], right=(1, 2, 3, 4, 5))
+para(f"Ohne Eigenkapital liegt der Cash knapp unter null. Nach Steuer (35 % Grenzsteuersatz, Annahme) bleibt es positiv, weil Zinsen ({eur(zins)}) und Gebäudeabschreibung 3 % ({eur(B['gs_afa'])}) einen steuerlichen Verlust von {eur(-B['gs_gewinn'])} erzeugen, den die Gesellschafter mit anderen Einkünften verrechnen. Die Tilgung ({eur(tilg)} im Jahr, {eur(tilg / 8)} pro Person bei 8) baut Vermögen auf. Die Förderoption (degressive AfA und Sonder-AfA im Wohnteil) erhöht die Abschreibung auf {eur(B['gs_afa_opt'])}, Fristen müssen geprüft werden.", after=4)
+z = Z[2]
+para(f"Mit Eigenkapital: Bringen die Gesellschafter {eur(z['ek'])} ein ({eur(z['kopf']['8']['ek'])} pro Kopf bei 8 Personen), erreicht die GbR Deckung 1,2 und {eurs(z['ergebnis_m'])} Cash im Monat ({eurs(z['kopf']['8']['cash_m'])} pro Kopf bei 8 Personen vor Steuern). Mit 8 statt 12 Wohnungen wären es {eur(Z[3]['ek'])} Eigenkapital.", after=4)
 
 head("4 Wo liegt das Risiko?")
 for t in [
-    f"Ohne Gastro-Gewinn fehlen {eur(-immo_cash)} im Jahr (Kapitaldienstdeckung nur {n(B['dscr_immo'], 2)}), der Gewinn hängt also an einer gut laufenden Gastro.",
-    f"Der Beleihungsauslauf liegt bei {n(B['auslauf'] * 100, 0)} %: Die Bank verlangt zusätzliche Sicherheiten (Grundschulden, Bürgschaften oder Eigenkapital), die Lücke zur 80-%-Grenze beträgt etwa 2,77 Mio € insgesamt.",
-    "Eine GbR haftet mit dem persönlichen Vermögen aller Gesellschafter. Betreibt die GbR auch die Gastro, ist sie komplett gewerblich (Gewerbesteuer), besser ist eine getrennte Betreiberfirma, die Pacht zahlt.",
-    "Der Lohn des Bauherrn, mögliche Sonderabschreibungen und Gewerbesteuer sind nicht gerechnet. Steuerberater und Bank müssen das prüfen.",
+    f"Die Pacht hängt am Gastro-Umsatz (Plan {eur(B['g_umsatz_monat'])} im Monat). Fällt die Gastro aus, fehlen der GbR zusätzlich {eur(-B['sens'][8][3] * 12)} im Jahr (Deckung {n(B['sens'][8][2], 2)}).",
+    f"Der Beleihungsauslauf liegt bei {n(B['auslauf'] * 100, 0)} %: Die Bank verlangt zusätzliche Sicherheiten oder Eigenkapital, die Lücke zur 80-%-Grenze beträgt etwa {n(B['eigenkapital_80'] / 1e6, 2)} Mio € insgesamt.",
+    "Eine GbR haftet mit dem persönlichen Vermögen aller Gesellschafter. Die Gastro läuft deshalb in einer getrennten Betreiberfirma, die Pacht zahlt.",
+    "Lohn des Bauherrn, Mehrkosten kleinerer Wohnungen über die angesetzten 15.000 € hinaus und Gewerbesteuer sind nicht gerechnet. Steuerberater und Bank müssen das prüfen.",
 ]:
-    p = doc.add_paragraph(style="List Bullet"); r = p.add_run(t); r.font.size = Pt(10); p.paragraph_format.space_after = Pt(2)
+    p = doc.add_paragraph(style="List Bullet"); r = p.add_run(t); r.font.size = Pt(9.5); p.paragraph_format.space_after = Pt(1)
 
-para("Quelle: Bankunterlagen_Baufeld3.xlsx (Blätter Ertrag und Cashflow, Tilgungsplan, Gastro Tagesteile).", italic=True, color=GREY, size=8.5, after=0)
+para("Quelle: Bankunterlagen_Baufeld3.xlsx (Blätter Ertrag und Cashflow, Gesellschafter, Szenarien).", italic=True, color=GREY, size=8.5, after=0)
 doc.save("Kosten-Nutzen_pro-Kopf_Baufeld3.docx")
-print(cash, gewinn, vor_kd/kosten)
+print(cash)
