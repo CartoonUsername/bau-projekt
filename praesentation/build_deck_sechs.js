@@ -281,7 +281,7 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
   const s = content("Modern, Klinker, Milchglas und Staffelgeschoss", "Für die Stadt", "Links Referenzstudie, rechts unsere Eckansicht als Skizze.");
   s.addImage({ path: fit(hasKI("ki_aussen_1.jpg") ? path.join(IMG, "ki_aussen_1.jpg") : path.join(IMG, "aussen.jpg"), 5.9, 3.29), x: MX, y: 1.4, w: 5.9, h: 3.29, altText: "Visualisierung Außenansicht" });
   s.addImage({ path: path.join(IMG, "skizze_aussen_ecke.png"), x: 6.8, y: 1.4, w: 5.9, h: 3.69, sizing: { type: "contain", w: 5.9, h: 3.69 }, altText: "Eckansicht als Skizze: Flachdach mit Staffelgeschoss, Balkone, vollverglastes Erdgeschoss" });
-  text(s, hasKI("ki_aussen_1.jpg") ? "KI-Visualisierung" : "Referenzstudie", { x: MX, y: 4.75, w: 5.9, h: 0.3, fontSize: 12, color: C.accent4 });
+  text(s, hasKI("ki_aussen_1.jpg") ? "Rendering" : "Referenzstudie", { x: MX, y: 4.75, w: 5.9, h: 0.3, fontSize: 12, color: C.accent4 });
   text(s, "Unsere Skizze (Eckansicht)", { x: 6.8, y: 5.12, w: 5.9, h: 0.3, fontSize: 12, color: C.accent4 });
   const pts = [["Klinker", "dunkel, Langformat, passend zum Umfeld"], ["Staffelgeschoss", "Holzbau, Terrasse rundum"], ["Balkone", "bodentiefe Fenster, Milchglas-Brüstungen"], ["Glas-EG", "Gastro mit Bar, Terrasse und Vordach"]];
   pts.forEach((p, i) => {
@@ -293,7 +293,7 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
 
 // ===== 8 Innen =====
 {
-  const s = content("Große Gastro mit Bar, neu und modern", "Für die Stadt", "KI-Visualisierung, Planung folgt mit dem Gastro-Fachplaner. Details im Gastro-Konzept.");
+  const s = content("Große Gastro mit Bar, neu und modern", "Für die Stadt", "Rendering, Planung folgt mit dem Gastro-Fachplaner. Details im Gastro-Konzept.");
   s.addImage({ path: fit(path.join(IMG, "ki_gastro_raum.jpg"), 8.2, 4.61), x: MX, y: 1.4, w: 8.2, h: 4.61, altText: "Visualisierung Gastraum mit Bar" });
   s.addImage({ path: fit(path.join(IMG, "ki_gastro_bar.jpg"), 3.63, 2.04), x: 9.1, y: 1.4, w: 3.63, h: 2.04, altText: "Visualisierung Bar" });
   [["ca. 190 Plätze", "innen (160 im Gastraum, 30 im Séparée), plus ca. 60 auf der Terrasse"], ["Bar", "12 Barhocker, Polsterbänke, Backbar"], ["Material", "Olivgrün, Cognac-Samt, Bordeaux, Eiche, schwarzer Stahl"]].forEach((p, i) => {
@@ -304,7 +304,7 @@ const firstPos = FOERDERUNG.find((f) => F[f].cfPlan.cf >= 0);
 
 // ===== 8b Visualisierungen (nur wenn KI-Bilder vorliegen) =====
 if (KI.length) {
-  const s = content("Visualisierungen", "Für die Stadt", "KI-Visualisierungen auf Basis der Skizzen, keine Planung.");
+  const s = content("Renderings", "Für die Stadt", "Renderings auf Basis der Skizzen, keine Planung.");
   const n = KI.length;
   const cols = n >= 5 ? 3 : n >= 3 ? 2 : n;
   const rowsN = Math.ceil(n / cols);
@@ -315,7 +315,7 @@ if (KI.length) {
     const y = 1.45 + Math.floor(i / cols) * (gh + 0.3);
     s.addImage({ path: fit(f, gw, gh), x, y, w: gw, h: gh, altText: "Visualisierung " + (i + 1) });
   });
-  text(s, "KI-generierte Visualisierungen zur Orientierung, Gestalt und Materialien. Fassadenteilung, Länge (32 m) und Büro-Fenster im 1. OG weichen im Detail von den Skizzen ab, Maße folgen mit dem Architekten.", { x: MX, y: H - 0.95, w: W - 2 * MX, h: 0.4, fontSize: 12, color: C.accent4 });
+  text(s, "Renderings zur Orientierung, Gestalt und Materialien. Fassadenteilung, Länge (32 m) und Büro-Fenster im 1. OG weichen im Detail von den Skizzen ab, Maße folgen mit dem Architekten.", { x: MX, y: H - 0.95, w: W - 2 * MX, h: 0.4, fontSize: 12, color: C.accent4 });
 }
 
 // ===== 9 Stellplätze =====

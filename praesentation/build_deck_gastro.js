@@ -216,7 +216,7 @@ async function deck() {
   }
 
   // ---- 8 Bilder Gastraum und Bar
-  { const s = content("So kann es aussehen: Gastraum und Bar", "Für Stadt und Bank", "KI-Visualisierungen zur Orientierung, keine Planung.");
+  { const s = content("So kann es aussehen: Gastraum und Bar", "Für Stadt und Bank", "Renderings zur Orientierung, keine Planung.");
     const gw = (W - 2 * MX - 0.3) / 2, gh = gw * 0.5625;
     s.addImage({ path: fit(img("ki_gastro_raum.jpg"), gw, gh), x: MX, y: 1.5, w: gw, h: gh, altText: "Gastraum am Abend" });
     s.addImage({ path: fit(img("ki_gastro_separee.jpg"), gw, gh), x: MX + gw + 0.3, y: 1.5, w: gw, h: gh, altText: "Séparée mit Stahl-Glas-Wand" });

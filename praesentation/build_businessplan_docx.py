@@ -198,7 +198,7 @@ para("Baufeld 3, Neue Mitte Werlte", size=14, color=GREY, after=14)
 img = os.path.join(here, "bilder", "ki_aussen_1.jpg")
 if os.path.exists(img):
     doc.add_picture(img, width=Cm(16.6))
-    para("KI-Visualisierung zur Orientierung, keine Planung.", italic=True, color=GREY, size=8.5, after=14)
+    para("Rendering zur Orientierung, keine Planung.", italic=True, color=GREY, size=8.5, after=14)
 table([
     ["Bauherr", "Bessam Hasso, Werlte"],
     ["Vorhaben", "Neubau eines gemischt genutzten Gebäudes: Restaurant und Bar im Erdgeschoss, 2 Büro-Ankermieter und 5 Wohnungen im 1. Obergeschoss, 7 Wohnungen im Staffelgeschoss in Holzbau"],

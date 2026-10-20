@@ -8,7 +8,7 @@ Restaurant und Bar (510 m², eigene Betreiberfirma, Pacht 10 % vom Umsatz) im ga
 | `Bankunterlagen_Baufeld3.xlsx` | Rechenmodell mit Formeln: Annahmen, Flächen und Mieten, Kosten und Finanzierung, Bauphase, Abzahlungsplan (monatlich und jährlich), Ertrag und Cashflow, Gastro-Betrieb, Ertragswert, Prognose, Belastungstest, Airbnb-Prüfung, Checkliste Bankunterlagen |
 | `Neue-Mitte-Werlte_Baufeld3_12-Wohnungen_Restaurant-Bar.pptx` (+ `.pdf`) | Präsentation für Bank und Stadt |
 | `Neue-Mitte-Werlte_Baufeld3_Gastro-Konzept.pptx` (+ `.pdf`) | Gastro: Gestaltung, Grundriss, Speisekarte, Umsatz, Personal |
-| `bilder/` | KI-Visualisierungen (`ki_*.jpg`), Skizzen, Referenzbilder, `BILDPROMPTS.md` |
+| `bilder/` | Renderings (`ki_*.jpg`), Skizzen, Referenzbilder, `BILDPROMPTS.md` |
 
 ## Erzeugung (Reihenfolge)
 1. `python3 build_bank_xlsx.py Bankunterlagen_Baufeld3.xlsx`, danach Formeln berechnen: `python3 <xlsx-skill>/scripts/recalc.py Bankunterlagen_Baufeld3.xlsx`
