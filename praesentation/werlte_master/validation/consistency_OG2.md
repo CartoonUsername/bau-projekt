@@ -18,3 +18,10 @@
 | Gaststätte Plätze | OPEN | 190 innen + 60 Terrasse; Sonderbau/Versammlungsstätte-Schwelle prüfen (C-20) |
 | Fassadenstützen EG | OPEN | Platzfassade 28 m ohne Stütze nicht nachgewiesen; Modell nimmt Stützen in R2-Achsen an, noch nicht gezeichnet (C-16) |
 | Rückseitiger Balkon über y = 18 | OPEN | Rückseite nicht Teil des eingefrorenen Designs; Grenzabstand unbekannt (C-19) |
+| Aufzug übereinander (GF, L1, L2) | PASS | [0.8, 10, 3.0, 12.6] auf allen Ebenen |
+| Aufzugsvorraum stößt an Mittelgang (L1) | PASS | Vorraum [0, 8, 4, 10], Gang [4, 8]–[32, 10]; Gang 2,0 m breit |
+| Aufzugsschacht Größe | OPEN | 2.2 x 2.6 m; Fahrkorb-Größe (z. B. 1,1 x 1,4 m) und Typ (Bettentransport) fachlich offen |
+| Aufzug erreicht alle Wohn- und Gewerbeebenen | PASS | EG, 1. OG, Staffel; Gastro-Küche/Büros über Mittelgang bzw. Kern erreichbar |
+| Aufzugsüberfahrt gegen Attika | OPEN | Staffel-FFL 6,5 m + üblicher Überfahrtsbedarf liegt nahe/über Attika 9,9 m; sichtbarer Aufbau wäre eine Designfrage (C-25) |
+| Stufenloser Zugang Wohnungseingang West (x 1–2,5) | OPEN | Gelände- und Platzhöhen unbekannt, keine Schwellen/Rampen im Modell |
+| Balkontür-Schwellen | OPEN | Betonbalkon-Detail im Design nicht definiert; Anschlusshöhe/Schwellenfreiheit offen |

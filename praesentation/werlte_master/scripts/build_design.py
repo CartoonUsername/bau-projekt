@@ -11,7 +11,7 @@ def room(id_, typ, level, x0, y0, x1, y1, status="P", **kw):
     return d
 
 D = {
-    "model": "NEUE_MITTE_MASTER_DRAFT_A_002",
+    "model": "NEUE_MITTE_MASTER_DRAFT_A_003",
     "decision": "Variante A verbindlich (Auftraggeber, 22.10.2026). Nachweis der Grundfläche 576 m² steht aus (Konflikt C-01).",
     "units": "m", "origin": "SW-Ecke Gebäude, x West nach Ost, y Platzfassade nach hinten",
     "site": {"area_m2": 960, "grz": 0.6, "footprint_max_theoretical_m2": 576, "envelope_estimate_m2": "400-460 (PROVISIONAL, nicht gemessen)"},
@@ -89,9 +89,9 @@ D["grid"] = {"x": D["grid_options"]["R2"]["x"], "y": [0.0, 8.0, 18.0], "note": "
 D["columns_gf"] = [[x, 8.0] for x in (9.6, 15.2, 20.8, 26.4)]
 D["facade_support"] = {"status": S["R"], "note": "Die OG-Last der Platzfassade (28 m Glasfront) braucht Fassadenstützen oder einen Träger; vollverglaste Front ohne Stützen ist nicht nachgewiesen (C-16). Annahme im Modell: Stützen 0,3 m in Rasterachsen R2 an y=0, noch nicht eingezeichnet.", "candidate_axes_x": D["grid_options"]["R2"]["x"]}
 D["core"] = {
-    "GF": [{"id": "LOBBY-GF", "rect": [0, 0, 4, 6], "status": S["A"]}, {"id": "STAIR-GF", "rect": [0, 6, 4, 12], "status": S["A"]}, {"id": "LIFT-GF", "rect": [0, 12, 4, 15], "status": S["A"]}, {"id": "TECH-GF", "rect": [0, 15, 4, 18], "status": S["A"]}],
-    "L1": [{"id": "RESERVE-L1", "rect": [0, 0, 4, 6], "status": S["A"], "note": "Abstell/Technik, Zweck offen"}, {"id": "STAIR-L1", "rect": [0, 6, 4, 12], "status": S["A"]}, {"id": "LIFT-L1", "rect": [0, 12, 4, 15], "status": S["A"]}, {"id": "TECH-L1", "rect": [0, 15, 4, 18], "status": S["A"]}],
-    "L2": [{"id": "STAIR-L2", "rect": [0.8, 6, 4.0, 12], "status": S["A"]}, {"id": "LIFT-L2", "rect": [0.8, 12, 4.0, 15], "status": S["A"]}]}
+    "GF": [{"id": "LOBBY-GF", "rect": [0, 0, 4, 3], "status": S["A"], "note": "Eingang x 1–2,5, Briefkästen"}, {"id": "STAIR-GF", "rect": [0, 3, 4, 8], "status": S["A"]}, {"id": "LANDING-GF", "rect": [0, 8, 4, 10], "status": S["A"], "note": "Aufzugsvorraum, liegt auf Höhe des Mittelgangs"}, {"id": "LIFT-GF", "rect": [0.8, 10, 3.0, 12.6], "status": S["A"]}, {"id": "TECH-GF", "rect": [3.0, 10, 4, 12.6], "status": S["A"]}, {"id": "ABSTELL-GF", "rect": [0, 12.6, 4, 18], "status": S["A"], "note": "Fahrrad/Müll/Abstellräume, Zweck offen"}],
+    "L1": [{"id": "RESERVE-L1", "rect": [0, 0, 4, 3], "status": S["A"], "note": "Zweck offen"}, {"id": "STAIR-L1", "rect": [0, 3, 4, 8], "status": S["A"]}, {"id": "LANDING-L1", "rect": [0, 8, 4, 10], "status": S["A"]}, {"id": "LIFT-L1", "rect": [0.8, 10, 3.0, 12.6], "status": S["A"]}, {"id": "TECH-L1", "rect": [3.0, 10, 4, 12.6], "status": S["A"]}, {"id": "ABSTELL-L1", "rect": [0, 12.6, 4, 18], "status": S["A"]}],
+    "L2": [{"id": "STAIR-L2", "rect": [0.8, 3, 4.0, 8], "status": S["A"]}, {"id": "LANDING-L2", "rect": [0.8, 8, 4.0, 10], "status": S["A"]}, {"id": "LIFT-L2", "rect": [0.8, 10, 3.0, 12.6], "status": S["A"], "note": "Schacht auf allen Ebenen x 0,8–3,0: Westwand liegt auf der Staffel-Rückversatzlinie; Überfahrt über Attika offen (C-25)"}]}
 D["shafts"] = [{"id": "SHAFT-KITCHEN", "rect": [30.0, 16.0, 31.2, 17.2], "levels": ["GF", "L1", "L2", "ROOF"], "status": S["P"], "note": "Küchenabluft; durchläuft Büro/Wohnung N1 (L1) und Staffel-N3 (L2): Geruch, Schall, Brandschutz (C-14)"}]
 BW, BD = 2.7, 1.5
 bal = []

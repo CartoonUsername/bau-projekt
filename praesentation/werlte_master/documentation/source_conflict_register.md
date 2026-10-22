@@ -42,3 +42,8 @@ Die Spalten folgen der Tabelle oben; "Status" gilt durchgehend als offen, bis au
 
 Offene baurechtliche Fragen sind gesammelt in `planning/baurechtliche_fragen.md`, Förderfragen getrennt in `foerderung/klaerung_wohnraumfoerderstelle.md`.
 
+| C-24 | Arbeitsstand v002: Aufzug hinter Treppenraum | Barrierefreie Erschließung braucht direkten Zugang vom Mittelgang | Aufzug war nur über den Treppenraum erreichbar (eigener Mangel) | Kern, Mittelgang | Kern v003 neu geordnet, Aufzugsvorraum am Mittelgang; Aufzug im Entwurf belassen, Notwendigkeit nicht belegt | Fachplaner |
+| C-25 | Aufzugsschacht übereinander | Staffel 0,8 m zurückgesetzt, Attika 9,9 m | Schacht ab x 0,8; Überfahrt über Attika könnte Aufbau erzeugen | Dach, Fassade West | nicht gelöst, Designfrage | Auftraggeber, Aufzugsplaner |
+| C-26 | Wohnung 39 m² einseitig belichtet über Gastro-Terrasse | Nutzung als Studio für 1 Person | Schall, Querlüftung, keine Abstellfläche | Wohnungsqualität | Studie `unit_WE-L1-S_nutzbarkeit`, keine Zahl erhöht | Auftraggeber |
+| C-27 | § 49 NBauO: jede achte Wohnung rollstuhlgerecht (Suchtreffer) | 13 Wohnungen, kleinste 39 m² | Kandidaten nur N1 (52 m²) und Staffel-Nord (57 m²), Nachweis fehlt | Wohnungsmix | Fachplaner, Rundung klären | Fachplaner |
+

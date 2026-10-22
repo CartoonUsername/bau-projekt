@@ -45,3 +45,8 @@ CORE-STAIR,Treppenraum,"4 x 6 bei y 6-12 (L2 ab x 0,8)",m,ASSUMED,Kern West
 CORE-LIFT,Aufzug mit Vorraum,"4 x 3 bei y 12-15",m,ASSUMED,Kern West
 CORRIDOR-LEN,Mittelgang Länge/Sackgasse,28,m,PROVISIONAL,Rettungsweg C-15
 STAFFEL-RATIO,Staffel zu Geschoss darunter,87,%,PROVISIONAL,C-23
+LIFT-SHAFT,Aufzugsschacht,"2,2 x 2,6 bei x 0,8-3,0 / y 10-12,6",m,ASSUMED,Kern v003
+LIFT-LANDING,Aufzugsvorraum,"4,0 x 2,0 bei y 8-10",m,ASSUMED,stößt an Mittelgang
+STAIR-CORE,Treppenraum v003,"4 x 5 bei y 3-8",m,ASSUMED,Kern v003
+UNIT-S-INNER,Innenmaß WE-L1-S,"5,35 x 7,35",m,ASSUMED,Wandstärken Fassade 0,45 / Trennwand 0,25 / Flurwand 0,20
+LIFT-FLOOR-REQ,Aufzugspflicht ab Fußboden höher als,12.25,m,UNVERIFIED,Suchtreffer § 38 NBauO

@@ -1,5 +1,5 @@
 {
- "model": "NEUE_MITTE_MASTER_DRAFT_A_002",
+ "model": "NEUE_MITTE_MASTER_DRAFT_A_003",
  "decision": "Variante A verbindlich (Auftraggeber, 22.10.2026). Nachweis der Grundfläche 576 m² steht aus (Konflikt C-01).",
  "units": "m",
  "origin": "SW-Ecke Gebäude, x West nach Ost, y Platzfassade nach hinten",
@@ -704,39 +704,62 @@
      0,
      0,
      4,
-     6
+     3
     ],
-    "status": "ASSUMED"
+    "status": "ASSUMED",
+    "note": "Eingang x 1–2,5, Briefkästen"
    },
    {
     "id": "STAIR-GF",
     "rect": [
      0,
-     6,
+     3,
      4,
-     12
+     8
     ],
     "status": "ASSUMED"
    },
    {
-    "id": "LIFT-GF",
+    "id": "LANDING-GF",
     "rect": [
      0,
-     12,
+     8,
      4,
-     15
+     10
+    ],
+    "status": "ASSUMED",
+    "note": "Aufzugsvorraum, liegt auf Höhe des Mittelgangs"
+   },
+   {
+    "id": "LIFT-GF",
+    "rect": [
+     0.8,
+     10,
+     3.0,
+     12.6
     ],
     "status": "ASSUMED"
    },
    {
     "id": "TECH-GF",
     "rect": [
+     3.0,
+     10,
+     4,
+     12.6
+    ],
+    "status": "ASSUMED"
+   },
+   {
+    "id": "ABSTELL-GF",
+    "rect": [
      0,
-     15,
+     12.6,
      4,
      18
     ],
-    "status": "ASSUMED"
+    "status": "ASSUMED",
+    "note": "Fahrrad/Müll/Abstellräume, Zweck offen"
    }
   ],
   "L1": [
@@ -746,36 +769,56 @@
      0,
      0,
      4,
-     6
+     3
     ],
     "status": "ASSUMED",
-    "note": "Abstell/Technik, Zweck offen"
+    "note": "Zweck offen"
    },
    {
     "id": "STAIR-L1",
     "rect": [
      0,
-     6,
+     3,
      4,
-     12
+     8
+    ],
+    "status": "ASSUMED"
+   },
+   {
+    "id": "LANDING-L1",
+    "rect": [
+     0,
+     8,
+     4,
+     10
     ],
     "status": "ASSUMED"
    },
    {
     "id": "LIFT-L1",
     "rect": [
-     0,
-     12,
-     4,
-     15
+     0.8,
+     10,
+     3.0,
+     12.6
     ],
     "status": "ASSUMED"
    },
    {
     "id": "TECH-L1",
     "rect": [
+     3.0,
+     10,
+     4,
+     12.6
+    ],
+    "status": "ASSUMED"
+   },
+   {
+    "id": "ABSTELL-L1",
+    "rect": [
      0,
-     15,
+     12.6,
      4,
      18
     ],
@@ -787,9 +830,19 @@
     "id": "STAIR-L2",
     "rect": [
      0.8,
-     6,
+     3,
      4.0,
-     12
+     8
+    ],
+    "status": "ASSUMED"
+   },
+   {
+    "id": "LANDING-L2",
+    "rect": [
+     0.8,
+     8,
+     4.0,
+     10
     ],
     "status": "ASSUMED"
    },
@@ -797,11 +850,12 @@
     "id": "LIFT-L2",
     "rect": [
      0.8,
-     12,
-     4.0,
-     15
+     10,
+     3.0,
+     12.6
     ],
-    "status": "ASSUMED"
+    "status": "ASSUMED",
+    "note": "Schacht auf allen Ebenen x 0,8–3,0: Westwand liegt auf der Staffel-Rückversatzlinie; Überfahrt über Attika offen (C-25)"
    }
   ]
  },

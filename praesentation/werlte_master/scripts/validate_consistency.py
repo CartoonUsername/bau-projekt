@@ -39,6 +39,19 @@ add("Oberstes Geschoss FFL", "INFO", "Staffel-FFL 6,5 m (< 7 m) → Gebäudeklas
 add("Gaststätte Plätze", "OPEN", "190 innen + 60 Terrasse; Sonderbau/Versammlungsstätte-Schwelle prüfen (C-20)")
 add("Fassadenstützen EG", "OPEN", "Platzfassade 28 m ohne Stütze nicht nachgewiesen; Modell nimmt Stützen in R2-Achsen an, noch nicht gezeichnet (C-16)")
 add("Rückseitiger Balkon über y = 18", "OPEN", "Rückseite nicht Teil des eingefrorenen Designs; Grenzabstand unbekannt (C-19)")
+
+core = D["core"]
+lift = {lv: next(c for c in core[lv] if c["id"].startswith("LIFT")) for lv in ("GF", "L1", "L2")}
+add("Aufzug übereinander (GF, L1, L2)", "PASS" if len({tuple(v["rect"]) for v in lift.values()}) == 1 else "FAIL", f"{lift['GF']['rect']} auf allen Ebenen")
+lg = {lv: next(c for c in core[lv] if c["id"].startswith("LANDING")) for lv in ("GF", "L1", "L2")}
+corr = og["CORR-L1"]["rect"]
+touch = lg["L1"]["rect"][2] == corr[0] and lg["L1"]["rect"][1] >= corr[1] - 1e-9 and lg["L1"]["rect"][3] <= corr[3] + 1e-9
+add("Aufzugsvorraum stößt an Mittelgang (L1)", "PASS" if touch else "FAIL", f"Vorraum {lg['L1']['rect']}, Gang {corr[:2]}–{corr[2:]}; Gang 2,0 m breit")
+lr = lift["L1"]["rect"]; add("Aufzugsschacht Größe", "OPEN", f"{lr[2]-lr[0]:.1f} x {lr[3]-lr[1]:.1f} m; Fahrkorb-Größe (z. B. 1,1 x 1,4 m) und Typ (Bettentransport) fachlich offen")
+add("Aufzug erreicht alle Wohn- und Gewerbeebenen", "PASS", "EG, 1. OG, Staffel; Gastro-Küche/Büros über Mittelgang bzw. Kern erreichbar")
+add("Aufzugsüberfahrt gegen Attika", "OPEN", "Staffel-FFL 6,5 m + üblicher Überfahrtsbedarf liegt nahe/über Attika 9,9 m; sichtbarer Aufbau wäre eine Designfrage (C-25)")
+add("Stufenloser Zugang Wohnungseingang West (x 1–2,5)", "OPEN", "Gelände- und Platzhöhen unbekannt, keine Schwellen/Rampen im Modell")
+add("Balkontür-Schwellen", "OPEN", "Betonbalkon-Detail im Design nicht definiert; Anschlusshöhe/Schwellenfreiheit offen")
 md = ["# Konsistenzprüfung Arbeitsbasis OG-2 (nur Geometrie, vorläufig)", "", "| Prüfung | Ergebnis | Detail |", "|---|---|---|"] + [f"| {a} | {b} | {c} |" for a, b, c in rows]
 open(os.path.join(here, "..", "validation", "consistency_OG2.md"), "w", encoding="utf-8").write("\n".join(md) + "\n")
 print("\n".join(md))
