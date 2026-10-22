@@ -38,12 +38,12 @@ else:
     newmat("beton"); imgtex(M["beton"], "beton", rough=0.85, bump=0.05)
     newmat("attika", (0.34, 0.35, 0.37), 0.5, 0.4); newmat("dach", (0.22, 0.22, 0.23), 0.9)
     newmat("glas", (0.02, 0.035, 0.045), 0.03, 0.0); M["glas"].node_tree.nodes["Principled BSDF"].inputs["IOR"].default_value = 1.5
-    newmat("milch", (0.82, 0.88, 0.88), 0.35); M["milch"].node_tree.nodes["Principled BSDF"].inputs["Transmission Weight"].default_value = 0.6
+    newmat("milch", (0.55, 0.72, 0.70), 0.28); M["milch"].node_tree.nodes["Principled BSDF"].inputs["Transmission Weight"].default_value = 0.8; M["milch"].node_tree.nodes["Principled BSDF"].inputs["IOR"].default_value = 1.45
     newmat("stahl", (0.04, 0.042, 0.048), 0.45, 0.7); newmat("holz", (0.56, 0.42, 0.26), 0.55); newmat("tuer", (0.04, 0.042, 0.048), 0.45, 0.7)
     newmat("deck", (0.4, 0.28, 0.17), 0.8); imgtex(M["deck"], "holz", rough=0.8, bump=0.1); newmat("boden"); imgtex(M["boden"], "pflaster", rough=0.9, bump=0.2); newmat("asphalt"); imgtex(M["asphalt"], "asphalt", rough=0.95, bump=0.1)
     newmat("linie", (0.9, 0.9, 0.88), 0.8); newmat("vordach", (0.05, 0.05, 0.055), 0.45, 0.7); newmat("gelaende", (0.42, 0.42, 0.40), 0.95)
     # beleuchtete Fenster (nur Nacht): Gastro warm, einzelne Wohnungsfenster dezent
-    newmat("glas_gastro", (0.02, 0.02, 0.02), 0.1, 0.0, (1.0, 0.62, 0.30, 6.0 if MODE == "nacht" else 0.0)); newmat("glas_wohnen", (0.02, 0.02, 0.02), 0.1, 0.0, (1.0, 0.72, 0.45, 2.2 if MODE == "nacht" else 0.0))
+    newmat("glas_gastro", (0.02, 0.02, 0.02), 0.1, 0.0, (1.0, 0.62, 0.30, 3.2 if MODE == "nacht" else 0.0)); newmat("glas_wohnen", (0.02, 0.02, 0.02), 0.1, 0.0, (1.0, 0.72, 0.45, 1.3 if MODE == "nacht" else 0.0))
     for k in ("glas_gastro", "glas_wohnen"): M[k].node_tree.nodes["Principled BSDF"].inputs["IOR"].default_value = 1.5
     if MODE != "nacht":
         for k in ("glas_gastro", "glas_wohnen"): M[k] = M["glas"]
@@ -102,7 +102,11 @@ VIEWS = {"01_front": dict(p=(46, -34, 1.8), t=(19, 4, 4.4), lens=38, sun=(-35, 3
 def world_sky(night, sunvec):
     w = bpy.data.worlds.new("w"); sc.world = w; w.use_nodes = True; nt = w.node_tree; bg = nt.nodes["Background"]; sky = nt.nodes.new("ShaderNodeTexSky"); sky.sky_type = "MULTIPLE_SCATTERING"
     sky.sun_disc = False; sky.sun_direction = sunvec; sky.air_density = 1.0
-    nt.links.new(sky.outputs["Color"], bg.inputs["Color"]); bg.inputs["Strength"].default_value = 1.0
+    if night:   # Abendhimmel: Verlauf von warmem Horizont zu dunklem Blau (Sky-Textur ist unter dem Horizont nicht brauchbar)
+        tc = nt.nodes.new("ShaderNodeTexCoord"); sep = nt.nodes.new("ShaderNodeSeparateXYZ"); mr = nt.nodes.new("ShaderNodeMapRange"); ramp = nt.nodes.new("ShaderNodeValToRGB")
+        mr.inputs["From Min"].default_value = 0.0; mr.inputs["From Max"].default_value = 0.7; ramp.color_ramp.elements[0].color = (0.30, 0.34, 0.50, 1); ramp.color_ramp.elements[1].color = (0.015, 0.03, 0.09, 1)
+        nt.links.new(tc.outputs["Generated"], sep.inputs["Vector"]); nt.links.new(sep.outputs["Z"], mr.inputs["Value"]); nt.links.new(mr.outputs["Result"], ramp.inputs["Fac"]); nt.links.new(ramp.outputs["Color"], bg.inputs["Color"]); bg.inputs["Strength"].default_value = 0.9
+    else: nt.links.new(sky.outputs["Color"], bg.inputs["Color"]); bg.inputs["Strength"].default_value = 1.0
 def setup_light(view, night):
     az, el = view["sun"]
     if night: el = -4.0
@@ -144,7 +148,7 @@ for name in VIEWS_TO_DO:
         w = bpy.data.worlds.new("w"); sc.world = w; w.use_nodes = True; w.node_tree.nodes["Background"].inputs["Color"].default_value = (0.93, 0.95, 0.98, 1); sc.view_settings.view_transform = "Standard"
     else:
         sc.render.engine = "CYCLES"; sc.cycles.device = "CPU"; sc.cycles.samples = 56; sc.cycles.use_denoising = True; sc.cycles.max_bounces = 6; sc.cycles.glossy_bounces = 4; sc.cycles.transmission_bounces = 4
-        setup_light(v, MODE == "nacht"); sc.view_settings.view_transform = "AgX"; sc.view_settings.exposure = -0.4 if MODE == "tag" else 1.2
+        setup_light(v, MODE == "nacht"); sc.view_settings.view_transform = "AgX"; sc.view_settings.exposure = -0.4 if MODE == "tag" else 0.2
         try: sc.view_settings.look = "AgX - Medium High Contrast"
         except Exception as e: print("look", e)
     sc.render.filepath = os.path.join(outd, f"{MODE}_{name}.png"); bpy.ops.render.render(write_still=True); print("ok", name, flush=True)
