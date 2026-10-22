@@ -47,3 +47,6 @@ Offene baurechtliche Fragen sind gesammelt in `planning/baurechtliche_fragen.md`
 | C-26 | Wohnung 39 m² einseitig belichtet über Gastro-Terrasse | Nutzung als Studio für 1 Person | Schall, Querlüftung, keine Abstellfläche | Wohnungsqualität | Studie `unit_WE-L1-S_nutzbarkeit`, keine Zahl erhöht | Auftraggeber |
 | C-27 | § 49 NBauO: jede achte Wohnung rollstuhlgerecht (Suchtreffer) | 13 Wohnungen, kleinste 39 m² | Kandidaten nur N1 (52 m²) und Staffel-Nord (57 m²), Nachweis fehlt | Wohnungsmix | Fachplaner, Rundung klären | Fachplaner |
 
+## Neue Planungsrichtung (22.10.2026): Varianten A, B, C
+C-28 bis C-36 sind in `documentation/varianten_ABC.md` beschrieben (Stellplätze, Grundstückszuschnitt H1, GRZ-Zählung von Auskragungen, kleinere Gastronomie, Büros hinten, hintere Wohnungen, Kernlage in C, Tragwerk, Fluchtwege). Alle offen, keine gelöst.
+

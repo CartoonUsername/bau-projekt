@@ -50,3 +50,11 @@ LIFT-LANDING,Aufzugsvorraum,"4,0 x 2,0 bei y 8-10",m,ASSUMED,stößt an Mittelga
 STAIR-CORE,Treppenraum v003,"4 x 5 bei y 3-8",m,ASSUMED,Kern v003
 UNIT-S-INNER,Innenmaß WE-L1-S,"5,35 x 7,35",m,ASSUMED,Wandstärken Fassade 0,45 / Trennwand 0,25 / Flurwand 0,20
 LIFT-FLOOR-REQ,Aufzugspflicht ab Fußboden höher als,12.25,m,UNVERIFIED,Suchtreffer § 38 NBauO
+PLOT-H1,Grundstück (Rechenhypothese),"32 x 30 = 960",m2,HYPOTHETICAL,nur Rechenannahme; keine Realdaten
+STALL-SIZE,Stellplatz,"2,5 x 5,0",m,ASSUMED,Varianten A–C
+AISLE,Fahrgasse,6.0,m,ASSUMED,Varianten A–C
+GASTRO-AREA-NEW,Gastronomie brutto (Rest nach Kern und Büros),316.4,m2,PROVISIONAL,Varianten A–C
+SEATS-INNEN-NEW,Innenplätze geschätzt,89,Stk,PROVISIONAL,"(Gastraum minus Bar)/2,1 + 12 Hocker"
+CANT-B,Auskragung hinten B,3.0,m,HYPOTHETICAL,C-30
+CANT-C,Auskragung hinten C,6.0,m,HYPOTHETICAL,C-30
+SOFFIT,Plattenunterseite über Stellplätzen,3.2,m,ASSUMED,Varianten B und C

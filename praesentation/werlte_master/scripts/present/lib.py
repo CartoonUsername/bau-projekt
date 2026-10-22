@@ -22,6 +22,7 @@ def esc(s):
 class Sheet:
     def __init__(self):
         self.e = []
+        self.defs = []
         self.boxes = []
     def add(self, s):
         self.e.append(s)
@@ -76,7 +77,7 @@ class Sheet:
     def svg(self):
         head = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}mm" height="{H}mm" viewBox="0 0 {W} {H}" '
                 f'font-family="Inter, \'Helvetica Neue\', Arial, sans-serif" text-rendering="geometricPrecision">'
-                f'<rect width="{W}" height="{H}" fill="#FFFFFF"/>')
+                '<defs>' + "".join(self.defs) + f'</defs><rect width="{W}" height="{H}" fill="#FFFFFF"/>')
         return head + "\n".join(self.e) + "</svg>"
 
 # ---------- Blattrahmen, Schriftfeld, Informationsbereich ----------
