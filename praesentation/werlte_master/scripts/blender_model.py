@@ -115,7 +115,7 @@ if MODE == "clay":
     bpy.ops.wm.save_as_mainfile(filepath=os.path.join(HF, "modelle", "baufeld3_B3.blend")); bpy.ops.export_scene.gltf(filepath=os.path.join(HF, "modelle", "baufeld3_B3.glb"))
 # Kameras: (Position, Ziel, Brennweite mm) im Modellkoordinatensystem (x West->Ost)
 VIEWS = {"01_front": ((46, -34, 1.8), (19, 4, 4.4), 38), "03_rueck": ((-14, 52, 2.4), (17, 14, 4.6), 40), "04_west": ((-40, -4, 2.2), (4, 9, 4.6), 40), "05_ost": ((72, 24, 2.2), (30, 9, 4.6), 40),
-         "06_luft": ((70, 58, 25), (14, 10, 3.0), 38), "08_terrasse": ((24, 29, 9.0), (16, 19.5, 7.0), 24)}
+         "06_luft": ((70, 58, 25), (14, 10, 3.0), 38), "08_terrasse": ((22, 33, 14.5), (17, 19.8, 7.2), 30)}
 def setup_world(night=False):
     w = bpy.data.worlds.new("w"); sc.world = w; w.use_nodes = True; nt = w.node_tree; bg = nt.nodes["Background"]
     sky = nt.nodes.new("ShaderNodeTexSky"); sky.sky_type = "MULTIPLE_SCATTERING"; sky.sun_elevation = math.radians(8 if night else 38); sky.sun_rotation = math.radians(200); sky.sun_disc = False; sky.sun_intensity = 0.0

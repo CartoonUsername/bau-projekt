@@ -57,5 +57,5 @@ cam = bpy.data.cameras.new("c"); cam.lens = 21; cam.sensor_width = 36; co = bpy.
 d = Vector((X(11.0), 8.0, 1.2)) - co.location; co.rotation_euler = d.to_track_quat("-Z", "Y").to_euler(); sc.camera = co
 area = bpy.data.lights.new("a", "AREA"); area.energy = 900 if not clay else 400; area.size = 20; area.size_y = 8; ao = bpy.data.objects.new("a", area); sc.collection.objects.link(ao); ao.location = (X(18), 5, H - 0.05)
 sc.render.resolution_x, sc.render.resolution_y = 2400, 1350; sc.render.engine = "CYCLES"; sc.cycles.device = "CPU"; sc.cycles.samples = 12 if clay else 48; sc.cycles.use_denoising = True; sc.cycles.max_bounces = 3 if clay else 6
-sc.view_settings.view_transform = "Standard"; sc.view_settings.exposure = -0.5
+sc.view_settings.view_transform = "Standard"; sc.view_settings.exposure = 1.6 if clay else -0.5
 os.makedirs(os.path.join(HF, "referenzen"), exist_ok=True); sc.render.filepath = os.path.join(HF, "referenzen", f"{MODE}_07_gastro.png"); bpy.ops.render.render(write_still=True); print("ok gastro")
