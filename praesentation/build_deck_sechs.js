@@ -13,7 +13,7 @@ const OUT = process.env.OUT || __dirname;
 const v = VARIANTEN.sechs;
 const UM = B.g_umsatz_monat; // Basis-Umsatz aus Excel (Blatt Gastro Tagesteile)
 // KI-Bilder (optional): werden automatisch eingebaut, wenn die Dateien in bilder/ liegen
-const KI = ["ki_aussen_1.jpg", "ki_aussen_2.jpg", "ki_terrasse.jpg", "ki_gastro_raum.jpg", "ki_gastro_bar.jpg"].map((n) => path.join(IMG, n)).filter((f) => fs.existsSync(f));
+const KI = ["ki_aussen_1.jpg", "ki_aussen_2.jpg", "ki_gastro_raum.jpg", "ki_gastro_bar.jpg"].map((n) => path.join(IMG, n)).filter((f) => fs.existsSync(f));
 const KI_AUSSEN = path.join(IMG, "ki_aussen_1.jpg");
 
 // Bild verzerrungsfrei zuschneiden (Mitte), liefert Pfad zum passenden Ausschnitt
@@ -344,6 +344,35 @@ if (KI.length) {
   B.anker.slice(0, 2).forEach((a) => rows.push([cell(a[0].split(":")[0] + " (Ankermieter)", { bold: true }), cell("1. OG"), R(fm1(a[1]) + " m²", { bold: true }), R(eur2(a[2])), R(eur(a[3]), { bold: true }), R(eur(a[4]), { bold: true })]));
   rows.push([cell("Rohertrag gesamt", { bold: true }), cell(""), cell(""), cell(""), R(eur(B.rohertrag_monat), { bold: true }), R(eur(B.rohertrag), { bold: true })]);
   s.addTable(rows, { x: MX, y: 1.45, w: W - 2 * MX, colW: [3.3, 1.5, 1.6, 1.8, 2.0, 1.93], rowH: 0.36, border: tblBorder, objectName: "Tabelle Mieten" });
+}
+
+// ===== 11a Wohnungen (Renderings) =====
+if (["ki_wohnung_og.jpg", "ki_wohnung_staffel.jpg", "ki_wohnung_schlafen.jpg", "ki_wohnung_balkon.jpg"].every(hasKI)) {
+  const s = content("Die Wohnungen: 12 Einheiten zwischen 48 und 64 m²", "Für Stadt, Bank und Gesellschafter", "Renderings zur Orientierung, keine Planung. Ausstattung und Grundrisse folgen mit dem Architekten.");
+  const items = [
+    ["ki_wohnung_og.jpg", "1. OG: Wohnen, Essen und Küche, ca. 64 m², Balkon zum Platz"],
+    ["ki_wohnung_staffel.jpg", "Staffelgeschoss in Holzbau, ca. 48 m², Dachterrasse"],
+    ["ki_wohnung_schlafen.jpg", "Schlafzimmer und Bad (Staffel)"],
+    ["ki_wohnung_balkon.jpg", "Balkon mit Blick auf Marktplatz und Rathaus"],
+  ];
+  const gw = 4.4, gh = 2.3;
+  items.forEach((it, i) => {
+    const x = MX + (i % 2) * (gw + 0.2);
+    const y = 1.45 + Math.floor(i / 2) * (gh + 0.55);
+    s.addImage({ path: fit(path.join(IMG, it[0]), gw, gh), x, y, w: gw, h: gh, altText: it[1] });
+    text(s, it[1], { x, y: y + gh + 0.04, w: gw, h: 0.4, fontSize: 11, color: C.accent4 });
+  });
+  card(s, 9.85, 1.45, W - 9.85 - MX, 5.0, "Wohnungen");
+  text(s, [
+    { text: "Wohnungsmix", options: { bold: true, color: C.accent1, breakLine: true } },
+    { text: "5 Wohnungen im 1. OG (je ca. 64 m²) mit Balkon", options: { bullet: true, breakLine: true } },
+    { text: "7 Wohnungen im Staffelgeschoss (je ca. 48 m²) mit Dachterrasse", options: { bullet: true, breakLine: true } },
+    { text: `Kaltmiete 11,18 €/m²: ca. ${eur(B.c_miete / 12)} bis ${eur(B.c_miete / 12)} je Wohnung`.replace(/ca\. .* bis .* je/, "ca. " + eur(64.2 * 11.1765) + " (64 m²) und " + eur(47.7 * 11.1765) + " (48 m²) je"), options: { bullet: true, breakLine: true } },
+    { text: " ", options: { breakLine: true } },
+    { text: "Standard", options: { bold: true, color: C.accent1, breakLine: true } },
+    { text: "Effizienzhaus 40 mit QNG, Holzbau im Staffelgeschoss, Aufzug", options: { bullet: true, breakLine: true } },
+    { text: "Eigener Eingang und Treppenhaus, getrennt von der Gastro", options: { bullet: true } },
+  ], { x: 10.05, y: 1.65, w: W - 9.85 - MX - 0.4, h: 4.7, fontSize: 12, paraSpaceAfter: 4 });
 }
 
 // ===== 11b2 Gewerbe: Gastro-Bedarf und Ankermieter =====

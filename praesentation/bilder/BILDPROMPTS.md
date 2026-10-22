@@ -79,3 +79,14 @@ north-German town, soft daylight. Flat roof, no pitched roof, no text.
 - **Dateinamen für den Einbau** (in `praesentation/bilder/` speichern, dann `build_deck_sechs.js` neu laufen lassen, die Folie "Visualisierungen" und das Titelbild entstehen automatisch):
   - `ki_aussen_1.jpg` (Prompt 1, wird auch Titelbild), `ki_aussen_2.jpg` (Prompt 2)
   - `ki_innen_1.jpg` (Prompt 3), `ki_innen_2.jpg` (Prompt 4)
+
+---
+
+## Stand Oktober 2026: 12 Wohnungen (Renderings Außen und Wohnungen)
+
+Feste Details für alle Bilder (Gebäude muss überall gleich aussehen):
+- 1. OG: dunkler braun-violetter Langformat-Klinker, graue Betonbänder, schwarze Stahlfenster, 5 auskragende Balkone aus grauem Beton mit Milchglas-Brüstung (Betonboden, kein Holzdeck)
+- Staffelgeschoss: Lärchenholz, Fenster mit hellen Holzrahmen, 7 schmale Fensterachsen, nur ca. 0,8 m breiter Umlauf mit grauem Boden hinter durchgehender Milchglas-Brüstung
+- EG: vollverglaste Gastro mit schwarzem Stahlvordach und Holzterrasse
+- Außenbilder: `ki_aussen_1.jpg` (Blaue Stunde), `ki_aussen_2.jpg` (Tag); Wohnungen: `ki_wohnung_og.jpg` (ca. 64 m²), `ki_wohnung_staffel.jpg` und `ki_wohnung_schlafen.jpg` (ca. 48 m²), `ki_wohnung_balkon.jpg`
+- Die Wohnungsbilder wurden mit der Tagesansicht als Referenzbild (image_references) erzeugt.

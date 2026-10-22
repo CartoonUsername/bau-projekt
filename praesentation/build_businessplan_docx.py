@@ -263,6 +263,12 @@ table([
     ["Staffelgeschoss (Holzbau)", "498 m²", "Wohnen", "7 × 48 m²", "334 m²"],
     ["Summe", "1.650 m²", "", "12 Wohnungen, 2 Büros", "655 m² Wohnen, 165 m² Büro"],
 ], [4.0, 2.2, 4.8, 2.6, 3.0], bold_rows=(4,), font=9)
+_w = [os.path.join(here, "bilder", n) for n in ("ki_wohnung_og.jpg", "ki_wohnung_staffel.jpg")]
+if all(os.path.exists(p) for p in _w):
+    _t = doc.add_table(rows=1, cols=2)
+    for _i, _p in enumerate(_w):
+        _c = _t.cell(0, _i); _c.paragraphs[0].add_run().add_picture(_p, width=Cm(8.0))
+    para("Renderings der Wohnungen: links 1. OG (ca. 64 m², Balkon), rechts Staffelgeschoss in Holzbau (ca. 48 m², Dachterrasse). Zur Orientierung, keine Planung.", italic=True, color=GREY, size=8.5, after=6)
 para("Mietaufstellung", bold=True, color=GREEN, after=2)
 rows = [["Wohnungen", "Geschoss", "Fläche", "Miete je m²", "Kaltmiete / Monat", "Kaltmiete / Jahr"]]
 for e in B["einheiten"]:
