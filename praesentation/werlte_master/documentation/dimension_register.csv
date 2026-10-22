@@ -1,0 +1,35 @@
+id,beschreibung,wert,einheit,status,quelle
+SITE-AREA,Grundstücksfläche Baufeld 3,960,m2,SOURCE-DEFINED,Konzeptheft (Auszug)
+SITE-PRICE,Kaufpreis,230,EUR/m2,SOURCE-DEFINED,Konzeptheft (Auszug)
+PLAN-GRZ,Grundflächenzahl,0.6,-,SOURCE-DEFINED,B-Plan 123 Entwurf (Auszug)
+PLAN-FOOTPRINT-THEORETICAL,rechnerische Maximalfläche (960 x 0.6),576,m2,SOURCE-DEFINED,Berechnung; KEINE Baugenehmigung
+PLAN-ENVELOPE-ESTIMATE,Baufenster nach Sichtschätzung,400-460,m2,PROVISIONAL,Sichtschätzung im Plan; nicht gemessen
+PLAN-STOREYS,Geschosse (min-max),2-3,-,SOURCE-DEFINED,B-Plan 123 Entwurf (Auszug)
+PLAN-EAVES,Traufhöhe,6.50,m,SOURCE-DEFINED,B-Plan 123 Entwurf (Auszug)
+PLAN-HEIGHT-MAX,Gesamthöhe maximal,12.00,m,SOURCE-DEFINED,B-Plan; Messregel unbestätigt
+PLAN-ROOF,Flachdach und Staffelgeschoss zulässig,offen,-,REQUIRES-APPROVAL,Stadt schriftlich klären
+BLD-WIDTH,Gebäudebreite (Modell),32.0,m,ASSUMED,gen_skizzen.js; aus 576/18
+BLD-DEPTH,Gebäudetiefe (Modell),18.0,m,ASSUMED,gen_skizzen.js
+BLD-FOOTPRINT-MODEL,Grundfläche Modell,576,m2,REQUIRES-APPROVAL,widerspricht Baufenster-Schätzung (C-01)
+LVL-EG-TOP,Oberkante EG-Decke,3.50,m,ASSUMED,gen_skizzen.js
+LVL-OG-TOP,Oberkante OG-Decke (Traufe),6.50,m,ASSUMED,Traufhöhe B-Plan
+LVL-STAFFEL-TOP,Oberkante Staffeldecke,9.60,m,ASSUMED,gen_skizzen.js
+LVL-ATTIKA,Oberkante Attika,9.90,m,ASSUMED,gen_skizzen.js
+STAFFEL-SETBACK,Rücksprung Staffelgeschoss,0.8,m,ASSUMED,Entwurf; B-Plan-Einordnung offen
+STAFFEL-AREA,BGF Staffelgeschoss,498,m2,ASSUMED,Berechnung 30.4 x 16.4
+CORE-WIDTH,Treppenhaus/Aufzug Westende,4.0,m,ASSUMED,gen_skizzen.js
+EG-GASTRO-AREA,Gastrofläche EG,510,m2,PROVISIONAL,Gastro-Konzept; setzt 576 m2 voraus (C-01)
+EG-SEATS-INDOOR,Innenplätze,190,Stk,PROVISIONAL,Gastro-Konzept (160 + 30)
+EG-SEATS-TERRACE,Terrassenplätze,60,Stk,PROVISIONAL,Gastro-Konzept
+EG-BAR-STOOLS,Barhocker,12,Stk,PROVISIONAL,Gastro-Konzept
+EG-SEPAREE-SEATS,Séparée,30,Stk,PROVISIONAL,Gastro-Konzept
+OG-OFFICE-1,Büro 1,100,m2,ASSUMED,Bauherr
+OG-OFFICE-2,Büro 2,65,m2,ASSUMED,Bauherr
+OG-UNITS,Wohnungen im 1. OG,5,Stk,PROVISIONAL,Excel-Modell; Grundriss nicht geprüft (C-07)
+STAFFEL-UNITS,Wohnungen im Staffelgeschoss,7,Stk,PROVISIONAL,Excel-Modell; Grundriss nicht geprüft (C-07)
+BALCONY-COUNT-SOUTH,Balkone lange Seite,5,Stk,PROVISIONAL,gen_skizzen.js; Renderings abweichend (C-08)
+BALCONY-WIDTH,Balkonbreite,2.7,m,ASSUMED,gen_skizzen.js (OGBAL)
+BALCONY-DEPTH,Balkontiefe,1.5,m,ASSUMED,gen_skizzen.js
+WINDOW-OG-FRAME,Fensterrahmen 1. OG,schwarz Stahl,-,SOURCE-DEFINED,Renderings
+WINDOW-STAFFEL-FRAME,Fensterrahmen Staffel,helles Holz,-,SOURCE-DEFINED,Renderings
+WINDOW-DIMENSIONS,Fenster- und Türmaße,unbekannt,-,MISSING,keine Quelle
