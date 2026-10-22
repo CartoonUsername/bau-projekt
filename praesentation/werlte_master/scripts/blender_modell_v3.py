@@ -63,10 +63,8 @@ def panel(side, a, z, pos, depth, name, mat):
     return mesh_box(name, mat, (d0, d1), a, z)
 def build():
     ground = "boden" if not FLAT else "boden"
-    mesh_box("Gelaende", ground if FLAT else "gelaende", (-900, 900), (-900, 900), (-0.4, -0.02))
-    if not FLAT:
-        mesh_box("Platz", "boden", (-45, 80), (-60, 0), (-0.02, 0)); mesh_box("Platz-W", "boden", (-45, 0), (0, 60), (-0.02, 0)); mesh_box("Platz-O", "boden", (32, 80), (0, 60), (-0.02, 0))
-    mesh_box("Asphalt", "asphalt", (0, 32), (18, 29), (-0.02, 0.0))
+    mesh_box("Gelaende", "boden", (-700, 700), (-700, 700), (-0.4, 0.0))
+    mesh_box("Asphalt", "asphalt", (0, 32), (18, 29), (-0.02, 0.006))
     for st in MB.stalls():
         x0, y0, x1, y1 = st
         for xa in (x0, x1 - 0.08): mesh_box("Stellplatzlinie", "linie", (xa, xa + 0.08), (y0, y1), (0, 0.012))
@@ -113,7 +111,7 @@ def setup_light(view, night):
     e = math.radians(el); vec = Vector((sh.x * math.cos(e), sh.y * math.cos(e), math.sin(e))); vec.normalize()
     world_sky(night, vec)
     if not night:
-        s = bpy.data.lights.new("sun", "SUN"); s.energy = 3.0; s.angle = math.radians(1.5); so = bpy.data.objects.new("sun", s); sc.collection.objects.link(so); so.rotation_euler = (-vec).to_track_quat("-Z", "Y").to_euler() if False else Vector(vec).to_track_quat("Z", "Y").to_euler()
+        s = bpy.data.lights.new("sun", "SUN"); s.energy = 4.5; s.angle = math.radians(1.2); so = bpy.data.objects.new("sun", s); sc.collection.objects.link(so); so.rotation_euler = (-vec).to_track_quat("-Z", "Y").to_euler() if False else Vector(vec).to_track_quat("Z", "Y").to_euler()
 def camera(view):
     cam = bpy.data.cameras.new("c"); cam.lens = view["lens"]; cam.sensor_width = 36; co = bpy.data.objects.new("cam", cam); sc.collection.objects.link(co); p, t = view["p"], view["t"]
     co.location = (X(p[0]), p[1], p[2]); co.rotation_euler = (Vector((X(t[0]), t[1], t[2])) - co.location).to_track_quat("-Z", "Y").to_euler(); sc.camera = co; return co
@@ -146,6 +144,8 @@ for name in VIEWS_TO_DO:
         w = bpy.data.worlds.new("w"); sc.world = w; w.use_nodes = True; w.node_tree.nodes["Background"].inputs["Color"].default_value = (0.93, 0.95, 0.98, 1); sc.view_settings.view_transform = "Standard"
     else:
         sc.render.engine = "CYCLES"; sc.cycles.device = "CPU"; sc.cycles.samples = 56; sc.cycles.use_denoising = True; sc.cycles.max_bounces = 6; sc.cycles.glossy_bounces = 4; sc.cycles.transmission_bounces = 4
-        setup_light(v, MODE == "nacht"); sc.view_settings.view_transform = "AgX"; sc.view_settings.exposure = 0.0 if MODE == "tag" else 1.5
+        setup_light(v, MODE == "nacht"); sc.view_settings.view_transform = "AgX"; sc.view_settings.exposure = -0.4 if MODE == "tag" else 1.2
+        try: sc.view_settings.look = "AgX - Medium High Contrast"
+        except Exception as e: print("look", e)
     sc.render.filepath = os.path.join(outd, f"{MODE}_{name}.png"); bpy.ops.render.render(write_still=True); print("ok", name, flush=True)
     json.dump(dict(view=name, camera=v["p"], target=v["t"], lens_mm=v["lens"], sensor_mm=36, sun_azimut_rel=v["sun"][0], sun_hoehe=v["sun"][1], modus=MODE), open(os.path.join(outd, f"{MODE}_{name}.camera.json"), "w"))
