@@ -9,7 +9,7 @@ _R = ImageFont.truetype(FONTS + "Inter-Regular.otf", 200)
 _B = ImageFont.truetype(FONTS + "Inter-SemiBold.otf", 200)
 INK = "#1B1F24"; GREY = "#6B7280"; LGREY = "#C9CED6"; PALE = "#E5E8EC"; ACC = "#9A3412"; ACCBG = "#FDF1E7"
 FILL = {"apartment": "#F2E4DC", "office": "#DDE7EE", "core": "#E7E9EC", "corridor": "#F8F8F6", "dining": "#F5EEDC", "lounge": "#EBDDC3", "bar": "#D9D2C6",
-        "private_dining": "#E8DCC8", "circulation": "#EFEFEC", "wc": "#E3E7EA", "storage": "#E3E7EA", "kitchen": "#DADFE3"}
+        "private_dining": "#E8DCC8", "foyer": "#E6E0D2", "circulation": "#EFEFEC", "wc": "#E3E7EA", "storage": "#E3E7EA", "kitchen": "#DADFE3"}
 W, H = 420.0, 297.0
 
 def tw(s, fs, bold=False):

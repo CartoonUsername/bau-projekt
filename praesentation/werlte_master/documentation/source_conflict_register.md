@@ -53,3 +53,6 @@ C-28 bis C-36 sind in `documentation/varianten_ABC.md` beschrieben (Stellplätze
 ## Korrigierte Planung (22.10.2026, Version 2)
 C-30 bis C-37 sind in `documentation/varianten_v2_ABC.md` fortgeschrieben (neu: C-37 kleinere Büros und Gastronomie gegenüber Excel; C-30: alle Varianten über der theoretischen GRZ-Fläche). C-31 (frühere Gastronomie 316 m²) entfällt durch Version 2. Alle offen.
 
+## Runde 3 (22.10.2026): Arbeitsgrundlage B3
+Neu: C-38 (Abstell/Fahrrad Wohnen im EG entfällt bei Büro-Alternative K; barrierefreie Gastplätze), C-39 (Dachterrassen: Brüstung, Dachaufbau, Brand- und Schallschutz). Beschreibung in `documentation/varianten_v3_B3.md`. Alle offen.
+

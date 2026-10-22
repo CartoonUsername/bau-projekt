@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420.0mm" height="297.0mm" viewBox="0 0 420.0 297.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" text-rendering="geometricPrecision"><defs></defs><rect width="420.0" height="297.0" fill="#FFFFFF"/><text x="14.000" y="20.000" font-size="6.0" text-anchor="start" font-weight="600" fill="#1B1F24">Stellplätze und baurechtliche Prüfpunkte – Bedarf, Nachweis und offene Fragen getrennt</text>
+<text x="14.000" y="27.000" font-size="3.0" text-anchor="start" font-weight="400" fill="#6B7280">Alle Werte hypothetisch oder Annahme; es wird keine Zulässigkeit behauptet. Die 32 × 30 m sind keine bestätigte Grundstücksgröße.</text>
+<text x="14.000" y="38.000" font-size="3.6" text-anchor="start" font-weight="600" fill="#1B1F24">1. Stellplätze: Bedarf und Nachweis getrennt</text>
+<text x="15.000" y="44.000" font-size="2.9" text-anchor="start" font-weight="600" fill="#1B1F24"></text>
+<text x="43.000" y="44.000" font-size="2.9" text-anchor="start" font-weight="600" fill="#1B1F24">Bedarf (grobe Annahme der Excel, nicht Satzung)</text>
+<text x="143.000" y="44.000" font-size="2.9" text-anchor="start" font-weight="600" fill="#1B1F24">Nachweislich möglich</text>
+<text x="221.000" y="44.000" font-size="2.9" text-anchor="start" font-weight="600" fill="#1B1F24">Hypothese H1 (32 × 30 m, nicht bestätigt)</text>
+<line x1="14.000" y1="45.900" x2="314.000" y2="45.900" stroke="#1B1F24" stroke-width="0.5" stroke-linecap="butt"/>
+<text x="15.000" y="50.265" font-size="2.9" text-anchor="start" font-weight="600" fill="#1B1F24">Wohnungen</text>
+<text x="43.000" y="50.265" font-size="2.9" text-anchor="start" font-weight="400" fill="#1B1F24">16 × 1,5 = 24</text>
+<text x="143.000" y="50.265" font-size="2.9" text-anchor="start" font-weight="400" fill="#1B1F24">0 (kein Lageplan, keine Grundstücksmaße)</text>
+<text x="221.000" y="50.265" font-size="2.9" text-anchor="start" font-weight="400" fill="#1B1F24">–</text>
+<line x1="14.000" y1="52.165" x2="314.000" y2="52.165" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="15.000" y="56.530" font-size="2.9" text-anchor="start" font-weight="600" fill="#1B1F24">Gastronomie</text>
+<text x="43.000" y="56.530" font-size="2.9" text-anchor="start" font-weight="400" fill="#1B1F24">Gastraum und Bar 280 m² / 10 = 28</text>
+<text x="143.000" y="56.530" font-size="2.9" text-anchor="start" font-weight="400" fill="#1B1F24">0</text>
+<text x="221.000" y="56.530" font-size="2.9" text-anchor="start" font-weight="400" fill="#1B1F24">–</text>
+<line x1="14.000" y1="58.430" x2="314.000" y2="58.430" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="15.000" y="62.795" font-size="2.9" text-anchor="start" font-weight="600" fill="#1B1F24">Büros</text>
+<text x="43.000" y="62.795" font-size="2.9" text-anchor="start" font-weight="400" fill="#1B1F24">56 m² / 30 = 1,9</text>
+<text x="143.000" y="62.795" font-size="2.9" text-anchor="start" font-weight="400" fill="#1B1F24">0</text>
+<text x="221.000" y="62.795" font-size="2.9" text-anchor="start" font-weight="400" fill="#1B1F24">–</text>
+<line x1="14.000" y1="64.695" x2="314.000" y2="64.695" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="15.000" y="69.060" font-size="2.9" text-anchor="start" font-weight="600" fill="#1B1F24">Summe</text>
+<text x="43.000" y="69.060" font-size="2.9" text-anchor="start" font-weight="400" fill="#1B1F24">54 (Excel-Stand mit 12 Wohnungen und 165 m² Büro: 61)</text>
+<text x="143.000" y="69.060" font-size="2.9" text-anchor="start" font-weight="400" fill="#1B1F24">0</text>
+<text x="221.000" y="69.060" font-size="2.9" text-anchor="start" font-weight="400" fill="#1B1F24">11 Stellplätze 2,50 × 5,00 m</text>
+<line x1="14.000" y1="70.960" x2="314.000" y2="70.960" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="15.000" y="75.325" font-size="2.9" text-anchor="start" font-weight="600" fill="#1B1F24">Fehlbetrag</text>
+<text x="43.000" y="75.325" font-size="2.9" text-anchor="start" font-weight="400" fill="#1B1F24">–</text>
+<text x="143.000" y="75.325" font-size="2.9" text-anchor="start" font-weight="400" fill="#1B1F24">gegenüber dem Bedarf: nicht bestimmbar</text>
+<text x="221.000" y="75.325" font-size="2.9" text-anchor="start" font-weight="400" fill="#1B1F24">rechnerisch 43 Stellplätze</text>
+<line x1="14.000" y1="77.225" x2="314.000" y2="77.225" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="15.000" y="81.590" font-size="2.9" text-anchor="start" font-weight="600" fill="#1B1F24">Überdeckung</text>
+<text x="43.000" y="81.590" font-size="2.9" text-anchor="start" font-weight="400" fill="#1B1F24">–</text>
+<text x="143.000" y="81.590" font-size="2.9" text-anchor="start" font-weight="400" fill="#1B1F24">–</text>
+<text x="221.000" y="81.590" font-size="2.9" text-anchor="start" font-weight="400" fill="#1B1F24">3,0 von 5,0 m Tiefe durch die Auskragung; Durchfahrtshöhe 3,20</text>
+<text x="221.000" y="85.360" font-size="2.9" text-anchor="start" font-weight="400" fill="#1B1F24">m (Annahme)</text>
+<line x1="14.000" y1="87.260" x2="314.000" y2="87.260" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="14.000" y="94.625" font-size="2.9" text-anchor="start" font-weight="400" fill="#1B1F24">Die Stellplatzsatzung der Stadt ist nicht bekannt; der Bedarf folgt den groben Annahmen der Excel. Mögliche Lösungen (Stellplätze außerhalb des Grundstücks, Ablöse, Gemeinschaftsanlage, Fahrradstellplätze) sind mit</text>
+<text x="14.000" y="98.540" font-size="2.9" text-anchor="start" font-weight="400" fill="#1B1F24">der Stadt zu klären und nicht Teil dieser Geometrie. Die Überdachung erzeugt keine zusätzlichen Stellplätze.</text>
+<text x="14.000" y="107.455" font-size="3.6" text-anchor="start" font-weight="600" fill="#1B1F24">2. Baurechtliche Prüfpunkte (alle offen)</text>
+<text x="15.000" y="113.455" font-size="2.8" text-anchor="start" font-weight="600" fill="#1B1F24">Thema</text>
+<text x="53.000" y="113.455" font-size="2.8" text-anchor="start" font-weight="600" fill="#1B1F24">Wert im Modell (hypothetisch)</text>
+<text x="153.000" y="113.455" font-size="2.8" text-anchor="start" font-weight="600" fill="#1B1F24">Status</text>
+<text x="253.000" y="113.455" font-size="2.8" text-anchor="start" font-weight="600" fill="#1B1F24">Nötige Unterlage</text>
+<line x1="14.000" y1="115.355" x2="314.000" y2="115.355" stroke="#1B1F24" stroke-width="0.5" stroke-linecap="butt"/>
+<text x="15.000" y="119.635" font-size="2.8" text-anchor="start" font-weight="600" fill="#1B1F24">GRZ</text>
+<text x="53.000" y="119.635" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Grundfläche EG 576 m² = 0,60 × 960 m²; Projektion 1. OG 660 m² = 0,69</text>
+<text x="153.000" y="119.635" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">OFFEN: Zählung von Auskragungen, Terrassen, Stellplätzen unbekannt;</text>
+<text x="153.000" y="123.275" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Variante nicht nachweisbar zulässig</text>
+<text x="253.000" y="119.635" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">B-Plan Nr. 123, Auslegung der GRZ</text>
+<line x1="14.000" y1="125.175" x2="314.000" y2="125.175" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="15.000" y="129.455" font-size="2.8" text-anchor="start" font-weight="600" fill="#1B1F24">Baufenster</text>
+<text x="53.000" y="129.455" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Gebäude 32 × 18 m; Sichtschätzung des Baufensters nur 400–460 m²</text>
+<text x="153.000" y="129.455" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">OFFEN (C-01): Nachweis fehlt</text>
+<text x="253.000" y="129.455" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Baufenster-Koordinaten, Lageplan</text>
+<line x1="14.000" y1="131.355" x2="314.000" y2="131.355" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="15.000" y="135.635" font-size="2.8" text-anchor="start" font-weight="600" fill="#1B1F24">Auskragung</text>
+<text x="53.000" y="135.635" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">3,00 m hinten über Stellplätzen, Staffel 1,50 m kürzer</text>
+<text x="153.000" y="135.635" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">OFFEN: Baugrenze und Überbauung der Stellplatzfläche</text>
+<text x="253.000" y="135.635" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">B-Plan, Stadt</text>
+<line x1="14.000" y1="137.535" x2="314.000" y2="137.535" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="15.000" y="141.815" font-size="2.8" text-anchor="start" font-weight="600" fill="#1B1F24">Abstände</text>
+<text x="53.000" y="141.815" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Rückbereich 12 m (aus 32 × 30 m angenommen)</text>
+<text x="153.000" y="141.815" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">OFFEN: Grenzabstand und Abstandsflächen unbekannt</text>
+<text x="253.000" y="141.815" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Lageplan mit Grenzen, NBauO</text>
+<line x1="14.000" y1="143.715" x2="314.000" y2="143.715" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="15.000" y="147.995" font-size="2.8" text-anchor="start" font-weight="600" fill="#1B1F24">Höhen</text>
+<text x="53.000" y="147.995" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Traufe 6,50 m, Staffeldecke 9,60 m, Attika 9,90 m, Maximum 12,00 m</text>
+<text x="153.000" y="147.995" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">OFFEN (C-03): Messregel unbestätigt</text>
+<text x="253.000" y="147.995" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">B-Plan, Stadt</text>
+<line x1="14.000" y1="149.895" x2="314.000" y2="149.895" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="15.000" y="154.175" font-size="2.8" text-anchor="start" font-weight="600" fill="#1B1F24">Geschosse</text>
+<text x="53.000" y="154.175" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">EG, 1. OG, Staffel (Staffel 87 % des Geschosses darunter)</text>
+<text x="153.000" y="154.175" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">OFFEN (C-02): Vollgeschoss und Zahl zulässig?</text>
+<text x="253.000" y="154.175" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">B-Plan, Stadt</text>
+<line x1="14.000" y1="156.075" x2="314.000" y2="156.075" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="15.000" y="160.355" font-size="2.8" text-anchor="start" font-weight="600" fill="#1B1F24">Brandschutz und</text>
+<text x="15.000" y="163.995" font-size="2.8" text-anchor="start" font-weight="600" fill="#1B1F24">Rettungswege</text>
+<text x="53.000" y="160.355" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Gaststätte 120 + 44 Plätze, Büros, 16 Wohnungen, ein Treppenraum,</text>
+<text x="53.000" y="163.995" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Dachterrasse</text>
+<text x="153.000" y="160.355" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">OFFEN (C-15, C-20, C-36, C-39)</text>
+<text x="253.000" y="160.355" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Brandschutzkonzept</text>
+<line x1="14.000" y1="165.895" x2="314.000" y2="165.895" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="15.000" y="170.175" font-size="2.8" text-anchor="start" font-weight="600" fill="#1B1F24">Terrasse und Vordach am</text>
+<text x="15.000" y="173.815" font-size="2.8" text-anchor="start" font-weight="600" fill="#1B1F24">Platz</text>
+<text x="53.000" y="170.175" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">24 × 3,6 m, Vordach, Balkone 1,50 m über der Fassade</text>
+<text x="153.000" y="170.175" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">OFFEN: Eigentum und Sondernutzung des Platzes</text>
+<text x="253.000" y="170.175" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Lageplan, Stadt</text>
+<line x1="14.000" y1="175.715" x2="314.000" y2="175.715" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<rect x="6.000" y="6.000" width="408.000" height="285.000" fill="none" stroke="#1B1F24" stroke-width="0.5"/>
+<line x1="315.000" y1="6.000" x2="315.000" y2="291.000" stroke="#6B7280" stroke-width="0.25" stroke-linecap="butt"/>
+<text x="318.000" y="14.000" font-size="2.6" text-anchor="start" font-weight="600" fill="#6B7280">KENNZAHLEN</text>
+<line x1="318.000" y1="15.600" x2="408.000" y2="15.600" stroke="#C9CED6" stroke-width="0.2" stroke-linecap="butt"/>
+<text x="318.000" y="20.200" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Bedarf (Annahme)</text>
+<text x="408.000" y="20.200" font-size="2.8" text-anchor="end" font-weight="600" fill="#1B1F24">ca. 54</text>
+<text x="318.000" y="24.600" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">nachweislich möglich</text>
+<text x="408.000" y="24.600" font-size="2.8" text-anchor="end" font-weight="600" fill="#1B1F24">0</text>
+<text x="318.000" y="29.000" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Hypothese H1</text>
+<text x="408.000" y="29.000" font-size="2.8" text-anchor="end" font-weight="600" fill="#1B1F24">11</text>
+<text x="318.000" y="36.400" font-size="2.6" text-anchor="start" font-weight="600" fill="#6B7280">OFFENE PUNKTE (NICHT GELÖST)</text>
+<line x1="318.000" y1="38.000" x2="408.000" y2="38.000" stroke="#C9CED6" stroke-width="0.2" stroke-linecap="butt"/>
+<rect x="318.000" y="40.000" width="9.000" height="3.800" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.2" rx="0.8"/>
+<text x="322.500" y="42.600" font-size="2.4" text-anchor="middle" font-weight="600" fill="#9A3412">C-28</text>
+<text x="329.500" y="42.600" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Stellplätze: Bedarf und Nachweis getrennt, Fehlbetrag</text>
+<text x="329.500" y="46.520" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">offen.</text>
+<rect x="318.000" y="48.840" width="9.000" height="3.800" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.2" rx="0.8"/>
+<text x="322.500" y="51.440" font-size="2.4" text-anchor="middle" font-weight="600" fill="#9A3412">C-29</text>
+<text x="329.500" y="51.440" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Grundstückszuschnitt, Zufahrt, Anlieferung unbekannt.</text>
+<rect x="318.000" y="53.760" width="9.000" height="3.800" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.2" rx="0.8"/>
+<text x="322.500" y="56.360" font-size="2.4" text-anchor="middle" font-weight="600" fill="#9A3412">C-30</text>
+<text x="329.500" y="56.360" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Baurechtliche Zulässigkeit nicht nachgewiesen.</text>
+<text x="318.000" y="63.280" font-size="2.6" text-anchor="start" font-weight="600" fill="#6B7280">HINWEISE</text>
+<line x1="318.000" y1="64.880" x2="408.000" y2="64.880" stroke="#C9CED6" stroke-width="0.2" stroke-linecap="butt"/>
+<text x="318.000" y="69.480" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Keine Variante gilt als zulässig, solange die Nachweise fehlen.</text>
+<line x1="315.000" y1="236.000" x2="414.000" y2="236.000" stroke="#1B1F24" stroke-width="0.5" stroke-linecap="butt"/>
+<text x="318.000" y="243.000" font-size="3.4" text-anchor="start" font-weight="600" fill="#1B1F24">Neue Mitte Werlte · Baufeld 3</text>
+<text x="318.000" y="248.200" font-size="2.7" text-anchor="start" font-weight="400" fill="#6B7280">Bauvorhaben: Restaurant und Bar, Büros, Wohnungen</text>
+<text x="318.000" y="256.700" font-size="4.2" text-anchor="start" font-weight="600" fill="#1B1F24">Stellplätze und Prüfpunkte</text>
+<text x="318.000" y="263.450" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Tabelle</text>
+<text x="318.000" y="267.650" font-size="2.5" text-anchor="start" font-weight="400" fill="#6B7280">Stand 22.10.2026 · Arbeitsgrundlage B3 (Variante B, nicht festgelegt)</text>
+<rect x="318.000" y="269.450" width="90.000" height="6.200" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.3" rx="0.8"/>
+<text x="363.000" y="273.650" font-size="2.6" text-anchor="middle" font-weight="600" fill="#9A3412">VORLÄUFIGER ARBEITSSTAND – nicht freigegeben</text>
+<text x="408.000" y="288.000" font-size="2.6" text-anchor="end" font-weight="600" fill="#1B1F24">Blatt 26</text></svg>
