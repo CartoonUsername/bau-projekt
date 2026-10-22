@@ -1,7 +1,6 @@
 # Higgsfield-Visualisierungen Baufeld 3 (Variante B3) – Prompts und Reihenfolge
 
-Status: NICHT generiert. Der Upload der Referenzbilder zu Higgsfield scheitert, weil die Netzwerkrichtlinie
-der Umgebung den Host `upload.higgsfield.ai` blockiert (HTTP 403 vom Proxy). Es wurden keine Bilder erfunden.
+Status: Motive 01-07 generiert (Higgsfield, Modell nano_banana_2), Motive 08 (Dachterrasse) und 09 (Wohnung) nicht erstellt.
 
 Alle Bilder: "konzeptionelle Visualisierung", ohne Text/Logos/Schilder, Bildbeschriftung nur im Layout außerhalb des Bildes.
 
@@ -27,3 +26,17 @@ close-up, no invented neighbouring buildings (neutral surroundings only).
 | 09 | Wohnung (optional) | – | ki_wohnung_og.jpg, ki_wohnung_balkon.jpg | Blatt 31 | Balkon 2,70 x 1,50 m |
 
 Prüfung je Bild: Geschosszahl, 5 Balkone, Fensterachsen, Auskragung, Staffelrücksprung gegen Referenz; sonst verwerfen.
+
+## Ergebnis der Generierung und Prüfung
+Zwei Durchläufe: Durchlauf 1 (Geometrie- plus Stilreferenz) wich ab (Eckperspektive, ca. 8 statt 5 Balkone, auskragendes Dach) und wurde für 01-06 verworfen.
+Durchlauf 2 (nur farbcodierte Geometrie-Referenz mit Legende, "exakt fünf Balkone, bündige Attika, keine Zusatzbauteile") ist die Endfassung.
+Gastro-Innenraum (07) stammt aus Durchlauf 1 (Referenzen ref_08_gastro + ki_gastro_raum).
+
+Verwendet: 01/02 ref_01_front, 03 ref_03_rueck, 04 ref_04_west, 05 ref_05_ost, 06 ref_06_luft; Rohdaten in `roh/`.
+
+Visuelle Prüfung (gegen Referenzrender, keine Maßprüfung):
+- 01/02: Kamera, 3 Ebenen, 5 Balkone, Klinker EG/1. OG, Holz im Staffelgeschoss stimmen; Staffel zeigt eingerückte Loggien.
+- 03: Rückflügel mit Auskragung über Stellplätzen plausibel; Anzahl Stellplätze/Balkone nicht exakt kontrolliert; Hintergrund enthält frei erfundene Umgebung (Halle, Felder).
+- 04/05/06: Volumen und Materialverteilung stimmen; Fensterzahl im Detail nicht exakt maßgleich.
+- 07: Stimmung wie bestehende Innenraumbilder; Möblierung/Pfeilerstellung nicht maßgleich zum Grundriss, im Hintergrund ist ein Platz mit Giebelhäusern erfunden.
+Alle Bilder sind konzeptionelle Visualisierungen und keine Planunterlagen.
