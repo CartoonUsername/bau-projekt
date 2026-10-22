@@ -21,3 +21,7 @@ Bewertung: Konfidenz hoch/mittel/niedrig. „Freigabe“ = Entscheidung des Auft
 | C-15 | Gastro-Konzept: ca. 190 Innen- und 60 Terrassenplätze, EG als Versammlungsstätte | Nur ein Treppenhaus am Westende | Rettungswege, zweiter Ausgang, Brandschutz (Gastro unter Wohnungen) ungeprüft | Treppen, Ausgänge | Brandschutz-/Gastro-Fachplaner | niedrig | Fachplaner | offen |
 
 Nicht auflösbar aus den vorhandenen Unterlagen: C-01, C-02, C-03, C-13. Dafür fehlen B-Plan-Originalunterlagen, Baufenster-Koordinaten und ein Lageplan.
+
+## Entscheidung Variante A (Update)
+- C-01: Eigentümerentscheidung "Variante A" (32 × 18 m = 576 m²) ist verbindlich als Untersuchungsansatz; der rechtliche/geometrische Nachweis (Baufenster, GRZ) bleibt OFFEN.
+- Alle Parameter (Footprint, ~510 m² Gastro, ~190/~60 Plätze, 12 WE) sind Ziele, nicht bewiesen. Design Freeze bleibt in Kraft.
