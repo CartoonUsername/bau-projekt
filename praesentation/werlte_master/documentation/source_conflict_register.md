@@ -25,3 +25,20 @@ Nicht auflösbar aus den vorhandenen Unterlagen: C-01, C-02, C-03, C-13. Dafür 
 ## Entscheidung Variante A (Update)
 - C-01: Eigentümerentscheidung "Variante A" (32 × 18 m = 576 m²) ist verbindlich als Untersuchungsansatz; der rechtliche/geometrische Nachweis (Baufenster, GRZ) bleibt OFFEN.
 - Alle Parameter (Footprint, ~510 m² Gastro, ~190/~60 Plätze, 12 WE) sind Ziele, nicht bewiesen. Design Freeze bleibt in Kraft.
+
+## Ergänzung Arbeitsbasis OG-2 (22.10.2026, VORLÄUFIG, nichts festgeschrieben)
+Die Spalten folgen der Tabelle oben; "Status" gilt durchgehend als offen, bis ausdrücklich freigegeben.
+
+| ID | Quelle A | Quelle B | Konflikt | Betrifft | Behandlung im Modell (nicht stillschweigend gelöst) | Zuständig |
+|---|---|---|---|---|---|---|
+| C-16 | Design: EG vollverglast, Front 28 m | OG-2 trägt Last auf der Platzfassade (y = 0) | Ohne Stützen oder Träger nicht nachgewiesen. Mit Stützen im 7-m-Raster (R1) steht eine Stütze genau in der Doppeltür (x 18) | Fassadenstützen, Tür, Fassadenbild EG | Arbeitsraster R2 (5,6 m, 5 Felder) vorgeschlagen: Wohnungen, Balkone und Stützen liegen auf einer Achse, Tür liegt in Feldmitte. R1 bleibt als Alternative im Modell. Nicht freigegeben | Tragwerksplaner, Auftraggeber |
+| C-17 | Excel: 12 Wohnungen, 655 m² | Geometrie OG-2: 13 Wohnungen, 591 m² netto (249 + 342) | Fläche und Zahl weichen ab, Wirtschaftlichkeit nicht neu gerechnet | Excel, Bank, Folien | Geometrie führt, Zahlen als ASSUMED (Netto-Faktor 0,88). Excel bleibt unverändert, bis Freigabe | Auftraggeber |
+| C-18 | Renderings: Stahlvordach über Terrasse | OG-2: fünf Betonbalkone, Tiefe 1,5 m, Unterseite 3,2 m | Vordach (Annahme Unterseite 3,0 m, Tiefe 3,6 m) liegt unter und überlappt alle Balkonplatten, Anschluss und Lichte Höhe offen | Fassadendetail EG/OG | Vordach als eigenes Bauteil unter den Balkonen geführt, nicht gelöst | Auftraggeber, Tragwerk |
+| C-19 | Design Freeze: Rückseite nicht gezeigt | OG-2: ein rückseitiger Balkon (1,5 m über y = 18) | Rückseite ist nicht Teil des eingefrorenen Designs, Grenzabstand/Baugrenze unbekannt | Rückfassade | Im Modell als PROVISIONAL, Entfall prüfen | Stadt, Auftraggeber |
+| C-20 | Gastro-Konzept: 190 + 60 Plätze | Bauordnungsrecht (Sonderbau, Versammlungsstätte, Gaststättenbau) | Einstufung, Rettungswege, Brandschutz zwischen Gastro und darüberliegenden Wohnungen offen | EG, Kern, Schächte | Fachplaner/Bauamt fragen; Modell enthält nur einen Treppenkern | Brandschutzplaner |
+| C-21 | Render: 7 Staffel-Achsen; OG-2: 5 Achsen | Modell S-1: 4 Achsen vorn | Drei verschiedene Achszahlen übereinander. Option S-2 (5 Achsen vorn auf R2, +1 Wohnung, 14 gesamt) möglich | Staffelfassade, Wohnungszahl | S-1 bleibt, S-2 nur dokumentiert | Auftraggeber |
+| C-22 | Küche EG | Wohnung N1 (L1) und Staffel-N3 darüber | Küchenabluftschacht (1,2 × 1,2 m bei x 30–31,2, y 16–17,2) läuft durch zwei Wohnungen | Schall, Geruch, Brand | Schacht im Modell, Konzept offen (Ergänzung C-14) | Fachplaner |
+| C-23 | Staffel ≈ 87 % des Geschosses darunter (498,6 / 576 m²) | übliche Schwelle ca. 75 % | Staffelgeschoss gilt voraussichtlich als Vollgeschoss (C-02) | Geschosszahl | offen, Rückfrage Stadt | Stadt |
+
+Offene baurechtliche Fragen sind gesammelt in `planning/baurechtliche_fragen.md`, Förderfragen getrennt in `foerderung/klaerung_wohnraumfoerderstelle.md`.
+

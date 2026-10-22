@@ -23,3 +23,7 @@ HINWEIS: 510 m² setzen die volle Grundfläche von 576 m² voraus und passen nic
 Außen: dunkelrotbrauner Langformat-Klinker, Betonbänder und Betonbalkone, schwarze Stahlfenster, Milchglas-Brüstungen, Lärchenholz im Staffelgeschoss mit hellen Holzfenstern, schmaler Umlauf (0,8 m), schwarzes Stahlvordach, Holzterrasse.
 Restaurant: olivgrüne Paneele, cognacfarbene Samtbänke, Bordeaux-Akzente, Eiche, anthrazitgeriffelte Theke, Messing, schwarze Stahl-Glas-Trennwände, ovale Spiegel, warme indirekte Beleuchtung, Mikrozement.
 Wohnungen: Eichenparkett, helle Holzflächen, Holzbau im Staffelgeschoss.
+
+## Stand 22.10.2026: Arbeitsbasis OG-2 (VORLÄUFIG)
+OG-2 (5 Wohnungen vorn mit 5 Balkonen, 1 Wohnung hinten, 2 Büros hinten) ist nur Arbeitsgrundlage für die geometrische Abstimmung, keine Festschreibung. Förderdaten sind nicht belegt und werden getrennt in `foerderung/` geklärt. Keine neuen Renderings vor abgestimmter Geometrie; Design Freeze unverändert.
+

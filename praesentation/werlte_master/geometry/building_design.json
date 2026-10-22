@@ -1,5 +1,5 @@
 {
- "model": "NEUE_MITTE_MASTER_DRAFT_A_001",
+ "model": "NEUE_MITTE_MASTER_DRAFT_A_002",
  "decision": "Variante A verbindlich (Auftraggeber, 22.10.2026). Nachweis der Grundfläche 576 m² steht aus (Konflikt C-01).",
  "units": "m",
  "origin": "SW-Ecke Gebäude, x West nach Ost, y Platzfassade nach hinten",
@@ -45,9 +45,10 @@
  "grid": {
   "x": [
    4.0,
-   11.0,
-   18.0,
-   25.0,
+   9.6,
+   15.2,
+   20.8,
+   26.4,
    32.0
   ],
   "y": [
@@ -55,19 +56,23 @@
    8.0,
    18.0
   ],
-  "note": "Raster 7,0 m in x, 8,0 und 10,0 m in y. Wohngeschoss-Mittelgang bei y 8–10 liegt nicht auf dem Raster: Unterzug/Abfangung, Statik prüfen (PROVISIONAL)"
+  "note": "Arbeitsraster R2 (vorläufig); Mittelgang y 8–10 liegt nicht auf dem y-Raster: Unterzug/Abfangung, Statik prüfen"
  },
  "columns_gf": [
   [
-   11.0,
+   9.6,
    8.0
   ],
   [
-   18.0,
+   15.2,
    8.0
   ],
   [
-   25.0,
+   20.8,
+   8.0
+  ],
+  [
+   26.4,
    8.0
   ]
  ],
@@ -638,11 +643,286 @@
  },
  "net_factor": 0.88,
  "open_decisions": [
-  "Variante OG-1 oder OG-2",
+  "OG-2 bleibt VORLÄUFIG (nicht festgeschrieben)",
+  "Raster R1 oder R2 (Tragwerk, C-16)",
+  "Staffel S-1 (4 vorn) oder S-2 (5 vorn, +1 WE) (C-09)",
   "Baufenster/Grundfläche 576 m² nachweisen (C-01)",
   "Staffelgeschoss als Vollgeschoss (C-02)",
   "Himmelsrichtung/Platzseite (C-13)",
-  "Statik Abfangung Mittelgang (Raster)",
-  "Rettungswege (C-15)"
- ]
+  "Rettungswege und Anleiterbarkeit (C-15)",
+  "Küchenschacht (C-14)",
+  "Vordach gegen Balkone (C-18)",
+  "Rückseitiger Balkon / Grenzabstand (C-19)",
+  "Gaststätte als Sonderbau ab ca. 190 + 60 Plätzen (C-20)"
+ ],
+ "working_basis": {
+  "upper_option": "OG-2",
+  "status": "VORLÄUFIG – geometrische Arbeitsgrundlage, keine endgültige Entscheidung (Auftraggeber 22.10.2026)",
+  "separation": "Förderprüfung (Mietstufe, Förderhöhe, Wohnungsanforderungen) ist getrennt in ../foerderung/ und fließt NICHT in die Geometrie ein"
+ },
+ "grid_options": {
+  "R1": {
+   "x": [
+    4.0,
+    11.0,
+    18.0,
+    25.0,
+    32.0
+   ],
+   "note": "7,0-m-Raster der ersten Entwurfsfassung; Mitte (x 18) liegt auf einer Stütze und kollidiert mit der Doppeltür x 17–19; Balkon- und Wohnungsachsen (5,6 m) liegen nicht auf dem Raster"
+  },
+  "R2": {
+   "x": [
+    4.0,
+    9.6,
+    15.2,
+    20.8,
+    26.4,
+    32.0
+   ],
+   "note": "5,6-m-Raster = 5 Felder gleich den 5 Wohnungen/Balkonen des OG-2; x 18 liegt in Feldmitte (Tür frei). VORSCHLAG, REQUIRES-APPROVAL (Tragwerksplaner)"
+  }
+ },
+ "grid_working": "R2",
+ "facade_support": {
+  "status": "REQUIRES-APPROVAL",
+  "note": "Die OG-Last der Platzfassade (28 m Glasfront) braucht Fassadenstützen oder einen Träger; vollverglaste Front ohne Stützen ist nicht nachgewiesen (C-16). Annahme im Modell: Stützen 0,3 m in Rasterachsen R2 an y=0, noch nicht eingezeichnet.",
+  "candidate_axes_x": [
+   4.0,
+   9.6,
+   15.2,
+   20.8,
+   26.4,
+   32.0
+  ]
+ },
+ "core": {
+  "GF": [
+   {
+    "id": "LOBBY-GF",
+    "rect": [
+     0,
+     0,
+     4,
+     6
+    ],
+    "status": "ASSUMED"
+   },
+   {
+    "id": "STAIR-GF",
+    "rect": [
+     0,
+     6,
+     4,
+     12
+    ],
+    "status": "ASSUMED"
+   },
+   {
+    "id": "LIFT-GF",
+    "rect": [
+     0,
+     12,
+     4,
+     15
+    ],
+    "status": "ASSUMED"
+   },
+   {
+    "id": "TECH-GF",
+    "rect": [
+     0,
+     15,
+     4,
+     18
+    ],
+    "status": "ASSUMED"
+   }
+  ],
+  "L1": [
+   {
+    "id": "RESERVE-L1",
+    "rect": [
+     0,
+     0,
+     4,
+     6
+    ],
+    "status": "ASSUMED",
+    "note": "Abstell/Technik, Zweck offen"
+   },
+   {
+    "id": "STAIR-L1",
+    "rect": [
+     0,
+     6,
+     4,
+     12
+    ],
+    "status": "ASSUMED"
+   },
+   {
+    "id": "LIFT-L1",
+    "rect": [
+     0,
+     12,
+     4,
+     15
+    ],
+    "status": "ASSUMED"
+   },
+   {
+    "id": "TECH-L1",
+    "rect": [
+     0,
+     15,
+     4,
+     18
+    ],
+    "status": "ASSUMED"
+   }
+  ],
+  "L2": [
+   {
+    "id": "STAIR-L2",
+    "rect": [
+     0.8,
+     6,
+     4.0,
+     12
+    ],
+    "status": "ASSUMED"
+   },
+   {
+    "id": "LIFT-L2",
+    "rect": [
+     0.8,
+     12,
+     4.0,
+     15
+    ],
+    "status": "ASSUMED"
+   }
+  ]
+ },
+ "shafts": [
+  {
+   "id": "SHAFT-KITCHEN",
+   "rect": [
+    30.0,
+    16.0,
+    31.2,
+    17.2
+   ],
+   "levels": [
+    "GF",
+    "L1",
+    "L2",
+    "ROOF"
+   ],
+   "status": "PROVISIONAL",
+   "note": "Küchenabluft; durchläuft Büro/Wohnung N1 (L1) und Staffel-N3 (L2): Geruch, Schall, Brandschutz (C-14)"
+  }
+ ],
+ "balconies": [
+  {
+   "id": "BALC-L1-F1",
+   "level": "L1",
+   "side": "front",
+   "rect": [
+    5.45,
+    -1.5,
+    8.15,
+    0.0
+   ],
+   "slab_underside_z": 3.2,
+   "railing": "Milchglas 1,1 m",
+   "status": "PROVISIONAL"
+  },
+  {
+   "id": "BALC-L1-F2",
+   "level": "L1",
+   "side": "front",
+   "rect": [
+    11.05,
+    -1.5,
+    13.75,
+    0.0
+   ],
+   "slab_underside_z": 3.2,
+   "railing": "Milchglas 1,1 m",
+   "status": "PROVISIONAL"
+  },
+  {
+   "id": "BALC-L1-F3",
+   "level": "L1",
+   "side": "front",
+   "rect": [
+    16.65,
+    -1.5,
+    19.35,
+    0.0
+   ],
+   "slab_underside_z": 3.2,
+   "railing": "Milchglas 1,1 m",
+   "status": "PROVISIONAL"
+  },
+  {
+   "id": "BALC-L1-F4",
+   "level": "L1",
+   "side": "front",
+   "rect": [
+    22.25,
+    -1.5,
+    24.95,
+    0.0
+   ],
+   "slab_underside_z": 3.2,
+   "railing": "Milchglas 1,1 m",
+   "status": "PROVISIONAL"
+  },
+  {
+   "id": "BALC-L1-F5",
+   "level": "L1",
+   "side": "front",
+   "rect": [
+    27.85,
+    -1.5,
+    30.55,
+    0.0
+   ],
+   "slab_underside_z": 3.2,
+   "railing": "Milchglas 1,1 m",
+   "status": "PROVISIONAL"
+  },
+  {
+   "id": "BALC-L1-R1",
+   "level": "L1",
+   "side": "rear",
+   "rect": [
+    27.35,
+    18.0,
+    30.05,
+    19.5
+   ],
+   "slab_underside_z": 3.2,
+   "status": "PROVISIONAL",
+   "note": "Rückseite nicht im eingefrorenen Design, ragt über 18 m (C-19)"
+  }
+ ],
+ "canopy": {
+  "id": "CANOPY-001",
+  "rect": [
+   6.0,
+   -3.6,
+   30.0,
+   0.0
+  ],
+  "underside_z": 3.0,
+  "status": "ASSUMED",
+  "note": "Stahlvordach; liegt unter allen fünf Balkonplatten (Unterseite 3,2 m) und überlappt sie in der Projektion (C-18)"
+ },
+ "staffel_alt": {
+  "S-2": "5 Wohnungen vorn auf Raster R2 (5,4–5,6 m) + 3 hinten = 8 Staffel-Wohnungen, Gesamt 14 WE; NICHT gewählt, ändert Wohnungszahl, nur Vorschlag (C-09)"
+ }
 }

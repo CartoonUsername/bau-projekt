@@ -33,3 +33,15 @@ BALCONY-DEPTH,Balkontiefe,1.5,m,ASSUMED,gen_skizzen.js
 WINDOW-OG-FRAME,Fensterrahmen 1. OG,schwarz Stahl,-,SOURCE-DEFINED,Renderings
 WINDOW-STAFFEL-FRAME,Fensterrahmen Staffel,helles Holz,-,SOURCE-DEFINED,Renderings
 WINDOW-DIMENSIONS,Fenster- und Türmaße,unbekannt,-,MISSING,keine Quelle
+GRID-X-R2,Arbeitsraster R2 (x),"4; 9,6; 15,2; 20,8; 26,4; 32",m,PROVISIONAL,build_design.py; REQUIRES-APPROVAL Tragwerk
+GRID-X-R1,Alternativraster R1 (x),"4; 11; 18; 25; 32",m,PROVISIONAL,erste Entwurfsfassung; Stütze in Tür (C-16)
+WE-OG2-FRONT,Wohnung OG-2 vorn (5 x),5.6 x 8.0 (39.4 m2 netto),m,PROVISIONAL,OG-2 Arbeitsbasis
+WE-OG2-REAR,Wohnung N1 OG-2 hinten,7.4 x 8.0 (52.1 m2 netto),m,PROVISIONAL,OG-2 Arbeitsbasis
+BALCONY-AXIS,Balkonmitten (5 x),"6,8; 12,4; 18,0; 23,6; 29,2",m,PROVISIONAL,gleich Wohnungsmitten
+BALCONY-UNDERSIDE,Balkonplatte Unterseite,3.2,m,ASSUMED,Decke 0.30 m unter OKFF 3.5
+CANOPY-UNDERSIDE,Vordach Unterseite,3.0,m,ASSUMED,schneidet Balkone (C-18)
+SHAFT-KITCHEN,Küchenschacht,"1,2 x 1,2 bei x 30-31,2 / y 16-17,2",m,PROVISIONAL,C-22
+CORE-STAIR,Treppenraum,"4 x 6 bei y 6-12 (L2 ab x 0,8)",m,ASSUMED,Kern West
+CORE-LIFT,Aufzug mit Vorraum,"4 x 3 bei y 12-15",m,ASSUMED,Kern West
+CORRIDOR-LEN,Mittelgang Länge/Sackgasse,28,m,PROVISIONAL,Rettungsweg C-15
+STAFFEL-RATIO,Staffel zu Geschoss darunter,87,%,PROVISIONAL,C-23
