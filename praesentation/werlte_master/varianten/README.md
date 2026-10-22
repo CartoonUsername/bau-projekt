@@ -3,4 +3,4 @@ Blatt 7–9: je Variante Erdgeschoss mit Stellplätzen, 1. Obergeschoss, 3. Gesc
 Neu erzeugen: `python3 scripts/variants/build_variants.py && python3 scripts/variants/metrics_variants.py && cd scripts/present && python3 variants_sheets.py A B C table`, danach `node export.js ../../varianten/*.svg`.
 Beschreibung, Annahmen und Konflikte: `documentation/varianten_ABC.md`.
 
-**Ersetzt durch  (korrigierte Planung, siehe ).**
+**Ersetzt durch `varianten_v2/` (korrigierte Planung, siehe `documentation/varianten_v2_ABC.md`).**
