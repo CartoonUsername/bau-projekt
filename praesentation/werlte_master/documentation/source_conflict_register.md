@@ -50,3 +50,6 @@ Offene baurechtliche Fragen sind gesammelt in `planning/baurechtliche_fragen.md`
 ## Neue Planungsrichtung (22.10.2026): Varianten A, B, C
 C-28 bis C-36 sind in `documentation/varianten_ABC.md` beschrieben (Stellplätze, Grundstückszuschnitt H1, GRZ-Zählung von Auskragungen, kleinere Gastronomie, Büros hinten, hintere Wohnungen, Kernlage in C, Tragwerk, Fluchtwege). Alle offen, keine gelöst.
 
+## Korrigierte Planung (22.10.2026, Version 2)
+C-30 bis C-37 sind in `documentation/varianten_v2_ABC.md` fortgeschrieben (neu: C-37 kleinere Büros und Gastronomie gegenüber Excel; C-30: alle Varianten über der theoretischen GRZ-Fläche). C-31 (frühere Gastronomie 316 m²) entfällt durch Version 2. Alle offen.
+

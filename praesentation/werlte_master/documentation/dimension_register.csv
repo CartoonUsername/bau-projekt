@@ -58,3 +58,9 @@ SEATS-INNEN-NEW,Innenplätze geschätzt,89,Stk,PROVISIONAL,"(Gastraum minus Bar)
 CANT-B,Auskragung hinten B,3.0,m,HYPOTHETICAL,C-30
 CANT-C,Auskragung hinten C,6.0,m,HYPOTHETICAL,C-30
 SOFFIT,Plattenunterseite über Stellplätzen,3.2,m,ASSUMED,Varianten B und C
+GASTRO-V2,Gastronomie brutto Version 2,440,m2,PROVISIONAL,Gastraum 280 / Küche 60 / Lager 27 / WC 24 / Personal 20 / Flur 20 / Anlieferung 9
+SEATS-V2,Innenplätze Version 2,138,Stk,PROVISIONAL,"(280-14)/2,1 + 12 Hocker"
+OFFICE-V2,Büros netto Version 2,56.3,m2,ASSUMED,2 x 32 m2 brutto
+EXT-A,Anbau 1. OG / Überstand Staffel A,"1,5 / 0",m,HYPOTHETICAL,C-30
+EXT-B,Anbau 1. OG / Überstand Staffel B,"3,0 / 1,5",m,HYPOTHETICAL,C-30
+EXT-C,Anbau 1. OG / Überstand Staffel C,"4,5 / 2,0",m,HYPOTHETICAL,C-30
