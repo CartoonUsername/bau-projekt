@@ -72,32 +72,52 @@ R = [  # id, gruppe, bauteil, seite, fundstelle, status, korrektur
  ("G1", "Gastro-Innenraum", "Raum 28 x 10 m, Bar x 5–15 / y 8,6–10, 12 Barhocker, Tischreihen 11/11/5 Tische, Fluchtwegfelder, Verglasung zur Platzseite", "8", "B21 (Layout normal), VB3 furnishing/rooms: Lage der Tische und Bar aus denselben Daten wie das Bild.", B, "Layout bestätigt; Stuhl-/Hockerformen sind modellhaft vereinfacht (keine Plangrundlage)."),
  ("G2", "Gastro-Innenraum", "Klinkerpfeiler, Glas-Stahl-Trennung (Séparée), Bänke", "8", "In B21/B23 nicht vorhanden (Séparée nur in Variante A, B3p). Bild enthält keine.", B, "keine (bewusst nicht dargestellt)"),
 ]
+R.append(("H1", "Höhe", "Gebäudehöhe Attika +9,90 m gegen zulässig 12,00 m; höchstens 3 Geschosse", "2–7", "Zulässige Höhe 12,00 m und max. 3 Geschosse: Bestätigung des Auftraggebers 23.10.2026 (deckt sich mit project_brief.md, C-03). Modell: B14 Höhenkoten +3,50 / +6,50 (Traufe) / +9,60 / +9,90; Differenz 2,10 m. Höhenbezug ±0,00 = Oberkante Erdgeschossfußboden (B14); Bezugspunkt der Messregel der Stadt unbelegt.", B,
+          "Höhe eingehalten, Reserve nicht ausgenutzt; Bezugspunkt/Messregel offen (07_gebaeudehoehe.md)."))
+UMS = {  # id -> (Stand nach Korrektur, Umsetzung im Modell v4)
+ "S1": ("offene Planungsentscheidung (C-40)", "Aus der plangetreuen Fassung entfernt (Wand geschlossen). Nur als Gestaltungsvorschlag Blatt 25 (Variante 'vorschlag', eigene Bildseite, gekennzeichnet). Belichtung/Rauchabzug Treppenraum und Rettungswege: offen."),
+ "S2": ("offene Planungsentscheidung (C-40)", "wie S1"), "S3": ("offene Planungsentscheidung (C-40)", "wie S1"),
+ "S4": ("bestätigt", "unverändert (Tür in Blatt 14)"),
+ "S5": ("offene Planungsentscheidung (C-40)", "wie S1; Gangende: Fenster oder zweiter Rettungsweg durch Brandschutz zu klären (C-15)"), "S6": ("offene Planungsentscheidung (C-40)", "wie S5"),
+ "S7": ("als Gestaltung gekennzeichnet, offen", "Seitliche Glasbrüstung bleibt als konzeptionelle Gestaltung, in Bildunterschrift und Hinweisblatt als 'nicht abschließend planbestätigt' gekennzeichnet"),
+ "S9": ("als Gestaltung gekennzeichnet, offen", "Betonbänder bleiben als konzeptionelle Gestaltung, gekennzeichnet wie S7"),
+ "P6": ("korrigiert, konzeptionell gekennzeichnet", "Korrektur 1: 1,40-m-Raster entfernt; sieben Stege mit ungleichen Abständen als konzeptionelle Rahmenteilung (modell_b3.rahmenteilung()), ohne Rastermaß, gekennzeichnet"),
+ "P8": ("bestätigt (Konstruktion offen)", "Korrektur 6: Vordach 24 x 3,6 m, Unterkante +3,00 m unverändert; keine Stützen oder Abhängungen ergänzt"),
+ "P10": ("korrigiert", "Korrektur 2: Rück-Staffelfenster z 6,90–9,00 m (Blatt 14)"),
+ "P11": ("korrigiert, Bürozugang offen", "Korrektur 3: dritte Rücktür x 1–2,5 entfernt"),
+ "P13": ("korrigiert, Belag offen", "Korrektur 4: Holzdeck durch neutral graue Fläche ersetzt"),
+ "P14": ("korrigiert, Dachaustritt offen (C-22)", "Korrektur 5: Stutzen entfernt; Küchenabluftschacht im Gebäude (VB3 SHAFT-KITCHEN, alle Geschosse) bleibt; Dachaustritt als offene Planungsentscheidung dokumentiert"),
+ "P16": ("offen (C-41)", "Korrektur 9: Ausrichtung unverändert beibehalten; keine Ansicht einzeln gespiegelt"),
+ "H1": ("bestätigt", "Höhe 9,90 m unverändert; Differenz 2,10 m dokumentiert"),
+}
+
 def write():
+    def nach(r): return UMS.get(r[0], (r[5], "unverändert"))
     with open(os.path.join(OUT, "06_plan_ist_pruefliste.csv"), "w", newline="", encoding="utf-8") as f:
-        w = csv.writer(f, delimiter=";"); w.writerow(["ID", "Gruppe", "Bauteil", "Rendering-Seite (05_bildauswahl_volksbank.pdf)", "Fundstelle in der Ursprungsplanung", "Status", "Erforderliche Korrektur"]); w.writerows(R)
-    cnt = {s: sum(1 for r in R if r[5] == s) for s in (B, A, U)}
-    md = ["# 06 Plan-Ist-Prüfliste: Bildauswahl gegen Originalpläne", "",
-          "Vorgehen: Jedes dargestellte Bauteil von `05_bildauswahl_volksbank.pdf` wird einer Fundstelle in den Originalplänen zugeordnet (Quellenkürzel unten). Es wurden **keine Renderings erzeugt und das Modell nicht geändert**; Änderungen erfolgen erst nach Freigabe dieser Liste.", "",
-          "**Wichtig zur früheren Prüfung:** Die Angabe '83 von 83 Prüfpunkten' verglich das Modell mit den Öffnungsregeln von Blatt 25, aus denen es gebaut wurde. Das ist **kein unabhängiger Beleg** dafür, dass die Pläne richtig umgesetzt sind. Der unabhängige Abgleich gegen Blatt 14 steht in `06_pruefpunkte_blatt14.csv` (71 Prüfpunkte, aus SVG-Koordinaten zurückgerechnet): 52 bestätigt, 19 Abweichungen, davon alle erklärt in dieser Liste. Zwei meiner früheren Aussagen waren falsch und sind hier korrigiert (Vordach ist in Blatt 14 gezeichnet; das 1,40-m-Pfostenraster ist in keinem Plan belegt).", "",
-          f"Ergebnis: {cnt[B]} bestätigt, {cnt[A]} Abweichung, {cnt[U]} ungeklärt (insgesamt {len(R)} Punkte).", "",
+        w = csv.writer(f, delimiter=";"); w.writerow(["ID", "Gruppe", "Bauteil", "Rendering-Seite (Bildauswahl)", "Fundstelle in der Ursprungsplanung", "Status Prüfung 22.10.", "Erforderliche Korrektur (Prüfung)", "Stand nach Korrektur (Modell v4)", "Umsetzung im Modell v4"])
+        for r in R: w.writerow(list(r) + list(nach(r)))
+    cnt = {s_: sum(1 for r in R if r[5] == s_) for s_ in (B, A, U)}
+    from collections import Counter
+    c2 = Counter(nach(r)[0].split(" (")[0].split(",")[0] for r in R)
+    md = ["# 06 Plan-Ist-Prüfliste: Bildauswahl gegen Originalpläne (aktualisiert 23.10.2026, Modell v4)", "",
+          "Jedes dargestellte Bauteil von `05_bildauswahl_volksbank.pdf` ist einer Fundstelle in den Originalplänen zugeordnet (Quellenkürzel unten). Die Spalten 'Status Prüfung 22.10.' zeigen die ursprüngliche Prüfung, 'Stand nach Korrektur' den Stand nach den freigegebenen Korrekturen 1–6 und den Vorgaben 7–9 im Modell v4. Es wurden bis zum Abschluss des Abgleichs keine Renderings erzeugt.", "",
+          "Zusammenhang mit dem unabhängigen Blatt-14-Abgleich (71 Prüfpunkte, 19 Abweichungen am Modell v3) und die Zuordnung der 19 Abweichungen zu den Punkten dieser Liste: `06_zuordnung_pruefungen.md` / `06_zuordnung_19_abweichungen.csv`. Stand Modell v4: `06_pruefpunkte_blatt14.csv`.", "",
+          f"Prüfung 22.10.: {cnt[B]} bestätigt, {cnt[A]} Abweichung, {cnt[U]} ungeklärt (insgesamt {len(R)} Punkte, inkl. H1 Höhe).", "",
           "Quellen: B3p/B4 = `praesentation_zeichnungen/03_Grundriss_Erdgeschoss`, `04_Ansicht_Platzfassade` (Arbeitsstand OG-2). B13/B14 = `varianten_v2/13_`, `14_Variante_B_…` (PDF `Varianten_v2_ABC_Gesamt.pdf` S. 3/S. 4). B21–B26 = `varianten_v3/21…26`. BD = `geometry/building_design.json`. VB3 = `geometry/variant_B3.json`. SK = `bilder/skizze_aussen_ansichten`, `bilder/gen_skizzen.js` (Skizze, nicht maßstäblich). KI = `bilder/ki_aussen_1/2.jpg`. CR = `documentation/source_conflict_register.md`.", ""]
     g = None
     for r in R:
-        if r[1] != g: g = r[1]; md += ["", f"## {g}", "", "| ID | Bauteil | Seite | Fundstelle in der Ursprungsplanung | Status | Erforderliche Korrektur |", "|---|---|---|---|---|---|"]
-        md.append("| " + " | ".join([r[0], r[2], r[3], r[4], f"**{r[5]}**", r[6]]).replace("\n", " ") + " |")
-    md += ["", "## Vorschlag für die Freigabe (Standardannahmen, bitte bestätigen oder ändern)", "",
-           "1. P6: Pfostenraster entfernen (glatte Glasfront wie B4/B14/B25).", "2. P10: Rück-Staffelfenster auf z 6,9–9,0 m (Blatt 14).", "3. S1–S3, S5, S6: Seitenfenster entfernen (Blatt 14 zeigt keine), bis der Bauherr/Fachplaner sie festlegt.",
-           "4. P11: dritte EG-Rücköffnung (x 1–2,5) entfernen.", "5. P13: Dachterrassenbelag neutral grau statt Holz.", "6. P14: Abluftstutzen entfernen.", "7. P8 Vordach bleibt (in B3p/B4/B13/B14/B21/BD belegt); ohne Stützen, im Hinweisblatt als 'Konstruktion offen'.",
-           "8. S7 seitliche Brüstung der Dachterrasse bleibt (Absturzsicherung), S9 Betonbänder bleiben als Gestaltung (Blatt 25, KI).", "9. P16 Ausrichtung (Kern rechts) bleibt wie in B14/B25, bis Sie entscheiden; Hinweisblatt nennt die Plan-Spiegelung.",
-           "10. T1–T5 und alle 'ungeklärt'-Punkte werden im Hinweisblatt der PDF als offene Planungsentscheidungen aufgeführt.", "",
-           "Danach: Modell (`scripts/modell_b3.py`) ändern, Prüfung gegen Blatt 14 und 25 wiederholen, alle betroffenen Ansichten aus demselben Modell neu rendern und veredeln, PDF neu bauen."]
+        if r[1] != g: g = r[1]; md += ["", f"## {g}", "", "| ID | Bauteil | Seite | Fundstelle in der Ursprungsplanung | Status 22.10. | Stand nach Korrektur | Umsetzung im Modell v4 |", "|---|---|---|---|---|---|---|"]
+        a, b_ = nach(r); md.append("| " + " | ".join([r[0], r[2], r[3], r[4], f"**{r[5]}**", f"**{a}**", b_]).replace("\n", " ") + " |")
+    md += ["", "## Offene Planungsentscheidungen nach der Korrektur", "",
+           "- C-40 Seitenfenster Kern-/Ostseite (S1–S3, S5, S6); Belichtung/Rauchabzug Treppenraum, Rettungsweg Gangende (C-15).", "- C-41 Orientierung der Platzfassade (P16, C-13).", "- C-42 Dachterrassenbelag (P13) und Dachaustritt der Küchenabluft (P14, C-22).",
+           "- C-43 Rahmenteilung/Fassadenstützen der EG-Verglasung (P6, C-16) und Bürozugang Rückseite (P11, C-32/C-38).", "- T1–T5 Tragwerk (Auskragung C-35, Stellplatzüberdeckung, Vordach, Fassadenstützen, Innenstützen).", "- Bezugspunkt der zulässigen Höhe 12,00 m (H1, C-03).", "- Betonbänder und seitliche Glasbrüstungen: konzeptionelle Gestaltung, nicht abschließend planbestätigt (S7, S9)."]
     open(os.path.join(OUT, "06_plan_ist_pruefliste.md"), "w", encoding="utf-8").write("\n".join(md) + "\n")
     col = {B: "#166534", A: "#B91C1C", U: "#B45309"}
-    rows = "".join(f"<tr><td>{r[0]}</td><td>{html.escape(r[2])}</td><td class=c>{html.escape(r[3])}</td><td>{html.escape(r[4])}</td><td style='color:{col[r[5]]};font-weight:700'>{r[5]}</td><td>{html.escape(r[6])}</td></tr>" for r in R)
-    page = f"""<html><head><meta charset=utf-8><style>@page{{size:A3 landscape;margin:12mm}}body{{font-family:Inter,Arial,sans-serif;font-size:8.2pt;color:#1B1F24}}h1{{font-size:15pt;margin:0 0 4px}}p{{margin:2px 0 6px;color:#444;font-size:8.5pt}}
+    rows = "".join(f"<tr><td>{r[0]}</td><td>{html.escape(r[2])}</td><td class=c>{html.escape(r[3])}</td><td>{html.escape(r[4])}</td><td style='color:{col[r[5]]};font-weight:700'>{r[5]}</td><td style='font-weight:700'>{html.escape(nach(r)[0])}</td><td>{html.escape(nach(r)[1])}</td></tr>" for r in R)
+    page = f"""<html><head><meta charset=utf-8><style>@page{{size:A3 landscape;margin:12mm}}body{{font-family:Inter,Arial,sans-serif;font-size:7.8pt;color:#1B1F24}}h1{{font-size:15pt;margin:0 0 4px}}p{{margin:2px 0 6px;color:#444;font-size:8.5pt}}
 table{{border-collapse:collapse;width:100%}}th,td{{border:1px solid #C9CED6;padding:3px 5px;vertical-align:top;text-align:left}}th{{background:#E5E8EC}}td.c{{text-align:center;white-space:nowrap}}tr{{page-break-inside:avoid}}</style></head><body>
-<h1>Plan-Ist-Prüfliste: 05_bildauswahl_volksbank.pdf gegen die Originalpläne</h1><p>{cnt[B]} bestätigt · {cnt[A]} Abweichung · {cnt[U]} ungeklärt. Quellenkürzel und Freigabevorschlag siehe 06_plan_ist_pruefliste.md. Keine Renderings, keine Modelländerung vor Freigabe.</p>
-<table><tr><th>ID</th><th>Bauteil</th><th>Seite</th><th>Fundstelle in der Ursprungsplanung</th><th>Status</th><th>Erforderliche Korrektur</th></tr>{rows}</table></body></html>"""
+<h1>Plan-Ist-Prüfliste, aktualisiert (Modell v4)</h1><p>Prüfung 22.10.: {cnt[B]} bestätigt · {cnt[A]} Abweichung · {cnt[U]} ungeklärt ({len(R)} Punkte). Spalte 'Stand nach Korrektur': Korrekturen 1–6 und Vorgaben 7–9 vom 23.10.2026 umgesetzt. Zuordnung zum Blatt-14-Abgleich: 06_zuordnung_pruefungen.md.</p>
+<table><tr><th>ID</th><th>Bauteil</th><th>Seite</th><th>Fundstelle in der Ursprungsplanung</th><th>Status 22.10.</th><th>Stand nach Korrektur</th><th>Umsetzung im Modell v4</th></tr>{rows}</table></body></html>"""
     p = os.path.join(OUT, "06_plan_ist_pruefliste.html"); open(p, "w", encoding="utf-8").write(page); return p
 if __name__ == "__main__":
     p = write(); print(len(R), "Zeilen", p)

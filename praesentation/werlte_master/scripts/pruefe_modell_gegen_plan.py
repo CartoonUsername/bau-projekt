@@ -22,6 +22,7 @@ def match(r, cand):
     return [c for c in cand if abs(c["x"] - r[0]) < TOL and abs(c["y"] - r[1]) < TOL and abs(c["w"] - r[2]) < TOL and abs(c["h"] - r[3]) < TOL]
 OPEN_COL = {"#2B3036", "#E6D9BE", "#CFE0E8", "#FFFFFF"}
 rows = []
+FREIGEGEBEN = {"Staffel-hinten": "Korrektur 2 (23.10.2026): Höhe z 6,90–9,00 wie Blatt 14 statt Blatt 25 (6,60–9,10)", "EG-hinten": "Korrektur 3: dritte Tür x 1–2,5 entfernt (Bürozugang offen)", "Abluftstutzen": "Korrektur 5: Stutzen entfernt (Dachaustritt offen, C-22)", "Plan-Öffnung ohne Modell": "freigegebene Abweichung Blatt 25 ↔ Modell (Korrekturen 2, 3, 5)"}
 def log(view, element, expected, found, note=""): rows.append(dict(ansicht=view, element=element, modell="%.2f/%.2f %.2fx%.2f mm" % expected, plan=("ja" if found else "NEIN"), anmerkung=note))
 for view, v in VIEWS.items():
     region = [r for r in RECT if v["ox"] - 6 <= r["x"] <= v["ox"] + v["wmax"] * M + 6 and v["gy"] - 48 <= r["y"] <= v["gy"] + 1 and r["w"] < 140 and r["fill"] != "#FFFFFF" or (v["ox"] - 6 <= r["x"] <= v["ox"] + v["wmax"] * M + 6 and v["gy"] - 48 <= r["y"] <= v["gy"] + 1 and r["fill"] == "#FFFFFF" and r["w"] < 20)]
@@ -33,8 +34,7 @@ for view, v in VIEWS.items():
         for b in MB.balconies(): expected.append((f"Balkonplatte {b['name']}", sheet_rect(view, span(view, b["x"], (0, 0)), (3.2, 3.5)))); expected.append((f"Balkonbrüstung {b['name']}", sheet_rect(view, span(view, b["x"], (0, 0)), (3.5, 4.6))))
     if view == "rear": t = MB.roof_terrace(); expected.append(("Brüstung Dachterrasse", sheet_rect(view, span(view, t["x"], (0, 0)), (6.5, 7.6))))
     if view in ("west", "east"): t = MB.roof_terrace(); expected.append(("Brüstung Dachterrasse seitlich", sheet_rect(view, span(view, (0, 0), (MB.Y2 if MB.Y2 > 18 else 18.0, MB.Y1)), (6.5, 7.6))))
-    if view == "east": f = MB.flue(); expected.append(("Abluftstutzen", sheet_rect(view, span(view, f["x"], f["y"]), f["z"])))
-    opens = [o for o in MB.openings() if o["side"] == SIDE[view]]
+    opens = [o for o in MB.openings("vorschlag") if o["side"] == SIDE[view]]
     open_exp = []
     for o in opens:
         if o["tag"] == "EG-Verglasung": r = sheet_rect(view, span(view, o["a"], o["a"]) if False else ((32 - o["a"][1], 32 - o["a"][0]) if view == "front" else o["a"]), o["z"])
@@ -50,10 +50,11 @@ for view, v in VIEWS.items():
         if c["fill"] in OPEN_COL and c["w"] < 40:
             if not any(abs(c["x"] - r[0]) < TOL and abs(c["y"] - r[1]) < TOL and abs(c["w"] - r[2]) < TOL and abs(c["h"] - r[3]) < TOL for _, r in open_exp):
                 if c["fill"] == "#FFFFFF" and c["h"] < 2: continue
-                rows.append(dict(ansicht=view, element="Plan-Öffnung ohne Modell", modell="-", plan="%.2f/%.2f %.2fx%.2f %s" % (c["x"], c["y"], c["w"], c["h"], c["fill"]), anmerkung="FEHLT im Modell"))
+                rows.append(dict(ansicht=view, element="Plan-Öffnung ohne Modell", modell="-", plan="%.2f/%.2f %.2fx%.2f %s" % (c["x"], c["y"], c["w"], c["h"], c["fill"]), anmerkung="FEHLT im Modell: " + FREIGEGEBEN["Plan-Öffnung ohne Modell"]))
 bad = [r for r in rows if r["plan"] == "NEIN" or "FEHLT" in r["anmerkung"]]
 out = os.path.join(ROOT, "visualisierungen", "higgsfield")
-with open(os.path.join(out, "01_modellpruefung_details.csv"), "w", newline="", encoding="utf-8") as f:
+with open(os.path.join(out, "01_modellpruefung_blatt25_v4.csv"), "w", newline="", encoding="utf-8") as f:
     w = csv.DictWriter(f, fieldnames=list(rows[0].keys())); w.writeheader(); w.writerows(rows)
 print(f"{len(rows)} Prüfpunkte, {len(rows) - len(bad)} bestanden, {len(bad)} Abweichungen")
-for r in bad: print(r["ansicht"], "|", r["element"], "|", r["modell"], "|", r["plan"], "|", r["anmerkung"])
+for r in bad:
+    k = next((k for k in FREIGEGEBEN if k in r["element"]), None); r["anmerkung"] = (r["anmerkung"] + " " + FREIGEGEBEN[k]).strip() if k else r["anmerkung"]; print(r["ansicht"], "|", r["element"], "|", r["modell"], "|", r["plan"], "|", r["anmerkung"])

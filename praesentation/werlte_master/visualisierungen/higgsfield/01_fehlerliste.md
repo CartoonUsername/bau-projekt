@@ -48,3 +48,8 @@ Prüfung nach Augenschein gegen Modell und Blatt 25; **keines der Bilder ist ma�
 - `scripts/pruefe_modell_gegen_plan.py` vergleicht Modell und SVG von Blatt 25 maßlich (Toleranz 0,015 m): 83 von 83 Prüfpunkten bestanden; der Test erkennt nachweislich die alten Fehler M1/M2 (4 Abweichungen bei Wiedereinbau der alten Werte).
 - Ortho-Ansichten des Modells im Maßstab 1:250 über das Planblatt gelegt (`renderings/00_geometrie_ortho/ueberlagerung_plan_modell_*.png`): Kanten deckungsgleich.
 - Außenansichten werden mit Blender/Cycles aus diesem Modell gerendert; Higgsfield nur noch optional zur Veredelung mit Geometrie-Kontrolle.
+
+## Nachtrag 23.10.2026
+- Korrektur zu M7: Das Vordach **ist** in Blatt 14 (Rechteck x 6–30, z 3,0–3,1), in BD CANOPY-001 und den Grundrissen belegt; nur Blatt 25 zeichnet es nicht.
+- Korrektur zu M8: Das 1,40-m-Pfostenraster ist **in keinem Plan belegt** (Skizze: 2,0 m); es war ein Fehler im ersten Renderskript und ist in Modell v4 entfernt.
+- Weitere Abweichungen gegen Blatt 14: Rück-Staffelfensterhöhe, dritte Rücktür, Dachterrassenbelag, Dachstutzen, Seitenfenster; alle in `06_plan_ist_pruefliste.md` mit Behandlung in v4.

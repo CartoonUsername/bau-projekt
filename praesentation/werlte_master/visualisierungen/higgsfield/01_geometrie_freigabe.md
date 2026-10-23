@@ -7,7 +7,10 @@ Stand 22.10.2026. Freigabe = **technische Arbeitsfreigabe für die Visualisierun
 - 3D-Aufbau und Renderings: `scripts/blender_modell_v3.py` (Blender 5.1 über das Python-Modul bpy, Cycles). Gespeicherte Modelle: `modelle/baufeld3_B3_v3.blend`, früheres Tonmodell `modelle/baufeld3_B3.blend/.glb` (veraltet, enthält die Fehler M1–M3 aus `01_fehlerliste.md`).
 - Szene: x' = −x gespiegelt, damit der Blick von der Platzseite den Kern (x = 0) rechts zeigt (Plan als Karte gelesen, wie Blatt 25). Himmelsrichtung unbekannt (C-13).
 
-## Prüfung
+## Korrektur der früheren Prüfaussage (23.10.2026)
+Die Angabe „83 von 83 Prüfpunkten“ verglich das Modell mit den Öffnungsregeln von Blatt 25, aus denen es gebaut war, und ist **kein unabhängiger Beleg**. Maßgeblich ist der Abgleich gegen Blatt 14 (andere Quelle): `06_pruefpunkte_blatt14.csv` mit Fundstelle je Zeile (SVG-Rechteck) und Zuordnung zur Prüfliste. Vordach und Pfostenraster: siehe `06_plan_ist_pruefliste.md` (frühere Aussagen dazu waren falsch). Modell jetzt Version v4.
+
+## Prüfung (Stand Modell v3, historisch)
 1. **Maßliche Prüfung gegen Blatt 25** (`scripts/pruefe_modell_gegen_plan.py`, Ergebnis `01_modellpruefung_details.csv`): 83 von 83 Prüfpunkten (Baukörper, Betonbänder, Attika, Balkonplatten und -brüstungen, Dachterrassenbrüstung, Abluftstutzen, alle Fenster und Türen aller vier Ansichten) stimmen mit der SVG von Blatt 25 auf 0,015 m überein; Gegenprobe Plan → Modell ebenfalls ohne fehlende Öffnung. Empfindlichkeitstest: mit den alten (falschen) Ostfenster- und Türwerten meldet die Prüfung 4 Abweichungen.
 2. **Überlagerung** Ortho-Ansicht des Modells (Maßstab 1:250) über die Planansicht: `renderings/00_geometrie_ortho/ueberlagerung_plan_modell_{front,rear,west,east}.png`, Kanten deckungsgleich.
 3. **Neutrale Ansichten** aus den definierten Kameras: `renderings/00_geometrie_neutral/einfach_*.png` (Farbcode wie Blatt 25).

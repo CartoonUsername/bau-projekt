@@ -56,3 +56,10 @@ C-30 bis C-37 sind in `documentation/varianten_v2_ABC.md` fortgeschrieben (neu: 
 ## Runde 3 (22.10.2026): Arbeitsgrundlage B3
 Neu: C-38 (Abstell/Fahrrad Wohnen im EG entfällt bei Büro-Alternative K; barrierefreie Gastplätze), C-39 (Dachterrassen: Brüstung, Dachaufbau, Brand- und Schallschutz). Beschreibung in `documentation/varianten_v3_B3.md`. Alle offen.
 
+
+## Nachtrag 23.10.2026 (Plan-Ist-Prüfung Bildauswahl, Modell v4)
+- **C-03 aktualisiert:** Gesamthöhe max. 12,00 m und höchstens drei Geschosse sind vom Auftraggeber bestätigt; Attika 9,90 m (Differenz 2,10 m, nicht ausgenutzt). Bezugspunkt/Messregel bleibt offen, siehe `visualisierungen/higgsfield/07_gebaeudehoehe.md`.
+- **C-40 (neu, offen): Seitenfenster Kern- und Ostseite.** Blatt 14 zeigt keine; nur Blatt 25 schlägt Schlitzfenster (Treppenraum y 4,5–9,5) und Fenster am Gangende (y 9,5–11,5) vor; die ältere Skizze zeigt andere Fenster an der Schmalseite. In der plangetreuen Fassung des Modells nicht enthalten, nur als Gestaltungsvorschlag. Zu klären: Belichtung/Rauchabzug Treppenraum, Rettungsweg am Gangende (C-15), Fenster Ostseite.
+- **C-41 (neu, offen): Orientierung der Platzfassade.** Blatt 4 und die Skizze zeigen den Kern links, Blatt 14/25 und die Bilder rechts (siehe C-13). Keine Ansicht wird einzeln gespiegelt.
+- **C-42 (neu, offen): Belag der Dachterrasse** (im Modell neutral grau) und **Dachaustritt der Küchenabluft** (C-22, im Modell nicht dargestellt).
+- **C-43 (neu, offen): Rahmenteilung der EG-Verglasung** (konzeptionell, ohne Rastermaß; Fassadenstützen C-16) und Bürozugang an der Rückseite (dritte Rücktür entfernt, C-32/C-38).

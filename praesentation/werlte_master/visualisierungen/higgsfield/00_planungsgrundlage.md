@@ -1,5 +1,17 @@
 # 00 Planungsgrundlage für die Visualisierungen – Neue Mitte Werlte, Baufeld 3
 
+> **Aktualisierung Modell v4 (23.10.2026) – überholt die Angaben weiter unten in folgenden Punkten:**
+> 1. EG-Verglasung: **kein Pfostenraster** (das 1,40-m-Raster war nicht belegt). Konzeptionelle, unregelmäßige Rahmenteilung (7 Stege) ohne Rastermaß, nicht planbestätigt.
+> 2. Rückseite Staffelfenster: z **6,90–9,00 m** (Blatt 14).
+> 3. Rückseite EG: **zwei** Öffnungen (x 5–6,5 und 15–16,5, Blatt 14); die dritte (x 1–2,5) entfällt bis zur Entscheidung über den Bürozugang.
+> 4. Dachterrasse: Belag **neutral grau** (im Plan nicht festgelegt).
+> 5. Abluft: Schacht im Gebäude bleibt (B13/B23, VB3); **Dachaustritt/Stutzen nicht dargestellt**, offene Planungsentscheidung (C-22).
+> 6. Vordach 24 x 3,6 m, Unterkante +3,00 m: **in Blatt 14 gezeichnet** und mit BD CANOPY-001 belegt (Annahme); Konstruktion offen, keine Stützen.
+> 7. Seitenfenster Kern-/Ostseite: **nicht Teil der plangetreuen Fassung** (Blatt 14 zeigt keine); nur Ost-Tür EG (Blatt 14). Blatt-25-Fenster nur als gekennzeichneter Gestaltungsvorschlag (C-40).
+> 8. Betonbänder und seitliche Dachterrassenbrüstung: konzeptionelle Gestaltung, nicht abschließend planbestätigt.
+> 9. Ausrichtung unverändert (Kern rechts von außen gesehen); Plan-Spiegelung Blatt 4 ↔ Blatt 14 offen (C-41).
+> 10. Höhe: Attika +9,90 m, zulässig 12,00 m (Bestätigung Auftraggeber), Differenz 2,10 m nicht ausgenutzt; max. 3 Geschosse (`07_gebaeudehoehe.md`).
+
 Status-Kennzeichnung je Angabe: **[B]** bestätigt (aus der Geometriedatei bzw. dem Planblatt belegt) · **[A]** angenommener Arbeitsstand (ASSUMED/PROVISIONAL im Plan) · **[U]** ungeklärt.
 „Bestätigt“ heißt hier nur: in den Projektplänen eindeutig festgelegt. Nichts davon ist baurechtlich oder vom Bauherrn freigegeben (Design Freeze gilt nur für die Platzfassade).
 

@@ -12,7 +12,11 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import modell_b3 as MB, texturen_b3 as TX
 ROOT = MB.ROOT; HF = os.path.join(ROOT, "visualisierungen", "higgsfield")
 argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else sys.argv[1:]
+VARIANTE = "vorschlag" if "--vorschlag" in argv else "plangetreu"
+argv = [a for a in argv if a != "--vorschlag"]
 MODE = argv[0]; VIEWS_TO_DO = argv[1:]
+RENDER_ROOT = os.path.join(HF, "renderings", "v4")   # Modellversion v4 (nach Korrekturen vom 23.10.2026); ältere Renderings bleiben unberührt
+PFX = "vorschlag_" if VARIANTE == "vorschlag" else ""
 TEXDIR = os.path.join(HF, "modelle", "texturen")
 if MODE in ("tag", "nacht") and not os.path.exists(os.path.join(TEXDIR, "klinker.png")): TX.make(TEXDIR)
 bpy.ops.wm.read_factory_settings(use_empty=True); sc = bpy.context.scene
@@ -30,7 +34,7 @@ def imgtex(m, name, scale_override=None, rough=0.8, bump=0.25):
 FLAT = MODE in ("ortho", "einfach")
 if FLAT:   # Farbcode wie Blatt 25
     def hexc(h): h = h.lstrip("#"); return tuple(int(h[i:i + 2], 16) / 255 for i in (0, 2, 4))
-    for n, c in (("klinker", "#C9ADA3"), ("laerche", "#DCC7A4"), ("beton", "#D9DADC"), ("attika", "#8E9399"), ("milch", "#EAF1F3"), ("glas", "#C9DCE6"), ("stahl", "#2B3036"), ("holz", "#E6D9BE"), ("tuer", "#FFFFFF"), ("deck", "#B08A5A"), ("dach", "#6B7280"), ("boden", "#EEEEEE"), ("asphalt", "#999999"), ("linie", "#FFFFFF"), ("vordach", "#4A4F57")):
+    for n, c in (("klinker", "#C9ADA3"), ("laerche", "#DCC7A4"), ("beton", "#D9DADC"), ("attika", "#8E9399"), ("milch", "#EAF1F3"), ("glas", "#C9DCE6"), ("stahl", "#2B3036"), ("holz", "#E6D9BE"), ("tuer", "#FFFFFF"), ("deck", "#A9ADB3"), ("dach", "#6B7280"), ("boden", "#EEEEEE"), ("asphalt", "#999999"), ("linie", "#FFFFFF"), ("vordach", "#4A4F57")):
         newmat(n, hexc(c), 1.0, 0.0, (*hexc(c), 1.0)).diffuse_color = (*hexc(c), 1.0)   # Farbe bleibt exakt
 else:
     newmat("klinker"); imgtex(M["klinker"], "klinker", rough=0.85, bump=0.35)
@@ -40,7 +44,7 @@ else:
     newmat("glas", (0.02, 0.035, 0.045), 0.03, 0.0); M["glas"].node_tree.nodes["Principled BSDF"].inputs["IOR"].default_value = 1.5
     newmat("milch", (0.55, 0.72, 0.70), 0.28); M["milch"].node_tree.nodes["Principled BSDF"].inputs["Transmission Weight"].default_value = 0.8; M["milch"].node_tree.nodes["Principled BSDF"].inputs["IOR"].default_value = 1.45
     newmat("stahl", (0.04, 0.042, 0.048), 0.45, 0.7); newmat("holz", (0.56, 0.42, 0.26), 0.55); newmat("tuer", (0.04, 0.042, 0.048), 0.45, 0.7)
-    newmat("deck", (0.4, 0.28, 0.17), 0.8); imgtex(M["deck"], "holz", rough=0.8, bump=0.1); newmat("boden"); imgtex(M["boden"], "pflaster", rough=0.9, bump=0.2); newmat("asphalt"); imgtex(M["asphalt"], "asphalt", rough=0.95, bump=0.1)
+    newmat("deck", (0.5, 0.5, 0.5), 0.85); imgtex(M["deck"], "beton", rough=0.85, bump=0.03); newmat("boden"); imgtex(M["boden"], "pflaster", rough=0.9, bump=0.2); newmat("asphalt"); imgtex(M["asphalt"], "asphalt", rough=0.95, bump=0.1)
     newmat("linie", (0.9, 0.9, 0.88), 0.8); newmat("vordach", (0.05, 0.05, 0.055), 0.45, 0.7); newmat("gelaende", (0.42, 0.42, 0.40), 0.95)
     # beleuchtete Fenster (nur Nacht): Gastro warm, einzelne Wohnungsfenster dezent
     newmat("glas_gastro", (0.02, 0.02, 0.02), 0.1, 0.0, (1.0, 0.62, 0.30, 3.2 if MODE == "nacht" else 0.0)); newmat("glas_wohnen", (0.02, 0.02, 0.02), 0.1, 0.0, (1.0, 0.72, 0.45, 1.3 if MODE == "nacht" else 0.0))
@@ -78,8 +82,10 @@ def build():
     for bal in MB.balconies():
         x, y = bal["x"], bal["y"]; mesh_box("Balkonplatte", "beton", x, y, (3.2, 3.5)); mesh_box("Balkon-vorn", "milch", x, (y[0], y[0] + P), (3.5, 4.6)); mesh_box("Balkon-W", "milch", (x[0], x[0] + P), y, (3.5, 4.6)); mesh_box("Balkon-O", "milch", (x[1] - P, x[1]), y, (3.5, 4.6))
     v = MB.vordach(); mesh_box("Vordach", "vordach", v["x"], v["y"], v["z"])
-    f = MB.flue(); mesh_box("Abluftstutzen", "stahl", f["x"], f["y"], f["z"])
-    for o in MB.openings():
+    # Abluftstutzen: Dachaustritt offen (C-22), wird nicht gebaut; der Schacht liegt im Gebäude (MB.shaft())
+    rt = MB.rahmenteilung()
+    for xr in ([] if FLAT else rt["x"]): panel("-y", (xr - 0.035, xr + 0.035), (0.0, 3.1), 0.0, 0.08, "Rahmenteilung-konzeptionell", "rahmen" if "rahmen" in M else "stahl")
+    for o in MB.openings(VARIANTE):
         side, (a0, a1), (z0, z1), pos = o["side"], o["a"], o["z"], o["pos"]; fr = "holz" if o["frame"] == "holz" else "stahl"; w = 0.07 if o["kind"] == "glas" else 0.1
         gm = "glas"
         if not FLAT and MODE == "nacht": gm = "glas_gastro" if o["tag"] in ("EG-Verglasung", "Doppeltür Gastro", "Tür Gastro Ost") else ("glas_wohnen" if o["tag"] in NIGHT_LIT else "glas")
@@ -133,13 +139,13 @@ def ortho(view, out, region):
     sc.render.resolution_x, sc.render.resolution_y = wpx, hpx; sc.render.engine = "CYCLES"; sc.cycles.device = "CPU"; sc.cycles.samples = 4; sc.cycles.use_denoising = False; sc.cycles.max_bounces = 0; sc.cycles.filter_width = 0.8
     sc.view_settings.view_transform = "Standard"; sc.render.filepath = out; bpy.ops.render.render(write_still=True)
 if MODE == "ortho":
-    outd = os.path.join(HF, "renderings", "00_geometrie_ortho"); os.makedirs(outd, exist_ok=True)
+    outd = os.path.join(RENDER_ROOT, "00_geometrie_ortho"); os.makedirs(outd, exist_ok=True)
     w = bpy.data.worlds.new("w"); sc.world = w; w.use_nodes = True; w.node_tree.nodes["Background"].inputs["Color"].default_value = (1, 1, 1, 1)
     for v, reg in (("front", (-1, 33, -0.3, 10.5)), ("rear", (-1, 33, -0.3, 10.5)), ("west", (-1, 22, -0.3, 10.5)), ("east", (-1, 22, -0.3, 10.5))):
         if VIEWS_TO_DO and v not in VIEWS_TO_DO: continue
-        ortho(v, os.path.join(outd, f"ortho_{v}.png"), reg); print("ok", v)
-    bpy.ops.wm.save_as_mainfile(filepath=os.path.join(HF, "modelle", "baufeld3_B3_v3.blend")); sys.exit(0)
-outd = os.path.join(HF, "renderings", {"einfach": "00_geometrie_neutral", "tag": "tag", "nacht": "nacht"}[MODE]); os.makedirs(outd, exist_ok=True)
+        ortho(v, os.path.join(outd, f"{PFX}ortho_{v}.png"), reg); print("ok", v)
+    bpy.ops.wm.save_as_mainfile(filepath=os.path.join(HF, "modelle", f"baufeld3_B3_{MB.MODEL_VERSION}{'_vorschlag' if VARIANTE == 'vorschlag' else ''}.blend")); sys.exit(0)
+outd = os.path.join(RENDER_ROOT, {"einfach": "00_geometrie_neutral", "tag": "tag", "nacht": "nacht"}[MODE]); os.makedirs(outd, exist_ok=True)
 for name in VIEWS_TO_DO:
     for o in [o for o in bpy.data.objects if o.type in ("LIGHT", "CAMERA")]: bpy.data.objects.remove(o)
     v = VIEWS[name]; camera(v); sc.render.resolution_x, sc.render.resolution_y = 2400, 1350
@@ -151,5 +157,5 @@ for name in VIEWS_TO_DO:
         setup_light(v, MODE == "nacht"); sc.view_settings.view_transform = "AgX"; sc.view_settings.exposure = -0.4 if MODE == "tag" else 0.2
         try: sc.view_settings.look = "AgX - Medium High Contrast"
         except Exception as e: print("look", e)
-    sc.render.filepath = os.path.join(outd, f"{MODE}_{name}.png"); bpy.ops.render.render(write_still=True); print("ok", name, flush=True)
-    json.dump(dict(view=name, camera=v["p"], target=v["t"], lens_mm=v["lens"], sensor_mm=36, sun_azimut_rel=v["sun"][0], sun_hoehe=v["sun"][1], modus=MODE), open(os.path.join(outd, f"{MODE}_{name}.camera.json"), "w"))
+    sc.render.filepath = os.path.join(outd, f"{PFX}{MODE}_{name}.png"); bpy.ops.render.render(write_still=True); print("ok", name, flush=True)
+    json.dump(dict(view=name, camera=v["p"], target=v["t"], lens_mm=v["lens"], sensor_mm=36, sun_azimut_rel=v["sun"][0], sun_hoehe=v["sun"][1], modus=MODE, variante=VARIANTE, modellversion=MB.MODEL_VERSION), open(os.path.join(outd, f"{PFX}{MODE}_{name}.camera.json"), "w"))

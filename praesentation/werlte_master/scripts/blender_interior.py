@@ -38,9 +38,9 @@ box((x0, x1), (y0, y1), (-0.1, 0), "boden"); box((x0, x1), (y0, y1), (H, H + 0.1
 box((x0 - 0.15, x0), (y0, y1), (0, H), "oliv"); box((x1, x1 + 0.15), (y0, y1), (0, H), "oliv"); box((x0, x1), (y1, y1 + 0.15), (0, H), "oliv")
 for k in range(int(28 / 1.4)):   # Paneelfugen: schmale dunkle Leisten alle 1,4 m an der Rückwand
     box((x0 + 1.4 * k - 0.02, x0 + 1.4 * k + 0.02), (y1 - 0.02, y1), (0.0, H), "stahl", "Fuge")
-# Platzseite: Glasfront (nur Pfosten sichtbar, Scheibe weggelassen), Pfostenraster 1,4 m ab x 4, Sturzband 3,1–3,2 m
+# Platzseite: Glasfront (Scheibe weggelassen), konzeptionelle Rahmenteilung ohne Rastermaß, Sturzband 3,1–3,2 m
 box((x0, x1), (y0 - 0.08, y0 + 0.04), (3.1, H), "stahl", "Sturz"); box((x0, x1), (y0 - 0.08, y0 + 0.04), (-0.02, 0.06), "stahl", "Sockel")
-for k in range(21): box((x0 + 1.4 * k - 0.03, x0 + 1.4 * k + 0.03), (y0 - 0.08, y0 + 0.04), (0, 3.1), "stahl", "Pfosten")
+for xr in MB.rahmenteilung()["x"]: box((xr - 0.035, xr + 0.035), (y0 - 0.08, y0 + 0.04), (0, 3.1), "stahl", "Rahmenteilung-konzeptionell")   # konzeptionell, KEIN Rastermaß (Korrektur 1)
 for a, b in ((17, 19), (29.5, 31)):
     box((a, b), (y0 - 0.1, y0 + 0.06), (2.4, 2.46), "stahl", "Tuersturz"); box((a, a + 0.06), (y0 - 0.1, y0 + 0.06), (0, 2.4), "stahl", "Tuerrahmen"); box((b - 0.06, b), (y0 - 0.1, y0 + 0.06), (0, 2.4), "stahl", "Tuerrahmen")
 # Außenwelt (Platz) vor der Fassade, nur neutral
@@ -72,4 +72,4 @@ else:
 sc.render.resolution_x, sc.render.resolution_y = 2400, 1350; sc.render.engine = "CYCLES"; sc.cycles.device = "CPU"; sc.cycles.use_denoising = not FLAT
 if FLAT: sc.cycles.samples = 8; sc.cycles.max_bounces = 0; sc.view_settings.view_transform = "Standard"
 else: sc.cycles.samples = 64; sc.cycles.max_bounces = 6; sc.view_settings.view_transform = "AgX"; sc.view_settings.exposure = 0.3
-outd = os.path.join(HF, "renderings", "07_gastro_innenraum"); os.makedirs(outd, exist_ok=True); sc.render.filepath = os.path.join(outd, f"{MODE}_07_gastro.png"); bpy.ops.render.render(write_still=True); print("ok gastro")
+outd = os.path.join(HF, "renderings", "v4", "07_gastro_innenraum"); os.makedirs(outd, exist_ok=True); sc.render.filepath = os.path.join(outd, f"{MODE}_07_gastro.png"); bpy.ops.render.render(write_still=True); print("ok gastro")
