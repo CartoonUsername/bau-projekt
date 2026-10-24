@@ -84,3 +84,4 @@ if __name__ == "__main__":
 
 import varianten_e  # registriert E1–E4 in V
 import varianten_f  # registriert F1–F4 in V
+import varianten_g  # registriert G1–G3 (Baufeld 3 / MI 3)

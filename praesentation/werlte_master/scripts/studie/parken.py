@@ -30,7 +30,8 @@ def stall_list(v):
         for r in rows: out.append(dict(rect=tuple(r), art=("par" if key == "par" else "90"), face=f.get(key, "S")))
     return out
 def pruefe(key):
-    v = VA.V[key]; cols = v["saeulen_pts"]; res = dict(stalls=[], gesamt=0, voll=0, eingeschraenkt=0, konflikt=0, hinweise=[])
+    global PLOT
+    v = VA.V[key]; PLOT = v.get("plot_rect", (0.0, 0.0, 32.0, 30.0)); cols = v["saeulen_pts"]; res = dict(stalls=[], gesamt=0, voll=0, eingeschraenkt=0, konflikt=0, hinweise=[])
     fg = v["fahrgasse"]; zu = v["zufahrt"]
     # Fahrgasse frei?
     fg_probleme = []
@@ -40,7 +41,7 @@ def pruefe(key):
         if overlap(e, fg): fg_probleme.append("Erdgeschoss in Fahrgasse")
     breite = min(fg[2] - fg[0], fg[3] - fg[1])
     if breite < GASSE - 1e-6: fg_probleme.append(f"Fahrgasse nur {breite:.2f} m")
-    anschluss = (abs(fg[2] - zu[0]) < 1e-6 and zu[1] >= fg[1] - 1e-6 and zu[3] <= fg[3] + 1e-6) if v.get("zufahrt_dir") == "E" else (abs(fg[3] - zu[1]) < 1e-6 and zu[0] >= fg[0] - 1e-6 and zu[2] <= fg[2] + 1e-6)
+    anschluss = (abs(fg[1] - zu[3]) < 1e-6 and zu[0] >= fg[0] - 1e-6 and zu[2] <= fg[2] + 1e-6) if v.get("zufahrt_dir") == "N" else (abs(fg[2] - zu[0]) < 1e-6 and zu[1] >= fg[1] - 1e-6 and zu[3] <= fg[3] + 1e-6) if v.get("zufahrt_dir") == "E" else (abs(fg[3] - zu[1]) < 1e-6 and zu[0] >= fg[0] - 1e-6 and zu[2] <= fg[2] + 1e-6)
     if not anschluss: fg_probleme.append("Fahrgasse ohne Anschluss an die Zufahrt")
     res["fahrgasse_probleme"] = sorted(set(fg_probleme)); res["fahrgasse_breite"] = breite
     for i, sd in enumerate(stall_list(v), 1):
@@ -73,8 +74,9 @@ def pruefe(key):
     res["hinweise"] += ["Geometrische Prüfung ohne Schleppkurven; 90°-Stellplätze 2,50 × 5,00 m und Fahrgasse 6,00 m sind Planungsannahmen", "Zufahrt (Lage der Straße) ist Annahme", "Feuerwehrzufahrt/Aufstellflächen unter dem Vorbau nicht nachgewiesen (Prüfbedarf)"]
     return res
 def flaechenbilanz(key, step=0.25):
+    global PLOT
     """Aufteilung der Grundstücksfläche (H1 32 × 30 m = 960 m²) in EG, nutzbare Stellplätze, Fahrgasse, Eingangs-/Zugangszonen und nur rechnerisch verbleibende Restfläche."""
-    v = VA.V[key]; pk = pruefe(key); cnt = dict(eg=0.0, stall=0.0, par=0.0, fahr=0.0, zone=0.0, rest=0.0); n = int(32 / step); m = int(30 / step); a = step * step
+    v = VA.V[key]; pk = pruefe(key); PLOT = v.get("plot_rect", (0.0, 0.0, 32.0, 30.0)); cnt = dict(eg=0.0, stall=0.0, par=0.0, fahr=0.0, zone=0.0, rest=0.0); n = int(PLOT[2] / step); m = int(PLOT[3] / step); a = step * step
     st = [(s["rect"], s["art"], s["status"]) for s in pk["stalls"]]
     for i in range(n):
         for j in range(m):

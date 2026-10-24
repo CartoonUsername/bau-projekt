@@ -1,37 +1,44 @@
-# Planungsrecht Baufeld 3 – Auswertung der amtlichen Unterlagen (Stand 24.10.2026)
+# Planungsrecht Baufeld 3 – zwei Planstände getrennt (Stand 24.10.2026)
 
-## 0. Quellenlage (wichtig)
-- Die vom Auftraggeber genannte **ZIP-Datei mit den Fotos der Seiten 13/15/16 ist in dieser Sitzung NICHT angekommen** (kein Anhang, `/mnt/user-data/uploads` leer, nichts im Repository). Ordner `fotos_stadt_unterlagen/` bleibt leer.
-- Stattdessen wurden die **amtlichen Planunterlagen der Stadt Werlte von der Website der Samtgemeinde** (sgwerlte.de → Wirtschaft & Bauen → Bauleitplanung → Bebauungspläne → Stadt Werlte) heruntergeladen und in `amtliche_unterlagen_sgwerlte/` abgelegt:
-  - **B-Plan Nr. 123 „Ehemalige Grundschule“, 1. Änderung** – Entwurf, Begründung, Planzeichnung, Schalltechnisches Gutachten (Stand 25.09.2026; Bekanntmachung 24.09.2026).
-  - **B-Plan Nr. 122 „Neue Mitte“** – Entwurf (Offenlage 02.10.–02.11.2026); angrenzender Plan im Westen.
-- Die Abbildungen 2 (Entwurfszeichnung) und 3 (Nutzungskonzept) der 1. Änderung entsprechen sehr wahrscheinlich den Foto-Seiten 15/16 des Auftraggebers; **das ist nicht bestätigt**. Welches Baufeld im Nutzungskonzept „Baufeld 3“ ist, geht aus diesen Unterlagen nicht hervor (Seite 13 fehlt).
-- **Klarstellung zur Nummer:** „Neue Mitte“ ist amtlich B-Plan Nr. **122**; Nr. **123** heißt „Ehemalige Grundschule“ (rechtskräftig seit 14.04.2023, 1. Änderung im Entwurf). Die Projektunterlagen sprechen von „B-Plan Nr. 123“ – das passt zu den Foto-Seiten, nicht zur Bezeichnung „Neue Mitte“.
+## 0. Quellen
+| Kürzel | Dokument | Rechtsstand | Datei |
+|---|---|---|---|
+| **P23** | B-Plan Nr. 123 „Ehemalige Grundschule“ (Planzeichnung + textl. Festsetzungen + Begründung, Satzung 07.03.2023, **in Kraft seit 14.04.2023**; Planunterlage Stand 08.06.2022) | **RECHTSKRÄFTIG** | `BPlan_123_…_rechtskraeftig_2023-04-14_Stand_2023-06-12.pdf` |
+| **E26** | B-Plan Nr. 123, **1. Änderung** (Planzeichnung Stand 25.08.2026, Begründung 25.09.2026, § 13a BauGB; Bekanntmachung 24.09.2026) | **nur ENTWURF** (kein Satzungsbeschluss) | `BPlan_123_…_1_Aenderung_Entwurf_2026-09-25.pdf` |
+| **N122** | B-Plan Nr. 122 „Neue Mitte“ (Kerngebiet; Offenlage 02.10.–02.11.2026) | Entwurf, angrenzender Plan, hier nicht maßgeblich | `BPlan_122_…pdf` |
+- Fotos der Seiten 13/15/16 des Auftraggebers: **nicht angekommen** (ZIP fehlt). Ordner `fotos_stadt_unterlagen/` leer.
+- Die Planauszüge Abb. 2/3 (Schallgutachten zur 1. Änderung) entsprechen vermutlich Seite 15/16 (unbestätigt).
 
-## 1. Verbindliche Festsetzungen? (Rechtsstand)
-| Punkt | Befund | Status |
+## 1. P23 – rechtskräftiger Plan 2023 (Fundstellen: Planzeichnung, Textliche Festsetzung 1.2, 2.2; Begründung 3.2–3.3)
+| Merkmal | MI 1 und **MI 3** | MI 2 |
 |---|---|---|
-| Rechtskraft | B-Plan 123 (Ursprung) rechtskräftig seit 14.04.2023. Die **1. Änderung ist nur ENTWURF** (Verfahren § 13a BauGB, Stand 25.09.2026, noch ohne Satzungsbeschluss). Der Ursprungsplan 123 liegt NICHT vor; seine Festsetzungen für Baufeld 3 sind unbekannt. | Entwurf / Ursprungsplan unbekannt |
-| Gebietsart | Mischgebiet (MI) | Entwurf (Änderungsbereich) |
-| GRZ | 0,6 | Entwurf |
-| Vollgeschosse | **zwingend II** (Z im Kreis „zwingend vorgeschrieben“); „mindestens zwingend zweigeschossig, maximal zweigeschossig“ | Entwurf |
-| Bauweise | offen (Gebäudelängen bis 50 m) | Entwurf |
-| Sockelhöhe SH | OK fertiger Fußboden EG max. **0,30 m** über Bezugspunkt | Entwurf |
-| Traufhöhe TH | max. **6,50 m** über Bezugspunkt; Traufe = Schnittkante Außenfläche aufgehendes Mauerwerk / Dachhaut | Entwurf |
-| **Gebäudehöhe H** | **max. 12,00 m über dem unteren Bezugspunkt**; oberer Bezugspunkt = Oberkante Baukörper (First, Hauptgesims); untergeordnete Teile (Antennen, Schornsteine) unberücksichtigt | Entwurf |
-| **Unterer Bezugspunkt** | **Oberkante der Fahrbahn der nächstgelegenen ausgebauten Erschließungsstraße in der Mitte vor dem jeweiligen Baukörper** (Höhe beim Bauamt der Stadt erfragen) | Entwurf |
-| Dach | Hauptdächer **geneigt, mind. 38°**; Flachdach nur für Verbindungsbauten (Höhe mind. 1,0 m unter First) und untergeordnete Teile/Wintergärten bis 70 m² | Entwurf (örtl. Bauvorschrift § 84 Abs. 3 NBauO) |
-| Fassade | nicht glasiertes Ziegelsichtmauerwerk (Rot/Rotbraun u. a. nach RAL 840 HR), andere Materialien ≤ 1/2 der Wandfläche | Entwurf |
-| Baugrenzen | **3,0 m Abstand zur Planstraße und zur Verkehrsfläche „Parkplatz“**; Planstraße 16,0 m Querschnitt | Entwurf (nur im Änderungsbereich) |
-| Nebenanlagen | Garagen und Nebenanlagen (soweit Gebäude) in den nicht überbaubaren Streifen entlang öffentlicher Verkehrsflächen unzulässig; Überdachung von Stellplätzen in der Parkplatzfläche unzulässig | Entwurf |
-| Stellplätze (Stadt) | öffentlicher Parkplatz mit **63 Einstellplätzen** (Eigentum der Stadt), für Allgemeinheit **und angrenzende gewerbliche Nutzungen**; Wohn-Stellplätze den Wohneinheiten räumlich zugeordnet; nachts für die Öffentlichkeit gesperrt (Schallschutz) | Begründung/Gutachten (Entwurf) |
+| Lage | MI 1: westlicher Block an der Marktstraße; **MI 3: Flurstück 59/1 südlich der Planstraße** | östlicher Block bis Kirchstraße |
+| Vollgeschosse (Z) | **II–III (Mindest- und Höchstmaß: mindestens zwei, höchstens drei)** | **II zwingend** |
+| GRZ | 0,6 | 0,6 |
+| Bauweise | offen (Gebäude bis 50 m) | offen |
+| Sockelhöhe SH | OK FFB EG max. 0,30 m über Bezugspunkt | wie MI 1 |
+| Traufhöhe TH | **max. 9,80 m** | max. 6,50 m |
+| Gebäudehöhe H | **max. 15,00 m** | max. 12,00 m |
+| Bezugspunkt | unterer: **Oberkante Fahrbahn der nächstgelegenen ausgebauten Erschließungsstraße in der Mitte vor dem jeweiligen Baukörper**; oberer: Oberkante Baukörper (First, Hauptgesims); untergeordnete Teile (Antennen, Schornsteine) unberücksichtigt | wie MI 1 |
+| Dachform (örtl. Bauvorschrift 2.2) | Hauptdächer **geneigt mind. 38°**; Flachdach nur für Verbindungsbauten (≥ 1,0 m unter First) und Wintergärten/untergeordnete Dachflächen bis 70 m² | wie MI 1 |
+| Fassade (2.4) | nicht glasiertes Ziegelsichtmauerwerk (Rot/Rotbraun u. a.), Putz/Holz/Metall bis 1/2 der Wandfläche | wie MI 1 |
+| Baugrenzen | MI 3: **10,0 m zur Marktstraße (Westen), 3 m zur Planstraße, 3 m Ost, 3 m Süd** (Planzeichnung); allgemein: 3 m zur Planstraße, Planstraße 16 m breit | Baugrenze orientiert sich an Baumstandorten |
+| Nicht überbaubare Flächen | Garagen und Nebenanlagen (soweit Gebäude) entlang öffentlicher Verkehrsflächen unzulässig (1.4) | wie MI 1 |
+| Bäume | Baumreihe Marktstraße (Zierkirsche) zu erhalten; im Kronentraufbereich keine Versiegelung/Anschüttung/Abgrabung (1.5) | – |
+| Schallschutz | Lärmpegelbereich III nur im 8-m-Streifen an der Kirchstraße (nicht MI 3) | – |
+Begründung 3.2: „Die zulässige Geschosszahl staffelt sich von drei Vollgeschossen im Westen zu zwei Vollgeschossen im Osten … entlang der Marktstraße mindestens zwei- und maximal dreigeschossig“ – **das stützt die Aussage der städtischen Seite 13 für MI 1/MI 3 (II–III)**.
 
-## 2. Beantwortung: Ist die 12 m-Höhe verbindlich festgesetzt, und von wo aus wird gemessen?
-- **Festgesetzt ja – aber nur im ENTWURF** der 1. Änderung (H = 12,00 m); der rechtskräftige Ursprungsplan 123 liegt nicht vor. Bis zum Satzungsbeschluss ist H = 12,00 m **nicht** als verbindlich anzusehen; dasselbe gilt für die Annahme „2–3 Geschosse“.
-- **Bezugspunkt: Oberkante Fahrbahn** der nächstgelegenen ausgebauten Erschließungsstraße in der Mitte vor dem Baukörper – **nicht** Oberkante Fertigfußboden. Der Fußboden EG darf höchstens 0,30 m darüber liegen (SH).
-- **Folge für die Entwürfe:** Bei SH = 0,30 m darf die Oberkante des Baukörpers höchstens **+11,70 m über FFB EG** liegen; nur bei FFB = Fahrbahnhöhe (SH 0) sind +12,00 m über FFB möglich. Die in E/F gezeichnete Attika **+12,00 m über FFB** ist bei SH > 0 **zu hoch**. Die Fahrbahnhöhe ist nicht bekannt – die 12 m gelten daher als **nicht nachgewiesen**.
+## 2. E26 – 1. Änderung, ENTWURF 2026 (Planzeichnung 25.08.2026; Begründung 25.09.2026) – NICHT mit P23 gleichzusetzen
+- Geltungsbereich ca. 3.874 m² (nördlich-mittlerer Teil + Einmündung Kirchstraße); **MI 3 / Flurstück 59/1 liegt NICHT im Änderungsbereich** (Abb. 2: Geltungsbereichsgrenze nördlich der Planstraße).
+- Festsetzungen im Entwurf: MI, GRZ 0,6, **II zwingend**, offene Bauweise, SH 0,30 m, **TH 6,50 m, H 12,00 m**, Dach ≥ 38°, Baugrenzen 3,0 m zu Planstraße und Parkplatz; öffentliche Parkfläche (63 Plätze); Stichstraße wird MI. Diese Werte entsprechen den MI-2-Werten von P23.
+- Die „12,00 m“ der Seite 15 stammen damit aus dem Entwurf bzw. aus MI 2 – **für MI 3 gilt nach P23 H = 15,00 m**.
 
-## 3. Folgen für die bisherigen Konzepte (im Entwurfsstand der 1. Änderung)
-- **Zwingend zwei Vollgeschosse + TH 6,50 m + geneigtes Dach ≥ 38°**: Ein dreigeschossiger Flachdachbau (B3, B, C, D, E, F) mit Staffelgeschoss und Traufe/Oberkante 1. OG bei +6,50…+8,20 m widerspricht dem Entwurf. Mit 38°-Dach und H = 12,00 m wäre ein ausgebautes Dachgeschoss (3. Ebene) denkbar; ob es Vollgeschoss ist (2/3-Regel) und wie die Staffel/Terrasse zulässig wäre, ist zu klären.
-- **Umlaufender Vorbau** über die Baugrenze hinaus: unzulässig (Baugrenze darf von Gebäudeteilen nicht überschritten werden, § 23 Abs. 3 BauNVO; Ausnahmen nur für untergeordnete Teile).
-- **Ob diese Festsetzungen für „Baufeld 3“ gelten**, hängt davon ab, ob Baufeld 3 im Änderungsbereich (ca. 3.874 m²) liegt. Das ist offen.
+## 3. Baufeld 3 – Zuordnung (Indizien, UNBESTÄTIGT)
+Für **MI 3 / Flurstück 59/1** sprechen: (a) Fläche aus der Planzeichnung abgegriffen ≈ 955–960 m² (Projektangabe ca. 960 m²); (b) Z = II–III wie Seite 13 („mindestens zwei, höchstens drei Geschosse“); (c) Baufenster ≈ 27,7 × 15,9 m (≈ 439 m²) liegt in der Größenordnung des B3-Fußabdrucks, aber nicht gleich (B3: 32 × 18 m = 576 m²); (d) Nutzungskonzept zeigt dort ein Einzelgebäude mit privaten Stellplätzen.
+Dagegen/offen: Seite 13 fehlt; Baufeldnummern stehen in den heruntergeladenen Unterlagen nicht; MI 1 hat ebenfalls II–III.
+
+## 4. Maße: Herkunft
+- **GESICHERT (Zahlen im Plan/Text):** 10,0 m Baugrenzabstand West, 3 m N/O/S (MI 3); Planstraße 16,0 m; Flurstück 59/1; Höhen/Z/GRZ/Dach/Bezugspunkt (P23 rechtskräftig).
+- **ABGELEITET (Vektorplan 1:1000, Maßstabsabgriff, nicht vermessen):** Baufenster MI 3 ≈ 27,7 × 15,9 m, Fläche ≈ 439 m² (Polygon aus der PDF-Geometrie; Kanten gegen Nord leicht gedreht).
+- **GESCHÄTZT (aus der Planabbildung gemessen, ±3 %):** Flurstück 59/1 ≈ 42,3 × 22,7 m ≈ 960 m², leicht trapezförmig.
+- **Nicht ableitbar:** amtliche Flurstücksgrenzen, exakte Eckkoordinaten, Höhe der Fahrbahn. → **Anforderung:** amtlicher Lageplan/Vermessung (Plan nennt ÖbVI Dipl.-Ing. Jörg Jüngerink, Az. 22-7003, Liegenschaftskarte Stand 08.06.2022) und Fahrbahnhöhe vom Bauamt.
