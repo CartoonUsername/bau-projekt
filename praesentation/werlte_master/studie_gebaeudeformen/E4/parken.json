@@ -1,0 +1,25 @@
+{
+ "parken": {
+  "stellplaetze": 22,
+  "reihe1": 10,
+  "reihe2": 12,
+  "fehler": [],
+  "hinweise": [
+   "vereinfachte Geometrieprüfung (Rechteckfreiraum 6,00 m vor 5,00 m tiefen 90°-Stellplätzen), keine Schleppkurven-Simulation",
+   "Säulen (Ø 0,40 m) auf der Stellplatzgrenze: Nutzbreite 2,50 − 0,20 = 2,30 m je Platz (Mindestmaß/Stellplatzverordnung prüfen)",
+   "Zufahrt von Osten ist Annahme (Lage der Erschließungsstraße unbekannt)",
+   "Lücke zwischen Platz 7 und 8 (x 20,0–22,5): Stellplatz entfällt für Hintereingang/Anlieferung Gewerbe; Fußweg zum Kern an der Westseite (x 0–2,5) unter dem Vorbau"
+  ],
+  "min_nutzbreite": 2.326794919243113,
+  "fahrgasse_m": 6.0,
+  "ok": true
+ },
+ "ueber": {
+  "west": 0,
+  "ost": 0,
+  "platz": 0,
+  "rueck": 0
+ },
+ "abstand3": 192.0,
+ "abstand6": 348.0
+}

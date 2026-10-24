@@ -27,6 +27,7 @@ V = {
 def rects_area(rs): return sum((x1 - x0) * (y1 - y0) for x0, y0, x1, y1 in rs)
 def bbox(rs): return (min(r[0] for r in rs), min(r[1] for r in rs), max(r[2] for r in rs), max(r[3] for r in rs))
 def saeulen(v):
+    if "saeulen_pts" in v: return v["saeulen_pts"]
     if v["saeulen"] != "rand_og1": return []
     x0, y0, x1, y1 = bbox(v["og1"]); pts = []
     def edge(a, b, n):
@@ -55,10 +56,10 @@ def kennzahlen(key):
         o = wohnstreifen(v["wohn"]["og1"], mv, mh); s = wohnstreifen(v["wohn"]["st"], mv, mh); alle = o["vorn"] + o["hinten"] + s["vorn"] + s["hinten"]
         k["mix"][m] = dict(label=lab, og1=o, st=s, we=len(alle), we_og1=len(o["vorn"]) + len(o["hinten"]), we_st=len(s["vorn"]) + len(s["hinten"]), wfl=round(o["netto"] + s["netto"], 1), kleinste=min(alle) if alle else 0, groesste=max(alle) if alle else 0, mittel=round(sum(alle) / len(alle), 1) if alle else 0)
     s = k["mix"]["standard"]; k["wfl"] = s["wfl"]; k["we"] = s["we"]
-    gastro_stp = 280 / 10; buero_stp = B3M["buero_netto"] / 30
+    gf_ = V[key].get('gewerbe_faktor', 1.0); gastro_stp = 280 / 10 * gf_; buero_stp = B3M["buero_netto"] / 30 * gf_
     k["stp_bedarf"] = {m: round(k["mix"][m]["we"] * 1.5 + gastro_stp + buero_stp, 1) for m in MIX}; k["stp_nachweisbar_H1"] = 11
     k["bgf"] = round(k["flaeche"]["eg"] + k["flaeche"]["og1"] + k["flaeche"]["st"], 1)
-    k["hoehe"] = dict(attika=9.9, zulaessig=HOEHE_MAX, differenz=round(HOEHE_MAX - 9.9, 2), geschosse=3)
+    za = V[key].get("Z", Z)["ATT"][1]; k["hoehe"] = dict(attika=za, zulaessig=HOEHE_MAX, differenz=round(HOEHE_MAX - za, 2), geschosse=3)
     k["staffel_anteil"] = round(rects_area(v["st"]) / rects_area(v["og1"]), 3)
     return k
 def alle(): return {key: kennzahlen(key) for key in V}
@@ -68,3 +69,5 @@ if __name__ == "__main__":
         s = k["mix"]["standard"]; print(key, "BGF", k["bgf"], "Wfl", s["wfl"], "WE", s["we"], (s["we_og1"], s["we_st"]), "Säulen", k["anzahl_saeulen"], "GRZ_proj", k["grz_projektion"], "stp", k["stp_bedarf"]["standard"], "über", k["ueber_grundstueck"], "kl/gr/mittel", s["kleinste"], s["groesste"], s["mittel"], "Tiefe/Breite", s["og1"]["tiefe_breite_max"], "Staffel%", k["staffel_anteil"])
         for m in ("klein", "gross"): mm = k["mix"][m]; print("   ", m, mm["we"], mm["wfl"], mm["kleinste"], mm["groesste"])
     print("B3 Referenz:", B3M["wfl_L1"], B3M["wfl_L2"], B3M["we"])
+
+import varianten_e  # registriert E1–E4 in V

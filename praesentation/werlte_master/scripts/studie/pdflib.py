@@ -24,7 +24,11 @@ def header(d, title, sub=None, tag=None):
 def footer(d, n, text="Entwurfsstudie Neue Mitte Werlte – Baufeld 3 · alle Werte vorläufig · keine Variante festgelegt · Baurecht, Statik und Förderung nicht bestätigt"):
     d.text((120, H - 90), text, font=F(26), fill=GREY); d.text((W - 220, H - 90), str(n), font=F(26), fill=GREY)
 def paste(im, path, x, y, w, h):
-    src = Image.open(path).convert("RGB"); k = min(w / src.width, h / src.height); src = src.resize((int(src.width * k), int(src.height * k)), Image.LANCZOS)
+    src = Image.open(path).convert("RGB")
+    if "/plaene/" in path:
+        from PIL import ImageChops; bb = ImageChops.difference(src, Image.new("RGB", src.size, "white")).getbbox()
+        if bb: src = src.crop((max(0, bb[0] - 20), max(0, bb[1] - 20), min(src.width, bb[2] + 20), min(src.height, bb[3] + 20)))
+    k = min(w / src.width, h / src.height); src = src.resize((int(src.width * k), int(src.height * k)), Image.LANCZOS)
     ox, oy = x + (w - src.width) // 2, y; im.paste(src, (ox, oy)); return (ox, oy, src.width, src.height)
 def text_block(d, x, y, w, text, size=34, color=INK, weight="Regular", lh=1.35):
     f = F(size, weight)

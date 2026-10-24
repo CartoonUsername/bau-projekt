@@ -25,25 +25,26 @@ def cyl(name, m, x, y, z0, z1, r):
     o = bpy.data.objects.new(name, me); sc.collection.objects.link(o); o.data.materials.append(M[m]); return o
 Z = VA.Z
 def build():
+    Zv = v.get("Z", Z)
     box("Gelaende", "boden", (-500, 500), (-500, 500), (-0.4, 0))
     px0, py0, px1, py1 = VA.PLOT
     # Grundstücksgrenze H1 (hypothetisch) als dünne rote Linien am Boden
     for (x0, y0, x1, y1) in ((px0, py0, px1, py0), (px0, py1, px1, py1), (px0, py0, px0, py1), (px1, py0, px1, py1)):
         box("Grenze-H1", "grenze", (min(x0, x1) - 0.12, max(x0, x1) + 0.12), (min(y0, y1) - 0.12, max(y0, y1) + 0.12), (0, 0.03))
-    box("Stellplatzflaeche-H1", "asphalt", (0, 32), (18, 29), (0, 0.01))
-    for st in VA.B3["parking"]["stalls"]:
+    a0 = v.get("asphalt", (0, 18, 32, 29)); box("Stellplatzflaeche-H1", "asphalt", (a0[0], a0[2]), (a0[1], a0[3]), (0, 0.01))
+    for st in v.get("stalls", VA.B3["parking"]["stalls"]):
         x0, y0, x1, y1 = st
         for xa in (x0, x1 - 0.08): box("Stellplatz", "linie", (xa, xa + 0.08), (y0, y1), (0.01, 0.025))
-    for (x0, y0, x1, y1) in v["eg"]: box("EG", "klinker", (x0, x1), (y0, y1), Z["EG"])
+    for (x0, y0, x1, y1) in v["eg"]: box("EG", "klinker", (x0, x1), (y0, y1), Zv["EG"])
     for (x0, y0, x1, y1) in v["og1"]:
-        box("OG1", "klinker", (x0, x1), (y0, y1), Z["OG1"]); box("Decke-unter-OG1", "beton", (x0 - 0.04, x1 + 0.04), (y0 - 0.04, y1 + 0.04), (3.2, 3.5)); box("Decke-ueber-OG1", "beton", (x0 - 0.04, x1 + 0.04), (y0 - 0.04, y1 + 0.04), (6.2, 6.5)); box("Dachfläche-OG1", "deck", (x0, x1), (y0, y1), (6.5, 6.53))
+        box("OG1", "klinker", (x0, x1), (y0, y1), Zv["OG1"]); box("Decke-unter-OG1", "beton", (x0 - 0.04, x1 + 0.04), (y0 - 0.04, y1 + 0.04), (Zv["OG1"][0] - 0.3, Zv["OG1"][0])); box("Decke-ueber-OG1", "beton", (x0 - 0.04, x1 + 0.04), (y0 - 0.04, y1 + 0.04), (Zv["OG1"][1] - 0.3, Zv["OG1"][1])); box("Dachfläche-OG1", "deck", (x0, x1), (y0, y1), (Zv["OG1"][1], Zv["OG1"][1] + 0.03))
     for (x0, y0, x1, y1) in v["st"]:
-        box("Staffel", "holz", (x0, x1), (y0, y1), Z["ST"]); box("Attika", "beton", (x0 - 0.04, x1 + 0.04), (y0 - 0.04, y1 + 0.04), (9.6, 9.9)); box("Dach", "dach", (x0, x1), (y0, y1), (9.9, 9.93))
+        box("Staffel", v.get("st_mat", "holz"), (x0, x1), (y0, y1), Zv["ST"]); box("Attika", "beton", (x0 - 0.04, x1 + 0.04), (y0 - 0.04, y1 + 0.04), (Zv["ATT"][0], Zv["ATT"][1])); box("Dach", "dach", (x0, x1), (y0, y1), (Zv["ATT"][1], Zv["ATT"][1] + 0.03))
     # Glasfront EG zum Platz (x 4–32), schematisch
-    box("EG-Glas", "glas", (4, 32), (-0.03, 0.0), (0, 3.1)); box("EG-Rahmen-oben", "rahmen", (4, 32), (-0.08, 0), (3.1, 3.2))
-    for xr in (4, 17, 19, 31.97): box("EG-Rahmen", "rahmen", (xr - 0.04, xr + 0.04), (-0.08, 0), (0, 3.1))
+    gf = v.get("glas_front", (4, 32, 0.0)); gh = Zv["EG"][1] - 0.4; box("EG-Glas", "glas", (gf[0], gf[1]), (gf[2] - 0.03, gf[2]), (0, gh)); box("EG-Rahmen-oben", "rahmen", (gf[0], gf[1]), (gf[2] - 0.08, gf[2]), (gh, gh + 0.1))
+    for xr in ((4, 17, 19, 31.97) if "glas_front" not in v else [gf[0] + (gf[1] - gf[0]) * i / 8 for i in range(9)]): box("EG-Rahmen", "rahmen", (xr - 0.04, xr + 0.04), (gf[2] - 0.08, gf[2]), (0, gh))
     # schematische Fenster der Wohngeschosse (Modul 5,6 m vorn / 7,0 m hinten, Lage rein schematisch)
-    for lvl, (z0, z1) in (("og1", (3.9, 6.1)), ("st", (6.9, 9.0))):
+    for lvl, (z0, z1) in (("og1", (Zv["OG1"][0] + 0.4, Zv["OG1"][1] - 0.4)), ("st", (Zv["ST"][0] + 0.4, Zv["ST"][1] - 0.6))):
         xs, y0, x1, y1 = v["wohn"][lvl]; L = x1 - xs
         for (face, mod, yface, sgn) in (("v", 5.6, y0, -1), ("h", 7.0, y1, 1)):
             n = int(L // mod); w = L / n if n else 0
@@ -57,8 +58,8 @@ def build():
             x0, _, x1, _ = b["rect"]; box("Balkon", "beton", (x0, x1), (-1.5, 0), (3.2, 3.5)); box("Balkon-Bruestung", "milch", (x0, x1), (-1.5, -1.44), (3.5, 4.6)); box("Balkon-Bruestung", "milch", (x0, x0 + 0.06), (-1.5, 0), (3.5, 4.6)); box("Balkon-Bruestung", "milch", (x1 - 0.06, x1), (-1.5, 0), (3.5, 4.6))
     if v["vordach"]: box("Vordach", "vordach", (6, 30), (-3.6, 0), (3.0, 3.1))
     # Dachterrassen-Brüstungen (Milchglas 1,10 m)
-    for (x0, y0, x1, y1) in v["bruestung"]: box("Bruestung", "milch", (min(x0, x1) - 0.04, max(x0, x1) + 0.04), (min(y0, y1) - 0.04, max(y0, y1) + 0.04), (6.5, 7.6))
-    for (x, y) in K["saeulen"]: cyl("Saeule", "saeule", x, y, 0.0, 3.2, 0.2)
+    for (x0, y0, x1, y1) in v["bruestung"]: box("Bruestung", "milch", (min(x0, x1) - 0.04, max(x0, x1) + 0.04), (min(y0, y1) - 0.04, max(y0, y1) + 0.04), (Zv["OG1"][1], Zv["OG1"][1] + 1.1))
+    for (x, y) in K["saeulen"]: cyl("Saeule", "saeule", x, y, 0.0, Zv["OG1"][0] - 0.3, 0.2)
 build()
 # Beleuchtung
 def world(vec):
@@ -73,9 +74,9 @@ def persp(name, p, t, lens):
     vec = Vector((0.55, -0.55, 0.62)); world(vec); sun(vec, 3.4); common(); sc.render.resolution_x, sc.render.resolution_y = 2000, 1125; sc.render.filepath = os.path.join(OUT, name + ".png"); bpy.ops.render.render(write_still=True)
 def ortho(name, side):
     for o in [o for o in bpy.data.objects if o.type in ("CAMERA", "LIGHT")]: bpy.data.objects.remove(o)
-    W, Hh, ppm = 42.0, 12.5, 50
+    W, Hh, ppm = 42.0, (14.0 if v.get("Z") else 12.5), 50
     if side in ("west", "east"): W = 32.0
-    cam = bpy.data.cameras.new("o"); cam.type = "ORTHO"; cam.ortho_scale = W; co = bpy.data.objects.new("o", cam); sc.collection.objects.link(co); sc.camera = co; cz = 5.2
+    cam = bpy.data.cameras.new("o"); cam.type = "ORTHO"; cam.ortho_scale = W; co = bpy.data.objects.new("o", cam); sc.collection.objects.link(co); sc.camera = co; cz = (6.0 if v.get("Z") else 5.2)
     if side == "front": co.location = (-16, -100, cz); co.rotation_euler = (math.radians(90), 0, 0); vec = Vector((0.5, -0.7, 0.55))
     if side == "rear": co.location = (-16, 100, cz); co.rotation_euler = (math.radians(90), 0, math.radians(180)); vec = Vector((-0.5, 0.7, 0.55))
     if side == "west": co.location = (100, 11.5, cz); co.rotation_euler = (math.radians(90), 0, math.radians(90)); vec = Vector((0.7, 0.5, 0.55))

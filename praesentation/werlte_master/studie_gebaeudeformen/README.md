@@ -6,3 +6,8 @@
 - `varianten_daten.json` – gemeinsame Datenbasis; erzeugt mit `scripts/studie/` (varianten.py → blender_studie.py, zeichne_plaene.py → baue_pdfs.py, baue_foerderung.py)
 - B3 (`scripts/modell_b3.py`) und die bisherigen PDFs bleiben unverändert; Variante A = B3.
 - Alle Werte vorläufig; Grundstück 32 × 30 m ist Hypothese H1.
+
+## Ergänzung: Variante E (12 m, umlaufender Vorbau, Parken)
+- `Entwurf_E_12m_Umlaufender_Vorbau_mit_Parken.pdf` – Höhenrahmen, Lageplan, Grundrisse, vier Fassaden, Schnitt für E1–E4
+- `Vergleich_E_mit_B_und_C.pdf` – Vergleichstabelle und Einordnung
+- Quellen: `scripts/studie/varianten_e.py`, `e_zeichnen.py`, `baue_pdfs_e.py`; Grundstück als `PLOT_POLY` austauschbar (aktuell Hypothese 32 × 30 m)
