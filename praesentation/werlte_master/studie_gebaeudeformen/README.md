@@ -18,3 +18,8 @@
 - `Vergleich_E_F_B_C.pdf` ersetzt `Vergleich_E_mit_B_und_C.pdf`
 - Quellen: `../quellen_stadt/` (Fotos der städtischen Seiten 13/15/16 fehlen noch)
 - Code: `scripts/studie/parken.py` (Parkprüfung), `varianten_f.py`, `e_zeichnen.py`, `baue_pdfs_ef.py`
+
+## Grundstücksanalyse (24.10.2026)
+- `Grundstuecksanalyse_Baufeld3.pdf` – Quellenstatus (gesichert / abgeleitet / unbekannt), Planungsrecht (12 m, Bezugspunkt), Kandidaten K1/K2, Lageplan mit Baufenster
+- Vergleichs- und Entwurfs-PDFs enthalten die Kernseiten; Quellen: `../quellen_stadt/amtliche_unterlagen_sgwerlte/`, `../quellen_stadt/planungsrecht_baufeld3.md`
+- Code: `scripts/studie/grundstueck_analyse.py`

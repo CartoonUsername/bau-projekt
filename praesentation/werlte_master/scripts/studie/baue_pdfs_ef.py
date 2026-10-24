@@ -2,7 +2,7 @@
 import os, sys, json, math
 sys.path.insert(0, os.path.dirname(__file__))
 from pdflib import *
-import varianten as VA, parken as PK, e_zeichnen as EZ
+import varianten as VA, parken as PK, e_zeichnen as EZ, grundstueck_analyse as GA
 OUT = os.path.join(VA.ROOT, "studie_gebaeudeformen"); EK = ["E1", "E2", "E3", "E4"]; FK = ["F1", "F2", "F3", "F4"]
 fm = lambda x, n=0: f"{x:,.{n}f}".replace(",", "X").replace(".", ",").replace("X", ".")
 D = {k: VA.kennzahlen(k) for k in ["A", "B", "C", "D"] + EK + FK}
@@ -25,11 +25,11 @@ def stp_status(k):
     return "kritisch", f"{n} nutzbar < erforderlich Mittel {fm(s['erf_mid'],1)} ({fm(s['erf_lo'],1)}–{fm(s['erf_hi'],1)}): Ablöse/Mitbenutzung nötig"
 def ampel(k):
     d = D[k]; v = VA.V[k]; ov = EZ.over_plot(k); mx = max(ov.values()); r = []
-    r.append(("Gebäudehöhe 12,00 m", "offen", f"Attika +{fm(d['hoehe']['attika'],2)} m; Reserve {fm(d['hoehe']['differenz'],2)} m. NICHT als eingehalten zu werten, solange der baurechtliche Höhenbezug (Gelände/Straße/OK Platz) unbelegt ist; Aufzugsüberfahrt/Dachaufbauten zusätzlich." if d["hoehe"]["differenz"] < 0.5 else f"Attika +{fm(d['hoehe']['attika'],2)} m; Höhenbezug unbelegt."))
-    r.append(("Geschosse 2–3", "pruef", f"3 Geschosse; 2. OG = {fm(d['staffel_anteil']*100)} % des 1. OG – Vollgeschoss-Frage klären; Traufhöhe 6,50 m (project_brief) gegen +7,90 m prüfen."))
+    r.append(("Gebäudehöhe 12,00 m", "kritisch" if d["hoehe"]["differenz"] < 0.5 else "offen", f"Attika +{fm(d['hoehe']['attika'],2)} m über FFB. Entwurf B-Plan 123: H = 12,00 m über OK Fahrbahn, FFB max. +0,30 m → Baukörper max. +11,70 m über FFB; Fahrbahnhöhe unbekannt, Plan nur Entwurf – NICHT als eingehalten zu werten." if d["hoehe"]["differenz"] < 0.5 else f"Attika +{fm(d['hoehe']['attika'],2)} m; Bezug OK Fahrbahn, SH ≤ 0,30 m; Plan nur Entwurf."))
+    r.append(("Geschosse / Traufe / Dach", "kritisch", f"Entwurf 1. Änderung: zwingend II Vollgeschosse, TH max. 6,50 m, Hauptdach geneigt ≥ 38° (Flachdach nur untergeordnet). Drei Geschosse mit Flachdach, Oberkante 1. OG +7,90 m und 2. OG = {fm(d['staffel_anteil']*100)} % des 1. OG widersprechen dem Entwurf; Ursprungsplan unbekannt."))
     g = d["grz_projektion"]; r.append(("GRZ / Überdeckung", "ok" if g <= 0.6 else ("pruef" if g <= 0.8 else "kritisch"), f"größte Geschossprojektion {fm(d['projektion_m2'])} m² = {fm(g*100)} % von 960 m² (GRZ 0,6 = 576 m² nur Annahme)."))
     if mx > 0: r.append(("Grenzen / Baugrenzen", "kritisch", f"Überstand {fm(mx,2)} m über H1 ({'Platzseite' if ov['platz'] else 'Seite'}); Außenkante sonst auf der Grenze."))
-    else: r.append(("Grenzen / Baugrenzen", "pruef", f"Außenkante OG auf angenommener Grenze (0,00 m); {EZ.abstand_szenario(k,3.0):.0f} m² (3 m) / {EZ.abstand_szenario(k,6.0):.0f} m² (6 m) des 1. OG lägen im Abstandsszenario – ungeklärt."))
+    else: r.append(("Grenzen / Baugrenzen", "kritisch", f"Außenkante OG auf angenommener Grenze (0,00 m). Entwurf: Baugrenze 3,0 m zu Planstraße/Parkplatz – der Vorbau über die Baugrenze ist unzulässig; auf den aus den amtlichen Plänen abgeleiteten Baufeldern (≈ 27 × 19 m Baufenster) passt der Fußabdruck nicht (siehe Grundstücksanalyse)."))
     a, b = stp_status(k); r.append(("Stellplätze (gesetzlich)", a, b))
     r.append(("Gewerbe im EG", "pruef", f"EG {fm(d['flaeche']['eg'])} m² (B3: 576 m²); Gastraum ca. {fm(VA.V[k].get('gastro_m2',280))} m²."))
     r.append(("Brandschutz / Feuerwehr", "pruef", "Vorbau über Stellplätzen/Fahrgasse, Aufstellflächen und Feuerwehrzufahrt, Rettungswege – Konzept erforderlich."))
@@ -67,20 +67,35 @@ def pages_for(k, n, tag):
     pages.append(im); n += 1
     im, dr = page_with(f"{k}: Gebäudeschnitt mit Geschosshöhen und 3D-Ansichten", v["name"], n, tag); paste(im, PLN(k, "schnitt"), 120, 270, 2250, 1200); paste(im, IMG(k, "persp"), 120, 1520, 1500, 800); paste(im, IMG(k, "aerial"), 1700, 1520, 1500, 800); pages.append(im)
     return pages
-exec(open("/tmp/hoehen_seite.txt").read().replace("def hoehen_seite(n):", "def hoehen_seite(n, tag):").replace('alle Höhen vorläufig", n)', 'alle Höhen vorläufig", n, tag)').replace("page_with(\"Höhenrahmen: B3 (+9,90 m) gegen 12,00 m\", \"Schnittschema, Höhenbezug und Raumhöhen · alle Höhen vorläufig\", n)", "page_with(\"Höhenrahmen: B3 (+9,90 m) gegen 12,00 m\", \"Schnittschema, Höhenbezug und Raumhöhen · alle Höhen vorläufig\", n, tag)"))
+def hoehen_seite(n, tag):
+    im, d = page_with("Höhenrahmen: B3 (+9,90 m) gegen 12,00 m – mit Bezugspunkt nach Entwurf B-Plan 123, 1. Änderung", "Schnittschema und Raumhöhen · alle Höhen vorläufig · 12,00 m gelten erst nach Klärung des Bezugspunkts als eingehalten", n, tag)
+    base, sc = 2000, 135
+    def col(x, levels, title, note):
+        d.text((x, 270), title, font=F(34, "SemiBold"), fill=INK)
+        for (z0, z1, lab, c) in levels:
+            d.rectangle([x, base - z1 * sc, x + 520, base - z0 * sc], fill=c, outline=INK, width=3); d.text((x + 16, base - (z0 + z1) / 2 * sc - 14), lab, font=F(26), fill=INK)
+        d.text((x, base + 20), note, font=F(24), fill=GREY)
+    col(150, [(0, 3.5, "EG 3,50 m", (245, 245, 245)), (3.5, 6.5, "1. OG 3,00 m", (252, 240, 232)), (6.5, 9.6, "Staffel 3,10 m", (252, 246, 236)), (9.6, 9.9, "", (130, 130, 135))], "B3 / A–D (bisher)", "Attika +9,90 m über FFB EG")
+    col(950, [(0, 4.3, "EG 4,30 m (lichte ≈ 3,85)", (245, 245, 245)), (4.3, 7.9, "1. OG 3,60 m (lichte ≈ 3,15)", (252, 240, 232)), (7.9, 11.5, "2. OG 3,60 m (lichte ≈ 3,15)", (252, 246, 236)), (11.5, 12.0, "", (130, 130, 135))], "E/F (Höhenschema H12)", "Attika +12,00 m über FFB EG")
+    d.line([(100, base - 12 * sc), (1600, base - 12 * sc)], fill=OK, width=4); d.text((130, base - 12 * sc - 40), "+12,00 m über FFB: nur zulässig, wenn FFB EG = Oberkante Fahrbahn (SH 0)", font=F(26, "SemiBold"), fill=OK)
+    d.line([(100, base - 11.7 * sc), (1600, base - 11.7 * sc)], fill=BAD, width=4); d.text((1000, base - 11.7 * sc + 8), "+11,70 m über FFB bei SH 0,30 m", font=F(26, "SemiBold"), fill=BAD)
+    rows = [["Aspekt", "Aussage (Quelle: B-Plan Nr. 123, 1. Änderung, Entwurf 25.09.2026)"], ["Bezugspunkt", "H = 12,00 m über Oberkante Fahrbahn der nächstgelegenen ausgebauten Erschließungsstraße in der Mitte vor dem Baukörper (nicht über FFB). FFB EG max. 0,30 m darüber (SH). Fahrbahnhöhe unbekannt."],
+        ["Rechtsstand", "Entwurf; Ursprungsplan 123 (rechtskräftig 14.04.2023) liegt nicht vor. 12 m daher NICHT als verbindlich nachgewiesen."], ["Folge für E/F", "Attika +12,00 m über FFB ist bei SH > 0 zu hoch (+11,70 m max.). Alternative H11,70: EG 4,10 / OG 3,55 / OG 3,55 / Attika 0,50."],
+        ["Traufhöhe / Dach", "TH max. 6,50 m, geneigtes Dach ≥ 38°, zwingend II Vollgeschosse (Entwurf): dreigeschossige Flachdachbauten passen nicht dazu."], ["Nutzung der Reserve", "Statt eines vierten Geschosses (nicht angenommen) fließt die Höhe in Geschosshöhen (lichte ≈ 3,15 m); Wohnfläche steigt dadurch nicht."]]
+    table(d, 1750, 300, [330, 1350], rows, 25); return im
 def quellen_seite(n, tag):
     im, d = page_with("Grundstück, Baugrenzen und Quellenstatus", "Was gesichert ist, was nur aus Beschreibungen stammt und was Hypothese ist", n, tag)
     rows = [["Punkt", "Stand", "Herkunft / Bemerkung"], ["Grundstücksfläche ca. 960 m²", "GESICHERT (Projektangabe)", "Projektunterlagen/Auftraggeber; nicht am Liegenschaftsnachweis geprüft"],
         ["Zuschnitt 32 × 30 m", "HYPOTHESE H1", "Nur aus 960 m² und B3-Annahme; weder vermessen noch aus einem Plan gemessen"],
-        ["B-Plan Nr. 123, Baufeld 3, zwei- bis dreigeschossig (Seite 13)", "nur BESCHREIBUNG", "Wiedergabe des Fotos durch ChatGPT im Chat; Foto liegt dem Projekt nicht vor (nicht angekommen)"],
-        ["Mischgebiet, max. bauliche Höhe 12,0 m (H), Plan-ENTWURF (Seite 15)", "nur BESCHREIBUNG", "wie oben; Entwurfsstand, rechtskräftige Fassung unbekannt; Höhenbezugspunkt nicht belegt"],
-        ["Seite 16 (Nutzungskonzept)", "UNBEKANNT", "keine Beschreibung vorhanden"],
+        ["B-Plan Nr. 123 „Ehemalige Grundschule“, 1. Änderung (Entwurf 25.09.2026): MI, GRZ 0,6, II zwingend, TH 6,50 m, H 12,00 m, SH 0,30 m, Baugrenze 3 m", "GESICHERT (Entwurf)", "amtliche Unterlagen der Stadt Werlte (sgwerlte.de), in quellen_stadt/ abgelegt; nicht rechtskräftig"],
+        ["Foto-Seiten 13/15/16 des Auftraggebers („zwei- bis dreigeschossig“)", "FEHLEN", "ZIP nicht angekommen; Seite 15/16 entsprechen vermutlich Abb. 2/3 der 1. Änderung (unbestätigt)"],
+        ["Zuordnung „Baufeld 3“ im Nutzungskonzept", "UNBEKANNT", "ohne Seite 13 nicht bestimmbar; Kandidaten K1/K2 abgeleitet"],
         ["Baugrenzen / Baulinien, GRZ, Abstandsflächen", "UNBEKANNT", "keine Maße am Plan abgelesen; alle Konturen in den Plänen sind Hypothese"],
         ["Erschließungsstraße, Zufahrt, Platzseite", "ANNAHME", "Platz an der Seite y = 0; Zufahrt von Osten (E) bzw. Süden (F) angenommen"],
         ["Stellplatz 2,50 × 5,00 m, Fahrgasse 6,00 m", "ANNAHME (Auftraggeber, vorläufig)", "Abgleich mit Stellplatzsatzung/Garagenverordnung ausstehend"]]
     cl = {(i, 1): (OK if r[1].startswith("GESICHERT") else (WARN if "BESCHREIBUNG" in r[1] or "ANNAHME" in r[1] else BAD)) for i, r in enumerate(rows) if i}
     y = table(d, 120, 290, [1100, 560, 1520], rows, 28, colors=cl)
-    text_block(d, 120, y + 60, 3200, "Die Fotos der Seiten 13, 15 und 16 wurden bisher NICHT in den Projektordner übernommen, weil sie in dieser Sitzung nicht ankamen (kein Anhang, Upload-Ordner leer, Bilder im ChatGPT-Link nur mit Anmeldung abrufbar). Ordner: quellen_stadt/fotos_stadt_unterlagen/. Sobald die Fotos vorliegen, werden Grundstückskontur und Baugrenzen daraus abgeleitet und als „aus Foto abgeleitet“ (nicht vermessen) gekennzeichnet; gesicherte Maße bleiben ausdrücklich getrennt.", 30)
+    text_block(d, 120, y + 60, 3200, "Die ZIP-Datei mit den Fotos der Seiten 13, 15 und 16 ist in dieser Sitzung nicht angekommen; der Ordner quellen_stadt/fotos_stadt_unterlagen/ ist leer. Grundlage sind die amtlichen Planunterlagen der Stadt (Entwurf B-Plan 123, 1. Änderung). Konturen aus den Plänen sind als ABGELEITET (±2 m) gekennzeichnet, gesicherte Maße getrennt.", 30)
     return im
 def pruefung540(n, tag):
     im, d = page_with("Planungsziel EG 540 m² + 420 m² Restfläche: Prüfung gegen die Hypothese", "18 m × 30 m = 540 m² Gebäude, 960 − 540 = 420 m² für Zufahrt, Fahrgasse, Stellplätze, Freiflächen", n, tag)
@@ -97,7 +112,7 @@ def pruefung540(n, tag):
 def intro(n, tag, titel, sub):
     pages = []; im, d = page_with(titel, sub, n, tag)
     y = text_block(d, 120, 280, 3260, "Ziel: Gebäudehöhe bis 12,00 m planerisch ausnutzen (drei Geschosse, keine zusätzlichen), umlaufender säulengestützter Vorbau, Zufahrt und Stellplätze unter und neben dem Vorbau. Keine Variante ist festgelegt; B3 (Variante A) und alle bestehenden Modelle bleiben unverändert. Alle Flächen sind vorläufig, bis Grundstücksgrenzen und Baugrenzen verlässlich geklärt sind.", 34)
-    rows = [["", "Bestätigt (Quelle)", "Annahme / unbestätigt"], ["Grundstück", "ca. 960 m² (Projektangabe)", "Zuschnitt 32 × 30 m = Hypothese; Baugrenzen, Abstände, Erschließungsstraße unbekannt"], ["Höhe / Geschosse", "max. 12,00 m und 2–3 Geschosse laut Auftraggeber; B-Plan-Entwurf S. 15 laut ChatGPT-Beschreibung", "Höhenbezugspunkt; Traufhöhe 6,50 m; Vollgeschoss-Definition → 12,00 m gelten erst nach Klärung als eingehalten"],
+    rows = [["", "Bestätigt (Quelle)", "Annahme / unbestätigt"], ["Grundstück", "ca. 960 m² (Projektangabe); amtliche Unterlagen: B-Plan 123, 1. Änderung (Entwurf) mit Baugrenze 3,0 m zu Planstraße/Parkplatz", "Zuschnitt 32 × 30 m = Hypothese H1; aus Nutzungskonzept abgeleitete Kandidaten ca. 33 × 25 m / 35 × 27 m (±2 m); Foto-Seiten 13/15/16 fehlen"], ["Höhe / Geschosse", "Entwurf B-Plan 123, 1. Änd.: H = 12,00 m über OK Fahrbahn, SH ≤ 0,30 m, TH 6,50 m, zwingend II Vollgeschosse, Dach ≥ 38°; 2–3 Geschosse laut Auftraggeber", "Plan nur ENTWURF, Ursprungsplan unbekannt; 12 m gelten erst nach Klärung (Fahrbahnhöhe, Dachform, Vollgeschosse) als eingehalten"],
         ["Stellplätze Wohnen", "KEINE gesetzliche Pflicht seit 01.07.2024 (§ 47 Abs. 1 Satz 3 NBauO; FAQ Land Niedersachsen Stand 11.07.2025)", "ob B-Plan/städtebaulicher Vertrag/Kaufvertrag Stellplätze für Wohnungen verlangt: unbekannt"], ["Stellplätze Gastro/Büro", "Pflicht besteht; Bemessung bedarfsorientiert (Richtzahlen Erlass: Gaststätte 1 je 8–12 Sitzplätze, Büro 1 je 30–40 m²)", "Gaststättenart („örtliche Bedeutung“) und Sitzplatzzahl angenommen"],
         ["Maße", "–", "Stellplatz 2,50 × 5,00 m, Fahrgasse 6,00 m, Säule Ø 0,40 m (Vorgaben/Annahmen), Zufahrtslage"], ["Wohnfläche", "B3: 846 m², 16 WE (Plan)", "übrige Varianten aus Geschosskonturen geschätzt (0,88 × Wohnstreifen)"]]
     table(d, 120, y + 50, [380, 1400, 1480], rows, 28); pages.append(im); return pages
@@ -125,6 +140,7 @@ def abschluss(n, tag, keys):
 def entwurf(keys, name, tag, titel, sub, extra):
     pages = intro(1, tag, titel, sub); n = len(pages) + 1
     pages.append(quellen_seite(n, tag)); n += 1
+    ga = GA.seiten(n, nur_kern=True); pages += ga; n += len(ga)
     pages.append(hoehen_seite(n, tag)); n += 1
     if extra: pages.append(pruefung540(n, tag)); n += 1
     pages.append(ueberblick(n, tag, keys, "Überblick " + "–".join([keys[0], keys[-1]]))); n += 1
@@ -135,7 +151,7 @@ def stellplatz_pdf():
     im, d = page_with("Stellplatzberechnung nach § 47 NBauO – Pflicht und optionales Ziel getrennt", "Prüfung der geltenden Vorgaben (Quelle: FAQ Land Niedersachsen Stand 11.07.2025; Richtzahlen des Erlasses)", n, tag)
     t = ("1. Wohnungen: Seit 01.07.2024 keine gesetzliche Pflicht mehr für den durch Wohnungen verursachten Bedarf (§ 47 Abs. 1 Satz 3 NBauO, wenn der Bauantrag nach dem 30.06.2024 gestellt wird). Kommunale Stellplatzsatzungen sind für Wohnungen nichtig. Ein Bebauungsplan kann keine Mindestzahl je Wohnung festsetzen; ein städtebaulicher Vertrag kann Stellplätze weiterhin vereinbaren (FAQ 11.1, 11.7–11.9). Freiwillige Stellplätze sind zulässig (11.10).\n"
          "2. Gastronomie und Büro: Pflicht besteht weiter (§ 47 Abs. 1 Satz 1), bedarfsorientiert durch die Bauaufsicht; Richtzahlen: Gaststätte örtlicher Bedeutung 1 je 8–12 Sitzplätze, überörtlicher Bedeutung 1 je 4–8; Büro allgemein 1 je 30–40 m² Nutzfläche, mit Besucherverkehr 1 je 15–25 m² (mind. 5).\n"
-         "3. B-Plan/städtebaulicher Vertrag Werlte: UNBEKANNT (kein Dokument vorhanden; Fotos S. 13/15/16 fehlen). Örtliche Bauvorschrift der Gemeinde für Nicht-Wohnungen: nicht gefunden.\n"
+         "3. B-Plan 123, 1. Änderung (Entwurf): keine Mindestzahl an Stellplätzen festgesetzt; Stadt plant einen öffentlichen Parkplatz mit 63 Plätzen (auch für angrenzende gewerbliche Nutzungen, nachts gesperrt); Wohn-Stellplätze werden den Wohneinheiten zugeordnet; Überdachung von Stellplätzen in der Parkplatzfläche unzulässig. Städtebaulicher Vertrag/Kaufvertrag und örtliche Bauvorschrift für Nicht-Wohnungen: UNBEKANNT/nicht gefunden.\n"
          "4. Vorbehalt: konsolidierter Gesetzestext in NI-VORIS war nicht abrufbar; Stand der Quelle 11.07.2025, spätere Änderungen sind zu prüfen.")
     y = text_block(d, 120, 290, 3260, t, 30); pages.append(im); n += 1
     im, d = page_with("Ergebnis je Variante: erforderlich (Pflicht) und optional (Ziel) getrennt", "„erforderlich“ = Gastro + Büro nach Richtzahlen (Spanne); „optional“ = freiwillig für Wohnen · „nutzbar“ = gezeichnet und geometrisch geprüft", n, tag)
@@ -155,6 +171,7 @@ def vergleich_pdf():
     tag = "VERGLEICH · NICHT FESTGELEGT"; ks = ["A", "B", "C"] + EK + FK; pages = []; n = 1
     pages += intro(n, tag, "Vergleich der Varianten B, C, E1–E4 und F1–F4", "Entwurfsstudie Baufeld 3 · alle Werte vorläufig · keine Variante festgelegt"); n += 1
     pages.append(quellen_seite(n, tag)); n += 1
+    ga = GA.seiten(n, nur_kern=True); pages += ga; n += len(ga)
     im, d = page_with("Erhöhte Schrägansichten im Vergleich", "gleiche Kamera, gleiche Darstellung", n, tag); kk = ["B", "C", "E1", "E2", "F1", "F2", "F3", "F4"]; w = 780
     for i, k in enumerate(kk): x = 120 + (i % 4) * (w + 30); y = 290 + (i // 4) * 900; d.text((x, y), VA.V[k]["name"].split(" (")[0][:34], font=F(26, "SemiBold"), fill=INK); paste(im, IMG(k, "aerial"), x, y + 40, w, 800)
     pages.append(im); n += 1
