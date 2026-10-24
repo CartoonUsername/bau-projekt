@@ -33,7 +33,7 @@ def baue():
     rows.append(["Obergrenze NBank-Darlehen: 75 % × 5.330 € × Wohnfläche (T€)"] + [fm(0.75 * 5330 * D[k]["wfl"] / 1000) for k in KEYS])
     rows.append(["KfW 298: WE × 100.000 € (T€) / KfW 296: WE × 150.000 € (T€)"] + [f"{D[k]['we']*100:,} / {D[k]['we']*150:,}".replace(",", ".") for k in KEYS])
     rows.append(["Barrierefreiheits-Zuschuss bis (€), falls alle WE erfüllen"] + [fm(5000 * D[k]["we"]) for k in KEYS])
-    rows.append(["Stellplatzbedarf vs. 11 nachweisbar"] + [f"{fm(D[k]['stp_bedarf']['standard'],1)} vs. 11" for k in KEYS])
+    rows.append(["Stellplätze erforderlich (Gastro+Büro; Wohnen keine Pflicht) vs. 11 nachweisbar"] + [f"{fm(D[k]['stp']['erf_lo'],1)}–{fm(D[k]['stp']['erf_hi'],1)} vs. 11" for k in KEYS])
     table(d, 120, 290, [1000,567,567,567,567], rows, 32)
     text_block(d, 120, 1900, 3260, "Lesehilfe: Die Obergrenzen wachsen mit Wohnfläche bzw. Wohnungszahl – ob sie ausgeschöpft werden, hängt von den tatsächlich förderfähigen Kosten (Kostengrenze je m²), der Mietbindung (gebundene Miete statt Marktmiete) und der Einkommensgruppe der Mieter ab. Größere Wohnungen können die Einpersonen-/Zweipersonen-Grenzen (50/60 m²) überschreiten und damit nicht angemessen sein; der kleinere Mix passt besser zu 50/60 m², bringt aber höhere Kosten je m² (Küchen/Bäder) und mehr Stellplatzbedarf. Variante C mit hoher Ausnutzung hat die größte Wohnfläche, aber die größten baurechtlichen Risiken (siehe Vergleichs-PDF).", 30, GREY)
     pages.append(im)

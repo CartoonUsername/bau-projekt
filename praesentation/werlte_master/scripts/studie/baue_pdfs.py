@@ -16,7 +16,7 @@ def baurecht(k):
     r.append(("Geschosse (2–3)", "pruef", f"3 Geschosse inkl. Staffel; Staffel = {fm(d['staffel_anteil']*100)} % des 1. OG – ob Vollgeschoss (B-Plan, NBauO), ist zu klären."))
     g = d["grz_projektion"]; r.append(("GRZ / überbaute Fläche", "ok" if g <= 0.6 else ("pruef" if g <= 0.8 else "kritisch"), f"EG {fm(d['flaeche']['eg'])} m² = {fm(d['grz_eg']*100)} %; größte Geschossprojektion {fm(d['projektion_m2'])} m² = {fm(g*100)} % von 960 m². Theoretische GRZ 0,6 ist eine Annahme, keine Festsetzung."))
     r.append(("Baugrenzen / Grenzen", "ok" if ue == 0 else "kritisch", "Alle Geschosse innerhalb des hypothetischen Grundstücks 32 × 30 m." if ue == 0 else f"Obergeschoss ragt bis {fm(ue,2)} m über das hypothetische Grundstück (W/O/Platz) – Überbauung Platzfläche/Nachbargrenze, Baulast/Genehmigung erforderlich."))
-    n = d["stp_bedarf"]["standard"]; r.append(("Stellplätze", "kritisch", f"Bedarf nach Ansatz ca. {fm(n,1)} (Wohnen 1,5/WE, Gastro 1/10 m², Büro 1/30 m²) gegenüber 11 nachweisbaren – Stellplatzsatzung/Ablöse klären."))
+    sp = d["stp"]; r.append(("Stellplätze (gesetzlich)", "pruef", f"Pflicht nur für Gastro + Büro: {fm(sp['erf_lo'],1)}–{fm(sp['erf_hi'],1)} (Mittel {fm(sp['erf_mid'],1)}) nach Richtzahlen § 47 NBauO; Wohnen seit 01.07.2024 keine Pflicht. 11 Plätze nachweisbar (Hypothese) – Bemessung durch Bauaufsicht; optional Wohnen 0,5–1,5/WE. Quelle: quellen_stadt/stellplatzpflicht_nbauo47.md"))
     r.append(("Gewerbe im EG", "ok", "EG-Nutzung Gastronomie/Büro wie B3 unverändert (32 × 18 m)."))
     r.append(("Brandschutz / Rettungswege", "pruef", "Staffel/OG-Auskragung, Gebäudeklasse 4/5, Rettungswege, Feuerwehrzufahrt: Konzept erforderlich."))
     return r
@@ -122,7 +122,7 @@ def vergleich_pdf():
     rows.append(["Beispiel-Wohnungsgrößen (Standard)"] + [f"{fm(D[k]['mix']['standard']['kleinste'])} m² (vorn) und {fm(D[k]['mix']['standard']['groesste'])} m² (hinten)" for k in ks])
     rows.append(["Mehr als 16 WE möglich?"] + [("Ja: " + str(max(D[k]['mix'][m]['we'] for m in D[k]['mix'])) + " WE bei kleinerem Mix" if max(D[k]['mix'][m]['we'] for m in D[k]['mix']) > 16 else "nein (16 nur im Standardmix)") for k in ks])
     rows.append(["Anzahl Stützen / Besonderheit"] + [(f"{D[k]['anzahl_saeulen']} Säulen" if D[k]['anzahl_saeulen'] else "keine Stützen") for k in ks])
-    rows.append(["Stellplatzbedarf (Ansatz) vs. 11 nachweisbar"] + [f"{fm(D[k]['stp_bedarf']['standard'],1)} vs. 11" for k in ks])
+    rows.append(["Stellplätze erforderlich (§ 47, Gastro+Büro; Wohnen 0) vs. 11 nachweisbar"] + [f"{fm(D[k]['stp']['erf_lo'],1)}–{fm(D[k]['stp']['erf_hi'],1)} vs. 11" for k in ks])
     table(d, 120, 290, cw, rows, 34)
     text_block(d, 120, 2000, 3200, "Hinweis: Die Wohnungszahl hängt vom Raster (Modulbreite) ab. Mehr WE heißt kleinere Wohnungen; ob kleinere oder größere Wohnungen förderlich/vermietbar sind, ist in der separaten Förder- und Marktbetrachtung zu klären (Foerderung_Variantenvergleich.pdf). Größere Wohnfläche allein garantiert keine höhere Förderung.", 30, GREY)
     pages.append(im); n += 1

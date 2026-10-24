@@ -37,6 +37,18 @@ def saeulen(v):
     for i in range(1, ny): pts.append((x0, round(y0 + (y1 - y0) * i / ny, 3))); pts.append((x1, round(y0 + (y1 - y0) * i / ny, 3)))
     return pts
 MIX = {"standard": (5.6, 7.0, "Standard (Modul 5,6 m vorn / 7,0 m hinten, wie B3)"), "klein": (4.9, 5.6, "mehr kleinere Wohnungen (4,9 / 5,6 m)"), "gross": (7.0, 8.4, "größere Wohnungen (7,0 / 8,4 m)")}
+def _wz(v, lvl):
+    w = v["wohn"][lvl]; return (w[1], w[0], w[3], w[2]) if v.get("wohn_orient") == "y" else w
+def stp_neu(gastro_m2, terr_m2, buero_m2, we_by_mix):
+    """Stellplätze getrennt: (1) rechtlich erforderlich nach § 47 NBauO (Wohnen seit 01.07.2024 nicht mehr; Gastro/Büro nach Richtzahlen des Erlasses, Spanne), (2) optional (Komfort/Markt/Vermietung)."""
+    seats = gastro_m2 / (280 / 120); tseats = terr_m2 / (64.4 / 44)
+    r = dict(sitze_innen=round(seats), sitze_terrasse=round(tseats), buero_m2=round(buero_m2, 1), gastro_m2=round(gastro_m2, 1), terrasse_m2=round(terr_m2, 1),
+             gastro_lo=seats / 12, gastro_mid=seats / 10, gastro_hi=seats / 8, buero_lo=buero_m2 / 40, buero_mid=buero_m2 / 35, buero_hi=buero_m2 / 30)
+    r["erf_lo"] = r["gastro_lo"] + r["buero_lo"]; r["erf_mid"] = r["gastro_mid"] + r["buero_mid"]; r["erf_hi"] = r["gastro_hi"] + r["buero_hi"]
+    r["erf_mit_terrasse_mid"] = (seats + tseats) / 10 + r["buero_mid"]; r["erf_mit_terrasse_hi"] = (seats + tseats) / 8 + r["buero_hi"]; r["wohnen_erforderlich"] = 0
+    r["optional"] = {m: dict(lo=0.5 * w, mid=1.0 * w, hi=1.5 * w) for m, w in we_by_mix.items()}
+    r["komfort_ziel"] = {m: r["erf_mid"] + 1.0 * w for m, w in we_by_mix.items()}
+    return r
 def wohnstreifen(w, mv, mh):
     xs, y0, x1, y1 = w; L = x1 - xs; D = y1 - y0; d = (D - GANG) / 2; nf = int(L // mv); nr = int(L // mh)
     f = [round((L / nf) * d * NETTO, 1) for _ in range(nf)] if nf else []; r = [round((L / nr) * d * NETTO, 1) for _ in range(nr)] if nr else []
@@ -53,11 +65,11 @@ def kennzahlen(key):
     k["saeulen"] = saeulen(v); k["anzahl_saeulen"] = len(k["saeulen"])
     k["mix"] = {}
     for m, (mv, mh, lab) in MIX.items():
-        o = wohnstreifen(v["wohn"]["og1"], mv, mh); s = wohnstreifen(v["wohn"]["st"], mv, mh); alle = o["vorn"] + o["hinten"] + s["vorn"] + s["hinten"]
+        o = wohnstreifen(_wz(v, "og1"), mv, mh); s = wohnstreifen(_wz(v, "st"), mv, mh); alle = o["vorn"] + o["hinten"] + s["vorn"] + s["hinten"]
         k["mix"][m] = dict(label=lab, og1=o, st=s, we=len(alle), we_og1=len(o["vorn"]) + len(o["hinten"]), we_st=len(s["vorn"]) + len(s["hinten"]), wfl=round(o["netto"] + s["netto"], 1), kleinste=min(alle) if alle else 0, groesste=max(alle) if alle else 0, mittel=round(sum(alle) / len(alle), 1) if alle else 0)
     s = k["mix"]["standard"]; k["wfl"] = s["wfl"]; k["we"] = s["we"]
-    gf_ = V[key].get('gewerbe_faktor', 1.0); gastro_stp = 280 / 10 * gf_; buero_stp = B3M["buero_netto"] / 30 * gf_
-    k["stp_bedarf"] = {m: round(k["mix"][m]["we"] * 1.5 + gastro_stp + buero_stp, 1) for m in MIX}; k["stp_nachweisbar_H1"] = 11
+    vv = V[key]; k["stp"] = stp_neu(vv.get("gastro_m2", 280.0), vv.get("terr_m2", 64.4), vv.get("buero_m2", B3M["buero_netto"]), {m: k["mix"][m]["we"] for m in MIX}); k["stp_nachweisbar_H1"] = 11
+    k["stp_bedarf"] = k["stp"]["komfort_ziel"]  # nur Rückwärtskompatibilität: Komfortziel = erforderlich (Mittel) + 1,0/WE, KEINE gesetzliche Pflicht
     k["bgf"] = round(k["flaeche"]["eg"] + k["flaeche"]["og1"] + k["flaeche"]["st"], 1)
     za = V[key].get("Z", Z)["ATT"][1]; k["hoehe"] = dict(attika=za, zulaessig=HOEHE_MAX, differenz=round(HOEHE_MAX - za, 2), geschosse=3)
     k["staffel_anteil"] = round(rects_area(v["st"]) / rects_area(v["og1"]), 3)
@@ -71,3 +83,4 @@ if __name__ == "__main__":
     print("B3 Referenz:", B3M["wfl_L1"], B3M["wfl_L2"], B3M["we"])
 
 import varianten_e  # registriert E1–E4 in V
+import varianten_f  # registriert F1–F4 in V

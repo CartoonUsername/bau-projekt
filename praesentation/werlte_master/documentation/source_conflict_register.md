@@ -63,3 +63,9 @@ Neu: C-38 (Abstell/Fahrrad Wohnen im EG entfällt bei Büro-Alternative K; barri
 - **C-41 (neu, offen): Orientierung der Platzfassade.** Blatt 4 und die Skizze zeigen den Kern links, Blatt 14/25 und die Bilder rechts (siehe C-13). Keine Ansicht wird einzeln gespiegelt.
 - **C-42 (neu, offen): Belag der Dachterrasse** (im Modell neutral grau) und **Dachaustritt der Küchenabluft** (C-22, im Modell nicht dargestellt).
 - **C-43 (neu, offen): Rahmenteilung der EG-Verglasung** (konzeptionell, ohne Rastermaß; Fassadenstützen C-16) und Bürozugang an der Rückseite (dritte Rücktür entfernt, C-32/C-38).
+
+## Nachtrag 24.10.2026 (Variantenstudie E/F)
+- **C-44 Stellplatzpflicht Wohnen:** Die früher angesetzten 1,5 Stellplätze je WE sind KEINE gesetzliche Pflicht. Seit 01.07.2024 entfällt die Pflicht für Wohnungen (§ 47 Abs. 1 Satz 3 NBauO; FAQ Land Niedersachsen, Stand 11.07.2025). Pflicht besteht für Gastro/Büro (Richtzahlen). Ob B-Plan/städtebaulicher Vertrag/Kaufvertrag Stellplätze für Wohnungen verlangt, ist unbekannt. Auswertung: `quellen_stadt/stellplatzpflicht_nbauo47.md`. Offen: aktuelle Gesetzesfassung in NI-VORIS prüfen.
+- **C-45 Fotos der städtischen Unterlagen (S. 13/15/16):** nicht im Projekt (Upload kam nicht an); Aussagen zu B-Plan Nr. 123, 2–3 Geschosse, H 12,0 m nur als ChatGPT-Beschreibung. Grundstückszuschnitt und Baugrenzen bleiben Hypothese H1.
+- **C-46 Planungsziel EG 540 m² (18 × 30 m) + 420 m² Restfläche:** zwei Lesarten (F1–F3 18 m Platzseite × 30 m Tiefe; F4 30 × 18 m); bei 30 m Länge füllt das EG die Grundstückstiefe von H1 (kein rückseitiger Vorbau, Vorbau vorn 1,5 m über die Grenze zum Platz).
+- **C-47 Höhe 12,00 m in E/F:** Attika exakt +12,00 m, Höhenbezug der Stadt unbelegt → nicht als eingehalten zu werten.

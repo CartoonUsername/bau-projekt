@@ -11,3 +11,10 @@
 - `Entwurf_E_12m_Umlaufender_Vorbau_mit_Parken.pdf` – Höhenrahmen, Lageplan, Grundrisse, vier Fassaden, Schnitt für E1–E4
 - `Vergleich_E_mit_B_und_C.pdf` – Vergleichstabelle und Einordnung
 - Quellen: `scripts/studie/varianten_e.py`, `e_zeichnen.py`, `baue_pdfs_e.py`; Grundstück als `PLOT_POLY` austauschbar (aktuell Hypothese 32 × 30 m)
+
+## Überarbeitung 24.10.2026 (Stellplätze nach § 47 NBauO, Variante F mit EG 540 m²)
+- `Entwurf_E_12m_Umlaufender_Vorbau_mit_Parken.pdf` (E1–E4, neu gerechnet) und `Entwurf_F_EG540m2_Umlaufender_Vorbau_Parken.pdf` (F1–F4)
+- `Stellplatzberechnung_NBauO47.pdf` – gesetzlich erforderlich (Gastro + Büro) und optional (Wohnen) getrennt
+- `Vergleich_E_F_B_C.pdf` ersetzt `Vergleich_E_mit_B_und_C.pdf`
+- Quellen: `../quellen_stadt/` (Fotos der städtischen Seiten 13/15/16 fehlen noch)
+- Code: `scripts/studie/parken.py` (Parkprüfung), `varianten_f.py`, `e_zeichnen.py`, `baue_pdfs_ef.py`

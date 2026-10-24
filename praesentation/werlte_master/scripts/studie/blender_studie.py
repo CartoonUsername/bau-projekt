@@ -34,7 +34,10 @@ def build():
     a0 = v.get("asphalt", (0, 18, 32, 29)); box("Stellplatzflaeche-H1", "asphalt", (a0[0], a0[2]), (a0[1], a0[3]), (0, 0.01))
     for st in v.get("stalls", VA.B3["parking"]["stalls"]):
         x0, y0, x1, y1 = st
-        for xa in (x0, x1 - 0.08): box("Stellplatz", "linie", (xa, xa + 0.08), (y0, y1), (0.01, 0.025))
+        if (x1 - x0) > (y1 - y0) + 0.01 and (x1 - x0) > 3.0:
+            for ya in (y0, y1 - 0.08): box("Stellplatz", "linie", (x0, x1), (ya, ya + 0.08), (0.01, 0.025))
+        else:
+            for xa in (x0, x1 - 0.08): box("Stellplatz", "linie", (xa, xa + 0.08), (y0, y1), (0.01, 0.025))
     for (x0, y0, x1, y1) in v["eg"]: box("EG", "klinker", (x0, x1), (y0, y1), Zv["EG"])
     for (x0, y0, x1, y1) in v["og1"]:
         box("OG1", "klinker", (x0, x1), (y0, y1), Zv["OG1"]); box("Decke-unter-OG1", "beton", (x0 - 0.04, x1 + 0.04), (y0 - 0.04, y1 + 0.04), (Zv["OG1"][0] - 0.3, Zv["OG1"][0])); box("Decke-ueber-OG1", "beton", (x0 - 0.04, x1 + 0.04), (y0 - 0.04, y1 + 0.04), (Zv["OG1"][1] - 0.3, Zv["OG1"][1])); box("Dachfläche-OG1", "deck", (x0, x1), (y0, y1), (Zv["OG1"][1], Zv["OG1"][1] + 0.03))
@@ -43,8 +46,17 @@ def build():
     # Glasfront EG zum Platz (x 4–32), schematisch
     gf = v.get("glas_front", (4, 32, 0.0)); gh = Zv["EG"][1] - 0.4; box("EG-Glas", "glas", (gf[0], gf[1]), (gf[2] - 0.03, gf[2]), (0, gh)); box("EG-Rahmen-oben", "rahmen", (gf[0], gf[1]), (gf[2] - 0.08, gf[2]), (gh, gh + 0.1))
     for xr in ((4, 17, 19, 31.97) if "glas_front" not in v else [gf[0] + (gf[1] - gf[0]) * i / 8 for i in range(9)]): box("EG-Rahmen", "rahmen", (xr - 0.04, xr + 0.04), (gf[2] - 0.08, gf[2]), (0, gh))
-    # schematische Fenster der Wohngeschosse (Modul 5,6 m vorn / 7,0 m hinten, Lage rein schematisch)
+    # schematische Fenster der Wohngeschosse (Modul 5,6 m / 7,0 m, Lage rein schematisch)
     for lvl, (z0, z1) in (("og1", (Zv["OG1"][0] + 0.4, Zv["OG1"][1] - 0.4)), ("st", (Zv["ST"][0] + 0.4, Zv["ST"][1] - 0.6))):
+        if v.get("wohn_orient") == "y":
+            x0w, ys, x1w, y1w = v["wohn"][lvl]; L = y1w - ys
+            for (mod, xface, sgn) in ((5.6, x0w, -1), (7.0, x1w, 1)):
+                n = int(L // mod); w = L / n if n else 0
+                for i in range(n):
+                    cy = ys + w * (i + 0.5); ww = min(w - 1.8, 4.2)
+                    box("Fenster", "glas", ((xface - 0.03, xface) if sgn < 0 else (xface, xface + 0.03)), (cy - ww / 2, cy + ww / 2), (z0, z1))
+                    for yr in (cy - ww / 2, cy + ww / 2): box("Fensterrahmen", "rahmen", ((xface - 0.07, xface) if sgn < 0 else (xface, xface + 0.07)), (yr - 0.04, yr + 0.04), (z0, z1))
+            continue
         xs, y0, x1, y1 = v["wohn"][lvl]; L = x1 - xs
         for (face, mod, yface, sgn) in (("v", 5.6, y0, -1), ("h", 7.0, y1, 1)):
             n = int(L // mod); w = L / n if n else 0
@@ -75,12 +87,12 @@ def persp(name, p, t, lens):
 def ortho(name, side):
     for o in [o for o in bpy.data.objects if o.type in ("CAMERA", "LIGHT")]: bpy.data.objects.remove(o)
     W, Hh, ppm = 42.0, (14.0 if v.get("Z") else 12.5), 50
-    if side in ("west", "east"): W = 32.0
+    if side in ("west", "east"): W = v.get("ortho_w", 32.0)
     cam = bpy.data.cameras.new("o"); cam.type = "ORTHO"; cam.ortho_scale = W; co = bpy.data.objects.new("o", cam); sc.collection.objects.link(co); sc.camera = co; cz = (6.0 if v.get("Z") else 5.2)
     if side == "front": co.location = (-16, -100, cz); co.rotation_euler = (math.radians(90), 0, 0); vec = Vector((0.5, -0.7, 0.55))
     if side == "rear": co.location = (-16, 100, cz); co.rotation_euler = (math.radians(90), 0, math.radians(180)); vec = Vector((-0.5, 0.7, 0.55))
-    if side == "west": co.location = (100, 11.5, cz); co.rotation_euler = (math.radians(90), 0, math.radians(90)); vec = Vector((0.7, 0.5, 0.55))
-    if side == "east": co.location = (-100, 11.5, cz); co.rotation_euler = (math.radians(90), 0, math.radians(-90)); vec = Vector((-0.7, -0.4, 0.55))
+    if side == "west": co.location = (100, v.get("ortho_cy", 11.5), cz); co.rotation_euler = (math.radians(90), 0, math.radians(90)); vec = Vector((0.7, 0.5, 0.55))
+    if side == "east": co.location = (-100, v.get("ortho_cy", 11.5), cz); co.rotation_euler = (math.radians(90), 0, math.radians(-90)); vec = Vector((-0.7, -0.4, 0.55))
     world(vec); sun(vec, 3.0); common(); sc.render.resolution_x, sc.render.resolution_y = int(W * ppm), int(Hh * ppm); sc.render.filepath = os.path.join(OUT, name + ".png"); bpy.ops.render.render(write_still=True)
 for vw in VIEWS:
     if vw == "persp": persp("persp", (46, -36, 8.0), (15, 7, 4.2), 30)

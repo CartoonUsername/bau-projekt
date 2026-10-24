@@ -1,0 +1,170 @@
+{
+ "parken": {
+  "stalls": [
+   {
+    "nr": 1,
+    "rect": [
+     2.5,
+     19.0,
+     5.0,
+     24.0
+    ],
+    "art": "90",
+    "face": "S",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 2,
+    "rect": [
+     5.0,
+     19.0,
+     7.5,
+     24.0
+    ],
+    "art": "90",
+    "face": "S",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 3,
+    "rect": [
+     7.9,
+     19.0,
+     10.4,
+     24.0
+    ],
+    "art": "90",
+    "face": "S",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 4,
+    "rect": [
+     10.4,
+     19.0,
+     12.9,
+     24.0
+    ],
+    "art": "90",
+    "face": "S",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 5,
+    "rect": [
+     13.3,
+     19.0,
+     15.8,
+     24.0
+    ],
+    "art": "90",
+    "face": "S",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 6,
+    "rect": [
+     18.7,
+     19.0,
+     21.2,
+     24.0
+    ],
+    "art": "90",
+    "face": "S",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 7,
+    "rect": [
+     21.2,
+     19.0,
+     23.7,
+     24.0
+    ],
+    "art": "90",
+    "face": "S",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 8,
+    "rect": [
+     24.1,
+     19.0,
+     26.6,
+     24.0
+    ],
+    "art": "90",
+    "face": "S",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 9,
+    "rect": [
+     26.6,
+     19.0,
+     29.1,
+     24.0
+    ],
+    "art": "90",
+    "face": "S",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   }
+  ],
+  "gesamt": 9,
+  "voll": 9,
+  "eingeschraenkt": 0,
+  "konflikt": 0,
+  "hinweise": [
+   "Geometrische Prüfung ohne Schleppkurven; 90°-Stellplätze 2,50 × 5,00 m und Fahrgasse 6,00 m sind Planungsannahmen",
+   "Zufahrt (Lage der Straße) ist Annahme",
+   "Feuerwehrzufahrt/Aufstellflächen unter dem Vorbau nicht nachgewiesen (Prüfbedarf)"
+  ],
+  "fahrgasse_probleme": [],
+  "fahrgasse_breite": 6.0,
+  "nutzbar": 9,
+  "min_nutzbreite": 2.5
+ },
+ "flaeche": {
+  "eg": 540.0,
+  "stall": 112.5,
+  "par": 0.0,
+  "fahr": 192.0,
+  "zone": 16.2,
+  "rest": 99.2
+ },
+ "ueber": {
+  "west": 0,
+  "ost": 0,
+  "platz": 0,
+  "rueck": 0
+ },
+ "abstand3": 222.0,
+ "abstand6": 408.0
+}
