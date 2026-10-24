@@ -1,0 +1,72 @@
+id,beschreibung,wert,einheit,status,quelle
+SITE-AREA,Grundstücksfläche Baufeld 3,960,m2,SOURCE-DEFINED,Konzeptheft (Auszug)
+SITE-PRICE,Kaufpreis,230,EUR/m2,SOURCE-DEFINED,Konzeptheft (Auszug)
+PLAN-GRZ,Grundflächenzahl,0.6,-,SOURCE-DEFINED,B-Plan 123 Entwurf (Auszug)
+PLAN-FOOTPRINT-THEORETICAL,rechnerische Maximalfläche (960 x 0.6),576,m2,SOURCE-DEFINED,Berechnung; KEINE Baugenehmigung
+PLAN-ENVELOPE-ESTIMATE,Baufenster nach Sichtschätzung,400-460,m2,PROVISIONAL,Sichtschätzung im Plan; nicht gemessen
+PLAN-STOREYS,Geschosse (min-max),2-3,-,SOURCE-DEFINED,B-Plan 123 Entwurf (Auszug)
+PLAN-EAVES,Traufhöhe,6.50,m,SOURCE-DEFINED,B-Plan 123 Entwurf (Auszug)
+PLAN-HEIGHT-MAX,Gesamthöhe maximal,12.00,m,SOURCE-DEFINED,B-Plan; Messregel unbestätigt
+PLAN-ROOF,Flachdach und Staffelgeschoss zulässig,offen,-,REQUIRES-APPROVAL,Stadt schriftlich klären
+BLD-WIDTH,Gebäudebreite (Modell),32.0,m,ASSUMED,gen_skizzen.js; aus 576/18
+BLD-DEPTH,Gebäudetiefe (Modell),18.0,m,ASSUMED,gen_skizzen.js
+BLD-FOOTPRINT-MODEL,Grundfläche Modell,576,m2,REQUIRES-APPROVAL,widerspricht Baufenster-Schätzung (C-01)
+LVL-EG-TOP,Oberkante EG-Decke,3.50,m,ASSUMED,gen_skizzen.js
+LVL-OG-TOP,Oberkante OG-Decke (Traufe),6.50,m,ASSUMED,Traufhöhe B-Plan
+LVL-STAFFEL-TOP,Oberkante Staffeldecke,9.60,m,ASSUMED,gen_skizzen.js
+LVL-ATTIKA,Oberkante Attika,9.90,m,ASSUMED,gen_skizzen.js
+STAFFEL-SETBACK,Rücksprung Staffelgeschoss,0.8,m,ASSUMED,Entwurf; B-Plan-Einordnung offen
+STAFFEL-AREA,BGF Staffelgeschoss,498,m2,ASSUMED,Berechnung 30.4 x 16.4
+CORE-WIDTH,Treppenhaus/Aufzug Westende,4.0,m,ASSUMED,gen_skizzen.js
+EG-GASTRO-AREA,Gastrofläche EG,510,m2,PROVISIONAL,Gastro-Konzept; setzt 576 m2 voraus (C-01)
+EG-SEATS-INDOOR,Innenplätze,190,Stk,PROVISIONAL,Gastro-Konzept (160 + 30)
+EG-SEATS-TERRACE,Terrassenplätze,60,Stk,PROVISIONAL,Gastro-Konzept
+EG-BAR-STOOLS,Barhocker,12,Stk,PROVISIONAL,Gastro-Konzept
+EG-SEPAREE-SEATS,Séparée,30,Stk,PROVISIONAL,Gastro-Konzept
+OG-OFFICE-1,Büro 1,100,m2,ASSUMED,Bauherr
+OG-OFFICE-2,Büro 2,65,m2,ASSUMED,Bauherr
+OG-UNITS,Wohnungen im 1. OG,5,Stk,PROVISIONAL,Excel-Modell; Grundriss nicht geprüft (C-07)
+STAFFEL-UNITS,Wohnungen im Staffelgeschoss,7,Stk,PROVISIONAL,Excel-Modell; Grundriss nicht geprüft (C-07)
+BALCONY-COUNT-SOUTH,Balkone lange Seite,5,Stk,PROVISIONAL,gen_skizzen.js; Renderings abweichend (C-08)
+BALCONY-WIDTH,Balkonbreite,2.7,m,ASSUMED,gen_skizzen.js (OGBAL)
+BALCONY-DEPTH,Balkontiefe,1.5,m,ASSUMED,gen_skizzen.js
+WINDOW-OG-FRAME,Fensterrahmen 1. OG,schwarz Stahl,-,SOURCE-DEFINED,Renderings
+WINDOW-STAFFEL-FRAME,Fensterrahmen Staffel,helles Holz,-,SOURCE-DEFINED,Renderings
+WINDOW-DIMENSIONS,Fenster- und Türmaße,unbekannt,-,MISSING,keine Quelle
+GRID-X-R2,Arbeitsraster R2 (x),"4; 9,6; 15,2; 20,8; 26,4; 32",m,PROVISIONAL,build_design.py; REQUIRES-APPROVAL Tragwerk
+GRID-X-R1,Alternativraster R1 (x),"4; 11; 18; 25; 32",m,PROVISIONAL,erste Entwurfsfassung; Stütze in Tür (C-16)
+WE-OG2-FRONT,Wohnung OG-2 vorn (5 x),5.6 x 8.0 (39.4 m2 netto),m,PROVISIONAL,OG-2 Arbeitsbasis
+WE-OG2-REAR,Wohnung N1 OG-2 hinten,7.4 x 8.0 (52.1 m2 netto),m,PROVISIONAL,OG-2 Arbeitsbasis
+BALCONY-AXIS,Balkonmitten (5 x),"6,8; 12,4; 18,0; 23,6; 29,2",m,PROVISIONAL,gleich Wohnungsmitten
+BALCONY-UNDERSIDE,Balkonplatte Unterseite,3.2,m,ASSUMED,Decke 0.30 m unter OKFF 3.5
+CANOPY-UNDERSIDE,Vordach Unterseite,3.0,m,ASSUMED,schneidet Balkone (C-18)
+SHAFT-KITCHEN,Küchenschacht,"1,2 x 1,2 bei x 30-31,2 / y 16-17,2",m,PROVISIONAL,C-22
+CORE-STAIR,Treppenraum,"4 x 6 bei y 6-12 (L2 ab x 0,8)",m,ASSUMED,Kern West
+CORE-LIFT,Aufzug mit Vorraum,"4 x 3 bei y 12-15",m,ASSUMED,Kern West
+CORRIDOR-LEN,Mittelgang Länge/Sackgasse,28,m,PROVISIONAL,Rettungsweg C-15
+STAFFEL-RATIO,Staffel zu Geschoss darunter,87,%,PROVISIONAL,C-23
+LIFT-SHAFT,Aufzugsschacht,"2,2 x 2,6 bei x 0,8-3,0 / y 10-12,6",m,ASSUMED,Kern v003
+LIFT-LANDING,Aufzugsvorraum,"4,0 x 2,0 bei y 8-10",m,ASSUMED,stößt an Mittelgang
+STAIR-CORE,Treppenraum v003,"4 x 5 bei y 3-8",m,ASSUMED,Kern v003
+UNIT-S-INNER,Innenmaß WE-L1-S,"5,35 x 7,35",m,ASSUMED,Wandstärken Fassade 0,45 / Trennwand 0,25 / Flurwand 0,20
+LIFT-FLOOR-REQ,Aufzugspflicht ab Fußboden höher als,12.25,m,UNVERIFIED,Suchtreffer § 38 NBauO
+PLOT-H1,Grundstück (Rechenhypothese),"32 x 30 = 960",m2,HYPOTHETICAL,nur Rechenannahme; keine Realdaten
+STALL-SIZE,Stellplatz,"2,5 x 5,0",m,ASSUMED,Varianten A–C
+AISLE,Fahrgasse,6.0,m,ASSUMED,Varianten A–C
+GASTRO-AREA-NEW,Gastronomie brutto (Rest nach Kern und Büros),316.4,m2,PROVISIONAL,Varianten A–C
+SEATS-INNEN-NEW,Innenplätze geschätzt,89,Stk,PROVISIONAL,"(Gastraum minus Bar)/2,1 + 12 Hocker"
+CANT-B,Auskragung hinten B,3.0,m,HYPOTHETICAL,C-30
+CANT-C,Auskragung hinten C,6.0,m,HYPOTHETICAL,C-30
+SOFFIT,Plattenunterseite über Stellplätzen,3.2,m,ASSUMED,Varianten B und C
+GASTRO-V2,Gastronomie brutto Version 2,440,m2,PROVISIONAL,Gastraum 280 / Küche 60 / Lager 27 / WC 24 / Personal 20 / Flur 20 / Anlieferung 9
+SEATS-V2,Innenplätze Version 2,138,Stk,PROVISIONAL,"(280-14)/2,1 + 12 Hocker"
+OFFICE-V2,Büros netto Version 2,56.3,m2,ASSUMED,2 x 32 m2 brutto
+EXT-A,Anbau 1. OG / Überstand Staffel A,"1,5 / 0",m,HYPOTHETICAL,C-30
+EXT-B,Anbau 1. OG / Überstand Staffel B,"3,0 / 1,5",m,HYPOTHETICAL,C-30
+EXT-C,Anbau 1. OG / Überstand Staffel C,"4,5 / 2,0",m,HYPOTHETICAL,C-30
+SEATS-REAL,Innenplätze realistisch (Möblierung normal),120,Stk,PROVISIONAL,Spanne 88–128; Tisch 1,2x0,8 / Stuhl 0,45
+TERRACE-SEATS,Terrassenplätze (Möblierung normal),44,Stk,PROVISIONAL,Spanne 40–52; Annahme der Planung 60
+C0-B3,Mittelgang B3,9.5,m,PROVISIONAL,ausgeglichene Tiefen 9.5 / 9.5
+STP-BEDARF-NEU,Stellplatzbedarf nach grober Excel-Annahme,54,Stk,ASSUMED,Satzung unbekannt
+STP-NACHWEIS,Stellplätze nachweislich möglich,0,Stk,UNVERIFIED,kein Lageplan
+STP-H1,Stellplätze Hypothese H1,11,Stk,HYPOTHETICAL,32 x 30 m nicht bestätigt

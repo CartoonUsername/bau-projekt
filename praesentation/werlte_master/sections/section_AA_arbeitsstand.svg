@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1094" height="600" font-family="Arial">
+<rect width="1094" height="600" fill="white"/>
+<text x="20" y="30" font-size="20" font-weight="bold">Schnitt A–A (x = 18) – Arbeitsstand</text>
+<text x="20" y="50" font-size="12" fill="#a00">ARBEITSSTAND, VORLÄUFIG (OG-2 als Arbeitsgrundlage, nicht festgeschrieben). Schematische Zeichnung, kein Rendering. Maße in m.</text>
+<line x1="20" y1="520" x2="1074" y2="520" stroke="#333" stroke-width="2"/>
+<rect x="279.6" y="394.0" width="648" height="126.0" fill="#F2D48C" stroke="#111" opacity="0.5"/>
+<rect x="711.6" y="394.0" width="216" height="126.0" fill="#7E8A94" stroke="#111" opacity="0.5"/>
+<rect x="150.0" y="515.68" width="129.6" height="4.32" fill="#D6B98F" stroke="#111" opacity="1"/>
+<rect x="279.6" y="394.0" width="648" height="10.799999999999994" fill="#9AA0A6" stroke="#111" opacity="1"/>
+<rect x="279.6" y="286.0" width="648" height="10.799999999999994" fill="#9AA0A6" stroke="#111" opacity="1"/>
+<rect x="308.4" y="174.40000000000003" width="590.4" height="10.799999999999962" fill="#9AA0A6" stroke="#111" opacity="1"/>
+<rect x="279.6" y="296.79999999999995" width="288" height="97.2" fill="#9A4034" stroke="#111" opacity="0.55"/>
+<rect x="639.5999999999999" y="296.79999999999995" width="288" height="97.2" fill="#3F6275" stroke="#111" opacity="0.55"/>
+<rect x="567.5999999999999" y="296.79999999999995" width="72" height="97.2" fill="#D9D3C8" stroke="#111" opacity="0.8"/>
+<rect x="308.4" y="185.2" width="259.2" height="100.80000000000003" fill="#B88B5A" stroke="#111" opacity="0.6"/>
+<rect x="639.5999999999999" y="185.2" width="259.2" height="100.80000000000003" fill="#B88B5A" stroke="#111" opacity="0.6"/>
+<rect x="567.5999999999999" y="185.2" width="72" height="100.80000000000003" fill="#D9D3C8" stroke="#111" opacity="0.8"/>
+<rect x="225.60000000000002" y="394.0" width="54.0" height="10.799999999999994" fill="#C9CCCF" stroke="#111" opacity="1"/>
+<rect x="150.0" y="412.0" width="129.6" height="3.600000000000003" fill="#000" stroke="#111" opacity="1"/>
+<rect x="563.5999999999999" y="296.79999999999995" width="8" height="223.20000000000002" fill="#000"/><text x="567.5999999999999" y="292.79999999999995" font-size="9" text-anchor="middle">Stütze y=8 (R2: x 15,2/20,8)</text>
+<text x="214.8" y="502.0" font-size="10" text-anchor="middle">Terrasse</text>
+<text x="279.6" y="142.0" font-size="10" text-anchor="middle">Platzfassade y=0</text>
+<text x="495.59999999999997" y="458.8" font-size="10" text-anchor="middle">Gastro EG</text>
+<text x="819.6" y="458.8" font-size="10" text-anchor="middle">Küche</text>
+<text x="423.59999999999997" y="347.20000000000005" font-size="10" text-anchor="middle">WE-L1-S3 (44,8 m² brutto)</text>
+<text x="783.6" y="347.20000000000005" font-size="10" text-anchor="middle">Büro (hinten)</text>
+<text x="603.5999999999999" y="347.20000000000005" font-size="10" text-anchor="middle">Mittelgang</text>
+<text x="438.0" y="232.0" font-size="10" text-anchor="middle">Staffel vorn</text>
+<text x="769.1999999999999" y="232.0" font-size="10" text-anchor="middle">Staffel hinten</text>
+<text x="933.6" y="523" font-size="9">±0,00</text><line x1="927.6" y1="520" x2="931.6" y2="520" stroke="#333"/>
+<text x="933.6" y="397.0" font-size="9">+3,50</text><line x1="927.6" y1="394.0" x2="931.6" y2="394.0" stroke="#333"/>
+<text x="933.6" y="289.0" font-size="9">+6,50 Traufe</text><line x1="927.6" y1="286.0" x2="931.6" y2="286.0" stroke="#333"/>
+<text x="933.6" y="166.59999999999997" font-size="9">+9,90 Attika</text><line x1="927.6" y1="163.59999999999997" x2="931.6" y2="163.59999999999997" stroke="#333"/>
+<text x="20" y="560" font-size="11" fill="#333">Schematisch: Geschosshöhen 3,5 / 3,0 / 3,1 m, Decken 0,30 m, Balkon UK 3,2 m schneidet Vordach UK 3,0 m (C-18). Staffel 0,8 m zurückgesetzt. Rückseite: Grundstücksgrenze unbekannt.</text></svg>

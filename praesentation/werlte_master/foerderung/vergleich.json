@@ -1,0 +1,146 @@
+{
+ "Excel-Basis (Vergleich)": {
+  "we": 12,
+  "wf": 655,
+  "gesamtkosten": 4894879,
+  "foerderfaehig": 2410636,
+  "ergebnis_ohne_foerderung_monat": -553,
+  "Z20_7.8": {
+   "zuschuss": 482127,
+   "ersparnis_kapitaldienst": 1693,
+   "mietverlust": 1990,
+   "saldo_monat": -297,
+   "ergebnis_monat": -851
+  },
+  "Z20_6.3": {
+   "zuschuss": 482127,
+   "ersparnis_kapitaldienst": 1693,
+   "mietverlust": 2875,
+   "saldo_monat": -1182,
+   "ergebnis_monat": -1735
+  },
+  "Z40_7.8": {
+   "zuschuss": 964254,
+   "ersparnis_kapitaldienst": 3386,
+   "mietverlust": 1990,
+   "saldo_monat": 1396,
+   "ergebnis_monat": 842
+  },
+  "Z40_6.3": {
+   "zuschuss": 964254,
+   "ersparnis_kapitaldienst": 3386,
+   "mietverlust": 2875,
+   "saldo_monat": 511,
+   "ergebnis_monat": -42
+  },
+  "Z45k_je_WE_(Dritt-Quelle,ungeprueft)": 540000
+ },
+ "OG-1": {
+  "we": 12,
+  "wf": 591,
+  "gesamtkosten": 4894879,
+  "foerderfaehig": 2410636,
+  "ergebnis_ohne_foerderung_monat": -1197,
+  "Z20_7.8": {
+   "zuschuss": 482127,
+   "ersparnis_kapitaldienst": 1693,
+   "mietverlust": 1796,
+   "saldo_monat": -103,
+   "ergebnis_monat": -1300
+  },
+  "Z20_6.3": {
+   "zuschuss": 482127,
+   "ersparnis_kapitaldienst": 1693,
+   "mietverlust": 2594,
+   "saldo_monat": -901,
+   "ergebnis_monat": -2098
+  },
+  "Z40_7.8": {
+   "zuschuss": 964254,
+   "ersparnis_kapitaldienst": 3386,
+   "mietverlust": 1796,
+   "saldo_monat": 1590,
+   "ergebnis_monat": 393
+  },
+  "Z40_6.3": {
+   "zuschuss": 964254,
+   "ersparnis_kapitaldienst": 3386,
+   "mietverlust": 2594,
+   "saldo_monat": 792,
+   "ergebnis_monat": -405
+  },
+  "Z45k_je_WE_(Dritt-Quelle,ungeprueft)": 540000
+ },
+ "OG-2": {
+  "we": 13,
+  "wf": 591,
+  "gesamtkosten": 4909879,
+  "foerderfaehig": 2418023,
+  "ergebnis_ohne_foerderung_monat": -1250,
+  "Z20_7.8": {
+   "zuschuss": 483605,
+   "ersparnis_kapitaldienst": 1698,
+   "mietverlust": 1796,
+   "saldo_monat": -98,
+   "ergebnis_monat": -1348
+  },
+  "Z20_6.3": {
+   "zuschuss": 483605,
+   "ersparnis_kapitaldienst": 1698,
+   "mietverlust": 2594,
+   "saldo_monat": -896,
+   "ergebnis_monat": -2145
+  },
+  "Z40_7.8": {
+   "zuschuss": 967209,
+   "ersparnis_kapitaldienst": 3396,
+   "mietverlust": 1796,
+   "saldo_monat": 1601,
+   "ergebnis_monat": 351
+  },
+  "Z40_6.3": {
+   "zuschuss": 967209,
+   "ersparnis_kapitaldienst": 3396,
+   "mietverlust": 2594,
+   "saldo_monat": 803,
+   "ergebnis_monat": -447
+  },
+  "Z45k_je_WE_(Dritt-Quelle,ungeprueft)": 585000
+ },
+ "OG-3 (optimiert, Bueros -> Wohnungen)": {
+  "we": 15,
+  "wf": 736,
+  "gesamtkosten": 4939879,
+  "foerderfaehig": 2432798,
+  "ergebnis_ohne_foerderung_monat": -1337,
+  "Z20_7.8": {
+   "zuschuss": 486560,
+   "ersparnis_kapitaldienst": 1709,
+   "mietverlust": 2237,
+   "saldo_monat": -528,
+   "ergebnis_monat": -1865
+  },
+  "Z20_6.3": {
+   "zuschuss": 486560,
+   "ersparnis_kapitaldienst": 1709,
+   "mietverlust": 3230,
+   "saldo_monat": -1522,
+   "ergebnis_monat": -2858
+  },
+  "Z40_7.8": {
+   "zuschuss": 973119,
+   "ersparnis_kapitaldienst": 3417,
+   "mietverlust": 2237,
+   "saldo_monat": 1181,
+   "ergebnis_monat": -156
+  },
+  "Z40_6.3": {
+   "zuschuss": 973119,
+   "ersparnis_kapitaldienst": 3417,
+   "mietverlust": 3230,
+   "saldo_monat": 187,
+   "ergebnis_monat": -1150
+  },
+  "Z45k_je_WE_(Dritt-Quelle,ungeprueft)": 675000
+ }
+}

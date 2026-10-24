@@ -1,0 +1,1022 @@
+{
+ "A": {
+  "key": "A",
+  "name": "A – Referenz B3 (rückwärtige Erweiterung)",
+  "idee": "Bisheriger Entwurf B3: 1. OG 3,00 m nach hinten ausgekragt (ohne Stützen), Staffelgeschoss 0,80 m zurückgesetzt, fünf Balkone zum Platz.",
+  "farbe": "#1F6F8B",
+  "flaeche": {
+   "eg": 576,
+   "og1": 660,
+   "st": 539.1
+  },
+  "aussenmasse": {
+   "eg": [
+    32,
+    18
+   ],
+   "og1": [
+    32,
+    21
+   ],
+   "st": [
+    30.4,
+    17.9
+   ]
+  },
+  "projektion_m2": 660,
+  "grz_eg": 0.6,
+  "grz_projektion": 0.688,
+  "ueber_grundstueck": {
+   "west": 0,
+   "ost": 0,
+   "platz": 0,
+   "rueck": 0
+  },
+  "saeulen": [],
+  "anzahl_saeulen": 0,
+  "mix": {
+   "standard": {
+    "label": "Standard (Modul 5,6 m vorn / 7,0 m hinten, wie B3)",
+    "og1": {
+     "laenge": 28,
+     "tiefe": 21,
+     "streifentiefe": 9.5,
+     "vorn": [
+      46.8,
+      46.8,
+      46.8,
+      46.8,
+      46.8
+     ],
+     "hinten": [
+      58.5,
+      58.5,
+      58.5,
+      58.5
+     ],
+     "brutto": 532.0,
+     "netto": 468.2,
+     "tiefe_breite_max": 1.7
+    },
+    "st": {
+     "laenge": 27.0,
+     "tiefe": 17.9,
+     "streifentiefe": 7.95,
+     "vorn": [
+      47.2,
+      47.2,
+      47.2,
+      47.2
+     ],
+     "hinten": [
+      63.0,
+      63.0,
+      63.0
+     ],
+     "brutto": 429.3,
+     "netto": 377.8,
+     "tiefe_breite_max": 1.18
+    },
+    "we": 16,
+    "we_og1": 9,
+    "we_st": 7,
+    "wfl": 846.0,
+    "kleinste": 46.8,
+    "groesste": 63.0,
+    "mittel": 52.9
+   },
+   "klein": {
+    "label": "mehr kleinere Wohnungen (4,9 / 5,6 m)",
+    "og1": {
+     "laenge": 28,
+     "tiefe": 21,
+     "streifentiefe": 9.5,
+     "vorn": [
+      46.8,
+      46.8,
+      46.8,
+      46.8,
+      46.8
+     ],
+     "hinten": [
+      46.8,
+      46.8,
+      46.8,
+      46.8,
+      46.8
+     ],
+     "brutto": 532.0,
+     "netto": 468.2,
+     "tiefe_breite_max": 1.7
+    },
+    "st": {
+     "laenge": 27.0,
+     "tiefe": 17.9,
+     "streifentiefe": 7.95,
+     "vorn": [
+      37.8,
+      37.8,
+      37.8,
+      37.8,
+      37.8
+     ],
+     "hinten": [
+      47.2,
+      47.2,
+      47.2,
+      47.2
+     ],
+     "brutto": 429.3,
+     "netto": 377.8,
+     "tiefe_breite_max": 1.47
+    },
+    "we": 19,
+    "we_og1": 10,
+    "we_st": 9,
+    "wfl": 846.0,
+    "kleinste": 37.8,
+    "groesste": 47.2,
+    "mittel": 44.5
+   },
+   "gross": {
+    "label": "größere Wohnungen (7,0 / 8,4 m)",
+    "og1": {
+     "laenge": 28,
+     "tiefe": 21,
+     "streifentiefe": 9.5,
+     "vorn": [
+      58.5,
+      58.5,
+      58.5,
+      58.5
+     ],
+     "hinten": [
+      78.0,
+      78.0,
+      78.0
+     ],
+     "brutto": 532.0,
+     "netto": 468.2,
+     "tiefe_breite_max": 1.36
+    },
+    "st": {
+     "laenge": 27.0,
+     "tiefe": 17.9,
+     "streifentiefe": 7.95,
+     "vorn": [
+      63.0,
+      63.0,
+      63.0
+     ],
+     "hinten": [
+      63.0,
+      63.0,
+      63.0
+     ],
+     "brutto": 429.3,
+     "netto": 377.8,
+     "tiefe_breite_max": 0.88
+    },
+    "we": 13,
+    "we_og1": 7,
+    "we_st": 6,
+    "wfl": 846.0,
+    "kleinste": 58.5,
+    "groesste": 78.0,
+    "mittel": 65.1
+   }
+  },
+  "wfl": 846.0,
+  "we": 16,
+  "stp_bedarf": {
+   "standard": 53.9,
+   "klein": 58.4,
+   "gross": 49.4
+  },
+  "stp_nachweisbar_H1": 11,
+  "bgf": 1775.1,
+  "hoehe": {
+   "attika": 9.9,
+   "zulaessig": 12.0,
+   "differenz": 2.1,
+   "geschosse": 3
+  },
+  "staffel_anteil": 0.817
+ },
+ "B": {
+  "key": "B",
+  "name": "B – Umlaufender Vorbau mit Säulen",
+  "idee": "1. OG kragt rundum 1,50 m (vorn, Seiten) bzw. 3,00 m (hinten) über das Erdgeschoss aus; Säulenreihe am Rand der Auskragung (Arkade), Staffelgeschoss 1,50 m hinter der Kante des 1. OG, rundum Dachterrasse.",
+  "farbe": "#B45309",
+  "flaeche": {
+   "eg": 576,
+   "og1": 787.5,
+   "st": 624.0
+  },
+  "aussenmasse": {
+   "eg": [
+    32,
+    18
+   ],
+   "og1": [
+    35.0,
+    22.5
+   ],
+   "st": [
+    32,
+    19.5
+   ]
+  },
+  "projektion_m2": 787.5,
+  "grz_eg": 0.6,
+  "grz_projektion": 0.82,
+  "ueber_grundstueck": {
+   "west": 1.5,
+   "ost": 1.5,
+   "platz": 1.5,
+   "rueck": 0
+  },
+  "saeulen": [
+   [
+    -1.5,
+    -1.5
+   ],
+   [
+    3.5,
+    -1.5
+   ],
+   [
+    8.5,
+    -1.5
+   ],
+   [
+    13.5,
+    -1.5
+   ],
+   [
+    18.5,
+    -1.5
+   ],
+   [
+    23.5,
+    -1.5
+   ],
+   [
+    28.5,
+    -1.5
+   ],
+   [
+    33.5,
+    -1.5
+   ],
+   [
+    -1.5,
+    21.0
+   ],
+   [
+    3.5,
+    21.0
+   ],
+   [
+    8.5,
+    21.0
+   ],
+   [
+    13.5,
+    21.0
+   ],
+   [
+    18.5,
+    21.0
+   ],
+   [
+    23.5,
+    21.0
+   ],
+   [
+    28.5,
+    21.0
+   ],
+   [
+    33.5,
+    21.0
+   ],
+   [
+    -1.5,
+    3.0
+   ],
+   [
+    33.5,
+    3.0
+   ],
+   [
+    -1.5,
+    7.5
+   ],
+   [
+    33.5,
+    7.5
+   ],
+   [
+    -1.5,
+    12.0
+   ],
+   [
+    33.5,
+    12.0
+   ],
+   [
+    -1.5,
+    16.5
+   ],
+   [
+    33.5,
+    16.5
+   ]
+  ],
+  "anzahl_saeulen": 24,
+  "mix": {
+   "standard": {
+    "label": "Standard (Modul 5,6 m vorn / 7,0 m hinten, wie B3)",
+    "og1": {
+     "laenge": 29.5,
+     "tiefe": 22.5,
+     "streifentiefe": 10.25,
+     "vorn": [
+      53.2,
+      53.2,
+      53.2,
+      53.2,
+      53.2
+     ],
+     "hinten": [
+      66.5,
+      66.5,
+      66.5,
+      66.5
+     ],
+     "brutto": 604.8,
+     "netto": 532.2,
+     "tiefe_breite_max": 1.74
+    },
+    "st": {
+     "laenge": 28,
+     "tiefe": 19.5,
+     "streifentiefe": 8.75,
+     "vorn": [
+      43.1,
+      43.1,
+      43.1,
+      43.1,
+      43.1
+     ],
+     "hinten": [
+      53.9,
+      53.9,
+      53.9,
+      53.9
+     ],
+     "brutto": 490.0,
+     "netto": 431.2,
+     "tiefe_breite_max": 1.56
+    },
+    "we": 18,
+    "we_og1": 9,
+    "we_st": 9,
+    "wfl": 963.4,
+    "kleinste": 43.1,
+    "groesste": 66.5,
+    "mittel": 53.5
+   },
+   "klein": {
+    "label": "mehr kleinere Wohnungen (4,9 / 5,6 m)",
+    "og1": {
+     "laenge": 29.5,
+     "tiefe": 22.5,
+     "streifentiefe": 10.25,
+     "vorn": [
+      44.3,
+      44.3,
+      44.3,
+      44.3,
+      44.3,
+      44.3
+     ],
+     "hinten": [
+      53.2,
+      53.2,
+      53.2,
+      53.2,
+      53.2
+     ],
+     "brutto": 604.8,
+     "netto": 532.2,
+     "tiefe_breite_max": 2.08
+    },
+    "st": {
+     "laenge": 28,
+     "tiefe": 19.5,
+     "streifentiefe": 8.75,
+     "vorn": [
+      43.1,
+      43.1,
+      43.1,
+      43.1,
+      43.1
+     ],
+     "hinten": [
+      43.1,
+      43.1,
+      43.1,
+      43.1,
+      43.1
+     ],
+     "brutto": 490.0,
+     "netto": 431.2,
+     "tiefe_breite_max": 1.56
+    },
+    "we": 21,
+    "we_og1": 11,
+    "we_st": 10,
+    "wfl": 963.4,
+    "kleinste": 43.1,
+    "groesste": 53.2,
+    "mittel": 45.8
+   },
+   "gross": {
+    "label": "größere Wohnungen (7,0 / 8,4 m)",
+    "og1": {
+     "laenge": 29.5,
+     "tiefe": 22.5,
+     "streifentiefe": 10.25,
+     "vorn": [
+      66.5,
+      66.5,
+      66.5,
+      66.5
+     ],
+     "hinten": [
+      88.7,
+      88.7,
+      88.7
+     ],
+     "brutto": 604.8,
+     "netto": 532.2,
+     "tiefe_breite_max": 1.39
+    },
+    "st": {
+     "laenge": 28,
+     "tiefe": 19.5,
+     "streifentiefe": 8.75,
+     "vorn": [
+      53.9,
+      53.9,
+      53.9,
+      53.9
+     ],
+     "hinten": [
+      71.9,
+      71.9,
+      71.9
+     ],
+     "brutto": 490.0,
+     "netto": 431.2,
+     "tiefe_breite_max": 1.25
+    },
+    "we": 14,
+    "we_og1": 7,
+    "we_st": 7,
+    "wfl": 963.4,
+    "kleinste": 53.9,
+    "groesste": 88.7,
+    "mittel": 68.8
+   }
+  },
+  "wfl": 963.4,
+  "we": 18,
+  "stp_bedarf": {
+   "standard": 56.9,
+   "klein": 61.4,
+   "gross": 50.9
+  },
+  "stp_nachweisbar_H1": 11,
+  "bgf": 1987.5,
+  "hoehe": {
+   "attika": 9.9,
+   "zulaessig": 12.0,
+   "differenz": 2.1,
+   "geschosse": 3
+  },
+  "staffel_anteil": 0.792
+ },
+ "C": {
+  "key": "C",
+  "name": "C – Maximierung der Wohnfläche",
+  "idee": "1. OG kragt vorn/seitlich 1,50 m und hinten 6,00 m aus (Stellplätze vollständig überdeckt), Säulen am Rand; Staffelgeschoss nur 0,80 m zurückgesetzt und damit fast so groß wie das 1. OG.",
+  "farbe": "#7C3AED",
+  "flaeche": {
+   "eg": 576,
+   "og1": 892.5,
+   "st": 798.3
+  },
+  "aussenmasse": {
+   "eg": [
+    32,
+    18
+   ],
+   "og1": [
+    35.0,
+    25.5
+   ],
+   "st": [
+    33.4,
+    23.9
+   ]
+  },
+  "projektion_m2": 892.5,
+  "grz_eg": 0.6,
+  "grz_projektion": 0.93,
+  "ueber_grundstueck": {
+   "west": 1.5,
+   "ost": 1.5,
+   "platz": 1.5,
+   "rueck": 0
+  },
+  "saeulen": [
+   [
+    -1.5,
+    -1.5
+   ],
+   [
+    3.5,
+    -1.5
+   ],
+   [
+    8.5,
+    -1.5
+   ],
+   [
+    13.5,
+    -1.5
+   ],
+   [
+    18.5,
+    -1.5
+   ],
+   [
+    23.5,
+    -1.5
+   ],
+   [
+    28.5,
+    -1.5
+   ],
+   [
+    33.5,
+    -1.5
+   ],
+   [
+    -1.5,
+    24.0
+   ],
+   [
+    3.5,
+    24.0
+   ],
+   [
+    8.5,
+    24.0
+   ],
+   [
+    13.5,
+    24.0
+   ],
+   [
+    18.5,
+    24.0
+   ],
+   [
+    23.5,
+    24.0
+   ],
+   [
+    28.5,
+    24.0
+   ],
+   [
+    33.5,
+    24.0
+   ],
+   [
+    -1.5,
+    3.6
+   ],
+   [
+    33.5,
+    3.6
+   ],
+   [
+    -1.5,
+    8.7
+   ],
+   [
+    33.5,
+    8.7
+   ],
+   [
+    -1.5,
+    13.8
+   ],
+   [
+    33.5,
+    13.8
+   ],
+   [
+    -1.5,
+    18.9
+   ],
+   [
+    33.5,
+    18.9
+   ]
+  ],
+  "anzahl_saeulen": 24,
+  "mix": {
+   "standard": {
+    "label": "Standard (Modul 5,6 m vorn / 7,0 m hinten, wie B3)",
+    "og1": {
+     "laenge": 29.5,
+     "tiefe": 25.5,
+     "streifentiefe": 11.75,
+     "vorn": [
+      61.0,
+      61.0,
+      61.0,
+      61.0,
+      61.0
+     ],
+     "hinten": [
+      76.3,
+      76.3,
+      76.3,
+      76.3
+     ],
+     "brutto": 693.2,
+     "netto": 610.1,
+     "tiefe_breite_max": 1.99
+    },
+    "st": {
+     "laenge": 28.500000000000004,
+     "tiefe": 23.9,
+     "streifentiefe": 10.95,
+     "vorn": [
+      54.9,
+      54.9,
+      54.9,
+      54.9,
+      54.9
+     ],
+     "hinten": [
+      68.7,
+      68.7,
+      68.7,
+      68.7
+     ],
+     "brutto": 624.2,
+     "netto": 549.3,
+     "tiefe_breite_max": 1.92
+    },
+    "we": 18,
+    "we_og1": 9,
+    "we_st": 9,
+    "wfl": 1159.4,
+    "kleinste": 54.9,
+    "groesste": 76.3,
+    "mittel": 64.4
+   },
+   "klein": {
+    "label": "mehr kleinere Wohnungen (4,9 / 5,6 m)",
+    "og1": {
+     "laenge": 29.5,
+     "tiefe": 25.5,
+     "streifentiefe": 11.75,
+     "vorn": [
+      50.8,
+      50.8,
+      50.8,
+      50.8,
+      50.8,
+      50.8
+     ],
+     "hinten": [
+      61.0,
+      61.0,
+      61.0,
+      61.0,
+      61.0
+     ],
+     "brutto": 693.2,
+     "netto": 610.1,
+     "tiefe_breite_max": 2.39
+    },
+    "st": {
+     "laenge": 28.500000000000004,
+     "tiefe": 23.9,
+     "streifentiefe": 10.95,
+     "vorn": [
+      54.9,
+      54.9,
+      54.9,
+      54.9,
+      54.9
+     ],
+     "hinten": [
+      54.9,
+      54.9,
+      54.9,
+      54.9,
+      54.9
+     ],
+     "brutto": 624.2,
+     "netto": 549.3,
+     "tiefe_breite_max": 1.92
+    },
+    "we": 21,
+    "we_og1": 11,
+    "we_st": 10,
+    "wfl": 1159.4,
+    "kleinste": 50.8,
+    "groesste": 61.0,
+    "mittel": 55.2
+   },
+   "gross": {
+    "label": "größere Wohnungen (7,0 / 8,4 m)",
+    "og1": {
+     "laenge": 29.5,
+     "tiefe": 25.5,
+     "streifentiefe": 11.75,
+     "vorn": [
+      76.3,
+      76.3,
+      76.3,
+      76.3
+     ],
+     "hinten": [
+      101.7,
+      101.7,
+      101.7
+     ],
+     "brutto": 693.2,
+     "netto": 610.1,
+     "tiefe_breite_max": 1.59
+    },
+    "st": {
+     "laenge": 28.500000000000004,
+     "tiefe": 23.9,
+     "streifentiefe": 10.95,
+     "vorn": [
+      68.7,
+      68.7,
+      68.7,
+      68.7
+     ],
+     "hinten": [
+      91.5,
+      91.5,
+      91.5
+     ],
+     "brutto": 624.2,
+     "netto": 549.3,
+     "tiefe_breite_max": 1.54
+    },
+    "we": 14,
+    "we_og1": 7,
+    "we_st": 7,
+    "wfl": 1159.4,
+    "kleinste": 68.7,
+    "groesste": 101.7,
+    "mittel": 82.8
+   }
+  },
+  "wfl": 1159.4,
+  "we": 18,
+  "stp_bedarf": {
+   "standard": 56.9,
+   "klein": 61.4,
+   "gross": 50.9
+  },
+  "stp_nachweisbar_H1": 11,
+  "bgf": 2266.8,
+  "hoehe": {
+   "attika": 9.9,
+   "zulaessig": 12.0,
+   "differenz": 2.1,
+   "geschosse": 3
+  },
+  "staffel_anteil": 0.894
+ },
+ "D": {
+  "key": "D",
+  "name": "D – Kompakt ohne Auskragung (Vergleichsbasis)",
+  "idee": "Ergänzende Variante: Erdgeschoss und 1. OG deckungsgleich 32 x 18 m, Staffelgeschoss 0,80 m zurückgesetzt, keine Auskragung, keine Säulen; Vergleichsbasis nahe der theoretischen GRZ-Fläche.",
+  "farbe": "#4D7C0F",
+  "flaeche": {
+   "eg": 576,
+   "og1": 576,
+   "st": 498.6
+  },
+  "aussenmasse": {
+   "eg": [
+    32,
+    18
+   ],
+   "og1": [
+    32,
+    18
+   ],
+   "st": [
+    30.4,
+    16.4
+   ]
+  },
+  "projektion_m2": 576,
+  "grz_eg": 0.6,
+  "grz_projektion": 0.6,
+  "ueber_grundstueck": {
+   "west": 0,
+   "ost": 0,
+   "platz": 0,
+   "rueck": 0
+  },
+  "saeulen": [],
+  "anzahl_saeulen": 0,
+  "mix": {
+   "standard": {
+    "label": "Standard (Modul 5,6 m vorn / 7,0 m hinten, wie B3)",
+    "og1": {
+     "laenge": 28,
+     "tiefe": 18,
+     "streifentiefe": 8.0,
+     "vorn": [
+      39.4,
+      39.4,
+      39.4,
+      39.4,
+      39.4
+     ],
+     "hinten": [
+      49.3,
+      49.3,
+      49.3,
+      49.3
+     ],
+     "brutto": 448.0,
+     "netto": 394.2,
+     "tiefe_breite_max": 1.43
+    },
+    "st": {
+     "laenge": 27.0,
+     "tiefe": 16.4,
+     "streifentiefe": 7.2,
+     "vorn": [
+      42.8,
+      42.8,
+      42.8,
+      42.8
+     ],
+     "hinten": [
+      57.0,
+      57.0,
+      57.0
+     ],
+     "brutto": 388.8,
+     "netto": 342.1,
+     "tiefe_breite_max": 1.07
+    },
+    "we": 16,
+    "we_og1": 9,
+    "we_st": 7,
+    "wfl": 736.3,
+    "kleinste": 39.4,
+    "groesste": 57.0,
+    "mittel": 46.0
+   },
+   "klein": {
+    "label": "mehr kleinere Wohnungen (4,9 / 5,6 m)",
+    "og1": {
+     "laenge": 28,
+     "tiefe": 18,
+     "streifentiefe": 8.0,
+     "vorn": [
+      39.4,
+      39.4,
+      39.4,
+      39.4,
+      39.4
+     ],
+     "hinten": [
+      39.4,
+      39.4,
+      39.4,
+      39.4,
+      39.4
+     ],
+     "brutto": 448.0,
+     "netto": 394.2,
+     "tiefe_breite_max": 1.43
+    },
+    "st": {
+     "laenge": 27.0,
+     "tiefe": 16.4,
+     "streifentiefe": 7.2,
+     "vorn": [
+      34.2,
+      34.2,
+      34.2,
+      34.2,
+      34.2
+     ],
+     "hinten": [
+      42.8,
+      42.8,
+      42.8,
+      42.8
+     ],
+     "brutto": 388.8,
+     "netto": 342.1,
+     "tiefe_breite_max": 1.33
+    },
+    "we": 19,
+    "we_og1": 10,
+    "we_st": 9,
+    "wfl": 736.3,
+    "kleinste": 34.2,
+    "groesste": 42.8,
+    "mittel": 38.7
+   },
+   "gross": {
+    "label": "größere Wohnungen (7,0 / 8,4 m)",
+    "og1": {
+     "laenge": 28,
+     "tiefe": 18,
+     "streifentiefe": 8.0,
+     "vorn": [
+      49.3,
+      49.3,
+      49.3,
+      49.3
+     ],
+     "hinten": [
+      65.7,
+      65.7,
+      65.7
+     ],
+     "brutto": 448.0,
+     "netto": 394.2,
+     "tiefe_breite_max": 1.14
+    },
+    "st": {
+     "laenge": 27.0,
+     "tiefe": 16.4,
+     "streifentiefe": 7.2,
+     "vorn": [
+      57.0,
+      57.0,
+      57.0
+     ],
+     "hinten": [
+      57.0,
+      57.0,
+      57.0
+     ],
+     "brutto": 388.8,
+     "netto": 342.1,
+     "tiefe_breite_max": 0.8
+    },
+    "we": 13,
+    "we_og1": 7,
+    "we_st": 6,
+    "wfl": 736.3,
+    "kleinste": 49.3,
+    "groesste": 65.7,
+    "mittel": 56.6
+   }
+  },
+  "wfl": 736.3,
+  "we": 16,
+  "stp_bedarf": {
+   "standard": 53.9,
+   "klein": 58.4,
+   "gross": 49.4
+  },
+  "stp_nachweisbar_H1": 11,
+  "bgf": 1650.6,
+  "hoehe": {
+   "attika": 9.9,
+   "zulaessig": 12.0,
+   "differenz": 2.1,
+   "geschosse": 3
+  },
+  "staffel_anteil": 0.866
+ }
+}

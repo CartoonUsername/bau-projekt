@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="850" font-family="Arial">
+<rect width="1200" height="850" fill="white"/>
+<text x="60" y="36" font-size="22" font-weight="bold">Erdgeschoss (Variante A, Entwurf)</text>
+<text x="60" y="58" font-size="12" fill="#555">Entwurf Variante A, nicht freigegeben. x: West nach Ost, y: Platzfassade (oben) nach hinten. Maße in m.</text>
+<rect x="60" y="190" width="120" height="540" fill="#8A9199" stroke="white" stroke-width="2" opacity="0.92"/>
+<text x="120.0" y="456.0" font-size="11" text-anchor="middle" fill="white">CORE-RES-GF</text>
+<text x="120.0" y="470.0" font-size="11" text-anchor="middle" fill="white">72 m²</text>
+<rect x="180" y="190" width="840" height="360" fill="#F2D48C" stroke="white" stroke-width="2" opacity="0.92"/>
+<text x="600.0" y="366.0" font-size="11" text-anchor="middle" fill="#111">DINING-GF</text>
+<text x="600.0" y="380.0" font-size="11" text-anchor="middle" fill="#111">336 m²</text>
+<rect x="840.0" y="214.0" width="180.0" height="221.99999999999997" fill="#B07A4A" stroke="white" stroke-width="2" opacity="0.92"/>
+<text x="930.0" y="321.0" font-size="11" text-anchor="middle" fill="white">LOUNGE-GF</text>
+<text x="930.0" y="335.0" font-size="11" text-anchor="middle" fill="white">44 m²</text>
+<rect x="495.0" y="478.0" width="270.0" height="72.00000000000001" fill="#3A3F44" stroke="white" stroke-width="2" opacity="0.92"/>
+<text x="630.0" y="510.0" font-size="11" text-anchor="middle" fill="white">BAR-GF</text>
+<text x="630.0" y="524.0" font-size="11" text-anchor="middle" fill="white">22 m²</text>
+<rect x="180" y="550" width="210" height="180" fill="#7A5C3A" stroke="white" stroke-width="2" opacity="0.92"/>
+<text x="285.0" y="636.0" font-size="11" text-anchor="middle" fill="white">SEPAREE-GF</text>
+<text x="285.0" y="650.0" font-size="11" text-anchor="middle" fill="white">42 m²</text>
+<rect x="390" y="550" width="105.0" height="180" fill="#D9D3C8" stroke="white" stroke-width="2" opacity="0.92"/>
+<text x="442.5" y="636.0" font-size="11" text-anchor="middle" fill="#111">SERVICE-GF</text>
+<text x="442.5" y="650.0" font-size="11" text-anchor="middle" fill="#111">21 m²</text>
+<rect x="495.0" y="550" width="120.0" height="180" fill="#A6ADB4" stroke="white" stroke-width="2" opacity="0.92"/>
+<text x="555.0" y="636.0" font-size="11" text-anchor="middle" fill="white">WC-GF</text>
+<text x="555.0" y="650.0" font-size="11" text-anchor="middle" fill="white">24 m²</text>
+<rect x="615.0" y="550" width="150.0" height="180" fill="#A6ADB4" stroke="white" stroke-width="2" opacity="0.92"/>
+<text x="690.0" y="636.0" font-size="11" text-anchor="middle" fill="white">STORE-GF</text>
+<text x="690.0" y="650.0" font-size="11" text-anchor="middle" fill="white">30 m²</text>
+<rect x="765.0" y="550" width="255.0" height="180" fill="#7E8A94" stroke="white" stroke-width="2" opacity="0.92"/>
+<text x="892.5" y="636.0" font-size="11" text-anchor="middle" fill="white">KITCHEN-GF</text>
+<text x="892.5" y="650.0" font-size="11" text-anchor="middle" fill="white">51 m²</text>
+<rect x="60" y="190" width="960" height="540" fill="none" stroke="#111" stroke-width="3"/>
+<rect x="240.0" y="-38.0" width="720.0" height="108.0" fill="#D6B98F" stroke="#333" stroke-dasharray="6 4"/><text x="600" y="22.0" font-size="12" text-anchor="middle">Terrasse ca. 60 Plätze</text><rect x="180.0" y="67" width="840.0" height="6" fill="#1F9" stroke="#111"/><rect x="570.0" y="67" width="60.0" height="6" fill="#1F9" stroke="#111"/><rect x="90.0" y="67" width="45.0" height="6" fill="#1F9" stroke="#111"/>
+</svg>
