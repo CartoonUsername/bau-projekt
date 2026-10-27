@@ -22,3 +22,7 @@
 ## Planstände und Baufeld 3 (24.10.2026)
 - `Entscheidung_Planstaende_Baufeld3_Variante_F.pdf` – zwei Planstände (rechtskräftig 2023 / Entwurf 2026), Baufeld-3-Zuordnung (MI 3, unbestätigt), Grundstücksrisiken, Auswirkungen auf F1–F4, Prüfgeometrien G1–G3
 - Code: `scripts/studie/entscheidung_pdf.py`, `varianten_g.py`; Quellen: `../quellen_stadt/`
+
+## Vergleichsstudie A gegen B (27.10.2026)
+- `Vergleichsstudie_A_B3_gegen_B_Neue_Idee.pdf` – Variante A = unveränderter B3-Entwurf, Variante B = neue Idee (EG 540 m², umlaufender Vorbau, drei Rücksprung-Optionen = Modelle F1–F3); je 3D, Ansichten, Grundrisse, Schnitt, Lageplan; Baufeld-3-Prüfung nach Planstand; Vergleichstabelle
+- Code: `scripts/studie/vergleichsstudie_ab.py`
