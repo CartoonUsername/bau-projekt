@@ -26,3 +26,7 @@
 ## Vergleichsstudie A gegen B (27.10.2026)
 - `Vergleichsstudie_A_B3_gegen_B_Neue_Idee.pdf` – Variante A = unveränderter B3-Entwurf, Variante B = neue Idee (EG 540 m², umlaufender Vorbau, drei Rücksprung-Optionen = Modelle F1–F3); je 3D, Ansichten, Grundrisse, Schnitt, Lageplan; Baufeld-3-Prüfung nach Planstand; Vergleichstabelle
 - Code: `scripts/studie/vergleichsstudie_ab.py`
+
+## Revitalyze-Import-PDFs (27.10.2026)
+- `revitalyze_import/` – technische Vektor-PDFs (1:100, A2 quer; Test-PDF A3) für einen PDF-zu-IFC-Test: A (B3-Referenz), B1–B3 (540 m², Staffel 0/1,50/3,00 m), `Test_EG_Vektor_Import.pdf`, `PDF_Import_Checkliste.md` (gesichert/angenommen/ungeklärt).
+- Code: `scripts/studie/revitalyze_modelle.py` (Modelle, Konsistenzprüfung), `revitalyze_pdfs.py` (reportlab).
