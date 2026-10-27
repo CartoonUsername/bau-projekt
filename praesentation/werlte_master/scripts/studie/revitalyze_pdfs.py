@@ -448,7 +448,6 @@ def erschliessung(sh, m):
     if b1[1] < 0: sh.line(b1[0], b1[1], b1[2], b1[1], 0.8, col=RED); sh.text((b1[0] + b1[2]) / 2, b1[1] - 0.9, "K: 1. OG ragt über Hypothese-Grenze zum Platz (y < 0)", 6, "c", col=RED, font=FB)
     if m["gruppe"] == "A":
         yb = min(r[1] for r in m["balkone"]); sh.line(4.0, yb, 32.0, yb, 0.8, col=RED); sh.text(18.0, -4.7, "K: Balkone (y −1,50) und Vordach (y −3,60) ragen über die Hypothese-Grenze zum Platz", 6, "c", col=RED, font=FB)
-    if m["gruppe"] == "B": sh.text((b1[0] + b1[2]) / 2, b1[3] + 0.6, "K: rückseitig kein Vorbau möglich (OG1-Kante = Grenze y = 30)", 6, "c", col=RED, font=FB)
     # Maße
     dim_chain(sh, [0, b[0], b[2], 32] if b[0] > 0 else [0, b[2], 32], "h", -1.0 if m["gruppe"] == "B" else -4.0, 1.5, -1, ext_from=-0.2)
     dim_chain(sh, [0, 18, 23, 29, 30] if m["gruppe"] == "A" else [0, 30], "v", 0.0, 1.5, -1, ext_from=-0.2) if m["gruppe"] == "A" else dim_chain(sh, [0, 30], "v", 0.0, 1.8, -1, ext_from=-0.2)

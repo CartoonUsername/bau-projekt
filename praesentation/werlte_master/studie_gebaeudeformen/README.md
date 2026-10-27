@@ -36,3 +36,7 @@
 - `Praesentation_B_Ueberdachte_Stellplaetze_Mehr_Wohnflaeche.pdf` – Version mit überdachten Stellplätzen und größeren/mehr Wohnflächen, drei Rücksprung-Optionen, keine Festlegung (22 Seiten).
 - Code: `scripts/studie/praesentation_ab.py` (nutzt die Bausteine von `vergleichsstudie_ab.py`).
 - Businessplan-Pakete A und B: siehe `../businessplan/README.md`.
+
+## Variante R – EG 540 m², Vorbau ringsum (27.10.2026)
+- Vorgabe: EG höchstens 540 m² (60 %), Überdachung/Vorbau ringsum. Modell `scripts/studie/varianten_r.py` (R1–R3: EG 20 × 27 m, OG1 26 × 30 m, Staffel 0/1,5/3,0 m); Pläne `R1–R3/plaene` (e_zeichnen.py); 8 Stellplätze unter dem 5 m Vorbau.
+- Ersetzt die F-Modelle (EG 18 × 30 m) als Grundlage von „Variante B": Revitalyze-PDFs B1–B3 und Businessplan B sind darauf umgestellt. `Praesentation_B_Ueberdachte_Stellplaetze_Mehr_Wohnflaeche.pdf` und `Vergleichsstudie…` beruhen noch auf F und sind insoweit überholt.

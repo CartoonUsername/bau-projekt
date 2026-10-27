@@ -6,7 +6,7 @@ Koordinaten in m: x West -> Ost, y von der Platzseite (0) zur Rückseite, z ab O
 Nichts wird erfunden: Unbekanntes steht in 'offen' und wird im PDF als ANNAHME bzw. NOCH OFFEN ausgewiesen."""
 import os, sys, math
 HIER = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HIER); sys.path.insert(0, os.path.join(HIER, ".."))
-import varianten as VA, varianten_f  # noqa: F401  (registriert F1–F3)
+import varianten as VA, varianten_f, varianten_r  # noqa: F401  (registriert F1–F3, R1–R3)
 import modell_b3 as M3
 
 WAND = 0.30          # ANNAHME Außenwandstärke (nur Darstellung der Doppellinie)
@@ -53,24 +53,24 @@ def modell_B(key, titel, dat, s):
     lv = {"EG": dict(poly=rect_poly(eg), rooms=rooms), "OG1": dict(poly=rect_poly(og), rooms=[]), "ST": dict(poly=rect_poly(st), rooms=[])}
     stalls = [tuple(x) for x in v["stalls"]]
     return dict(key=key, dat=dat, titel=titel, kurz=key, gruppe="B", s=s,
-                beschr=("Neue Idee: EG 18,00 m (Platzseite) × 30,00 m = 540 m² (Hypothese, Grundstück 32 × 30 m = 960 m² unbestätigt, Rest 420 m²); OG1 kragt 1,00 m West, 1,50 m Platzseite, 5,00 m Ost (über Stellplätze) aus, rückseitig bündig (Grundstücksgrenze der Hypothese); "
+                beschr=(f"Neue Idee (Ring): EG {c2(eg[2] - eg[0])} × {c2(eg[3] - eg[1])} m = {c2((eg[2] - eg[0]) * (eg[3] - eg[1]))} m² (60 % der Hypothese 960 m², unbestätigt); OG1 kragt ringsum aus (West {c2(eg[0] - og[0])} / Platz {c2(eg[1] - og[1])} / Rück {c2(og[3] - eg[3])} / Ost {c2(og[2] - eg[2])} m über der Stellplatzreihe), Grundstück 32 × 30 m = Hypothese; "
                         + {0.0: "oberstes Geschoss bündig mit der Außenkante des 1. OG.", 1.5: "oberstes Geschoss 1,50 m hinter der Außenkante des 1. OG zurückgesetzt (rundum).", 3.0: "oberstes Geschoss 3,00 m hinter der Außenkante des 1. OG zurückgesetzt (rundum)."}[s]),
                 hoehenstatus="HYPOTHETISCH (Höhenschema EG 4,30 / 1. OG 3,60 / oberstes Geschoss 3,60 / Attika 0,50 = 12,00 m aus varianten_e.py) – NICHT gesichert, nicht verbindlich",
-                quelle="studie/varianten_f.py " + key + " (Planungsziel 24.10.2026)",
+                quelle="studie/varianten_r.py " + key + " (Vorgabe 27.10.2026: EG 540 m², Vorbau ringsum)",
                 levels=lv, zfloor=zf, ztop_st=Z["ST"][1], zattika=Z["ATT"][1], slab=0.45, slab_status="ANNAHME 0,45 m (Wert aus varianten_e.py DECKE)",
                 saeulen=[tuple(p) for p in v["saeulen_pts"]], openings=[], balkone=[], vordach=None, terrasse=None, schacht=None,
                 plot=PLOT, stalls=stalls, aisle=tuple(v["fahrgasse"]), walkways=[], zufahrt=tuple(v["zufahrt"]), eingaenge=[(n, tuple(r)) for n, r in v["eingaenge"]],
-                glasfront=v["glas_front"], schnitt_x=15.0, rest_hyp=960 - 540, eg_ziel=(18.0, 30.0), ziel_m2=540.0, setback=s,
+                glasfront=v["glas_front"], schnitt_x=15.0, rest_hyp=960 - 540, eg_ziel=(round(eg[2] - eg[0], 2), round(eg[3] - eg[1], 2)), ziel_m2=540.0, setback=s, wohn_kern=v.get("wohn_kern", ""), eg_kern=[r for n, r, c in v["eg_raeume"] if c == "core"][0],
                 offen=["Wandstärken (0,30 m Darstellung ANNAHME)", "Deckenstärken (0,45 m ANNAHME)", "Fenster, Türen, Brüstungen: keine Daten – nicht gezeichnet (nur Glasfront-Lage Gastro aus dem Entwurf als ANNAHME)",
-                       "Innenaufteilung 1. OG und oberstes Geschoss (Wohnen/Kern) – keine Raumdaten", "Treppen-/Aufzugslage im OG (Kern-Streifen laut Entwurf widerspricht der EG-Kernlage, siehe Konsistenzprotokoll)",
-                       "Geschosshöhen (hypothetisch) und Höhenbezug", "Grundstückszuschnitt (Hypothese 32 × 30 m), Lage von Zufahrt/Straße", "Rückseitiger Vorbau: auf der Hypothese-Grenze nicht möglich (0,00 m)",
+                       "Innenaufteilung 1. OG und oberstes Geschoss (Wohnen/Kern) – keine Raumdaten", "Treppen-/Aufzugslage im OG (Kern-Streifen laut Entwurf liegt nicht über dem EG-Kern, siehe Konsistenzprotokoll)",
+                       "Geschosshöhen (hypothetisch) und Höhenbezug", "Grundstückszuschnitt (Hypothese 32 × 30 m), Lage von Zufahrt/Straße", "Stützen im Vorbau und Feuerwehrzufahrt unter dem Vorbau",
                        "Stellplatzmaß 2,50 × 5,00 m und Fahrgasse 6,00 m sind Annahmen"])
 
 def alle():
     return [modell_A(),
-            modell_B("F1", "Variante B1 – 540 m² EG, Vorbau bündig (oberstes Geschoss bündig zum 1. OG)", "B1_540m2_Vorbau_Buendig_Import.pdf", 0.0),
-            modell_B("F2", "Variante B2 – 540 m² EG, Vorbau, Staffel 1,50 m", "B2_540m2_Vorbau_Staffel_150cm_Import.pdf", 1.5),
-            modell_B("F3", "Variante B3neu – 540 m² EG, Vorbau, Staffel 3,00 m", "B3_540m2_Vorbau_Staffel_300cm_Import.pdf", 3.0)]
+            modell_B("R1", "Variante B1 – 540 m² EG, Vorbau ringsum, oberstes Geschoss bündig", "B1_540m2_Vorbau_Buendig_Import.pdf", 0.0),
+            modell_B("R2", "Variante B2 – 540 m² EG, Vorbau ringsum, Staffel 1,50 m", "B2_540m2_Vorbau_Staffel_150cm_Import.pdf", 1.5),
+            modell_B("R3", "Variante B3neu – 540 m² EG, Vorbau ringsum, Staffel 3,00 m", "B3_540m2_Vorbau_Staffel_300cm_Import.pdf", 3.0)]
 
 # ---------- Konsistenzprüfung ----------
 def pip(p, pt):
@@ -104,7 +104,7 @@ def pruefe(m):
             f"Rücksprung oberstes Geschoss zur Außenkante des 1. OG West/Platz/Ost/Rück = {c2(ins[0])} / {c2(ins[1])} / {c2(ins[2])} / {c2(ins[3])} m (Soll {c2(s)} rundum)")
         e = bb(eg); vor = (e[0] - og[0], e[1] - og[1], og[2] - e[2], og[3] - e[3])
         add("KONFLIKT" if min(vor) <= 0 else "OK",
-            f"Vorbau (OG1-Kante minus EG-Wand) West/Platz/Ost/Rück = {c2(vor[0])} / {c2(vor[1])} / {c2(vor[2])} / {c2(vor[3])} m – Vorgabe 'umlaufend auf allen vier Seiten' ist rückseitig NICHT erfüllt (Grundstücksgrenze der Hypothese bei y = 30)")
+            f"Vorbau (OG1-Kante minus EG-Wand) West/Platz/Ost/Rück = {c2(vor[0])} / {c2(vor[1])} / {c2(vor[2])} / {c2(vor[3])} m – " + ("umlaufend auf allen vier Seiten, innerhalb der Hypothese-Grundstücksgrenze" if min(vor) > 0 else "mindestens eine Seite ohne Vorbau (Grundstücksgrenze der Hypothese)"))
     cs = m["saeulen"]
     if cs:
         og = m["levels"]["OG1"]["poly"]; ob = bb(og)
@@ -152,7 +152,8 @@ def pruefe(m):
         ra = sum((r["rect"][2] - r["rect"][0]) * (r["rect"][3] - r["rect"][1]) for r in rr)
         add("OK" if abs(ra - poly_area(lv["poly"])) < 0.05 else "HINWEIS", f"{k}: Raumflächensumme {ra:.1f} m² (brutto) gegen Geschossumriss {poly_area(lv['poly']):.1f} m²".replace(".", ","))
     if m["gruppe"] == "B":
-        add("KONFLIKT", "Kern: EG-Kern x 1–5 / y 0–9,5 m; Entwurf nennt für die Obergeschosse einen Kern-Streifen y −1,5…2,5 m über die volle Breite – Treppe/Aufzug im OG liegen nicht über dem EG-Kern; Lage NOCH OFFEN, im OG-Plan nicht gezeichnet")
+        k_ = m["eg_kern"]
+        add("KONFLIKT", f"Kern: EG-Kern x {c2(k_[0])}–{c2(k_[2])} / y {c2(k_[1])}–{c2(k_[3])} m; der Entwurf nennt für die Obergeschosse einen anderen Kern ({m['wohn_kern']}) – Treppe/Aufzug im OG liegen nicht über dem EG-Kern; Lage NOCH OFFEN, im OG-Plan nicht gezeichnet")
         add("HINWEIS", "Fenster, Türen, Brüstungen und Geschossraumaufteilung für B1–B3 liegen nicht vor – Ansichten ohne Öffnungen, OG ohne Räume (bewusst nicht erfunden)")
     st = m["stalls"]
     dims = {(round(s[2] - s[0], 2), round(s[3] - s[1], 2)) for s in st}

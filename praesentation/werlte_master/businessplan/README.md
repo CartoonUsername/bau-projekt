@@ -8,3 +8,6 @@ Alle Zahlen sind Planungsannahmen; Gastro-Umsatz proportional zu den Innenplätz
 
 ## Bilder Variante B im Stil der früheren Bilder (27.10.2026)
 `bilder/neu/B1|B2|B3_{hero,detail,east}.jpg`, `B2|B3_roof.jpg` (Higgsfield, nano_banana_pro): Geometrie-Referenz = korrigierte Hero-Renderings, Stil-Referenz = Bilder aus dem früheren Bankplan (Eckansicht, Arkadendetail, Dachterrasse). Alternativen in `bilder/neu/alt/`. Gastro-Innenansichten bleiben die früheren Bilder (`gastro_*.jpg`).
+
+## Umstellung auf Variante R (Vorbau ringsum, EG 540 m²)
+Businessplan B (Deck, DOCX, Kosten-Nutzen) rechnet mit R1–R3 (`scripts/studie/varianten_r.py`); Bilder in `bilder/neu_r/` (Tonmodell-Referenz `clay.py` → Higgsfield-Luftbild → Augenhöhen-Ansichten; Ansichten als Vektor→PNG `elev_png.py`). `bilder/neu/` (F-Modelle) ist überholt.

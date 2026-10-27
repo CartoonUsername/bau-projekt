@@ -9,7 +9,7 @@ Erzeugt mit `scripts/studie/revitalyze_pdfs.py` (reportlab, reine Vektor-PDFs, 0
 |---|---|---|
 | `Test_EG_Vektor_Import.pdf` | **Zuerst hochladen:** nur Grundriss EG der B3-Referenz, ohne Grundstück, Stellplätze, Säulen | 1 Seite A3 quer, 1:100 |
 | `A_B3_Referenz_Import.pdf` | B3-Referenz unverändert (aus dem bestehenden Modell v4) | 12 Seiten A2 quer, 1:100 |
-| `B1_540m2_Vorbau_Buendig_Import.pdf` | Neue Idee, oberstes Geschoss bündig zur Außenkante OG1 | 12 Seiten A2 quer, 1:100 |
+| `B1_540m2_Vorbau_Buendig_Import.pdf` | Neue Idee (Ring, Stand 27.10.2026): EG 20 × 27 m = 540 m², Vorbau ringsum, oberstes Geschoss bündig zur Außenkante OG1 | 12 Seiten A2 quer, 1:100 |
 | `B2_540m2_Vorbau_Staffel_150cm_Import.pdf` | wie B1, Staffel 1,50 m (rundum, ab Außenkante OG1) | 12 Seiten A2 quer, 1:100 |
 | `B3_540m2_Vorbau_Staffel_300cm_Import.pdf` | wie B1, Staffel 3,00 m (nicht die B3-Referenz!) | 12 Seiten A2 quer, 1:100 |
 
@@ -29,21 +29,19 @@ Seiten je Paket: 1 Übersicht (Maße, Maßstabsbalken 10 m, Legende) · 2 EG · 
 - **Angenommen:** Wandstärke 0,30 m (nur Darstellung), Deckenstärke 0,30 m, Höhenbezug ±0,00 = OK Fertigfußboden EG, Stellplatz 2,50 × 5,00 m, Fahrgasse 6,00 m, Grundstück 32 × 30 m.
 - **Ungeklärt:** Innentüren und Türanschläge (nicht gezeichnet), Treppenläufe, Aufzugsgröße, Brüstungs-/Sturzhöhen, Anbindung der Fahrgasse, Höhenbezug zur Stadt.
 
-### B1–B3 (neue Idee)
-- **Gesichert:** nur die Vorgabe selbst (EG 18 × 30 m = 540 m², Rest 420 m² unter Hypothese, Staffel 0/1,50/3,00 m ab Außenkante OG1, Zielhöhe 12,00 m nicht bindend).
-- **Angenommen (Entwurfsannahmen):** Vorbau 1,00 m West / 1,50 m Platz / 5,00 m Ost / 0 m Rück; 18 Säulen Ø 0,40 m; Höhenschema EG 4,30 / OG1 3,60 / oberstes Geschoss 3,60 / Attika 0,50 = 12,00 m (**hypothetisch**, nicht als gesichert gezeichnet); EG-Raumzonen; Glasfront Gastro x 5–19; Eingangslagen; Stellplätze; Zufahrt.
-- **Ungeklärt:** Fenster, Türen, Brüstungen (nicht gezeichnet), Raumaufteilung und Kern in den Obergeschossen, Geschosshöhen, Deckenstärke (0,45 m Annahme), Grundstückszuschnitt, Lage der Straße/Zufahrt.
+### B1–B3 (neue Idee, Ring)
+- **Gesichert:** nur die Vorgabe selbst (EG 540 m² = 60 % der Hypothese 960 m², Vorbau ringsum, Staffel 0/1,50/3,00 m ab Außenkante OG1, Zielhöhe 12,00 m nicht bindend).
+- **Angenommen (Entwurfsannahmen):** EG 20 × 27 m; Vorbau West 1,00 / Platz 1,50 / Rück 1,50 / Ost 5,00 m (über der Stellplatzreihe); 22 Säulen Ø 0,40 m; Höhenschema EG 4,30 / OG1 3,60 / oberstes Geschoss 3,60 / Attika 0,50 = 12,00 m (**hypothetisch**); EG-Raumzonen; Glasfront Gastro x 5–21; Eingangslagen; 8 Stellplätze; Zufahrt von Süden.
+- **Ungeklärt:** Fenster, Türen, Brüstungen (nicht gezeichnet), Raumaufteilung und Kern in den Obergeschossen, Geschosshöhen, Deckenstärke (0,45 m Annahme), Grundstückszuschnitt, Lage der Straße/Zufahrt, Feuerwehrzufahrt unter dem Vorbau.
 
 ## 4. Dokumentierte Widersprüche (nicht stillschweigend korrigiert)
 
-1. **B1–B3: „umlaufender Vorbau auf allen vier Seiten" ist rückseitig nicht erfüllt** – OG1-Kante und EG-Wand liegen bei y = 30 m (Grenze der Hypothese). Vorbau W/Platz/O/Rück = 1,00 / 1,50 / 5,00 / 0,00 m.
-2. **B1–B3: OG1 ragt 1,50 m über die Hypothese-Grenze zum Platz** (y < 0); 6 Säulen stehen dort außerhalb. Platzgrenze/Baulinie ist offen.
-3. **B1–B3: Säulen (23,65 | 29,30) und (23,65 | 29,65) liegen 0,35 m auseinander** (Ø 0,40 m, überschneiden sich). Ursache: Rasterende der Stellplatzpaare.
-4. **B1–B3: Kern im EG (x 1–5, y 0–9,5) ≠ Kern-Streifen der Obergeschosse (y −1,5…2,5 über die volle Breite).** OG-Kern daher nicht gezeichnet.
-5. **A: Balkone (y −1,50) und Vordach (y −3,60) ragen über die Hypothese-Grenze zum Platz.**
-6. **A: Bar liegt innerhalb des Gastraum-Rechtecks** (verschachtelt; Raumflächensumme EG 590 m² statt 576 m²). Beide Rechtecke werden wie im Modell gezeichnet.
-7. Höhen: A Attika +9,90 m (B3-Modell), B +12,00 m (hypothetisches Schema) – nicht vergleichbar bezogen; Höhenbezug der Stadt (OK Fahrbahn) offen.
-8. Rechtsebenen (B-Plan Nr. 123 von 2023, rechtskräftig; Änderungsentwurf 2026 ohne Wirkung für MI 3; Hauptdach-Neigung ≥ 38° bei Flachdach/Staffel) sind auf Seite 11 jedes Pakets getrennt aufgeführt; **es wird keine Zulässigkeit festgestellt**. Dass Baufeld 3 = MI 3 / Flurstück 59/1 ist, ist unbestätigt.
+1. **B1–B3: Kern im EG (x 1–5, y 1,5–11) ≠ Kern-Streifen der Obergeschosse (y 0…4 über die volle Breite).** OG-Kern daher nicht gezeichnet.
+2. **A: Balkone (y −1,50) und Vordach (y −3,60) ragen über die Hypothese-Grenze zum Platz.**
+3. **A: Bar liegt innerhalb des Gastraum-Rechtecks** (verschachtelt; Raumflächensumme EG 590 m² statt 576 m²). Beide Rechtecke werden wie im Modell gezeichnet.
+4. Höhen: A Attika +9,90 m (B3-Modell), B +12,00 m (hypothetisches Schema) – nicht vergleichbar bezogen; Höhenbezug der Stadt (OK Fahrbahn) offen.
+5. Rechtsebenen (B-Plan Nr. 123 von 2023, rechtskräftig; Änderungsentwurf 2026 ohne Wirkung für MI 3; Hauptdach-Neigung ≥ 38° bei Flachdach/Staffel) sind auf Seite 11 jedes Pakets getrennt aufgeführt; **es wird keine Zulässigkeit festgestellt**. Dass Baufeld 3 = MI 3 / Flurstück 59/1 ist, ist unbestätigt.
+6. Geändert gegenüber der ersten Fassung vom 27.10.2026: Die früheren B-Modelle (EG 18 × 30 m) hatten rückseitig keinen Vorbau, ragten 1,5 m über die Hypothese-Grenze und hatten zwei kollidierende Säulen. Das Ring-Modell (EG 20 × 27 m) erfüllt „Vorbau auf allen vier Seiten innerhalb der Grenze" und hat diese Konflikte nicht mehr.
 
 Vollständige Protokolle: Seite 12 jedes Pakets.
 

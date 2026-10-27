@@ -81,18 +81,17 @@ class Deck:
 # ---------- Daten ----------
 TXT = {"A": dict(titel="Baufeld 3: Standardversion (B3)", sub="Businessplan für die Bank: Konzept, Finanzierung mit KfW-Krediten, Ertragswert und Abzahlungsplan", keys=["A"], names=["A – B3 Standard"],
                  kurz="Gastro im ganzen EG (576 m²), im 1. OG 3 Büro-/Wohn-Einheiten über 3,00 m Anbau, 16 Wohnungen"),
-       "B": dict(titel="Baufeld 3: überdachte Stellplätze, größere Wohnungen", sub="Businessplan für die Bank: schmales Erdgeschoss, breitere Obergeschosse, drei Optionen – Finanzierung, Ertragswert, Abzahlungsplan", keys=["F1", "F2", "F3"],
-                 names=["B1 bündig", "B2 Staffel 1,50 m", "B3 Staffel 3,00 m"], kurz="schmales EG (18 × 30 m), 1. und 2. OG breiter über Säulen, Stellplätze unter dem Vorbau")}
+       "B": dict(titel="Baufeld 3: überdachte Stellplätze, größere Wohnungen", sub="Businessplan für die Bank: schmales Erdgeschoss, breitere Obergeschosse, drei Optionen – Finanzierung, Ertragswert, Abzahlungsplan", keys=["R1", "R2", "R3"],
+                 names=["B1 bündig", "B2 Staffel 1,50 m", "B3 Staffel 3,00 m"], kurz="schmales EG (20 × 27 m = 540 m², GRZ-Grenze), 1. und 2. OG ringsum auskragend auf Säulen, Stellplätze unter dem Vorbau")}
 def optdata(group):
     ks = TXT[group]["keys"]; out = []
     for k in ks:
         v = VI.inp(k); r = F.rechne(v); out.append((k, v, r, VI.D[k]))
     return out
-def img(k, name): return os.path.join(GEO, k, "ansichten", name + ".png")
+def img(k, name): return os.path.join(BILD, "ansichten", k, name + ".png") if k.startswith("R") else os.path.join(GEO, k, "ansichten", name + ".png")
 def pln(k, name): return os.path.join(GEO, k, "plaene", name + ".png")
 def hf(k, name): return os.path.join(BILD, f"hf_{k}_{name}.jpg")
-BK = {"F1": "B1", "F2": "B2", "F3": "B3"}
-def neu(k, name): return os.path.join(BILD, "neu", f"{BK[k]}_{name}.jpg")
+def neu(k, name): return os.path.join(BILD, "neu_r", f"{k}_{name}.jpg")
 
 def build(group):
     T = TXT[group]; O = optdata(group); multi = len(O) > 1; names = T["names"]; foot = "Für Bank und Stadt"
@@ -103,7 +102,7 @@ def build(group):
     s = deck.slide(None, tag=False); bg = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, 0, Inches(5.2), Inches(7.5)); bg.fill.solid(); bg.fill.fore_color.rgb = GREEN; bg.line.fill.background()
     deck.text(s, 0.6, 1.0, 4.2, 0.3, "NEUE MITTE WERLTE", 11, GOLD, bold=True); deck.text(s, 0.6, 1.5, 4.2, 2.3, T["titel"], 30 if len(T["titel"]) < 40 else 23, WHITE, font="Georgia")
     deck.text(s, 0.6, 3.9, 4.2, 1.2, T["sub"], 12, WHITE); deck.text(s, 0.6, 5.7, 4.2, 1.0, ["Bessam Hasso, Werlte", "Bebauungsplan Nr. 123 (2023) und 1. Änderung (Entwurf 25.08.2026)", "Stand 27.10.2026 · alle Zahlen Planungsannahmen"], 10, WHITE)
-    deck.pic(s, (os.path.join(BILD, "neu", "_title_B.jpg") if multi else hf("A", "persp")), 5.2, 0, w=8.133, h=7.5)
+    deck.pic(s, (os.path.join(BILD, "neu_r", "_title_B.jpg") if multi else hf("A", "persp")), 5.2, 0, w=8.133, h=7.5)
     # 2 Auf einen Blick
     s = deck.slide("Das Vorhaben auf einen Blick", foot)
     mz = [pct(r["mischzins"], 2) for _, _, r, _ in O]
@@ -116,7 +115,7 @@ def build(group):
     rows = [["Projekt"] + (names if multi else ["Wert"])]
     rows += [["Grundstück / EG / BGF gesamt"] + cols(lambda k, v, r, d: f"960 m² / {num(d['flaeche']['eg'])} m² / {num(v['bgf'])} m²"),
              ["Nutzung"] + ([T["kurz"]] if not multi else cols(lambda k, v, r, d: f"Gastro EG, Büro, {d['mix']['standard']['we']} Wohnungen ({num(v['wfl'])} m²)")),
-             ["Stellplätze (Hypothese 32 × 30 m)"] + cols(lambda k, v, r, d: "11 rückseitig, teilweise überdacht" if k == "A" else "13, davon 8 voll überdacht"),
+             ["Stellplätze (Hypothese 32 × 30 m)"] + cols(lambda k, v, r, d: "11 rückseitig, teilweise überdacht" if k == "A" else "8, alle unter dem Vorbau überdacht"),
              ["Kapitaldienstdeckung (DSCR)"] + cols(lambda k, v, r, d: f"{num(r['dscr_ges'],2)} gesamt, {num(r['dscr_imm'],2)} nur Immobilie"),
              ["Ertragswert / Beleihungsauslauf"] + cols(lambda k, v, r, d: f"{mio(r['ew'])} / {pct(r['auslauf'])}")]
     deck.table(s, 0.5, 2.8, 12.3, [3] + [4] * len(O) if multi else [3, 9], rows, 10, rowh=0.42, right_from=9)
@@ -152,7 +151,7 @@ def build(group):
     deck.pic(s, pln(O[min(1, len(O) - 1)][0], "schnitt"), 0.4, 1.2, w=7.3, h=4.6)
     rows = [["Ebene", "Nutzung", "BGF"] if not multi else ["Ebene", "Nutzung"] + names]
     nutz = {"A": ["Gastro ca. 440 m² mit Bar, Küche, dazu Büros, Treppenhaus, Aufzug", "Wohnungen, Flur, Kern; Anbau 3,00 m nach hinten", "Wohnungen, oberstes Geschoss in Holzbau"],
-            "B": ["Gastro 18 × 30 m (Platzseite 18 m), Büro, Kern; Stellplätze im Osten", "Wohnungen, kragt 1,0 / 1,5 / 5,0 m aus (West / Platz / Ost), Säulen", "Wohnungen, Holzbau, Staffel je Option"]}[group]
+            "B": ["Gastro 20 × 27 m (540 m², 60 % der Hypothese), Büro, Kern; Stellplätze im Osten", "Wohnungen, kragt ringsum aus (West 1,0 / Platz 1,5 / Rück 1,5 / Ost 5,0 m), Säulen", "Wohnungen, Holzbau, Staffel je Option"]}[group]
     for i, (lab, kk) in enumerate((("EG", "eg"), ("1. OG", "og1"), ("oberstes Geschoss", "st"))):
         rows.append([lab, nutz[i]] + cols(lambda k, v, r, d, kk=kk: f"{num(d['flaeche'][kk], 0)} m²"))
     rows.append(["Summe", ""] + cols(lambda k, v, r, d: f"{num(v['bgf'])} m²"))
@@ -193,13 +192,13 @@ def build(group):
     # 11 Stellplätze
     s = deck.slide("Stellplätze sind der Knackpunkt", foot)
     cd = CategoryChartData(); cd.categories = ["Bedarf Gastro/Büro (untere Spanne)", "Bedarf (obere Spanne)"] + [f"gezeichnet {n_}" for n_ in names]
-    row = [round(r0["gesamt"] * 0 + O[0][3]["stp"]["erf_lo"], 1), round(O[0][3]["stp"]["erf_hi"], 1)] + [11 if k == "A" else 13 for k, *_ in O]
+    row = [round(r0["gesamt"] * 0 + O[0][3]["stp"]["erf_lo"], 1), round(O[0][3]["stp"]["erf_hi"], 1)] + [11 if k == "A" else 8 for k, *_ in O]
     cd.add_series("Stellplätze", row)
     gf = s.shapes.add_chart(XL_CHART_TYPE.COLUMN_CLUSTERED, Inches(0.5), Inches(1.2), Inches(6.5), Inches(5.4), cd); ch = gf.chart; ch.has_legend = False; ch.plots[0].has_data_labels = True; ch.plots[0].series[0].format.fill.solid(); ch.plots[0].series[0].format.fill.fore_color.rgb = GREEN
     ch.category_axis.tick_labels.font.size = Pt(9); ch.value_axis.tick_labels.font.size = Pt(9)
     deck.text(s, 7.4, 1.2, 5.4, 0.4, "Vorschlag für die Stadt", 15, BRICK, font="Georgia")
     items = (["Gezeichnet sind 11 rückseitige Stellplätze (2,50 × 5,00 m), 10 davon teilweise überdacht; der Nachweis Gastro/Büro nach § 47 NBauO (Richtzahlen) liegt bei " + f"{num(O[0][3]['stp']['erf_lo'],1)}–{num(O[0][3]['stp']['erf_hi'],1)}.", "Wohnen braucht seit 01.07.2024 keine Pflichtstellplätze; optional 0,5–1,5 je Wohnung."] if group == "A" else
-             ["Gezeichnet sind 13 Stellplätze auf der Hypothese 32 × 30 m: 8 voll unter dem Vorbau (Ostreihe, Säulenpaare 5,4 m) und 5 Längsparker; Zufahrt von Süden angenommen.", f"Nachweis Gastro/Büro nach Richtzahlen {num(O[0][3]['stp']['erf_lo'],1)}–{num(O[0][3]['stp']['erf_hi'],1)}; Wohnen seit 01.07.2024 ohne Pflicht, optional 0,5–1,5 je Wohnung.", "Offen: Sackgasse/Wendebedarf, Feuerwehrzufahrt unter dem Vorbau."])
+             ["Gezeichnet sind 8 Stellplätze auf der Hypothese 32 × 30 m, alle in der Ostreihe unter dem 5,0 m auskragenden Vorbau (Säulenpaare 5,4 m, Fahrgasse 6,00 m im Osten); zwei Plätze entfallen für Hintereingang und Büro-Eingang; Zufahrt von Süden angenommen.", f"Nachweis Gastro/Büro nach Richtzahlen {num(O[0][3]['stp']['erf_lo'],1)}–{num(O[0][3]['stp']['erf_hi'],1)}; Wohnen seit 01.07.2024 ohne Pflicht, optional 0,5–1,5 je Wohnung.", "Offen: Sackgasse/Wendebedarf, Feuerwehrzufahrt unter dem Vorbau."])
     deck.bullets(s, 7.4, 1.7, 5.4, 3.3, items + ["Restplätze alternativ auf der öffentlichen Parkfläche per Vereinbarung oder Ablöse (Höhe nennt die Stadt)."], 11)
     deck.text(s, 7.4, 5.2, 5.4, 1.4, "Auf dem aus den Stadtplänen abgeleiteten Flurstück 59/1 (≈ 42,3 × 22,7 m) sind diese Stellplätze nicht unterzubringen; die Zahlen gelten nur auf der Hypothese.", 10, GREY)
     # 12 Flächen und Mieten
