@@ -30,3 +30,8 @@
 ## Revitalyze-Import-PDFs (27.10.2026)
 - `revitalyze_import/` – technische Vektor-PDFs (1:100, A2 quer; Test-PDF A3) für einen PDF-zu-IFC-Test: A (B3-Referenz), B1–B3 (540 m², Staffel 0/1,50/3,00 m), `Test_EG_Vektor_Import.pdf`, `PDF_Import_Checkliste.md` (gesichert/angenommen/ungeklärt).
 - Code: `scripts/studie/revitalyze_modelle.py` (Modelle, Konsistenzprüfung), `revitalyze_pdfs.py` (reportlab).
+
+## Zwei getrennte Gesamtpräsentationen (27.10.2026)
+- `Praesentation_A_Standard_B3.pdf` – Standardversion = bisheriger B3-Entwurf, unverändert (13 Seiten).
+- `Praesentation_B_Ueberdachte_Stellplaetze_Mehr_Wohnflaeche.pdf` – Version mit überdachten Stellplätzen und größeren/mehr Wohnflächen, drei Rücksprung-Optionen, keine Festlegung (22 Seiten).
+- Code: `scripts/studie/praesentation_ab.py` (nutzt die Bausteine von `vergleichsstudie_ab.py`).
