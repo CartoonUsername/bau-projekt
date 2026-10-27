@@ -1,0 +1,982 @@
+{
+ "model": "NEUE_MITTE_MASTER_DRAFT_A_003",
+ "decision": "Variante A verbindlich (Auftraggeber, 22.10.2026). Nachweis der Grundfläche 576 m² steht aus (Konflikt C-01).",
+ "units": "m",
+ "origin": "SW-Ecke Gebäude, x West nach Ost, y Platzfassade nach hinten",
+ "site": {
+  "area_m2": 960,
+  "grz": 0.6,
+  "footprint_max_theoretical_m2": 576,
+  "envelope_estimate_m2": "400-460 (PROVISIONAL, nicht gemessen)"
+ },
+ "building": {
+  "width": 32.0,
+  "depth": 18.0,
+  "footprint_m2": 576.0,
+  "status": "REQUIRES-APPROVAL"
+ },
+ "levels": [
+  {
+   "id": "GF",
+   "name": "Erdgeschoss",
+   "ffl": 0.0,
+   "top": 3.5,
+   "status": "ASSUMED"
+  },
+  {
+   "id": "L1",
+   "name": "1. Obergeschoss",
+   "ffl": 3.5,
+   "top": 6.5,
+   "status": "ASSUMED",
+   "note": "Traufhöhe B-Plan 6,50 m"
+  },
+  {
+   "id": "L2",
+   "name": "Staffelgeschoss",
+   "ffl": 6.5,
+   "top": 9.6,
+   "status": "ASSUMED",
+   "setback": 0.8
+  }
+ ],
+ "attika_top": 9.9,
+ "slab_thickness": 0.3,
+ "grid": {
+  "x": [
+   4.0,
+   9.6,
+   15.2,
+   20.8,
+   26.4,
+   32.0
+  ],
+  "y": [
+   0.0,
+   8.0,
+   18.0
+  ],
+  "note": "Arbeitsraster R2 (vorläufig); Mittelgang y 8–10 liegt nicht auf dem y-Raster: Unterzug/Abfangung, Statik prüfen"
+ },
+ "columns_gf": [
+  [
+   9.6,
+   8.0
+  ],
+  [
+   15.2,
+   8.0
+  ],
+  [
+   20.8,
+   8.0
+  ],
+  [
+   26.4,
+   8.0
+  ]
+ ],
+ "rooms": [
+  {
+   "id": "CORE-RES-GF",
+   "type": "core",
+   "level": "GF",
+   "rect": [
+    0,
+    0,
+    4,
+    18
+   ],
+   "area_gross": 72,
+   "status": "ASSUMED",
+   "note": "Treppe, Aufzug, Technik, Wohnungseingang"
+  },
+  {
+   "id": "DINING-GF",
+   "type": "dining",
+   "level": "GF",
+   "rect": [
+    4,
+    0,
+    32,
+    12
+   ],
+   "area_gross": 336,
+   "status": "PROVISIONAL",
+   "seats_note": "Gastraum + Lounge + Stehtische + Bar zusammen"
+  },
+  {
+   "id": "LOUNGE-GF",
+   "type": "lounge",
+   "level": "GF",
+   "rect": [
+    26.0,
+    0.8,
+    32,
+    8.2
+   ],
+   "area_gross": 44.4,
+   "status": "PROVISIONAL",
+   "seats": 20
+  },
+  {
+   "id": "BAR-GF",
+   "type": "bar",
+   "level": "GF",
+   "rect": [
+    14.5,
+    9.6,
+    23.5,
+    12
+   ],
+   "area_gross": 21.6,
+   "status": "PROVISIONAL",
+   "seats": 12,
+   "note": "Hocker, Theke 0,7 m, Servicegang 0,8 m, Backbar 0,6 m"
+  },
+  {
+   "id": "SEPAREE-GF",
+   "type": "private_dining",
+   "level": "GF",
+   "rect": [
+    4,
+    12,
+    11,
+    18
+   ],
+   "area_gross": 42,
+   "status": "PROVISIONAL",
+   "seats": 30,
+   "partition": "Stahl-Glas-Wand an x=11 und y=12"
+  },
+  {
+   "id": "SERVICE-GF",
+   "type": "circulation",
+   "level": "GF",
+   "rect": [
+    11,
+    12,
+    14.5,
+    18
+   ],
+   "area_gross": 21.0,
+   "status": "PROVISIONAL",
+   "note": "Garderobe/Servicegang"
+  },
+  {
+   "id": "WC-GF",
+   "type": "wc",
+   "level": "GF",
+   "rect": [
+    14.5,
+    12,
+    18.5,
+    18
+   ],
+   "area_gross": 24.0,
+   "status": "PROVISIONAL",
+   "note": "H, D, barrierefrei, Fachplaner prüft"
+  },
+  {
+   "id": "STORE-GF",
+   "type": "storage",
+   "level": "GF",
+   "rect": [
+    18.5,
+    12,
+    23.5,
+    18
+   ],
+   "area_gross": 30.0,
+   "status": "PROVISIONAL",
+   "note": "Lager, Kühlung"
+  },
+  {
+   "id": "KITCHEN-GF",
+   "type": "kitchen",
+   "level": "GF",
+   "rect": [
+    23.5,
+    12,
+    32,
+    18
+   ],
+   "area_gross": 51.0,
+   "status": "PROVISIONAL",
+   "note": "Abluft über Dach, Schacht nötig (C-14)"
+  }
+ ],
+ "gf_seats": {
+  "dining_tables": 116,
+  "stehtische": 12,
+  "lounge": 20,
+  "barhocker": 12,
+  "separee": 30,
+  "total_indoor": 190,
+  "terrace": 60
+ },
+ "openings": [
+  {
+   "id": "RESTAURANT-FRONT-001",
+   "type": "glazing",
+   "level": "GF",
+   "wall": "y=0",
+   "x": [
+    4.0,
+    32.0
+   ],
+   "height": 3.1,
+   "status": "PROVISIONAL",
+   "frame": "schwarz Stahl"
+  },
+  {
+   "id": "DOOR-GF-REST-001",
+   "type": "door_double",
+   "level": "GF",
+   "wall": "y=0",
+   "x": [
+    17.0,
+    19.0
+   ],
+   "height": 2.4,
+   "status": "ASSUMED"
+  },
+  {
+   "id": "DOOR-GF-RES-001",
+   "type": "door",
+   "level": "GF",
+   "wall": "y=0",
+   "x": [
+    1.0,
+    2.5
+   ],
+   "height": 2.4,
+   "status": "ASSUMED",
+   "note": "Wohnungseingang West"
+  }
+ ],
+ "terrace": {
+  "id": "TERRACE-001",
+  "rect": [
+   6.0,
+   -3.6,
+   30.0,
+   0.0
+  ],
+  "area_m2": 86.4,
+  "seats": 60,
+  "status": "REQUIRES-APPROVAL",
+  "note": "Lage auf dem Grundstück ungeprüft; Stahlvordach CANOPY-001 schwarz"
+ },
+ "upper_options": {
+  "OG-1": {
+   "name": "Mittelgang, Balkone vorn und hinten (2 + 3)",
+   "rooms": [
+    {
+     "id": "OFFICE-1-L1",
+     "type": "office",
+     "level": "L1",
+     "rect": [
+      4,
+      0,
+      16.5,
+      8
+     ],
+     "area_gross": 100.0,
+     "status": "ASSUMED",
+     "target": 100
+    },
+    {
+     "id": "OFFICE-2-L1",
+     "type": "office",
+     "level": "L1",
+     "rect": [
+      4,
+      10,
+      12.1,
+      18
+     ],
+     "area_gross": 64.8,
+     "status": "ASSUMED",
+     "target": 65
+    },
+    {
+     "id": "WE-L1-S1",
+     "type": "apartment",
+     "level": "L1",
+     "rect": [
+      16.5,
+      0,
+      24.25,
+      8
+     ],
+     "area_gross": 62.0,
+     "status": "PROVISIONAL",
+     "balcony": "front"
+    },
+    {
+     "id": "WE-L1-S2",
+     "type": "apartment",
+     "level": "L1",
+     "rect": [
+      24.25,
+      0,
+      32,
+      8
+     ],
+     "area_gross": 62.0,
+     "status": "PROVISIONAL",
+     "balcony": "front"
+    },
+    {
+     "id": "WE-L1-N1",
+     "type": "apartment",
+     "level": "L1",
+     "rect": [
+      12.1,
+      10,
+      18.73,
+      18
+     ],
+     "area_gross": 53.04,
+     "status": "PROVISIONAL",
+     "balcony": "rear"
+    },
+    {
+     "id": "WE-L1-N2",
+     "type": "apartment",
+     "level": "L1",
+     "rect": [
+      18.73,
+      10,
+      25.37,
+      18
+     ],
+     "area_gross": 53.12,
+     "status": "PROVISIONAL",
+     "balcony": "rear"
+    },
+    {
+     "id": "WE-L1-N3",
+     "type": "apartment",
+     "level": "L1",
+     "rect": [
+      25.37,
+      10,
+      32,
+      18
+     ],
+     "area_gross": 53.04,
+     "status": "PROVISIONAL",
+     "balcony": "rear"
+    },
+    {
+     "id": "CORR-L1",
+     "type": "corridor",
+     "level": "L1",
+     "rect": [
+      4,
+      8,
+      32,
+      10
+     ],
+     "area_gross": 56,
+     "status": "PROVISIONAL"
+    }
+   ],
+   "note": "Wohnungen mit realistischen Räumen, Balkonbild der Renderings (5 an der Platzfassade) nicht erfüllt"
+  },
+  "OG-2": {
+   "name": "5 kleine Wohnungen vorn mit 5 Balkonen, Büros hinten",
+   "rooms": [
+    {
+     "id": "WE-L1-S1",
+     "type": "apartment",
+     "level": "L1",
+     "rect": [
+      4.0,
+      0,
+      9.6,
+      8
+     ],
+     "area_gross": 44.8,
+     "status": "PROVISIONAL",
+     "balcony": "front"
+    },
+    {
+     "id": "WE-L1-S2",
+     "type": "apartment",
+     "level": "L1",
+     "rect": [
+      9.6,
+      0,
+      15.2,
+      8
+     ],
+     "area_gross": 44.8,
+     "status": "PROVISIONAL",
+     "balcony": "front"
+    },
+    {
+     "id": "WE-L1-S3",
+     "type": "apartment",
+     "level": "L1",
+     "rect": [
+      15.2,
+      0,
+      20.8,
+      8
+     ],
+     "area_gross": 44.8,
+     "status": "PROVISIONAL",
+     "balcony": "front"
+    },
+    {
+     "id": "WE-L1-S4",
+     "type": "apartment",
+     "level": "L1",
+     "rect": [
+      20.8,
+      0,
+      26.4,
+      8
+     ],
+     "area_gross": 44.8,
+     "status": "PROVISIONAL",
+     "balcony": "front"
+    },
+    {
+     "id": "WE-L1-S5",
+     "type": "apartment",
+     "level": "L1",
+     "rect": [
+      26.4,
+      0,
+      32.0,
+      8
+     ],
+     "area_gross": 44.8,
+     "status": "PROVISIONAL",
+     "balcony": "front"
+    },
+    {
+     "id": "OFFICE-1-L1",
+     "type": "office",
+     "level": "L1",
+     "rect": [
+      4,
+      10,
+      16.5,
+      18
+     ],
+     "area_gross": 100.0,
+     "status": "ASSUMED",
+     "target": 100
+    },
+    {
+     "id": "OFFICE-2-L1",
+     "type": "office",
+     "level": "L1",
+     "rect": [
+      16.5,
+      10,
+      24.6,
+      18
+     ],
+     "area_gross": 64.8,
+     "status": "ASSUMED",
+     "target": 65
+    },
+    {
+     "id": "WE-L1-N1",
+     "type": "apartment",
+     "level": "L1",
+     "rect": [
+      24.6,
+      10,
+      32,
+      18
+     ],
+     "area_gross": 59.2,
+     "status": "PROVISIONAL",
+     "balcony": "rear"
+    },
+    {
+     "id": "CORR-L1",
+     "type": "corridor",
+     "level": "L1",
+     "rect": [
+      4,
+      8,
+      32,
+      10
+     ],
+     "area_gross": 56,
+     "status": "PROVISIONAL"
+    }
+   ],
+   "note": "Balkonbild der Renderings erfüllt, Wohnungen nur ca. 39 m² netto"
+  }
+ },
+ "staffel": {
+  "name": "Staffel S-1: 4 Wohnungen vorn, 3 hinten, Mittelgang",
+  "rooms": [
+   {
+    "id": "WE-L2-S1",
+    "type": "apartment",
+    "level": "L2",
+    "rect": [
+     4.2,
+     0.8,
+     10.95,
+     8.0
+    ],
+    "area_gross": 48.6,
+    "status": "PROVISIONAL"
+   },
+   {
+    "id": "WE-L2-S2",
+    "type": "apartment",
+    "level": "L2",
+    "rect": [
+     10.95,
+     0.8,
+     17.7,
+     8.0
+    ],
+    "area_gross": 48.6,
+    "status": "PROVISIONAL"
+   },
+   {
+    "id": "WE-L2-S3",
+    "type": "apartment",
+    "level": "L2",
+    "rect": [
+     17.7,
+     0.8,
+     24.45,
+     8.0
+    ],
+    "area_gross": 48.6,
+    "status": "PROVISIONAL"
+   },
+   {
+    "id": "WE-L2-S4",
+    "type": "apartment",
+    "level": "L2",
+    "rect": [
+     24.45,
+     0.8,
+     31.2,
+     8.0
+    ],
+    "area_gross": 48.6,
+    "status": "PROVISIONAL"
+   },
+   {
+    "id": "WE-L2-N1",
+    "type": "apartment",
+    "level": "L2",
+    "rect": [
+     4.2,
+     10.0,
+     13.2,
+     17.2
+    ],
+    "area_gross": 64.8,
+    "status": "PROVISIONAL"
+   },
+   {
+    "id": "WE-L2-N2",
+    "type": "apartment",
+    "level": "L2",
+    "rect": [
+     13.2,
+     10.0,
+     22.2,
+     17.2
+    ],
+    "area_gross": 64.8,
+    "status": "PROVISIONAL"
+   },
+   {
+    "id": "WE-L2-N3",
+    "type": "apartment",
+    "level": "L2",
+    "rect": [
+     22.2,
+     10.0,
+     31.2,
+     17.2
+    ],
+    "area_gross": 64.8,
+    "status": "PROVISIONAL"
+   },
+   {
+    "id": "CORR-L2",
+    "type": "corridor",
+    "level": "L2",
+    "rect": [
+     4.2,
+     8,
+     31.2,
+     10
+    ],
+    "area_gross": 54.0,
+    "status": "PROVISIONAL"
+   },
+   {
+    "id": "CORE-RES-L2",
+    "type": "core",
+    "level": "L2",
+    "rect": [
+     0.8,
+     0.8,
+     4.2,
+     17.2
+    ],
+    "area_gross": 55.76,
+    "status": "ASSUMED"
+   }
+  ],
+  "note": "Die Renderings zeigen 7 Fensterachsen an der Platzfassade, das lässt sich nur mit 7 Mikrowohnungen von 3,9 m Breite erfüllen"
+ },
+ "net_factor": 0.88,
+ "open_decisions": [
+  "OG-2 bleibt VORLÄUFIG (nicht festgeschrieben)",
+  "Raster R1 oder R2 (Tragwerk, C-16)",
+  "Staffel S-1 (4 vorn) oder S-2 (5 vorn, +1 WE) (C-09)",
+  "Baufenster/Grundfläche 576 m² nachweisen (C-01)",
+  "Staffelgeschoss als Vollgeschoss (C-02)",
+  "Himmelsrichtung/Platzseite (C-13)",
+  "Rettungswege und Anleiterbarkeit (C-15)",
+  "Küchenschacht (C-14)",
+  "Vordach gegen Balkone (C-18)",
+  "Rückseitiger Balkon / Grenzabstand (C-19)",
+  "Gaststätte als Sonderbau ab ca. 190 + 60 Plätzen (C-20)"
+ ],
+ "working_basis": {
+  "upper_option": "OG-2",
+  "status": "VORLÄUFIG – geometrische Arbeitsgrundlage, keine endgültige Entscheidung (Auftraggeber 22.10.2026)",
+  "separation": "Förderprüfung (Mietstufe, Förderhöhe, Wohnungsanforderungen) ist getrennt in ../foerderung/ und fließt NICHT in die Geometrie ein"
+ },
+ "grid_options": {
+  "R1": {
+   "x": [
+    4.0,
+    11.0,
+    18.0,
+    25.0,
+    32.0
+   ],
+   "note": "7,0-m-Raster der ersten Entwurfsfassung; Mitte (x 18) liegt auf einer Stütze und kollidiert mit der Doppeltür x 17–19; Balkon- und Wohnungsachsen (5,6 m) liegen nicht auf dem Raster"
+  },
+  "R2": {
+   "x": [
+    4.0,
+    9.6,
+    15.2,
+    20.8,
+    26.4,
+    32.0
+   ],
+   "note": "5,6-m-Raster = 5 Felder gleich den 5 Wohnungen/Balkonen des OG-2; x 18 liegt in Feldmitte (Tür frei). VORSCHLAG, REQUIRES-APPROVAL (Tragwerksplaner)"
+  }
+ },
+ "grid_working": "R2",
+ "facade_support": {
+  "status": "REQUIRES-APPROVAL",
+  "note": "Die OG-Last der Platzfassade (28 m Glasfront) braucht Fassadenstützen oder einen Träger; vollverglaste Front ohne Stützen ist nicht nachgewiesen (C-16). Annahme im Modell: Stützen 0,3 m in Rasterachsen R2 an y=0, noch nicht eingezeichnet.",
+  "candidate_axes_x": [
+   4.0,
+   9.6,
+   15.2,
+   20.8,
+   26.4,
+   32.0
+  ]
+ },
+ "core": {
+  "GF": [
+   {
+    "id": "LOBBY-GF",
+    "rect": [
+     0,
+     0,
+     4,
+     3
+    ],
+    "status": "ASSUMED",
+    "note": "Eingang x 1–2,5, Briefkästen"
+   },
+   {
+    "id": "STAIR-GF",
+    "rect": [
+     0,
+     3,
+     4,
+     8
+    ],
+    "status": "ASSUMED"
+   },
+   {
+    "id": "LANDING-GF",
+    "rect": [
+     0,
+     8,
+     4,
+     10
+    ],
+    "status": "ASSUMED",
+    "note": "Aufzugsvorraum, liegt auf Höhe des Mittelgangs"
+   },
+   {
+    "id": "LIFT-GF",
+    "rect": [
+     0.8,
+     10,
+     3.0,
+     12.6
+    ],
+    "status": "ASSUMED"
+   },
+   {
+    "id": "TECH-GF",
+    "rect": [
+     3.0,
+     10,
+     4,
+     12.6
+    ],
+    "status": "ASSUMED"
+   },
+   {
+    "id": "ABSTELL-GF",
+    "rect": [
+     0,
+     12.6,
+     4,
+     18
+    ],
+    "status": "ASSUMED",
+    "note": "Fahrrad/Müll/Abstellräume, Zweck offen"
+   }
+  ],
+  "L1": [
+   {
+    "id": "RESERVE-L1",
+    "rect": [
+     0,
+     0,
+     4,
+     3
+    ],
+    "status": "ASSUMED",
+    "note": "Zweck offen"
+   },
+   {
+    "id": "STAIR-L1",
+    "rect": [
+     0,
+     3,
+     4,
+     8
+    ],
+    "status": "ASSUMED"
+   },
+   {
+    "id": "LANDING-L1",
+    "rect": [
+     0,
+     8,
+     4,
+     10
+    ],
+    "status": "ASSUMED"
+   },
+   {
+    "id": "LIFT-L1",
+    "rect": [
+     0.8,
+     10,
+     3.0,
+     12.6
+    ],
+    "status": "ASSUMED"
+   },
+   {
+    "id": "TECH-L1",
+    "rect": [
+     3.0,
+     10,
+     4,
+     12.6
+    ],
+    "status": "ASSUMED"
+   },
+   {
+    "id": "ABSTELL-L1",
+    "rect": [
+     0,
+     12.6,
+     4,
+     18
+    ],
+    "status": "ASSUMED"
+   }
+  ],
+  "L2": [
+   {
+    "id": "STAIR-L2",
+    "rect": [
+     0.8,
+     3,
+     4.0,
+     8
+    ],
+    "status": "ASSUMED"
+   },
+   {
+    "id": "LANDING-L2",
+    "rect": [
+     0.8,
+     8,
+     4.0,
+     10
+    ],
+    "status": "ASSUMED"
+   },
+   {
+    "id": "LIFT-L2",
+    "rect": [
+     0.8,
+     10,
+     3.0,
+     12.6
+    ],
+    "status": "ASSUMED",
+    "note": "Schacht auf allen Ebenen x 0,8–3,0: Westwand liegt auf der Staffel-Rückversatzlinie; Überfahrt über Attika offen (C-25)"
+   }
+  ]
+ },
+ "shafts": [
+  {
+   "id": "SHAFT-KITCHEN",
+   "rect": [
+    30.0,
+    16.0,
+    31.2,
+    17.2
+   ],
+   "levels": [
+    "GF",
+    "L1",
+    "L2",
+    "ROOF"
+   ],
+   "status": "PROVISIONAL",
+   "note": "Küchenabluft; durchläuft Büro/Wohnung N1 (L1) und Staffel-N3 (L2): Geruch, Schall, Brandschutz (C-14)"
+  }
+ ],
+ "balconies": [
+  {
+   "id": "BALC-L1-F1",
+   "level": "L1",
+   "side": "front",
+   "rect": [
+    5.45,
+    -1.5,
+    8.15,
+    0.0
+   ],
+   "slab_underside_z": 3.2,
+   "railing": "Milchglas 1,1 m",
+   "status": "PROVISIONAL"
+  },
+  {
+   "id": "BALC-L1-F2",
+   "level": "L1",
+   "side": "front",
+   "rect": [
+    11.05,
+    -1.5,
+    13.75,
+    0.0
+   ],
+   "slab_underside_z": 3.2,
+   "railing": "Milchglas 1,1 m",
+   "status": "PROVISIONAL"
+  },
+  {
+   "id": "BALC-L1-F3",
+   "level": "L1",
+   "side": "front",
+   "rect": [
+    16.65,
+    -1.5,
+    19.35,
+    0.0
+   ],
+   "slab_underside_z": 3.2,
+   "railing": "Milchglas 1,1 m",
+   "status": "PROVISIONAL"
+  },
+  {
+   "id": "BALC-L1-F4",
+   "level": "L1",
+   "side": "front",
+   "rect": [
+    22.25,
+    -1.5,
+    24.95,
+    0.0
+   ],
+   "slab_underside_z": 3.2,
+   "railing": "Milchglas 1,1 m",
+   "status": "PROVISIONAL"
+  },
+  {
+   "id": "BALC-L1-F5",
+   "level": "L1",
+   "side": "front",
+   "rect": [
+    27.85,
+    -1.5,
+    30.55,
+    0.0
+   ],
+   "slab_underside_z": 3.2,
+   "railing": "Milchglas 1,1 m",
+   "status": "PROVISIONAL"
+  },
+  {
+   "id": "BALC-L1-R1",
+   "level": "L1",
+   "side": "rear",
+   "rect": [
+    27.35,
+    18.0,
+    30.05,
+    19.5
+   ],
+   "slab_underside_z": 3.2,
+   "status": "PROVISIONAL",
+   "note": "Rückseite nicht im eingefrorenen Design, ragt über 18 m (C-19)"
+  }
+ ],
+ "canopy": {
+  "id": "CANOPY-001",
+  "rect": [
+   6.0,
+   -3.6,
+   30.0,
+   0.0
+  ],
+  "underside_z": 3.0,
+  "status": "ASSUMED",
+  "note": "Stahlvordach; liegt unter allen fünf Balkonplatten (Unterseite 3,2 m) und überlappt sie in der Projektion (C-18)"
+ },
+ "staffel_alt": {
+  "S-2": "5 Wohnungen vorn auf Raster R2 (5,4–5,6 m) + 3 hinten = 8 Staffel-Wohnungen, Gesamt 14 WE; NICHT gewählt, ändert Wohnungszahl, nur Vorschlag (C-09)"
+ }
+}

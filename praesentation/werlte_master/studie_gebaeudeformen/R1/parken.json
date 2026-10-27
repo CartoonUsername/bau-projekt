@@ -1,0 +1,156 @@
+{
+ "parken": {
+  "stalls": [
+   {
+    "nr": 1,
+    "rect": [
+     21.0,
+     1.5,
+     26.0,
+     4.0
+    ],
+    "art": "90",
+    "face": "E",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 2,
+    "rect": [
+     21.0,
+     4.0,
+     26.0,
+     6.5
+    ],
+    "art": "90",
+    "face": "E",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 3,
+    "rect": [
+     21.0,
+     6.9,
+     26.0,
+     9.4
+    ],
+    "art": "90",
+    "face": "E",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 4,
+    "rect": [
+     21.0,
+     9.4,
+     26.0,
+     11.9
+    ],
+    "art": "90",
+    "face": "E",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 5,
+    "rect": [
+     21.0,
+     12.3,
+     26.0,
+     14.8
+    ],
+    "art": "90",
+    "face": "E",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 6,
+    "rect": [
+     21.0,
+     17.7,
+     26.0,
+     20.2
+    ],
+    "art": "90",
+    "face": "E",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 7,
+    "rect": [
+     21.0,
+     20.2,
+     26.0,
+     22.7
+    ],
+    "art": "90",
+    "face": "E",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 8,
+    "rect": [
+     21.0,
+     25.6,
+     26.0,
+     28.1
+    ],
+    "art": "90",
+    "face": "E",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   }
+  ],
+  "gesamt": 8,
+  "voll": 8,
+  "eingeschraenkt": 0,
+  "konflikt": 0,
+  "hinweise": [
+   "Fahrgasse ist Sackgasse zum Platz hin: Wenden im Gassenende (Dreipunktwende) nötig – Schleppkurve prüfen",
+   "Geometrische Prüfung ohne Schleppkurven; 90°-Stellplätze 2,50 × 5,00 m und Fahrgasse 6,00 m sind Planungsannahmen",
+   "Zufahrt (Lage der Straße) ist Annahme",
+   "Feuerwehrzufahrt/Aufstellflächen unter dem Vorbau nicht nachgewiesen (Prüfbedarf)"
+  ],
+  "fahrgasse_probleme": [],
+  "fahrgasse_breite": 6.0,
+  "nutzbar": 8,
+  "min_nutzbreite": 2.5
+ },
+ "flaeche": {
+  "eg": 540.0,
+  "stall": 100.0,
+  "par": 0.0,
+  "fahr": 180.0,
+  "zone": 27.5,
+  "rest": 112.5
+ },
+ "ueber": {
+  "west": 0,
+  "ost": 0,
+  "platz": 0,
+  "rueck": 0
+ },
+ "abstand3": 228.0,
+ "abstand6": 420.0
+}

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="850" font-family="Arial">
+<rect width="1200" height="850" fill="white"/>
+<text x="60" y="36" font-size="22" font-weight="bold">1. OG Option OG-2: 5 kleine Wohnungen vorn mit 5 Balkonen, Büros hinten</text>
+<text x="60" y="58" font-size="12" fill="#555">Entwurf Variante A, nicht freigegeben. x: West nach Ost, y: Platzfassade (oben) nach hinten. Maße in m.</text>
+<rect x="180.0" y="190" width="168.0" height="240" fill="#9A4034" stroke="white" stroke-width="2" opacity="0.92"/>
+<text x="264.0" y="306.0" font-size="11" text-anchor="middle" fill="white">WE-L1-S1</text>
+<text x="264.0" y="320.0" font-size="11" text-anchor="middle" fill="white">45 m²</text>
+<rect x="223.49999999999997" y="145.0" width="81.0" height="45.0" fill="#CFD3D6" stroke="#333" stroke-dasharray="4 3"/>
+<rect x="348.0" y="190" width="168.0" height="240" fill="#9A4034" stroke="white" stroke-width="2" opacity="0.92"/>
+<text x="431.99999999999994" y="306.0" font-size="11" text-anchor="middle" fill="white">WE-L1-S2</text>
+<text x="431.99999999999994" y="320.0" font-size="11" text-anchor="middle" fill="white">45 m²</text>
+<rect x="391.49999999999994" y="145.0" width="81.0" height="45.0" fill="#CFD3D6" stroke="#333" stroke-dasharray="4 3"/>
+<rect x="516.0" y="190" width="168.00000000000006" height="240" fill="#9A4034" stroke="white" stroke-width="2" opacity="0.92"/>
+<text x="600.0" y="306.0" font-size="11" text-anchor="middle" fill="white">WE-L1-S3</text>
+<text x="600.0" y="320.0" font-size="11" text-anchor="middle" fill="white">45 m²</text>
+<rect x="559.5" y="145.0" width="81.0" height="45.0" fill="#CFD3D6" stroke="#333" stroke-dasharray="4 3"/>
+<rect x="684.0" y="190" width="167.99999999999994" height="240" fill="#9A4034" stroke="white" stroke-width="2" opacity="0.92"/>
+<text x="768.0" y="306.0" font-size="11" text-anchor="middle" fill="white">WE-L1-S4</text>
+<text x="768.0" y="320.0" font-size="11" text-anchor="middle" fill="white">45 m²</text>
+<rect x="727.5" y="145.0" width="81.0" height="45.0" fill="#CFD3D6" stroke="#333" stroke-dasharray="4 3"/>
+<rect x="852.0" y="190" width="168.00000000000006" height="240" fill="#9A4034" stroke="white" stroke-width="2" opacity="0.92"/>
+<text x="936.0" y="306.0" font-size="11" text-anchor="middle" fill="white">WE-L1-S5</text>
+<text x="936.0" y="320.0" font-size="11" text-anchor="middle" fill="white">45 m²</text>
+<rect x="895.4999999999999" y="145.0" width="81.0" height="45.0" fill="#CFD3D6" stroke="#333" stroke-dasharray="4 3"/>
+<rect x="180" y="490" width="375.0" height="240" fill="#3F6275" stroke="white" stroke-width="2" opacity="0.92"/>
+<text x="367.5" y="606.0" font-size="11" text-anchor="middle" fill="white">OFFICE-1-L1</text>
+<text x="367.5" y="620.0" font-size="11" text-anchor="middle" fill="white">100 m²</text>
+<rect x="555.0" y="490" width="243.00000000000006" height="240" fill="#3F6275" stroke="white" stroke-width="2" opacity="0.92"/>
+<text x="676.5" y="606.0" font-size="11" text-anchor="middle" fill="white">OFFICE-2-L1</text>
+<text x="676.5" y="620.0" font-size="11" text-anchor="middle" fill="white">65 m²</text>
+<rect x="798.0" y="490" width="221.99999999999994" height="240" fill="#9A4034" stroke="white" stroke-width="2" opacity="0.92"/>
+<text x="909.0" y="606.0" font-size="11" text-anchor="middle" fill="white">WE-L1-N1</text>
+<text x="909.0" y="620.0" font-size="11" text-anchor="middle" fill="white">59 m²</text>
+<rect x="868.5" y="730" width="81.0" height="45.0" fill="#CFD3D6" stroke="#333" stroke-dasharray="4 3"/>
+<rect x="180" y="430" width="840" height="60" fill="#D9D3C8" stroke="white" stroke-width="2" opacity="0.92"/>
+<text x="600.0" y="456.0" font-size="11" text-anchor="middle" fill="#111">CORR-L1</text>
+<text x="600.0" y="470.0" font-size="11" text-anchor="middle" fill="#111">56 m²</text>
+<rect x="60" y="190" width="960" height="540" fill="none" stroke="#111" stroke-width="3"/>
+
+</svg>
