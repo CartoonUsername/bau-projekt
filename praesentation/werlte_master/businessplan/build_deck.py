@@ -91,6 +91,8 @@ def optdata(group):
 def img(k, name): return os.path.join(GEO, k, "ansichten", name + ".png")
 def pln(k, name): return os.path.join(GEO, k, "plaene", name + ".png")
 def hf(k, name): return os.path.join(BILD, f"hf_{k}_{name}.jpg")
+BK = {"F1": "B1", "F2": "B2", "F3": "B3"}
+def neu(k, name): return os.path.join(BILD, "neu", f"{BK[k]}_{name}.jpg")
 
 def build(group):
     T = TXT[group]; O = optdata(group); multi = len(O) > 1; names = T["names"]; foot = "Für Bank und Stadt"
@@ -101,7 +103,7 @@ def build(group):
     s = deck.slide(None, tag=False); bg = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, 0, Inches(5.2), Inches(7.5)); bg.fill.solid(); bg.fill.fore_color.rgb = GREEN; bg.line.fill.background()
     deck.text(s, 0.6, 1.0, 4.2, 0.3, "NEUE MITTE WERLTE", 11, GOLD, bold=True); deck.text(s, 0.6, 1.5, 4.2, 2.3, T["titel"], 30 if len(T["titel"]) < 40 else 23, WHITE, font="Georgia")
     deck.text(s, 0.6, 3.9, 4.2, 1.2, T["sub"], 12, WHITE); deck.text(s, 0.6, 5.7, 4.2, 1.0, ["Bessam Hasso, Werlte", "Bebauungsplan Nr. 123 (2023) und 1. Änderung (Entwurf 25.08.2026)", "Stand 27.10.2026 · alle Zahlen Planungsannahmen"], 10, WHITE)
-    deck.pic(s, hf(O[min(1, len(O) - 1)][0], "persp"), 5.2, 0, w=8.133, h=7.5)
+    deck.pic(s, (os.path.join(BILD, "neu", "_title_B.jpg") if multi else hf("A", "persp")), 5.2, 0, w=8.133, h=7.5)
     # 2 Auf einen Blick
     s = deck.slide("Das Vorhaben auf einen Blick", foot)
     mz = [pct(r["mischzins"], 2) for _, _, r, _ in O]
@@ -168,9 +170,16 @@ def build(group):
         for i, (h_, b_) in enumerate((("Klinker", "dunkel, Langformat, passend zum Umfeld"), ("Oberstes Geschoss", "Holzbau, Terrasse rundum"), ("Balkone", "bodentiefe Fenster, Milchglas-Brüstungen"), ("Glas-EG", "Gastro mit Bar, Terrasse und Vordach"))):
             deck.text(s, 0.5 + i * 3.1, 5.3, 3.0, 0.3, h_, 13, BRICK, font="Georgia"); deck.text(s, 0.5 + i * 3.1, 5.65, 3.0, 0.7, b_, 10, GREY)
     else:
-        for i, (k, v, r, d) in enumerate(O): deck.pic(s, hf(k, "persp"), 0.5 + i * 4.15, 1.3, w=4.0, h=2.6); deck.text(s, 0.5 + i * 4.15, 3.95, 4.0, 0.3, names[i], 13, BRICK, font="Georgia")
-        for i, (k, v, r, d) in enumerate(O): deck.pic(s, hf(k, "aerial"), 0.5 + i * 4.15, 4.35, w=4.0, h=2.3)
+        for i, (k, v, r, d) in enumerate(O): deck.pic(s, neu(k, "hero"), 0.5 + i * 4.15, 1.3, w=4.0, h=2.45); deck.text(s, 0.5 + i * 4.15, 3.8, 4.0, 0.3, names[i], 13, BRICK, font="Georgia")
+        for i, (k, v, r, d) in enumerate(O): deck.pic(s, neu(k, "detail"), 0.5 + i * 4.15, 4.2, w=4.0, h=2.45)
     deck.text(s, 0.5, 6.7, 12.3, 0.3, "KI-Visualisierungen (Nano Banana Pro auf Basis der Geometrie-Renderings) zur Orientierung; Fassadenteilung und Details folgen mit dem Architekten.", 9, GREY)
+    if multi:
+        s = deck.slide("Vorbau auf Säulen: überdachte Stellplätze und Dachterrasse", foot)
+        for i, (k, v, r, d) in enumerate(O): deck.pic(s, neu(k, "east"), 0.5 + i * 4.15, 1.2, w=4.0, h=2.45); deck.text(s, 0.5 + i * 4.15, 3.7, 4.0, 0.3, names[i] + ": Ostseite, Stellplätze unter dem Vorbau", 10, GREY)
+        deck.pic(s, neu(O[1][0], "roof"), 0.5, 4.2, w=4.0, h=2.3); deck.text(s, 0.5, 6.55, 4.0, 0.3, "B2: Dachterrasse 1,50 m", 10, GREY)
+        deck.pic(s, neu(O[2][0], "roof"), 4.65, 4.2, w=4.0, h=2.3); deck.text(s, 4.65, 6.55, 4.0, 0.3, "B3: Dachterrasse 3,00 m", 10, GREY)
+        deck.note(s, 8.8, 4.2, 4.0, 2.3, "B1:", "oberstes Geschoss bündig, keine Dachterrasse. B2 und B3 bekommen eine umlaufende Dachterrasse mit Milchglas-Brüstung; Holzfassade im Staffelgeschoss.", 10)
+        deck.text(s, 0.5, 6.85, 12.3, 0.25, "KI-Visualisierungen im Stil der früheren Bilder; Details (Fenster, Brüstungen) folgen mit dem Architekten.", 8, GREY)
     # 9 Gastro
     s = deck.slide("Große Gastro mit Bar, neu und modern" if group == "A" else "Gastro im schmalen Erdgeschoss", foot)
     deck.pic(s, os.path.join(BILD, "gastro_1.jpg"), 0.5, 1.2, w=7.4, h=5.2); deck.pic(s, os.path.join(BILD, "gastro_2.jpg"), 8.1, 1.2, w=4.7, h=2.6)

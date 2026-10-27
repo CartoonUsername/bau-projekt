@@ -5,3 +5,6 @@ Zwei getrennte Pakete im Aufbau des früheren Bankplans (33 Folien, Businessplan
 - `bilder/hf_*`: KI-Visualisierungen (Higgsfield, Modell nano_banana_pro, Referenz = Geometrie-Renderings aus `studie_gebaeudeformen/*/ansichten`); `gastro_*.jpg` aus dem früheren Gastro-Konzept.
 - Code: `finanz.py` (Rechenmodell, an den früheren Plan angelehnt: Nachrechnung Gesamtkosten −0,2 %), `varianten_in.py`, `build_deck.py`, `build_docs.py`.
 Alle Zahlen sind Planungsannahmen; Gastro-Umsatz proportional zu den Innenplätzen; Höhen bei B hypothetisch; keine Aussage zur Zulässigkeit, keine Variante festgelegt.
+
+## Bilder Variante B im Stil der früheren Bilder (27.10.2026)
+`bilder/neu/B1|B2|B3_{hero,detail,east}.jpg`, `B2|B3_roof.jpg` (Higgsfield, nano_banana_pro): Geometrie-Referenz = korrigierte Hero-Renderings, Stil-Referenz = Bilder aus dem früheren Bankplan (Eckansicht, Arkadendetail, Dachterrasse). Alternativen in `bilder/neu/alt/`. Gastro-Innenansichten bleiben die früheren Bilder (`gastro_*.jpg`).
