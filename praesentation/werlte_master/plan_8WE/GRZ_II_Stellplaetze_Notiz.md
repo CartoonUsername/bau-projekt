@@ -22,3 +22,4 @@ Wir bleiben beim Plan „8 Wohnungen, große Gastro im EG, 576 m² Grundfläche�
 - Titelfolie: „Bebauungsplan Nr. 123 (Plan 2023, rechtskräftig)“ statt „1. Änderung (Entwurf)“.
 - Schriften im gesamten Foliensatz: Überschriften Cambria (vorher Georgia), Text Calibri (vorher Arial), auch Tabellen, Diagramme und Theme.
 - Word-Businessplan und Gastro-Konzept ebenfalls auf Cambria/Calibri umgestellt (Kopien mit Suffix _Cambria-Calibri; Inhalt unverändert, beide nennen noch „1. Änderung“ als Planstand).
+- Word-Businessplan und Gastro-Konzept (Titelfolie) an den Plan 2023 (MI 3) angeglichen. Achtung: Word und Gastro-Konzept rechnen mit 540 m² Grundfläche / 4,49 Mio. € / Gastro 460 m², der Bank-Foliensatz mit 576 m² / 4,85 Mio. € / Gastro 510 m² – Stände nicht identisch.
