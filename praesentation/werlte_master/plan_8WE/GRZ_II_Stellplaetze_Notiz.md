@@ -18,3 +18,6 @@ Wir bleiben beim Plan „8 Wohnungen, große Gastro im EG, 576 m² Grundfläche�
 - Folie 25 (Bedarf): Stellplätze und Zufahrt als GRZ II mit wasserdurchlässigem Stein bestätigen lassen.
 - Folie 4 an den rechtskräftigen Plan 2023 (MI 3) angeglichen: II–III, Traufe 9,80 m / Höhe 15,00 m (Bezug OK Fahrbahn), Hauptdach ≥ 38° (Flachdach nur untergeordnet), Baugrenze 10 m West / 3 m übrige; Klärungsfragen um Zuordnung MI 3, Befreiung Staffel/Flachdach ergänzt.
 - Nicht geändert: Zahlen, Finanzierung, Gastro, Titelfolie (nennt noch „1. Änderung, Entwurf“) und Folie 2 („Stadt“-Texte). Zuordnung Baufeld 3 = MI 3 bleibt unbestätigt.
+
+- Titelfolie: „Bebauungsplan Nr. 123 (Plan 2023, rechtskräftig)“ statt „1. Änderung (Entwurf)“.
+- Schriften im gesamten Foliensatz: Überschriften Cambria (vorher Georgia), Text Calibri (vorher Arial), auch Tabellen, Diagramme und Theme.
