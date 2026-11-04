@@ -16,4 +16,5 @@ Wir bleiben beim Plan „8 Wohnungen, große Gastro im EG, 576 m² Grundfläche�
 - Folie 4 (B-Plan): GRZ-Zeile und Stellplatz-Zeile um GRZ II ergänzt, neue Klärungsfrage zur Ausnahme für wasserdurchlässigen Stein.
 - Folie 11 (Stellplätze): 576 m² = Gebäude; 6–8 Plätze in der GRZ II; mit Ausnahme ca. 11 Plätze auf der Restfläche.
 - Folie 25 (Bedarf): Stellplätze und Zufahrt als GRZ II mit wasserdurchlässigem Stein bestätigen lassen.
-- Nicht geändert: Zahlen, Finanzierung, Gastro. Offen bleibt, dass Folie 4 Traufhöhe/Höhe/Vollgeschosse aus dem Entwurf 2026 als „Wert im B-Plan“ nennt (der rechtskräftige Plan 2023 hat für MI 3 II–III, TH 9,80 m, H 15,00 m; Zuordnung Baufeld 3 = MI 3 unbestätigt).
+- Folie 4 an den rechtskräftigen Plan 2023 (MI 3) angeglichen: II–III, Traufe 9,80 m / Höhe 15,00 m (Bezug OK Fahrbahn), Hauptdach ≥ 38° (Flachdach nur untergeordnet), Baugrenze 10 m West / 3 m übrige; Klärungsfragen um Zuordnung MI 3, Befreiung Staffel/Flachdach ergänzt.
+- Nicht geändert: Zahlen, Finanzierung, Gastro, Titelfolie (nennt noch „1. Änderung, Entwurf“) und Folie 2 („Stadt“-Texte). Zuordnung Baufeld 3 = MI 3 bleibt unbestätigt.
