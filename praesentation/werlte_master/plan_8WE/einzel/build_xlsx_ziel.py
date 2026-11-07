@@ -5,7 +5,7 @@ blue=Font(color="0000FF"); b=Font(bold=True)
 ws["A1"]="Neue Mitte Werlte – Baufeld 3: Einzelrechnung je Einheit (Zielwerte Bau 1.450 €/m², Holz-Staffel)"; ws["A1"].font=Font(bold=True,size=13)
 inp=[("Baukosten €/m² BGF (ANNAHME Zielpreis)",1450),("Holzabschlag Staffel €/m² (ANNAHME)",700),("Terrasse Staffel gesamt €",32400),
 ("Baunebenkosten",0.15),("Effizienzhaus/QNG-Mehrkosten",0.03),("Grundstück gesamt €",236256),("Gastro-Ausbau €",150000),
-("Finanzierungskosten (% der Investition)",271065.9/4219771.8),("Zins KfW 298",0.025),("Zins KfW 299",0.03),("Zins Hausbank",0.04),
+("Finanzierungskosten (% der Investition)",158174.309/2688213.3),("Zins KfW 298",0.025),("Zins KfW 299",0.03),("Zins Hausbank",0.04),
 ("Tilgung",0.01),("Rücklage (% der Miete)",0.10),("Miete Wohnung €/m²/Monat",11.176),("Pacht Gastro €/m²/Monat",12.0),
 ("KfW 298 je Wohnung €",150000),("KfW 299 €/m² Gastro-NF",1700),("Ziel-DSCR",1.0)]
 for i,(k,v) in enumerate(inp):
