@@ -68,7 +68,7 @@ img(sl,IM+"gastro1.jpg",0.7,1.9,4.0,2.5); img(sl,IM+"gastro2.jpg",4.85,1.9,4.0,2
 kpi(sl,0.7,4.75,2.9,"150 Plätze","innen (130 Gastraum, 20 Séparée)",vs=30); kpi(sl,3.8,4.75,2.9,"+ 40 Plätze","auf der Terrasse",vs=30); kpi(sl,6.9,4.75,2.9,"460 m²","ganzes Erdgeschoss",vs=30); kpi(sl,10.0,4.75,2.6,"12 €/m²","Pacht ans Haus (Annahme)",TERRA,vs=30)
 # 8 Staffel
 sl=page(d,SEC[0],"Das Staffelgeschoss aus Holz spart Baukosten")
-kpi(sl,0.7,2.0,3.6,"460 m²","Staffelgeschoss, kein Vollgeschoss"); kpi(sl,4.7,2.0,3.6,eur(460*700),"Ersparnis gegenüber Massivbau (700 €/m², Annahme)",POS); kpi(sl,8.9,2.0,3.6,"72 m²","schmale Dachterrasse rundum",GREY)
+kpi(sl,0.7,2.0,3.6,"460 m²","Staffelgeschoss in Holzbau"); kpi(sl,4.7,2.0,3.6,eur(460*700),"Ersparnis gegenüber Massivbau (700 €/m², Annahme)",POS); kpi(sl,8.9,2.0,3.6,"72 m²","schmale Dachterrasse rundum",GREY)
 tx(sl,0.7,3.9,7.4,2.5,[{"t":"Leichter und schneller gebaut, kürzere Bauzeit."},{"t":"Zwei Partner aus dem Bekanntenkreis: Bauunternehmen unten, Zimmerei oben."},{"t":"Hilft beim QNG-Nachweis und beim Effizienzhaus-40-Standard."},{"t":"Brandschutz (Gebäudeklasse 4) und Schallschutz muss der Architekt nachweisen."}],size=15,space=10)
 img(sl,IM+"terrasse.jpg",8.5,3.8,4.13,2.6)
 # 9 Lage
@@ -80,11 +80,18 @@ for i,(a,b) in enumerate(tl):
     tx(sl,x-0.3,2.7,2.6,0.4,a,size=16,color=GREEN,font=HF,bold=True); tx(sl,x-0.3,3.95,2.5,1,b,size=13,color=INK)
 tx(sl,0.7,5.6,11.9,0.9,["Grundstück: ca. 960 m², Baufeld 3 östlich des Rathauses, südlich der Planstraße. Mischgebiet, Gewerbe im EG erwünscht, Baureife liegt vor."],size=14,color=GREY)
 # 10 B-Plan
-sl=page(d,SEC[1],"Der Bebauungsplan passt weitgehend, drei Punkte sind offen","Plan 2023, rechtskräftig, Gebiet MI 3. Zum Vergleich Entwurf 1. Änderung (gilt nicht für MI 3): First 12,00 m, dann noch 2,10 m Luft. Zuordnung Baufeld 3 = MI 3 / Flurstück 59/1 ist noch nicht bestätigt. Keine Aussage zur Zulässigkeit.")
-rows=[["Thema","Vorgabe im B-Plan","Unser Entwurf","Stand"],["Grundfläche (GRZ)","0,6 = max. 576 m²","540 m²","  passt"],["Geschosse","II bis III Vollgeschosse","EG, 1. OG, Staffel (Nicht-Vollgeschoss)","  klären"],["Höhe","Traufe 9,80 m, First 15,00 m (ab OK Fahrbahn)","gesamt ca. 9,90 m (Annahme), 5,10 m Luft","  klären"],["Dach","geneigt, mind. 38°","Flachdach mit Staffelgeschoss","  Befreiung nötig"],["Baufenster","10 m West, 3 m übrige Seiten","540 m², Lage zu prüfen","  klären"],["Stellplätze","auf dem Grundstück","ca. 8 in der GRZ II","  knapp"]]
-table(sl,0.7,1.95,11.93,rows,[2,3.6,3.6,1.7],size=13,rh=0.55,align=["l","l","l","l"])
-cl={"passt":POS,"klären":GOLD,"knapp":GOLD,"Befreiung nötig":NEG}
-for i,r in enumerate(rows[1:]): dot(sl,10.88,1.95+0.55*(i+1)+0.2,cl[r[3].strip(" ")])
+sl=page(d,SEC[1],"Bebauungsplan: Fläche, Geschosse und Höhe passen, zwei Punkte brauchen eine Befreiung","Plan 2023 (rechtskräftig), MI 3: Begründung 3.2, örtliche Bauvorschrift 2.2. Baufenster ca. 440 m² aus dem Plan abgegriffen, nicht vermessen. Zuordnung Baufeld 3 = MI 3 unbestätigt. Keine Aussage zur Zulässigkeit.")
+SP="\u2003\u2003"
+rows=[["Thema","Vorgabe im B-Plan","Unser Entwurf","Stand"],
+["Grundfläche (GRZ)","0,6 = max. 576 m²","540 m²",SP+"passt"],
+["Geschosse","II bis III Vollgeschosse","EG, 1. OG, Staffel: auch als 3. Vollgeschoss erlaubt",SP+"passt"],
+["Höhe","Traufe max. 9,80 m, First max. 15,00 m","First ca. 9,90 m (5,10 m Luft), Traufe auf 9,80 m auslegen",SP+"passt"],
+["Dach","Hauptdach geneigt, mind. 38°","Flachdach mit Staffelgeschoss (Alternative: Satteldach 38°)",SP+"Befreiung nötig"],
+["Baufenster","10 m West, 3 m übrige Seiten, ca. 440 m²","540 m²: ca. 100 m² über der Baugrenze",SP+"Befreiung nötig"],
+["Stellplätze","auf dem Grundstück","ca. 8 in der GRZ II, 420 m² Freifläche",SP+"knapp"]]
+table(sl,0.7,1.95,11.93,rows,[2,3.4,4.3,1.9],size=13,rh=0.58,align=["l","l","l","l"])
+cl={"passt":POS,"knapp":GOLD,"Befreiung nötig":NEG}
+for i,r in enumerate(rows[1:]): dot(sl,10.62,1.95+0.58*(i+1)+0.21,cl[r[3].strip("\u2003")])
 # 11 Stellplätze
 sl=page(d,SEC[1],"Stellplätze sind der Engpass: es fehlen ca. 30 Plätze auf dem Grundstück")
 cd=CategoryChartData(); cd.categories=["Bedarf (Annahme)","Platz in GRZ II","Mit Ausnahme"]; cd.add_series("Stellplätze",[41,8,12])
@@ -95,7 +102,7 @@ ch.value_axis.visible=False; hide_axis_lines(ch.value_axis); hide_axis_lines(ch.
 tx(sl,6.8,2.0,5.8,4.4,[{"t":"Bedarf ca. 41 Plätze","bold":True,"size":16,"color":GREEN},"Annahme: 33 für die Gastro (Gastro-Konzept) plus 1 je Wohnung. Maßgeblich ist die Satzung der Stadt.",{"t":"Freifläche: 420 m² (960 − 540)","bold":True,"size":16,"color":GREEN},"Hier liegen Stellplätze, Zufahrt und Terrasse. Befestigt zählen sie zur GRZ II (bis 0,8 = 228 m²), dort passen ca. 8 Plätze. Terrasse und Wintergarten im 10-m-Streifen West sind zu klären.",{"t":"Vorschlag an die Stadt","bold":True,"size":16,"color":GREEN},"Wasserdurchlässiger Stein und Ausnahme über 0,8 hinaus (ca. 12 Plätze), Rest auf der öffentlichen Parkfläche per Vereinbarung oder Ablöse."],size=13,space=7)
 # 12 Fragen
 sl=page(d,SEC[1],"Das fragen wir die Stadt am Montag, 09.11.2026")
-qs=["Ist Baufeld 3 tatsächlich MI 3 (Flurstück 59/1) im rechtskräftigen Plan 2023?","Sind 540 m² Grundfläche im Baufenster zulässig?","Gilt das Staffelgeschoss als Nicht-Vollgeschoss, und ist ein Flachdach befreibar?","Dürfen Stellplätze mit wasserdurchlässigem Stein über GRZ 0,8 hinausgehen (§ 19 Abs. 4 Satz 4 Nr. 1 BauNVO)?","Mitnutzung der öffentlichen Parkfläche oder Höhe der Ablöse?","Dürfen Terrasse und Wintergarten in den 10-m-Streifen West (Baugrenze) und zählen sie zur GRZ II?","Kaufpreis 230 €/m² und Reservierung bis zur Finanzierungszusage?"]
+qs=["Ist Baufeld 3 tatsächlich MI 3 (Flurstück 59/1) im rechtskräftigen Plan 2023?","Das Baufenster hat ca. 440 m²: Befreiung von der Baugrenze für 540 m²?","Ist das Staffelgeschoss als drittes Vollgeschoss (II–III) erlaubt, und ist das Flachdach befreibar?","Dürfen Stellplätze mit wasserdurchlässigem Stein über GRZ 0,8 hinausgehen (§ 19 Abs. 4 Satz 4 Nr. 1 BauNVO)?","Mitnutzung der öffentlichen Parkfläche oder Höhe der Ablöse?","Dürfen Terrasse und Wintergarten in den 10-m-Streifen West (Baugrenze) und zählen sie zur GRZ II?","Kaufpreis 230 €/m² und Reservierung bis zur Finanzierungszusage?"]
 for i,q in enumerate(qs):
     y=1.9+i*0.67; rect(sl,0.7,y,0.46,0.46,GREEN,shape=MSO_SHAPE.OVAL); tx(sl,0.7,y,0.46,0.46,str(i+1),size=15,color=WHITE,align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE,font=HF); tx(sl,1.45,y+0.07,11,0.5,q,size=15)
 tx(sl,0.7,6.65,11.9,0.3,"Die vollständige Fragenliste (34 Punkte) liegt separat als Word-Datei vor.",size=10,color=GREY)
@@ -228,12 +235,12 @@ table(sl,0.7,1.95,7.4,[["Zwei Apartments à","45 m²","60 m²","83 m²"],["Preis
 tx(sl,8.5,2.0,4.1,3.5,["Kein Apartment erreicht den nötigen Mehrertrag von 300 € im Monat.","Dazu kommen Aufwand, Reinigung und ab 12 Betten Sonderbau-Brandschutz."],size=15,space=12)
 # 31 Risiken
 sl=page(d,SEC[4],"Die größten Risiken und was wir dagegen tun")
-rows=[["Risiko","Was passiert?","Was wir tun"],["Baupreis höher als 1.450 €/m²","1. OG trägt die Raten nicht allein (bei 1.800 €: Faktor 0,83)","Angebote einholen, Holz-Staffel, Gewerke aus dem Netzwerk"],["Zins nach Bindung höher","+1 Prozentpunkt: ca. 2.100 € mehr pro Monat","KfW-Zusage vor Baubeginn, Forward-Darlehen"],["Gastro fällt aus","Faktor sinkt auf "+f2(gf[2]),"Erfahrener Betreiber, Pachtstaffel, Bonitätsprüfung"],["Genehmigung","Staffel, Flachdach, Stellplätze offen","Vorabstimmung mit der Stadt, Termin 09.11."],["Sicherheiten","Auslauf "+f"{Z['auslauf']*100:.0f}"+" %","Zusatzsicherheiten, Bürgschaft oder Eigenkapital"]]
+rows=[["Risiko","Was passiert?","Was wir tun"],["Baupreis höher als 1.450 €/m²","1. OG trägt die Raten nicht allein (bei 1.800 €: Faktor 0,83)","Angebote einholen, Holz-Staffel, Gewerke aus dem Netzwerk"],["Zins nach Bindung höher","+1 Prozentpunkt: ca. 2.100 € mehr pro Monat","KfW-Zusage vor Baubeginn, Forward-Darlehen"],["Gastro fällt aus","Faktor sinkt auf "+f2(gf[2]),"Erfahrener Betreiber, Pachtstaffel, Bonitätsprüfung"],["Genehmigung","Flachdach, Baugrenze (540 m² > ca. 440 m²), Stellplätze offen","Vorabstimmung mit der Stadt, Termin 09.11."],["Sicherheiten","Auslauf "+f"{Z['auslauf']*100:.0f}"+" %","Zusatzsicherheiten, Bürgschaft oder Eigenkapital"]]
 table(sl,0.7,1.95,11.93,rows,[3,4.4,4.5],size=13,rh=0.78,align=["l","l","l"])
 # 32 Brauche
 sl=page(d,SEC[4],"Was ich von Stadt und Bank brauche")
 tx(sl,0.7,1.95,5.8,0.4,"Von der Stadt",size=20,color=GREEN,font=HF)
-tx(sl,0.7,2.6,5.8,4,[{"t":[("Genehmigung: ",{"bold":True}),("540 m², Staffel als Nicht-Vollgeschoss, Flachdach und Höhe schriftlich bestätigen.",{})]},{"t":[("Stellplätze: ",{"bold":True}),("GRZ II mit wasserdurchlässigem Stein, Mitnutzung der Parkfläche oder faire Ablöse.",{})]},{"t":[("Grundstück: ",{"bold":True}),("230 €/m² mit Baureife, Reservierung bis zur Finanzierungszusage.",{})]}],size=15,space=12)
+tx(sl,0.7,2.6,5.8,4,[{"t":[("Genehmigung: ",{"bold":True}),("540 m² (Baugrenze), Staffelgeschoss, Flachdach und Höhe schriftlich bestätigen.",{})]},{"t":[("Stellplätze: ",{"bold":True}),("GRZ II mit wasserdurchlässigem Stein, Mitnutzung der Parkfläche oder faire Ablöse.",{})]},{"t":[("Grundstück: ",{"bold":True}),("230 €/m² mit Baureife, Reservierung bis zur Finanzierungszusage.",{})]}],size=15,space=12)
 tx(sl,7.0,1.95,5.6,0.4,"Von der Bank",size=20,color=GREEN,font=HF)
 tx(sl,7.0,2.6,5.6,4,[{"t":[("Darlehen: ",{"bold":True}),(f"{mio(Z['gesamt'])} mit KfW 298/299 und 12 Monaten Anlaufzeit ohne Tilgung.",{})]},{"t":[("Sicherheiten: ",{"bold":True}),("Gespräch über Grundschulden oder Bürgschaft wegen des Beleihungsauslaufs.",{})]},{"t":[("KfW-Antrag: ",{"bold":True}),("für 298 und 299 vor Baubeginn über die Hausbank.",{})]}],size=15,space=12)
 # 33 Schritte
