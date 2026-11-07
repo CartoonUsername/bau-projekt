@@ -2,8 +2,8 @@ from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment
 wb=Workbook(); ws=wb.active; ws.title="Einzelrechnung"
 blue=Font(color="0000FF"); b=Font(bold=True)
-ws["A1"]="Neue Mitte Werlte – Baufeld 3: Einzelrechnung je Einheit (Zielwerte Bau 1.800 €/m², Holz-Staffel)"; ws["A1"].font=Font(bold=True,size=13)
-inp=[("Baukosten €/m² BGF (ANNAHME Zielpreis)",1800),("Holzabschlag Staffel €/m² (ANNAHME)",700),("Terrasse Staffel gesamt €",32400),
+ws["A1"]="Neue Mitte Werlte – Baufeld 3: Einzelrechnung je Einheit (Zielwerte Bau 1.450 €/m², Holz-Staffel)"; ws["A1"].font=Font(bold=True,size=13)
+inp=[("Baukosten €/m² BGF (ANNAHME Zielpreis)",1450),("Holzabschlag Staffel €/m² (ANNAHME)",700),("Terrasse Staffel gesamt €",32400),
 ("Baunebenkosten",0.15),("Effizienzhaus/QNG-Mehrkosten",0.03),("Grundstück gesamt €",236256),("Gastro-Ausbau €",150000),
 ("Finanzierungskosten (% der Investition)",271065.9/4219771.8),("Zins KfW 298",0.025),("Zins KfW 299",0.03),("Zins Hausbank",0.04),
 ("Tilgung",0.01),("Rücklage (% der Miete)",0.10),("Miete Wohnung €/m²/Monat",11.176),("Pacht Gastro €/m²/Monat",12.0),
@@ -22,8 +22,8 @@ f,l=R0+1,R0+len(rows)
 for k,(n,g,nf,bgf) in enumerate(rows):
     r=R0+1+k; gas=n=="Gastro"; st=g=="Staffel"
     ws.cell(r,1,n); ws.cell(r,2,g); ws.cell(r,3,nf); ws.cell(r,4,bgf)
-    ws.cell(r,5,f"={I['bau']}*D{r}"+(f"-{I['holz']}*460/3" if st else ""))
-    ws.cell(r,6,f"={I['terr']}/3" if st else 0)
+    ws.cell(r,5,f"={I['bau']}*D{r}"+(f"-{I['holz']}*460/3+{I['terr']}/3" if st else ""))
+    ws.cell(r,6,0)
     ws.cell(r,7,f"=E{r}*{I['bnk']}"); ws.cell(r,8,f"=(E{r}+G{r})*{I['eh']}")
     ws.cell(r,9,f"={I['grund']}*D{r}/SUM($D${f}:$D${l})"); ws.cell(r,10,f"={I['aus']}" if gas else 0)
     ws.cell(r,11,f"=E{r}+F{r}+G{r}+H{r}+I{r}+J{r}"); ws.cell(r,12,f"=K{r}*{I['fin']}"); ws.cell(r,13,f"=K{r}+L{r}")
@@ -41,4 +41,4 @@ ws[f"S{t}"]=f"=R{t}/P{t}"; ws[f"S{t}"].number_format="0.00"; ws[f"S{t}"].font=b
 ws.cell(t+2,1,"Hinweise: KfW-Förderdarlehen (298: 150.000 € je WE zu 2,5 %; 299: 1.700 €/m² Gastro-NF zu 3,0 %) sind in DSCR bereits enthalten; Rest Hausbank 4,0 %. Blau = Eingaben. Baupreis, Holzabschlag und KfW 299 (1.700 €/m²) sind ANNAHMEN bzw. Zielwerte und noch nicht durch Angebote belegt. DSCR ohne Gastro-Betriebsgewinn. Keine Aussage zur baurechtlichen Zulässigkeit.")
 ws.column_dimensions["A"].width=40
 for c in range(2,22): ws.column_dimensions[ws.cell(1,c).column_letter].width=14
-wb.save("Einzelrechnung_Einheiten_Ziel1800.xlsx")
+wb.save("Einzelrechnung_Einheiten_Ziel1450.xlsx")
