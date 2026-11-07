@@ -1,0 +1,23 @@
+# 34 Anhang
+sl=d.blank(SAGE); rect(sl,9.5,3.0,5.5,5.5,BLUSH,shape=MSO_SHAPE.OVAL); tx(sl,0.9,2.8,10,1,"Anhang",size=48,color=INK,font=HF); tx(sl,0.9,3.9,8,0.8,"Annahmen, Gastro-Kosten, Gastro-Ausbau, Mietdaten, Quellen",size=18,color=GREY)
+# 35 Annahmen
+sl=page(d,SEC[5],"Rechenannahmen auf einen Blick")
+rows=[["Annahme","Wert","Herkunft"],["Baukosten","2.200 €/m² BGF (Zusatzszenario 1.450 €)","Bank-Excel, Angebote nötig"],["Holzabschlag Staffel","400 €/m²","Annahme"],["Baunebenkosten / Effizienzhaus, QNG","17 % / 4 %","Quellen 15–20 % / 3–8 %"],["Außenanlagen, Stellplätze","100.000 €","Annahme"],["Grundstück","960 m² × 230 € + 7 % Nebenkosten","Bauherr / Stadt"],["Miete / Pacht","10,90 €/m² / 8 €/m²","Portale Neubau 10,7–11,0 / Inserate 6–8"],["Rücklage","15 % von Miete und Pacht","BewG-Pauschalen, Annahme"],["Gastro","50.000 € Umsatz/Monat, Marge 30,5 %","Bauherr / Richtwert"],["Zinsen","KfW 2,5 % und 3,0 %, Hausbank 4,0 %, 1 % Tilgung","Annahme"],["Bauzeit / Anlaufzeit","15 Monate / 12 Monate","Annahme"],["Eigenkapital","0 €","Bauherr, Bank verlangt mehr"]]
+table(sl,0.7,1.85,11.93,rows,[3.6,5.2,3.2],size=12,rh=0.41,align=["l","l","l"])
+# 36 Gastro Kosten
+sl=page(d,SEC[5],"Gastro: Kosten pro Monat bei 50.000 € Umsatz","Branchen-Richtwerte, keine Werte aus Werlte.")
+po=[("Wareneinsatz (Essen, Getränke)","28 %",14000),("Personal (ohne Chef-Lohn)","30 %",15000),("Pacht ans Haus (460 m² × 8 €)","",3680),("Energie, Wasser, Müll","3 %",1500),("Reinigung, Verbrauchsmaterial","2 %",1000),("Werbung","1,5 %",750),("Reparaturen, Wartung, Kasse","1,5 %",750),("Sonstiges","1,5 %",750),("Versicherungen, GEMA","1 %",500),("Steuerberater, Buchhaltung","1 %",500)]
+t_=sum(p[2] for p in po)
+table(sl,0.7,1.85,8.5,[["Posten","Anteil","Betrag"]]+[[a,b,eur(c)] for a,b,c in po]+[["Summe Kosten","",eur(t_)],["Gewinn nach Pacht, vor Lohn","",eur(50000-t_)]],[4.6,1.2,1.6],size=12,rh=0.36,total=(11,12))
+# 37 Ausbau
+sl=page(d,SEC[5],"Gastro-Ausbau: 150.000 € sind knapp, Angebote sind nötig","Bei 200.000 € Ausbau steigt die Rate um ca. 190 € im Monat. Baunebenkosten fallen auf Möbel und Geräte nicht an.")
+ab=[("Küche (Herd, Kühlräume, Edelstahl, Spülküche)",30000),("Lüftung und Abluft",18000),("Theke und Bar",20000),("Möbel (ca. 150 Plätze, Lounge, Séparée)",28000),("Beleuchtung und Deko",8000),("Wand, Boden, Decke, Akustik",15000),("Gäste-WC Ausstattung",5000),("Kasse, Technik, Musik, WLAN",5000),("Terrasse (Holzdeck, Möbel, Heizstrahler)",6000),("Planung und Genehmigung",5000),("Eröffnung, Marketing, Erstbestückung",3000),("Puffer 5 %",7150)]
+table(sl,0.7,1.85,8.5,[["Posten","Betrag"]]+[[a,eur(b)] for a,b in ab]+[["Summe (im Modell: 150.000 €)",eur(sum(b for _,b in ab))]],[6,2],size=12,rh=0.36,total=(13,))
+# 38 Mieten
+sl=page(d,SEC[5],"Mietdaten: Wir rechnen mit 10,90 €/m², Neubau liegt bei 10,7 bis 11,0 €","Quellen: mietpreise.info/mietspiegel/werlte, miete-aktuell.de, immobilienscout24.de (Kreis Emsland), Abruf Oktober 2026.")
+table(sl,0.7,1.95,8.2,[["Quelle","Wert für Werlte"],["ImmoScout24 (Wohnungen, Durchschnitt)","7,78 €/m²"],["miete-aktuell.de (Kaltmiete 2026)","8,13 €/m²"],["mietpreise.info (14 Inserate, Spanne 6,09–14,48 €)","9,58 €/m²"],["mietpreise.info (Neubau)","10,73–11,02 €/m²"],["Landkreis Emsland (ImmoScout24, Q2 2026)","8,10 €/m²"]],[5.6,2.4],size=13,rh=0.6,hl=(4,))
+tx(sl,9.3,2.0,3.3,3.5,["Im Modell: 10,90 €/m² Kaltmiete (Bauherr nennt 11,18 €/m²: 950 € für 85 m²).","Gastro-Pacht 8 €/m²: Inserate in Kleinstädten liegen bei 6 bis 8 €/m²."],size=14,space=10)
+# 39 Quellen
+sl=page(d,SEC[5],"Quellen und Stand der Recherche","Alles Suchtreffer vom 07.11.2026, nicht im Volltext geprüft. Alle Preise, Zinsen und Umsätze sind Annahmen. Keine Aussage zur baurechtlichen Zulässigkeit.")
+table(sl,0.7,1.85,11.93,[["Quelle","Aussage"],["Verbraucherzentrale, Interhyp","KfW 298: 100.000 € je Wohneinheit, mit QNG 150.000 €"],["KfW, co2online","KfW 299: bis 2.000 € je m² Nettogrundfläche mit QNG, max. 10 Mio. €"],["vergleich.de (22.06.2026), WIBank","KfW 298 effektiv ca. 2,60 %, andere Quellen 0,6 bis 1,5 %"],["Börsen-Zeitung, mobiflip, PwC-Blog","Einlagensicherung Privatbanken bis 2030 gesenkt; EU-Frist 11.05.2027 fragmentarisch; Wegfall 2027 nicht belegt"],["fertighaus.de, bau.de-Forum, Thüringer Landesamt","Baukosten 3.000–5.000 bzw. 2.000–3.500 €/m² Wohnfläche; Genehmigungsdaten 1.908–2.366 €/m²"],["baufi-deutschland.de (2026)","Mehrfamilienhaus: mind. 20 bis 30 % Eigenkapital, ab ca. 90 % Auslauf Zinsaufschläge"],["Nordkurier, Immobilienportale","Gastro-Inserate in Kleinstädten ca. 6 bis 8 €/m²"],["BewG Anlage 23 (gesetze-im-internet.de)","Bewirtschaftung: 230 € je Wohnung, 9 €/m² Instandhaltung, 2 % Mietausfall"]],[4,8],size=12,rh=0.56,align=["l","l"])
+d.prs.save(OUT); print("slides",d.n)

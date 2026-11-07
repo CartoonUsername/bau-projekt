@@ -15,6 +15,7 @@ def units(p=P, pacht=12.0, miete=11.176, umsatz=50000.0, marge=0.305):
         bau=p["bau"]*u["bgf"]; terr=0.0
         if u["geschoss"]=="Staffel": bau=bau-p["holz"]*(460/3)+p["terr"]/3; terr=0.0
         bnk=bau*p["bnk"]; eh=(bau+bnk)*p["eh"]; grund=p["grund"]*u["bgf"]/tot_bgf; aus=p["ausbau"] if u["typ"]=="Gastro" else 0.0
+        aus+=p.get("aussen",0.0)*u["bgf"]/tot_bgf
         u["invest"]=bau+terr+bnk+eh+grund+aus
     ti=sum(u["invest"] for u in ue)
     for u in ue:

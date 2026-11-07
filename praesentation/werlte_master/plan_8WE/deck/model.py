@@ -2,7 +2,7 @@
 import sys
 sys.path.insert(0,"/home/user/bau-projekt/praesentation/werlte_master/plan_8WE/einzel")
 BASE=dict(bau=2200.0,holz=400.0,bnk=0.15,eh=0.03,dz=0.0,umsatz=50000.0,marge=0.305,miete=11.176,pacht=12.0,rl=0.10,
-          grund=236256.0,ausbau=150000.0,terr=32400.0,kfw298=1200000.0,kfw299=782000.0,z298=0.025,z299=0.030,zb=0.040,til=0.01)
+          grund=236256.0,ausbau=150000.0,aussen=0.0,terr=32400.0,kfw298=1200000.0,kfw299=782000.0,z298=0.025,z299=0.030,zb=0.040,til=0.01)
 BGF=1540.0; WF=725.0; GNF=460.0
 def model(**kw):
     p=dict(BASE); p.update(kw); m=dict(p)
@@ -12,7 +12,7 @@ def model(**kw):
     m["bau_roh"]=bau_roh; m["abschlag"]=abschlag; m["terr_k"]=p["terr"]
     m["bau"]=bau_roh+abschlag+p["terr"]
     m["bnk_k"]=m["bau"]*p["bnk"]; m["eh_k"]=(m["bau"]+m["bnk_k"])*p["eh"]
-    inv=p["grund"]+m["bau"]+m["bnk_k"]+m["eh_k"]+p["ausbau"]; m["inv"]=inv
+    inv=p["grund"]+m["bau"]+m["bnk_k"]+m["eh_k"]+p["ausbau"]+p["aussen"]; m["inv"]=inv
     # Bauphase
     k298,k299=p["kfw298"],p["kfw299"]; s1,s2=k298/inv,k299/inv; s3=1-s1-s2
     st1=st2=st3=0.0; fin=0.0; bau_sum=inv-p["grund"]; off=bau_sum
