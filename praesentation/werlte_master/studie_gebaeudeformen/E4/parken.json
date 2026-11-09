@@ -1,0 +1,350 @@
+{
+ "parken": {
+  "stalls": [
+   {
+    "nr": 1,
+    "rect": [
+     2.5,
+     14.0,
+     5.0,
+     19.0
+    ],
+    "art": "90",
+    "face": "S",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 2,
+    "rect": [
+     5.0,
+     14.0,
+     7.5,
+     19.0
+    ],
+    "art": "90",
+    "face": "S",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 3,
+    "rect": [
+     7.9,
+     14.0,
+     10.4,
+     19.0
+    ],
+    "art": "90",
+    "face": "S",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 4,
+    "rect": [
+     10.4,
+     14.0,
+     12.9,
+     19.0
+    ],
+    "art": "90",
+    "face": "S",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 5,
+    "rect": [
+     13.3,
+     14.0,
+     15.8,
+     19.0
+    ],
+    "art": "90",
+    "face": "S",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 6,
+    "rect": [
+     18.7,
+     14.0,
+     21.2,
+     19.0
+    ],
+    "art": "90",
+    "face": "S",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 7,
+    "rect": [
+     21.2,
+     14.0,
+     23.7,
+     19.0
+    ],
+    "art": "90",
+    "face": "S",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 8,
+    "rect": [
+     24.1,
+     14.0,
+     26.6,
+     19.0
+    ],
+    "art": "90",
+    "face": "S",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 9,
+    "rect": [
+     26.6,
+     14.0,
+     29.1,
+     19.0
+    ],
+    "art": "90",
+    "face": "S",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 10,
+    "rect": [
+     1.0,
+     25.0,
+     3.5,
+     30.0
+    ],
+    "art": "90",
+    "face": "N",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 11,
+    "rect": [
+     3.5,
+     25.0,
+     6.0,
+     30.0
+    ],
+    "art": "90",
+    "face": "N",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 12,
+    "rect": [
+     6.0,
+     25.0,
+     8.5,
+     30.0
+    ],
+    "art": "90",
+    "face": "N",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 13,
+    "rect": [
+     8.5,
+     25.0,
+     11.0,
+     30.0
+    ],
+    "art": "90",
+    "face": "N",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 14,
+    "rect": [
+     11.0,
+     25.0,
+     13.5,
+     30.0
+    ],
+    "art": "90",
+    "face": "N",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 15,
+    "rect": [
+     13.5,
+     25.0,
+     16.0,
+     30.0
+    ],
+    "art": "90",
+    "face": "N",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 16,
+    "rect": [
+     16.0,
+     25.0,
+     18.5,
+     30.0
+    ],
+    "art": "90",
+    "face": "N",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 17,
+    "rect": [
+     18.5,
+     25.0,
+     21.0,
+     30.0
+    ],
+    "art": "90",
+    "face": "N",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 18,
+    "rect": [
+     21.0,
+     25.0,
+     23.5,
+     30.0
+    ],
+    "art": "90",
+    "face": "N",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 19,
+    "rect": [
+     23.5,
+     25.0,
+     26.0,
+     30.0
+    ],
+    "art": "90",
+    "face": "N",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 20,
+    "rect": [
+     26.0,
+     25.0,
+     28.5,
+     30.0
+    ],
+    "art": "90",
+    "face": "N",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 21,
+    "rect": [
+     28.5,
+     25.0,
+     31.0,
+     30.0
+    ],
+    "art": "90",
+    "face": "N",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   }
+  ],
+  "gesamt": 21,
+  "voll": 21,
+  "eingeschraenkt": 0,
+  "konflikt": 0,
+  "hinweise": [
+   "Geometrische Prüfung ohne Schleppkurven; 90°-Stellplätze 2,50 × 5,00 m und Fahrgasse 6,00 m sind Planungsannahmen",
+   "Zufahrt (Lage der Straße) ist Annahme",
+   "Feuerwehrzufahrt/Aufstellflächen unter dem Vorbau nicht nachgewiesen (Prüfbedarf)"
+  ],
+  "fahrgasse_probleme": [],
+  "fahrgasse_breite": 6.0,
+  "nutzbar": 21,
+  "min_nutzbreite": 2.5
+ },
+ "flaeche": {
+  "eg": 357.5,
+  "stall": 262.5,
+  "par": 0.0,
+  "fahr": 192.0,
+  "zone": 21.2,
+  "rest": 126.8
+ },
+ "ueber": {
+  "west": 0,
+  "ost": 0,
+  "platz": 0,
+  "rueck": 0
+ },
+ "abstand3": 192.0,
+ "abstand6": 348.0
+}

@@ -1,0 +1,1978 @@
+{
+ "bgf": 1650,
+ "n_we": 12,
+ "wf": 655,
+ "miete_monat": 7320.58823529412,
+ "pacht_monat": 9563.5,
+ "miete_voll_monat": 7320.58823529412,
+ "buero_monat": 1600,
+ "buero1_monat": 950,
+ "buero2_monat": 650,
+ "rohertrag_monat": 18484.0882352941,
+ "g_plaetze": 190,
+ "g_bedarf": 510,
+ "g_umsatz_platz": 6040.1052631579,
+ "g_pacht_quote": 0.1,
+ "g_m2_platz": 2.68421052631579,
+ "b_anteil_kd": 0.0837741156525793,
+ "b_wohn_anteil_kd": 0.467071494070355,
+ "b_miete_jahr": 19200,
+ "b_m2": 165,
+ "b_miete_m2": 9.6969696969697,
+ "b_ueber_laufzeit": 210234.643194967,
+ "stellplatz_bedarf": 60.6,
+ "k_land": 220800,
+ "k_grest": 11040,
+ "k_notar": 4416,
+ "k_land_ges": 236256,
+ "k_bau_massiv": 3630000,
+ "k_holz": -199200,
+ "k_terrasse": 34650,
+ "k_bau": 3465450,
+ "k_bnk": 519817.5,
+ "k_eh40": 119558.025,
+ "k_ausbau": 274750,
+ "k_invest": 4615831.525,
+ "k_fin": 279047.74409598,
+ "k_gesamt": 4894879.26909598,
+ "kosten_m2_bgf": 2966.59349642181,
+ "foerder_kfw": 2947500,
+ "foerder_zins_jahr": 38475,
+ "foerder_zins_monat": 3206.25,
+ "kredit": 4894879.26909598,
+ "kredit_kfw_anteil": 0.602159897713752,
+ "mischzins": 0.0321397448466373,
+ "kredit_297": 0,
+ "kredit_298": 1800000,
+ "kredit_299": 1147500,
+ "kredit_bank": 1947379.26909598,
+ "kfw_rahmen": 2947500,
+ "kfw_rahmen_wohn": 1800000,
+ "kfw_rahmen_gastro": 1147500,
+ "fin_kosten": 279047.74409598,
+ "rate_jahr1": 206268.963454799,
+ "rate_monat": 17189.0802878999,
+ "rest_10": 4318034.27934322,
+ "rest_20": 3519270.66832487,
+ "rest_35": 1697322.93723924,
+ "zins_jahr1": 156592.361889169,
+ "tilg_jahr1": 49676.6015656301,
+ "rate_w": 5250,
+ "rate_g": 3825,
+ "rate_b": 8114.08028789992,
+ "g_gewinn_vor_pacht": 29168.675,
+ "g_ergebnis": 19605.175,
+ "g_breakeven": 16721.3114754098,
+ "g_umsatz_monat": 95635,
+ "g_abend_anteil": 0.747634234328436,
+ "g_tag_anteil": 0.252365765671564,
+ "g_gaeste_monat": 4295,
+ "c_miete": 7320.58823529412,
+ "c_buero": 1600,
+ "c_pacht": 9563.5,
+ "c_rueck": -1848.40882352941,
+ "c_netto_immo": 16635.6794117647,
+ "c_netto": 16635.6794117647,
+ "c_kd": -17189.0802878999,
+ "c_ergebnis": -553.40087613522,
+ "c_gastro": 19605.175,
+ "c_gesamt": 19051.7741238648,
+ "dscr": 0.967805090972507,
+ "dscr_immo": 0.967805090972507,
+ "dscr_gesamt": 2.10836495058296,
+ "dscr_lang": 0.467071494070355,
+ "zinsdeckung": 1.2748268851227,
+ "anfangsrendite": 0.040783059594858,
+ "breakeven_haus": 101783.898623725,
+ "anteil_buero": 0.0865609371494402,
+ "rohertrag": 221809.058823529,
+ "reinertrag": 193478.777647059,
+ "bewirt": -28330.2811764706,
+ "bodenwert": 220800,
+ "vervielf": 18.522894860816,
+ "ertragswert": 3591637.82940393,
+ "ertragswert_geb": 3370837.82940393,
+ "sachwert": 4325625.525,
+ "beleihungswert": 3232474.04646354,
+ "auslauf": 1.51428262028931,
+ "wertluecke": -1303241.43969205,
+ "eigenkapital_80": 2308900.03192515,
+ "ew_wohn": 1772307.03007413,
+ "ew_buero": 274281.741697865,
+ "ew_gastro": 1545049.05763193,
+ "dscr_y5": 1.02895805178595,
+ "dscr_y10": 1.1109099781781,
+ "ergebnis_y10": 22877.2862355905,
+ "airbnb_45": -543.946411764706,
+ "airbnb_60": -317.500411764706,
+ "airbnb_83": -30.8294117647059,
+ "airbnb_fazit": "Kein Szenario erreicht den Mindest-Mehrertrag von 300 € pro Monat. Langfristige Vermietung ist besser, Airbnb bleibt aus dem Konzept.",
+ "airbnb_netto_45": 209.583,
+ "langfrist_45": 603.529411764706,
+ "airbnb_netto_83": 722.7,
+ "langfrist_83": 603.529411764706,
+ "sens_zins": -4151.76277558791,
+ "sens_miete": -1212.25381731169,
+ "sens_umsatz20": -2274.83087613522,
+ "sens_umsatz40": -3996.26087613522,
+ "sens_bau": -1952.88550609852,
+ "sens_buero1": -1408.40087613522,
+ "sens_buero2": -1993.40087613522,
+ "sens_pacht": -9160.55087613522,
+ "gs_cash_j": -6640.81051362264,
+ "gs_gewinn": -88351.4746979926,
+ "gs_gewinn_opt": -239331.578322993,
+ "gs_afa": 131387.26575,
+ "gs_afa_opt": 282367.369375,
+ "gs_wohnanteil": 0.492481203007519,
+ "einheiten": [
+  {
+   "nr": "WE 1–5 im 1. OG (5 × 64.2 m²)",
+   "geschoss": "1. OG",
+   "m2": 321,
+   "nutzung": "vermietet",
+   "miete_m2": 11.1764705882353,
+   "miete": 3587.64705882353,
+   "jahr": 43051.7647058824
+  },
+  {
+   "nr": "WE 6–12 im Staffelgeschoss (7 × 47.7 m²)",
+   "geschoss": "Staffel",
+   "m2": 334,
+   "nutzung": "vermietet",
+   "miete_m2": 11.1764705882353,
+   "miete": 3732.94117647059,
+   "jahr": 44795.2941176471
+  }
+ ],
+ "tilgung": [
+  {
+   "jahr": 1,
+   "zins": 156592.361889169,
+   "tilg": 49676.6015656301,
+   "rate": 206268.963454799,
+   "rest": 4845202.66753035,
+   "kfw": 2917658.20745262
+  },
+  {
+   "jahr": 2,
+   "zins": 154969.954414124,
+   "tilg": 51299.0090406755,
+   "rate": 206268.963454799,
+   "rest": 4793903.65848968,
+   "kfw": 2887002.10815311
+  },
+  {
+   "jahr": 3,
+   "zins": 153292.216678132,
+   "tilg": 52976.7467766667,
+   "rate": 206268.963454799,
+   "rest": 4740926.91171301,
+   "kfw": 2855509.29511082
+  },
+  {
+   "jahr": 4,
+   "zins": 151557.18551054,
+   "tilg": 54711.7779442586,
+   "rate": 206268.963454799,
+   "rest": 4686215.13376875,
+   "kfw": 2823156.73950926
+  },
+  {
+   "jahr": 5,
+   "zins": 149762.825688636,
+   "tilg": 56506.1377661636,
+   "rate": 206268.963454799,
+   "rest": 4629708.99600259,
+   "kfw": 2789920.77330253
+  },
+  {
+   "jahr": 6,
+   "zins": 147907.027220019,
+   "tilg": 58361.9362347798,
+   "rate": 206268.963454799,
+   "rest": 4571347.05976781,
+   "kfw": 2755777.07132052
+  },
+  {
+   "jahr": 7,
+   "zins": 145987.602520296,
+   "tilg": 60281.3609345028,
+   "rate": 206268.963454799,
+   "rest": 4511065.6988333,
+   "kfw": 2720700.63286904
+  },
+  {
+   "jahr": 8,
+   "zins": 144002.283481982,
+   "tilg": 62266.6799728171,
+   "rate": 206268.963454799,
+   "rest": 4448799.01886049,
+   "kfw": 2684665.76281038
+  },
+  {
+   "jahr": 9,
+   "zins": 141948.718430375,
+   "tilg": 64320.2450244245,
+   "rate": 206268.963454799,
+   "rest": 4384478.77383606,
+   "kfw": 2647646.05210959
+  },
+  {
+   "jahr": 10,
+   "zins": 139824.46896196,
+   "tilg": 66444.4944928389,
+   "rate": 206268.963454799,
+   "rest": 4318034.27934322,
+   "kfw": 2609614.35783126
+  },
+  {
+   "jahr": 11,
+   "zins": 137627.006660752,
+   "tilg": 68641.9567940467,
+   "rate": 206268.963454799,
+   "rest": 4249392.32254918,
+   "kfw": 2570542.78257114
+  },
+  {
+   "jahr": 12,
+   "zins": 135353.709687779,
+   "tilg": 70915.2537670203,
+   "rate": 206268.963454799,
+   "rest": 4178477.06878216,
+   "kfw": 2530402.65330646
+  },
+  {
+   "jahr": 13,
+   "zins": 133001.859238742,
+   "tilg": 73267.1042160571,
+   "rate": 206268.963454799,
+   "rest": 4105209.9645661,
+   "kfw": 2489164.49964852
+  },
+  {
+   "jahr": 14,
+   "zins": 130568.635864683,
+   "tilg": 75700.3275901165,
+   "rate": 206268.963454799,
+   "rest": 4029509.63697598,
+   "kfw": 2446798.03148037
+  },
+  {
+   "jahr": 15,
+   "zins": 128051.115650269,
+   "tilg": 78217.8478045303,
+   "rate": 206268.963454799,
+   "rest": 3951291.78917145,
+   "kfw": 2403272.11596211
+  },
+  {
+   "jahr": 16,
+   "zins": 125446.266244121,
+   "tilg": 80822.6972106783,
+   "rate": 206268.963454799,
+   "rest": 3870469.09196078,
+   "kfw": 2358554.75388593
+  },
+  {
+   "jahr": 17,
+   "zins": 122750.942735361,
+   "tilg": 83518.0207194383,
+   "rate": 206268.963454799,
+   "rest": 3786951.07124134,
+   "kfw": 2312613.055362
+  },
+  {
+   "jahr": 18,
+   "zins": 119961.883370345,
+   "tilg": 86307.0800844545,
+   "rate": 206268.963454799,
+   "rest": 3700643.99115688,
+   "kfw": 2265413.21481654
+  },
+  {
+   "jahr": 19,
+   "zins": 117075.705103294,
+   "tilg": 89193.2583515054,
+   "rate": 206268.963454799,
+   "rest": 3611450.73280538,
+   "kfw": 2216920.48528219
+  },
+  {
+   "jahr": 20,
+   "zins": 114088.898974295,
+   "tilg": 92180.0644805039,
+   "rate": 206268.963454799,
+   "rest": 3519270.66832487,
+   "kfw": 2167099.15196051
+  },
+  {
+   "jahr": 21,
+   "zins": 110997.82530788,
+   "tilg": 95271.138146919,
+   "rate": 206268.963454799,
+   "rest": 3423999.53017795,
+   "kfw": 2115912.50503594
+  },
+  {
+   "jahr": 22,
+   "zins": 107798.708725117,
+   "tilg": 98470.2547296817,
+   "rate": 206268.963454799,
+   "rest": 3325529.27544827,
+   "kfw": 2063322.81171984
+  },
+  {
+   "jahr": 23,
+   "zins": 104487.632961884,
+   "tilg": 101781.330492915,
+   "rate": 206268.963454799,
+   "rest": 3223747.94495536,
+   "kfw": 2009291.28750253
+  },
+  {
+   "jahr": 24,
+   "zins": 101060.535485674,
+   "tilg": 105208.427969125,
+   "rate": 206268.963454799,
+   "rest": 3118539.51698623,
+   "kfw": 1953778.06659079
+  },
+  {
+   "jahr": 25,
+   "zins": 97513.2019030195,
+   "tilg": 108755.76155178,
+   "rate": 206268.963454799,
+   "rest": 3009783.75543445,
+   "kfw": 1896742.17150764
+  },
+  {
+   "jahr": 26,
+   "zins": 93841.2601492521,
+   "tilg": 112427.703305547,
+   "rate": 206268.963454799,
+   "rest": 2897356.05212891,
+   "kfw": 1838141.48183025
+  },
+  {
+   "jahr": 27,
+   "zins": 90040.1744520476,
+   "tilg": 116228.789002752,
+   "rate": 206268.963454799,
+   "rest": 2781127.26312616,
+   "kfw": 1777932.70204164
+  },
+  {
+   "jahr": 28,
+   "zins": 86105.2390598113,
+   "tilg": 120163.724394988,
+   "rate": 206268.963454799,
+   "rest": 2660963.53873117,
+   "kfw": 1716071.32847056
+  },
+  {
+   "jahr": 29,
+   "zins": 82031.5717256385,
+   "tilg": 124237.391729161,
+   "rate": 206268.963454799,
+   "rest": 2536726.14700201,
+   "kfw": 1652511.61529372
+  },
+  {
+   "jahr": 30,
+   "zins": 77814.106937197,
+   "tilg": 128454.856517602,
+   "rate": 206268.963454799,
+   "rest": 2408271.29048441,
+   "kfw": 1587206.53957345
+  },
+  {
+   "jahr": 31,
+   "zins": 73447.5888825035,
+   "tilg": 132821.374572296,
+   "rate": 206268.963454799,
+   "rest": 2275449.91591211,
+   "kfw": 1520107.76530322
+  },
+  {
+   "jahr": 32,
+   "zins": 68926.5641411612,
+   "tilg": 137342.399313638,
+   "rate": 206268.963454799,
+   "rest": 2138107.51659847,
+   "kfw": 1451165.60643265
+  },
+  {
+   "jahr": 33,
+   "zins": 64245.3740902131,
+   "tilg": 142023.589364586,
+   "rate": 206268.963454799,
+   "rest": 1996083.92723389,
+   "kfw": 1380328.98884287
+  },
+  {
+   "jahr": 34,
+   "zins": 59398.1470133317,
+   "tilg": 146870.816441467,
+   "rate": 206268.963454799,
+   "rest": 1849213.11079242,
+   "kfw": 1307545.4112421
+  },
+  {
+   "jahr": 35,
+   "zins": 54378.7899016164,
+   "tilg": 151890.173553183,
+   "rate": 206268.963454799,
+   "rest": 1697322.93723924,
+   "kfw": 1232760.90495065
+  }
+ ],
+ "prognose": {
+  "Kaltmiete Wohnen": [
+   87847.0588235294,
+   89164.7647058823,
+   90502.2361764706,
+   91859.7697191176,
+   93237.6662649044,
+   94636.2312588779,
+   96055.7747277611,
+   97496.6113486775,
+   98959.0605189077,
+   100443.446426691
+  ],
+  "Büromieten (Indexmiete)": [
+   19200,
+   19584,
+   19975.68,
+   20375.1936,
+   20782.697472,
+   21198.35142144,
+   21622.3184498688,
+   22054.7648188662,
+   22495.8601152435,
+   22945.7773175484
+  ],
+  "Pacht Gastro": [
+   114762,
+   116483.43,
+   118230.68145,
+   120004.14167175,
+   121804.203796826,
+   123631.266853779,
+   125485.735856585,
+   127368.021894434,
+   129278.542222851,
+   131217.720356193
+  ],
+  "Rücklagen": [
+   -22180.9058823529,
+   -22523.2194705882,
+   -22870.8597626471,
+   -23223.9104990868,
+   -23582.4567533731,
+   -23946.5849534097,
+   -24316.3829034215,
+   -24691.9398061978,
+   -25073.3462857002,
+   -25460.6944100433
+  ],
+  "Nettoertrag Immobilie (GbR)": [
+   199628.152941176,
+   202708.975235294,
+   205837.737863823,
+   209015.194491781,
+   212242.110780358,
+   215519.264580687,
+   218847.446130794,
+   222227.45825578,
+   225660.116571302,
+   229146.24969039
+  ],
+  "Kapitaldienst": [
+   -206268.963454799,
+   -206268.963454799,
+   -206268.963454799,
+   -206268.963454799,
+   -206268.963454799,
+   -206268.963454799,
+   -206268.963454799,
+   -206268.963454799,
+   -206268.963454799,
+   -206268.963454799
+  ],
+  "Ergebnis der GbR nach Kapitaldienst": [
+   -6640.81051362262,
+   -3559.98821950497,
+   -431.225590975606,
+   2746.23103698171,
+   5973.14732555844,
+   9250.30112588778,
+   12578.4826759945,
+   15958.4948009808,
+   19391.1531165024,
+   22877.2862355905
+  ],
+  "Kapitaldienstdeckung der GbR (DSCR)": [
+   0.967805090972507,
+   0.982741037915357,
+   0.997909401473915,
+   1.01331383544565,
+   1.02895805178595,
+   1.04484582154753,
+   1.06098097583523,
+   1.07736740677653,
+   1.09400906850803,
+   1.1109099781781
+  ],
+  "Restschuld Jahresende": [
+   4845202.66753035,
+   4793903.65848968,
+   4740926.91171301,
+   4686215.13376875,
+   4629708.99600259,
+   4571347.05976781,
+   4511065.6988333,
+   4448799.01886049,
+   4384478.77383606,
+   4318034.27934322
+  ],
+  "Betriebsergebnis Gastro nach Pacht (Betreiberfirma)": [
+   235262.1,
+   238791.0315,
+   242372.8969725,
+   246008.490427087,
+   249698.617783494,
+   253444.097050246,
+   257245.758506,
+   261104.44488359,
+   265021.011556843,
+   268996.326730196
+  ]
+ },
+ "ertrag_tab": [
+  [
+   "Rohertrag pro Jahr",
+   87847.0588235294,
+   19200,
+   114762,
+   221809.058823529
+  ],
+  [
+   "Verwaltungskosten",
+   -4320,
+   -576,
+   -3442.86,
+   null
+  ],
+  [
+   "Instandhaltung",
+   -7860,
+   -1320,
+   -4080,
+   null
+  ],
+  [
+   "Mietausfallwagnis",
+   -1756.94117647059,
+   -384,
+   -4590.48,
+   null
+  ],
+  [
+   "Bewirtschaftungskosten",
+   -13936.9411764706,
+   -2280,
+   -12113.34,
+   -28330.2811764706
+  ],
+  [
+   "Reinertrag",
+   73910.1176470588,
+   16920,
+   102648.66,
+   193478.777647059
+  ],
+  [
+   "Flächenanteil (für die Verteilung des Bodenwerts)",
+   0.492481203007519,
+   0.12406015037594,
+   0.383458646616541,
+   1
+  ],
+  [
+   "Bodenwertanteil (Bodenwert 960 m² × 230 €)",
+   108739.84962406,
+   27392.4812030075,
+   84667.6691729323,
+   220800
+  ],
+  [
+   "Liegenschaftszins",
+   0.04,
+   0.06,
+   0.065,
+   null
+  ],
+  [
+   "Bodenwertverzinsung",
+   -4349.59398496241,
+   -1643.54887218045,
+   -5503.3984962406,
+   null
+  ],
+  [
+   "Reinertragsanteil der Gebäude",
+   69560.5236620964,
+   15276.4511278196,
+   97145.2615037594,
+   181982.236293675
+  ],
+  [
+   "Restnutzungsdauer (Jahre)",
+   80,
+   60,
+   60,
+   null
+  ],
+  [
+   "Vervielfältiger",
+   23.915391846835,
+   16.161427705238,
+   15.0329657448345,
+   18.522894860816
+  ],
+  [
+   "Ertragswert der Gebäude",
+   1663567.18045007,
+   246889.260494858,
+   1460381.388459,
+   3370837.82940393
+  ],
+  [
+   "Ertragswert (Gebäude plus Bodenwert)",
+   1772307.03007413,
+   274281.741697865,
+   1545049.05763193,
+   3591637.82940393
+  ]
+ ],
+ "bel_tab": [
+  [
+   "Sachwert (Bodenwert plus Herstellungskosten Gebäude)",
+   4325625.525
+  ],
+  [
+   "Ertragswert",
+   3591637.82940393
+  ],
+  [
+   "Marktwert-Schätzung (niedrigerer Wert)",
+   3591637.82940393
+  ],
+  [
+   "Beleihungswert nach Sicherheitsabschlag",
+   3232474.04646354
+  ],
+  [
+   "Gesamtkosten des Vorhabens",
+   4894879.26909598
+  ],
+  [
+   "Darlehensbedarf (100 % Fremdfinanzierung)",
+   4894879.26909598
+  ],
+  [
+   "Beleihungsauslauf (Darlehen / Beleihungswert)",
+   1.51428262028931
+  ],
+  [
+   "Beleihungsauslauf KfW-Darlehen allein",
+   0.911840267743121
+  ],
+  [
+   "Ertragswert minus Gesamtkosten",
+   -1303241.43969205
+  ],
+  [
+   "Darlehen über 80 % Beleihungsauslauf",
+   2308900.03192515
+  ],
+  [
+   "Kaufpreisfaktor (Ertragswert / Rohertrag)",
+   16.1924758549263
+  ],
+  [
+   "Kosten-Faktor (Gesamtkosten / Rohertrag)",
+   22.0679862899122
+  ]
+ ],
+ "sens": [
+  [
+   "Plan",
+   -553.40087613522,
+   0.967805090972507,
+   null
+  ],
+  [
+   "Anschlusszins nach 10 Jahren +1 Prozentpunkt (auf Restschuld)",
+   -4151.76277558791,
+   0.800275438499408,
+   -3598.36189945269
+  ],
+  [
+   "Mieten Wohnen −10 %",
+   -1212.25381731169,
+   0.929475353130729,
+   -658.852941176471
+  ],
+  [
+   "Gastro-Umsatz −20 % (Umsatzpacht sinkt)",
+   -2274.83087613522,
+   0.867658371592076,
+   -1721.43
+  ],
+  [
+   "Gastro-Umsatz −40 % (Umsatzpacht sinkt, Mindestpacht)",
+   -3996.26087613522,
+   0.767511652211646,
+   -3442.86
+  ],
+  [
+   "Baukosten +10 % (Kredit steigt entsprechend)",
+   -1952.88550609852,
+   0.894941566778948,
+   -1399.4846299633
+  ],
+  [
+   "Größerer Büro-Ankermieter zieht aus (Leerstand)",
+   -1408.40087613522,
+   0.918064209803788,
+   -855
+  ],
+  [
+   "Beide Büros leer",
+   -1993.40087613522,
+   0.884030975319927,
+   -1440
+  ],
+  [
+   "Gastro fällt ganz aus (keine Pacht)",
+   -9160.55087613522,
+   0.467071494070355,
+   -8607.15
+  ]
+ ],
+ "kosten_tab": [
+  [
+   "Grundstück (Kaufpreis)",
+   220800
+  ],
+  [
+   "Grunderwerbsteuer",
+   11040
+  ],
+  [
+   "Notar und Grundbuch",
+   4416
+  ],
+  [
+   "Grundstück gesamt",
+   236256
+  ],
+  [
+   "Bau, Massivbau (BGF × Baukosten)",
+   3630000
+  ],
+  [
+   "Abschlag Holzbau Staffelgeschoss",
+   -199200
+  ],
+  [
+   "Dachterrasse rundum",
+   34650
+  ],
+  [
+   "Bau gesamt",
+   3465450
+  ],
+  [
+   "Baunebenkosten",
+   519817.5
+  ],
+  [
+   "Mehrkosten Effizienzhaus 40 und QNG-Nachweis",
+   119558.025
+  ],
+  [
+   "Ausbau Gastro, Büros (Vermieter-Ausbau) und Mehrkosten zusätzlicher Wohneinheiten",
+   274750
+  ],
+  [
+   "Investitionskosten ohne Finanzierung",
+   4615831.525
+  ],
+  [
+   "Finanzierungskosten (Bauzeit, Bereitstellung, Anlaufzeit)",
+   279047.74409598
+  ],
+  [
+   "Gesamtkosten des Vorhabens",
+   4894879.26909598
+  ]
+ ],
+ "fin_tab": [
+  [
+   "KfW 297 Klimafreundlicher Neubau (selbst genutzte Wohnungen)",
+   0,
+   0,
+   0.025
+  ],
+  [
+   "KfW 298 Klimafreundlicher Neubau (vermietete Wohnungen)",
+   1800000,
+   0.367731235245039,
+   0.025
+  ],
+  [
+   "KfW 299 Klimafreundlicher Neubau (Nichtwohngebäude: Gastro und Büros)",
+   1147500,
+   0.234428662468713,
+   0.03
+  ],
+  [
+   "Hausbank-Darlehen (Restfinanzierung inkl. Zinsen der Bauzeit)",
+   1947379.26909598,
+   0.397840102286248,
+   0.04
+  ],
+  [
+   "Eigenkapital",
+   0,
+   0,
+   null
+  ],
+  [
+   "Summe Finanzierung",
+   4894879.26909598,
+   1,
+   null
+  ]
+ ],
+ "gastro_bedarf": [
+  [
+   "Gastraum inkl. Lounge",
+   160,
+   1.9,
+   304
+  ],
+  [
+   "Séparée (Feiern)",
+   30,
+   1.4,
+   42
+  ],
+  [
+   "Bar und Theken-Zone",
+   1,
+   25,
+   25
+  ],
+  [
+   "Küche mit Spülküche",
+   1,
+   55,
+   55
+  ],
+  [
+   "Lager, Kühlung, Anlieferung",
+   1,
+   25,
+   25
+  ],
+  [
+   "WC (Herren, Damen, barrierefrei)",
+   1,
+   22,
+   22
+  ],
+  [
+   "Eingang, Garderobe, Flure, Technik",
+   1,
+   37,
+   37
+  ]
+ ],
+ "anker": [
+  [
+   "Büro 1: Versicherungsgesellschaft o. ä.",
+   100,
+   9.5,
+   950,
+   11400,
+   10,
+   124826.819397012,
+   0.0513955564324801
+  ],
+  [
+   "Büro 2: Makler o. ä.",
+   65,
+   10,
+   650,
+   7800,
+   10,
+   85407.8237979554,
+   0.0351653807169601
+  ],
+  [
+   "Summe Büro",
+   165,
+   9.6969696969697,
+   1600,
+   19200,
+   null,
+   210234.643194967,
+   0.0865609371494402
+  ]
+ ],
+ "gastro_tab": [
+  [
+   "Umsatz (netto)",
+   null,
+   95635
+  ],
+  [
+   "Wareneinsatz (Einkauf Essen und Getränke)",
+   0.28,
+   -26777.8
+  ],
+  [
+   "Personal (ohne Lohn des Bauherrn)",
+   0.3,
+   -28690.5
+  ],
+  [
+   "Energie, Wasser, Müll",
+   0.03,
+   -2869.05
+  ],
+  [
+   "Reinigung, Wäsche, Verbrauchsmaterial",
+   0.02,
+   -1912.7
+  ],
+  [
+   "Werbung und Marketing",
+   0.015,
+   -1434.525
+  ],
+  [
+   "Reparaturen, Wartung, Kassensystem",
+   0.015,
+   -1434.525
+  ],
+  [
+   "Sonstiges",
+   0.015,
+   -1434.525
+  ],
+  [
+   "Versicherungen, GEMA, Gebühren",
+   0.01,
+   -956.35
+  ],
+  [
+   "Steuerberater, Buchhaltung",
+   0.01,
+   -956.35
+  ],
+  [
+   "Summe Betriebskosten ohne Pacht",
+   0.695,
+   -66466.325
+  ],
+  [
+   "Gewinn vor Pacht",
+   0.305,
+   29168.675
+  ],
+  [
+   "Pacht an die GbR (Maximum aus Mindestpacht und Umsatzpacht)",
+   null,
+   -9563.5
+  ],
+  [
+   "Lohn des Bauherrn",
+   null,
+   0
+  ],
+  [
+   "Betriebsergebnis nach Pacht",
+   null,
+   19605.175
+  ],
+  [
+   "Break-even-Umsatz des Betriebs (Ergebnis nach Pacht = 0)",
+   null,
+   16721.3114754098
+  ]
+ ],
+ "gastro_umsatz": [
+  [
+   50000,
+   15250,
+   10150
+  ],
+  [
+   65000,
+   19825,
+   13325
+  ],
+  [
+   80000,
+   24400,
+   16400
+  ],
+  [
+   95635,
+   29168.675,
+   19605.175
+  ],
+  [
+   110000,
+   33550,
+   22550
+  ]
+ ],
+ "tagesteile": [
+  [
+   "Frühstück werktags",
+   "Di–Fr 08:00–11:00",
+   17,
+   25,
+   11,
+   4675,
+   0.0488837768599362
+  ],
+  [
+   "Brunch am Wochenende",
+   "Sa, So 09:00–14:00",
+   9,
+   60,
+   14,
+   7560,
+   0.0790505568045172
+  ],
+  [
+   "Mittagstisch",
+   "Di–Fr 11:30–14:30",
+   17,
+   50,
+   14,
+   11900,
+   0.12443143200711
+  ],
+  [
+   "Abendessen Restaurant",
+   "Di–So 17:30–22:00",
+   26,
+   55,
+   32,
+   45760,
+   0.478485909970199
+  ],
+  [
+   "Bar Di–Do",
+   "ab 21:00",
+   13,
+   20,
+   18,
+   4680,
+   0.0489360589742249
+  ],
+  [
+   "Bar Fr, Sa (bis 01:00)",
+   "Cocktails, Wein, Bier, Musik",
+   9,
+   70,
+   22,
+   13860,
+   0.144926020808281
+  ],
+  [
+   "Feiern, Live-Abende, Séparée",
+   "nach Absprache, 4 pro Monat",
+   4,
+   40,
+   45,
+   7200,
+   0.0752862445757307
+  ]
+ ],
+ "gs_items": [
+  [
+   "Nettoertrag Immobilie pro Jahr",
+   199628.152941176
+  ],
+  [
+   "Zinsen im 1. Jahr",
+   156592.361889169
+  ],
+  [
+   "Tilgung im 1. Jahr (Vermögensaufbau)",
+   49676.6015656301
+  ],
+  [
+   "Cash nach Kapitaldienst pro Jahr",
+   -6640.81051362264
+  ],
+  [
+   "Gebäudekosten als Abschreibungsbasis (ohne Grundstück und Finanzierungskosten)",
+   4379575.525
+  ],
+  [
+   "Abschreibung linear 3 %",
+   131387.26575
+  ],
+  [
+   "Steuerliches Ergebnis (Verlust negativ)",
+   -88351.4746979926
+  ],
+  [
+   "Wohnanteil nach Fläche (Wohnen / Wohnen, Büro, Gastro)",
+   0.492481203007519
+  ],
+  [
+   "Abschreibung mit steuerlicher Förderung (Wohnteil: degressiv 5 % + Sonder-AfA 5 %, Rest linear)",
+   282367.369375
+  ],
+  [
+   "Steuerliches Ergebnis mit Förderung (Verlust negativ)",
+   -239331.578322993
+  ]
+ ],
+ "gs_kopf": [
+  [
+   "Eigenkapital pro Person",
+   0,
+   0,
+   0,
+   0
+  ],
+  [
+   "Cash pro Person und Jahr (vor Steuern)",
+   -6640.81051362264,
+   -3320.40525681132,
+   -1660.20262840566,
+   -830.10131420283
+  ],
+  [
+   "Cash pro Person und Monat (vor Steuern)",
+   -553.40087613522,
+   -276.70043806761,
+   -138.350219033805,
+   -69.1751095169025
+  ],
+  [
+   "Steuerliches Ergebnis pro Person und Jahr",
+   -88351.4746979926,
+   -44175.7373489963,
+   -22087.8686744981,
+   -11043.9343372491
+  ],
+  [
+   "Steuerwirkung pro Person (Erstattung bei Verlust, Zahlung bei Gewinn)",
+   30923.0161442974,
+   15461.5080721487,
+   7730.75403607435,
+   3865.37701803718
+  ],
+  [
+   "Cash nach Steuer pro Person und Jahr",
+   24282.2056306748,
+   12141.1028153374,
+   6070.55140766869,
+   3035.27570383435
+  ],
+  [
+   "Cash nach Steuer pro Person und Monat",
+   2023.51713588956,
+   1011.75856794478,
+   505.879283972391,
+   252.939641986195
+  ],
+  [
+   "Mit steuerlicher Förderung: Steuerwirkung pro Person und Jahr",
+   83766.0524130474,
+   41883.0262065237,
+   20941.5131032619,
+   10470.7565516309
+  ],
+  [
+   "Mit steuerlicher Förderung: Cash nach Steuer pro Person und Jahr",
+   77125.2418994248,
+   38562.6209497124,
+   19281.3104748562,
+   9640.6552374281
+  ],
+  [
+   "Mit steuerlicher Förderung: Cash nach Steuer pro Person und Monat",
+   6427.10349161873,
+   3213.55174580937,
+   1606.77587290468,
+   803.387936452342
+  ],
+  [
+   "Tilgung pro Person und Jahr (Vermögensaufbau)",
+   49676.6015656301,
+   24838.300782815,
+   12419.1503914075,
+   6209.57519570376
+  ]
+ ],
+ "szenarien": [
+  {
+   "name": "12 Wohnungen, kein Eigenkapital",
+   "we": 12,
+   "ek": 0.0,
+   "gesamt": 4894879.27,
+   "fin": 279047.74,
+   "kfw": 2947500.0,
+   "kfw298": 1800000.0,
+   "kfw299": 1147500.0,
+   "bank": 1947379.27,
+   "mischzins": 0.032139744846637286,
+   "zinsvorteil": 38475.0,
+   "rate": 17189.08,
+   "netto_immo": 16635.68,
+   "pacht": 9563.5,
+   "ergebnis_m": -553.4,
+   "ergebnis_j": -6640.81,
+   "dscr": 0.9678050909725071,
+   "betreiber_m": 19605.18,
+   "gesamt_bauherr_m": 19051.77,
+   "zins1": 156592.36,
+   "tilg1": 49676.6,
+   "afa": 131387.27,
+   "gewinn": -88351.47,
+   "afa_opt": 282367.37,
+   "gewinn_opt": -239331.58,
+   "kopf": {
+    "1": {
+     "ek": 0.0,
+     "cash_m": -553.4,
+     "cash_j": -6640.81,
+     "cash_steuer_m": 2023.52,
+     "cash_steuer_j": 24282.21,
+     "cash_opt_m": 6427.1,
+     "cash_opt_j": 77125.24,
+     "tilg_j": 49676.6
+    },
+    "2": {
+     "ek": 0.0,
+     "cash_m": -276.7,
+     "cash_j": -3320.41,
+     "cash_steuer_m": 1011.76,
+     "cash_steuer_j": 12141.1,
+     "cash_opt_m": 3213.55,
+     "cash_opt_j": 38562.62,
+     "tilg_j": 24838.3
+    },
+    "4": {
+     "ek": 0.0,
+     "cash_m": -138.35,
+     "cash_j": -1660.2,
+     "cash_steuer_m": 505.88,
+     "cash_steuer_j": 6070.55,
+     "cash_opt_m": 1606.78,
+     "cash_opt_j": 19281.31,
+     "tilg_j": 12419.15
+    },
+    "8": {
+     "ek": 0.0,
+     "cash_m": -69.18,
+     "cash_j": -830.1,
+     "cash_steuer_m": 252.94,
+     "cash_steuer_j": 3035.28,
+     "cash_opt_m": 803.39,
+     "cash_opt_j": 9640.66,
+     "tilg_j": 6209.58
+    }
+   },
+   "faktor": null,
+   "vervielf": 24.52,
+   "faktor_bauherr": 21.41,
+   "ek_rendite": null
+  },
+  {
+   "name": "8 Wohnungen, kein Eigenkapital",
+   "we": 8,
+   "ek": 0.0,
+   "gesamt": 4845505.71,
+   "fin": 289674.18,
+   "kfw": 2347500.0,
+   "kfw298": 1200000.0,
+   "kfw299": 1147500.0,
+   "bank": 2498005.71,
+   "mischzins": 0.03391704358874059,
+   "zinsvorteil": 29475.0,
+   "rate": 17733.36,
+   "netto_immo": 16635.68,
+   "pacht": 9563.5,
+   "ergebnis_m": -1097.68,
+   "ergebnis_j": -13172.13,
+   "dscr": 0.9381009647640711,
+   "betreiber_m": 19605.18,
+   "gesamt_bauherr_m": 18507.5,
+   "zins1": 163584.57,
+   "tilg1": 49215.71,
+   "afa": 129587.27,
+   "gewinn": -93543.68,
+   "afa_opt": 278498.95,
+   "gewinn_opt": -242455.37,
+   "kopf": {
+    "1": {
+     "ek": 0.0,
+     "cash_m": -1097.68,
+     "cash_j": -13172.13,
+     "cash_steuer_m": 1630.68,
+     "cash_steuer_j": 19568.16,
+     "cash_opt_m": 5973.94,
+     "cash_opt_j": 71687.25,
+     "tilg_j": 49215.71
+    },
+    "2": {
+     "ek": 0.0,
+     "cash_m": -548.84,
+     "cash_j": -6586.07,
+     "cash_steuer_m": 815.34,
+     "cash_steuer_j": 9784.08,
+     "cash_opt_m": 2986.97,
+     "cash_opt_j": 35843.62,
+     "tilg_j": 24607.86
+    },
+    "4": {
+     "ek": 0.0,
+     "cash_m": -274.42,
+     "cash_j": -3293.03,
+     "cash_steuer_m": 407.67,
+     "cash_steuer_j": 4892.04,
+     "cash_opt_m": 1493.48,
+     "cash_opt_j": 17921.81,
+     "tilg_j": 12303.93
+    },
+    "8": {
+     "ek": 0.0,
+     "cash_m": -137.21,
+     "cash_j": -1646.52,
+     "cash_steuer_m": 203.83,
+     "cash_steuer_j": 2446.02,
+     "cash_opt_m": 746.74,
+     "cash_opt_j": 8960.91,
+     "tilg_j": 6151.96
+    }
+   },
+   "faktor": null,
+   "vervielf": 24.27,
+   "faktor_bauherr": 21.82,
+   "ek_rendite": null
+  },
+  {
+   "name": "12 Wohnungen, Eigenkapital für Deckung 1,2",
+   "we": 12,
+   "ek": 749000.0,
+   "gesamt": 4844812.18,
+   "fin": 228980.66,
+   "kfw": 2947500.0,
+   "kfw298": 1800000.0,
+   "kfw299": 1147500.0,
+   "bank": 1148312.18,
+   "mischzins": 0.030606258710065618,
+   "zinsvorteil": 38475.0,
+   "rate": 13859.63,
+   "netto_immo": 16635.68,
+   "pacht": 9563.5,
+   "ergebnis_m": 2776.05,
+   "ergebnis_j": 33312.54,
+   "dscr": 1.200297158423669,
+   "betreiber_m": 19605.18,
+   "gesamt_bauherr_m": 22381.22,
+   "zins1": 124777.81,
+   "tilg1": 41537.8,
+   "afa": 131387.27,
+   "gewinn": -56536.93,
+   "afa_opt": 282367.37,
+   "gewinn_opt": -207517.03,
+   "kopf": {
+    "1": {
+     "ek": 749000.0,
+     "cash_m": 2776.05,
+     "cash_j": 33312.54,
+     "cash_steuer_m": 4425.04,
+     "cash_steuer_j": 53100.47,
+     "cash_opt_m": 8828.63,
+     "cash_opt_j": 105943.5,
+     "tilg_j": 41537.8
+    },
+    "2": {
+     "ek": 374500.0,
+     "cash_m": 1388.02,
+     "cash_j": 16656.27,
+     "cash_steuer_m": 2212.52,
+     "cash_steuer_j": 26550.23,
+     "cash_opt_m": 4414.31,
+     "cash_opt_j": 52971.75,
+     "tilg_j": 20768.9
+    },
+    "4": {
+     "ek": 187250.0,
+     "cash_m": 694.01,
+     "cash_j": 8328.14,
+     "cash_steuer_m": 1106.26,
+     "cash_steuer_j": 13275.12,
+     "cash_opt_m": 2207.16,
+     "cash_opt_j": 26485.88,
+     "tilg_j": 10384.45
+    },
+    "8": {
+     "ek": 93625.0,
+     "cash_m": 347.01,
+     "cash_j": 4164.07,
+     "cash_steuer_m": 553.13,
+     "cash_steuer_j": 6637.56,
+     "cash_opt_m": 1103.58,
+     "cash_opt_j": 13242.94,
+     "tilg_j": 5192.22
+    }
+   },
+   "faktor": 145.44,
+   "vervielf": 24.27,
+   "faktor_bauherr": 18.04,
+   "ek_rendite": 0.04447602656035982
+  },
+  {
+   "name": "8 Wohnungen, Eigenkapital für Deckung 1,2",
+   "we": 8,
+   "ek": 871000.0,
+   "gesamt": 4787266.69,
+   "fin": 231435.16,
+   "kfw": 2347500.0,
+   "kfw298": 1200000.0,
+   "kfw299": 1147500.0,
+   "bank": 1568766.69,
+   "mischzins": 0.03247369948271156,
+   "zinsvorteil": 29475.0,
+   "rate": 13861.53,
+   "netto_immo": 16635.68,
+   "pacht": 9563.5,
+   "ergebnis_m": 2774.15,
+   "ergebnis_j": 33289.82,
+   "dscr": 1.2001331723029134,
+   "betreiber_m": 19605.18,
+   "gesamt_bauherr_m": 22379.33,
+   "zins1": 126587.28,
+   "tilg1": 39751.06,
+   "afa": 129587.27,
+   "gewinn": -56546.39,
+   "afa_opt": 278498.95,
+   "gewinn_opt": -205458.07,
+   "kopf": {
+    "1": {
+     "ek": 871000.0,
+     "cash_m": 2774.15,
+     "cash_j": 33289.82,
+     "cash_steuer_m": 4423.42,
+     "cash_steuer_j": 53081.06,
+     "cash_opt_m": 8766.68,
+     "cash_opt_j": 105200.14,
+     "tilg_j": 39751.06
+    },
+    "2": {
+     "ek": 435500.0,
+     "cash_m": 1387.08,
+     "cash_j": 16644.91,
+     "cash_steuer_m": 2211.71,
+     "cash_steuer_j": 26540.53,
+     "cash_opt_m": 4383.34,
+     "cash_opt_j": 52600.07,
+     "tilg_j": 19875.53
+    },
+    "4": {
+     "ek": 217750.0,
+     "cash_m": 693.54,
+     "cash_j": 8322.45,
+     "cash_steuer_m": 1105.86,
+     "cash_steuer_j": 13270.26,
+     "cash_opt_m": 2191.67,
+     "cash_opt_j": 26300.04,
+     "tilg_j": 9937.76
+    },
+    "8": {
+     "ek": 108875.0,
+     "cash_m": 346.77,
+     "cash_j": 4161.23,
+     "cash_steuer_m": 552.93,
+     "cash_steuer_j": 6635.13,
+     "cash_opt_m": 1095.83,
+     "cash_opt_j": 13150.02,
+     "tilg_j": 4968.88
+    }
+   },
+   "faktor": 143.81,
+   "vervielf": 23.98,
+   "faktor_bauherr": 17.83,
+   "ek_rendite": 0.03822022794421197
+  }
+ ],
+ "airbnb_tab": [
+  [
+   "Wohnfläche je Apartment (m²)",
+   60,
+   60,
+   60
+  ],
+  [
+   "Auslastung",
+   0.174,
+   0.362,
+   0.6
+  ],
+  [
+   "Preis pro Nacht (€)",
+   90,
+   90,
+   90
+  ],
+  [
+   "Umsatz pro Apartment und Monat",
+   476.325,
+   990.975,
+   1642.5
+  ],
+  [
+   "Netto Airbnb pro Apartment und Monat",
+   209.583,
+   436.029,
+   722.7
+  ],
+  [
+   "Netto langfristige Miete pro Apartment und Monat",
+   603.529411764706,
+   603.529411764706,
+   603.529411764706
+  ],
+  [
+   "Möblierung (€)",
+   36000,
+   36000,
+   36000
+  ],
+  [
+   "Kapitaldienst der Möblierung pro Monat",
+   -150,
+   -150,
+   -150
+  ],
+  [
+   "Mehrertrag Airbnb je Apartment pro Monat",
+   -543.946411764706,
+   -317.500411764706,
+   -30.8294117647059
+  ],
+  [
+   "Mehrertrag für das Apartment pro Monat",
+   -543.946411764706,
+   -317.500411764706,
+   -30.8294117647059
+  ],
+  [
+   "Ergebnis",
+   "lohnt sich nicht",
+   "lohnt sich nicht",
+   "lohnt sich nicht"
+  ],
+  [
+   "Break-even Auslastung (Airbnb = langfristige Miete)",
+   0.625595194491246,
+   0.625595194491246,
+   0.625595194491246
+  ]
+ ],
+ "bau": [
+  [
+   0,
+   236256,
+   85391.6202607503,
+   92130.9189247326,
+   58733.4608145171,
+   85391.6202607503
+  ],
+  [
+   1,
+   291971.701666667,
+   106152.738783282,
+   205988.857663084,
+   131317.896760216,
+   191544.359044032
+  ],
+  [
+   2,
+   291971.701666667,
+   106925.246374795,
+   319846.796401435,
+   203902.332705915,
+   298469.605418828
+  ],
+  [
+   3,
+   291971.701666667,
+   107700.328991614,
+   433704.735139786,
+   276486.768651614,
+   406169.934410442
+  ],
+  [
+   4,
+   291971.701666667,
+   108477.995217155,
+   547562.673878137,
+   349071.204597313,
+   514647.929627597
+  ],
+  [
+   5,
+   291971.701666667,
+   109258.253663448,
+   661420.612616489,
+   421655.640543011,
+   623906.183291045
+  ],
+  [
+   6,
+   291971.701666667,
+   110041.112971229,
+   775278.55135484,
+   494240.07648871,
+   733947.296262273
+  ],
+  [
+   7,
+   291971.701666667,
+   117395.945097535,
+   889136.490093191,
+   566824.512434409,
+   851343.241359809
+  ],
+  [
+   8,
+   291971.701666667,
+   117476.000789263,
+   1002994.42883154,
+   639408.948380108,
+   968819.242149072
+  ],
+  [
+   9,
+   291971.701666667,
+   117556.323333296,
+   1116852.36756989,
+   711993.384325807,
+   1086375.56548237
+  ],
+  [
+   10,
+   291971.701666667,
+   117636.913619143,
+   1230710.30630824,
+   784577.820271506,
+   1204012.47910151
+  ],
+  [
+   11,
+   291971.701666667,
+   117717.772539276,
+   1344568.2450466,
+   857162.256217205,
+   1321730.25164079
+  ],
+  [
+   12,
+   291971.701666667,
+   117798.900989143,
+   1458426.18378495,
+   929746.692162904,
+   1439529.15262993
+  ],
+  [
+   13,
+   291971.701666667,
+   117880.299867176,
+   1572284.1225233,
+   1002331.1281086,
+   1557409.45249711
+  ],
+  [
+   14,
+   291971.701666667,
+   117961.970074802,
+   1686142.06126165,
+   1074915.5640543,
+   1675371.42257191
+  ],
+  [
+   15,
+   291971.701666667,
+   118043.912516454,
+   1800000,
+   1147500,
+   1793415.33508836
+  ],
+  [
+   16,
+   0,
+   12596.8011169612,
+   1800000,
+   1147500,
+   1806012.13620532
+  ],
+  [
+   17,
+   0,
+   12638.7904540177,
+   1800000,
+   1147500,
+   1818650.92665934
+  ],
+  [
+   18,
+   0,
+   12680.9197555311,
+   1800000,
+   1147500,
+   1831331.84641487
+  ],
+  [
+   19,
+   0,
+   12723.1894880496,
+   1800000,
+   1147500,
+   1844055.03590292
+  ],
+  [
+   20,
+   0,
+   12765.6001196764,
+   1800000,
+   1147500,
+   1856820.6360226
+  ],
+  [
+   21,
+   0,
+   12808.1521200753,
+   1800000,
+   1147500,
+   1869628.78814267
+  ],
+  [
+   22,
+   0,
+   12850.8459604756,
+   1800000,
+   1147500,
+   1882479.63410315
+  ],
+  [
+   23,
+   0,
+   12893.6821136772,
+   1800000,
+   1147500,
+   1895373.31621683
+  ],
+  [
+   24,
+   0,
+   12936.6610540561,
+   1800000,
+   1147500,
+   1908309.97727088
+  ],
+  [
+   25,
+   0,
+   12979.7832575696,
+   1800000,
+   1147500,
+   1921289.76052845
+  ],
+  [
+   26,
+   0,
+   13023.0492017615,
+   1800000,
+   1147500,
+   1934312.80973021
+  ],
+  [
+   27,
+   0,
+   13066.4593657674,
+   1800000,
+   1147500,
+   1947379.26909598
+  ]
+ ],
+ "unterlagen": [
+  [
+   1,
+   "Projekt: Businessplan (Word) und Präsentation",
+   "Vorhaben, Konzept, Zahlen, Risiken. Liegt vor.",
+   "vorhanden"
+  ],
+  [
+   2,
+   "Projekt: Rechenmodell mit Finanzierungs- und Tilgungsplan",
+   "Diese Excel-Datei.",
+   "vorhanden"
+  ],
+  [
+   3,
+   "Projekt: Gastro-Konzept mit Gestaltung",
+   "Konzept, Grundriss, Speisekarte, Umsatzaufbau.",
+   "vorhanden"
+  ],
+  [
+   4,
+   "Projekt: Lageplan, Flurkarte, Grundbuchauszug",
+   "Baufeld 3, ca. 960 m². Grundbuchauszug nach Kaufvertrag.",
+   "offen"
+  ],
+  [
+   5,
+   "Projekt: Bebauungsplan Nr. 123, 1. Änderung und Konzeptheft",
+   "Festsetzungen, städtebaulicher Vertrag. Entwurf Stand 25.08.2026.",
+   "teilweise"
+  ],
+  [
+   6,
+   "Projekt: Grundstückskaufvertrag oder Reservierung der Stadt",
+   "Preis 230 €/m², Zuschnitt, Baureife.",
+   "offen"
+  ],
+  [
+   7,
+   "Bau: Entwurfspläne, Flächen- und Wohnflächenberechnung",
+   "Grundrisse, Schnitte, Ansichten vom Architekten.",
+   "offen"
+  ],
+  [
+   8,
+   "Bau: Baubeschreibung",
+   "Konstruktion, Energiestandard, Heizung.",
+   "offen"
+  ],
+  [
+   9,
+   "Bau: Bauvoranfrage oder Baugenehmigung",
+   "Zulässigkeit 540 m², Staffelgeschoss, Flachdach, Höhe, Stellplätze.",
+   "offen"
+  ],
+  [
+   10,
+   "Bau: Kostenberechnung nach DIN 276 und Angebote",
+   "Bauunternehmen und Zimmerei, Festpreis je m².",
+   "offen"
+  ],
+  [
+   11,
+   "Bau: Bauzeitenplan",
+   "Baubeginn Mitte 2027, 15 Monate Bauzeit.",
+   "vorhanden"
+  ],
+  [
+   12,
+   "KfW: Bestätigung Energieeffizienz-Experte (Effizienzhaus 40)",
+   "Antrag KfW 297/298 und 299 über die Hausbank vor Baubeginn.",
+   "offen"
+  ],
+  [
+   13,
+   "KfW: QNG-Zertifizierung (Konzept und Zertifizierer)",
+   "Für den vollen Kreditrahmen erforderlich.",
+   "offen"
+  ],
+  [
+   14,
+   "KfW: Heizkonzept ohne Öl, Gas und Biomasse",
+   "Wärmepumpe oder Fernwärme.",
+   "offen"
+  ],
+  [
+   15,
+   "Einnahmen: Mietaufstellung und Mietkalkulation",
+   "8 Wohnungen und 2 Büros, Flächen, Miete je m².",
+   "vorhanden"
+  ],
+  [
+   16,
+   "Einnahmen: Pachtvertrag Gastro (Entwurf)",
+   "Laufzeit, Pacht 10 €/m², Staffel, Sicherheiten.",
+   "offen"
+  ],
+  [
+   17,
+   "Einnahmen: Vorverträge Ankermieter Büro (2 Mieter)",
+   "Versicherungsgesellschaft (100 m²) und Makler (65 m²), 10 Jahre fest, Indexmiete, Bonitätsauskunft.",
+   "offen"
+  ],
+  [
+   18,
+   "Einnahmen: Vorvermietungsabsichten",
+   "Interessenten für Wohnungen und Gastro.",
+   "offen"
+  ],
+  [
+   19,
+   "Betrieb: Gastro-Kalkulation mit Wareneinsatz, Personal, Umsatz",
+   "Blatt 'Gastro Betrieb'.",
+   "vorhanden"
+  ],
+  [
+   20,
+   "Betrieb: Nachweis Gastro-Erfahrung, Lebenslauf, Konzession",
+   "Gaststättenerlaubnis, Hygiene, Qualifikation.",
+   "offen"
+  ],
+  [
+   21,
+   "Person: Selbstauskunft und Vermögensübersicht",
+   "Einkommen, Verbindlichkeiten, Vermögen.",
+   "offen"
+  ],
+  [
+   22,
+   "Person: Einkommensnachweise, Steuerbescheide, BWA, Schufa",
+   "letzte drei Jahre.",
+   "offen"
+  ],
+  [
+   23,
+   "Person: Nachweis weiterer Sicherheiten",
+   "Bürgschaften, Grundschulden auf weitere Immobilien, bestehende Objekte (letzte zwei Jahre gekauft).",
+   "offen"
+  ],
+  [
+   24,
+   "Sicherheit: Wertermittlung / Beleihungswert",
+   "Gutachten der Bank, Rechenbeispiel im Blatt 'Ertragswert'.",
+   "offen"
+  ],
+  [
+   25,
+   "Sicherheit: Versicherungen",
+   "Bauleistung, Bauherrenhaftpflicht, Gebäude.",
+   "offen"
+  ]
+ ]
+}

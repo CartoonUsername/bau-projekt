@@ -1,0 +1,232 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420.0mm" height="297.0mm" viewBox="0 0 420.0 297.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" text-rendering="geometricPrecision"><defs></defs><rect width="420.0" height="297.0" fill="#FFFFFF"/><text x="14.000" y="20.000" font-size="6.0" text-anchor="start" font-weight="600" fill="#1B1F24">Büros hinten – Zugang, Büro-WC und Flur (drei Alternativen)</text>
+<text x="14.000" y="27.000" font-size="3.0" text-anchor="start" font-weight="400" fill="#6B7280">Grundrisse hinterer Erdgeschoss-Bereich M 1:150 · unabhängige Erreichbarkeit nur über die Rückseite, Fußweg vom Platz ungeklärt (C-29)</text>
+<text x="14.000" y="40.000" font-size="3.4" text-anchor="start" font-weight="600" fill="#1B1F24">Alternative K: Büro-Foyer im Kern</text>
+<rect x="14.000" y="48.000" width="26.667" height="6.667" fill="#E7E9EC" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="19.333" y="54.667" width="14.667" height="17.333" fill="#E7E9EC" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="34.000" y="54.667" width="6.667" height="17.333" fill="#E7E9EC" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="14.000" y="54.667" width="5.333" height="17.333" fill="#E7E9EC" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="14.000" y="72.000" width="15.333" height="14.000" fill="#E3E7EA" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="29.333" y="72.000" width="11.333" height="14.000" fill="#E6E0D2" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="14.000" y="86.000" width="26.667" height="12.000" fill="#E6E0D2" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="40.667" y="48.000" width="40.000" height="23.333" fill="#E3E7EA" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="80.667" y="48.000" width="33.333" height="23.333" fill="#EFEFEC" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="114.000" y="48.000" width="33.333" height="23.333" fill="#EFEFEC" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="147.333" y="48.000" width="10.000" height="30.000" fill="#DADFE3" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="147.333" y="78.000" width="10.000" height="20.000" fill="#E3E7EA" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="40.667" y="71.333" width="53.333" height="26.667" fill="#DDE7EE" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="94.000" y="71.333" width="53.333" height="26.667" fill="#DDE7EE" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="14.000" y="98.000" width="16.667" height="33.333" fill="#EEEFF1" stroke="#C9CED6" stroke-width="0.2"/>
+<rect x="30.667" y="98.000" width="16.667" height="33.333" fill="#EEEFF1" stroke="#C9CED6" stroke-width="0.2"/>
+<rect x="57.333" y="98.000" width="16.667" height="33.333" fill="#EEEFF1" stroke="#C9CED6" stroke-width="0.2"/>
+<rect x="74.000" y="98.000" width="16.667" height="33.333" fill="#EEEFF1" stroke="#C9CED6" stroke-width="0.2"/>
+<rect x="90.667" y="98.000" width="16.667" height="33.333" fill="#EEEFF1" stroke="#C9CED6" stroke-width="0.2"/>
+<rect x="124.000" y="98.000" width="16.667" height="33.333" fill="#EEEFF1" stroke="#C9CED6" stroke-width="0.2"/>
+<rect x="140.667" y="98.000" width="16.667" height="33.333" fill="#EEEFF1" stroke="#C9CED6" stroke-width="0.2"/>
+<line x1="14.000" y1="98.000" x2="157.333" y2="98.000" stroke="#1B1F24" stroke-width="0.9" stroke-linecap="butt"/>
+<line x1="14.000" y1="48.000" x2="14.000" y2="98.000" stroke="#1B1F24" stroke-width="0.9" stroke-linecap="butt"/>
+<text x="27.333" y="52.233" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">Flur</text>
+<text x="26.667" y="64.233" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">AZ</text>
+<text x="21.667" y="79.900" font-size="2.6" text-anchor="middle" font-weight="600" fill="#1B1F24">WC</text>
+<text x="27.333" y="92.900" font-size="2.6" text-anchor="middle" font-weight="600" fill="#1B1F24">Foyer</text>
+<text x="60.667" y="60.567" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">Gäste-WC</text>
+<text x="97.333" y="60.567" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">Personal</text>
+<text x="130.667" y="60.567" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">Flur</text>
+<text x="67.333" y="84.167" font-size="2.6" text-anchor="middle" font-weight="600" fill="#1B1F24">Büro 1</text>
+<text x="67.333" y="87.567" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">28 m²</text>
+<text x="120.667" y="84.167" font-size="2.6" text-anchor="middle" font-weight="600" fill="#1B1F24">Büro 2</text>
+<text x="120.667" y="87.567" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">28 m²</text>
+<line x1="20.667" y1="98.000" x2="30.667" y2="98.000" stroke="#FFFFFF" stroke-width="2.0" stroke-linecap="butt"/>
+<line x1="20.667" y1="97.000" x2="20.667" y2="99.000" stroke="#1B1F24" stroke-width="0.5" stroke-linecap="butt"/>
+<line x1="30.667" y1="97.000" x2="30.667" y2="99.000" stroke="#1B1F24" stroke-width="0.5" stroke-linecap="butt"/>
+<line x1="47.333" y1="98.000" x2="57.333" y2="98.000" stroke="#FFFFFF" stroke-width="2.0" stroke-linecap="butt"/>
+<line x1="47.333" y1="97.000" x2="47.333" y2="99.000" stroke="#1B1F24" stroke-width="0.5" stroke-linecap="butt"/>
+<line x1="57.333" y1="97.000" x2="57.333" y2="99.000" stroke="#1B1F24" stroke-width="0.5" stroke-linecap="butt"/>
+<line x1="114.000" y1="98.000" x2="124.000" y2="98.000" stroke="#FFFFFF" stroke-width="2.0" stroke-linecap="butt"/>
+<line x1="114.000" y1="97.000" x2="114.000" y2="99.000" stroke="#1B1F24" stroke-width="0.5" stroke-linecap="butt"/>
+<line x1="124.000" y1="97.000" x2="124.000" y2="99.000" stroke="#1B1F24" stroke-width="0.5" stroke-linecap="butt"/>
+<line x1="24.000" y1="108.667" x2="118.667" y2="108.667" stroke="#4C9A5E" stroke-width="0.5" stroke-dasharray="2 1.2" stroke-linecap="butt"/>
+<line x1="24.000" y1="108.667" x2="24.000" y2="100.000" stroke="#4C9A5E" stroke-width="0.5" stroke-dasharray="2 1.2" stroke-linecap="butt"/>
+<text x="67.333" y="112.267" font-size="2.6" text-anchor="middle" font-weight="600" fill="#2F7A44">Zugang von der Rückseite</text>
+<text x="162.000" y="40.000" font-size="3.4" text-anchor="start" font-weight="600" fill="#1B1F24">Alternative F: Flur und WC zwischen den Büros</text>
+<rect x="162.000" y="48.000" width="26.667" height="6.667" fill="#E7E9EC" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="167.333" y="54.667" width="14.667" height="17.333" fill="#E7E9EC" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="182.000" y="54.667" width="6.667" height="17.333" fill="#E7E9EC" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="162.000" y="54.667" width="5.333" height="17.333" fill="#E7E9EC" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="162.000" y="72.000" width="26.667" height="26.000" fill="#E7E9EC" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="188.667" y="48.000" width="40.000" height="23.333" fill="#E3E7EA" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="228.667" y="48.000" width="33.333" height="23.333" fill="#EFEFEC" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="262.000" y="48.000" width="33.333" height="23.333" fill="#EFEFEC" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="295.333" y="48.000" width="10.000" height="30.000" fill="#DADFE3" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="295.333" y="78.000" width="10.000" height="20.000" fill="#E3E7EA" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="188.667" y="71.333" width="48.000" height="26.667" fill="#DDE7EE" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="236.667" y="71.333" width="16.000" height="13.333" fill="#E3E7EA" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="236.667" y="84.667" width="16.000" height="13.333" fill="#E6E0D2" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="252.667" y="71.333" width="42.667" height="26.667" fill="#DDE7EE" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="162.000" y="98.000" width="16.667" height="33.333" fill="#EEEFF1" stroke="#C9CED6" stroke-width="0.2"/>
+<rect x="178.667" y="98.000" width="16.667" height="33.333" fill="#EEEFF1" stroke="#C9CED6" stroke-width="0.2"/>
+<rect x="205.333" y="98.000" width="16.667" height="33.333" fill="#EEEFF1" stroke="#C9CED6" stroke-width="0.2"/>
+<rect x="222.000" y="98.000" width="16.667" height="33.333" fill="#EEEFF1" stroke="#C9CED6" stroke-width="0.2"/>
+<rect x="238.667" y="98.000" width="16.667" height="33.333" fill="#EEEFF1" stroke="#C9CED6" stroke-width="0.2"/>
+<rect x="272.000" y="98.000" width="16.667" height="33.333" fill="#EEEFF1" stroke="#C9CED6" stroke-width="0.2"/>
+<rect x="288.667" y="98.000" width="16.667" height="33.333" fill="#EEEFF1" stroke="#C9CED6" stroke-width="0.2"/>
+<line x1="162.000" y1="98.000" x2="305.333" y2="98.000" stroke="#1B1F24" stroke-width="0.9" stroke-linecap="butt"/>
+<line x1="162.000" y1="48.000" x2="162.000" y2="98.000" stroke="#1B1F24" stroke-width="0.9" stroke-linecap="butt"/>
+<text x="175.333" y="52.233" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">Flur</text>
+<text x="174.667" y="64.233" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">AZ</text>
+<text x="175.333" y="85.900" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">Abstell</text>
+<text x="208.667" y="60.567" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">Gäste-WC</text>
+<text x="245.333" y="60.567" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">Personal</text>
+<text x="278.667" y="60.567" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">Flur</text>
+<text x="212.667" y="84.167" font-size="2.6" text-anchor="middle" font-weight="600" fill="#1B1F24">Büro 1</text>
+<text x="212.667" y="87.567" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">25 m²</text>
+<text x="244.667" y="78.900" font-size="2.6" text-anchor="middle" font-weight="600" fill="#1B1F24">WC</text>
+<text x="244.667" y="92.233" font-size="2.6" text-anchor="middle" font-weight="600" fill="#1B1F24">Flur</text>
+<text x="274.000" y="84.167" font-size="2.6" text-anchor="middle" font-weight="600" fill="#1B1F24">Büro 2</text>
+<text x="274.000" y="87.567" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">23 m²</text>
+<line x1="238.000" y1="98.000" x2="251.333" y2="98.000" stroke="#FFFFFF" stroke-width="2.0" stroke-linecap="butt"/>
+<line x1="238.000" y1="97.000" x2="238.000" y2="99.000" stroke="#1B1F24" stroke-width="0.5" stroke-linecap="butt"/>
+<line x1="251.333" y1="97.000" x2="251.333" y2="99.000" stroke="#1B1F24" stroke-width="0.5" stroke-linecap="butt"/>
+<line x1="262.000" y1="98.000" x2="272.000" y2="98.000" stroke="#FFFFFF" stroke-width="2.0" stroke-linecap="butt"/>
+<line x1="262.000" y1="97.000" x2="262.000" y2="99.000" stroke="#1B1F24" stroke-width="0.5" stroke-linecap="butt"/>
+<line x1="272.000" y1="97.000" x2="272.000" y2="99.000" stroke="#1B1F24" stroke-width="0.5" stroke-linecap="butt"/>
+<line x1="244.667" y1="108.667" x2="266.667" y2="108.667" stroke="#4C9A5E" stroke-width="0.5" stroke-dasharray="2 1.2" stroke-linecap="butt"/>
+<line x1="244.667" y1="108.667" x2="244.667" y2="100.000" stroke="#4C9A5E" stroke-width="0.5" stroke-dasharray="2 1.2" stroke-linecap="butt"/>
+<text x="215.333" y="112.267" font-size="2.6" text-anchor="middle" font-weight="600" fill="#2F7A44">Zugang von der Rückseite</text>
+<text x="14.000" y="160.000" font-size="3.4" text-anchor="start" font-weight="600" fill="#1B1F24">Alternative M: Mitbenutzung des Gäste-WC</text>
+<rect x="14.000" y="168.000" width="26.667" height="6.667" fill="#E7E9EC" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="19.333" y="174.667" width="14.667" height="17.333" fill="#E7E9EC" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="34.000" y="174.667" width="6.667" height="17.333" fill="#E7E9EC" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="14.000" y="174.667" width="5.333" height="17.333" fill="#E7E9EC" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="14.000" y="192.000" width="26.667" height="26.000" fill="#E7E9EC" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="40.667" y="168.000" width="40.000" height="23.333" fill="#E3E7EA" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="80.667" y="168.000" width="33.333" height="23.333" fill="#EFEFEC" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="114.000" y="168.000" width="33.333" height="23.333" fill="#EFEFEC" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="147.333" y="168.000" width="10.000" height="30.000" fill="#DADFE3" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="147.333" y="198.000" width="10.000" height="20.000" fill="#E3E7EA" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="40.667" y="191.333" width="53.333" height="26.667" fill="#DDE7EE" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="94.000" y="191.333" width="53.333" height="26.667" fill="#DDE7EE" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="14.000" y="218.000" width="16.667" height="33.333" fill="#EEEFF1" stroke="#C9CED6" stroke-width="0.2"/>
+<rect x="30.667" y="218.000" width="16.667" height="33.333" fill="#EEEFF1" stroke="#C9CED6" stroke-width="0.2"/>
+<rect x="57.333" y="218.000" width="16.667" height="33.333" fill="#EEEFF1" stroke="#C9CED6" stroke-width="0.2"/>
+<rect x="74.000" y="218.000" width="16.667" height="33.333" fill="#EEEFF1" stroke="#C9CED6" stroke-width="0.2"/>
+<rect x="90.667" y="218.000" width="16.667" height="33.333" fill="#EEEFF1" stroke="#C9CED6" stroke-width="0.2"/>
+<rect x="124.000" y="218.000" width="16.667" height="33.333" fill="#EEEFF1" stroke="#C9CED6" stroke-width="0.2"/>
+<rect x="140.667" y="218.000" width="16.667" height="33.333" fill="#EEEFF1" stroke="#C9CED6" stroke-width="0.2"/>
+<line x1="14.000" y1="218.000" x2="157.333" y2="218.000" stroke="#1B1F24" stroke-width="0.9" stroke-linecap="butt"/>
+<line x1="14.000" y1="168.000" x2="14.000" y2="218.000" stroke="#1B1F24" stroke-width="0.9" stroke-linecap="butt"/>
+<text x="27.333" y="172.233" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">Flur</text>
+<text x="26.667" y="184.233" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">AZ</text>
+<text x="27.333" y="205.900" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">Abstell</text>
+<text x="60.667" y="180.567" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">Gäste-WC</text>
+<text x="97.333" y="180.567" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">Personal</text>
+<text x="130.667" y="180.567" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">Flur</text>
+<text x="67.333" y="204.167" font-size="2.6" text-anchor="middle" font-weight="600" fill="#1B1F24">Büro 1</text>
+<text x="67.333" y="207.567" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">28 m²</text>
+<text x="120.667" y="204.167" font-size="2.6" text-anchor="middle" font-weight="600" fill="#1B1F24">Büro 2</text>
+<text x="120.667" y="207.567" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">28 m²</text>
+<line x1="47.333" y1="218.000" x2="57.333" y2="218.000" stroke="#FFFFFF" stroke-width="2.0" stroke-linecap="butt"/>
+<line x1="47.333" y1="217.000" x2="47.333" y2="219.000" stroke="#1B1F24" stroke-width="0.5" stroke-linecap="butt"/>
+<line x1="57.333" y1="217.000" x2="57.333" y2="219.000" stroke="#1B1F24" stroke-width="0.5" stroke-linecap="butt"/>
+<line x1="114.000" y1="218.000" x2="124.000" y2="218.000" stroke="#FFFFFF" stroke-width="2.0" stroke-linecap="butt"/>
+<line x1="114.000" y1="217.000" x2="114.000" y2="219.000" stroke="#1B1F24" stroke-width="0.5" stroke-linecap="butt"/>
+<line x1="124.000" y1="217.000" x2="124.000" y2="219.000" stroke="#1B1F24" stroke-width="0.5" stroke-linecap="butt"/>
+<line x1="52.333" y1="228.667" x2="118.667" y2="228.667" stroke="#4C9A5E" stroke-width="0.5" stroke-dasharray="2 1.2" stroke-linecap="butt"/>
+<text x="80.667" y="232.267" font-size="2.6" text-anchor="middle" font-weight="600" fill="#2F7A44">Zugang von der Rückseite</text>
+<line x1="60.667" y1="168.000" x2="60.667" y2="161.000" stroke="#B03A2E" stroke-width="0.6" stroke-dasharray="2 1.2" stroke-linecap="butt"/>
+<text x="64.667" y="165.000" font-size="2.6" text-anchor="start" font-weight="600" fill="#B03A2E">WC-Weg durch das Restaurant</text>
+<text x="162.000" y="160.000" font-size="3.4" text-anchor="start" font-weight="600" fill="#1B1F24">Vergleich der Alternativen</text>
+<text x="162.000" y="167.000" font-size="2.7" text-anchor="start" font-weight="600" fill="#1B1F24"></text>
+<text x="210.000" y="167.000" font-size="2.7" text-anchor="start" font-weight="600" fill="#1B1F24">K</text>
+<text x="240.000" y="167.000" font-size="2.7" text-anchor="start" font-weight="600" fill="#1B1F24">F</text>
+<text x="270.000" y="167.000" font-size="2.7" text-anchor="start" font-weight="600" fill="#1B1F24">M</text>
+<line x1="162.000" y1="171.310" x2="300.000" y2="171.310" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="162.000" y="172.710" font-size="2.7" text-anchor="start" font-weight="600" fill="#1B1F24">Gastronomie</text>
+<text x="210.000" y="172.710" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">440 m²</text>
+<text x="240.000" y="172.710" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">440 m²</text>
+<text x="270.000" y="172.710" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">440 m²</text>
+<line x1="162.000" y1="177.020" x2="300.000" y2="177.020" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="162.000" y="178.420" font-size="2.7" text-anchor="start" font-weight="600" fill="#1B1F24">Büros netto</text>
+<text x="210.000" y="178.420" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">56 m²</text>
+<text x="240.000" y="178.420" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">48 m²</text>
+<text x="270.000" y="178.420" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">56 m²</text>
+<line x1="162.000" y1="182.730" x2="300.000" y2="182.730" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="162.000" y="184.130" font-size="2.7" text-anchor="start" font-weight="600" fill="#1B1F24">Büro-WC</text>
+<text x="210.000" y="184.130" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">im Foyer, 5 m²</text>
+<text x="240.000" y="184.130" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">zwischen Büros, 5 m²</text>
+<text x="270.000" y="184.130" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Gäste-WC</text>
+<line x1="162.000" y1="188.440" x2="300.000" y2="188.440" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="162.000" y="189.840" font-size="2.7" text-anchor="start" font-weight="600" fill="#1B1F24">WC von beiden Büros erreichbar</text>
+<text x="210.000" y="189.840" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">nur über außen</text>
+<text x="240.000" y="189.840" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">ja, innen</text>
+<text x="270.000" y="189.840" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">nur durch Restaurant</text>
+<line x1="162.000" y1="194.150" x2="300.000" y2="194.150" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="162.000" y="195.550" font-size="2.7" text-anchor="start" font-weight="600" fill="#1B1F24">unabhängig vom Restaurant</text>
+<text x="210.000" y="195.550" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">ja (Rückseite)</text>
+<text x="240.000" y="195.550" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">ja (Rückseite)</text>
+<text x="270.000" y="195.550" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">nein (WC)</text>
+<line x1="162.000" y1="199.860" x2="300.000" y2="199.860" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="162.000" y="201.260" font-size="2.7" text-anchor="start" font-weight="600" fill="#1B1F24">Barrierefreier Zugang</text>
+<text x="210.000" y="201.260" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">ja, eben</text>
+<text x="240.000" y="201.260" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">ja, eben</text>
+<text x="270.000" y="201.260" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">ja, eben</text>
+<line x1="162.000" y1="205.570" x2="300.000" y2="205.570" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="162.000" y="206.970" font-size="2.7" text-anchor="start" font-weight="600" fill="#1B1F24">Verlust</text>
+<text x="210.000" y="206.970" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Abstell Wohnen 16 m²</text>
+<text x="240.000" y="206.970" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Bürofläche −8 m²</text>
+<text x="270.000" y="206.970" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">keiner</text>
+<line x1="162.000" y1="211.280" x2="300.000" y2="211.280" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="162.000" y="214.680" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Arbeitsstand: Alternative K (Büros bleiben je 28 m², Gastronomie unverändert). Sie kostet den</text>
+<text x="162.000" y="218.460" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Abstellraum Wohnen im Erdgeschoss; ein neuer Ort für Fahrrad und Abstell ist offen (C-38). Alternative</text>
+<text x="162.000" y="222.240" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">F löst die Wege innen, verkleinert die Büros auf 25 und 22 m².</text>
+<rect x="6.000" y="6.000" width="408.000" height="285.000" fill="none" stroke="#1B1F24" stroke-width="0.5"/>
+<line x1="315.000" y1="6.000" x2="315.000" y2="291.000" stroke="#6B7280" stroke-width="0.25" stroke-linecap="butt"/>
+<text x="318.000" y="14.000" font-size="2.6" text-anchor="start" font-weight="600" fill="#6B7280">KENNZAHLEN</text>
+<line x1="318.000" y1="15.600" x2="408.000" y2="15.600" stroke="#C9CED6" stroke-width="0.2" stroke-linecap="butt"/>
+<text x="318.000" y="20.200" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Büro 1 und 2 (K)</text>
+<text x="408.000" y="20.200" font-size="2.8" text-anchor="end" font-weight="600" fill="#1B1F24">je ca. 28 m² netto</text>
+<text x="318.000" y="24.600" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Foyer mit Büro-WC (K)</text>
+<text x="408.000" y="24.600" font-size="2.8" text-anchor="end" font-weight="600" fill="#1B1F24">ca. 16 m² brutto</text>
+<text x="318.000" y="32.000" font-size="2.6" text-anchor="start" font-weight="600" fill="#6B7280">LEGENDE</text>
+<line x1="318.000" y1="33.600" x2="408.000" y2="33.600" stroke="#C9CED6" stroke-width="0.2" stroke-linecap="butt"/>
+<rect x="318.000" y="35.300" width="8.000" height="4.000" fill="#DDE7EE" stroke="#6B7280" stroke-width="0.25"/>
+<text x="330.000" y="38.200" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Büro</text>
+<rect x="318.000" y="40.120" width="8.000" height="4.000" fill="#E6E0D2" stroke="#6B7280" stroke-width="0.25"/>
+<text x="330.000" y="43.020" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Büro-Foyer, Büro-Flur</text>
+<rect x="318.000" y="44.940" width="8.000" height="4.000" fill="#E3E7EA" stroke="#6B7280" stroke-width="0.25"/>
+<text x="330.000" y="47.840" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">WC</text>
+<line x1="318.000" y1="51.760" x2="326.000" y2="51.760" stroke="#4C9A5E" stroke-width="0.5" stroke-dasharray="2 1.2" stroke-linecap="butt"/>
+<text x="330.000" y="52.660" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Weg von der Rückseite</text>
+<line x1="318.000" y1="56.580" x2="326.000" y2="56.580" stroke="#B03A2E" stroke-width="0.6" stroke-dasharray="2 1.2" stroke-linecap="butt"/>
+<text x="330.000" y="57.480" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Weg durch das Restaurant</text>
+<text x="318.000" y="64.300" font-size="2.6" text-anchor="start" font-weight="600" fill="#6B7280">OFFENE PUNKTE (NICHT GELÖST)</text>
+<line x1="318.000" y1="65.900" x2="408.000" y2="65.900" stroke="#C9CED6" stroke-width="0.2" stroke-linecap="butt"/>
+<rect x="318.000" y="67.900" width="9.000" height="3.800" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.2" rx="0.8"/>
+<text x="322.500" y="70.500" font-size="2.4" text-anchor="middle" font-weight="600" fill="#9A3412">C-32</text>
+<text x="329.500" y="70.500" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Büros nur rückseitig belichtet und erschlossen; Büro-WC</text>
+<text x="329.500" y="74.420" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">jetzt in drei Alternativen geprüft.</text>
+<rect x="318.000" y="76.740" width="9.000" height="3.800" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.2" rx="0.8"/>
+<text x="322.500" y="79.340" font-size="2.4" text-anchor="middle" font-weight="600" fill="#9A3412">C-29</text>
+<text x="329.500" y="79.340" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Fußweg vom Platz zur Rückseite und Grundstückszuschnitt</text>
+<text x="329.500" y="83.260" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">unbekannt: unabhängige Erreichbarkeit nur unter dieser</text>
+<text x="329.500" y="87.180" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Voraussetzung.</text>
+<rect x="318.000" y="89.500" width="9.000" height="3.800" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.2" rx="0.8"/>
+<text x="322.500" y="92.100" font-size="2.4" text-anchor="middle" font-weight="600" fill="#9A3412">C-38</text>
+<text x="329.500" y="92.100" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Abstell- und Fahrradraum Wohnen: neuer Ort offen.</text>
+<rect x="318.000" y="94.420" width="9.000" height="3.800" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.2" rx="0.8"/>
+<text x="322.500" y="97.020" font-size="2.4" text-anchor="middle" font-weight="600" fill="#9A3412">C-36</text>
+<text x="329.500" y="97.020" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Fluchtwege der Büros: Rücktüren, nicht geprüft.</text>
+<text x="318.000" y="103.940" font-size="2.6" text-anchor="start" font-weight="600" fill="#6B7280">HINWEISE</text>
+<line x1="318.000" y1="105.540" x2="408.000" y2="105.540" stroke="#C9CED6" stroke-width="0.2" stroke-linecap="butt"/>
+<text x="318.000" y="110.140" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Gastronomie bleibt bei 440 m²; keine Fläche wird ohne Alternativen</text>
+<text x="318.000" y="113.866" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">abgegeben.</text>
+<text x="318.000" y="118.792" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Flächen netto = Brutto × 0,88 (Annahme). Türen und Wandstärken</text>
+<text x="318.000" y="122.518" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">nicht festgelegt.</text>
+<line x1="315.000" y1="236.000" x2="414.000" y2="236.000" stroke="#1B1F24" stroke-width="0.5" stroke-linecap="butt"/>
+<text x="318.000" y="243.000" font-size="3.4" text-anchor="start" font-weight="600" fill="#1B1F24">Neue Mitte Werlte · Baufeld 3</text>
+<text x="318.000" y="248.200" font-size="2.7" text-anchor="start" font-weight="400" fill="#6B7280">Bauvorhaben: Restaurant und Bar, Büros, Wohnungen</text>
+<text x="318.000" y="256.700" font-size="4.2" text-anchor="start" font-weight="600" fill="#1B1F24">Büros – Zugang, WC und Flur</text>
+<text x="318.000" y="263.450" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Maßstab 1:150 (A3)</text>
+<text x="318.000" y="267.650" font-size="2.5" text-anchor="start" font-weight="400" fill="#6B7280">Stand 22.10.2026 · Arbeitsgrundlage B3 (Variante B, nicht festgelegt)</text>
+<rect x="318.000" y="269.450" width="90.000" height="6.200" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.3" rx="0.8"/>
+<text x="363.000" y="273.650" font-size="2.6" text-anchor="middle" font-weight="600" fill="#9A3412">VORLÄUFIGER ARBEITSSTAND – nicht freigegeben</text>
+<text x="408.000" y="288.000" font-size="2.6" text-anchor="end" font-weight="600" fill="#1B1F24">Blatt 22</text></svg>

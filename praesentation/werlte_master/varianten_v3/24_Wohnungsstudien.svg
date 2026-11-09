@@ -1,0 +1,227 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420.0mm" height="297.0mm" viewBox="0 0 420.0 297.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" text-rendering="geometricPrecision"><defs><pattern id="hatch" width="1.6" height="1.6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="1.6" stroke="#8A8F98" stroke-width="0.25"/></pattern><pattern id="terr" width="1.8" height="1.8" patternUnits="userSpaceOnUse"><line x1="0" y1="0.9" x2="1.8" y2="0.9" stroke="#B49A72" stroke-width="0.3"/></pattern></defs><rect width="420.0" height="297.0" fill="#FFFFFF"/><text x="14.000" y="20.000" font-size="6.0" text-anchor="start" font-weight="600" fill="#1B1F24">Wohnungsstudien – Grundrisse, Belichtung, Belüftung, Erschließung</text>
+<text x="14.000" y="27.000" font-size="3.0" text-anchor="start" font-weight="400" fill="#6B7280">Studien M 1:100 zur Prüfung der Nutzbarkeit (Variante B als Arbeitsgrundlage), keine Planung · Innenmaße mit Wandstärken ASSUMED</text>
+<text x="22.000" y="40.000" font-size="3.2" text-anchor="start" font-weight="600" fill="#1B1F24">Wohnung 1.01–1.05 (1. OG vorn)</text>
+<rect x="22.000" y="62.000" width="53.500" height="46.000" fill="#F7F0E8" stroke="#6B7280" stroke-width="0.25"/>
+<text x="48.750" y="84.500" font-size="2.6" text-anchor="middle" font-weight="600" fill="#1B1F24">Wohnen / Schlafen</text>
+<text x="48.750" y="87.900" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">24,6 m²</text>
+<rect x="22.000" y="108.000" width="27.000" height="22.000" fill="#EDEAE4" stroke="#6B7280" stroke-width="0.25"/>
+<text x="35.500" y="118.500" font-size="2.6" text-anchor="middle" font-weight="400" fill="#1B1F24">Küche (offen)</text>
+<text x="35.500" y="121.900" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">5,9 m²</text>
+<rect x="49.000" y="108.000" width="26.500" height="14.000" fill="#EDEAE4" stroke="#6B7280" stroke-width="0.25"/>
+<text x="62.250" y="114.500" font-size="2.6" text-anchor="middle" font-weight="400" fill="#1B1F24">Abstell</text>
+<text x="62.250" y="117.900" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">3,7 m²</text>
+<rect x="49.000" y="122.000" width="26.500" height="28.500" fill="#EDEAE4" stroke="#6B7280" stroke-width="0.25"/>
+<text x="62.250" y="135.750" font-size="2.6" text-anchor="middle" font-weight="400" fill="#1B1F24">Bad</text>
+<text x="62.250" y="139.150" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">7,6 m²</text>
+<rect x="22.000" y="130.000" width="27.000" height="20.500" fill="#EDEAE4" stroke="#6B7280" stroke-width="0.25"/>
+<text x="35.500" y="139.750" font-size="2.6" text-anchor="middle" font-weight="400" fill="#1B1F24">Flur</text>
+<text x="35.500" y="143.150" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">5,5 m²</text>
+<rect x="22.000" y="62.000" width="53.500" height="88.500" fill="none" stroke="#1B1F24" stroke-width="1.0"/>
+<rect x="27.000" y="61.300" width="43.500" height="1.400" fill="#FFFFFF" stroke="#1B1F24" stroke-width="0.4"/>
+<rect x="30.000" y="149.800" width="9.000" height="1.400" fill="#FFFFFF" stroke="#1B1F24" stroke-width="0.4"/>
+<rect x="35.250" y="47.000" width="27.000" height="15.000" fill="#F1F2F3" stroke="#1B1F24" stroke-width="0.45"/>
+<text x="48.750" y="55.400" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">Balkon</text>
+<text x="22.000" y="154.700" font-size="2.6" text-anchor="start" font-weight="400" fill="#6B7280">Eingang vom Mittelgang</text>
+<text x="81.500" y="64.000" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="84.500" y="64.000" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Wohnfläche netto ca, 46,8 m² (Modell)</text>
+<text x="81.500" y="68.910" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="84.500" y="68.910" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Wohnräume an der Fassade: 1, Raumtiefe</text>
+<text x="84.500" y="72.420" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">4,6 m</text>
+<text x="81.500" y="77.330" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="84.500" y="77.330" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Glasfläche (Annahme) ca, 7,0 m² = 29 %</text>
+<text x="84.500" y="80.840" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">der Wohnraumfläche</text>
+<text x="81.500" y="85.750" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="84.500" y="85.750" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Innenliegend: Küche, Abstell, Bad, Flur</text>
+<text x="84.500" y="89.260" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">(mechanische Lüftung)</text>
+<text x="81.500" y="94.170" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="84.500" y="94.170" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Einseitig belichtet, keine Querlüftung</text>
+<text x="81.500" y="99.080" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="84.500" y="99.080" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Außenraum: Balkon 2,70 × 1,50 m zum</text>
+<text x="84.500" y="102.590" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Platz</text>
+<text x="81.500" y="107.500" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="84.500" y="107.500" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Stufenlos über Aufzug und Mittelgang</text>
+<text x="166.000" y="40.000" font-size="3.2" text-anchor="start" font-weight="600" fill="#1B1F24">Wohnung 1.06–1.09 (1. OG hinten)</text>
+<rect x="166.000" y="62.000" width="39.000" height="46.000" fill="#F7F0E8" stroke="#6B7280" stroke-width="0.25"/>
+<text x="185.500" y="84.500" font-size="2.6" text-anchor="middle" font-weight="600" fill="#1B1F24">Wohnen / Essen</text>
+<text x="185.500" y="87.900" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">17,9 m²</text>
+<rect x="205.000" y="62.000" width="28.500" height="46.000" fill="#F7F0E8" stroke="#6B7280" stroke-width="0.25"/>
+<text x="219.250" y="84.500" font-size="2.6" text-anchor="middle" font-weight="600" fill="#1B1F24">Schlafen</text>
+<text x="219.250" y="87.900" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">13,1 m²</text>
+<rect x="166.000" y="108.000" width="39.000" height="26.000" fill="#EDEAE4" stroke="#6B7280" stroke-width="0.25"/>
+<text x="185.500" y="120.500" font-size="2.6" text-anchor="middle" font-weight="400" fill="#1B1F24">Küche (offen)</text>
+<text x="185.500" y="123.900" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">10,1 m²</text>
+<rect x="205.000" y="108.000" width="28.500" height="24.000" fill="#EDEAE4" stroke="#6B7280" stroke-width="0.25"/>
+<text x="219.250" y="119.500" font-size="2.6" text-anchor="middle" font-weight="400" fill="#1B1F24">Bad</text>
+<text x="219.250" y="122.900" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">6,8 m²</text>
+<rect x="166.000" y="134.000" width="39.000" height="16.500" fill="#EDEAE4" stroke="#6B7280" stroke-width="0.25"/>
+<text x="185.500" y="141.750" font-size="2.6" text-anchor="middle" font-weight="400" fill="#1B1F24">Flur</text>
+<text x="185.500" y="145.150" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">6,4 m²</text>
+<rect x="205.000" y="132.000" width="28.500" height="18.500" fill="#EDEAE4" stroke="#6B7280" stroke-width="0.25"/>
+<text x="219.250" y="140.750" font-size="2.6" text-anchor="middle" font-weight="400" fill="#1B1F24">Abstell</text>
+<text x="219.250" y="144.150" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">5,3 m²</text>
+<rect x="166.000" y="62.000" width="67.500" height="88.500" fill="none" stroke="#1B1F24" stroke-width="1.0"/>
+<rect x="171.000" y="61.300" width="29.000" height="1.400" fill="#FFFFFF" stroke="#1B1F24" stroke-width="0.4"/>
+<rect x="210.000" y="61.300" width="18.500" height="1.400" fill="#FFFFFF" stroke="#1B1F24" stroke-width="0.4"/>
+<rect x="178.000" y="149.800" width="9.000" height="1.400" fill="#FFFFFF" stroke="#1B1F24" stroke-width="0.4"/>
+<text x="166.000" y="154.700" font-size="2.6" text-anchor="start" font-weight="400" fill="#6B7280">Eingang vom Mittelgang</text>
+<text x="239.500" y="64.000" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="242.500" y="64.000" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Wohnfläche netto ca, 58,5 m² (Modell)</text>
+<text x="239.500" y="68.910" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="242.500" y="68.910" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Wohnräume an der Fassade: 2,</text>
+<text x="242.500" y="72.420" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Raumtiefe 4,6 m</text>
+<text x="239.500" y="77.330" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="242.500" y="77.330" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Glasfläche (Annahme) ca, 10,9 m² = 35</text>
+<text x="242.500" y="80.840" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">% der Wohnraumfläche</text>
+<text x="239.500" y="85.750" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="242.500" y="85.750" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Innenliegend: Küche, Bad, Flur, Abstell</text>
+<text x="242.500" y="89.260" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">(mechanische Lüftung)</text>
+<text x="239.500" y="94.170" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="242.500" y="94.170" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Einseitig belichtet, keine Querlüftung</text>
+<text x="239.500" y="99.080" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="242.500" y="99.080" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Außenraum: kein Außenraum</text>
+<text x="239.500" y="103.990" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="242.500" y="103.990" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Stufenlos über Aufzug und Mittelgang</text>
+<text x="22.000" y="168.000" font-size="3.2" text-anchor="start" font-weight="600" fill="#1B1F24">Wohnung 3.01–3.04 (Staffel vorn)</text>
+<rect x="22.000" y="176.000" width="36.000" height="44.000" fill="#F7F0E8" stroke="#6B7280" stroke-width="0.25"/>
+<text x="40.000" y="197.500" font-size="2.6" text-anchor="middle" font-weight="600" fill="#1B1F24">Wohnen / Essen</text>
+<text x="40.000" y="200.900" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">15,8 m²</text>
+<rect x="58.000" y="176.000" width="29.000" height="44.000" fill="#F7F0E8" stroke="#6B7280" stroke-width="0.25"/>
+<text x="72.500" y="197.500" font-size="2.6" text-anchor="middle" font-weight="600" fill="#1B1F24">Schlafen</text>
+<text x="72.500" y="200.900" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">12,8 m²</text>
+<rect x="22.000" y="220.000" width="36.000" height="20.000" fill="#EDEAE4" stroke="#6B7280" stroke-width="0.25"/>
+<text x="40.000" y="229.500" font-size="2.6" text-anchor="middle" font-weight="400" fill="#1B1F24">Küche (offen)</text>
+<text x="40.000" y="232.900" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">7,2 m²</text>
+<rect x="58.000" y="220.000" width="29.000" height="22.000" fill="#EDEAE4" stroke="#6B7280" stroke-width="0.25"/>
+<text x="72.500" y="230.500" font-size="2.6" text-anchor="middle" font-weight="400" fill="#1B1F24">Bad</text>
+<text x="72.500" y="233.900" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">6,4 m²</text>
+<rect x="22.000" y="240.000" width="36.000" height="16.500" fill="#EDEAE4" stroke="#6B7280" stroke-width="0.25"/>
+<text x="40.000" y="247.750" font-size="2.6" text-anchor="middle" font-weight="400" fill="#1B1F24">Flur</text>
+<text x="40.000" y="251.150" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">5,9 m²</text>
+<rect x="58.000" y="242.000" width="29.000" height="14.500" fill="#EDEAE4" stroke="#6B7280" stroke-width="0.25"/>
+<text x="72.500" y="248.750" font-size="2.6" text-anchor="middle" font-weight="400" fill="#1B1F24">Abstell</text>
+<text x="72.500" y="252.150" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">4,2 m²</text>
+<rect x="22.000" y="176.000" width="65.000" height="80.500" fill="none" stroke="#1B1F24" stroke-width="1.0"/>
+<rect x="27.000" y="175.300" width="26.000" height="1.400" fill="#FFFFFF" stroke="#1B1F24" stroke-width="0.4"/>
+<rect x="63.000" y="175.300" width="19.000" height="1.400" fill="#FFFFFF" stroke="#1B1F24" stroke-width="0.4"/>
+<rect x="32.000" y="255.800" width="9.000" height="1.400" fill="#FFFFFF" stroke="#1B1F24" stroke-width="0.4"/>
+<text x="22.000" y="260.700" font-size="2.6" text-anchor="start" font-weight="400" fill="#6B7280">Eingang vom Mittelgang</text>
+<text x="93.000" y="178.000" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="96.000" y="178.000" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Wohnfläche netto ca, 51,7 m² (Modell)</text>
+<text x="93.000" y="182.910" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="96.000" y="182.910" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Wohnräume an der Fassade: 2,</text>
+<text x="96.000" y="186.420" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Raumtiefe 4,4 m</text>
+<text x="93.000" y="191.330" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="96.000" y="191.330" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Glasfläche (Annahme) ca, 10,3 m² = 36</text>
+<text x="96.000" y="194.840" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">% der Wohnraumfläche</text>
+<text x="93.000" y="199.750" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="96.000" y="199.750" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Innenliegend: Küche, Bad, Flur, Abstell</text>
+<text x="96.000" y="203.260" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">(mechanische Lüftung)</text>
+<text x="93.000" y="208.170" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="96.000" y="208.170" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Einseitig belichtet, keine Querlüftung</text>
+<text x="93.000" y="213.080" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="96.000" y="213.080" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Außenraum: Umlauf 0,80 m, kein</text>
+<text x="96.000" y="216.590" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">nutzbarer Außenraum</text>
+<text x="93.000" y="221.500" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="96.000" y="221.500" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Stufenlos über Aufzug und Mittelgang</text>
+<text x="166.000" y="168.000" font-size="3.2" text-anchor="start" font-weight="600" fill="#1B1F24">Wohnung 3.05–3.07 (Staffel hinten)</text>
+<rect x="166.000" y="199.000" width="48.000" height="39.000" fill="#F7F0E8" stroke="#6B7280" stroke-width="0.25"/>
+<text x="190.000" y="218.000" font-size="2.6" text-anchor="middle" font-weight="600" fill="#1B1F24">Wohnen / Essen</text>
+<text x="190.000" y="221.400" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">18,7 m²</text>
+<rect x="214.000" y="199.000" width="39.500" height="39.000" fill="#F7F0E8" stroke="#6B7280" stroke-width="0.25"/>
+<text x="233.750" y="218.000" font-size="2.6" text-anchor="middle" font-weight="600" fill="#1B1F24">Schlafen</text>
+<text x="233.750" y="221.400" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">15,4 m²</text>
+<rect x="166.000" y="238.000" width="34.000" height="26.500" fill="#EDEAE4" stroke="#6B7280" stroke-width="0.25"/>
+<text x="183.000" y="250.750" font-size="2.6" text-anchor="middle" font-weight="400" fill="#1B1F24">Küche (offen)</text>
+<text x="183.000" y="254.150" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">9,0 m²</text>
+<rect x="200.000" y="238.000" width="24.000" height="26.500" fill="#EDEAE4" stroke="#6B7280" stroke-width="0.25"/>
+<text x="212.000" y="250.750" font-size="2.6" text-anchor="middle" font-weight="400" fill="#1B1F24">Bad</text>
+<text x="212.000" y="254.150" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">6,4 m²</text>
+<rect x="224.000" y="238.000" width="29.500" height="26.500" fill="#EDEAE4" stroke="#6B7280" stroke-width="0.25"/>
+<text x="238.750" y="250.750" font-size="2.6" text-anchor="middle" font-weight="400" fill="#1B1F24">Flur</text>
+<text x="238.750" y="254.150" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">7,8 m²</text>
+<rect x="166.000" y="199.000" width="87.500" height="65.500" fill="none" stroke="#1B1F24" stroke-width="1.0"/>
+<rect x="171.000" y="198.300" width="38.000" height="1.400" fill="#FFFFFF" stroke="#1B1F24" stroke-width="0.4"/>
+<rect x="219.000" y="198.300" width="29.500" height="1.400" fill="#FFFFFF" stroke="#1B1F24" stroke-width="0.4"/>
+<rect x="232.000" y="263.800" width="9.000" height="1.400" fill="#FFFFFF" stroke="#1B1F24" stroke-width="0.4"/>
+<rect x="166.000" y="176.000" width="87.500" height="23.000" fill="url(#terr)" stroke="#B49A72" stroke-width="0.3"/>
+<text x="210.000" y="188.400" font-size="2.6" text-anchor="middle" font-weight="600" fill="#6B5A3A" stroke="#FFFFFF" stroke-width="0.9" paint-order="stroke" stroke-linejoin="round">Dachterrasse 2,3 m</text>
+<text x="166.000" y="268.700" font-size="2.6" text-anchor="start" font-weight="400" fill="#6B7280">Eingang vom Mittelgang</text>
+<text x="259.500" y="201.000" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="262.500" y="201.000" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Wohnfläche netto ca, 57,0 m²</text>
+<text x="262.500" y="204.510" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">(Modell)</text>
+<text x="259.500" y="209.420" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="262.500" y="209.420" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Wohnräume an der Fassade: 2,</text>
+<text x="262.500" y="212.930" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Raumtiefe 3,9 m</text>
+<text x="259.500" y="217.840" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="262.500" y="217.840" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Glasfläche (Annahme) ca, 13,8 m²</text>
+<text x="262.500" y="221.350" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">= 40 % der Wohnraumfläche</text>
+<text x="259.500" y="226.260" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="262.500" y="226.260" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Innenliegend: Küche, Bad, Flur</text>
+<text x="262.500" y="229.770" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">(mechanische Lüftung)</text>
+<text x="259.500" y="234.680" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="262.500" y="234.680" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Einseitig belichtet, keine</text>
+<text x="262.500" y="238.190" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Querlüftung</text>
+<text x="259.500" y="243.100" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="262.500" y="243.100" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Außenraum: Dachterrasse 9,0 × 2,3</text>
+<text x="262.500" y="246.610" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">m = 20,7 m²</text>
+<text x="259.500" y="251.520" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">•</text>
+<text x="262.500" y="251.520" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Stufenlos über Aufzug und</text>
+<text x="262.500" y="255.030" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Mittelgang</text>
+<rect x="14.000" y="280.000" width="10.000" height="1.600" fill="#1B1F24" stroke="#1B1F24" stroke-width="0.2"/>
+<rect x="24.000" y="280.000" width="10.000" height="1.600" fill="#FFFFFF" stroke="#1B1F24" stroke-width="0.2"/>
+<text x="14.000" y="285.000" font-size="2.5" text-anchor="start" font-weight="400" fill="#1B1F24">0</text>
+<text x="34.000" y="285.000" font-size="2.5" text-anchor="end" font-weight="400" fill="#1B1F24">2 m</text>
+<text x="38.000" y="281.400" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Maßstab 1:100</text>
+<rect x="6.000" y="6.000" width="408.000" height="285.000" fill="none" stroke="#1B1F24" stroke-width="0.5"/>
+<line x1="315.000" y1="6.000" x2="315.000" y2="291.000" stroke="#6B7280" stroke-width="0.25" stroke-linecap="butt"/>
+<text x="318.000" y="14.000" font-size="2.6" text-anchor="start" font-weight="600" fill="#6B7280">KENNZAHLEN</text>
+<line x1="318.000" y1="15.600" x2="408.000" y2="15.600" stroke="#C9CED6" stroke-width="0.2" stroke-linecap="butt"/>
+<text x="318.000" y="20.200" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Typen</text>
+<text x="408.000" y="20.200" font-size="2.8" text-anchor="end" font-weight="600" fill="#1B1F24">4</text>
+<text x="318.000" y="24.600" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Wohnungen im Modell</text>
+<text x="408.000" y="24.600" font-size="2.8" text-anchor="end" font-weight="600" fill="#1B1F24">16</text>
+<text x="318.000" y="32.000" font-size="2.6" text-anchor="start" font-weight="600" fill="#6B7280">LEGENDE</text>
+<line x1="318.000" y1="33.600" x2="408.000" y2="33.600" stroke="#C9CED6" stroke-width="0.2" stroke-linecap="butt"/>
+<rect x="318.000" y="35.300" width="8.000" height="4.000" fill="#F7F0E8" stroke="#6B7280" stroke-width="0.25"/>
+<text x="330.000" y="38.200" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Raum mit Fenster (Aufenthaltsraum)</text>
+<rect x="318.000" y="40.120" width="8.000" height="4.000" fill="#EDEAE4" stroke="#6B7280" stroke-width="0.25"/>
+<text x="330.000" y="43.020" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">innenliegender Raum, mechanische Lüftung</text>
+<rect x="318.000" y="44.940" width="8.000" height="2.000" fill="#FFFFFF" stroke="#1B1F24" stroke-width="0.25"/>
+<text x="330.000" y="47.840" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Fenster / Wohnungstür (Lage Annahme)</text>
+<rect x="318.000" y="49.760" width="8.000" height="4.000" fill="url(#terr)" stroke="#B49A72" stroke-width="0.3"/>
+<text x="330.000" y="52.660" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Dachterrasse</text>
+<text x="318.000" y="59.480" font-size="2.6" text-anchor="start" font-weight="600" fill="#6B7280">OFFENE PUNKTE (NICHT GELÖST)</text>
+<line x1="318.000" y1="61.080" x2="408.000" y2="61.080" stroke="#C9CED6" stroke-width="0.2" stroke-linecap="butt"/>
+<rect x="318.000" y="63.080" width="9.000" height="3.800" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.2" rx="0.8"/>
+<text x="322.500" y="65.680" font-size="2.4" text-anchor="middle" font-weight="600" fill="#9A3412">C-26</text>
+<text x="329.500" y="65.680" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Einseitig belichtete Wohnungen, Lage über der</text>
+<text x="329.500" y="69.600" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Gastro-Terrasse: Schall und Betriebszeiten nicht geprüft.</text>
+<rect x="318.000" y="71.920" width="9.000" height="3.800" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.2" rx="0.8"/>
+<text x="322.500" y="74.520" font-size="2.4" text-anchor="middle" font-weight="600" fill="#9A3412">C-33</text>
+<text x="329.500" y="74.520" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Hintere Wohnungen im 1. OG ohne Außenraum (Loggien</text>
+<text x="329.500" y="78.440" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">nur als Option, nicht geplant).</text>
+<rect x="318.000" y="80.760" width="9.000" height="3.800" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.2" rx="0.8"/>
+<text x="322.500" y="83.360" font-size="2.4" text-anchor="middle" font-weight="600" fill="#9A3412">C-39</text>
+<text x="329.500" y="83.360" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Dachterrasse: Brüstung, Brand- und Schallschutz,</text>
+<text x="329.500" y="87.280" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Dachaufbau über Wohnungen und Zugang offen; keine</text>
+<text x="329.500" y="91.200" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Rettungsfunktion nachgewiesen.</text>
+<rect x="318.000" y="93.520" width="9.000" height="3.800" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.2" rx="0.8"/>
+<text x="322.500" y="96.120" font-size="2.4" text-anchor="middle" font-weight="600" fill="#9A3412">C-27</text>
+<text x="329.500" y="96.120" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Rollstuhlgerechte Wohnung: Kandidaten sind T2 und T4,</text>
+<text x="329.500" y="100.040" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">nicht nachgewiesen.</text>
+<text x="318.000" y="106.960" font-size="2.6" text-anchor="start" font-weight="600" fill="#6B7280">HINWEISE</text>
+<line x1="318.000" y1="108.560" x2="408.000" y2="108.560" stroke="#C9CED6" stroke-width="0.2" stroke-linecap="butt"/>
+<text x="318.000" y="113.160" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Wohnungsgrößen sind Ergebnis der Gebäudetiefe (Mittelgang bei y</text>
+<text x="318.000" y="116.886" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">9,50 m: vorn 9,5 m, hinten 9,5 m), nicht der Flächenmaximierung.</text>
+<text x="318.000" y="120.612" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Küche und Bad liegen innen.</text>
+<text x="318.000" y="125.538" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Glasfläche = 2,2 m Höhe × (Raumbreite − 0,9 m, höchstens 3,2 m);</text>
+<text x="318.000" y="129.264" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Regeln zu Tageslicht und Lüftung sind nicht geprüft.</text>
+<line x1="315.000" y1="236.000" x2="414.000" y2="236.000" stroke="#1B1F24" stroke-width="0.5" stroke-linecap="butt"/>
+<text x="318.000" y="243.000" font-size="3.4" text-anchor="start" font-weight="600" fill="#1B1F24">Neue Mitte Werlte · Baufeld 3</text>
+<text x="318.000" y="248.200" font-size="2.7" text-anchor="start" font-weight="400" fill="#6B7280">Bauvorhaben: Restaurant und Bar, Büros, Wohnungen</text>
+<text x="318.000" y="256.700" font-size="4.2" text-anchor="start" font-weight="600" fill="#1B1F24">Wohnungsstudien</text>
+<text x="318.000" y="263.450" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Maßstab 1:100 (A3)</text>
+<text x="318.000" y="267.650" font-size="2.5" text-anchor="start" font-weight="400" fill="#6B7280">Stand 22.10.2026 · Arbeitsgrundlage B3 (Variante B, nicht festgelegt)</text>
+<rect x="318.000" y="269.450" width="90.000" height="6.200" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.3" rx="0.8"/>
+<text x="363.000" y="273.650" font-size="2.6" text-anchor="middle" font-weight="600" fill="#9A3412">VORLÄUFIGER ARBEITSSTAND – nicht freigegeben</text>
+<text x="408.000" y="288.000" font-size="2.6" text-anchor="end" font-weight="600" fill="#1B1F24">Blatt 24</text></svg>

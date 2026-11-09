@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420.0mm" height="297.0mm" viewBox="0 0 420.0 297.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" text-rendering="geometricPrecision"><defs></defs><rect width="420.0" height="297.0" fill="#FFFFFF"/><text x="14.000" y="20.000" font-size="6.0" text-anchor="start" font-weight="600" fill="#1B1F24">Vergleich der Varianten A, B und C (Version 2)</text>
+<text x="14.000" y="27.000" font-size="3.0" text-anchor="start" font-weight="400" fill="#6B7280">Gastronomie großzügig, Büros kompakt, Wohngeschosse abgestuft. Alle Werte hypothetisch und aus der Geometrie berechnet; keine Variante ist festgelegt.</text>
+<text x="15.500" y="38.000" font-size="3.0" text-anchor="start" font-weight="600" fill="#1B1F24">Kriterium</text>
+<text x="77.500" y="38.000" font-size="3.0" text-anchor="start" font-weight="600" fill="#1B1F24">A: moderat vergrößert</text>
+<text x="156.500" y="38.000" font-size="3.0" text-anchor="start" font-weight="600" fill="#1B1F24">B: erweitert und abgestuft</text>
+<text x="235.500" y="38.000" font-size="3.0" text-anchor="start" font-weight="600" fill="#1B1F24">C: maximal sinnvoll, abgestuft</text>
+<line x1="14.000" y1="40.000" x2="314.000" y2="40.000" stroke="#1B1F24" stroke-width="0.5" stroke-linecap="butt"/>
+<text x="15.500" y="45.000" font-size="3.0" text-anchor="start" font-weight="600" fill="#1B1F24">Gebäudeform</text>
+<text x="77.500" y="45.000" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">Anbau 1,50 m; Staffel bündig mit EG-Rückwand;</text>
+<text x="77.500" y="49.050" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">Dachterrasse 2,3 m</text>
+<text x="156.500" y="45.000" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">Anbau 3,00 m; Staffel 1,50 m kürzer; Treppenform mit</text>
+<text x="156.500" y="49.050" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">Dachterrasse 2,3 m</text>
+<text x="235.500" y="45.000" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">Anbau 4,50 m; Staffel 2,00 m; Treppenform mit</text>
+<text x="235.500" y="49.050" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">Dachterrasse 3,3 m; 5 Stützen</text>
+<line x1="14.000" y1="54.900" x2="314.000" y2="54.900" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="15.500" y="56.700" font-size="3.0" text-anchor="start" font-weight="600" fill="#1B1F24">Außenmaße EG / 1. OG / 3. Geschoss</text>
+<text x="77.500" y="56.700" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">32 × 18 / 32 × 19,5 / 30,4 × 16,4 m</text>
+<text x="156.500" y="56.700" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">32 × 18 / 32 × 21,0 / 30,4 × 17,9 m</text>
+<text x="235.500" y="56.700" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">32 × 18 / 32 × 22,5 / 30,4 × 18,4 m</text>
+<line x1="14.000" y1="62.550" x2="314.000" y2="62.550" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="15.500" y="64.350" font-size="3.0" text-anchor="start" font-weight="600" fill="#1B1F24">Projizierte Fläche (1. OG), GRZ-Zahl</text>
+<text x="77.500" y="64.350" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">618 m², 0,64 (Grenze theoretisch 576 m²)</text>
+<text x="156.500" y="64.350" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">660 m², 0,69 (Grenze theoretisch 576 m²)</text>
+<text x="235.500" y="64.350" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">702 m², 0,73 (Grenze theoretisch 576 m²)</text>
+<line x1="14.000" y1="70.200" x2="314.000" y2="70.200" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="15.500" y="72.000" font-size="3.0" text-anchor="start" font-weight="600" fill="#1B1F24">Geschossfläche gesamt, Kubatur</text>
+<text x="15.500" y="76.050" font-size="3.0" text-anchor="start" font-weight="600" fill="#1B1F24">(Näherung)</text>
+<text x="77.500" y="72.000" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">BGF 1.693 m², BRI ca. 5.416 m³</text>
+<text x="156.500" y="72.000" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">BGF 1.775 m², BRI ca. 5.667 m³</text>
+<text x="235.500" y="72.000" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">BGF 1.831 m², BRI ca. 5.835 m³</text>
+<line x1="14.000" y1="81.900" x2="314.000" y2="81.900" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="15.500" y="83.700" font-size="3.0" text-anchor="start" font-weight="600" fill="#1B1F24">Gastronomie brutto (Erdgeschoss)</text>
+<text x="77.500" y="83.700" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">ca. 440 m², davon Gastraum mit Bar 280 m²</text>
+<text x="156.500" y="83.700" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">ca. 440 m², davon Gastraum mit Bar 280 m²</text>
+<text x="235.500" y="83.700" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">ca. 440 m², davon Gastraum mit Bar 280 m²</text>
+<line x1="14.000" y1="89.550" x2="314.000" y2="89.550" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="15.500" y="91.350" font-size="3.0" text-anchor="start" font-weight="600" fill="#1B1F24">Innenplätze (geschätzt) und Terrasse</text>
+<text x="77.500" y="91.350" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">ca. 138 innen (2,1 m² je Platz + 12 Barhocker), 60</text>
+<text x="77.500" y="95.400" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">Terrasse</text>
+<text x="156.500" y="91.350" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">ca. 138 innen (2,1 m² je Platz + 12 Barhocker), 60</text>
+<text x="156.500" y="95.400" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">Terrasse</text>
+<text x="235.500" y="91.350" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">ca. 138 innen (2,1 m² je Platz + 12 Barhocker), 60</text>
+<text x="235.500" y="95.400" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">Terrasse</text>
+<line x1="14.000" y1="101.250" x2="314.000" y2="101.250" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="15.500" y="103.050" font-size="3.0" text-anchor="start" font-weight="600" fill="#1B1F24">Büros hinten im EG</text>
+<text x="77.500" y="103.050" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">2 Büros, ca. 56 m² netto (64 m² brutto)</text>
+<text x="156.500" y="103.050" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">2 Büros, ca. 56 m² netto (64 m² brutto)</text>
+<text x="235.500" y="103.050" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">2 Büros, ca. 56 m² netto (64 m² brutto)</text>
+<line x1="14.000" y1="108.900" x2="314.000" y2="108.900" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="15.500" y="110.700" font-size="3.0" text-anchor="start" font-weight="600" fill="#1B1F24">Wohnungen (1. OG + 3. Geschoss)</text>
+<text x="77.500" y="110.700" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">9 + 7 = 16</text>
+<text x="156.500" y="110.700" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">9 + 7 = 16</text>
+<text x="235.500" y="110.700" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">9 + 7 = 16</text>
+<line x1="14.000" y1="116.550" x2="314.000" y2="116.550" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="15.500" y="118.350" font-size="3.0" text-anchor="start" font-weight="600" fill="#1B1F24">Wohnungsgrößen netto (m²)</text>
+<text x="77.500" y="118.350" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">39, 43, 57, 58</text>
+<text x="156.500" y="118.350" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">39, 43, 68, 69</text>
+<text x="235.500" y="118.350" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">44, 49, 65, 71</text>
+<line x1="14.000" y1="124.200" x2="314.000" y2="124.200" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="15.500" y="126.000" font-size="3.0" text-anchor="start" font-weight="600" fill="#1B1F24">Wohnfläche netto gesamt</text>
+<text x="77.500" y="126.000" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">ca. 773 m² (Excel-Stand 655 m²)</text>
+<text x="156.500" y="126.000" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">ca. 846 m² (Excel-Stand 655 m²)</text>
+<text x="235.500" y="126.000" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">ca. 895 m² (Excel-Stand 655 m²)</text>
+<line x1="14.000" y1="131.850" x2="314.000" y2="131.850" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="15.500" y="133.650" font-size="3.0" text-anchor="start" font-weight="600" fill="#1B1F24">Zusätzliche Wohnfläche gegenüber A</text>
+<text x="77.500" y="133.650" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">–</text>
+<text x="156.500" y="133.650" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">+73 m² (+9 %)</text>
+<text x="235.500" y="133.650" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">+122 m² (+16 %)</text>
+<line x1="14.000" y1="139.500" x2="314.000" y2="139.500" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="15.500" y="141.300" font-size="3.0" text-anchor="start" font-weight="600" fill="#1B1F24">Überdachte Stellplätze</text>
+<text x="77.500" y="141.300" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">11 Plätze, 1,5 von 5,0 m Tiefe überdeckt</text>
+<text x="156.500" y="141.300" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">11 Plätze, 3,0 von 5,0 m Tiefe überdeckt</text>
+<text x="235.500" y="141.300" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">11 Plätze, 4,5 von 5,0 m Tiefe überdeckt</text>
+<line x1="14.000" y1="147.150" x2="314.000" y2="147.150" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="15.500" y="148.950" font-size="3.0" text-anchor="start" font-weight="600" fill="#1B1F24">Stützen, Rangierfläche, Durchfahrt</text>
+<text x="77.500" y="148.950" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">keine Stütze; Fahrgasse 6,00 m (192 m²); h 3,20 m</text>
+<text x="156.500" y="148.950" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">keine Stütze; Fahrgasse 6,00 m (192 m²); h 3,20 m</text>
+<text x="235.500" y="148.950" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">5 Stützen an der Auskragungskante; Fahrgasse 6,00</text>
+<text x="235.500" y="153.000" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">m; h 3,20 m</text>
+<line x1="14.000" y1="158.850" x2="314.000" y2="158.850" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="15.500" y="160.650" font-size="3.0" text-anchor="start" font-weight="600" fill="#1B1F24">Wohnqualität</text>
+<text x="77.500" y="160.650" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">Vorn 5 Studios mit Balkon, hinten 4 Wohnungen 58</text>
+<text x="77.500" y="164.700" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">m²; Terrasse nur 2,3 m</text>
+<text x="156.500" y="160.650" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">Vorn wie A, hinten 4 Wohnungen 68 m², Staffel</text>
+<text x="156.500" y="164.700" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">hinten 69 m²</text>
+<text x="235.500" y="160.650" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">Vorn 5 Wohnungen 44 m², hinten 71 m², Staffel 49</text>
+<text x="235.500" y="164.700" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">und 65 m²; Tiefe/Breite höchstens 1,64</text>
+<line x1="14.000" y1="170.550" x2="314.000" y2="170.550" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<text x="15.500" y="172.350" font-size="3.0" text-anchor="start" font-weight="600" fill="#1B1F24">Nachweisstatus</text>
+<text x="77.500" y="172.350" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">Projektion über 576 m²: nicht nachweisbar</text>
+<text x="156.500" y="172.350" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">Projektion über 576 m²: nicht nachweisbar</text>
+<text x="235.500" y="172.350" font-size="3.0" text-anchor="start" font-weight="400" fill="#1B1F24">Projektion über 576 m²: nicht nachweisbar</text>
+<line x1="14.000" y1="178.200" x2="314.000" y2="178.200" stroke="#C9CED6" stroke-width="0.15" stroke-linecap="butt"/>
+<rect x="6.000" y="6.000" width="408.000" height="285.000" fill="none" stroke="#1B1F24" stroke-width="0.5"/>
+<line x1="315.000" y1="6.000" x2="315.000" y2="291.000" stroke="#6B7280" stroke-width="0.25" stroke-linecap="butt"/>
+<text x="318.000" y="14.000" font-size="2.6" text-anchor="start" font-weight="600" fill="#6B7280">KENNZAHLEN</text>
+<line x1="318.000" y1="15.600" x2="408.000" y2="15.600" stroke="#C9CED6" stroke-width="0.2" stroke-linecap="butt"/>
+<text x="318.000" y="20.200" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Erdgeschoss</text>
+<text x="408.000" y="20.200" font-size="2.8" text-anchor="end" font-weight="600" fill="#1B1F24">in allen Varianten 32 × 18 m</text>
+<text x="318.000" y="27.600" font-size="2.6" text-anchor="start" font-weight="600" fill="#6B7280">OFFENE PUNKTE (NICHT GELÖST)</text>
+<line x1="318.000" y1="29.200" x2="408.000" y2="29.200" stroke="#C9CED6" stroke-width="0.2" stroke-linecap="butt"/>
+<rect x="318.000" y="31.200" width="9.000" height="3.800" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.2" rx="0.8"/>
+<text x="322.500" y="33.800" font-size="2.4" text-anchor="middle" font-weight="600" fill="#9A3412">C-30</text>
+<text x="329.500" y="33.800" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Baufenster, GRZ und Zählung von Auskragungen sind</text>
+<text x="329.500" y="37.720" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">unbekannt: alle drei Varianten übersteigen die theoretische</text>
+<text x="329.500" y="41.640" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">GRZ-Fläche.</text>
+<rect x="318.000" y="43.960" width="9.000" height="3.800" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.2" rx="0.8"/>
+<text x="322.500" y="46.560" font-size="2.4" text-anchor="middle" font-weight="600" fill="#9A3412">C-28</text>
+<text x="329.500" y="46.560" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Stellplätze: Bedarf 61, nachweisbar nur 11 (Annahme).</text>
+<rect x="318.000" y="48.880" width="9.000" height="3.800" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.2" rx="0.8"/>
+<text x="322.500" y="51.480" font-size="2.4" text-anchor="middle" font-weight="600" fill="#9A3412">C-29</text>
+<text x="329.500" y="51.480" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Grundstückszuschnitt (hier 32 × 30 m angenommen),</text>
+<text x="329.500" y="55.400" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Zufahrt, Anlieferung unbekannt.</text>
+<rect x="318.000" y="57.720" width="9.000" height="3.800" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.2" rx="0.8"/>
+<text x="322.500" y="60.320" font-size="2.4" text-anchor="middle" font-weight="600" fill="#9A3412">C-37</text>
+<text x="329.500" y="60.320" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Büros 56 m² statt 165 m²: Mieteinnahmen und</text>
+<text x="329.500" y="64.240" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Gastro-Pacht nicht neu gerechnet.</text>
+<rect x="318.000" y="66.560" width="9.000" height="3.800" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.2" rx="0.8"/>
+<text x="322.500" y="69.160" font-size="2.4" text-anchor="middle" font-weight="600" fill="#9A3412">C-35</text>
+<text x="329.500" y="69.160" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Tragwerk der Auskragungen offen.</text>
+<text x="318.000" y="76.080" font-size="2.6" text-anchor="start" font-weight="600" fill="#6B7280">HINWEISE</text>
+<line x1="318.000" y1="77.680" x2="408.000" y2="77.680" stroke="#C9CED6" stroke-width="0.2" stroke-linecap="butt"/>
+<text x="318.000" y="82.280" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Erdgeschoss in allen Varianten gleich. Gastronomie: Gastraum 280</text>
+<text x="318.000" y="86.006" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">m², Küche 60, Lager 27, WC 24, Personal 20, Flur 20, Anlieferung 9.</text>
+<text x="318.000" y="90.932" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Wohnungsgrößen netto = Brutto × 0,88 (Annahme).</text>
+<text x="318.000" y="95.858" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Keine Renderings, keine Förderthemen.</text>
+<line x1="315.000" y1="236.000" x2="414.000" y2="236.000" stroke="#1B1F24" stroke-width="0.5" stroke-linecap="butt"/>
+<text x="318.000" y="243.000" font-size="3.4" text-anchor="start" font-weight="600" fill="#1B1F24">Neue Mitte Werlte · Baufeld 3</text>
+<text x="318.000" y="248.200" font-size="2.7" text-anchor="start" font-weight="400" fill="#6B7280">Bauvorhaben: Restaurant und Bar, Büros, Wohnungen</text>
+<text x="318.000" y="256.700" font-size="4.2" text-anchor="start" font-weight="600" fill="#1B1F24">Vergleich der Varianten A, B und C</text>
+<text x="318.000" y="263.450" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Tabelle</text>
+<text x="318.000" y="267.650" font-size="2.5" text-anchor="start" font-weight="400" fill="#6B7280">Stand 22.10.2026 · Modell NEUE_MITTE_MASTER_DRAFT_A_003</text>
+<rect x="318.000" y="269.450" width="90.000" height="6.200" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.3" rx="0.8"/>
+<text x="363.000" y="273.650" font-size="2.6" text-anchor="middle" font-weight="600" fill="#9A3412">VORLÄUFIGER ARBEITSSTAND – nicht freigegeben</text>
+<text x="408.000" y="288.000" font-size="2.6" text-anchor="end" font-weight="600" fill="#1B1F24">Blatt 17</text></svg>

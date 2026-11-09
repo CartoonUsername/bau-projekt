@@ -1,0 +1,241 @@
+{
+ "parken": {
+  "stalls": [
+   {
+    "nr": 1,
+    "rect": [
+     19.0,
+     2.5,
+     24.0,
+     5.0
+    ],
+    "art": "90",
+    "face": "E",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 2,
+    "rect": [
+     19.0,
+     5.0,
+     24.0,
+     7.5
+    ],
+    "art": "90",
+    "face": "E",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 3,
+    "rect": [
+     19.0,
+     7.9,
+     24.0,
+     10.4
+    ],
+    "art": "90",
+    "face": "E",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 4,
+    "rect": [
+     19.0,
+     10.4,
+     24.0,
+     12.9
+    ],
+    "art": "90",
+    "face": "E",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 5,
+    "rect": [
+     19.0,
+     13.3,
+     24.0,
+     15.8
+    ],
+    "art": "90",
+    "face": "E",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 6,
+    "rect": [
+     19.0,
+     18.7,
+     24.0,
+     21.2
+    ],
+    "art": "90",
+    "face": "E",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 7,
+    "rect": [
+     19.0,
+     21.2,
+     24.0,
+     23.7
+    ],
+    "art": "90",
+    "face": "E",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 8,
+    "rect": [
+     19.0,
+     26.6,
+     24.0,
+     29.1
+    ],
+    "art": "90",
+    "face": "E",
+    "status": "voll",
+    "gruende": [],
+    "hinweise": [],
+    "nutzbreite": 2.5
+   },
+   {
+    "nr": 9,
+    "rect": [
+     30.0,
+     1.0,
+     32.0,
+     6.5
+    ],
+    "art": "par",
+    "face": "W",
+    "status": "eingeschraenkt",
+    "gruende": [],
+    "hinweise": [
+     "Parallelparker 2,00 × 5,50 m (Annahme), Randlage"
+    ],
+    "nutzbreite": 2.0
+   },
+   {
+    "nr": 10,
+    "rect": [
+     30.0,
+     6.5,
+     32.0,
+     12.0
+    ],
+    "art": "par",
+    "face": "W",
+    "status": "eingeschraenkt",
+    "gruende": [],
+    "hinweise": [
+     "Parallelparker 2,00 × 5,50 m (Annahme), Randlage"
+    ],
+    "nutzbreite": 2.0
+   },
+   {
+    "nr": 11,
+    "rect": [
+     30.0,
+     12.0,
+     32.0,
+     17.5
+    ],
+    "art": "par",
+    "face": "W",
+    "status": "eingeschraenkt",
+    "gruende": [],
+    "hinweise": [
+     "Parallelparker 2,00 × 5,50 m (Annahme), Randlage"
+    ],
+    "nutzbreite": 2.0
+   },
+   {
+    "nr": 12,
+    "rect": [
+     30.0,
+     17.5,
+     32.0,
+     23.0
+    ],
+    "art": "par",
+    "face": "W",
+    "status": "eingeschraenkt",
+    "gruende": [],
+    "hinweise": [
+     "Parallelparker 2,00 × 5,50 m (Annahme), Randlage"
+    ],
+    "nutzbreite": 2.0
+   },
+   {
+    "nr": 13,
+    "rect": [
+     30.0,
+     23.0,
+     32.0,
+     28.5
+    ],
+    "art": "par",
+    "face": "W",
+    "status": "eingeschraenkt",
+    "gruende": [],
+    "hinweise": [
+     "Parallelparker 2,00 × 5,50 m (Annahme), Randlage"
+    ],
+    "nutzbreite": 2.0
+   }
+  ],
+  "gesamt": 13,
+  "voll": 8,
+  "eingeschraenkt": 5,
+  "konflikt": 0,
+  "hinweise": [
+   "Fahrgasse ist Sackgasse zum Platz hin: Wenden im Gassenende (Dreipunktwende) nötig – Schleppkurve prüfen",
+   "Geometrische Prüfung ohne Schleppkurven; 90°-Stellplätze 2,50 × 5,00 m und Fahrgasse 6,00 m sind Planungsannahmen",
+   "Zufahrt (Lage der Straße) ist Annahme",
+   "Feuerwehrzufahrt/Aufstellflächen unter dem Vorbau nicht nachgewiesen (Prüfbedarf)"
+  ],
+  "fahrgasse_probleme": [],
+  "fahrgasse_breite": 6.0,
+  "nutzbar": 13,
+  "min_nutzbreite": 2.5
+ },
+ "flaeche": {
+  "eg": 540.0,
+  "stall": 100.0,
+  "par": 55.0,
+  "fahr": 180.0,
+  "zone": 12.5,
+  "rest": 72.5
+ },
+ "ueber": {
+  "west": 0,
+  "ost": 0,
+  "platz": 1.5,
+  "rueck": 0
+ },
+ "abstand3": 252.0,
+ "abstand6": 432.0
+}

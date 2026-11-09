@@ -1,0 +1,20 @@
+Nr;Ansicht;Prüfpunkt Blatt-14-Abgleich (Modell v3);Befund;Punkt der Prüfliste;Stand Modell v4
+1;Platzseite;Betonbänder 0,30 m an den Geschossdecken;"in Blatt 14 nicht gezeichnet; in Blatt 25, Blatt 4 (Balkonplatten) und Referenzbild ki_aussen vorhanden";S9;bleibt, als konzeptionelle Gestaltung gekennzeichnet (offen, nicht planbestätigt)
+2;Rückseite;Öffnung EG-hinten (glas);im Modell, aber NICHT in Blatt 14 (nur Vorschlag Blatt 25 bzw. Gestaltung);P11;behoben (Korrektur 3: dritte Tür entfernt)
+3;Rückseite;Öffnung Staffel-hinten-WE-L2-H1 (glas);im Modell, aber NICHT in Blatt 14 (nur Vorschlag Blatt 25 bzw. Gestaltung);P10;"behoben (Korrektur 2: z 6,90–9,00 wie Blatt 14); die 3 'Plan-Elemente ohne Modell' sind dieselben Fenster in der Plan-Sicht"
+4;Rückseite;Öffnung Staffel-hinten-WE-L2-H2 (glas);im Modell, aber NICHT in Blatt 14 (nur Vorschlag Blatt 25 bzw. Gestaltung);P10;"behoben (Korrektur 2: z 6,90–9,00 wie Blatt 14); die 3 'Plan-Elemente ohne Modell' sind dieselben Fenster in der Plan-Sicht"
+5;Rückseite;Öffnung Staffel-hinten-WE-L2-H3 (glas);im Modell, aber NICHT in Blatt 14 (nur Vorschlag Blatt 25 bzw. Gestaltung);P10;"behoben (Korrektur 2: z 6,90–9,00 wie Blatt 14); die 3 'Plan-Elemente ohne Modell' sind dieselben Fenster in der Plan-Sicht"
+6;Rückseite;Betonbänder 0,30 m an den Geschossdecken;"in Blatt 14 nicht gezeichnet; in Blatt 25, Blatt 4 (Balkonplatten) und Referenzbild ki_aussen vorhanden";S9;bleibt, als konzeptionelle Gestaltung gekennzeichnet (offen, nicht planbestätigt)
+7;Rückseite;Plan-Element ohne Modell;in Blatt 14, aber nicht im Modell;P10;"behoben (Korrektur 2: z 6,90–9,00 wie Blatt 14); die 3 'Plan-Elemente ohne Modell' sind dieselben Fenster in der Plan-Sicht"
+8;Rückseite;Plan-Element ohne Modell;in Blatt 14, aber nicht im Modell;P10;"behoben (Korrektur 2: z 6,90–9,00 wie Blatt 14); die 3 'Plan-Elemente ohne Modell' sind dieselben Fenster in der Plan-Sicht"
+9;Rückseite;Plan-Element ohne Modell;in Blatt 14, aber nicht im Modell;P10;"behoben (Korrektur 2: z 6,90–9,00 wie Blatt 14); die 3 'Plan-Elemente ohne Modell' sind dieselben Fenster in der Plan-Sicht"
+10;Kernseite;Öffnung Kern-EG (glas);im Modell, aber NICHT in Blatt 14 (nur Vorschlag Blatt 25 bzw. Gestaltung);S1;"behoben durch Herausnahme aus der plangetreuen Fassung; nur noch als Gestaltungsvorschlag (offene Entscheidung)"
+11;Kernseite;Öffnung Kern-OG1 (glas);im Modell, aber NICHT in Blatt 14 (nur Vorschlag Blatt 25 bzw. Gestaltung);S2;wie S1
+12;Kernseite;Öffnung Kern-Staffel (glas);im Modell, aber NICHT in Blatt 14 (nur Vorschlag Blatt 25 bzw. Gestaltung);S3;wie S1
+13;Kernseite;Brüstung Dachterrasse seitlich;"Blatt 14 zeichnet keine seitliche Brüstung; Blatt 25 schon";S7;bleibt, als konzeptionelle Gestaltung gekennzeichnet (offen)
+14;Kernseite;Betonbänder 0,30 m an den Geschossdecken;"in Blatt 14 nicht gezeichnet; in Blatt 25, Blatt 4 (Balkonplatten) und Referenzbild ki_aussen vorhanden";S9;bleibt, als konzeptionelle Gestaltung gekennzeichnet (offen, nicht planbestätigt)
+15;Ostseite;Öffnung Ost-OG1 (glas);im Modell, aber NICHT in Blatt 14 (nur Vorschlag Blatt 25 bzw. Gestaltung);S5;wie S1
+16;Ostseite;Öffnung Ost-Staffel (glas);im Modell, aber NICHT in Blatt 14 (nur Vorschlag Blatt 25 bzw. Gestaltung);S6;wie S1
+17;Ostseite;Brüstung Dachterrasse seitlich;"Blatt 14 zeichnet keine seitliche Brüstung; Blatt 25 schon";S7;bleibt, als konzeptionelle Gestaltung gekennzeichnet (offen)
+18;Ostseite;Abluftstutzen;Blatt 14: 'Abluftführung über Dach (Austritt) ist nicht dargestellt' (C-22);P14;"behoben (Korrektur 5: Stutzen entfernt; Dachaustritt offene Planungsentscheidung C-22)"
+19;Ostseite;Betonbänder 0,30 m an den Geschossdecken;"in Blatt 14 nicht gezeichnet; in Blatt 25, Blatt 4 (Balkonplatten) und Referenzbild ki_aussen vorhanden";S9;bleibt, als konzeptionelle Gestaltung gekennzeichnet (offen, nicht planbestätigt)

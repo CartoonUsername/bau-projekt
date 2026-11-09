@@ -1,0 +1,247 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420.0mm" height="297.0mm" viewBox="0 0 420.0 297.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" text-rendering="geometricPrecision"><rect width="420.0" height="297.0" fill="#FFFFFF"/><text x="14.000" y="20.000" font-size="6.0" text-anchor="start" font-weight="600" fill="#1B1F24">1. Obergeschoss – Arbeitsgrundlage OG-2</text>
+<text x="14.000" y="27.000" font-size="3.0" text-anchor="start" font-weight="400" fill="#6B7280">Grundriss M 1:125 · OG-2 ist vorläufige Arbeitsgrundlage, keine endgültige Entscheidung</text>
+<rect x="84.000" y="84.000" width="44.800" height="64.000" fill="#F2E4DC" stroke="#FFFFFF" stroke-width="0.0"/>
+<rect x="128.800" y="84.000" width="44.800" height="64.000" fill="#F2E4DC" stroke="#FFFFFF" stroke-width="0.0"/>
+<rect x="173.600" y="84.000" width="44.800" height="64.000" fill="#F2E4DC" stroke="#FFFFFF" stroke-width="0.0"/>
+<rect x="218.400" y="84.000" width="44.800" height="64.000" fill="#F2E4DC" stroke="#FFFFFF" stroke-width="0.0"/>
+<rect x="263.200" y="84.000" width="44.800" height="64.000" fill="#F2E4DC" stroke="#FFFFFF" stroke-width="0.0"/>
+<rect x="84.000" y="164.000" width="100.000" height="64.000" fill="#DDE7EE" stroke="#FFFFFF" stroke-width="0.0"/>
+<rect x="184.000" y="164.000" width="64.800" height="64.000" fill="#DDE7EE" stroke="#FFFFFF" stroke-width="0.0"/>
+<rect x="248.800" y="164.000" width="59.200" height="64.000" fill="#F2E4DC" stroke="#FFFFFF" stroke-width="0.0"/>
+<rect x="84.000" y="148.000" width="224.000" height="16.000" fill="#F8F8F6" stroke="#FFFFFF" stroke-width="0.0"/>
+<rect x="52.000" y="84.000" width="32.000" height="144.000" fill="#E7E9EC" stroke="none" stroke-width="0"/>
+<rect x="84.000" y="84.000" width="44.800" height="64.000" fill="none" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="128.800" y="84.000" width="44.800" height="64.000" fill="none" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="173.600" y="84.000" width="44.800" height="64.000" fill="none" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="218.400" y="84.000" width="44.800" height="64.000" fill="none" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="263.200" y="84.000" width="44.800" height="64.000" fill="none" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="84.000" y="164.000" width="100.000" height="64.000" fill="none" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="184.000" y="164.000" width="64.800" height="64.000" fill="none" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="248.800" y="164.000" width="59.200" height="64.000" fill="none" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="84.000" y="148.000" width="224.000" height="16.000" fill="none" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="52.000" y="84.000" width="32.000" height="24.000" fill="none" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="52.000" y="108.000" width="32.000" height="40.000" fill="none" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="52.000" y="148.000" width="32.000" height="16.000" fill="none" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="58.400" y="164.000" width="17.600" height="20.800" fill="none" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="76.000" y="164.000" width="8.000" height="20.800" fill="none" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="52.000" y="184.800" width="32.000" height="43.200" fill="none" stroke="#6B7280" stroke-width="0.25"/>
+<rect x="52.000" y="84.000" width="256.000" height="144.000" fill="none" stroke="#1B1F24" stroke-width="0.8"/>
+<rect x="292.000" y="212.000" width="9.600" height="9.600" fill="#F3D98B" stroke="#1B1F24" stroke-width="0.35"/>
+<text x="296.800" y="217.800" font-size="2.6" text-anchor="middle" font-weight="600" fill="#1B1F24">KS</text>
+<line x1="58.400" y1="164.000" x2="76.000" y2="184.800" stroke="#6B7280" stroke-width="0.2" stroke-linecap="butt"/>
+<line x1="58.400" y1="184.800" x2="76.000" y2="164.000" stroke="#6B7280" stroke-width="0.2" stroke-linecap="butt"/>
+<text x="106.400" y="115.400" font-size="2.8" text-anchor="middle" font-weight="600" fill="#1B1F24">WE-L1-S1</text>
+<text x="106.400" y="119.000" font-size="2.5999999999999996" text-anchor="middle" font-weight="400" fill="#6B7280">ca. 39,4 m²</text>
+<text x="151.200" y="115.400" font-size="2.8" text-anchor="middle" font-weight="600" fill="#1B1F24">WE-L1-S2</text>
+<text x="151.200" y="119.000" font-size="2.5999999999999996" text-anchor="middle" font-weight="400" fill="#6B7280">ca. 39,4 m²</text>
+<text x="196.000" y="115.400" font-size="2.8" text-anchor="middle" font-weight="600" fill="#1B1F24">WE-L1-S3</text>
+<text x="196.000" y="119.000" font-size="2.5999999999999996" text-anchor="middle" font-weight="400" fill="#6B7280">ca. 39,4 m²</text>
+<text x="240.800" y="115.400" font-size="2.8" text-anchor="middle" font-weight="600" fill="#1B1F24">WE-L1-S4</text>
+<text x="240.800" y="119.000" font-size="2.5999999999999996" text-anchor="middle" font-weight="400" fill="#6B7280">ca. 39,4 m²</text>
+<text x="285.600" y="115.400" font-size="2.8" text-anchor="middle" font-weight="600" fill="#1B1F24">WE-L1-S5</text>
+<text x="285.600" y="119.000" font-size="2.5999999999999996" text-anchor="middle" font-weight="400" fill="#6B7280">ca. 39,4 m²</text>
+<text x="134.000" y="195.400" font-size="2.8" text-anchor="middle" font-weight="600" fill="#1B1F24">Büro 1</text>
+<text x="134.000" y="199.000" font-size="2.5999999999999996" text-anchor="middle" font-weight="400" fill="#6B7280">ca. 88,0 m²</text>
+<text x="216.400" y="195.400" font-size="2.8" text-anchor="middle" font-weight="600" fill="#1B1F24">Büro 2</text>
+<text x="216.400" y="199.000" font-size="2.5999999999999996" text-anchor="middle" font-weight="400" fill="#6B7280">ca. 57,0 m²</text>
+<text x="278.400" y="195.400" font-size="2.8" text-anchor="middle" font-weight="600" fill="#1B1F24">WE-L1-N1</text>
+<text x="278.400" y="199.000" font-size="2.5999999999999996" text-anchor="middle" font-weight="400" fill="#6B7280">ca. 52,1 m²</text>
+<text x="196.000" y="155.400" font-size="2.8" text-anchor="middle" font-weight="600" fill="#1B1F24">Mittelgang</text>
+<text x="196.000" y="159.000" font-size="2.5999999999999996" text-anchor="middle" font-weight="400" fill="#6B7280">2,00 m breit</text>
+<text x="68.000" y="95.400" font-size="2.7" text-anchor="middle" font-weight="600" fill="#1B1F24">Reserve</text>
+<text x="68.000" y="99.000" font-size="2.5" text-anchor="middle" font-weight="400" fill="#6B7280">Zweck offen</text>
+<text x="68.000" y="129.000" font-size="2.7" text-anchor="middle" font-weight="600" fill="#1B1F24">Treppenraum</text>
+<text x="68.000" y="157.000" font-size="2.7" text-anchor="middle" font-weight="600" fill="#1B1F24">Aufzugsvorraum</text>
+<rect x="59.400" y="170.800" width="15.600" height="5.600" fill="#FFFFFF" fill-opacity="0.85" stroke="none" stroke-width="0"/>
+<text x="67.200" y="175.400" font-size="2.7" text-anchor="middle" font-weight="600" fill="#1B1F24">Aufzug</text>
+<text x="81.000" y="174.400" font-size="2.7" text-anchor="middle" font-weight="600" fill="#1B1F24" transform="rotate(-90 81.000 174.400)">Technik</text>
+<text x="68.000" y="205.800" font-size="2.7" text-anchor="middle" font-weight="600" fill="#1B1F24">Abstellräume</text>
+<text x="68.000" y="209.400" font-size="2.5" text-anchor="middle" font-weight="400" fill="#6B7280">Zweck offen</text>
+<rect x="127.600" y="146.800" width="2.400" height="2.400" fill="#1B1F24" stroke="#1B1F24" stroke-width="0.1"/>
+<rect x="172.400" y="146.800" width="2.400" height="2.400" fill="#1B1F24" stroke="#1B1F24" stroke-width="0.1"/>
+<rect x="217.200" y="146.800" width="2.400" height="2.400" fill="#1B1F24" stroke="#1B1F24" stroke-width="0.1"/>
+<rect x="262.000" y="146.800" width="2.400" height="2.400" fill="#1B1F24" stroke="#1B1F24" stroke-width="0.1"/>
+<rect x="95.600" y="72.000" width="21.600" height="12.000" fill="#F1F2F3" stroke="#1B1F24" stroke-width="0.45"/>
+<rect x="96.100" y="72.500" width="20.600" height="11.000" fill="none" stroke="#6B7280" stroke-width="0.2"/>
+<text x="106.400" y="79.000" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">Balkon</text>
+<rect x="140.400" y="72.000" width="21.600" height="12.000" fill="#F1F2F3" stroke="#1B1F24" stroke-width="0.45"/>
+<rect x="140.900" y="72.500" width="20.600" height="11.000" fill="none" stroke="#6B7280" stroke-width="0.2"/>
+<text x="151.200" y="79.000" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">Balkon</text>
+<rect x="185.200" y="72.000" width="21.600" height="12.000" fill="#F1F2F3" stroke="#1B1F24" stroke-width="0.45"/>
+<rect x="185.700" y="72.500" width="20.600" height="11.000" fill="none" stroke="#6B7280" stroke-width="0.2"/>
+<text x="196.000" y="79.000" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">Balkon</text>
+<rect x="230.000" y="72.000" width="21.600" height="12.000" fill="#F1F2F3" stroke="#1B1F24" stroke-width="0.45"/>
+<rect x="230.500" y="72.500" width="20.600" height="11.000" fill="none" stroke="#6B7280" stroke-width="0.2"/>
+<text x="240.800" y="79.000" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">Balkon</text>
+<rect x="274.800" y="72.000" width="21.600" height="12.000" fill="#F1F2F3" stroke="#1B1F24" stroke-width="0.45"/>
+<rect x="275.300" y="72.500" width="20.600" height="11.000" fill="none" stroke="#6B7280" stroke-width="0.2"/>
+<text x="285.600" y="79.000" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">Balkon</text>
+<rect x="270.800" y="228.000" width="21.600" height="12.000" fill="#F1F2F3" stroke="#1B1F24" stroke-width="0.45"/>
+<rect x="271.300" y="228.500" width="20.600" height="11.000" fill="none" stroke="#6B7280" stroke-width="0.2"/>
+<text x="281.600" y="235.000" font-size="2.6" text-anchor="middle" font-weight="400" fill="#6B7280">Balkon</text>
+<line x1="84.000" y1="53.000" x2="84.000" y2="84.000" stroke="#B9615A" stroke-width="0.18" stroke-dasharray="5 1.2 0.8 1.2" stroke-linecap="butt"/>
+<line x1="84.000" y1="228.000" x2="84.000" y2="235.000" stroke="#B9615A" stroke-width="0.18" stroke-dasharray="5 1.2 0.8 1.2" stroke-linecap="butt"/>
+<circle cx="84.000" cy="50.000" r="3.0" fill="#FFFFFF" stroke="#1B1F24" stroke-width="0.3"/>
+<text x="84.000" y="51.000" font-size="2.7" text-anchor="middle" font-weight="600" fill="#1B1F24">1</text>
+<line x1="128.800" y1="53.000" x2="128.800" y2="84.000" stroke="#B9615A" stroke-width="0.18" stroke-dasharray="5 1.2 0.8 1.2" stroke-linecap="butt"/>
+<line x1="128.800" y1="228.000" x2="128.800" y2="235.000" stroke="#B9615A" stroke-width="0.18" stroke-dasharray="5 1.2 0.8 1.2" stroke-linecap="butt"/>
+<circle cx="128.800" cy="50.000" r="3.0" fill="#FFFFFF" stroke="#1B1F24" stroke-width="0.3"/>
+<text x="128.800" y="51.000" font-size="2.7" text-anchor="middle" font-weight="600" fill="#1B1F24">2</text>
+<line x1="173.600" y1="53.000" x2="173.600" y2="84.000" stroke="#B9615A" stroke-width="0.18" stroke-dasharray="5 1.2 0.8 1.2" stroke-linecap="butt"/>
+<line x1="173.600" y1="228.000" x2="173.600" y2="235.000" stroke="#B9615A" stroke-width="0.18" stroke-dasharray="5 1.2 0.8 1.2" stroke-linecap="butt"/>
+<circle cx="173.600" cy="50.000" r="3.0" fill="#FFFFFF" stroke="#1B1F24" stroke-width="0.3"/>
+<text x="173.600" y="51.000" font-size="2.7" text-anchor="middle" font-weight="600" fill="#1B1F24">3</text>
+<line x1="218.400" y1="53.000" x2="218.400" y2="84.000" stroke="#B9615A" stroke-width="0.18" stroke-dasharray="5 1.2 0.8 1.2" stroke-linecap="butt"/>
+<line x1="218.400" y1="228.000" x2="218.400" y2="235.000" stroke="#B9615A" stroke-width="0.18" stroke-dasharray="5 1.2 0.8 1.2" stroke-linecap="butt"/>
+<circle cx="218.400" cy="50.000" r="3.0" fill="#FFFFFF" stroke="#1B1F24" stroke-width="0.3"/>
+<text x="218.400" y="51.000" font-size="2.7" text-anchor="middle" font-weight="600" fill="#1B1F24">4</text>
+<line x1="263.200" y1="53.000" x2="263.200" y2="84.000" stroke="#B9615A" stroke-width="0.18" stroke-dasharray="5 1.2 0.8 1.2" stroke-linecap="butt"/>
+<line x1="263.200" y1="228.000" x2="263.200" y2="235.000" stroke="#B9615A" stroke-width="0.18" stroke-dasharray="5 1.2 0.8 1.2" stroke-linecap="butt"/>
+<circle cx="263.200" cy="50.000" r="3.0" fill="#FFFFFF" stroke="#1B1F24" stroke-width="0.3"/>
+<text x="263.200" y="51.000" font-size="2.7" text-anchor="middle" font-weight="600" fill="#1B1F24">5</text>
+<line x1="308.000" y1="53.000" x2="308.000" y2="84.000" stroke="#B9615A" stroke-width="0.18" stroke-dasharray="5 1.2 0.8 1.2" stroke-linecap="butt"/>
+<line x1="308.000" y1="228.000" x2="308.000" y2="235.000" stroke="#B9615A" stroke-width="0.18" stroke-dasharray="5 1.2 0.8 1.2" stroke-linecap="butt"/>
+<circle cx="308.000" cy="50.000" r="3.0" fill="#FFFFFF" stroke="#1B1F24" stroke-width="0.3"/>
+<text x="308.000" y="51.000" font-size="2.7" text-anchor="middle" font-weight="600" fill="#1B1F24">6</text>
+<line x1="22.000" y1="84.000" x2="52.000" y2="84.000" stroke="#B9615A" stroke-width="0.18" stroke-dasharray="5 1.2 0.8 1.2" stroke-linecap="butt"/>
+<line x1="308.000" y1="84.000" x2="315.000" y2="84.000" stroke="#B9615A" stroke-width="0.18" stroke-dasharray="5 1.2 0.8 1.2" stroke-linecap="butt"/>
+<circle cx="19.000" cy="84.000" r="3.0" fill="#FFFFFF" stroke="#1B1F24" stroke-width="0.3"/>
+<text x="19.000" y="85.000" font-size="2.7" text-anchor="middle" font-weight="600" fill="#1B1F24">A</text>
+<line x1="22.000" y1="148.000" x2="52.000" y2="148.000" stroke="#B9615A" stroke-width="0.18" stroke-dasharray="5 1.2 0.8 1.2" stroke-linecap="butt"/>
+<line x1="308.000" y1="148.000" x2="315.000" y2="148.000" stroke="#B9615A" stroke-width="0.18" stroke-dasharray="5 1.2 0.8 1.2" stroke-linecap="butt"/>
+<circle cx="19.000" cy="148.000" r="3.0" fill="#FFFFFF" stroke="#1B1F24" stroke-width="0.3"/>
+<text x="19.000" y="149.000" font-size="2.7" text-anchor="middle" font-weight="600" fill="#1B1F24">B</text>
+<line x1="22.000" y1="228.000" x2="52.000" y2="228.000" stroke="#B9615A" stroke-width="0.18" stroke-dasharray="5 1.2 0.8 1.2" stroke-linecap="butt"/>
+<line x1="308.000" y1="228.000" x2="315.000" y2="228.000" stroke="#B9615A" stroke-width="0.18" stroke-dasharray="5 1.2 0.8 1.2" stroke-linecap="butt"/>
+<circle cx="19.000" cy="228.000" r="3.0" fill="#FFFFFF" stroke="#1B1F24" stroke-width="0.3"/>
+<text x="19.000" y="229.000" font-size="2.7" text-anchor="middle" font-weight="600" fill="#1B1F24">C</text>
+<line x1="52.000" y1="64.000" x2="84.000" y2="64.000" stroke="#1B1F24" stroke-width="0.2" stroke-linecap="butt"/>
+<line x1="51.100" y1="64.900" x2="52.900" y2="63.100" stroke="#1B1F24" stroke-width="0.3" stroke-linecap="butt"/>
+<line x1="83.100" y1="64.900" x2="84.900" y2="63.100" stroke="#1B1F24" stroke-width="0.3" stroke-linecap="butt"/>
+<text x="68.000" y="62.900" font-size="2.6" text-anchor="middle" font-weight="400" fill="#1B1F24" stroke="#FFFFFF" stroke-width="0.9" paint-order="stroke" stroke-linejoin="round">4,00</text>
+<line x1="84.000" y1="64.000" x2="128.800" y2="64.000" stroke="#1B1F24" stroke-width="0.2" stroke-linecap="butt"/>
+<line x1="83.100" y1="64.900" x2="84.900" y2="63.100" stroke="#1B1F24" stroke-width="0.3" stroke-linecap="butt"/>
+<line x1="127.900" y1="64.900" x2="129.700" y2="63.100" stroke="#1B1F24" stroke-width="0.3" stroke-linecap="butt"/>
+<text x="106.400" y="62.900" font-size="2.6" text-anchor="middle" font-weight="400" fill="#1B1F24" stroke="#FFFFFF" stroke-width="0.9" paint-order="stroke" stroke-linejoin="round">5,60</text>
+<line x1="128.800" y1="64.000" x2="173.600" y2="64.000" stroke="#1B1F24" stroke-width="0.2" stroke-linecap="butt"/>
+<line x1="127.900" y1="64.900" x2="129.700" y2="63.100" stroke="#1B1F24" stroke-width="0.3" stroke-linecap="butt"/>
+<line x1="172.700" y1="64.900" x2="174.500" y2="63.100" stroke="#1B1F24" stroke-width="0.3" stroke-linecap="butt"/>
+<text x="151.200" y="62.900" font-size="2.6" text-anchor="middle" font-weight="400" fill="#1B1F24" stroke="#FFFFFF" stroke-width="0.9" paint-order="stroke" stroke-linejoin="round">5,60</text>
+<line x1="173.600" y1="64.000" x2="218.400" y2="64.000" stroke="#1B1F24" stroke-width="0.2" stroke-linecap="butt"/>
+<line x1="172.700" y1="64.900" x2="174.500" y2="63.100" stroke="#1B1F24" stroke-width="0.3" stroke-linecap="butt"/>
+<line x1="217.500" y1="64.900" x2="219.300" y2="63.100" stroke="#1B1F24" stroke-width="0.3" stroke-linecap="butt"/>
+<text x="196.000" y="62.900" font-size="2.6" text-anchor="middle" font-weight="400" fill="#1B1F24" stroke="#FFFFFF" stroke-width="0.9" paint-order="stroke" stroke-linejoin="round">5,60</text>
+<line x1="218.400" y1="64.000" x2="263.200" y2="64.000" stroke="#1B1F24" stroke-width="0.2" stroke-linecap="butt"/>
+<line x1="217.500" y1="64.900" x2="219.300" y2="63.100" stroke="#1B1F24" stroke-width="0.3" stroke-linecap="butt"/>
+<line x1="262.300" y1="64.900" x2="264.100" y2="63.100" stroke="#1B1F24" stroke-width="0.3" stroke-linecap="butt"/>
+<text x="240.800" y="62.900" font-size="2.6" text-anchor="middle" font-weight="400" fill="#1B1F24" stroke="#FFFFFF" stroke-width="0.9" paint-order="stroke" stroke-linejoin="round">5,60</text>
+<line x1="263.200" y1="64.000" x2="308.000" y2="64.000" stroke="#1B1F24" stroke-width="0.2" stroke-linecap="butt"/>
+<line x1="262.300" y1="64.900" x2="264.100" y2="63.100" stroke="#1B1F24" stroke-width="0.3" stroke-linecap="butt"/>
+<line x1="307.100" y1="64.900" x2="308.900" y2="63.100" stroke="#1B1F24" stroke-width="0.3" stroke-linecap="butt"/>
+<text x="285.600" y="62.900" font-size="2.6" text-anchor="middle" font-weight="400" fill="#1B1F24" stroke="#FFFFFF" stroke-width="0.9" paint-order="stroke" stroke-linejoin="round">5,60</text>
+<line x1="52.000" y1="57.000" x2="308.000" y2="57.000" stroke="#1B1F24" stroke-width="0.2" stroke-linecap="butt"/>
+<line x1="51.100" y1="57.900" x2="52.900" y2="56.100" stroke="#1B1F24" stroke-width="0.3" stroke-linecap="butt"/>
+<line x1="307.100" y1="57.900" x2="308.900" y2="56.100" stroke="#1B1F24" stroke-width="0.3" stroke-linecap="butt"/>
+<text x="180.000" y="55.900" font-size="2.6" text-anchor="middle" font-weight="400" fill="#1B1F24" stroke="#FFFFFF" stroke-width="0.9" paint-order="stroke" stroke-linejoin="round">32,00</text>
+<line x1="40.000" y1="84.000" x2="40.000" y2="148.000" stroke="#1B1F24" stroke-width="0.2" stroke-linecap="butt"/>
+<line x1="39.100" y1="84.900" x2="40.900" y2="83.100" stroke="#1B1F24" stroke-width="0.3" stroke-linecap="butt"/>
+<line x1="39.100" y1="148.900" x2="40.900" y2="147.100" stroke="#1B1F24" stroke-width="0.3" stroke-linecap="butt"/>
+<text x="38.900" y="116.000" font-size="2.6" text-anchor="middle" font-weight="400" fill="#1B1F24" transform="rotate(-90 38.900 116.000)" stroke="#FFFFFF" stroke-width="0.9" paint-order="stroke" stroke-linejoin="round">8,00</text>
+<line x1="40.000" y1="148.000" x2="40.000" y2="164.000" stroke="#1B1F24" stroke-width="0.2" stroke-linecap="butt"/>
+<line x1="39.100" y1="148.900" x2="40.900" y2="147.100" stroke="#1B1F24" stroke-width="0.3" stroke-linecap="butt"/>
+<line x1="39.100" y1="164.900" x2="40.900" y2="163.100" stroke="#1B1F24" stroke-width="0.3" stroke-linecap="butt"/>
+<text x="38.900" y="156.000" font-size="2.6" text-anchor="middle" font-weight="400" fill="#1B1F24" transform="rotate(-90 38.900 156.000)" stroke="#FFFFFF" stroke-width="0.9" paint-order="stroke" stroke-linejoin="round">2,00</text>
+<line x1="40.000" y1="164.000" x2="40.000" y2="228.000" stroke="#1B1F24" stroke-width="0.2" stroke-linecap="butt"/>
+<line x1="39.100" y1="164.900" x2="40.900" y2="163.100" stroke="#1B1F24" stroke-width="0.3" stroke-linecap="butt"/>
+<line x1="39.100" y1="228.900" x2="40.900" y2="227.100" stroke="#1B1F24" stroke-width="0.3" stroke-linecap="butt"/>
+<text x="38.900" y="196.000" font-size="2.6" text-anchor="middle" font-weight="400" fill="#1B1F24" transform="rotate(-90 38.900 196.000)" stroke="#FFFFFF" stroke-width="0.9" paint-order="stroke" stroke-linejoin="round">8,00</text>
+<line x1="32.000" y1="84.000" x2="32.000" y2="228.000" stroke="#1B1F24" stroke-width="0.2" stroke-linecap="butt"/>
+<line x1="31.100" y1="84.900" x2="32.900" y2="83.100" stroke="#1B1F24" stroke-width="0.3" stroke-linecap="butt"/>
+<line x1="31.100" y1="228.900" x2="32.900" y2="227.100" stroke="#1B1F24" stroke-width="0.3" stroke-linecap="butt"/>
+<text x="30.900" y="156.000" font-size="2.6" text-anchor="middle" font-weight="400" fill="#1B1F24" transform="rotate(-90 30.900 156.000)" stroke="#FFFFFF" stroke-width="0.9" paint-order="stroke" stroke-linejoin="round">18,00</text>
+<rect x="244.000" y="155.900" width="9.000" height="3.800" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.25" rx="0.8"/>
+<text x="248.500" y="158.400" font-size="2.4" text-anchor="middle" font-weight="600" fill="#9A3412">C-16</text>
+<rect x="285.600" y="155.900" width="9.000" height="3.800" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.25" rx="0.8"/>
+<text x="290.100" y="158.400" font-size="2.4" text-anchor="middle" font-weight="600" fill="#9A3412">C-15</text>
+<rect x="275.200" y="214.300" width="9.000" height="3.800" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.25" rx="0.8"/>
+<text x="279.700" y="216.800" font-size="2.4" text-anchor="middle" font-weight="600" fill="#9A3412">C-22</text>
+<rect x="275.200" y="244.700" width="9.000" height="3.800" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.25" rx="0.8"/>
+<text x="279.700" y="247.200" font-size="2.4" text-anchor="middle" font-weight="600" fill="#9A3412">C-19</text>
+<rect x="14.000" y="268.000" width="8.000" height="1.600" fill="#1B1F24" stroke="#1B1F24" stroke-width="0.2"/>
+<rect x="22.000" y="268.000" width="8.000" height="1.600" fill="#FFFFFF" stroke="#1B1F24" stroke-width="0.2"/>
+<rect x="30.000" y="268.000" width="8.000" height="1.600" fill="#1B1F24" stroke="#1B1F24" stroke-width="0.2"/>
+<rect x="38.000" y="268.000" width="8.000" height="1.600" fill="#FFFFFF" stroke="#1B1F24" stroke-width="0.2"/>
+<rect x="46.000" y="268.000" width="8.000" height="1.600" fill="#1B1F24" stroke="#1B1F24" stroke-width="0.2"/>
+<text x="14.000" y="273.000" font-size="2.5" text-anchor="start" font-weight="400" fill="#1B1F24">0</text>
+<text x="54.000" y="273.000" font-size="2.5" text-anchor="end" font-weight="400" fill="#1B1F24">5 m</text>
+<text x="58.000" y="269.400" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Maßstab 1:125</text>
+<rect x="6.000" y="6.000" width="408.000" height="285.000" fill="none" stroke="#1B1F24" stroke-width="0.5"/>
+<line x1="315.000" y1="6.000" x2="315.000" y2="291.000" stroke="#6B7280" stroke-width="0.25" stroke-linecap="butt"/>
+<text x="318.000" y="14.000" font-size="2.6" text-anchor="start" font-weight="600" fill="#6B7280">KENNZAHLEN</text>
+<line x1="318.000" y1="15.600" x2="408.000" y2="15.600" stroke="#C9CED6" stroke-width="0.2" stroke-linecap="butt"/>
+<text x="318.000" y="20.200" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Grundfläche Gebäude</text>
+<text x="408.000" y="20.200" font-size="2.8" text-anchor="end" font-weight="600" fill="#1B1F24">32,00 × 18,00 m = 576 m²</text>
+<text x="318.000" y="24.600" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Wohnungen im 1. OG</text>
+<text x="408.000" y="24.600" font-size="2.8" text-anchor="end" font-weight="600" fill="#1B1F24">6</text>
+<text x="318.000" y="29.000" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Wohnfläche netto</text>
+<text x="408.000" y="29.000" font-size="2.8" text-anchor="end" font-weight="600" fill="#1B1F24">ca. 249 m²</text>
+<text x="318.000" y="33.400" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Bürofläche netto</text>
+<text x="408.000" y="33.400" font-size="2.8" text-anchor="end" font-weight="600" fill="#1B1F24">ca. 145 m²</text>
+<text x="318.000" y="40.800" font-size="2.6" text-anchor="start" font-weight="600" fill="#6B7280">LEGENDE</text>
+<line x1="318.000" y1="42.400" x2="408.000" y2="42.400" stroke="#C9CED6" stroke-width="0.2" stroke-linecap="butt"/>
+<rect x="318.000" y="44.100" width="8.000" height="4.000" fill="#F2E4DC" stroke="#6B7280" stroke-width="0.25"/>
+<text x="330.000" y="47.000" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Wohnung (Wohnfläche netto)</text>
+<rect x="318.000" y="48.920" width="8.000" height="4.000" fill="#DDE7EE" stroke="#6B7280" stroke-width="0.25"/>
+<text x="330.000" y="51.820" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Büro (Nutzfläche netto)</text>
+<rect x="318.000" y="53.740" width="8.000" height="4.000" fill="#E7E9EC" stroke="#6B7280" stroke-width="0.25"/>
+<text x="330.000" y="56.640" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Erschließung: Treppenraum, Aufzug, Technik</text>
+<rect x="318.000" y="58.560" width="8.000" height="4.000" fill="#F8F8F6" stroke="#6B7280" stroke-width="0.25"/>
+<text x="330.000" y="61.460" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Mittelgang</text>
+<rect x="319.000" y="63.380" width="6.000" height="4.000" fill="#F1F2F3" stroke="#1B1F24" stroke-width="0.45"/>
+<text x="330.000" y="66.280" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Balkon (2,70 × 1,50 m)</text>
+<rect x="320.500" y="68.700" width="3.000" height="3.000" fill="#1B1F24" stroke="#1B1F24" stroke-width="0.1"/>
+<text x="330.000" y="71.100" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Stütze (Annahme, Raster R2)</text>
+<rect x="320.000" y="73.520" width="4.000" height="3.000" fill="#F3D98B" stroke="#1B1F24" stroke-width="0.3"/>
+<text x="330.000" y="75.920" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">KS: Küchenabluft-Schacht</text>
+<line x1="318.000" y1="79.840" x2="326.000" y2="79.840" stroke="#B9615A" stroke-width="0.18" stroke-dasharray="5 1.2 0.8 1.2" stroke-linecap="butt"/>
+<text x="330.000" y="80.740" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Rasterachse (vorläufig)</text>
+<text x="318.000" y="87.560" font-size="2.6" text-anchor="start" font-weight="600" fill="#6B7280">OFFENE PUNKTE (NICHT GELÖST)</text>
+<line x1="318.000" y1="89.160" x2="408.000" y2="89.160" stroke="#C9CED6" stroke-width="0.2" stroke-linecap="butt"/>
+<rect x="318.000" y="91.160" width="9.000" height="3.800" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.2" rx="0.8"/>
+<text x="322.500" y="93.760" font-size="2.4" text-anchor="middle" font-weight="600" fill="#9A3412">C-01</text>
+<text x="329.500" y="93.760" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Baufenster: Nachweis der 576 m² Grundfläche fehlt.</text>
+<rect x="318.000" y="96.080" width="9.000" height="3.800" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.2" rx="0.8"/>
+<text x="322.500" y="98.680" font-size="2.4" text-anchor="middle" font-weight="600" fill="#9A3412">C-15</text>
+<text x="329.500" y="98.680" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Rettungswege: Mittelgang ca. 28 m lang, zweiter</text>
+<text x="329.500" y="102.600" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Rettungsweg offen.</text>
+<rect x="318.000" y="104.920" width="9.000" height="3.800" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.2" rx="0.8"/>
+<text x="322.500" y="107.520" font-size="2.4" text-anchor="middle" font-weight="600" fill="#9A3412">C-16</text>
+<text x="329.500" y="107.520" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Stützen oder Träger in der Platzfassade nicht</text>
+<text x="329.500" y="111.440" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">nachgewiesen.</text>
+<rect x="318.000" y="113.760" width="9.000" height="3.800" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.2" rx="0.8"/>
+<text x="322.500" y="116.360" font-size="2.4" text-anchor="middle" font-weight="600" fill="#9A3412">C-19</text>
+<text x="329.500" y="116.360" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Rückseitiger Balkon: Grenzabstand unbekannt.</text>
+<rect x="318.000" y="118.680" width="9.000" height="3.800" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.2" rx="0.8"/>
+<text x="322.500" y="121.280" font-size="2.4" text-anchor="middle" font-weight="600" fill="#9A3412">C-22</text>
+<text x="329.500" y="121.280" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Küchenabluft-Schacht läuft durch Wohnung WE-L1-N1.</text>
+<rect x="318.000" y="123.600" width="9.000" height="3.800" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.2" rx="0.8"/>
+<text x="322.500" y="126.200" font-size="2.4" text-anchor="middle" font-weight="600" fill="#9A3412">C-25</text>
+<text x="329.500" y="126.200" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Aufzug: Überfahrt über die Attika offen.</text>
+<text x="318.000" y="133.120" font-size="2.6" text-anchor="start" font-weight="600" fill="#6B7280">HINWEISE</text>
+<line x1="318.000" y1="134.720" x2="408.000" y2="134.720" stroke="#C9CED6" stroke-width="0.2" stroke-linecap="butt"/>
+<text x="318.000" y="139.320" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">OG-2: fünf Wohnungen vorn mit je einem Balkon zum Platz</text>
+<text x="318.000" y="143.046" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">(Platzfassade oben), eine Wohnung und zwei Büros hinten.</text>
+<text x="318.000" y="147.972" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Flächen netto = Brutto × 0,88 (Annahme).</text>
+<text x="318.000" y="152.898" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Fenster, Türen und Wandstärken sind noch nicht festgelegt und daher</text>
+<text x="318.000" y="156.624" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">nicht dargestellt.</text>
+<text x="318.000" y="161.550" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Himmelsrichtung unbekannt (C-13). Förderthemen sind nicht</text>
+<text x="318.000" y="165.276" font-size="2.7" text-anchor="start" font-weight="400" fill="#1B1F24">Gegenstand dieses Blatts.</text>
+<line x1="315.000" y1="236.000" x2="414.000" y2="236.000" stroke="#1B1F24" stroke-width="0.5" stroke-linecap="butt"/>
+<text x="318.000" y="243.000" font-size="3.4" text-anchor="start" font-weight="600" fill="#1B1F24">Neue Mitte Werlte · Baufeld 3</text>
+<text x="318.000" y="248.200" font-size="2.7" text-anchor="start" font-weight="400" fill="#6B7280">Bauvorhaben: Restaurant und Bar, Büros, Wohnungen</text>
+<text x="318.000" y="256.700" font-size="4.2" text-anchor="start" font-weight="600" fill="#1B1F24">1. Obergeschoss – Arbeitsgrundlage OG-2</text>
+<text x="318.000" y="263.450" font-size="2.8" text-anchor="start" font-weight="400" fill="#1B1F24">Maßstab 1:125 (A3)</text>
+<text x="318.000" y="267.650" font-size="2.5" text-anchor="start" font-weight="400" fill="#6B7280">Stand 22.10.2026 · Modell NEUE_MITTE_MASTER_DRAFT_A_003</text>
+<rect x="318.000" y="269.450" width="90.000" height="6.200" fill="#FDF1E7" stroke="#9A3412" stroke-width="0.3" rx="0.8"/>
+<text x="363.000" y="273.650" font-size="2.6" text-anchor="middle" font-weight="600" fill="#9A3412">VORLÄUFIGER ARBEITSSTAND – nicht freigegeben</text>
+<text x="408.000" y="288.000" font-size="2.6" text-anchor="end" font-weight="600" fill="#1B1F24">Blatt 1</text></svg>
